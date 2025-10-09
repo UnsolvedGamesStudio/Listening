@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://xqc1yxn05bn"]
 
 [ext_resource type="Script" uid="uid://risall41qse" path="res://test.gd" id="1_glv2v"]
-[ext_resource type="AudioStream" uid="uid://c062c6eruatvm" path="res://nice.wav" id="2_uu6xs"]
+[ext_resource type="AudioStream" uid="uid://bhcq425mgvjwe" path="res://beat_only.wav" id="2_cm0pq"]
 [ext_resource type="Script" uid="uid://dbs7tn7suqlhg" path="res://conductor.gd" id="3_r0du0"]
 [ext_resource type="Script" uid="uid://r5f15r3v6gb1" path="res://health_manager.gd" id="4_cm0pq"]
 
@@ -10,7 +10,7 @@ resource_name = "pulse"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
@@ -39,7 +39,6 @@ scale = Vector2(1.2, 1.2)
 pivot_offset = Vector2(20, 20)
 color = Color(0.495626, 0.147791, 0.241063, 1)
 script = ExtResource("1_glv2v")
-window = 0.4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Damager"]
 unique_name_in_owner = true
@@ -48,11 +47,10 @@ libraries = {
 }
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_uu6xs")
+stream = ExtResource("2_cm0pq")
 autoplay = true
 bus = &"BGM"
 script = ExtResource("3_r0du0")
-slow = true
 
 [node name="Label" type="Label" parent="."]
 offset_left = 42.0

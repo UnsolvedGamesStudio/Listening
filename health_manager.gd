@@ -26,8 +26,8 @@ func on_beat():
 	#measure_spacer = 0
 	
 	player_hp -= 10
-	if player_hp <= 0:
-		get_tree().quit()
+	#if player_hp <= 0:
+		#get_tree().quit()
 	update_ui_all()
 
 
