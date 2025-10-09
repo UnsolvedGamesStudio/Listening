@@ -6,20 +6,12 @@ extends AudioStreamPlayer
 @export var slow:= false
 @export var off:= false
 
-var song_position:= 0.0
-var song_position_in_beats:= 1
-var seconds_per_beat:= 60.0 / bpm
-var last_reported_beat:= -1
-var beats_before_start:= 0
-var current_measure:= 1
-
-var closest:= 0
 
 
 func _ready() -> void:
 	if slow == true:
 		bpm *= 0.5
-	seconds_per_beat = 60.0 / bpm
+	BeatVars.seconds_per_beat = 60.0 / bpm
 
 
 func _physics_process(_delta: float):
@@ -29,26 +21,28 @@ func _physics_process(_delta: float):
 		
 		return
 	
+	BeatVars.frames_since_last_beat += 1
 	## Loop
 	if not playing:
 		play()
-		last_reported_beat = -1
+		BeatVars.last_reported_beat = -1
 		return
 	
-	song_position = get_playback_position() + AudioServer.get_time_since_last_mix()
-	song_position -= AudioServer.get_output_latency()
-	song_position_in_beats = int( floor(song_position / seconds_per_beat) + beats_before_start )
+	BeatVars.song_position = get_playback_position() + AudioServer.get_time_since_last_mix()
+	BeatVars.song_position -= AudioServer.get_output_latency()
+	BeatVars.song_position_in_beats = int( floor(BeatVars.song_position / BeatVars.seconds_per_beat) + BeatVars.beats_before_start )
 	_report_beat()
-	
+	#print(BeatVars.frames_since_last_beat)
 	#prints("song_position: ", song_position, ". song_position_in_beats: ", song_position_in_beats, ". last_reported_beat: ", last_reported_beat)
 
 
 func _report_beat():
-	if last_reported_beat < song_position_in_beats:
-		if current_measure > measures:
+	if BeatVars.last_reported_beat < BeatVars.song_position_in_beats:
+		if BeatVars.current_measure > measures:
 			Bus.measure_played.emit()
-			current_measure = 1
+			BeatVars.current_measure = 1
 		
 		Bus.beat_played.emit()
-		last_reported_beat = song_position_in_beats
-		current_measure += 1
+		BeatVars.frames_since_last_beat = 0
+		BeatVars.last_reported_beat = BeatVars.song_position_in_beats
+		BeatVars.current_measure += 1

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://xqc1yxn05bn"]
 
 [ext_resource type="Script" uid="uid://risall41qse" path="res://test.gd" id="1_glv2v"]
-[ext_resource type="AudioStream" uid="uid://bhcq425mgvjwe" path="res://beat_only.wav" id="2_cm0pq"]
+[ext_resource type="AudioStream" uid="uid://d3suo8rgat2pr" path="res://beat_long.wav" id="2_cm0pq"]
 [ext_resource type="Script" uid="uid://dbs7tn7suqlhg" path="res://conductor.gd" id="3_r0du0"]
 [ext_resource type="Script" uid="uid://r5f15r3v6gb1" path="res://health_manager.gd" id="4_cm0pq"]
 
@@ -57,9 +57,6 @@ offset_left = 42.0
 offset_top = -11.0
 offset_right = 96.0
 offset_bottom = 12.0
-
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
 
 [node name="Labels" type="Node" parent="."]
 script = ExtResource("4_cm0pq")
