@@ -1,0 +1,94 @@
+[gd_scene load_steps=7 format=3 uid="uid://xqc1yxn05bn"]
+
+[ext_resource type="Script" uid="uid://risall41qse" path="res://test.gd" id="1_glv2v"]
+[ext_resource type="AudioStream" uid="uid://c062c6eruatvm" path="res://nice.wav" id="2_uu6xs"]
+[ext_resource type="Script" uid="uid://dbs7tn7suqlhg" path="res://conductor.gd" id="3_r0du0"]
+[ext_resource type="Script" uid="uid://r5f15r3v6gb1" path="res://health_manager.gd" id="4_cm0pq"]
+
+[sub_resource type="Animation" id="Animation_rxg2q"]
+resource_name = "pulse"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_glv2v"]
+_data = {
+&"pulse": SubResource("Animation_rxg2q")
+}
+
+[node name="Main" type="Node"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Damager" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(20, 20)
+color = Color(0.495626, 0.147791, 0.241063, 1)
+script = ExtResource("1_glv2v")
+window = 0.4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Damager"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_glv2v")
+}
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_uu6xs")
+autoplay = true
+bus = &"BGM"
+script = ExtResource("3_r0du0")
+slow = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 42.0
+offset_top = -11.0
+offset_right = 96.0
+offset_bottom = 12.0
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Labels" type="Node" parent="."]
+script = ExtResource("4_cm0pq")
+
+[node name="PlayerHPLabel" type="Label" parent="Labels"]
+anchors_preset = -1
+anchor_left = -0.016493056
+anchor_top = 0.16975309
+anchor_right = 0.018229166
+anchor_bottom = 0.20524691
+size_flags_horizontal = 4
+text = "HP: 0"
+metadata/_edit_use_anchors_ = true
+
+[node name="EnemyHPLabel" type="Label" parent="Labels"]
+anchors_preset = -1
+anchor_left = -0.039930556
+anchor_top = -0.18055555
+anchor_right = 0.043402776
+anchor_bottom = -0.14506173
+size_flags_horizontal = 4
+text = "Enemy HP: 0"
+metadata/_edit_use_anchors_ = true
+
+[node name="LevelLabel" type="Label" parent="Labels"]
+offset_left = -245.0
+offset_top = -12.0
+offset_right = -205.0
+offset_bottom = 11.0
+text = "Level: 0"

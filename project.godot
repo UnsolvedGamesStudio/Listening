@@ -1,0 +1,30 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Listen"
+run/main_scene="uid://xqc1yxn05bn"
+config/features=PackedStringArray("4.5", "Forward Plus")
+
+[autoload]
+
+Bus="*res://signal_bus.gd"
+
+[debug]
+
+gdscript/warnings/unused_variable=0
+gdscript/warnings/unused_local_constant=0
+gdscript/warnings/unused_parameter=0
+gdscript/warnings/unused_signal=0
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.108825, 0.326918, 0.288411, 1)
