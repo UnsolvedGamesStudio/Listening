@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dewfhmrag5pkp"]
+
+[ext_resource type="AudioStream" uid="uid://bhcq425mgvjwe" path="res://assets/music/beat_only.wav" id="1_1oder"]
+[ext_resource type="Script" uid="uid://dbs7tn7suqlhg" path="res://autoloads/bgm/bgm.gd" id="2_vucbv"]
+[ext_resource type="Script" uid="uid://dos3qhffr4v0a" path="res://addons/rhythm_notifier/rhythm_notifier.gd" id="3_1oder"]
+
+[node name="BGM" type="AudioStreamPlayer"]
+stream = ExtResource("1_1oder")
+autoplay = true
+bus = &"BGM"
+script = ExtResource("2_vucbv")
+
+[node name="RhythmNotifier" type="Node" parent="." node_paths=PackedStringArray("audio_stream_player")]
+unique_name_in_owner = true
+script = ExtResource("3_1oder")
+bpm = 120.0
+beat_length = 0.5
+audio_stream_player = NodePath("..")
+running = true

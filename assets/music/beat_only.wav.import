@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bhcq425mgvjwe"
-path="res://.godot/imported/beat_only.wav-339966e2e71b18bab82b813a98c617c4.sample"
+path="res://.godot/imported/beat_only.wav-4024a2ad1e6259c0b5db0c075d7325e5.sample"
 
 [deps]
 
-source_file="res://beat_only.wav"
-dest_files=["res://.godot/imported/beat_only.wav-339966e2e71b18bab82b813a98c617c4.sample"]
+source_file="res://assets/music/beat_only.wav"
+dest_files=["res://.godot/imported/beat_only.wav-4024a2ad1e6259c0b5db0c075d7325e5.sample"]
 
 [params]
 
@@ -18,7 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop_mode=0
+edit/loop_mode=2
 edit/loop_begin=0
 edit/loop_end=-1
 compress/mode=2

@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://dflkyrrs1kf1s"]
+
+[ext_resource type="Texture2D" uid="uid://c4axu3iewcc0a" path="res://assets/sprites/ui/timing_bar.png" id="1_boco5"]
+[ext_resource type="Script" uid="uid://dbgh2fsud7i6r" path="res://timing_bar/beat_vizualizer.gd" id="1_kra6h"]
+[ext_resource type="Texture2D" uid="uid://dfpijhj0xwh2c" path="res://assets/sprites/ui/timing_bar_middle.png" id="3_yv7sp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yv7sp"]
+radius = 2.0
+
+[node name="BeatVisualizer" type="CanvasLayer"]
+script = ExtResource("1_kra6h")
+
+[node name="TimingBar" type="TextureRect" parent="."]
+unique_name_in_owner = true
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_boco5")
+stretch_mode = 1
+
+[node name="MiddleBar" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2, 532)
+texture = ExtResource("3_yv7sp")
+
+[node name="BeatArea" type="Area2D" parent="MiddleBar"]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleBar/BeatArea"]
+shape = SubResource("CircleShape2D_yv7sp")

@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0tfafh16tflf"]
+
+[ext_resource type="Texture2D" uid="uid://bvo01f3ho371s" path="res://assets/sprites/ui/timing_circle.png" id="1_476gq"]
+[ext_resource type="Script" uid="uid://lqwfrw88w54v" path="res://timing_bar/timing_circle.gd" id="2_3qkbb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_476gq"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_3qkbb"]
+resource_name = "kill"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yo2ja"]
+_data = {
+&"kill": SubResource("Animation_3qkbb")
+}
+
+[node name="TimingCircle" type="Sprite2D"]
+texture = ExtResource("1_476gq")
+script = ExtResource("2_3qkbb")
+
+[node name="Zones" type="Node2D" parent="."]
+
+[node name="MediumZone" type="Area2D" parent="Zones"]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/MediumZone"]
+shape = SubResource("RectangleShape2D_476gq")
+
+[node name="Kill" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_yo2ja")
+}
