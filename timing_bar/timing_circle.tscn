@@ -37,7 +37,6 @@ _data = {
 [node name="TimingCircle" type="Sprite2D"]
 modulate = Color(1, 1, 1, 0)
 texture = ExtResource("1_476gq")
-offset = Vector2(-16, 0)
 script = ExtResource("2_3qkbb")
 
 [node name="Zones" type="Node2D" parent="."]
