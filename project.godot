@@ -18,6 +18,7 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 
 Bus="*res://autoloads/signal_bus.gd"
 Bgm="*res://autoloads/bgm/bgm.tscn"
+Vars="*res://autoloads/vars.gd"
 
 [debug]
 

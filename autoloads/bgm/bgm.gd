@@ -5,6 +5,11 @@ extends AudioStreamPlayer
 var two_beat_count:= 0
 var four_beat_count:= 0
 
+var songs: Dictionary[String, AudioStream] = {
+	"test" : preload("uid://bhcq425mgvjwe")
+}
+
+
 func _ready() -> void:
 	rhythm_notifier.beat.connect(on_beat)
 
