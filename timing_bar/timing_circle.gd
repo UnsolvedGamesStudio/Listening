@@ -1,26 +1,27 @@
 extends Sprite2D
 class_name timing_circle
 
-const RANK_LABEL = preload("uid://6w4l5x6wfeyn")
-
+@onready var zones: Node2D = %Zones
+@onready var easy_zone: Area2D = %EasyZone
 @onready var medium_zone: Area2D = %MediumZone
-@onready var kill: AnimationPlayer = %Kill
+@onready var perfect_zone: Area2D = %PerfectZone
+@onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
-var kill_point:= 0.0
-var direction:= 1.0
+const SLOW_SPEED:= 1.0
+const MEDIUM_SPEED:= 2.0
+const FAST_SPEED:= 4.0
+
+var beat_area: Area2D
 
 
-func _physics_process(delta: float) -> void:
-	global_position.x += 1 * direction
+func _ready() -> void:
+	var easiest_zone:= perfect_zone
 	
-	if global_position.x == kill_point:
-		kill.play("kill")
+	visible_on_screen_notifier_2d.connect("screen_exited", on_screen_exited)
 
 
-func generate_text():
-	var text_inst:= RANK_LABEL.instantiate()
-	
-	get_parent().add_child(text_inst)
+func _process(delta: float) -> void:
+	global_position.x += MEDIUM_SPEED
 
 
 func remove():
@@ -31,3 +32,7 @@ func remove():
 		Vars.active_circles.erase(circle)
 	
 	queue_free()
+
+
+func on_screen_exited():
+	remove()

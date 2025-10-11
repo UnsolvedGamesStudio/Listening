@@ -2,20 +2,20 @@
 
 [ext_resource type="Texture2D" uid="uid://bvo01f3ho371s" path="res://assets/sprites/ui/timing_circle.png" id="1_476gq"]
 [ext_resource type="Script" uid="uid://lqwfrw88w54v" path="res://timing_bar/timing_circle.gd" id="2_3qkbb"]
-[ext_resource type="Script" uid="uid://dft4gp0t0pod4" path="res://timing_bar/medium_zone.gd" id="3_yo2ja"]
+[ext_resource type="Script" uid="uid://dft4gp0t0pod4" path="res://timing_bar/timing_circle_zone.gd" id="3_yo2ja"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tjtfn"]
-radius = 9.0
+radius = 9.861882
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yo2ja"]
-radius = 5.0
+radius = 4.2449036
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4mav4"]
-radius = 1.0
+radius = 0.67466056
 
-[sub_resource type="Animation" id="Animation_3qkbb"]
-resource_name = "kill"
-length = 0.5
+[sub_resource type="Animation" id="Animation_yo2ja"]
+resource_name = "enter"
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -23,40 +23,30 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.06666666),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"remove"
-}]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yo2ja"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4mav4"]
 _data = {
-&"kill": SubResource("Animation_3qkbb")
+&"enter": SubResource("Animation_yo2ja")
 }
 
 [node name="TimingCircle" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0)
 texture = ExtResource("1_476gq")
+offset = Vector2(-16, 0)
 script = ExtResource("2_3qkbb")
 
 [node name="Zones" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [node name="EasyZone" type="Area2D" parent="Zones"]
 unique_name_in_owner = true
 script = ExtResource("3_yo2ja")
+difficulty = "easy"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/EasyZone"]
 shape = SubResource("CircleShape2D_tjtfn")
@@ -65,7 +55,7 @@ debug_color = Color(0, 0.6313726, 0.4862745, 0)
 [node name="MediumZone" type="Area2D" parent="Zones"]
 unique_name_in_owner = true
 script = ExtResource("3_yo2ja")
-difficulty = "Medium"
+difficulty = "medium"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/MediumZone"]
 shape = SubResource("CircleShape2D_yo2ja")
@@ -74,14 +64,17 @@ debug_color = Color(0, 0.6, 0.69803923, 0)
 [node name="PerfectZone" type="Area2D" parent="Zones"]
 unique_name_in_owner = true
 script = ExtResource("3_yo2ja")
-difficulty = "Perfect"
+difficulty = "perfect"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/PerfectZone"]
 shape = SubResource("CircleShape2D_4mav4")
 debug_color = Color(0.9011016, 0.3098072, 0, 0)
 
-[node name="Kill" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-8, -8, 16, 16)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_yo2ja")
+&"": SubResource("AnimationLibrary_4mav4")
 }
+autoplay = "enter"

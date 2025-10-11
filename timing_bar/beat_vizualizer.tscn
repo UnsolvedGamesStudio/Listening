@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dfpijhj0xwh2c" path="res://assets/sprites/ui/timing_bar_middle.png" id="3_yv7sp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yv7sp"]
-radius = 2.0
+radius = 3.0
 
 [sub_resource type="Animation" id="Animation_yv7sp"]
 resource_name = "pop_out"

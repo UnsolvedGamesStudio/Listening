@@ -49,9 +49,15 @@ _data = {
 
 [node name="RankLabel" type="Label"]
 modulate = Color(1, 1, 1, 0.8017492)
-offset_right = 46.0
-offset_bottom = 23.0
+anchors_preset = -1
+anchor_left = -0.025
+anchor_right = 0.022916667
+anchor_bottom = 0.042592593
+pivot_offset = Vector2(24, 12)
 text = "Good!"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Enter" type="AnimationPlayer" parent="."]
 libraries = {
