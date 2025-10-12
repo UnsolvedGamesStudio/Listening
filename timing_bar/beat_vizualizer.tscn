@@ -43,19 +43,20 @@ grow_vertical = 0
 texture = ExtResource("1_boco5")
 stretch_mode = 1
 
-[node name="MiddleIndicator" type="Sprite2D" parent="."]
+[node name="BeatActivator" type="Sprite2D" parent="." groups=["beat_activator"]]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.49411765)
 position = Vector2(2, 532)
 texture = ExtResource("3_yv7sp")
 
-[node name="BeatArea" type="Area2D" parent="MiddleIndicator"]
+[node name="BeatArea" type="Area2D" parent="BeatActivator"]
 unique_name_in_owner = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleIndicator/BeatArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BeatActivator/BeatArea"]
 shape = SubResource("CircleShape2D_yv7sp")
 
-[node name="MiddleIndicatorAnim" type="AnimationPlayer" parent="MiddleIndicator"]
+[node name="BeatActivatorAnim" type="AnimationPlayer" parent="BeatActivator"]
+unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_3jijn")
 }

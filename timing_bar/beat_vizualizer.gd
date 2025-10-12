@@ -4,9 +4,9 @@ const TIMING_CIRCLE = preload("uid://d0tfafh16tflf")
 const RANK_LABEL = preload("uid://6w4l5x6wfeyn")
 
 @onready var timing_bar: TextureRect = %TimingBar
-@onready var middle_indicator: Sprite2D = %MiddleIndicator
+@onready var beat_activator: Sprite2D = %BeatActivator
 @onready var beat_area: Area2D = %BeatArea
-@onready var middle_indicator_anim: AnimationPlayer = $MiddleIndicator/MiddleIndicatorAnim
+@onready var beat_activator_anim: AnimationPlayer = %BeatActivatorAnim
 
 @export_range(1, 10) var height_modifier:= 1.2
 
@@ -25,11 +25,11 @@ func init_positions():
 	var height:= get_viewport().get_visible_rect().size.y / height_modifier
 	
 	timing_bar.global_position.y = height
-	middle_indicator.global_position.x = middle_of_screen.x
+	beat_activator.global_position.x = middle_of_screen.x
 	
 	var middle_of_bar:= timing_bar.global_position.y + (timing_bar.size.y / 2)
 	
-	middle_indicator.global_position.y = middle_of_bar
+	beat_activator.global_position.y = middle_of_bar
 	
 	circle_spawn_pos.y = middle_of_bar
 	circle_spawn_pos.x = 0
@@ -40,7 +40,7 @@ func connect_signals():
 
 
 func generate_circle():
-	var circle_inst: timing_circle = TIMING_CIRCLE.instantiate()
+	var circle_inst: TimingCircle = TIMING_CIRCLE.instantiate()
 	
 	circle_inst.global_position = circle_spawn_pos
 	circle_inst.beat_area = beat_area
@@ -54,26 +54,45 @@ func update_middle_of_screen():
 	middle_of_screen = get_viewport().get_visible_rect().size / 2
 
 
-func pop_out_middle_indicator():
-	middle_indicator_anim.play("pop_out")
+func pop_out_beat_activator():
+	beat_activator_anim.play("pop_out")
 
-
-func check_accuracy():
+## Todo: split into multiple functions/retool to be less confusing
+func check_accuracy(element: String = "none"):
+	var circle: TimingCircle
 	var accuracy:= "missed"
+	var level:= 0
+	
+	pop_out_beat_activator()
 	
 	for area in beat_area.get_overlapping_areas():
 		if not "difficulty" in area:
 			return accuracy
 		
 		if area.difficulty == "easy":
+			level = 1
 			accuracy = "easy"
 		
 		if area.difficulty == "medium":
+			level = 2
 			accuracy = "medium"
 		
 		if area.difficulty == "perfect":
+			level = 3
 			accuracy = "perfect"
 		
+		if area.owner is TimingCircle:
+			circle = area.owner
+	
+	if not accuracy == "missed":
+		Bus.beat_success.emit(level)
+		Bus.beat_success_to_circle.emit(level, circle, element)
+		Bus.beat_success_to_spellcast.emit(level, element)
+		
+		if not element == "none":
+			Vars.last_element = element
+	
+	generate_text(accuracy)
 	return accuracy
 
 
@@ -94,5 +113,13 @@ func on_beat_played():
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click") or event.is_action_pressed("activate"):
-		pop_out_middle_indicator()
-		generate_text(check_accuracy())
+		check_accuracy()
+	
+	elif event.is_action_pressed("element_1"):
+		check_accuracy("fire")
+	
+	elif event.is_action_pressed("element_2"):
+		check_accuracy("ice")
+	
+	elif event.is_action_pressed("element_3"):
+		check_accuracy("lightning")

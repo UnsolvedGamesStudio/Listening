@@ -11,3 +11,5 @@ signal third_of_four_beats
 signal fourth_of_four_beats
 
 signal beat_success(level: int)
+signal beat_success_to_circle(level: int, circle: TimingCircle, element: String)
+signal beat_success_to_spellcast(element: String)

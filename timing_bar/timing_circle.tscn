@@ -5,13 +5,13 @@
 [ext_resource type="Script" uid="uid://dft4gp0t0pod4" path="res://timing_bar/timing_circle_zone.gd" id="3_yo2ja"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tjtfn"]
-radius = 9.861882
+radius = 9.105401
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yo2ja"]
-radius = 4.2449036
+radius = 3.6133754
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4mav4"]
-radius = 0.67466056
+radius = 1.0806454
 
 [sub_resource type="Animation" id="Animation_yo2ja"]
 resource_name = "enter"
@@ -35,7 +35,6 @@ _data = {
 }
 
 [node name="TimingCircle" type="Sprite2D"]
-modulate = Color(1, 1, 1, 0)
 texture = ExtResource("1_476gq")
 script = ExtResource("2_3qkbb")
 
