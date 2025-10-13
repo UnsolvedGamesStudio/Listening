@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://86r6xeju02bg"]
+
+[ext_resource type="Texture2D" uid="uid://b7mmj4bh7r1aa" path="res://MainUI/textures/reticle.png" id="1_sgsgb"]
+
+[node name="MainUI" type="CanvasLayer"]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Reticle" type="TextureRect" parent="CenterContainer"]
+layout_mode = 2
+texture = ExtResource("1_sgsgb")

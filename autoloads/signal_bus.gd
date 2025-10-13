@@ -1,5 +1,6 @@
 extends Node
 
+signal beat_press_attempted
 
 signal any_beat
 

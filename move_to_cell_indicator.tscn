@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvtaknhhjh26e"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_43p1k"]
+
+[node name="MoveToCellIndicator" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.014642477, 0)
+mesh = SubResource("PlaneMesh_43p1k")

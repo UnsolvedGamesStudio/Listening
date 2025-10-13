@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://dflkyrrs1kf1s"]
 
-[ext_resource type="Texture2D" uid="uid://c4axu3iewcc0a" path="res://assets/sprites/ui/timing_bar.png" id="1_boco5"]
+[ext_resource type="Texture2D" uid="uid://c4axu3iewcc0a" path="res://timing_bar/textures/timing_bar.png" id="1_boco5"]
 [ext_resource type="Script" uid="uid://dbgh2fsud7i6r" path="res://timing_bar/beat_vizualizer.gd" id="1_kra6h"]
-[ext_resource type="Texture2D" uid="uid://dfpijhj0xwh2c" path="res://assets/sprites/ui/timing_bar_middle.png" id="3_yv7sp"]
+[ext_resource type="Texture2D" uid="uid://dfpijhj0xwh2c" path="res://timing_bar/textures/timing_bar_middle.png" id="3_yv7sp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yv7sp"]
-radius = 3.0
+radius = 2.4665587
 
 [sub_resource type="Animation" id="Animation_yv7sp"]
 resource_name = "pop_out"
@@ -28,7 +28,7 @@ _data = {
 &"pop_out": SubResource("Animation_yv7sp")
 }
 
-[node name="BeatVisualizer" type="CanvasLayer"]
+[node name="BeatVisualizer" type="CanvasLayer" groups=["beat_vizualizer"]]
 script = ExtResource("1_kra6h")
 
 [node name="TimingBar" type="TextureRect" parent="."]
@@ -43,7 +43,7 @@ grow_vertical = 0
 texture = ExtResource("1_boco5")
 stretch_mode = 1
 
-[node name="BeatActivator" type="Sprite2D" parent="." groups=["beat_activator"]]
+[node name="BeatActivator" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.49411765)
 position = Vector2(2, 532)

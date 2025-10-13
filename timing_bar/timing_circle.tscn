@@ -1,14 +1,14 @@
 [gd_scene load_steps=9 format=3 uid="uid://d0tfafh16tflf"]
 
-[ext_resource type="Texture2D" uid="uid://bvo01f3ho371s" path="res://assets/sprites/ui/timing_circle.png" id="1_476gq"]
+[ext_resource type="Texture2D" uid="uid://bvo01f3ho371s" path="res://timing_bar/textures/timing_circle.png" id="1_476gq"]
 [ext_resource type="Script" uid="uid://lqwfrw88w54v" path="res://timing_bar/timing_circle.gd" id="2_3qkbb"]
 [ext_resource type="Script" uid="uid://dft4gp0t0pod4" path="res://timing_bar/timing_circle_zone.gd" id="3_yo2ja"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tjtfn"]
-radius = 9.105401
+radius = 10.250254
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yo2ja"]
-radius = 3.6133754
+radius = 4.786974
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4mav4"]
 radius = 1.0806454
