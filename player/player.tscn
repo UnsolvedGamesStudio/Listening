@@ -1,12 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://ce10gkdeiprj7"]
+[gd_scene load_steps=4 format=3 uid="uid://ce10gkdeiprj7"]
 
 [ext_resource type="Script" uid="uid://bxbkaxat5hcgk" path="res://player/player.gd" id="1_oul6g"]
+[ext_resource type="PackedScene" uid="uid://bc7nsyavco5xh" path="res://player/spellcast.tscn" id="2_rkbax"]
+[ext_resource type="PackedScene" uid="uid://ds6ehm1oneoe7" path="res://player/interact.tscn" id="3_g1dw6"]
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_oul6g")
+move_speed_level = 3
+
+[node name="Spellcast" parent="." instance=ExtResource("2_rkbax")]
+
+[node name="Interact" parent="." instance=ExtResource("3_g1dw6")]
 
 [node name="Neck" type="Node3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29461646, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Neck"]
 unique_name_in_owner = true
@@ -15,5 +23,6 @@ current = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.282909, 0)
-light_energy = 1.825
-omni_range = 15.092
+light_color = Color(1, 0.8320722, 0.71004725, 1)
+light_volumetric_fog_energy = 1.495
+shadow_enabled = true

@@ -1,11 +1,15 @@
 extends Node3D
+class_name Player
 
 @onready var camera: Camera3D = %Camera3D
 @onready var neck: Node3D = %Neck
 
-@export var camera_raycast_distance:= 2.0
+const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
+
+@export var camera_raycast_distance:= 200.0
 @export var camera_speed:= 50
 @export var spawn_pos:= Vector3(0, 0, 0)
+@export_range(1, 3) var move_speed_level:= 2
 
 var move_to_cell_indicator: Node3D
 
@@ -62,7 +66,17 @@ func move_forward():
 	if current_looked_at_cell == null:
 		return
 	
-	var move_speed:= Bgm.rhythm_notifier.bpm / 400
+	var move_speed: float
+	if move_speed_level == 1:
+		move_speed = Bgm.rhythm_notifier.bpm / 200
+	if move_speed_level == 2:
+		move_speed = Bgm.rhythm_notifier.bpm / 400
+	if move_speed_level == 3:
+		move_speed = Bgm.rhythm_notifier.bpm / 800
+	
+	if not Vars.last_activated_circle == null:
+		Vars.last_activated_circle.texture = MOVE_SIGIL
+	
 	var tween:= get_tree().create_tween()
 	tween.tween_property(self, "global_position", current_looked_at_cell.global_position, move_speed)
 	
@@ -85,9 +99,10 @@ func update_looked_at_cell():
 	current_looked_at_cell = cell.get_parent()
 	
 	move_to_cell_indicator.global_position = cell.global_position
+	move_to_cell_indicator.global_rotation_degrees.y = snapped(neck.global_rotation_degrees.y, 90)
 
 
-func check_raycast(collider: bool):
+func check_raycast(collider: bool = false):
 	var space_state:= camera.get_world_3d().direct_space_state
 	##!! middle of screen is dependent on the viewport scale settings
 	var middle_of_screen = get_viewport().size / 4
@@ -95,7 +110,8 @@ func check_raycast(collider: bool):
 	var end:= origin + camera.project_ray_normal(middle_of_screen) * camera_raycast_distance
 	var query:= PhysicsRayQueryParameters3D.create(origin, end)
 	
-	query.collide_with_areas = true
+	if collider == true:
+		query.collide_with_areas = true
 	
 	var result:= space_state.intersect_ray(query)
 	
@@ -107,3 +123,8 @@ func check_raycast(collider: bool):
 	
 	else:
 		return result
+
+
+func get_look_at_direction():
+	var middle_of_screen = get_viewport().size / 4
+	return camera.project_ray_normal(middle_of_screen) * camera_raycast_distance

@@ -7,14 +7,9 @@ class_name TimingCircle
 @onready var perfect_zone: Area2D = %PerfectZone
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
-const FIRE_SIGIL = preload("uid://cv18664g653gf")
-const ICE_SIGIL = preload("uid://bu5poabmlsdta")
-const LIGHTNING_SIGIL = preload("uid://c3brioukmdf24")
+@export_range(1, 2) var speed_level:= 2
 
-const SLOW_SPEED:= 1.0
-const MEDIUM_SPEED:= 2.0
-const FAST_SPEED:= 4.0
-
+var speed:= 2.0
 var beat_area: Area2D
 
 
@@ -23,10 +18,16 @@ func _ready() -> void:
 	
 	visible_on_screen_notifier_2d.connect("screen_exited", on_screen_exited)
 	Bus.beat_success_to_circle.connect(on_beat_success_to_circle)
+	easiest_zone.area_exited.connect(on_easiest_zone_area_exited)
+	
+	if speed_level == 1:
+		speed = 1.0
+	if speed_level == 2:
+		speed = 2.0
 
 
 func _process(delta: float) -> void:
-	global_position.x += MEDIUM_SPEED
+	global_position.x += speed_level
 
 
 func remove():
@@ -38,17 +39,24 @@ func remove():
 	
 	queue_free()
 
-##Todo: Replace strings with enum/dict/other
-func change_to_sigil(element: String):
-	if element == "none":
-		return
+
+func change_speed(amount: int):
+	speed_level = min(amount, 2)
 	
-	if element == "fire":
-		texture = FIRE_SIGIL
-	if element == "ice":
-		texture = ICE_SIGIL
-	if element == "lightning":
-		texture = LIGHTNING_SIGIL
+	if speed_level == 1:
+		speed = 1.0
+	if speed_level == 2:
+		speed = 2.0
+
+
+#func change_to_sigil(element: int):
+	#if element == -1:
+		#return
+	#
+	#if not "texture" in Vars.elements[element]:
+		#return
+	#
+	#texture = Vars.elements[element].texture
 
 
 func recolor(level: int):
@@ -56,15 +64,15 @@ func recolor(level: int):
 		return
 	
 	if level == 1:
-		modulate = Color(1.224, 0.154, 0.325)
+		material.set_shader_parameter("clr", Color(0.736, 0.68, 0.284, 1.0))
 		return
 	
 	if level == 2:
-		modulate = Color(2.033, 0.985, 0.0)
+		material.set_shader_parameter("clr", Color(0.588, 0.627, 0.03, 1.0))
 		return
 	
 	if level >= 3:
-		modulate = Color(0.0, 1.637, 0.0)
+		material.set_shader_parameter("clr", Color(0.0, 0.595, 0.337, 1.0))
 		return
 
 
@@ -74,13 +82,17 @@ func deactivate_zones():
 		zone.monitoring = false
 
 
-func on_beat_success_to_circle(level: int, circle: TimingCircle, element: String):
+func on_beat_success_to_circle(level: int, circle: TimingCircle, element: int):
 	if not circle == self:
 		return
 	
 	deactivate_zones()
-	change_to_sigil(element)
+	#change_to_sigil(element)
 	recolor(level)
+
+
+func on_easiest_zone_area_exited(area: Area2D):
+	material.set_shader_parameter("clr", Color(0.68, 0.053, 0.223, 1.0))
 
 
 func on_screen_exited():

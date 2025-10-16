@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dll8ommh3gens"]
+
+[ext_resource type="Script" uid="uid://ck8o2p4vesh6s" path="res://spell_casting/elements/element.gd" id="1_sxv2t"]
+[ext_resource type="Texture2D" uid="uid://cvi5fhknrqn1k" path="res://spell_casting/textures/joy_sigil.png" id="2_sxv2t"]
+
+[resource]
+script = ExtResource("1_sxv2t")
+id = "joy"
+name_string = "Joy"
+texture = ExtResource("2_sxv2t")

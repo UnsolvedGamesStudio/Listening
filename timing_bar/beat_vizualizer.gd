@@ -77,19 +77,3 @@ func on_beat_played():
 	
 	## Test system's accuracy
 	#print(check_accuracy())
-
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("left_click"):
-		Bgm.check_accuracy()
-	#
-	#elif event.is_action_pressed("element_1"):
-		#check_accuracy("fire")
-	#
-	#elif event.is_action_pressed("element_2"):
-		#check_accuracy("ice")
-	#
-	#elif event.is_action_pressed("element_3"):
-		#check_accuracy("lightning")
-	
-	

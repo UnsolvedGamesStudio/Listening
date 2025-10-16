@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c3by8wql8tw8j"]
+
+[ext_resource type="Texture2D" uid="uid://bu5y1dmeu5ec6" path="res://terrain/textures/wall_tile.png" id="1_41dti"]
+
+[resource]
+albedo_texture = ExtResource("1_41dti")
+uv1_triplanar = true
+texture_filter = 0

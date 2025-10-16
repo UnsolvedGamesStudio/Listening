@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cmbm0xvgimn1j"]
+
+[ext_resource type="Script" uid="uid://ck8o2p4vesh6s" path="res://spell_casting/elements/element.gd" id="1_jvmg1"]
+[ext_resource type="Texture2D" uid="uid://cgy3lkdlcu6i3" path="res://spell_casting/textures/sadness_sigil.png" id="2_jvmg1"]
+
+[resource]
+script = ExtResource("1_jvmg1")
+id = "sadness"
+name_string = "Sadness"
+texture = ExtResource("2_jvmg1")

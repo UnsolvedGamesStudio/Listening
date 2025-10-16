@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1rnngxhnemng"]
+
+[ext_resource type="Script" uid="uid://d0wkhkbfau2f6" path="res://terrain/layout.gd" id="1_v6hxy"]
+[ext_resource type="PackedScene" uid="uid://86r6xeju02bg" path="res://main_ui/main_ui.tscn" id="2_272v2"]
+[ext_resource type="PackedScene" uid="uid://cxn5thfypyjo2" path="res://map/map.tscn" id="2_hcp3l"]
+[ext_resource type="PackedScene" uid="uid://dflkyrrs1kf1s" path="res://timing_bar/beat_vizualizer.tscn" id="3_tupbf"]
+[ext_resource type="PackedScene" uid="uid://ce10gkdeiprj7" path="res://player/player.tscn" id="4_trw21"]
+[ext_resource type="PackedScene" uid="uid://dvtaknhhjh26e" path="res://terrain/move_to_cell_indicator.tscn" id="7_08ldw"]
+
+[node name="Layout" type="Node3D"]
+script = ExtResource("1_v6hxy")
+
+[node name="Map" type="CanvasLayer" parent="."]
+visible = false
+scale = Vector2(0.25, 0.25)
+transform = Transform2D(0.25, 0, 0, 0.25, 0, 0)
+
+[node name="Panel" type="Panel" parent="Map"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_right = 0.041666668
+anchor_bottom = 0.074074075
+metadata/_edit_use_anchors_ = true
+
+[node name="Map" parent="Map/Panel" instance=ExtResource("2_hcp3l")]
+position = Vector2(244, 164)
+
+[node name="MainUI" parent="." instance=ExtResource("2_272v2")]
+
+[node name="BeatVisualizer" parent="." instance=ExtResource("3_tupbf")]
+
+[node name="Player" parent="." instance=ExtResource("4_trw21")]
+
+[node name="MoveToCellIndicator" parent="." groups=["move_to_cell_indicator"] instance=ExtResource("7_08ldw")]
+unique_name_in_owner = true

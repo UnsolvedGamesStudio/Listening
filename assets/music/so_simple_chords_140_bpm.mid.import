@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://dvvjseifubaqs"
+path="res://.godot/imported/so_simple_chords_140_bpm.mid-6cb177506713826840844f7e370636b0.res"
+
+[deps]
+
+source_file="res://assets/music/so_simple_chords_140_bpm.mid"
+dest_files=["res://.godot/imported/so_simple_chords_140_bpm.mid-6cb177506713826840844f7e370636b0.res"]
+
+[params]
+

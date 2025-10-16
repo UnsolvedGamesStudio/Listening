@@ -1,0 +1,126 @@
+[gd_scene load_steps=11 format=3 uid="uid://b0qtdogq2osyf"]
+
+[ext_resource type="Script" uid="uid://cek31j454p35k" path="res://terrain/cell.gd" id="1_ds1sf"]
+[ext_resource type="Script" uid="uid://ddnl1t5x1dbdw" path="res://terrain/cell_collision.tres.gd" id="2_0s7o3"]
+[ext_resource type="Material" uid="uid://c3by8wql8tw8j" path="res://terrain/textures/wall_material.tres" id="2_ds1sf"]
+[ext_resource type="Material" uid="uid://bd5kwov3i5lgu" path="res://terrain/textures/floor_material.tres" id="3_ecwuj"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sf26d"]
+material = ExtResource("2_ds1sf")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8d6ju"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8d6ju"]
+material = ExtResource("2_ds1sf")
+size = Vector2(2, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sf26d"]
+size = Vector3(2, 1, 4)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7ypjj"]
+material = ExtResource("3_ecwuj")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ds1sf"]
+size = Vector3(2, 2, 2)
+
+[node name="Cell" type="Node3D"]
+script = ExtResource("1_ds1sf")
+
+[node name="TopFace" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-1, 1.509958e-07, 0, -1.509958e-07, -1, 0, 0, 0, 1, 0, 4, 0)
+mesh = SubResource("PlaneMesh_sf26d")
+
+[node name="Area3D" type="Area3D" parent="TopFace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.557168e-08, -0.50048876, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TopFace/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0042419434)
+shape = SubResource("BoxShape3D_8d6ju")
+debug_color = Color(0.9926967, 0, 0.25486487, 0.41960785)
+
+[node name="NorthFace" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-1, 1.509958e-07, 6.600236e-15, 0, -4.371139e-08, 1, 1.509958e-07, 1, 4.371139e-08, 0, 2, -1)
+mesh = SubResource("PlaneMesh_8d6ju")
+
+[node name="Area3D" type="Area3D" parent="NorthFace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.557168e-08, -0.50048876, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NorthFace/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0042419434)
+shape = SubResource("BoxShape3D_sf26d")
+debug_color = Color(0.9926967, 0, 0.25486487, 0.41960785)
+
+[node name="EastFace" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 1, 2, 0)
+mesh = SubResource("PlaneMesh_8d6ju")
+
+[node name="Area3D" type="Area3D" parent="EastFace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.557168e-08, -0.50048876, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EastFace/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0042419434)
+shape = SubResource("BoxShape3D_sf26d")
+debug_color = Color(0.9926967, 0, 0.25486487, 0.41960785)
+
+[node name="SouthFace" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, -4.3711392e-08, -1.9106857e-15, 0, -4.371139e-08, 1, -4.3711392e-08, -1, -4.371139e-08, 0, 2, 1)
+mesh = SubResource("PlaneMesh_8d6ju")
+
+[node name="Area3D" type="Area3D" parent="SouthFace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.557168e-08, -0.50048876, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SouthFace/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0042419434)
+shape = SubResource("BoxShape3D_sf26d")
+debug_color = Color(0.9926967, 0, 0.25486487, 0.41960785)
+
+[node name="WestFace" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(7.54979e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, -7.54979e-08, -3.300118e-15, -1, 2, 0)
+mesh = SubResource("PlaneMesh_8d6ju")
+
+[node name="Area3D" type="Area3D" parent="WestFace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.557168e-08, -0.50048876, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WestFace/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0042419434)
+shape = SubResource("BoxShape3D_sf26d")
+debug_color = Color(0.9926967, 0, 0.25486487, 0.41960785)
+
+[node name="BottomFace" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+mesh = SubResource("PlaneMesh_7ypjj")
+
+[node name="Area3D" type="Area3D" parent="BottomFace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.557168e-08, -0.50048876, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BottomFace/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0042419434)
+shape = SubResource("BoxShape3D_8d6ju")
+debug_color = Color(0.9926967, 0, 0.25486487, 0.41960785)
+
+[node name="CellCollision" type="Area3D" parent="."]
+script = ExtResource("2_0s7o3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CellCollision"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_ds1sf")
+debug_color = Color(0.9492838, 6.3532593e-06, 0.57661045, 0.41960785)

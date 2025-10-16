@@ -1,60 +1,88 @@
 extends Node
 
 @onready var label: Label = $Label
+
+const CAST_SIGIL = preload("uid://c5nwti415vrqj")
+const EMPTY_CAST_SIGIL = preload("uid://cquqsopjsxe0b")
+
+const PROJECTILE = preload("uid://bwaev5gyis5tp")
+
 var container:= Vars.element_container
+var container_ui: ElementContainerUI
+var player: Player
 
 
 func _ready() -> void:
-	Bus.beat_success_to_spellcast.connect(on_beat_success_to_spellcast)
+	container_ui = get_tree().get_first_node_in_group("element_container_ui")
+	player = owner
 
 
 func _input(event: InputEvent) -> void:
-	on_cast_pressed(event)
-	on_element_pressed(event)
-
-
-func on_cast_pressed(event: InputEvent):
-	if not event.is_action_pressed("cast"):
-		return
-	
-	Bgm.check_accuracy()
-
-
-func on_element_pressed(event: InputEvent):
-	var picked_element
+	if event.is_action_pressed("cast"):
+		on_cast_pressed()
 	
 	if event.is_action_pressed("element_1"):
-		picked_element = "fire"
+		add_element(0)
 	
-	elif event.is_action_pressed("element_2"):
-		picked_element = "ice"
+	if event.is_action_pressed("element_2"):
+		add_element(1)
 	
-	elif event.is_action_pressed("element_3"):
-		picked_element = "lightning"
+	if event.is_action_pressed("element_3"):
+		add_element(2)
+
+
+func on_cast_pressed():
+	var success: String = Bgm.check_accuracy()
 	
-	if picked_element == null:
+	if success == "missed":
 		return
 	
-	Bgm.check_accuracy(picked_element)
+	cast_spell()
+
+
+func add_element(element: int):
+	var success: String = Bgm.check_accuracy()
+	
+	if success == "missed":
+		return
+	
+	if not Vars.last_activated_circle == null:
+			Vars.last_activated_circle.texture = Vars.elements[element].texture
+	
+	if container.size() >= 3:
+		container.push_front(element)
+	else:
+		container.append(element)
+	
+	container_ui.update()
 
 
 func cast_spell():
+	Bgm.play_midi()
 	if container == []:
+		if not Vars.last_activated_circle == null:
+			Vars.last_activated_circle.texture = EMPTY_CAST_SIGIL
 		return
 	
+	if not Vars.last_activated_circle == null:
+		Vars.last_activated_circle.texture = CAST_SIGIL
+	
+	
+	create_projectile()
 	container.clear()
-	label.text = str("Cast!")
-	await get_tree().create_timer(0.4).timeout
-	label.text = ""
+	container_ui.update()
 
 
-func on_beat_success_to_spellcast(level, element: String):
-	if element == "none":
-		cast_spell()
-		return
+func create_projectile():
+	var projectile_inst: Projectile = PROJECTILE.instantiate()
+	var position_offset:= 0.3
+	var look_at_direction: Vector3 = player.get_look_at_direction()
 	
-	if container.size() >= 3:
-		container.clear()
+	owner.get_parent().add_child(projectile_inst)
+	projectile_inst.player = player
 	
-	container.append(element)
-	label.text = str(container)
+	projectile_inst.global_position.x = player.camera.global_position.x + (position_offset * (look_at_direction.x / 50))
+	projectile_inst.global_position.y = player.camera.global_position.y + (position_offset * (look_at_direction.y / 50))
+	projectile_inst.global_position.z = player.camera.global_position.z  + (position_offset * (look_at_direction.z / 50))
+	
+	projectile_inst.target_point = look_at_direction

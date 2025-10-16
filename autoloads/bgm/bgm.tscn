@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://dewfhmrag5pkp"]
+[gd_scene load_steps=8 format=3 uid="uid://dewfhmrag5pkp"]
 
-[ext_resource type="AudioStream" uid="uid://bhcq425mgvjwe" path="res://assets/music/beat_only.wav" id="1_1oder"]
+[ext_resource type="AudioStream" uid="uid://cehj8qpgycok1" path="res://assets/music/so simple 140 bpm.wav" id="1_1oder"]
 [ext_resource type="Script" uid="uid://dbs7tn7suqlhg" path="res://autoloads/bgm/bgm.gd" id="2_vucbv"]
 [ext_resource type="Script" uid="uid://dos3qhffr4v0a" path="res://addons/rhythm_notifier/rhythm_notifier.gd" id="3_1oder"]
+[ext_resource type="MidiResource" uid="uid://dvvjseifubaqs" path="res://assets/music/so_simple_chords_140_bpm.mid" id="4_1i4ta"]
+[ext_resource type="Script" uid="uid://2ag1petdt53" path="res://addons/SimpleSampler/sampler_instrument.gd" id="5_syuoy"]
+[ext_resource type="Script" uid="uid://dtpmtwvvk0ac7" path="res://addons/SimpleSampler/sample_resource.gd" id="6_yq28d"]
+[ext_resource type="Resource" uid="uid://c67s4yjf8k7l0" path="res://assets/samples/test.tres" id="7_qfgnj"]
 
 [node name="BGM" type="AudioStreamPlayer"]
 stream = ExtResource("1_1oder")
@@ -13,7 +17,20 @@ script = ExtResource("2_vucbv")
 [node name="RhythmNotifier" type="Node" parent="." node_paths=PackedStringArray("audio_stream_player")]
 unique_name_in_owner = true
 script = ExtResource("3_1oder")
-bpm = 120.0
-beat_length = 0.5
+bpm = 140.0
+beat_length = 0.42857142857142855
 audio_stream_player = NodePath("..")
-running = true
+
+[node name="MidiPlayer" type="MidiPlayer" parent="."]
+midi = ExtResource("4_1i4ta")
+loop = true
+unique_name_in_owner = true
+
+[node name="SamplerInstrument" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+max_polyphony = 6
+bus = &"Sampler"
+script = ExtResource("5_syuoy")
+max_notes = 6
+samples = Array[ExtResource("6_yq28d")]([ExtResource("7_qfgnj")])
+metadata/_custom_type_script = "uid://2ag1petdt53"

@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://5is6n10g8b8b"]
+
+[ext_resource type="Script" uid="uid://bdu1s4nar2plq" path="res://main_ui/element_container_ui.gd" id="1_k5wb2"]
+
+[node name="ElementContainerUI" type="PanelContainer"]
+custom_minimum_size = Vector2(25, 0)
+anchors_preset = -1
+anchor_left = 0.9479167
+anchor_right = 1.0
+anchor_bottom = 0.02962963
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="ElementContainers" type="VBoxContainer" parent="." groups=["element_container_ui"]]
+layout_mode = 2
+alignment = 1
+script = ExtResource("1_k5wb2")
+
+[node name="Element1Container" type="PanelContainer" parent="ElementContainers"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="Element1" type="TextureRect" parent="ElementContainers/Element1Container"]
+unique_name_in_owner = true
+layout_mode = 2
+stretch_mode = 3
+
+[node name="Element2Container" type="PanelContainer" parent="ElementContainers"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="Element2" type="TextureRect" parent="ElementContainers/Element2Container"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Element3Container" type="PanelContainer" parent="ElementContainers"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="Element3" type="TextureRect" parent="ElementContainers/Element3Container"]
+unique_name_in_owner = true
+layout_mode = 2
+stretch_mode = 3

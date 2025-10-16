@@ -1,8 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0tfafh16tflf"]
+[gd_scene load_steps=11 format=3 uid="uid://d0tfafh16tflf"]
 
+[ext_resource type="Shader" uid="uid://d3vol50xhipt" path="res://timing_bar/outline.gdshader" id="1_4mav4"]
 [ext_resource type="Texture2D" uid="uid://bvo01f3ho371s" path="res://timing_bar/textures/timing_circle.png" id="1_476gq"]
 [ext_resource type="Script" uid="uid://lqwfrw88w54v" path="res://timing_bar/timing_circle.gd" id="2_3qkbb"]
 [ext_resource type="Script" uid="uid://dft4gp0t0pod4" path="res://timing_bar/timing_circle_zone.gd" id="3_yo2ja"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4mav4"]
+resource_local_to_scene = true
+shader = ExtResource("1_4mav4")
+shader_parameter/clr = Color(0, 0.03137255, 0, 1)
+shader_parameter/type = 1
+shader_parameter/thickness = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tjtfn"]
 radius = 10.250254
@@ -35,8 +43,10 @@ _data = {
 }
 
 [node name="TimingCircle" type="Sprite2D"]
+material = SubResource("ShaderMaterial_4mav4")
 texture = ExtResource("1_476gq")
 script = ExtResource("2_3qkbb")
+speed_level = 3
 
 [node name="Zones" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -69,6 +79,7 @@ shape = SubResource("CircleShape2D_4mav4")
 debug_color = Color(0.9011016, 0.3098072, 0, 0)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+z_index = -1
 rect = Rect2(-8, -8, 16, 16)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
