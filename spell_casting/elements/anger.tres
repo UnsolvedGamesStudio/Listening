@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://cmx6b83khcpk1"]
 
 [ext_resource type="Script" uid="uid://ck8o2p4vesh6s" path="res://spell_casting/elements/element.gd" id="1_17mm2"]
-[ext_resource type="Texture2D" uid="uid://45k1w4wb7h02" path="res://spell_casting/textures/anger_sigil.png" id="2_17mm2"]
+[ext_resource type="Texture2D" uid="uid://cfj1n1k6dgke1" path="res://spell_casting/textures/anger_sigil.png" id="2_17mm2"]
 
 [resource]
 script = ExtResource("1_17mm2")

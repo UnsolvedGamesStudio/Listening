@@ -26,8 +26,8 @@ func _ready() -> void:
 		speed = 2.0
 
 
-func _process(delta: float) -> void:
-	global_position.x += speed_level
+func _physics_process(delta: float) -> void:
+	global_position.x += speed_level * (delta * 60)
 
 
 func remove():
