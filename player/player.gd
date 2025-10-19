@@ -84,6 +84,13 @@ func move_forward():
 	is_moving = true
 	tween.tween_callback(update_looked_at_cell)
 	tween.tween_callback(set_moving_false)
+	tween.tween_callback(update_occupied_cell)
+
+
+func update_occupied_cell():
+	Vars.occupied_cell = current_looked_at_cell
+	current_looked_at_cell = null
+	print(Vars.occupied_cell)
 
 
 func set_moving_false():

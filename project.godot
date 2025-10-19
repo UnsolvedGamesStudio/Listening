@@ -20,6 +20,7 @@ Bus="*res://autoloads/signal_bus.gd"
 Bgm="*res://autoloads/bgm/bgm.tscn"
 Vars="*res://autoloads/vars.gd"
 NoteValue="*res://addons/SimpleSampler/note_value.gd"
+Util="*res://util.gd"
 
 [debug]
 
@@ -50,6 +51,7 @@ move_to_cell_indicator=""
 beat_vizualizer=""
 element_container_ui=""
 reticle=""
+player=""
 
 [input]
 
@@ -95,6 +97,7 @@ forward={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/default_filters/use_nearest_mipmap_filter=true
 anti_aliasing/quality/msaa_2d=1
 anti_aliasing/quality/msaa_3d=1
 environment/defaults/default_clear_color=Color(0.108825, 0.326918, 0.288411, 1)

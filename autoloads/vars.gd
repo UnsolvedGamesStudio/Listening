@@ -1,5 +1,12 @@
 extends Node
 
+var cell_size:= 2
+
+
+## Layout
+var cell_nodes: Array[Cell] = []
+
+
 ## Beat Visualizer
 var active_circles: Array[TimingCircle] = []
 var last_activated_circle: TimingCircle

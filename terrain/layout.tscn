@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1rnngxhnemng"]
+[gd_scene load_steps=8 format=3 uid="uid://d1rnngxhnemng"]
 
 [ext_resource type="Script" uid="uid://d0wkhkbfau2f6" path="res://terrain/layout.gd" id="1_v6hxy"]
+[ext_resource type="PackedScene" uid="uid://xepbmrkn1hvu" path="res://enemies/enemy_spawner.tscn" id="2_1xy32"]
 [ext_resource type="PackedScene" uid="uid://86r6xeju02bg" path="res://main_ui/main_ui.tscn" id="2_272v2"]
 [ext_resource type="PackedScene" uid="uid://cxn5thfypyjo2" path="res://map/map.tscn" id="2_hcp3l"]
 [ext_resource type="PackedScene" uid="uid://dflkyrrs1kf1s" path="res://timing_bar/beat_vizualizer.tscn" id="3_tupbf"]
@@ -33,3 +34,5 @@ position = Vector2(244, 164)
 
 [node name="MoveToCellIndicator" parent="." groups=["move_to_cell_indicator"] instance=ExtResource("7_08ldw")]
 unique_name_in_owner = true
+
+[node name="EnemySpawner" parent="." instance=ExtResource("2_1xy32")]

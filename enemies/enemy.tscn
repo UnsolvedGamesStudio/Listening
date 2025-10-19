@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://dt0weymuwtkif"]
+
+[ext_resource type="Script" uid="uid://pm4s0telhvbu" path="res://enemies/enemy.gd" id="1_7frlh"]
+[ext_resource type="Texture2D" uid="uid://cx0ni1wvl78g0" path="res://enemies/textures/iseen_a_skull.png" id="1_fw1ev"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7frlh"]
+size = Vector3(0.70015335, 0.7224121, 0.013183594)
+
+[sub_resource type="Animation" id="Animation_7frlh"]
+resource_name = "bob"
+loop_mode = 2
+step = 0.0333333
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToMove")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 0.2, 0)
+
+[sub_resource type="Animation" id="Animation_orwns"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToMove")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a6vjd"]
+_data = {
+&"RESET": SubResource("Animation_orwns"),
+&"bob": SubResource("Animation_7frlh")
+}
+
+[node name="Enemy" type="Node3D"]
+script = ExtResource("1_7frlh")
+
+[node name="ToMove" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="ToMove"]
+texture_filter = 0
+texture = ExtResource("1_fw1ev")
+
+[node name="Hurtbox" type="Area3D" parent="ToMove"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToMove/Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010328293, 0.036743164, -0.006591797)
+shape = SubResource("BoxShape3D_7frlh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_a6vjd")
+}
+autoplay = "bob"

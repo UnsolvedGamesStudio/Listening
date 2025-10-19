@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bc7nsyavco5xh" path="res://player/spellcast.tscn" id="2_rkbax"]
 [ext_resource type="PackedScene" uid="uid://ds6ehm1oneoe7" path="res://player/interact.tscn" id="3_g1dw6"]
 
-[node name="Player" type="Node3D"]
+[node name="Player" type="Node3D" groups=["player"]]
 script = ExtResource("1_oul6g")
 move_speed_level = 3
 

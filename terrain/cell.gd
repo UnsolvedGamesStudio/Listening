@@ -1,6 +1,9 @@
 extends Node3D
 class_name Cell
 
+
+var occupants: Array[Node3D]
+
 @onready var top_face: MeshInstance3D = %TopFace
 @onready var north_face: MeshInstance3D = %NorthFace
 @onready var east_face: MeshInstance3D = %EastFace
