@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://bwaev5gyis5tp"]
+[gd_scene load_steps=10 format=3 uid="uid://bwaev5gyis5tp"]
 
 [ext_resource type="Script" uid="uid://0lclde4xd8rw" path="res://projectile/projectile.gd" id="1_makwg"]
-[ext_resource type="Texture2D" uid="uid://c5nwti415vrqj" path="res://timing_bar/textures/cast_sigil.png" id="2_makwg"]
+[ext_resource type="Texture2D" uid="uid://d0jjxcbead86g" path="res://spell_casting/textures/default_spell.png" id="2_makwg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_makwg"]
 size = Vector3(0.5703311, 0.56411743, 0.016845703)
@@ -41,8 +41,8 @@ _data = {
 &"lifetime": SubResource("Animation_makwg")
 }
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_dr2av"]
-size = Vector3(0.5630069, 0.5670471, 0.016845703)
+[sub_resource type="SphereShape3D" id="SphereShape3D_makwg"]
+radius = 0.43779042
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hrg8b"]
 emission_shape = 1
@@ -59,25 +59,6 @@ texture_repeat = false
 material = SubResource("StandardMaterial3D_makwg")
 size = Vector2(0.025, 0.025)
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_makwg"]
-emission_shape = 1
-emission_sphere_radius = 0.7
-gravity = Vector3(0, 0, 0)
-radial_accel_min = 0.49999776
-radial_accel_max = 3.9999976
-tangential_accel_min = 10.589997
-tangential_accel_max = 17.649998
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dr2av"]
-cull_mode = 1
-albedo_color = Color(0.7647059, 0.8901961, 0.19215687, 1)
-texture_filter = 0
-texture_repeat = false
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_makwg"]
-material = SubResource("StandardMaterial3D_dr2av")
-size = Vector2(0.025, 0.025)
-
 [node name="Projectile" type="CharacterBody3D"]
 collision_layer = 0
 collision_mask = 0
@@ -85,7 +66,8 @@ script = ExtResource("1_makwg")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(4.035, 0, 0, 0, 4.035, 0, 0, 0, 4.035, 0, 0, 0)
-flip_h = true
+transparency = 1.0
+billboard = 2
 texture_filter = 0
 texture = ExtResource("2_makwg")
 
@@ -102,30 +84,17 @@ autoplay = "lifetime"
 
 [node name="Hitbox" type="Area3D" parent="."]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 12
 
 [node name="HitboxCollision" type="CollisionShape3D" parent="Hitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03618884, 0.039535522, 0.013549805)
-shape = SubResource("BoxShape3D_dr2av")
+shape = SubResource("SphereShape3D_makwg")
 
 [node name="FlyingParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1.0000001, 0, 1.0000001, -4.3711392e-08, 0, 0, 0)
-amount = 10
-lifetime = 0.5
+lifetime = 0.4
 randomness = 0.53
 process_material = SubResource("ParticleProcessMaterial_hrg8b")
 draw_pass_1 = SubResource("PlaneMesh_3dxjh")
-
-[node name="HitParticles" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-visible = false
-emitting = false
-amount = 20
-speed_scale = 0.8
-explosiveness = 0.2
-randomness = 0.53
-process_material = SubResource("ParticleProcessMaterial_makwg")
-draw_pass_1 = SubResource("PlaneMesh_makwg")
 
 [node name="KillTimer" type="Timer" parent="."]
 wait_time = 5.0

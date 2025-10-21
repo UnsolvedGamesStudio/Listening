@@ -5,6 +5,6 @@
 
 [resource]
 script = ExtResource("1_17mm2")
-id = "sadness"
-name_string = "Sadness"
+id = "anger"
+name_string = "Anger"
 texture = ExtResource("2_17mm2")

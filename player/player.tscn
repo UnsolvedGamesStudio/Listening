@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://ce10gkdeiprj7"]
+[gd_scene load_steps=5 format=3 uid="uid://ce10gkdeiprj7"]
 
 [ext_resource type="Script" uid="uid://bxbkaxat5hcgk" path="res://player/player.gd" id="1_oul6g"]
-[ext_resource type="PackedScene" uid="uid://bc7nsyavco5xh" path="res://player/spellcast.tscn" id="2_rkbax"]
+[ext_resource type="PackedScene" uid="uid://bc7nsyavco5xh" path="res://spell_casting/spellcast.tscn" id="2_rkbax"]
 [ext_resource type="PackedScene" uid="uid://ds6ehm1oneoe7" path="res://player/interact.tscn" id="3_g1dw6"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g1dw6"]
+height = 2.209961
+radius = 0.5131836
 
 [node name="Player" type="Node3D" groups=["player"]]
 script = ExtResource("1_oul6g")
@@ -14,11 +18,10 @@ move_speed_level = 3
 
 [node name="Neck" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29461646, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7422652, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Neck"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.278, 0)
 current = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
@@ -26,3 +29,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.282909, 0)
 light_color = Color(1, 0.8320722, 0.71004725, 1)
 light_volumetric_fog_energy = 1.495
 shadow_enabled = true
+
+[node name="PlayerCollision" type="Area3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 8
+collision_mask = 36
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerCollision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10498047, 0)
+shape = SubResource("CylinderShape3D_g1dw6")

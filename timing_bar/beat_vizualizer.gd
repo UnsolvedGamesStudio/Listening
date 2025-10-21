@@ -7,6 +7,7 @@ const RANK_LABEL = preload("uid://6w4l5x6wfeyn")
 @onready var beat_activator: Sprite2D = %BeatActivator
 @onready var beat_area: Area2D = %BeatArea
 @onready var beat_activator_anim: AnimationPlayer = %BeatActivatorAnim
+@onready var succes_label_container: Panel = %SuccesLabelContainer
 
 @export_range(1, 10) var height_modifier:= 1.2
 
@@ -61,10 +62,20 @@ func pop_out_beat_activator():
 
 
 func generate_text(accuracy: String):
-	var text_inst: Label = RANK_LABEL.instantiate()
+	var text_inst:= RANK_LABEL.instantiate()
+	var text:= ""
 	
-	text_inst.text = str(accuracy.capitalize(), "!")
-	get_parent().add_child(text_inst)
+	if accuracy == "easy":
+		text = "OK..."
+	
+	if accuracy == "medium":
+		text = "Nice."
+	
+	if accuracy == "perfect":
+		text = "Perfect!"
+	
+	text_inst.text = str(text)
+	succes_label_container.add_child(text_inst)
 
 
 func on_beat_press_attempted():

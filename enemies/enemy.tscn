@@ -1,10 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dt0weymuwtkif"]
+[gd_scene load_steps=9 format=3 uid="uid://dt0weymuwtkif"]
 
 [ext_resource type="Script" uid="uid://pm4s0telhvbu" path="res://enemies/enemy.gd" id="1_7frlh"]
 [ext_resource type="Texture2D" uid="uid://cx0ni1wvl78g0" path="res://enemies/textures/iseen_a_skull.png" id="1_fw1ev"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_7frlh"]
-size = Vector3(0.70015335, 0.7224121, 0.013183594)
+[sub_resource type="SphereShape3D" id="SphereShape3D_7frlh"]
+radius = 0.3433736
 
 [sub_resource type="Animation" id="Animation_7frlh"]
 resource_name = "bob"
@@ -13,44 +13,100 @@ step = 0.0333333
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ToMove")
+tracks/0/path = NodePath("ToAnimate")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 0.2, 0)
-
-[sub_resource type="Animation" id="Animation_orwns"]
-length = 0.001
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ToMove")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.5, 0, 1, 1, 0, 0.7, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a6vjd"]
 _data = {
-&"RESET": SubResource("Animation_orwns"),
 &"bob": SubResource("Animation_7frlh")
 }
+
+[sub_resource type="Animation" id="Animation_orwns"]
+resource_name = "attack"
+length = 0.4
+step = 0.0333333
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToAnimate/Sprite3D")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.95, 0.95, 0.95, 0.06666667, 1, 1, 1, 1, 0.16666667, 1, 1.2, 1.2, 1.2, 0.36666667, 1, 1, 1, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_07tka"]
+_data = {
+&"attack": SubResource("Animation_orwns")
+}
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7frlh"]
+viewport_path = NodePath("HealthBar3D/SubViewport")
 
 [node name="Enemy" type="Node3D"]
 script = ExtResource("1_7frlh")
 
-[node name="ToMove" type="Node3D" parent="."]
+[node name="ToAnimate" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Sprite3D" type="Sprite3D" parent="ToMove"]
+[node name="Sprite3D" type="Sprite3D" parent="ToAnimate"]
+unique_name_in_owner = true
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, 0)
+billboard = 2
 texture_filter = 0
 texture = ExtResource("1_fw1ev")
 
-[node name="Hurtbox" type="Area3D" parent="ToMove"]
+[node name="Hurtbox" type="Area3D" parent="ToAnimate"]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 16
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ToMove/Hurtbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToAnimate/Hurtbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010328293, 0.036743164, -0.006591797)
-shape = SubResource("BoxShape3D_7frlh")
+shape = SubResource("SphereShape3D_7frlh")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="MovementRaycasts" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="ForwardRaycast" type="RayCast3D" parent="MovementRaycasts"]
+target_position = Vector3(0, 0, 2)
+
+[node name="BackRaycast" type="RayCast3D" parent="MovementRaycasts"]
+target_position = Vector3(0, 0, -2)
+
+[node name="LeftRaycast" type="RayCast3D" parent="MovementRaycasts"]
+target_position = Vector3(2, 0, 0)
+
+[node name="RightRaycast" type="RayCast3D" parent="MovementRaycasts"]
+target_position = Vector3(-2, 0, 0)
+
+[node name="IdleAnim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_a6vjd")
 }
 autoplay = "bob"
+
+[node name="AttackAnim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_07tka")
+}
+
+[node name="HealthBar3D" type="Sprite3D" parent="."]
+billboard = 2
+texture_filter = 0
+texture = SubResource("ViewportTexture_7frlh")
+
+[node name="SubViewport" type="SubViewport" parent="HealthBar3D"]
+size = Vector2i(50, 5)
+
+[node name="HealthBar" type="ProgressBar" parent="HealthBar3D/SubViewport"]
+unique_name_in_owner = true
+modulate = Color(0, 18.892157, 0, 1)
+custom_minimum_size = Vector2(50, 5)
+offset_right = 50.0
+offset_bottom = 5.0
+max_value = 1.0
+value = 0.5
+show_percentage = false

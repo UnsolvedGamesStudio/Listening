@@ -53,6 +53,10 @@ element_container_ui=""
 reticle=""
 player=""
 
+[gui]
+
+theme/custom_font="uid://bn3geo3tsd2lu"
+
 [input]
 
 cast={
@@ -93,6 +97,10 @@ forward={
 
 3d_physics/layer_1="room_inside"
 3d_physics/layer_2="terrain"
+3d_physics/layer_3="enemies"
+3d_physics/layer_4="player"
+3d_physics/layer_5="player_damage"
+3d_physics/layer_6="enemy_damage"
 
 [rendering]
 

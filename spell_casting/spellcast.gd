@@ -78,11 +78,44 @@ func create_projectile():
 	var position_offset:= 0.3
 	var look_at_direction: Vector3 = player.get_look_at_direction()
 	
-	owner.get_parent().add_child(projectile_inst)
+	projectile_inst.color = determine_color()
+	projectile_inst.damage = determine_damage()
 	projectile_inst.player = player
+	projectile_inst.target_point = look_at_direction
+	projectile_inst.origin_node = player
 	
+	owner.get_parent().add_child(projectile_inst)
+	
+	projectile_inst.hitbox.set_collision_layer_value(5, true)
 	projectile_inst.global_position.x = player.camera.global_position.x + (position_offset * (look_at_direction.x / 50))
 	projectile_inst.global_position.y = player.camera.global_position.y + (position_offset * (look_at_direction.y / 50))
 	projectile_inst.global_position.z = player.camera.global_position.z  + (position_offset * (look_at_direction.z / 50))
+
+
+func determine_damage():
+	var damage:= 0.0
 	
-	projectile_inst.target_point = look_at_direction
+	damage += (20 * Vars.element_container.size() ) + Vars.combo
+	
+	return damage
+
+
+func determine_color():
+	var color:= Color.WHITE
+	
+	for element in Vars.element_container:
+		if not "id" in Vars.elements[element]:
+			return
+		
+		if Vars.elements[element].id == "joy":
+			color.b -= 0.3
+		
+		if Vars.elements[element].id == "sadness":
+			color.r -= 0.15
+			color.g -= 0.15
+		
+		if Vars.elements[element].id == "anger":
+			color.b -= 0.15
+			color.g -= 0.15
+	
+	return color

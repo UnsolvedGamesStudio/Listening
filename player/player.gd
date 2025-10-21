@@ -1,10 +1,11 @@
 extends Node3D
 class_name Player
 
+const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
+
 @onready var camera: Camera3D = %Camera3D
 @onready var neck: Node3D = %Neck
-
-const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
+@onready var player_collision: Area3D = %PlayerCollision
 
 @export var camera_raycast_distance:= 200.0
 @export var camera_speed:= 50
@@ -19,14 +20,25 @@ var tilt_upper_limit:= deg_to_rad(90)
 var current_looked_at_cell: Cell
 var is_moving:= false
 
+## Stats
+var max_hp:= 100.0:
+	set(value):
+		max_hp = clampf(value, 1.0, 9999.9)
+
+var hp:= max_hp:
+	set(value):
+		hp = clampf(value, 0.0, max_hp)
+
 
 func _ready() -> void:
 	position = spawn_pos
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	move_to_cell_indicator = get_tree().get_first_node_in_group("move_to_cell_indicator")
+	player_collision.area_entered.connect(on_player_collision_area_entered)
 	
 	await get_tree().create_timer(0.0).timeout
 	update_looked_at_cell()
+	Bus.player_moved.emit()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -57,6 +69,11 @@ func camera_movement(event: InputEvent):
 	camera.rotation.x = clampf(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 
+func take_damage(amount: float):
+	hp -= amount
+	Bus.player_lost_hp.emit()
+
+
 func move_forward():
 	if Bgm.check_accuracy() == "missed":
 		return
@@ -82,23 +99,22 @@ func move_forward():
 	
 	tween.play()
 	is_moving = true
+	tween.tween_callback(set_player_cell)
 	tween.tween_callback(update_looked_at_cell)
 	tween.tween_callback(set_moving_false)
-	tween.tween_callback(update_occupied_cell)
-
-
-func update_occupied_cell():
-	Vars.occupied_cell = current_looked_at_cell
-	current_looked_at_cell = null
-	print(Vars.occupied_cell)
+	tween.tween_callback(Bus.player_moved.emit)
 
 
 func set_moving_false():
 	is_moving = false
 
 
+func set_player_cell():
+	Vars.player_cell = current_looked_at_cell.cell_grid_position
+
+
 func update_looked_at_cell():
-	var cell: Area3D = check_raycast(true)
+	var cell: Area3D = check_raycast_cells()
 	
 	if not cell is CellCollision:
 		return
@@ -109,7 +125,7 @@ func update_looked_at_cell():
 	move_to_cell_indicator.global_rotation_degrees.y = snapped(neck.global_rotation_degrees.y, 90)
 
 
-func check_raycast(collider: bool = false):
+func check_raycast_cells():
 	var space_state:= camera.get_world_3d().direct_space_state
 	##!! middle of screen is dependent on the viewport scale settings
 	var middle_of_screen = get_viewport().size / 4
@@ -117,21 +133,24 @@ func check_raycast(collider: bool = false):
 	var end:= origin + camera.project_ray_normal(middle_of_screen) * camera_raycast_distance
 	var query:= PhysicsRayQueryParameters3D.create(origin, end)
 	
-	if collider == true:
-		query.collide_with_areas = true
+	query.collide_with_areas = true
 	
 	var result:= space_state.intersect_ray(query)
 	
-	if collider == true:
-		if not "collider" in result:
-			return
+	if not "collider" in result:
+		return
 		
-		return result["collider"]
-	
-	else:
-		return result
+	return result["collider"]
 
 
 func get_look_at_direction():
 	var middle_of_screen = get_viewport().size / 4
 	return camera.project_ray_normal(middle_of_screen) * camera_raycast_distance
+
+
+func on_player_collision_area_entered(area: Area3D):
+	if "damage" in area.owner:
+		take_damage(area.owner.damage)
+	
+	if "body_damage" in area.owner:
+		take_damage(area.owner.body_damage)

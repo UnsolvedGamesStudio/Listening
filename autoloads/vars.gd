@@ -5,9 +5,11 @@ var cell_size:= 2
 
 ## Layout
 var cell_nodes: Array[Cell] = []
+var player_cell: Vector2i = Vector2i.ZERO
 
 
 ## Beat Visualizer
+var combo:= 0
 var active_circles: Array[TimingCircle] = []
 var last_activated_circle: TimingCircle
 

@@ -10,6 +10,8 @@ var beat_visualizer: CanvasLayer
 
 var two_beat_count:= 0
 var four_beat_count:= 0
+var eight_beat_count:= 0
+var twelve_beat_count:= 0
 
 
 var songs: Dictionary[String, AudioStream] = {
@@ -88,9 +90,12 @@ func check_accuracy():
 			circle = area.owner
 	
 	if not accuracy == "missed":
+		Bus.beat_success.emit(level)
 		Vars.last_activated_circle = circle
 		circle.deactivate_zones()
 		circle.recolor(level)
+	else:
+		Bus.beat_failure.emit()
 	
 	beat_visualizer.generate_text(accuracy)
 	return accuracy
@@ -99,6 +104,8 @@ func check_accuracy():
 func on_beat(_interval: int):
 	two_beat_count += 1
 	four_beat_count += 1
+	eight_beat_count += 1
+	twelve_beat_count += 1
 	
 	Bus.any_beat.emit()
 	
@@ -118,3 +125,15 @@ func on_beat(_interval: int):
 	if four_beat_count == 4:
 		Bus.fourth_of_four_beats.emit()
 		four_beat_count = 0
+	
+	if eight_beat_count == 1:
+		Bus.first_of_eight_beats.emit()
+	
+	if eight_beat_count == 8:
+		eight_beat_count = 0
+	
+	if twelve_beat_count == 1:
+		Bus.first_of_twelve_beats.emit()
+	
+	if twelve_beat_count == 12:
+		twelve_beat_count = 0
