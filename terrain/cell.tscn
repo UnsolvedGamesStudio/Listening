@@ -117,10 +117,11 @@ shape = SubResource("BoxShape3D_8d6ju")
 debug_color = Color(0.9926967, 0, 0.25486487, 0.41960785)
 
 [node name="CellCollision" type="Area3D" parent="."]
+collision_mask = 13
 script = ExtResource("2_0s7o3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CellCollision"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("BoxShape3D_ds1sf")
-debug_color = Color(0, 0.55487114, 0.90688163, 0.41960785)
+debug_color = Color(0, 0.5529412, 0.90588236, 0)

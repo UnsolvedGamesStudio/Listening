@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dotmsm333w37o"]
+
+[ext_resource type="Script" uid="uid://dtkmjqle23wsy" path="res://vfx/sprite_effect.gd" id="1_m1ml8"]
+
+[node name="SpriteEffect" type="Sprite3D"]
+billboard = 1
+texture_filter = 0
+script = ExtResource("1_m1ml8")
+
+[node name="KillTimer" type="Timer" parent="."]
+unique_name_in_owner = true

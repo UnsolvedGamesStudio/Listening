@@ -52,6 +52,8 @@ beat_vizualizer=""
 element_container_ui=""
 reticle=""
 player=""
+player_collision=""
+enemy_collision=""
 
 [gui]
 

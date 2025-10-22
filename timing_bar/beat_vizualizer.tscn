@@ -46,25 +46,42 @@ stretch_mode = 1
 
 [node name="ComboLabel" type="Label" parent="TimingBar"]
 modulate = Color(1, 1, 1, 0.58431375)
-layout_mode = 0
-offset_left = 227.0
-offset_top = -30.0
-offset_right = 251.0
-offset_bottom = -4.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.47291666
+anchor_top = -2.75
+anchor_right = 0.5229167
+anchor_bottom = -1.125
 theme_override_font_sizes/font_size = 32
 text = "x0"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("4_3jijn")
+metadata/_edit_use_anchors_ = true
+
+[node name="ScoreLabel" type="Label" parent="TimingBar/ComboLabel"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.58431375)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.5833333
+anchor_top = 0.42307693
+anchor_right = 1.4166666
+anchor_bottom = 2.0480769
+theme_override_font_sizes/font_size = 16
+text = "Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="SuccesLabelContainer" type="Panel" parent="TimingBar"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5541667
-anchor_top = -1.5
-anchor_right = 0.6375
-anchor_bottom = -1.125
+anchor_left = 0.33958334
+anchor_top = -1.375
+anchor_right = 0.35208333
+anchor_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true

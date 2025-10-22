@@ -11,8 +11,8 @@ func _ready() -> void:
 
 func update_value():
 	value = player.hp / 100
-	modulate.r = (player.max_hp - player.hp) / 100
-	modulate.g = player.hp / 100
+	modulate.r = max_value - value
+	modulate.g = value
 
 
 func on_player_lost_hp():

@@ -7,6 +7,7 @@ const EMPTY_CAST_SIGIL = preload("uid://cquqsopjsxe0b")
 
 const PROJECTILE = preload("uid://bwaev5gyis5tp")
 
+var element_expiry_time_mult:= 20.0
 var container:= Vars.element_container
 var container_ui: ElementContainerUI
 var player: Player
@@ -47,7 +48,9 @@ func add_element(element: int):
 		return
 	
 	if not Vars.last_activated_circle == null:
-			Vars.last_activated_circle.texture = Vars.elements[element].texture
+		Vars.last_activated_circle.texture = Vars.elements[element].texture
+	
+	element_expiry()
 	
 	if container.size() >= 3:
 		container.push_front(element)
@@ -66,7 +69,6 @@ func cast_spell():
 	
 	if not Vars.last_activated_circle == null:
 		Vars.last_activated_circle.texture = CAST_SIGIL
-	
 	
 	create_projectile()
 	container.clear()
@@ -92,10 +94,17 @@ func create_projectile():
 	projectile_inst.global_position.z = player.camera.global_position.z  + (position_offset * (look_at_direction.z / 50))
 
 
+func element_expiry():
+	container_ui.element_expiry_timer.start(Bgm.rhythm_notifier.beat_length * element_expiry_time_mult)
+	await container_ui.element_expiry_timer.timeout
+	Vars.element_container.clear()
+	container_ui.update()
+
+
 func determine_damage():
 	var damage:= 0.0
 	
-	damage += (20 * Vars.element_container.size() ) + Vars.combo
+	damage += (20 * Vars.element_container.size() ) + (Vars.score / 10)
 	
 	return damage
 

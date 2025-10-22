@@ -13,34 +13,52 @@ grow_vertical = 2
 size_flags_vertical = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="ElementContainers" type="VBoxContainer" parent="." groups=["element_container_ui"]]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TimerBar" type="ProgressBar" parent="HBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0, 1, 0, 1)
+custom_minimum_size = Vector2(5.555, 7.13)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+max_value = 1.0
+fill_mode = 3
+show_percentage = false
+
+[node name="ElementContainers" type="VBoxContainer" parent="HBoxContainer" groups=["element_container_ui"]]
 layout_mode = 2
 alignment = 1
 script = ExtResource("1_k5wb2")
 
-[node name="Element1Container" type="PanelContainer" parent="ElementContainers"]
+[node name="Element1Container" type="PanelContainer" parent="HBoxContainer/ElementContainers"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
-[node name="Element1" type="TextureRect" parent="ElementContainers/Element1Container"]
+[node name="Element1" type="TextureRect" parent="HBoxContainer/ElementContainers/Element1Container"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Element2Container" type="PanelContainer" parent="ElementContainers"]
+[node name="Element2Container" type="PanelContainer" parent="HBoxContainer/ElementContainers"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
-[node name="Element2" type="TextureRect" parent="ElementContainers/Element2Container"]
+[node name="Element2" type="TextureRect" parent="HBoxContainer/ElementContainers/Element2Container"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Element3Container" type="PanelContainer" parent="ElementContainers"]
+[node name="Element3Container" type="PanelContainer" parent="HBoxContainer/ElementContainers"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
-[node name="Element3" type="TextureRect" parent="ElementContainers/Element3Container"]
+[node name="Element3" type="TextureRect" parent="HBoxContainer/ElementContainers/Element3Container"]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="ElementExpiryTimer" type="Timer" parent="HBoxContainer/ElementContainers"]
+unique_name_in_owner = true
+one_shot = true

@@ -28,5 +28,5 @@ tile_set = SubResource("TileSet_e0an3")
 
 [node name="Enemies" type="TileMapLayer" parent="."]
 unique_name_in_owner = true
-tile_map_data = PackedByteArray("AAAAAP//AAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD0/wAAAAAAAAAAAAD7/wIAAAAAAAAAAAD7/wMAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAgAAAAAAAAAAAAHAAAAAAAAAAAAAAD6//v/AAAAAAAAAAAEAPv/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_kffv2")

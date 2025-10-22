@@ -29,7 +29,6 @@ func generate_enemies():
 	for tile in used_tiles:
 		var enemy_inst: Enemy = ENEMY.instantiate()
 		
-		enemy_inst.occupied_cell = tile
 		add_child(enemy_inst)
 		enemy_nodes.append(enemy_inst)
 		enemy_inst.global_position = Vector3(tile.x * cell_size, 1.0, tile.y * cell_size)

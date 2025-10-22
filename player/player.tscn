@@ -30,7 +30,7 @@ light_color = Color(1, 0.8320722, 0.71004725, 1)
 light_volumetric_fog_energy = 1.495
 shadow_enabled = true
 
-[node name="PlayerCollision" type="Area3D" parent="."]
+[node name="PlayerCollision" type="Area3D" parent="." groups=["player_collision"]]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 8

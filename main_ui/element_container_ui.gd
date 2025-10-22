@@ -5,9 +5,26 @@ class_name ElementContainerUI
 @onready var element_2: TextureRect = %Element2
 @onready var element_3: TextureRect = %Element3
 
+@onready var element_expiry_timer: Timer = %ElementExpiryTimer
+@onready var timer_bar: ProgressBar = %TimerBar
+
+
+func _physics_process(delta: float) -> void:
+	if element_expiry_timer.is_stopped():
+		return
+	
+	timer_bar.value = element_expiry_timer.time_left / element_expiry_timer.wait_time
+	timer_bar.modulate.r = timer_bar.max_value - timer_bar.value
+	timer_bar.modulate.g = timer_bar.value
+
 
 func update():
 	var first_in_container
+	
+	if Vars.element_container == []:
+		timer_bar.value = 0.0
+		element_expiry_timer.stop()
+	
 	if Vars.element_container.size() > 0:
 		first_in_container = Vars.element_container[0]
 	

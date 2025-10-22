@@ -10,7 +10,9 @@ const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 @export var camera_raycast_distance:= 200.0
 @export var camera_speed:= 50
 @export var spawn_pos:= Vector3(0, 0, 0)
-@export_range(1, 3) var move_speed_level:= 2
+@export_range(1, 3) var movement_speed:= 4
+
+var click_to_capture_mouse:= true
 
 var move_to_cell_indicator: Node3D
 
@@ -31,8 +33,10 @@ var hp:= max_hp:
 
 
 func _ready() -> void:
+	if click_to_capture_mouse == false:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
 	position = spawn_pos
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	move_to_cell_indicator = get_tree().get_first_node_in_group("move_to_cell_indicator")
 	player_collision.area_entered.connect(on_player_collision_area_entered)
 	
@@ -54,7 +58,14 @@ func _input(event: InputEvent) -> void:
 		move_forward()
 	
 	if event.is_action_pressed("ui_cancel"):
-		get_tree().quit()
+		if click_to_capture_mouse == false:
+			get_tree().quit()
+		
+		if click_to_capture_mouse == true:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	if (event.is_action_pressed("cast") or event.is_action_pressed("interact") or event.is_action_pressed("forward")) and click_to_capture_mouse == true:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func camera_movement(event: InputEvent):
@@ -83,13 +94,12 @@ func move_forward():
 	if current_looked_at_cell == null:
 		return
 	
-	var move_speed: float
-	if move_speed_level == 1:
-		move_speed = Bgm.rhythm_notifier.bpm / 200
-	if move_speed_level == 2:
-		move_speed = Bgm.rhythm_notifier.bpm / 400
-	if move_speed_level == 3:
-		move_speed = Bgm.rhythm_notifier.bpm / 800
+	for occupant in current_looked_at_cell.occupants:
+		if is_instance_valid(occupant):
+			if "impassable" in occupant:
+				return
+	
+	var move_speed: float = Bgm.rhythm_notifier.bpm / (movement_speed * 100)
 	
 	if not Vars.last_activated_circle == null:
 		Vars.last_activated_circle.texture = MOVE_SIGIL
@@ -99,7 +109,6 @@ func move_forward():
 	
 	tween.play()
 	is_moving = true
-	tween.tween_callback(set_player_cell)
 	tween.tween_callback(update_looked_at_cell)
 	tween.tween_callback(set_moving_false)
 	tween.tween_callback(Bus.player_moved.emit)
@@ -107,10 +116,6 @@ func move_forward():
 
 func set_moving_false():
 	is_moving = false
-
-
-func set_player_cell():
-	Vars.player_cell = current_looked_at_cell.cell_grid_position
 
 
 func update_looked_at_cell():

@@ -38,7 +38,7 @@ func init_positions():
 
 
 func connect_signals():
-	Bus.any_beat.connect(on_beat_played)
+	Bus.beat.connect(on_beat)
 	Bus.beat_press_attempted.connect(on_beat_press_attempted)
 
 
@@ -82,7 +82,7 @@ func on_beat_press_attempted():
 	pop_out_beat_activator()
 
 
-func on_beat_played():
+func on_beat(_beat_count: int):
 	update_middle_of_screen()
 	generate_circle()
 	

@@ -23,6 +23,7 @@ func _ready() -> void:
 
 func update_faces(cell_list: Array, cell_size: int) -> void:
 	cell_grid_position = Vector2i(position.x / cell_size as int, position.z / 2 as int)
+	Vars.cell_coordinates.append(cell_grid_position)
 	
 	if cell_list.has(cell_grid_position + Vector2i.UP):
 		north_face.queue_free()
@@ -49,7 +50,23 @@ func remove_occupant(area: Area3D):
 
 
 func on_area_entered(area: Area3D):
+	if not area.is_in_group("player_collision") and not area.is_in_group("enemy_collision"):
+		return
+	
 	add_occupant(area)
+	
+	if area.is_in_group("player_collision"):
+		Vars.player_cell = self
+	
+	if area.is_in_group("enemy_collision"):
+		if not "owner" in area:
+			return
+		
+		if not "occupied_cell" in area.owner:
+			return
+		
+		area.owner.occupied_cell = self
+
 
 
 func on_area_exited(area: Area3D):

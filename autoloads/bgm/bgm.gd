@@ -8,10 +8,7 @@ var current_chord: Array[Array] = []
 
 var beat_visualizer: CanvasLayer
 
-var two_beat_count:= 0
-var four_beat_count:= 0
-var eight_beat_count:= 0
-var twelve_beat_count:= 0
+var beat_count:= 0
 
 
 var songs: Dictionary[String, AudioStream] = {
@@ -45,7 +42,6 @@ func midi_to_name(midi_number):
 	var octave_number = midi_number / notes_per_octave + octave_offset
 	# Return the note name and the octave number as a string
 	current_chord.append([note_name, octave_number - 4])
-
 
 
 func play_midi():
@@ -102,38 +98,5 @@ func check_accuracy():
 
 
 func on_beat(_interval: int):
-	two_beat_count += 1
-	four_beat_count += 1
-	eight_beat_count += 1
-	twelve_beat_count += 1
-	
-	Bus.any_beat.emit()
-	
-	if two_beat_count == 1:
-		Bus.first_of_two_beats.emit()
-	
-	if two_beat_count == 2:
-		Bus.second_of_two_beats.emit()
-		two_beat_count = 0
-	
-	if four_beat_count == 1:
-		Bus.first_of_four_beats.emit()
-	
-	if four_beat_count == 3:
-		Bus.third_of_four_beats.emit()
-	
-	if four_beat_count == 4:
-		Bus.fourth_of_four_beats.emit()
-		four_beat_count = 0
-	
-	if eight_beat_count == 1:
-		Bus.first_of_eight_beats.emit()
-	
-	if eight_beat_count == 8:
-		eight_beat_count = 0
-	
-	if twelve_beat_count == 1:
-		Bus.first_of_twelve_beats.emit()
-	
-	if twelve_beat_count == 12:
-		twelve_beat_count = 0
+	beat_count += 1
+	Bus.beat.emit(beat_count)

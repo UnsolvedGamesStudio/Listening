@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://ycxhwv4g5a5v"]
+
+[ext_resource type="Texture2D" uid="uid://cjl3vw6ggdteo" path="res://vfx/shadow.png" id="1_8cogx"]
+[ext_resource type="Script" uid="uid://dn3lg4m2lq5sb" path="res://vfx/enemy_indicator.gd" id="1_pgj8b"]
+[ext_resource type="Texture2D" uid="uid://dbyd2im7ned86" path="res://vfx/enemy_indicator.png" id="3_jp4rt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pgj8b"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.7529412, 0.1254902, 0.06666667, 1)
+albedo_texture = ExtResource("3_jp4rt")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pgj8b"]
+material = SubResource("StandardMaterial3D_pgj8b")
+
+[node name="EnemyIndicator" type="Node3D"]
+script = ExtResource("1_pgj8b")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, -8.742278e-08, 2, 0, -2, -8.742278e-08, 0, 0.0052624047, 0)
+visible = false
+modulate = Color(0.7909768, 0, 0.1285719, 1)
+texture_filter = 0
+texture = ExtResource("1_8cogx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.0039476, 0, 0, 0, 1, 0, 0, 0, 1.0039476, 0, 0, 0)
+mesh = SubResource("PlaneMesh_pgj8b")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+target_position = Vector3(0, -100, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
