@@ -1,0 +1,257 @@
+[gd_scene load_steps=15 format=3 uid="uid://dt0weymuwtkif"]
+
+[ext_resource type="Texture2D" uid="uid://cx0ni1wvl78g0" path="res://enemies/textures/iseen_a_skull.png" id="1_fw1ev"]
+[ext_resource type="PackedScene" uid="uid://ycxhwv4g5a5v" path="res://vfx/EnemyIndicator.tscn" id="3_orwns"]
+[ext_resource type="PackedScene" uid="uid://cmviqulbv2o3x" path="res://enemies/behaviors/get_hurt_eb.tscn" id="4_a6vjd"]
+[ext_resource type="PackedScene" uid="uid://d3qw0t4lwkfbh" path="res://enemies/behaviors/movement_eb.tscn" id="5_07tka"]
+[ext_resource type="PackedScene" uid="uid://ckrngbta7laek" path="res://enemies/behaviors/melee_attack_eb.tscn" id="6_3t1x0"]
+[ext_resource type="PackedScene" uid="uid://b8rwjdbr6qey4" path="res://enemies/behaviors/ranged_attack_eb.tscn" id="7_epsnb"]
+
+[sub_resource type="GDScript" id="GDScript_3t1x0"]
+script/source = "extends Node3D
+class_name Enemy
+
+const PROJECTILE = preload(\"uid://bwaev5gyis5tp\")
+const DEFAULT_PROJECTILE_TEXTURE = preload(\"uid://dgygswxu7j8ds\")
+
+@onready var sprite_3d: Sprite3D = %Sprite3D
+@onready var idle_anim: AnimationPlayer = %IdleAnim
+@onready var vision_raycast: RayCast3D = %VisionRaycast
+@onready var movement_raycast: RayCast3D = %MovementRaycast
+@onready var behaviors: Node = %Behaviors
+
+@export var preferred_range: ranges
+enum ranges{MELEE, RANGED, NONE}
+
+@export var body_damage:= 10.0
+@export var impassable:= false
+
+@export var vision_limit:= 10.0
+
+var occupied_cell: Cell
+var on_top_of_player:= false
+var sees_player:= false
+var player: Player
+
+
+func _ready() -> void:
+	player = get_tree().get_first_node_in_group(\"player\")
+
+
+func _physics_process(delta: float) -> void:
+	check_on_top_of_player()
+	check_sees_player()
+	
+	if not get_direction_to_player() == null:
+		movement_raycast.target_position = get_direction_to_player()
+	
+	if on_top_of_player == true:
+		sprite_3d.modulate.a = 0.0
+	else:
+		sprite_3d.modulate.a = 1.0
+
+
+func get_direction_to_player():
+	var chosen_directions: Array[Vector3i]= []
+	var direction_to_player: Vector3i = round(global_position.direction_to(player.global_position))
+	
+	if direction_to_player.z == Vars.directions[\"north\"].z:
+		chosen_directions.append(Vars.directions[\"north\"])
+	
+	if direction_to_player.x == Vars.directions[\"east\"].x:
+		chosen_directions.append(Vars.directions[\"east\"])
+	
+	if direction_to_player.z == Vars.directions[\"south\"].z:
+		chosen_directions.append(Vars.directions[\"south\"])
+	
+	if direction_to_player.x == Vars.directions[\"west\"].x:
+		chosen_directions.append(Vars.directions[\"west\"])
+	if chosen_directions == []:
+		return
+	
+	return chosen_directions.pick_random()
+
+
+func within_distance_to_player(distance: int):
+	var cell_distance:= roundi( (occupied_cell.cell_grid_position - Vars.player_cell.cell_grid_position).length() )
+	
+	if cell_distance <= distance:
+		return true
+	else:
+		return false
+
+
+func check_on_top_of_player():
+	var player_distance = (global_position - player.global_position).length()
+	
+	if player_distance <= 1.5 and on_top_of_player == false:
+		on_top_of_player = true
+	
+	if player_distance > 1.5 and on_top_of_player == true:
+		on_top_of_player = false
+
+
+func check_sees_player():
+	var player_distance = (global_position - player.enemy_aim_point.global_position).length()
+	if player_distance > vision_limit:
+		sees_player = false
+		return
+	
+	vision_raycast.look_at(player.enemy_aim_point.global_position + Vector3(0.0001, 0.0001, 0.0001))
+	
+	if vision_raycast.get_collider() == null:
+		return
+	
+	if vision_raycast.get_collider().is_in_group(\"player_collision\"):
+		sees_player = true
+	else:
+		sees_player = false
+"
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7frlh"]
+viewport_path = NodePath("ToAnimate/HealthBar3D/SubViewport")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7frlh"]
+radius = 0.3896371
+
+[sub_resource type="Animation" id="Animation_7frlh"]
+resource_name = "bob"
+loop_mode = 2
+step = 0.0333333
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToAnimate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.5, 0, 1, 1, 0, 0.7, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a6vjd"]
+_data = {
+&"bob": SubResource("Animation_7frlh")
+}
+
+[sub_resource type="Animation" id="Animation_orwns"]
+resource_name = "attack"
+length = 0.4
+step = 0.0333333
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToAnimate/Sprite3D")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.95, 0.95, 0.95, 0.06666667, 1, 1, 1, 1, 0.16666667, 1, 1.2, 1.2, 1.2, 0.36666667, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_a6vjd"]
+resource_name = "ranged_attack"
+length = 0.8
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToAnimate/Sprite3D:offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.26666668, 0.36666667, 0.5, 0.6333333, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5.505), Vector2(0, 10), Vector2(0, -5.505), Vector2(0, 10), Vector2(0, -5.505), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_07tka"]
+_data = {
+&"attack": SubResource("Animation_orwns"),
+&"ranged_attack": SubResource("Animation_a6vjd")
+}
+
+[node name="Enemy" type="Node3D"]
+script = SubResource("GDScript_3t1x0")
+preferred_range = 1
+
+[node name="ToAnimate" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="HealthBar3D" type="Sprite3D" parent="ToAnimate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3622712, 0)
+billboard = 2
+texture_filter = 0
+texture = SubResource("ViewportTexture_7frlh")
+
+[node name="SubViewport" type="SubViewport" parent="ToAnimate/HealthBar3D"]
+size = Vector2i(50, 5)
+
+[node name="HealthBar" type="ProgressBar" parent="ToAnimate/HealthBar3D/SubViewport"]
+unique_name_in_owner = true
+modulate = Color(0, 18.892157, 0, 1)
+custom_minimum_size = Vector2(50, 5)
+offset_right = 50.0
+offset_bottom = 5.0
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="Sprite3D" type="Sprite3D" parent="ToAnimate"]
+unique_name_in_owner = true
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, 0)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("1_fw1ev")
+
+[node name="VisionRaycast" type="RayCast3D" parent="ToAnimate/Sprite3D"]
+unique_name_in_owner = true
+transform = Transform3D(1.0526316, 0, 0, 0, 1.0526316, 0, 0, 0, 1.0526316, 0, 0, 0)
+target_position = Vector3(0, 0, -1000)
+collision_mask = 10
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="EnemyCollision" type="Area3D" parent="ToAnimate" groups=["enemy_collision"]]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToAnimate/EnemyCollision"]
+shape = SubResource("SphereShape3D_7frlh")
+
+[node name="MovementRaycast" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+target_position = Vector3(0, 0, -1.5)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="EnemyIndicator" parent="." instance=ExtResource("3_orwns")]
+
+[node name="IdleAnim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_a6vjd")
+}
+autoplay = "bob"
+
+[node name="AttackAnim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_07tka")
+}
+
+[node name="Behaviors" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="GetHurt" parent="Behaviors" node_paths=PackedStringArray("hurtbox", "health_bar") instance=ExtResource("4_a6vjd")]
+hurtbox = NodePath("../../ToAnimate/EnemyCollision")
+health_bar = NodePath("../../ToAnimate/HealthBar3D/SubViewport/HealthBar")
+
+[node name="Movement" parent="Behaviors" node_paths=PackedStringArray("movement_raycast") instance=ExtResource("5_07tka")]
+movement_raycast = NodePath("../../MovementRaycast")
+
+[node name="MeleeAttack" parent="Behaviors" node_paths=PackedStringArray("attack_anim") instance=ExtResource("6_3t1x0")]
+attack_anim = NodePath("../../AttackAnim")
+melees_every_x_beat = 6
+
+[node name="RangedAttack" parent="Behaviors" instance=ExtResource("7_epsnb")]
+shoots_every_x_beat = 4
+projectile_speed = 5.0

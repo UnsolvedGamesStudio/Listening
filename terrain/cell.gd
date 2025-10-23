@@ -68,6 +68,5 @@ func on_area_entered(area: Area3D):
 		area.owner.occupied_cell = self
 
 
-
 func on_area_exited(area: Area3D):
 	remove_occupant(area)

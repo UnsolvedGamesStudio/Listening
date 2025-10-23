@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmviqulbv2o3x"]
+
+[ext_resource type="Script" uid="uid://c8kgfw5qr3c1y" path="res://enemies/behaviors/get_hurt_eb.gd" id="1_5158y"]
+
+[node name="HpEB" type="Node"]
+script = ExtResource("1_5158y")

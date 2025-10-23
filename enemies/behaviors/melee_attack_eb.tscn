@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckrngbta7laek"]
+
+[ext_resource type="Script" uid="uid://bta3b7id8y0a7" path="res://enemies/behaviors/melee_attack_eb.gd" id="1_gpckg"]
+
+[node name="MeleeAttackEB" type="Node"]
+script = ExtResource("1_gpckg")

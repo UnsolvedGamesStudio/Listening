@@ -1,13 +1,17 @@
-extends Node3D
+[gd_scene load_steps=5 format=3 uid="uid://ce10gkdeiprj7"]
+
+[ext_resource type="PackedScene" uid="uid://bc7nsyavco5xh" path="res://spell_casting/spellcast.tscn" id="2_rkbax"]
+[ext_resource type="PackedScene" uid="uid://ds6ehm1oneoe7" path="res://player/interact.tscn" id="3_g1dw6"]
+
+[sub_resource type="GDScript" id="GDScript_rkbax"]
+script/source = "extends Node3D
 class_name Player
 
-const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
+const MOVE_SIGIL = preload(\"uid://iw7wpmqsi86\")
 
 @onready var camera: Camera3D = %Camera3D
 @onready var neck: Node3D = %Neck
 @onready var player_collision: Area3D = %PlayerCollision
-@onready var enemy_aim_point: Marker3D = %EnemyAimPoint
-@onready var headbob: AnimationPlayer = %Headbob
 
 @export var camera_raycast_distance:= 200.0
 @export var camera_speed:= 50
@@ -39,7 +43,7 @@ func _ready() -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	position = spawn_pos
-	move_to_cell_indicator = get_tree().get_first_node_in_group("move_to_cell_indicator")
+	move_to_cell_indicator = get_tree().get_first_node_in_group(\"move_to_cell_indicator\")
 	player_collision.area_entered.connect(on_player_collision_area_entered)
 	
 	await get_tree().create_timer(0.0).timeout
@@ -56,17 +60,17 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("forward") and is_moving == false:
+	if event.is_action_pressed(\"forward\") and is_moving == false:
 		move_forward()
 	
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed(\"ui_cancel\"):
 		if click_to_capture_mouse == false:
 			get_tree().quit()
 		
 		if click_to_capture_mouse == true:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
-	if (event.is_action_pressed("cast") or event.is_action_pressed("interact") or event.is_action_pressed("forward")) and click_to_capture_mouse == true:
+	if (event.is_action_pressed(\"cast\") or event.is_action_pressed(\"interact\") or event.is_action_pressed(\"forward\")) and click_to_capture_mouse == true:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
@@ -88,7 +92,7 @@ func take_damage(amount: float):
 
 
 func move_forward():
-	if Bgm.check_accuracy() == "missed":
+	if Bgm.check_accuracy() == \"missed\":
 		return
 	
 	update_looked_at_cell()
@@ -98,7 +102,7 @@ func move_forward():
 	
 	for occupant in current_looked_at_cell.occupants:
 		if is_instance_valid(occupant):
-			if "impassable" in occupant:
+			if \"impassable\" in occupant:
 				return
 	
 	var move_speed: float = Bgm.rhythm_notifier.bpm / (movement_speed * 100)
@@ -107,10 +111,9 @@ func move_forward():
 		Vars.last_activated_circle.texture = MOVE_SIGIL
 	
 	var tween:= get_tree().create_tween()
-	tween.tween_property(self, "global_position", current_looked_at_cell.global_position, move_speed)
+	tween.tween_property(self, \"global_position\", current_looked_at_cell.global_position, move_speed)
 	
 	tween.play()
-	headbob.play("bob")
 	is_moving = true
 	tween.tween_callback(update_looked_at_cell)
 	tween.tween_callback(set_moving_false)
@@ -145,10 +148,10 @@ func check_raycast_cells():
 	
 	var result:= space_state.intersect_ray(query)
 	
-	if not "collider" in result:
+	if not \"collider\" in result:
 		return
 		
-	return result["collider"]
+	return result[\"collider\"]
 
 
 func get_look_at_direction():
@@ -157,8 +160,44 @@ func get_look_at_direction():
 
 
 func on_player_collision_area_entered(area: Area3D):
-	if "damage" in area.owner:
+	if \"damage\" in area.owner:
 		take_damage(area.owner.damage)
 	
-	if "body_damage" in area.owner:
+	if \"body_damage\" in area.owner:
 		take_damage(area.owner.body_damage)
+"
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g1dw6"]
+height = 2.209961
+radius = 0.3
+
+[node name="Player" type="Node3D" groups=["player"]]
+script = SubResource("GDScript_rkbax")
+
+[node name="Spellcast" parent="." instance=ExtResource("2_rkbax")]
+
+[node name="Interact" parent="." instance=ExtResource("3_g1dw6")]
+
+[node name="Neck" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7422652, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Neck"]
+unique_name_in_owner = true
+current = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.282909, 0)
+light_color = Color(1, 0.8320722, 0.71004725, 1)
+light_volumetric_fog_energy = 1.495
+shadow_enabled = true
+
+[node name="PlayerCollision" type="Area3D" parent="." groups=["player_collision"]]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 8
+collision_mask = 36
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerCollision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10498047, 0)
+shape = SubResource("CylinderShape3D_g1dw6")

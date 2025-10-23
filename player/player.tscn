@@ -1,16 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://ce10gkdeiprj7"]
+[gd_scene load_steps=7 format=3 uid="uid://ce10gkdeiprj7"]
 
 [ext_resource type="Script" uid="uid://bxbkaxat5hcgk" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://bc7nsyavco5xh" path="res://spell_casting/spellcast.tscn" id="2_rkbax"]
 [ext_resource type="PackedScene" uid="uid://ds6ehm1oneoe7" path="res://player/interact.tscn" id="3_g1dw6"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_g1dw6"]
-height = 2.209961
-radius = 0.5131836
+height = 2.0915527
+radius = 0.3
+
+[sub_resource type="Animation" id="Animation_g1dw6"]
+resource_name = "bob"
+length = 0.33333668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Neck:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.642, 0), Vector3(0, 1.712, 0), Vector3(0, 1.642, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yw30f"]
+_data = {
+&"bob": SubResource("Animation_g1dw6")
+}
 
 [node name="Player" type="Node3D" groups=["player"]]
 script = ExtResource("1_oul6g")
-move_speed_level = 3
 
 [node name="Spellcast" parent="." instance=ExtResource("2_rkbax")]
 
@@ -18,7 +38,7 @@ move_speed_level = 3
 
 [node name="Neck" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7422652, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6518437, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Neck"]
 unique_name_in_owner = true
@@ -37,5 +57,15 @@ collision_layer = 8
 collision_mask = 36
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerCollision"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10498047, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045776367, 0)
 shape = SubResource("CylinderShape3D_g1dw6")
+
+[node name="EnemyAimPoint" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9143802, 0)
+
+[node name="Headbob" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_yw30f")
+}

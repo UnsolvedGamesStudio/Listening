@@ -4,8 +4,11 @@ extends Node
 
 const CAST_SIGIL = preload("uid://c5nwti415vrqj")
 const EMPTY_CAST_SIGIL = preload("uid://cquqsopjsxe0b")
+const DEFAULT_SPELL = preload("uid://d0jjxcbead86g")
 
 const PROJECTILE = preload("uid://bwaev5gyis5tp")
+
+@export var spell_range:= 7.0
 
 var element_expiry_time_mult:= 20.0
 var container:= Vars.element_container
@@ -77,7 +80,7 @@ func cast_spell():
 
 func create_projectile():
 	var projectile_inst: Projectile = PROJECTILE.instantiate()
-	var position_offset:= 0.3
+	var position_offset:= 0.15
 	var look_at_direction: Vector3 = player.get_look_at_direction()
 	
 	projectile_inst.color = determine_color()
@@ -85,9 +88,11 @@ func create_projectile():
 	projectile_inst.player = player
 	projectile_inst.target_point = look_at_direction
 	projectile_inst.origin_node = player
+	projectile_inst.max_distance = spell_range
 	
 	owner.get_parent().add_child(projectile_inst)
 	
+	projectile_inst.sprite_3d.texture = DEFAULT_SPELL
 	projectile_inst.hitbox.set_collision_layer_value(5, true)
 	projectile_inst.global_position.x = player.camera.global_position.x + (position_offset * (look_at_direction.x / 50))
 	projectile_inst.global_position.y = player.camera.global_position.y + (position_offset * (look_at_direction.y / 50))

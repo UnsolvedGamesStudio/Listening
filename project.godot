@@ -20,7 +20,6 @@ Bus="*res://autoloads/signal_bus.gd"
 Bgm="*res://autoloads/bgm/bgm.tscn"
 Vars="*res://autoloads/vars.gd"
 NoteValue="*res://addons/SimpleSampler/note_value.gd"
-Util="*res://util.gd"
 
 [debug]
 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8rwjdbr6qey4"]
+
+[ext_resource type="Script" uid="uid://blb4tx7l7f5cj" path="res://enemies/behaviors/ranged_attack_eb.gd" id="1_nkrd7"]
+
+[node name="RangedAttackEB" type="Node"]
+script = ExtResource("1_nkrd7")

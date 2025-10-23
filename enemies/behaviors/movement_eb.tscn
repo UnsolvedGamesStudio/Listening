@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3qw0t4lwkfbh"]
+
+[ext_resource type="Script" uid="uid://ccafp7t4eyxxd" path="res://enemies/behaviors/movement_eb.gd" id="1_glmia"]
+
+[node name="MovementEB" type="Node"]
+script = ExtResource("1_glmia")

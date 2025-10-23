@@ -1,14 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://dt0weymuwtkif"]
+[gd_scene load_steps=14 format=3 uid="uid://dt0weymuwtkif"]
 
-[ext_resource type="Script" uid="uid://pm4s0telhvbu" path="res://enemies/enemy.gd" id="1_7frlh"]
+[ext_resource type="Script" uid="uid://pm4s0telhvbu" path="res://enemies/enemy.gd" id="1_epsnb"]
 [ext_resource type="Texture2D" uid="uid://cx0ni1wvl78g0" path="res://enemies/textures/iseen_a_skull.png" id="1_fw1ev"]
+[ext_resource type="Resource" uid="uid://ceba2t3qkajfx" path="res://enemies/data/enemy_resource.tres" id="2_4w5fm"]
 [ext_resource type="PackedScene" uid="uid://ycxhwv4g5a5v" path="res://vfx/EnemyIndicator.tscn" id="3_orwns"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7frlh"]
 viewport_path = NodePath("ToAnimate/HealthBar3D/SubViewport")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7frlh"]
-radius = 0.3433736
+radius = 0.3896371
 
 [sub_resource type="Animation" id="Animation_7frlh"]
 resource_name = "bob"
@@ -22,9 +23,83 @@ tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.5, 0, 1, 1, 0, 0.7, 0)
 
+[sub_resource type="Animation" id="Animation_07tka"]
+resource_name = "hurt"
+length = 0.30000305
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToAnimate/Sprite3D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.16666667, 0.20000002, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(1.09, 1.09, 1.09), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ToAnimate/Sprite3D:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.16666667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.84313726, 0.39607844, 0.39607844, 0.69411767), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3t1x0"]
+resource_name = "die"
+length = 0.56666946
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToAnimate/Sprite3D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.56666666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.08, 1.08, 1.08), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ToAnimate/Sprite3D:flip_h")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.36666667, 0.46666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.56666666),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a6vjd"]
 _data = {
-&"bob": SubResource("Animation_7frlh")
+&"bob": SubResource("Animation_7frlh"),
+&"die": SubResource("Animation_3t1x0"),
+&"hurt": SubResource("Animation_07tka")
 }
 
 [sub_resource type="Animation" id="Animation_orwns"]
@@ -37,7 +112,7 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("ToAnimate/Sprite3D")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.95, 0.95, 0.95, 0.06666667, 1, 1, 1, 1, 0.16666667, 1, 1.2, 1.2, 1.2, 0.36666667, 1, 1, 1, 1)
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.033333335, 1, 0.95, 0.95, 0.95, 0.1, 1, 1, 1, 1, 0.2, 1, 1.2, 1.2, 1.2, 0.4, 1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_a6vjd"]
 resource_name = "ranged_attack"
@@ -63,7 +138,8 @@ _data = {
 }
 
 [node name="Enemy" type="Node3D"]
-script = ExtResource("1_7frlh")
+script = ExtResource("1_epsnb")
+data = ExtResource("2_4w5fm")
 preferred_range = 1
 
 [node name="ToAnimate" type="Node3D" parent="."]
@@ -90,7 +166,6 @@ show_percentage = false
 
 [node name="Sprite3D" type="Sprite3D" parent="ToAnimate"]
 unique_name_in_owner = true
-transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, 0)
 billboard = 2
 texture_filter = 0
 texture = ExtResource("1_fw1ev")
@@ -104,13 +179,12 @@ hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="Hurtbox" type="Area3D" parent="ToAnimate" groups=["enemy_collision"]]
+[node name="EnemyCollision" type="Area3D" parent="ToAnimate" groups=["enemy_collision"]]
 unique_name_in_owner = true
 collision_layer = 4
 collision_mask = 16
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ToAnimate/Hurtbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010328293, 0.036743164, -0.006591797)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToAnimate/EnemyCollision"]
 shape = SubResource("SphereShape3D_7frlh")
 
 [node name="MovementRaycast" type="RayCast3D" parent="."]
@@ -121,6 +195,7 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="EnemyIndicator" parent="." instance=ExtResource("3_orwns")]
+unique_name_in_owner = true
 
 [node name="IdleAnim" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -134,3 +209,6 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_07tka")
 }
+
+[node name="Behaviors" type="Node" parent="."]
+unique_name_in_owner = true
