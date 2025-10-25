@@ -81,13 +81,12 @@ func cast_spell():
 func create_projectile():
 	var projectile_inst: Projectile = PROJECTILE.instantiate()
 	var look_at_direction: Vector3 = player.get_look_at_direction()
-	
+	projectile_inst.direction = look_at_direction.normalized()
 	projectile_inst.color = determine_color()
 	projectile_inst.damage = determine_damage()
-	projectile_inst.player = player
-	projectile_inst.target_point = look_at_direction
 	projectile_inst.origin_node = player
 	projectile_inst.max_distance = spell_range
+	#projectile_inst.target_point = look_at_direction
 	
 	owner.get_parent().add_child(projectile_inst)
 	

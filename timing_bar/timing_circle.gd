@@ -17,6 +17,7 @@ func _ready() -> void:
 	
 	visible_on_screen_notifier_2d.connect("screen_exited", on_screen_exited)
 	Bus.beat_success_to_circle.connect(on_beat_success_to_circle)
+	easiest_zone.area_entered.connect(on_easiest_zone_area_entered)
 	easiest_zone.area_exited.connect(on_easiest_zone_area_exited)
 	
 	tween_position()
@@ -71,6 +72,11 @@ func on_beat_success_to_circle(level: int, circle: TimingCircle, element: int):
 	
 	deactivate_zones()
 	recolor(level)
+
+
+func on_easiest_zone_area_entered(area: Area2D):
+	if area.owner is BeatVisualizer and Bgm.circles_are_in == false:
+		Bgm.circles_are_in = true
 
 
 func on_easiest_zone_area_exited(area: Area2D):

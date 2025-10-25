@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Listen"
-run/main_scene="uid://d1rnngxhnemng"
+run/main_scene="uid://xqc1yxn05bn"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
 [autoload]
@@ -53,6 +53,7 @@ reticle=""
 player=""
 player_collision=""
 enemy_collision=""
+combo_manager=""
 
 [gui]
 

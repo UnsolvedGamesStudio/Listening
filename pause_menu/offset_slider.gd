@@ -3,7 +3,7 @@ extends PanelContainer
 @onready var offset_slider_label: Label = %OffsetSliderLabel
 @onready var offset_slider: HSlider = %OffsetSlider
 
-## 10 offset feels pretty good.
+
 func _ready() -> void:
 	offset_slider.value_changed.connect(on_offset_slider_value_changed)
 	offset_slider.drag_ended.connect(on_offset_slider_drag_ended)

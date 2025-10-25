@@ -7,11 +7,15 @@ extends AudioStreamPlayer
 @onready var pause_menu_music: AudioStreamPlayer = %PauseMenuMusic
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
+var combo_label: ComboManager
+
 var current_chord: Array[Array] = []
 
 var beat_visualizer: CanvasLayer
 
 var beat_count:= 0
+var last_timing:= 0.0
+var circles_are_in:= false
 
 
 var songs: Dictionary[String, AudioStream] = {
@@ -22,26 +26,13 @@ var songs: Dictionary[String, AudioStream] = {
 func _ready() -> void:
 	rhythm_notifier.beat.connect(on_beat)
 	midi_player.note.connect(on_midi_note_played)
+	
 	midi_player.link_audio_stream_player([self])
 	midi_player.play()
 
 
 func on_midi_note_played(event, track):
 	midi_to_name(event.note)
-
-
-func play_with_leadin():
-	rhythm_notifier.beats(1, false, 4).connect(func(_i):
-		rhythm_notifier.audio_stream_player.play()
-	, CONNECT_ONE_SHOT)
-	
-	rhythm_notifier.beat.connect(func(count):
-		if not rhythm_notifier.audio_stream_player.playing:
-			print("Pickup beat %d" % count)
-		else:
-			print("Song beat %d" % count))
-	
-	rhythm_notifier.running = true  # Start signaling without playing the audio stream
 
 
 func midi_to_name(midi_number):
@@ -76,18 +67,12 @@ func play_midi():
 
 
 func check_accuracy():
-	## Foolproof method:
-	#if Bgm.rhythm_notifier.current_position > (Vars.last_timing - 0.1) and\
-	#Bgm.rhythm_notifier.current_position < (Vars.last_timing + 0.1):
-		#print("!!!")
-	
 	var beat_area: Area2D = beat_visualizer.beat_area
 	var circle: TimingCircle
 	var accuracy:= "missed"
 	var level:= 0
 	
 	Bus.beat_press_attempted.emit()
-	
 	for area in beat_area.get_overlapping_areas():
 		if not "difficulty" in area:
 			return accuracy
@@ -107,16 +92,43 @@ func check_accuracy():
 		if area.owner is TimingCircle:
 			circle = area.owner
 	
+	if circles_are_in == false:
+		accuracy = check_silent_timing()
+	
 	if not accuracy == "missed":
 		Bus.beat_success.emit(level)
+	
+	if not accuracy == "missed" and circles_are_in == true:
 		Vars.last_activated_circle = circle
 		circle.deactivate_zones()
 		circle.recolor(level)
-	else:
+	
+	if accuracy == "missed":
 		Bus.beat_failure.emit()
 	
 	beat_visualizer.generate_text(accuracy)
 	return accuracy
+
+
+func check_silent_timing():
+	var window: float = rhythm_notifier.beat_length
+	var success:= "missed"
+	
+	var easy_timing = Bgm.rhythm_notifier.current_position > (last_timing - (window / 2.9) ) and\
+	Bgm.rhythm_notifier.current_position < (last_timing + (window / 2.9) )
+	var medium_timing = Bgm.rhythm_notifier.current_position > (last_timing - (window / 3.8) ) and\
+	Bgm.rhythm_notifier.current_position < (last_timing + (window / 3.8) )
+	var perfect_timing = Bgm.rhythm_notifier.current_position > (last_timing - (window / 4.5) ) and\
+	Bgm.rhythm_notifier.current_position < (last_timing + (window / 4.5) )
+	
+	if easy_timing:
+		success = "easy"
+	if medium_timing:
+		success = "medium"
+	if perfect_timing:
+		success = "perfect"
+	
+	return success
 
 
 func play_kick():
@@ -124,7 +136,7 @@ func play_kick():
 
 
 func check_real_timing():
-	Vars.last_timing = Bgm.rhythm_notifier.current_position
+	last_timing = rhythm_notifier.current_position
 
 
 func on_beat(_interval: int):

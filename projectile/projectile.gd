@@ -13,7 +13,6 @@ var destroyed:= false
 var origin_node: Node3D
 var target_point:= Vector3.ZERO
 var direction:= Vector3.ZERO
-var player: Player
 var color:= Color.WHITE
 
 var speed:= 60.0
@@ -34,7 +33,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	direction = global_position.direction_to(target_point)
+	#direction = global_position.direction_to(target_point)
 	velocity += direction * speed * delta
 	distance_traveled = starting_position.distance_to(global_position)
 	if distance_traveled >= max(2.5, max_distance):

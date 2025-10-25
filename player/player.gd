@@ -82,10 +82,8 @@ func move_forward():
 	if current_looked_at_cell == null:
 		return
 	
-	for occupant in current_looked_at_cell.occupants:
-		if is_instance_valid(occupant):
-			if "impassable" in occupant:
-				return
+	if impassable_enemy() == true:
+		return
 	
 	var move_speed: float = Bgm.rhythm_notifier.bpm / (movement_speed * 100)
 	
@@ -101,6 +99,20 @@ func move_forward():
 	tween.tween_callback(update_looked_at_cell)
 	tween.tween_callback(set_moving_false)
 	tween.tween_callback(Bus.player_moved.emit)
+
+
+func impassable_enemy():
+	for occupant in current_looked_at_cell.occupants:
+		if not is_instance_valid(occupant):
+			return false
+		
+		if not "impassable" in occupant:
+			return false
+		
+		if occupant.impassable == true:
+			return true
+	
+	return false
 
 
 func set_moving_false():

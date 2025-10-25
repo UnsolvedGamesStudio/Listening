@@ -1,8 +1,6 @@
 extends Node
 
 
-var last_timing:= 0.0
-
 ## Layout
 var directions: Dictionary[String, Vector3i] = {
 	"north" : Vector3i(0, 0, -1),
@@ -10,7 +8,6 @@ var directions: Dictionary[String, Vector3i] = {
 	"south" : Vector3i(0, 0, 1),
 	"west" : Vector3i(-1, 0, 0)
 }
-
 
 var cell_size:= 2
 var cell_nodes: Array[Cell] = []

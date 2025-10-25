@@ -1,5 +1,5 @@
 extends Label
-class_name combo_manager
+class_name ComboManager
 
 @onready var score_label: Label = %ScoreLabel
 

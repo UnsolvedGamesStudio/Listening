@@ -9,10 +9,8 @@ var enabled:= true
 var shoots_every_x_beat:= 6
 var projectile_range:= 2
 var projectile_damage:= 10.0
-var projectile_speed:= 60.0
+var projectile_speed:= 25.0
 
-var body_damage:= 10.0
-var impassable:= false
 var attack_anim: AnimationPlayer
 
 var melee_range:= 1
@@ -57,8 +55,6 @@ func create_projectile():
 	projectile_inst.damage = projectile_damage
 	projectile_inst.speed = projectile_speed
 	projectile_inst.max_distance = float(projectile_range) + 3.0
-	projectile_inst.player = player
-	projectile_inst.target_point = player.enemy_aim_point.global_position
 	projectile_inst.origin_node = O
 	
 	get_parent().add_child(projectile_inst)
@@ -66,6 +62,9 @@ func create_projectile():
 	projectile_inst.sprite_3d.texture = DEFAULT_PROJECTILE_TEXTURE
 	projectile_inst.hitbox.set_collision_layer_value(6, true)
 	projectile_inst.global_position = O.sprite_3d.global_position
+	
+	var projectile_direction:= projectile_inst.global_position.direction_to(player.enemy_aim_point.global_position)
+	projectile_inst.direction = projectile_direction
 
 
 func on_beat(beat_count: int):

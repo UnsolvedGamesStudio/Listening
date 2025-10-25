@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name BeatVisualizer
 
 const TIMING_CIRCLE = preload("uid://d0tfafh16tflf")
 const RANK_LABEL = preload("uid://6w4l5x6wfeyn")
