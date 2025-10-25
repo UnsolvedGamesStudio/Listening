@@ -14,8 +14,6 @@ const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 @export var spawn_pos:= Vector3(0, 0, 0)
 @export_range(1, 3) var movement_speed:= 4
 
-@export var click_to_capture_mouse:= false
-
 var move_to_cell_indicator: Node3D
 
 var tilt_lower_limit:= deg_to_rad(-90)
@@ -35,9 +33,7 @@ var hp:= max_hp:
 
 
 func _ready() -> void:
-	if click_to_capture_mouse == false:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	position = spawn_pos
 	move_to_cell_indicator = get_tree().get_first_node_in_group("move_to_cell_indicator")
 	player_collision.area_entered.connect(on_player_collision_area_entered)
@@ -58,16 +54,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("forward") and is_moving == false:
 		move_forward()
-	
-	if event.is_action_pressed("ui_cancel"):
-		if click_to_capture_mouse == false:
-			get_tree().quit()
-		
-		if click_to_capture_mouse == true:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	
-	if (event.is_action_pressed("cast") or event.is_action_pressed("interact") or event.is_action_pressed("forward")) and click_to_capture_mouse == true:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func camera_movement(event: InputEvent):

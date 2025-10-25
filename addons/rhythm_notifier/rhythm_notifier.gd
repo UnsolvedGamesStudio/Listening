@@ -3,6 +3,7 @@
 class_name RhythmNotifier
 extends Node
 
+
 ## A node that emits emits rhythmic signals synchronized with the beat of an [AudioStreamPlayer].
 ##
 ## [RhythmNotifier] lets you define custom signals that emit when a given beat in the audio stream
@@ -15,7 +16,9 @@ extends Node
 ##
 ## [br][br][b]Usage example:[/b]
 ## [codeblock]
-## @onready var r: RhythmNotifier = $RhythmNotifier  # Set bpm and audio_stream_player in inspector
+##
+##@onready var r: RhythmNotifier = $RhythmNotifier  # Set bpm and audio_stream_player in inspector
+##
 ##
 ## # Play music and emit lots of signals
 ## func _play_some_music():
@@ -34,20 +37,21 @@ extends Node
 ##     # Stop playback on beat 20.
 ##     r.beats(0, false, 20).connect(func(_i): r.audio_stream_player.stop())
 ##
-## # Play the music after 4 pickup beats
-## func _play_with_leadin():
-##     r.beats(1, false, 4).connect(func(_i):
-##         r.audio_stream_player.play()
-##     , CONNECT_ONE_SHOT)
-##
-##     r.beat.connect(func(count):
-##         if not r.audio_stream_player.playing:
-##             print("Pickup beat %d" % count)
-##         else:
-##             print("Song beat %d" % count)
-##
-##     r.running = true  # Start signaling without playing the audio stream
-##
+
+ # Play the music after 4 pickup beats
+#func _play_with_leadin():
+	#r.beats(1, false, 4).connect(func(_i):
+		#audio_stream_player.play()
+	#, CONNECT_ONE_SHOT)
+	#
+	#r.beat.connect(func(count):
+		#if not r.audio_stream_player.playing:
+			#print("Pickup beat %d" % count)
+		#else:
+			#print("Song beat %d" % count))
+	#
+	#r.running = true  # Start signaling without playing the audio stream
+
 ## # Change the song tempo partway through
 ## func _change_tempos():
 ##     r.bpm = 60

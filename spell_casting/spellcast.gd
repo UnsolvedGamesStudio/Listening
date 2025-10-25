@@ -80,7 +80,6 @@ func cast_spell():
 
 func create_projectile():
 	var projectile_inst: Projectile = PROJECTILE.instantiate()
-	var position_offset:= 0.15
 	var look_at_direction: Vector3 = player.get_look_at_direction()
 	
 	projectile_inst.color = determine_color()
@@ -94,9 +93,7 @@ func create_projectile():
 	
 	projectile_inst.sprite_3d.texture = DEFAULT_SPELL
 	projectile_inst.hitbox.set_collision_layer_value(5, true)
-	projectile_inst.global_position.x = player.camera.global_position.x + (position_offset * (look_at_direction.x / 50))
-	projectile_inst.global_position.y = player.camera.global_position.y + (position_offset * (look_at_direction.y / 50))
-	projectile_inst.global_position.z = player.camera.global_position.z  + (position_offset * (look_at_direction.z / 50))
+	projectile_inst.global_position = player.camera.global_position
 
 
 func element_expiry():

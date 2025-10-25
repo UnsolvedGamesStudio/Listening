@@ -3,6 +3,9 @@ extends AudioStreamPlayer
 @onready var rhythm_notifier: RhythmNotifier = %RhythmNotifier
 @onready var midi_player: MidiPlayer = %MidiPlayer
 @onready var sampler_instrument: SamplerInstrument = %SamplerInstrument
+@onready var kick: AudioStreamPlayer = %Kick
+@onready var pause_menu_music: AudioStreamPlayer = %PauseMenuMusic
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 var current_chord: Array[Array] = []
 
@@ -25,6 +28,20 @@ func _ready() -> void:
 
 func on_midi_note_played(event, track):
 	midi_to_name(event.note)
+
+
+func play_with_leadin():
+	rhythm_notifier.beats(1, false, 4).connect(func(_i):
+		rhythm_notifier.audio_stream_player.play()
+	, CONNECT_ONE_SHOT)
+	
+	rhythm_notifier.beat.connect(func(count):
+		if not rhythm_notifier.audio_stream_player.playing:
+			print("Pickup beat %d" % count)
+		else:
+			print("Song beat %d" % count))
+	
+	rhythm_notifier.running = true  # Start signaling without playing the audio stream
 
 
 func midi_to_name(midi_number):
@@ -59,6 +76,11 @@ func play_midi():
 
 
 func check_accuracy():
+	## Foolproof method:
+	#if Bgm.rhythm_notifier.current_position > (Vars.last_timing - 0.1) and\
+	#Bgm.rhythm_notifier.current_position < (Vars.last_timing + 0.1):
+		#print("!!!")
+	
 	var beat_area: Area2D = beat_visualizer.beat_area
 	var circle: TimingCircle
 	var accuracy:= "missed"
@@ -97,6 +119,16 @@ func check_accuracy():
 	return accuracy
 
 
+func play_kick():
+	kick.play()
+
+
+func check_real_timing():
+	Vars.last_timing = Bgm.rhythm_notifier.current_position
+
+
 func on_beat(_interval: int):
+	check_real_timing()
 	beat_count += 1
+	play_kick()
 	Bus.beat.emit(beat_count)

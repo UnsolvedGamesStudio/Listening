@@ -1,24 +1,63 @@
-[gd_scene load_steps=8 format=3 uid="uid://dewfhmrag5pkp"]
+[gd_scene load_steps=13 format=3 uid="uid://dewfhmrag5pkp"]
 
-[ext_resource type="AudioStream" uid="uid://cehj8qpgycok1" path="res://assets/music/so simple 140 bpm.wav" id="1_1oder"]
+[ext_resource type="AudioStream" uid="uid://c5ye3ra8wurt5" path="res://assets/music/beat_only_long.wav" id="1_qfgnj"]
 [ext_resource type="Script" uid="uid://dbs7tn7suqlhg" path="res://autoloads/bgm/bgm.gd" id="2_vucbv"]
 [ext_resource type="Script" uid="uid://dos3qhffr4v0a" path="res://addons/rhythm_notifier/rhythm_notifier.gd" id="3_1oder"]
 [ext_resource type="MidiResource" uid="uid://dvvjseifubaqs" path="res://assets/music/so_simple_chords_140_bpm.mid" id="4_1i4ta"]
 [ext_resource type="Script" uid="uid://2ag1petdt53" path="res://addons/SimpleSampler/sampler_instrument.gd" id="5_syuoy"]
 [ext_resource type="Script" uid="uid://dtpmtwvvk0ac7" path="res://addons/SimpleSampler/sample_resource.gd" id="6_yq28d"]
 [ext_resource type="Resource" uid="uid://c67s4yjf8k7l0" path="res://assets/samples/test.tres" id="7_qfgnj"]
+[ext_resource type="AudioStream" uid="uid://hmaa8n3edwg0" path="res://assets/samples/clean-808-kick_A_minor.wav" id="8_wbxdo"]
+[ext_resource type="AudioStream" uid="uid://520br8rgi2n1" path="res://assets/music/Stasis.ogg" id="9_qfgnj"]
+
+[sub_resource type="Animation" id="Animation_qfgnj"]
+resource_name = "pause_menu_music_volume"
+length = 0.2
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PauseMenuMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.3922922, 1),
+"update": 0,
+"values": [-80.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4owoj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PauseMenuMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j4ark"]
+_data = {
+&"RESET": SubResource("Animation_4owoj"),
+&"pause_menu_music_volume": SubResource("Animation_qfgnj")
+}
 
 [node name="BGM" type="AudioStreamPlayer"]
-stream = ExtResource("1_1oder")
-autoplay = true
+stream = ExtResource("1_qfgnj")
 bus = &"BGM"
 script = ExtResource("2_vucbv")
 
 [node name="RhythmNotifier" type="Node" parent="." node_paths=PackedStringArray("audio_stream_player")]
 unique_name_in_owner = true
 script = ExtResource("3_1oder")
-bpm = 140.0
-beat_length = 0.42857142857142855
+bpm = 120.0
+beat_length = 0.5
 audio_stream_player = NodePath("..")
 
 [node name="MidiPlayer" type="MidiPlayer" parent="."]
@@ -34,3 +73,23 @@ script = ExtResource("5_syuoy")
 max_notes = 6
 samples = Array[ExtResource("6_yq28d")]([ExtResource("7_qfgnj")])
 metadata/_custom_type_script = "uid://2ag1petdt53"
+
+[node name="Kick" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("8_wbxdo")
+bus = &"Kick"
+
+[node name="PauseMenuMusic" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+stream = ExtResource("9_qfgnj")
+volume_db = -80.0
+autoplay = true
+bus = &"PauseMenuMusic"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+libraries = {
+&"": SubResource("AnimationLibrary_j4ark")
+}

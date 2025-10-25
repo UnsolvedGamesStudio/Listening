@@ -2,6 +2,7 @@ extends CanvasLayer
 
 const TIMING_CIRCLE = preload("uid://d0tfafh16tflf")
 const RANK_LABEL = preload("uid://6w4l5x6wfeyn")
+const BEAT_TIMER = preload("uid://dwk7ovxfs2mxp")
 
 @onready var timing_bar: TextureRect = %TimingBar
 @onready var beat_activator: Sprite2D = %BeatActivator
@@ -46,6 +47,7 @@ func generate_circle():
 	var circle_inst: TimingCircle = TIMING_CIRCLE.instantiate()
 	
 	circle_inst.global_position = circle_spawn_pos
+	circle_inst.global_position.x += Vars.beat_circle_offset
 	circle_inst.beat_area = beat_area
 	
 	Vars.active_circles.append(circle_inst)
@@ -83,8 +85,15 @@ func on_beat_press_attempted():
 
 
 func on_beat(_beat_count: int):
+	var timer_inst: Timer = BEAT_TIMER.instantiate()
+	
+	timer_inst.wait_time = Bgm.rhythm_notifier.beat_length
+	add_child(timer_inst)
+
+
+func on_beat_timer_timeout():
 	update_middle_of_screen()
 	generate_circle()
 	
 	## Test system's accuracy
-	#print(check_accuracy())
+	#Bgm.check_accuracy()

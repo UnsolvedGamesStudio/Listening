@@ -53,6 +53,13 @@ custom_minimum_size = Vector2(25, 100)
 layout_mode = 2
 size_flags_horizontal = 8
 
+[node name="PauseHint" type="Label" parent="MarginContainer"]
+modulate = Color(1, 1, 1, 0.3372549)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Press ESC to pause"
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0

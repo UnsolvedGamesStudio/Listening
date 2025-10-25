@@ -27,6 +27,9 @@ func _ready() -> void:
 
 
 func move():
+	if movement_raycast.get_collider() == null:
+		return
+	
 	var raycast_result = movement_raycast.get_collider().owner
 	
 	if raycast_result == null:

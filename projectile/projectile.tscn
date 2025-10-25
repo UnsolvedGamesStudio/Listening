@@ -16,7 +16,7 @@ tracks/0/path = NodePath("Sprite3D:transparency")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06666667),
+"times": PackedFloat32Array(0.06666667, 0.26666668),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.0]
@@ -87,7 +87,8 @@ debug_fill = false
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+transparency = 1.0
 billboard = 2
 texture_filter = 0
 texture = ExtResource("2_makwg")

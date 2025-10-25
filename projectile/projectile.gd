@@ -1,6 +1,6 @@
 extends CharacterBody3D
 class_name Projectile
-
+## Todo: make it destroyed if the hitbox hits ENEMIES specifically, just not walls
 const POP_TEXTURE = preload("uid://cyk5g3u4ymo2g")
 
 @onready var sprite_3d: Sprite3D = %Sprite3D

@@ -1,7 +1,7 @@
 extends Node
 
-var cell_size:= 2
 
+var last_timing:= 0.0
 
 ## Layout
 var directions: Dictionary[String, Vector3i] = {
@@ -12,6 +12,7 @@ var directions: Dictionary[String, Vector3i] = {
 }
 
 
+var cell_size:= 2
 var cell_nodes: Array[Cell] = []
 var cell_coordinates: Array[Vector2i] = []
 var player_cell: Cell
@@ -20,6 +21,7 @@ var player_cell: Cell
 ## Beat Visualizer
 var combo:= 0
 var score:= 0.0
+var beat_circle_offset:= 0.0
 var active_circles: Array[TimingCircle] = []
 var last_activated_circle: TimingCircle
 

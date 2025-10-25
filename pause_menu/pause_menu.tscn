@@ -1,0 +1,158 @@
+[gd_scene load_steps=9 format=3 uid="uid://dohwuclbdrfh1"]
+
+[ext_resource type="Script" uid="uid://drn422cycc5qn" path="res://pause_menu/offset_slider.gd" id="1_5hbt6"]
+[ext_resource type="Script" uid="uid://d2xrtoqxe8yqr" path="res://pause_menu/pause_menu.gd" id="1_uwtdo"]
+[ext_resource type="Script" uid="uid://b56jfy7g127ku" path="res://pause_menu/button.gd" id="2_rd7dy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uwtdo"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7wlu"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+bg_color = Color(0.17968586, 0.36960748, 0.2089456, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Animation" id="Animation_uwtdo"]
+resource_name = "pop_in"
+length = 0.1
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(0.65975446, 1),
+"update": 0,
+"values": [Vector2(0, 500), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_b4s0c"]
+resource_name = "pop_out"
+length = 0.1
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(0.65975446, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 500)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s1glv"]
+_data = {
+&"pop_in": SubResource("Animation_uwtdo"),
+&"pop_out": SubResource("Animation_b4s0c")
+}
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+offset = Vector2(0, 500)
+transform = Transform2D(1, 0, 0, 1, 0, 500)
+script = ExtResource("1_uwtdo")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+process_mode = 2
+modulate = Color(1, 1, 1, 0.5294118)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -141.0
+offset_top = 50.0
+offset_right = 141.0
+offset_bottom = 159.0
+grow_horizontal = 2
+size_flags_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uwtdo")
+
+[node name="ControlsTutorialLabel" type="Label" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Press Tab to exit the game.
+A, S, and D add elements to your emotion spell.
+Press Left Click to cast the created spell.
+Press W to go to the highlighted tile.
+Press Space to interact."
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+process_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="OffsetSliderContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_c7wlu")
+script = ExtResource("1_5hbt6")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/OffsetSliderContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="OffsetSliderLabel" type="Label" parent="MarginContainer/VBoxContainer/OffsetSliderContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Beat Offset: 0px"
+
+[node name="OffsetSlider" type="HSlider" parent="MarginContainer/VBoxContainer/OffsetSliderContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = -25.0
+max_value = 25.0
+rounded = true
+
+[node name="ResumeButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_behavior_recursive = 1
+text = "Resume"
+script = ExtResource("2_rd7dy")
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_behavior_recursive = 1
+text = "Exit game"
+script = ExtResource("2_rd7dy")
+type = "exit"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+libraries = {
+&"": SubResource("AnimationLibrary_s1glv")
+}

@@ -6,10 +6,9 @@ class_name TimingCircle
 @onready var medium_zone: Area2D = %MediumZone
 @onready var perfect_zone: Area2D = %PerfectZone
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
 
-@export_range(1, 2) var speed_level:= 2
-
-var speed:= 2.0
+var speed:= 8 ##1 = highest. value is rounded up to the next even number.
 var beat_area: Area2D
 
 
@@ -20,43 +19,27 @@ func _ready() -> void:
 	Bus.beat_success_to_circle.connect(on_beat_success_to_circle)
 	easiest_zone.area_exited.connect(on_easiest_zone_area_exited)
 	
-	if speed_level == 1:
-		speed = 1.0
-	if speed_level == 2:
-		speed = 2.0
+	tween_position()
 
 
-func _physics_process(delta: float) -> void:
-	global_position.x += speed_level * (delta * 60)
+func tween_position():
+	if speed % 2 == 1:
+		speed += 1
+		print(speed)
+	
+	var tween:= create_tween()
+	var length: float = Bgm.rhythm_notifier.beat_length * speed
+	
+	tween.tween_property(self, "global_position:x", get_viewport_rect().size.x, length)
+	tween.tween_callback(remove)
 
 
 func remove():
+	animation_player.play("exit")
+	
 	for circle in Vars.active_circles:
-		if not circle == self:
-			return
-		
-		Vars.active_circles.erase(circle)
-	
-	queue_free()
-
-
-func change_speed(amount: int):
-	speed_level = min(amount, 2)
-	
-	if speed_level == 1:
-		speed = 1.0
-	if speed_level == 2:
-		speed = 2.0
-
-
-#func change_to_sigil(element: int):
-	#if element == -1:
-		#return
-	#
-	#if not "texture" in Vars.elements[element]:
-		#return
-	#
-	#texture = Vars.elements[element].texture
+		if circle == self:
+			Vars.active_circles.erase(circle)
 
 
 func recolor(level: int):
@@ -87,7 +70,6 @@ func on_beat_success_to_circle(level: int, circle: TimingCircle, element: int):
 		return
 	
 	deactivate_zones()
-	#change_to_sigil(element)
 	recolor(level)
 
 
