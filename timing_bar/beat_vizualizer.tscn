@@ -30,6 +30,7 @@ _data = {
 }
 
 [node name="BeatVisualizer" type="CanvasLayer" groups=["beat_vizualizer"]]
+process_mode = 3
 script = ExtResource("1_kra6h")
 
 [node name="TimingBar" type="TextureRect" parent="."]

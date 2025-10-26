@@ -27,7 +27,7 @@ func _ready() -> void:
 	rhythm_notifier.beat.connect(on_beat)
 	midi_player.note.connect(on_midi_note_played)
 	
-	midi_player.link_audio_stream_player([self])
+	play()
 	midi_player.play()
 
 
@@ -52,8 +52,12 @@ func midi_to_name(midi_number):
 	current_chord.append([note_name, octave_number - 4])
 
 
-func play_midi():
+func play_midi(empty: bool = false):
+	var octave_modifier:= 1
 	var sample:= sampler_instrument.samples[0]
+	
+	if empty == true:
+		octave_modifier = 0
 	
 	sampler_instrument.stop()
 	
@@ -63,7 +67,7 @@ func play_midi():
 		sample.tone = note[0]
 		sample.octave = note[1]
 		
-		sampler_instrument.play_note(note[0], note[1])
+		sampler_instrument.play_note(note[0], note[1] - octave_modifier)
 
 
 func check_accuracy():
@@ -140,7 +144,9 @@ func check_real_timing():
 
 
 func on_beat(_interval: int):
+	if Vars.paused == false:
+		beat_count += 1
+	
 	check_real_timing()
-	beat_count += 1
 	play_kick()
 	Bus.beat.emit(beat_count)

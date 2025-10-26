@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7wmmnca4o1dx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1sf2w"]
+transparency = 1
+albedo_color = Color(0.36838618, 0.8039323, 0.77371633, 0.27450982)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_oy4h2"]
+material = SubResource("StandardMaterial3D_1sf2w")
+size = Vector2(1, 1)
+
+[node name="PlayerSpawnPoint" type="Node3D" groups=["player_spawn"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+mesh = SubResource("PlaneMesh_oy4h2")

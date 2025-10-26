@@ -1,19 +1,22 @@
 extends Node
 
 
+var paused:= false
+
 ## Layout
-var directions: Dictionary[String, Vector3i] = {
+const directions: Dictionary[String, Vector3i] = {
 	"north" : Vector3i(0, 0, -1),
 	"east" : Vector3i(1, 0, 0),
 	"south" : Vector3i(0, 0, 1),
 	"west" : Vector3i(-1, 0, 0)
 }
 
-var cell_size:= 2
+const cell_size:= 2
 var cell_nodes: Array[Cell] = []
 var cell_coordinates: Array[Vector2i] = []
-var player_cell: Cell
+var player_spawn_cell: Cell
 
+var player_cell: Cell
 
 ## Beat Visualizer
 var combo:= 0
@@ -32,3 +35,16 @@ var elements: Array[Resource] = [
 
 var element_container: Array[int] = []
 var last_element:= "none"
+
+
+func reset():
+	paused = false
+	cell_nodes.clear()
+	cell_coordinates.clear()
+	player_cell = null
+	combo = 0
+	score = 0.0
+	active_circles.clear()
+	last_activated_circle = null
+	element_container.clear()
+	last_element = "none"

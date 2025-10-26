@@ -12,13 +12,6 @@ const PROJECTILE = preload("uid://bwaev5gyis5tp")
 
 var element_expiry_time_mult:= 20.0
 var container:= Vars.element_container
-var container_ui: ElementContainerUI
-var player: Player
-
-
-func _ready() -> void:
-	container_ui = get_tree().get_first_node_in_group("element_container_ui")
-	player = owner
 
 
 func _input(event: InputEvent) -> void:
@@ -45,6 +38,7 @@ func on_cast_pressed():
 
 
 func add_element(element: int):
+	var container_ui: ElementContainerUI = get_tree().get_first_node_in_group("element_container_ui")
 	var success: String = Bgm.check_accuracy()
 	
 	if success == "missed":
@@ -64,11 +58,15 @@ func add_element(element: int):
 
 
 func cast_spell():
-	Bgm.play_midi()
+	var container_ui: ElementContainerUI = get_tree().get_first_node_in_group("element_container_ui")
+	
 	if container == []:
+		Bgm.play_midi(true)
 		if not Vars.last_activated_circle == null:
 			Vars.last_activated_circle.texture = EMPTY_CAST_SIGIL
 		return
+	
+	Bgm.play_midi(false)
 	
 	if not Vars.last_activated_circle == null:
 		Vars.last_activated_circle.texture = CAST_SIGIL
@@ -80,22 +78,23 @@ func cast_spell():
 
 func create_projectile():
 	var projectile_inst: Projectile = PROJECTILE.instantiate()
-	var look_at_direction: Vector3 = player.get_look_at_direction()
+	var look_at_direction: Vector3 = Find.P().get_look_at_direction()
+	
 	projectile_inst.direction = look_at_direction.normalized()
 	projectile_inst.color = determine_color()
 	projectile_inst.damage = determine_damage()
-	projectile_inst.origin_node = player
+	projectile_inst.origin_node = Find.P()
 	projectile_inst.max_distance = spell_range
-	#projectile_inst.target_point = look_at_direction
 	
 	owner.get_parent().add_child(projectile_inst)
 	
 	projectile_inst.sprite_3d.texture = DEFAULT_SPELL
 	projectile_inst.hitbox.set_collision_layer_value(5, true)
-	projectile_inst.global_position = player.camera.global_position
+	projectile_inst.global_position = Find.P().camera.global_position
 
 
 func element_expiry():
+	var container_ui: ElementContainerUI = get_tree().get_first_node_in_group("element_container_ui")
 	container_ui.element_expiry_timer.start(Bgm.rhythm_notifier.beat_length * element_expiry_time_mult)
 	await container_ui.element_expiry_timer.timeout
 	Vars.element_container.clear()
@@ -104,8 +103,9 @@ func element_expiry():
 
 func determine_damage():
 	var damage:= 0.0
+	var bonus_from_score: float = min(100.0, Vars.score / 20.0)
 	
-	damage += (20 * Vars.element_container.size() ) + (Vars.score / 10)
+	damage += (20 * Vars.element_container.size() ) + bonus_from_score
 	
 	return damage
 

@@ -12,9 +12,6 @@ const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 @export var camera_raycast_distance:= 200.0
 @export var camera_speed:= 50
 @export var spawn_pos:= Vector3(0, 0, 0)
-@export_range(1, 3) var movement_speed:= 4
-
-var move_to_cell_indicator: Node3D
 
 var tilt_lower_limit:= deg_to_rad(-90)
 var tilt_upper_limit:= deg_to_rad(90)
@@ -22,7 +19,11 @@ var tilt_upper_limit:= deg_to_rad(90)
 var current_looked_at_cell: Cell
 var is_moving:= false
 
+var invincible_cheat:= false
+var invincible:= false
+
 ## Stats
+const base_max_hp:= 100.0
 var max_hp:= 100.0:
 	set(value):
 		max_hp = clampf(value, 1.0, 9999.9)
@@ -31,16 +32,31 @@ var hp:= max_hp:
 	set(value):
 		hp = clampf(value, 0.0, max_hp)
 
+const base_movement_speed:= 4
+var movement_speed:= 20:
+	set(value):
+		movement_speed = clampi(value, 1, 20)
+
 
 func _ready() -> void:
+	reset_vars()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	position = spawn_pos
-	move_to_cell_indicator = get_tree().get_first_node_in_group("move_to_cell_indicator")
 	player_collision.area_entered.connect(on_player_collision_area_entered)
 	
 	await get_tree().create_timer(0.0).timeout
+	
+	global_position = get_tree().get_first_node_in_group("player_spawn").global_position
 	update_looked_at_cell()
 	Bus.player_moved.emit()
+
+
+func reset_vars():
+	current_looked_at_cell = null
+	max_hp = base_max_hp
+	hp = max_hp
+	movement_speed = base_movement_speed
+	Bus.player_hp_changed.emit()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -69,8 +85,20 @@ func camera_movement(event: InputEvent):
 
 
 func take_damage(amount: float):
+	if invincible == true or invincible_cheat == true:
+		return
+	
 	hp -= amount
+	
 	Bus.player_lost_hp.emit()
+	Bus.player_hp_changed.emit()
+	
+	if hp <= 0:
+		die()
+
+
+func die():
+	SceneManager.reload_game()
 
 
 func move_forward():
@@ -121,7 +149,8 @@ func set_moving_false():
 
 func update_looked_at_cell():
 	var cell: Area3D = check_raycast_cells()
-	
+	var move_to_cell_indicator = get_tree().get_first_node_in_group("move_to_cell_indicator")
+
 	if not cell is CellCollision:
 		return
 	

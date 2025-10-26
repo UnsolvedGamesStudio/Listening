@@ -4,15 +4,13 @@ const ENEMY = preload("uid://dt0weymuwtkif")
 
 @export var enabled:= true
 
-var map: Map
-
 
 func _ready() -> void:
-	map = get_tree().get_first_node_in_group("map")
 	generate_enemies()
 
 
 func generate_enemies():
+	var map: Map = get_tree().get_first_node_in_group("map")
 	if enabled == false:
 		return
 	

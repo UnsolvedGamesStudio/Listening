@@ -3,7 +3,6 @@
 class_name RhythmNotifier
 extends Node
 
-
 ## A node that emits emits rhythmic signals synchronized with the beat of an [AudioStreamPlayer].
 ##
 ## [RhythmNotifier] lets you define custom signals that emit when a given beat in the audio stream

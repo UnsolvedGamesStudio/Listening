@@ -16,7 +16,7 @@ func _ready() -> void:
 
 
 func melee_attack():
-	player.take_damage(melee_damage)
+	Find.P().take_damage(melee_damage)
 	
 	if not attack_anim == null:
 		attack_anim.play("attack")

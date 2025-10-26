@@ -63,7 +63,7 @@ func create_projectile():
 	projectile_inst.hitbox.set_collision_layer_value(6, true)
 	projectile_inst.global_position = O.sprite_3d.global_position
 	
-	var projectile_direction:= projectile_inst.global_position.direction_to(player.enemy_aim_point.global_position)
+	var projectile_direction:= projectile_inst.global_position.direction_to(Find.P().enemy_aim_point.global_position)
 	projectile_inst.direction = projectile_direction
 
 

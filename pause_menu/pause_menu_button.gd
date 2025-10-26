@@ -1,6 +1,7 @@
 extends Button
 
-@export_enum("exit") var type:= "resume"
+@export var type: types
+enum types {RESUME, EXIT}
 
 
 func _ready() -> void:
@@ -8,9 +9,9 @@ func _ready() -> void:
 
 
 func on_button_up():
-	if type == "resume":
+	if type == types.RESUME:
 		if owner.has_method("unpause"):
 			owner.unpause()
 	
-	if type == "exit":
+	if type == types.EXIT:
 		get_tree().quit()

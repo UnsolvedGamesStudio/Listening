@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bwaev5gyis5tp"]
+[gd_scene load_steps=12 format=3 uid="uid://bwaev5gyis5tp"]
 
 [ext_resource type="Script" uid="uid://0lclde4xd8rw" path="res://projectile/projectile.gd" id="1_makwg"]
 [ext_resource type="Texture2D" uid="uid://dgygswxu7j8ds" path="res://projectile/textures/default_projectile.png" id="2_makwg"]
@@ -48,13 +48,41 @@ tracks/2/keys = {
 "values": [Vector3(0, 0, 0), Vector3(3, 3, 3)]
 }
 
+[sub_resource type="Animation" id="Animation_dr2av"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3, 3, 3)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dr2av"]
 _data = {
+&"RESET": SubResource("Animation_dr2av"),
 &"lifetime": SubResource("Animation_makwg")
 }
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_makwg"]
-radius = 0.3096057
+radius = 0.27556098
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hrg8b"]
 emission_shape = 1
@@ -87,8 +115,7 @@ debug_fill = false
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-transparency = 1.0
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 billboard = 2
 texture_filter = 0
 texture = ExtResource("2_makwg")
@@ -120,11 +147,11 @@ unique_name_in_owner = true
 wait_time = 0.3
 one_shot = true
 
-[node name="BodyDetect" type="Area3D" parent="."]
+[node name="WallDetect" type="Area3D" parent="."]
 unique_name_in_owner = true
 collision_layer = 0
-collision_mask = 14
+collision_mask = 2
 
-[node name="BodyCollision" type="CollisionShape3D" parent="BodyDetect"]
+[node name="WallCollision" type="CollisionShape3D" parent="WallDetect"]
 shape = SubResource("SphereShape3D_dr2av")
 debug_color = Color(0, 0.5372549, 0.9607843, 0.3529412)

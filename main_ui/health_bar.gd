@@ -1,19 +1,20 @@
 extends ProgressBar
 
-var player: Player
-
-
 func _ready() -> void:
-	player = get_tree().get_first_node_in_group("player")
-	Bus.player_lost_hp.connect(on_player_lost_hp)
+	#Bus.player_hp_changed.connect(on_player_hp_changed)
+	update_value()
+
+
+func _physics_process(delta: float) -> void:
 	update_value()
 
 
 func update_value():
-	value = player.hp / 100
+	max_value = Find.P().max_hp / 100
+	value = Find.P().hp / 100
 	modulate.r = max_value - value
 	modulate.g = value
 
 
-func on_player_lost_hp():
+func on_player_hp_changed():
 	update_value()

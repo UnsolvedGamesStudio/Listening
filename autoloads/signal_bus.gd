@@ -11,3 +11,4 @@ signal beat_failure
 
 signal player_moved
 signal player_lost_hp
+signal player_hp_changed

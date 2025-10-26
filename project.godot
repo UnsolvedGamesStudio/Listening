@@ -17,9 +17,11 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 [autoload]
 
 Bus="*res://autoloads/signal_bus.gd"
+Find="*res://find.gd"
 Bgm="*res://autoloads/bgm/bgm.tscn"
 Vars="*res://autoloads/vars.gd"
 NoteValue="*res://addons/SimpleSampler/note_value.gd"
+SceneManager="*res://scene_manager.gd"
 
 [debug]
 
@@ -54,6 +56,8 @@ player=""
 player_collision=""
 enemy_collision=""
 combo_manager=""
+main_scene=""
+player_spawn=""
 
 [gui]
 

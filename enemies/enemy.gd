@@ -27,11 +27,9 @@ enum ranges{MELEE, RANGED, CONTACT}
 var occupied_cell: Cell
 var on_top_of_player:= false
 var sees_player:= false
-var player: Player
 
 
 func _ready() -> void:
-	player = get_tree().get_first_node_in_group("player")
 	init_behaviors()
 
 
@@ -68,7 +66,7 @@ func update_enemy_indicator():
 
 func get_direction_to_player():
 	var chosen_directions: Array[Vector3i]= []
-	var direction_to_player: Vector3i = round(global_position.direction_to(player.global_position))
+	var direction_to_player: Vector3i = round(global_position.direction_to(Find.P().global_position))
 	
 	if direction_to_player.z == Vars.directions["north"].z:
 		chosen_directions.append(Vars.directions["north"])
@@ -86,8 +84,11 @@ func get_direction_to_player():
 	
 	return chosen_directions.pick_random()
 
-
+##Enemy.within_distance_to_player: Invalid access to property or key 'cell_grid_position' on a base object of type 'Nil'.
 func within_distance_to_player(distance: int):
+	if Vars.player_cell == null:
+		return
+	
 	var cell_distance:= roundi( (occupied_cell.cell_grid_position - Vars.player_cell.cell_grid_position).length() )
 	
 	if cell_distance <= distance:
@@ -97,7 +98,7 @@ func within_distance_to_player(distance: int):
 
 
 func check_on_top_of_player():
-	var player_distance = (global_position - player.global_position).length()
+	var player_distance = (global_position - Find.P().global_position).length()
 	
 	if player_distance <= 1.5 and on_top_of_player == false:
 		on_top_of_player = true
@@ -107,12 +108,12 @@ func check_on_top_of_player():
 
 
 func check_sees_player():
-	var player_distance = (global_position - player.enemy_aim_point.global_position).length()
+	var player_distance = (global_position - Find.P().enemy_aim_point.global_position).length()
 	if player_distance > vision_limit:
 		sees_player = false
 		return
 	
-	vision_raycast.look_at(player.enemy_aim_point.global_position + Vector3(0.0001, 0.0001, 0.0001))
+	vision_raycast.look_at(Find.P().enemy_aim_point.global_position + Vector3(0.0001, 0.0001, 0.0001))
 	
 	if vision_raycast.get_collider() == null:
 		return
