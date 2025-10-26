@@ -8,7 +8,7 @@ const DEFAULT_SPELL = preload("uid://d0jjxcbead86g")
 
 const PROJECTILE = preload("uid://bwaev5gyis5tp")
 
-@export var spell_range:= 7.0
+@export var spell_range:= 8.0
 
 var element_expiry_time_mult:= 20.0
 var container:= Vars.element_container

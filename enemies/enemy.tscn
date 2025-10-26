@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pm4s0telhvbu" path="res://enemies/enemy.gd" id="1_epsnb"]
 [ext_resource type="Texture2D" uid="uid://cx0ni1wvl78g0" path="res://enemies/textures/iseen_a_skull.png" id="1_fw1ev"]
-[ext_resource type="Resource" uid="uid://ceba2t3qkajfx" path="res://enemies/data/enemy_resource.tres" id="2_4w5fm"]
+[ext_resource type="Script" uid="uid://hkfw0lmbbs63" path="res://enemies/enemy_data_loader.gd" id="3_07tka"]
 [ext_resource type="PackedScene" uid="uid://ycxhwv4g5a5v" path="res://vfx/EnemyIndicator.tscn" id="3_orwns"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7frlh"]
@@ -139,11 +139,15 @@ _data = {
 
 [node name="Enemy" type="Node3D"]
 script = ExtResource("1_epsnb")
-data = ExtResource("2_4w5fm")
 preferred_range = 1
 
+[node name="DataLoader" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_07tka")
+
 [node name="ToAnimate" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5009344, 0)
 
 [node name="HealthBar3D" type="Sprite3D" parent="ToAnimate"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3622712, 0)
@@ -161,6 +165,7 @@ custom_minimum_size = Vector2(50, 5)
 offset_right = 50.0
 offset_bottom = 5.0
 max_value = 1.0
+step = 0.001
 value = 0.5
 show_percentage = false
 

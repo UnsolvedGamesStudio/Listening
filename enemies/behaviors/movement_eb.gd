@@ -5,18 +5,18 @@ var enabled:= true
 var movement_raycast: RayCast3D
 
 var moves_every_x_beat:= 2
-var movement_speed:= 4.0
+var movement_speed:= 4
 
 var melee_range:= 1
 var projectile_range:= 2
 
 
 func _ready() -> void:
+	set_stats()
 	movement_raycast = O.movement_raycast
 	if movement_raycast == null:
 		printerr(self, " of ", O, ": movement_raycast not found")
 		return
-	
 	Bus.beat.connect(on_beat)
 	for behavior in get_parent().get_children():
 		if behavior is MeleeAttackEB:
@@ -24,6 +24,18 @@ func _ready() -> void:
 		
 		if behavior is RangedAttackEB:
 			projectile_range = behavior.projectile_range
+
+
+func set_stats():
+	var data: EnemyResource = O.data
+	
+	if data == null:
+		printerr(self, " of ", O, ": data not found")
+		return
+	
+	moves_every_x_beat = data.moves_every_x_beat
+	movement_speed = data.movement_speed
+	projectile_range = data.projectile_range
 
 
 func move():
@@ -40,16 +52,30 @@ func move():
 	
 	var target_cell: Cell = raycast_result
 	
-	var tween:= get_tree().create_tween()
 	var move_speed: float = Bgm.rhythm_notifier.bpm / (movement_speed * 100)
 	
 	if target_cell == null:
 		return
 	
+	if cell_occupied(target_cell) == true:
+		return
+	
+	var tween:= get_tree().create_tween()
 	tween.tween_property(O, "global_position:x", target_cell.global_position.x, move_speed)
 	tween.tween_property(O, "global_position:z", target_cell.global_position.z, move_speed)
 	
 	tween.play()
+
+
+func cell_occupied(cell: Cell):
+	for occupant in cell.occupants:
+		if not is_instance_valid(occupant):
+			return
+		
+		if occupant is Enemy:
+			return true
+	
+	return false
 
 
 func check_movement():

@@ -1,58 +1,23 @@
-[gd_scene load_steps=14 format=4 uid="uid://cxn5thfypyjo2"]
+[gd_scene load_steps=6 format=4 uid="uid://cxn5thfypyjo2"]
 
 [ext_resource type="Script" uid="uid://b5vxkkjqswp6v" path="res://map/map.gd" id="1_a0dt8"]
-[ext_resource type="Texture2D" uid="uid://db0h4w7etjcx7" path="res://map/textures/map_cell.png" id="1_hgrid"]
-[ext_resource type="Texture2D" uid="uid://dam31kn2ab3bc" path="res://map/textures/enemy_cell.png" id="3_4hjbm"]
-[ext_resource type="Texture2D" uid="uid://cv18664g653gf" path="res://spell_casting/textures/fire_sigil.png" id="4_kffv2"]
-[ext_resource type="Texture2D" uid="uid://cyk5g3u4ymo2g" path="res://projectile/textures/pop.png" id="4_lgq1i"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wijl4"]
-texture = ExtResource("1_hgrid")
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_e0an3"]
-sources/1 = SubResource("TileSetAtlasSource_wijl4")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lgq1i"]
-texture = ExtResource("3_4hjbm")
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_kffv2"]
-sources/0 = SubResource("TileSetAtlasSource_lgq1i")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7lyie"]
-texture = ExtResource("4_kffv2")
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_5jdw0"]
-sources/0 = SubResource("TileSetAtlasSource_7lyie")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kffv2"]
-texture = ExtResource("4_lgq1i")
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_7lyie"]
-sources/0 = SubResource("TileSetAtlasSource_kffv2")
+[ext_resource type="PackedScene" uid="uid://dh2trp7vilqh4" path="res://map/floor_layout_tilemap.tscn" id="2_kffv2"]
+[ext_resource type="PackedScene" uid="uid://dilbsihag48bm" path="res://map/enemies_tilemap.tscn" id="3_7lyie"]
+[ext_resource type="PackedScene" uid="uid://dbp1pkxa8kxvk" path="res://map/hazards_tilemap.tscn" id="4_5jdw0"]
+[ext_resource type="PackedScene" uid="uid://cpaaq2380fajf" path="res://map/player_spawn_tilemap.tscn" id="5_kffv2"]
 
 [node name="Map" type="Node2D" groups=["map"]]
 script = ExtResource("1_a0dt8")
 
-[node name="FloorLayout" type="TileMapLayer" parent="."]
+[node name="FloorLayout" parent="." instance=ExtResource("2_kffv2")]
 unique_name_in_owner = true
-tile_map_data = PackedByteArray("AAD//wAAAQAAAAAAAAD/////AQAAAAAAAAAAAP//AQAAAAAAAAAAAAAAAQAAAAAAAAD//wEAAQAAAAAAAAD//wIAAQAAAAAAAAD//wMAAQAAAAAAAAD//wQAAQAAAAAAAAD//wUAAQAAAAAAAAD//wYAAQAAAAAAAAAAAAYAAQAAAAAAAAAAAAcAAQAAAAAAAAAAAAgAAQAAAAAAAAAAAAUAAQAAAAAAAAAAAAQAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAEAAQAAAAAAAAD//wgAAQAAAAAAAAD//wcAAQAAAAAAAAABAP//AQAAAAAAAAACAP//AQAAAAAAAAADAP//AQAAAAAAAAAEAP//AQAAAAAAAAAFAP//AQAAAAAAAAAGAP//AQAAAAAAAAAHAP//AQAAAAAAAAD+////AQAAAAAAAAD9////AQAAAAAAAAD8////AQAAAAAAAAD7////AQAAAAAAAAD6////AQAAAAAAAAD5////AQAAAAAAAAD4////AQAAAAAAAAD4//7/AQAAAAAAAAD4//3/AQAAAAAAAAD4//z/AQAAAAAAAAD4//v/AQAAAAAAAAAHAP7/AQAAAAAAAAAHAP3/AQAAAAAAAAAHAPz/AQAAAAAAAAAGAPv/AQAAAAAAAAAHAPv/AQAAAAAAAAAFAPv/AQAAAAAAAAAEAPv/AQAAAAAAAAADAPv/AQAAAAAAAAACAPv/AQAAAAAAAAABAPv/AQAAAAAAAAAAAPv/AQAAAAAAAAD///v/AQAAAAAAAAD+//v/AQAAAAAAAAD9//v/AQAAAAAAAAD8//v/AQAAAAAAAAD7//v/AQAAAAAAAAD6//v/AQAAAAAAAAD5//v/AQAAAAAAAAAHAAAAAQAAAAAAAAAHAAEAAQAAAAAAAAAHAAIAAQAAAAAAAAAHAAMAAQAAAAAAAAAGAAMAAQAAAAAAAAAGAAQAAQAAAAAAAAAGAAUAAQAAAAAAAAAGAAYAAQAAAAAAAAABAAcAAQAAAAAAAAACAAcAAQAAAAAAAAADAAcAAQAAAAAAAAAEAAcAAQAAAAAAAAAFAAcAAQAAAAAAAAAGAAcAAQAAAAAAAAAFAAQAAQAAAAAAAAAEAAQAAQAAAAAAAAADAAQAAQAAAAAAAAD8/wIAAQAAAAAAAAD7/wIAAQAAAAAAAAD+/wAAAQAAAAAAAAD9/wAAAQAAAAAAAAD8/wAAAQAAAAAAAAD7/wAAAQAAAAAAAAD6/wAAAQAAAAAAAAD5/wAAAQAAAAAAAAD4/wAAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAFAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAD+/wMAAQAAAAAAAAD9/wMAAQAAAAAAAAD8/wMAAQAAAAAAAAD7/wMAAQAAAAAAAAAFAAMAAQAAAAAAAAAEAAMAAQAAAAAAAAADAAMAAQAAAAAAAAAHAAQAAQAAAAAAAAAHAAUAAQAAAAAAAAAHAAYAAQAAAAAAAAAHAAcAAQAAAAAAAAABAAgAAQAAAAAAAAACAAgAAQAAAAAAAAADAAgAAQAAAAAAAAAEAAgAAQAAAAAAAAAFAAgAAQAAAAAAAAAGAAgAAQAAAAAAAAAHAAgAAQAAAAAAAAD///7/AQAAAAAAAAAAAP7/AQAAAAAAAAAAAP3/AQAAAAAAAAD///3/AQAAAAAAAAD///z/AQAAAAAAAAAAAPz/AQAAAAAAAAD6/wMAAQAAAAAAAAD5/wMAAQAAAAAAAAD4/wMAAQAAAAAAAAD4/wIAAQAAAAAAAAD4/wEAAQAAAAAAAAD7/wQAAQAAAAAAAAD8/wQAAQAAAAAAAAABAP3/AQAAAAAAAAACAP3/AQAAAAAAAAADAP3/AQAAAAAAAAD//wkAAQAAAAAAAAD//woAAQAAAAAAAAD//wsAAQAAAAAAAAD//wwAAQAAAAAAAAD//w0AAQAAAAAAAAA=")
-tile_set = SubResource("TileSet_e0an3")
 
-[node name="Enemies" type="TileMapLayer" parent="."]
+[node name="Enemies" parent="." instance=ExtResource("3_7lyie")]
 unique_name_in_owner = true
-tile_map_data = PackedByteArray("AAD8/wQAAAAAAAAAAAAAAPv/AAAAAAAAAAADAP3/AAAAAAAAAAD4//v/AAAAAAAAAAAHAPv/AAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAHAAAAAAAAAAAAAAD4/wAAAAAAAAAAAAD7/wIAAAAAAAAAAAD//wgAAAAAAAAAAAA=")
-tile_set = SubResource("TileSet_kffv2")
+tile_map_data = PackedByteArray("AAD4//v/AQAAAAAAAAD4/wAAAQABAAAAAAD7/wIAAQAAAAAAAAD8/wQAAQABAAAAAAAAAPv/AQABAAAAAAADAP3/AQAAAAAAAAADAAMAAQABAAAAAAADAAQAAQABAAAAAAAEAAMAAQAAAAAAAAAEAAQAAQAAAAAAAAAHAPv/AQAAAAAAAAAHAAAAAQAAAAAAAAD//wcAAQABAAAAAAD//wIAAQAAAAAAAAAHAAcAAQAAAAAAAAA=")
 
-[node name="Hazards" type="TileMapLayer" parent="."]
+[node name="Hazards" parent="." instance=ExtResource("4_5jdw0")]
 unique_name_in_owner = true
-tile_map_data = PackedByteArray("AAD//wsAAAAAAAAAAAAHAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAABAP3/AAAAAAAAAAD4//3/AAAAAAAAAAD5/wMAAAAAAAAAAAAHAP3/AAAAAAAAAAAAAAEAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAAAAAIAAAAAAAAAAAA=")
-tile_set = SubResource("TileSet_5jdw0")
 
-[node name="PlayerSpawn" type="TileMapLayer" parent="."]
+[node name="PlayerSpawn" parent="." instance=ExtResource("5_kffv2")]
 unique_name_in_owner = true
-tile_map_data = PackedByteArray("AAD//w0AAAAAAAAAAAA=")
-tile_set = SubResource("TileSet_7lyie")

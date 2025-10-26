@@ -11,3 +11,7 @@ func find_player() -> Player:
 		printerr(self, ": player not found")
 	
 	return player
+
+
+func set_stats():
+	pass

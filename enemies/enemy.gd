@@ -4,18 +4,20 @@ class_name Enemy
 const PROJECTILE = preload("uid://bwaev5gyis5tp")
 const DEFAULT_PROJECTILE_TEXTURE = preload("uid://dgygswxu7j8ds")
 
+@onready var to_animate: Node3D = %ToAnimate
 @onready var sprite_3d: Sprite3D = %Sprite3D
 @onready var idle_anim: AnimationPlayer = %IdleAnim
 @onready var attack_anim: AnimationPlayer = %AttackAnim
 @onready var vision_raycast: RayCast3D = %VisionRaycast
 @onready var movement_raycast: RayCast3D = %MovementRaycast
-@onready var behaviors: Node = %Behaviors
+@onready var behaviors_container: Node = %Behaviors
 @onready var enemy_collision: Area3D = %EnemyCollision
+@onready var data_loader: EnemyDataLoader = %DataLoader
 
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var enemy_indicator: EnemyIndicator = %EnemyIndicator
 
-@export var data: EnemyResource
+var data: EnemyResource
 @export var preferred_range: ranges
 enum ranges{MELEE, RANGED, CONTACT}
 
@@ -30,14 +32,8 @@ var sees_player:= false
 
 
 func _ready() -> void:
-	init_behaviors()
-
-
-func init_behaviors():
-	for behavior: NodePath in data.behaviors:
-		var behavior_inst = load(behavior).instantiate()
-		behavior_inst.O = self
-		behaviors.add_child(behavior_inst)
+	Vars.living_enemies.append(self)
+	data_loader.load_data()
 
 
 func _physics_process(delta: float) -> void:

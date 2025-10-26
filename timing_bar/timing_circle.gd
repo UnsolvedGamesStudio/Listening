@@ -26,7 +26,6 @@ func _ready() -> void:
 func tween_position():
 	if speed % 2 == 1:
 		speed += 1
-		print(speed)
 	
 	var tween:= create_tween()
 	var length: float = Bgm.rhythm_notifier.beat_length * speed

@@ -33,8 +33,12 @@ var elements: Array[Resource] = [
 	preload("res://spell_casting/elements/sadness.tres"),
 ]
 
+## Spellcasting
 var element_container: Array[int] = []
 var last_element:= "none"
+
+## Enemies
+var living_enemies: Array[Enemy] = []
 
 
 func reset():
@@ -48,3 +52,4 @@ func reset():
 	last_activated_circle = null
 	element_container.clear()
 	last_element = "none"
+	living_enemies.clear()

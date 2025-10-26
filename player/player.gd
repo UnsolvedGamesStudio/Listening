@@ -1,6 +1,6 @@
 extends Node3D
 class_name Player
-
+## Todo: add indicator of effective range, probably a line with a ball at the end?
 const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 
 @onready var camera: Camera3D = %Camera3D
@@ -23,8 +23,8 @@ var invincible_cheat:= false
 var invincible:= false
 
 ## Stats
-const base_max_hp:= 100.0
-var max_hp:= 100.0:
+const base_max_hp:= 200.0
+var max_hp:= base_max_hp:
 	set(value):
 		max_hp = clampf(value, 1.0, 9999.9)
 

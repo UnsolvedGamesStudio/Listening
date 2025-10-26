@@ -10,9 +10,21 @@ var attack_anim: AnimationPlayer
 
 
 func _ready() -> void:
+	set_stats()
 	attack_anim = O.attack_anim
-	
 	Bus.beat.connect(on_beat)
+
+
+func set_stats():
+	var data: EnemyResource = O.data
+	
+	if data == null:
+		printerr(self, " of ", O, ": data not found")
+		return
+	
+	melees_every_x_beat = data.melees_every_x_beat
+	melee_range = data.melee_range
+	melee_damage = data.melee_damage
 
 
 func melee_attack():
