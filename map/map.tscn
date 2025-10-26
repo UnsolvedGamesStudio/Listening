@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://cxn5thfypyjo2"]
+[gd_scene load_steps=14 format=4 uid="uid://cxn5thfypyjo2"]
 
 [ext_resource type="Script" uid="uid://b5vxkkjqswp6v" path="res://map/map.gd" id="1_a0dt8"]
 [ext_resource type="Texture2D" uid="uid://db0h4w7etjcx7" path="res://map/textures/map_cell.png" id="1_hgrid"]
 [ext_resource type="Texture2D" uid="uid://dam31kn2ab3bc" path="res://map/textures/enemy_cell.png" id="3_4hjbm"]
+[ext_resource type="Texture2D" uid="uid://cv18664g653gf" path="res://spell_casting/textures/fire_sigil.png" id="4_kffv2"]
 [ext_resource type="Texture2D" uid="uid://cyk5g3u4ymo2g" path="res://projectile/textures/pop.png" id="4_lgq1i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wijl4"]
@@ -18,6 +19,13 @@ texture = ExtResource("3_4hjbm")
 
 [sub_resource type="TileSet" id="TileSet_kffv2"]
 sources/0 = SubResource("TileSetAtlasSource_lgq1i")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7lyie"]
+texture = ExtResource("4_kffv2")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_5jdw0"]
+sources/0 = SubResource("TileSetAtlasSource_7lyie")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kffv2"]
 texture = ExtResource("4_lgq1i")
@@ -38,6 +46,11 @@ tile_set = SubResource("TileSet_e0an3")
 unique_name_in_owner = true
 tile_map_data = PackedByteArray("AAD8/wQAAAAAAAAAAAAAAPv/AAAAAAAAAAADAP3/AAAAAAAAAAD4//v/AAAAAAAAAAAHAPv/AAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAHAAAAAAAAAAAAAAD4/wAAAAAAAAAAAAD7/wIAAAAAAAAAAAD//wgAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_kffv2")
+
+[node name="Hazards" type="TileMapLayer" parent="."]
+unique_name_in_owner = true
+tile_map_data = PackedByteArray("AAD//wsAAAAAAAAAAAAHAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAABAP3/AAAAAAAAAAD4//3/AAAAAAAAAAD5/wMAAAAAAAAAAAAHAP3/AAAAAAAAAAAAAAEAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAAAAAIAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_5jdw0")
 
 [node name="PlayerSpawn" type="TileMapLayer" parent="."]
 unique_name_in_owner = true

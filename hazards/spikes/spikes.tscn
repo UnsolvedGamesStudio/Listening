@@ -1,0 +1,205 @@
+[gd_scene load_steps=8 format=3 uid="uid://c86l6d7h0h8wa"]
+
+[ext_resource type="ArrayMesh" uid="uid://bn4ylrjkxguy1" path="res://hazards/spikes/spike_mesh.tres" id="1_3s87x"]
+[ext_resource type="Script" uid="uid://57tlvk71dd56" path="res://hazards/spikes/spikes.gd" id="1_7fboi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7fboi"]
+albedo_color = Color(3.0096948, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_iveop"]
+material = SubResource("StandardMaterial3D_7fboi")
+top_radius = 10.768
+bottom_radius = 0.0
+height = 0.001
+radial_segments = 5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7fboi"]
+size = Vector3(1.8474426, 1, 1.8820496)
+
+[sub_resource type="Animation" id="Animation_cagj7"]
+resource_name = "up_down"
+length = 0.5
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpikeMeshes:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.1, 0), Vector3(0, 0.1, 0), Vector3(0, -0.935, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dwf70"]
+_data = {
+&"up_down": SubResource("Animation_cagj7")
+}
+
+[node name="Spikes" type="Node3D"]
+script = ExtResource("1_7fboi")
+
+[node name="SpikeMeshes" type="Node3D" parent="."]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, -0.1, 0)
+
+[node name="Spike" type="MeshInstance3D" parent="SpikeMeshes"]
+transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, 0, 41.446636, 0)
+mesh = ExtResource("1_3s87x")
+skeleton = NodePath("")
+
+[node name="Spike2" type="MeshInstance3D" parent="SpikeMeshes"]
+transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, 87.39969, 41.446636, 0)
+mesh = ExtResource("1_3s87x")
+skeleton = NodePath("")
+
+[node name="Spike3" type="MeshInstance3D" parent="SpikeMeshes"]
+transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, -88.922775, 41.446636, 0)
+mesh = ExtResource("1_3s87x")
+skeleton = NodePath("")
+
+[node name="Spike4" type="MeshInstance3D" parent="SpikeMeshes"]
+transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, 0, 41.446636, 89.36937)
+mesh = ExtResource("1_3s87x")
+skeleton = NodePath("")
+
+[node name="Spike5" type="MeshInstance3D" parent="SpikeMeshes"]
+transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, 87.39969, 41.446636, 89.36937)
+mesh = ExtResource("1_3s87x")
+skeleton = NodePath("")
+
+[node name="Spike6" type="MeshInstance3D" parent="SpikeMeshes"]
+transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, -88.922775, 41.446636, 89.36937)
+mesh = ExtResource("1_3s87x")
+skeleton = NodePath("")
+
+[node name="Spike7" type="MeshInstance3D" parent="SpikeMeshes"]
+transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, 0, 41.446636, -90.226326)
+mesh = ExtResource("1_3s87x")
+skeleton = NodePath("")
+
+[node name="Spike8" type="MeshInstance3D" parent="SpikeMeshes"]
+transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, 87.39969, 41.446636, -90.226326)
+mesh = ExtResource("1_3s87x")
+skeleton = NodePath("")
+
+[node name="Spike9" type="MeshInstance3D" parent="SpikeMeshes"]
+transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, -88.922775, 41.446636, -90.226326)
+mesh = ExtResource("1_3s87x")
+skeleton = NodePath("")
+
+[node name="Spike10" type="MeshInstance3D" parent="SpikeMeshes"]
+transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, -50.669945, 41.446636, -55.292873)
+mesh = ExtResource("1_3s87x")
+skeleton = NodePath("")
+
+[node name="Spike11" type="MeshInstance3D" parent="SpikeMeshes"]
+transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, 49.330055, 41.446636, -55.292873)
+mesh = ExtResource("1_3s87x")
+skeleton = NodePath("")
+
+[node name="Spike12" type="MeshInstance3D" parent="SpikeMeshes"]
+transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, 49.33005, 41.446636, 44.707127)
+mesh = ExtResource("1_3s87x")
+skeleton = NodePath("")
+
+[node name="Spike13" type="MeshInstance3D" parent="SpikeMeshes"]
+transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, -50.66995, 41.446636, 44.707127)
+mesh = ExtResource("1_3s87x")
+skeleton = NodePath("")
+
+[node name="HoleMeshes" type="Node3D" parent="."]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, -0.39488864, 0)
+
+[node name="Hole" type="MeshInstance3D" parent="HoleMeshes"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 40.86874, 0)
+mesh = SubResource("CylinderMesh_iveop")
+skeleton = NodePath("")
+
+[node name="Hole2" type="MeshInstance3D" parent="HoleMeshes"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 87.39969, 40.86874, 0)
+mesh = SubResource("CylinderMesh_iveop")
+skeleton = NodePath("")
+
+[node name="Hole3" type="MeshInstance3D" parent="HoleMeshes"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -88.922775, 40.86874, 0)
+mesh = SubResource("CylinderMesh_iveop")
+skeleton = NodePath("")
+
+[node name="Hole4" type="MeshInstance3D" parent="HoleMeshes"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 40.86874, 89.36937)
+mesh = SubResource("CylinderMesh_iveop")
+skeleton = NodePath("")
+
+[node name="Hole5" type="MeshInstance3D" parent="HoleMeshes"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 87.39969, 40.86874, 89.36937)
+mesh = SubResource("CylinderMesh_iveop")
+skeleton = NodePath("")
+
+[node name="Hole6" type="MeshInstance3D" parent="HoleMeshes"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -88.922775, 40.86874, 89.36937)
+mesh = SubResource("CylinderMesh_iveop")
+skeleton = NodePath("")
+
+[node name="Hole7" type="MeshInstance3D" parent="HoleMeshes"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 40.86874, -90.226326)
+mesh = SubResource("CylinderMesh_iveop")
+skeleton = NodePath("")
+
+[node name="Hole8" type="MeshInstance3D" parent="HoleMeshes"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 87.39969, 40.86874, -90.226326)
+mesh = SubResource("CylinderMesh_iveop")
+skeleton = NodePath("")
+
+[node name="Hole9" type="MeshInstance3D" parent="HoleMeshes"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -88.922775, 40.86874, -90.226326)
+mesh = SubResource("CylinderMesh_iveop")
+skeleton = NodePath("")
+
+[node name="Hole10" type="MeshInstance3D" parent="HoleMeshes"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -50.669945, 40.86874, -55.292873)
+mesh = SubResource("CylinderMesh_iveop")
+skeleton = NodePath("")
+
+[node name="Hole11" type="MeshInstance3D" parent="HoleMeshes"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 49.33005, 40.86874, -55.292873)
+mesh = SubResource("CylinderMesh_iveop")
+skeleton = NodePath("")
+
+[node name="Hole12" type="MeshInstance3D" parent="HoleMeshes"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 49.33005, 40.86874, 44.707127)
+mesh = SubResource("CylinderMesh_iveop")
+skeleton = NodePath("")
+
+[node name="Hole13" type="MeshInstance3D" parent="HoleMeshes"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -50.66995, 40.86874, 44.707127)
+mesh = SubResource("CylinderMesh_iveop")
+skeleton = NodePath("")
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 48
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032546997, 0.47287297, -0.018051147)
+shape = SubResource("BoxShape3D_7fboi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_dwf70")
+}
+speed_scale = 4.0
