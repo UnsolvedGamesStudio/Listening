@@ -10,5 +10,6 @@ signal beat_success_to_spellcast(element: int)
 signal beat_failure
 
 signal player_moved
+signal player_took_damage(origin: Node3D)
 signal player_lost_hp
-signal player_hp_changed
+signal synapse_picked_up

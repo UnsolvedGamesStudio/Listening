@@ -25,20 +25,13 @@ func generate_enemies():
 	
 	for tile in used_tiles:
 		var enemy_inst: Enemy = ENEMY.instantiate()
+		var custom_data: EnemyResource = enemy_layout.get_cell_tile_data(tile).get_custom_data("enemy_data")
 		
-		if not check_data(enemy_layout, tile) == null:
-			enemy_inst.data = check_data(enemy_layout, tile)
+		if custom_data == null:
+			printerr(self, ": custom data of tile", tile, " not found, defaulting to placeholder")
+		
+		if not custom_data == null:
+			enemy_inst.data = custom_data
 		
 		add_child(enemy_inst)
 		enemy_inst.global_position = Vector3(tile.x * cell_size, 1.0, tile.y * cell_size)
-
-
-func check_data(enemy_layout: TileMapLayer, coords: Vector2i):
-	var enemy_data: EnemyResource 
-	for tile_coords in enemy_layout.get_used_cells():
-		var tile_data: TileData = enemy_layout.get_cell_tile_data(tile_coords)
-		
-		if tile_coords == coords:
-			enemy_data = tile_data.get_custom_data("enemy_data")
-	
-	return enemy_data

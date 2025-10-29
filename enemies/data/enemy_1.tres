@@ -9,3 +9,4 @@ script = ExtResource("2_wldrd")
 id = "test2"
 preferred_range = 1
 vision_limit = 15.0
+shoots_every_x_beat = 3

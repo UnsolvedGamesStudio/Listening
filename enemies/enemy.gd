@@ -17,7 +17,7 @@ const DEFAULT_PROJECTILE_TEXTURE = preload("uid://dgygswxu7j8ds")
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var enemy_indicator: EnemyIndicator = %EnemyIndicator
 
-var data: EnemyResource
+var data: EnemyResource = preload("uid://c8heqp3v32a1n")
 @export var preferred_range: ranges
 enum ranges{MELEE, RANGED, CONTACT}
 

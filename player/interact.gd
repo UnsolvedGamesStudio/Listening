@@ -15,7 +15,6 @@ func _input(event: InputEvent) -> void:
 	if not event.is_action_pressed("interact"):
 		return
 	
-	get_parent().die()
 	interact()
 
 

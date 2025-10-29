@@ -1,0 +1,29 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbekwcebmhpn5"]
+
+[ext_resource type="PackedScene" uid="uid://b4d6fhecioyhy" path="res://pickups/healing_pickup.tscn" id="1_3n2ir"]
+[ext_resource type="Texture2D" uid="uid://cxymxxlybqtl" path="res://pickups/textures/sprout-Sheet.png" id="1_qtvvu"]
+[ext_resource type="PackedScene" uid="uid://7meyinovsje0" path="res://pickups/synapse_pickup.tscn" id="3_ddfpn"]
+[ext_resource type="Texture2D" uid="uid://di2kls167grne" path="res://pickups/textures/drop-Sheet.png" id="4_cls01"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3n2ir"]
+resource_name = "healing"
+texture = ExtResource("1_qtvvu")
+margins = Vector2i(1, 1)
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("1_3n2ir")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tketc"]
+resource_name = "synapse"
+texture = ExtResource("4_cls01")
+margins = Vector2i(1, 1)
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("3_ddfpn")
+
+[sub_resource type="TileSet" id="TileSet_58toi"]
+custom_data_layer_0/name = "pickup_scene"
+custom_data_layer_0/type = 24
+sources/0 = SubResource("TileSetAtlasSource_3n2ir")
+sources/2 = SubResource("TileSetAtlasSource_tketc")
+
+[node name="Pickups" type="TileMapLayer"]
+tile_set = SubResource("TileSet_58toi")

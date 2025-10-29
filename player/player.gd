@@ -56,7 +56,6 @@ func reset_vars():
 	max_hp = base_max_hp
 	hp = max_hp
 	movement_speed = base_movement_speed
-	Bus.player_hp_changed.emit()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -81,17 +80,22 @@ func camera_movement(event: InputEvent):
 	
 	neck.rotate_y(-event.relative.x * (camera_speed / 12000.0))
 	camera.rotate_x(-event.relative.y * (camera_speed / 12000.0))
+	player_collision.rotate_y(-event.relative.x * (camera_speed / 12000.0))
 	camera.rotation.x = clampf(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 
-func take_damage(amount: float):
+func take_damage(origin: Node3D, amount: float):
+	Bus.player_took_damage.emit(origin)
+	lose_hp(amount)
+
+
+func lose_hp(amount: float):
 	if invincible == true or invincible_cheat == true:
 		return
 	
 	hp -= amount
 	
 	Bus.player_lost_hp.emit()
-	Bus.player_hp_changed.emit()
 	
 	if hp <= 0:
 		die()
@@ -99,6 +103,10 @@ func take_damage(amount: float):
 
 func die():
 	SceneManager.reload_game()
+
+
+func heal(amount: float):
+	hp += amount
 
 
 func move_forward():
@@ -178,14 +186,36 @@ func check_raycast_cells():
 	return result["collider"]
 
 
-func get_look_at_direction():
+func get_look_at_direction(distance: float = camera_raycast_distance):
 	var middle_of_screen = get_viewport().size / 4
 	return camera.project_ray_normal(middle_of_screen) * camera_raycast_distance
 
 
+func get_hit_angles(attacker: Node3D) -> Vector2:
+	# Vector from player to attacker
+	var to_attacker = (attacker.global_position - global_position).normalized()
+	
+	# Camera basis vectors
+	var cam_forward = -camera.global_transform.basis.z.normalized()
+	var cam_right = camera.global_transform.basis.x.normalized()
+	var cam_up = camera.global_transform.basis.y.normalized()
+
+	# Project attack direction into camera space
+	var x = to_attacker.dot(cam_right)     # right (+) / left (-)
+	var y = to_attacker.dot(cam_up)        # up (+) / down (-)
+	var z = to_attacker.dot(cam_forward)   # forward (+) / back (-)
+
+	# Horizontal and vertical angles in radians
+	var horizontal_angle = atan2(x, z)
+	var vertical_angle = atan2(y, z)
+	
+	# Return as a Vector2(horizontal, vertical)
+	return Vector2(horizontal_angle, vertical_angle)
+
+
 func on_player_collision_area_entered(area: Area3D):
 	if "damage" in area.owner:
-		take_damage(area.owner.damage)
+		take_damage(area.owner, area.owner.damage)
 	
 	if "body_damage" in area.owner:
-		take_damage(area.owner.body_damage)
+		take_damage(area.owner, area.owner.body_damage)

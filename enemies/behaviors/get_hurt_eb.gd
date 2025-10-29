@@ -1,6 +1,8 @@
 extends EnemyBehavior
 class_name GetHurtEB
 
+const DAMAGE_POPUP = preload("uid://caxugm1j30feu")
+
 var enabled:= true
 
 var max_hp:= 100.0:
@@ -55,6 +57,7 @@ func set_stats():
 func take_damage(amount: float):
 	hp -= amount
 	O.idle_anim.play("hurt")
+	generate_text(amount)
 	
 	if hp <= 0:
 		die()
@@ -72,6 +75,15 @@ func die():
 	
 	Vars.living_enemies.erase(O)
 	O.idle_anim.play("die")
+
+
+func generate_text(amount: float):
+	var player: Player = get_tree().get_first_node_in_group("player")
+	var text_inst: Node3D = DAMAGE_POPUP.instantiate()
+	var rand_vector3:= Vector3( randf_range(-0.5, 0.1), randf_range(-0.5, 0.5), randf_range(-0.5, 0.5) )
+	add_child(text_inst)
+	text_inst.global_position = O.sprite_3d.global_position + rand_vector3
+	text_inst.label.text = str( int(amount) )
 
 
 func on_hurtbox_area_entered(area: Area3D):

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq07fafe5x1ax"]
+
+[ext_resource type="Script" uid="uid://34r0wdgnufbn" path="res://map/spawners/hazard_spawner.gd" id="1_arscp"]
+
+[node name="HazardSpawner" type="Node"]
+script = ExtResource("1_arscp")

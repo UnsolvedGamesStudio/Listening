@@ -3,6 +3,11 @@ extends Node
 
 var paused:= false
 
+## Player
+var synapses_left:= 0
+var synapses:= 0
+
+
 ## Layout
 const directions: Dictionary[String, Vector3i] = {
 	"north" : Vector3i(0, 0, -1),
