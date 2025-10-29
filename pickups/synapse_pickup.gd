@@ -12,6 +12,8 @@ func _ready() -> void:
 	Vars.synapses_left += 1
 	area_3d.area_entered.connect(on_area_3d_area_entered)
 	Bus.beat.connect(on_beat)
+	await get_tree().create_timer(0.0).timeout
+	area_3d.get_child(0).disabled = false
 
 
 func destroy():
@@ -24,6 +26,7 @@ func on_beat(beat_count: int):
 
 
 func on_area_3d_area_entered(area: Area3D):
+	print(Vars.synapses)
 	Vars.synapses += 1
 	Bus.synapse_picked_up.emit()
 	destroy()

@@ -59,6 +59,7 @@ collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_bgvgf")
+disabled = true
 
 [node name="Particles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 1.0972521, 0)

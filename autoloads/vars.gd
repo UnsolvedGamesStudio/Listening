@@ -58,3 +58,5 @@ func reset():
 	element_container.clear()
 	last_element = "none"
 	living_enemies.clear()
+	synapses = 0
+	synapses_left = 0
