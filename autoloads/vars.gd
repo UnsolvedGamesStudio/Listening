@@ -2,6 +2,7 @@ extends Node
 
 
 var paused:= false
+var level_time:= 0.0
 
 ## Player
 var synapses_left:= 0
@@ -29,6 +30,7 @@ var score:= 0.0
 var beat_circle_offset:= 0.0
 var active_circles: Array[TimingCircle] = []
 var last_activated_circle: TimingCircle
+var in_timing_window:= false
 
 
 ## Spells
@@ -46,8 +48,14 @@ var last_element:= "none"
 var living_enemies: Array[Enemy] = []
 
 
+## Inventory
+var inventory: Dictionary[item_types, Dictionary] = {}
+enum item_types{F_KEY}
+
+
 func reset():
 	paused = false
+	level_time = 0.0
 	cell_nodes.clear()
 	cell_coordinates.clear()
 	player_cell = null
@@ -60,3 +68,4 @@ func reset():
 	living_enemies.clear()
 	synapses = 0
 	synapses_left = 0
+	inventory.clear()

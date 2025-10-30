@@ -1,0 +1,92 @@
+[gd_scene load_steps=10 format=3 uid="uid://ciib1opj8rndx"]
+
+[ext_resource type="Script" uid="uid://d1oh0ke0xfu6d" path="res://pickups/key_pickup.gd" id="1_on6h4"]
+[ext_resource type="Texture2D" uid="uid://ds7esfeg8ue4b" path="res://map/textures/key_tiles.png" id="2_on6h4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usfr8"]
+atlas = ExtResource("2_on6h4")
+region = Rect2(0, 0, 18, 18)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bgvgf"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_on6h4"]
+emission_shape = 1
+emission_sphere_radius = 0.3
+gravity = Vector3(0, 0.1, 0)
+linear_accel_min = 0.49999776
+linear_accel_max = 0.99999774
+turbulence_noise_strength = 0.5
+turbulence_noise_scale = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_byumj"]
+cull_mode = 2
+albedo_color = Color(9.623802, 13.296311, 13.296311, 1)
+emission = Color(0, 0.87058824, 0, 1)
+emission_energy_multiplier = 1.28
+billboard_mode = 1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_usfr8"]
+material = SubResource("StandardMaterial3D_byumj")
+size = Vector2(0.025, 0.025)
+orientation = 2
+
+[sub_resource type="Animation" id="Animation_lcksh"]
+resource_name = "on_beat"
+length = 2.0
+loop_mode = 1
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToAnimate:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.1, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_emkgw"]
+_data = {
+&"on_beat": SubResource("Animation_lcksh")
+}
+
+[node name="KeyPickup" type="Node3D"]
+script = ExtResource("1_on6h4")
+
+[node name="ToAnimate" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="ToAnimate"]
+unique_name_in_owner = true
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.5471647, 0)
+billboard = 2
+double_sided = false
+texture_filter = 0
+texture = SubResource("AtlasTexture_usfr8")
+region_rect = Rect2(0, 0, 32, 16)
+
+[node name="Area3D" type="Area3D" parent="ToAnimate"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5769119, 0)
+collision_layer = 64
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToAnimate/Area3D"]
+shape = SubResource("SphereShape3D_bgvgf")
+
+[node name="Particles" type="GPUParticles3D" parent="ToAnimate"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0.3681352, 0)
+amount = 10
+explosiveness = 0.46
+randomness = 0.52
+process_material = SubResource("ParticleProcessMaterial_on6h4")
+draw_pass_1 = SubResource("PlaneMesh_usfr8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_emkgw")
+}

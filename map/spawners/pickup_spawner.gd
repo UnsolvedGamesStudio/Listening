@@ -4,10 +4,10 @@ extends Node
 
 
 func _ready() -> void:
-	generate_enemies()
+	generate_pickups()
 
 
-func generate_enemies():
+func generate_pickups():
 	var map: Map = get_tree().get_first_node_in_group("map")
 	if enabled == false:
 		return

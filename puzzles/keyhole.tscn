@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmltvam4lo0l1"]
+
+[ext_resource type="Script" uid="uid://bjofeygc2i0sj" path="res://puzzles/keyhole.gd" id="1_vobuj"]
+[ext_resource type="Texture2D" uid="uid://p42o3wloyjmx" path="res://puzzles/textures/keyhole.png" id="1_x4g1l"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ei6pj"]
+radius = 0.5839425
+
+[node name="Keyhole" type="Node3D"]
+script = ExtResource("1_vobuj")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0.001)
+texture_filter = 0
+texture = ExtResource("1_x4g1l")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -0.01)
+texture_filter = 0
+texture = ExtResource("1_x4g1l")
+
+[node name="Area3D" type="Area3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, -1.509958e-07, 1.509958e-07, -1.509958e-07, -4.3711367e-08, 1, -1.509958e-07, -1, -4.371139e-08, 0, 0, 0)
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_ei6pj")

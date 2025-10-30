@@ -1,6 +1,7 @@
 extends Node3D
 class_name Player
 ## Todo: add indicator of effective range, probably a line with a ball at the end?
+## Todo: add signals for "successful actions", so you can't cheese the score as much?
 const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 
 @onready var camera: Camera3D = %Camera3D
@@ -8,8 +9,11 @@ const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 @onready var player_collision: Area3D = %PlayerCollision
 @onready var enemy_aim_point: Marker3D = %EnemyAimPoint
 @onready var headbob: AnimationPlayer = %Headbob
+@onready var movement_raycast: RayCast3D = %MovementRaycast
+@onready var los: RayCast3D = %LineOfSight
 
 @export var camera_raycast_distance:= 200.0
+@export var interact_range: float = 1.0
 @export var camera_speed:= 50
 @export var spawn_pos:= Vector3(0, 0, 0)
 
@@ -17,6 +21,7 @@ var tilt_lower_limit:= deg_to_rad(-90)
 var tilt_upper_limit:= deg_to_rad(90)
 
 var current_looked_at_cell: Cell
+var current_los_collider: Area3D
 var is_moving:= false
 
 var invincible_cheat:= false
@@ -43,12 +48,17 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	position = spawn_pos
 	player_collision.area_entered.connect(on_player_collision_area_entered)
+	movement_raycast.target_position.z = -Vars.cell_size / 1.75
+	interact_range = Vars.cell_size * 10000
+	los.global_position = camera.global_position
 	
 	await get_tree().create_timer(0.0).timeout
 	
+	player_collision.get_child(0).disabled = false
 	global_position = get_tree().get_first_node_in_group("player_spawn").global_position
 	update_looked_at_cell()
 	Bus.player_moved.emit()
+	lose_hp(50.0)
 
 
 func reset_vars():
@@ -64,6 +74,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if mouse_input:
 		camera_movement(event)
 		update_looked_at_cell()
+		check_los()
 
 
 func _input(event: InputEvent) -> void:
@@ -118,7 +129,7 @@ func move_forward():
 	if current_looked_at_cell == null:
 		return
 	
-	if impassable_enemy() == true:
+	if check_impassable() == true:
 		return
 	
 	var move_speed: float = Bgm.rhythm_notifier.bpm / (movement_speed * 100)
@@ -137,7 +148,7 @@ func move_forward():
 	tween.tween_callback(Bus.player_moved.emit)
 
 
-func impassable_enemy():
+func check_impassable():
 	for occupant in current_looked_at_cell.occupants:
 		if not is_instance_valid(occupant):
 			return false
@@ -156,7 +167,7 @@ func set_moving_false():
 
 
 func update_looked_at_cell():
-	var cell: Area3D = check_raycast_cells()
+	var cell: Area3D = check_movement_raycast()
 	var move_to_cell_indicator = get_tree().get_first_node_in_group("move_to_cell_indicator")
 
 	if not cell is CellCollision:
@@ -168,22 +179,22 @@ func update_looked_at_cell():
 	move_to_cell_indicator.global_rotation_degrees.y = snapped(neck.global_rotation_degrees.y, 90)
 
 
-func check_raycast_cells():
-	var space_state:= camera.get_world_3d().direct_space_state
+func check_movement_raycast():
+	if movement_raycast.get_collider() == null:
+		return
+	
+	return movement_raycast.get_collider()
+
+
+func check_los():
 	##!! middle of screen is dependent on the viewport scale settings
 	var middle_of_screen = get_viewport().size / 4
 	var origin:= camera.project_ray_origin(middle_of_screen)
-	var end:= origin + camera.project_ray_normal(middle_of_screen) * camera_raycast_distance
-	var query:= PhysicsRayQueryParameters3D.create(origin, end)
+	var target:= origin + camera.project_ray_normal(middle_of_screen) * interact_range
 	
-	query.collide_with_areas = true
+	los.target_position = target
 	
-	var result:= space_state.intersect_ray(query)
-	
-	if not "collider" in result:
-		return
-		
-	return result["collider"]
+	return los.get_collider()
 
 
 func get_look_at_direction(distance: float = camera_raycast_distance):

@@ -37,17 +37,33 @@ script = ExtResource("1_oul6g")
 
 [node name="Neck" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6518437, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.642, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Neck"]
 unique_name_in_owner = true
 current = true
+
+[node name="MovementRaycast" type="RayCast3D" parent="Neck"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.33531928, 0)
+target_position = Vector3(0, 0, -2)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="LineOfSight" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+visible = false
+collision_mask = 70
+hit_back_faces = false
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.282909, 0)
 light_color = Color(1, 0.8320722, 0.71004725, 1)
 light_volumetric_fog_energy = 1.495
 shadow_enabled = true
+omni_range = 5.3116255
 
 [node name="PlayerCollision" type="Area3D" parent="." groups=["player_collision"]]
 unique_name_in_owner = true
@@ -56,7 +72,9 @@ collision_layer = 8
 collision_mask = 36
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerCollision"]
+visible = false
 shape = SubResource("CylinderShape3D_g1dw6")
+disabled = true
 
 [node name="EnemyAimPoint" type="Marker3D" parent="."]
 unique_name_in_owner = true

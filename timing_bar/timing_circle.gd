@@ -76,10 +76,13 @@ func on_beat_success_to_circle(level: int, circle: TimingCircle, element: int):
 func on_easiest_zone_area_entered(area: Area2D):
 	if area.owner is BeatVisualizer and Bgm.circles_are_in == false:
 		Bgm.circles_are_in = true
+	
+	Vars.in_timing_window = true
 
 
 func on_easiest_zone_area_exited(area: Area2D):
 	material.set_shader_parameter("clr", Color(0.68, 0.053, 0.223, 1.0))
+	Vars.in_timing_window = false
 
 
 func on_screen_exited():

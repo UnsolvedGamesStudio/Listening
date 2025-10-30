@@ -58,6 +58,7 @@ enemy_collision=""
 combo_manager=""
 main_scene=""
 player_spawn=""
+obstacle_collision=""
 
 [gui]
 
@@ -118,6 +119,8 @@ exit={
 3d_physics/layer_4="player"
 3d_physics/layer_5="player_damage"
 3d_physics/layer_6="enemy_damage"
+3d_physics/layer_7="interactable"
+3d_physics/layer_8="obstacles"
 
 [rendering]
 

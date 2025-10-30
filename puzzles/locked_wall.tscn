@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5gdwlmng0rsy"]
+
+[ext_resource type="Script" uid="uid://b1d1ue50x01g6" path="res://puzzles/obstacle.gd" id="1_6568k"]
+[ext_resource type="PackedScene" uid="uid://dgneaw016pnir" path="res://puzzles/keyhole_interactable.tscn" id="1_p1utb"]
+[ext_resource type="Texture2D" uid="uid://bu5y1dmeu5ec6" path="res://terrain/textures/wall_tile.png" id="1_ux783"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p1utb"]
+cull_mode = 2
+albedo_texture = ExtResource("1_ux783")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bp5gm"]
+material = SubResource("StandardMaterial3D_p1utb")
+size = Vector2(2, 4.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p1utb"]
+size = Vector3(2, 4.1, 2)
+
+[node name="LockedWall" type="Node3D"]
+script = ExtResource("1_6568k")
+
+[node name="KeyholeInteractable" parent="." instance=ExtResource("1_p1utb")]
+transform = Transform3D(0.9, 0, 0, 0, -3.934025e-08, 0.9, 0, -0.9, -3.934025e-08, 0, 2, 0)
+
+[node name="NorthFace" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-0.9, 1.3589622e-07, 5.9402124e-15, 0, -3.934025e-08, 0.9, 1.3589622e-07, 0.9, 3.934025e-08, 0, 1.849839, -0.9)
+mesh = SubResource("PlaneMesh_bp5gm")
+
+[node name="EastFace" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-3.934025e-08, -0.9, -3.934025e-08, 0, -3.934025e-08, 0.9, -0.9, 3.934025e-08, 1.7196169e-15, 0.9, 1.849839, 0)
+mesh = SubResource("PlaneMesh_bp5gm")
+
+[node name="SouthFace" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.9, -3.934025e-08, -1.7196171e-15, 0, -3.934025e-08, 0.9, -3.934025e-08, -0.9, -3.934025e-08, 0, 1.849839, 0.9)
+mesh = SubResource("PlaneMesh_bp5gm")
+
+[node name="WestFace" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(6.794811e-08, 0.9, 3.934025e-08, 0, -3.934025e-08, 0.9, 0.9, -6.794811e-08, -2.9701062e-15, -0.9, 1.849839, 0)
+mesh = SubResource("PlaneMesh_bp5gm")
+
+[node name="Area3D" type="Area3D" parent="." groups=["obstacle_collision"]]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 1.85, 0)
+collision_layer = 130
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_p1utb")

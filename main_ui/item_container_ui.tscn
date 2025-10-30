@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cho60r3e5ojhj"]
+
+[ext_resource type="Script" uid="uid://b72akhbyyxs7b" path="res://main_ui/item_container.gd" id="1_byjxi"]
+
+[node name="ItemContainerUI" type="PanelContainer"]
+custom_minimum_size = Vector2(25, 25)
+size_flags_horizontal = 8
+size_flags_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="ItemContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 4
+script = ExtResource("1_byjxi")

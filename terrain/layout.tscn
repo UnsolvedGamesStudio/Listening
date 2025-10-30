@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d1rnngxhnemng"]
+[gd_scene load_steps=14 format=3 uid="uid://d1rnngxhnemng"]
 
 [ext_resource type="Script" uid="uid://d0wkhkbfau2f6" path="res://terrain/layout.gd" id="1_v6hxy"]
 [ext_resource type="PackedScene" uid="uid://xepbmrkn1hvu" path="res://map/spawners/enemy_spawner.tscn" id="2_1xy32"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dq07fafe5x1ax" path="res://map/spawners/hazard_spawner.tscn" id="6_5218q"]
 [ext_resource type="PackedScene" uid="uid://dvtaknhhjh26e" path="res://terrain/move_to_cell_indicator.tscn" id="7_08ldw"]
 [ext_resource type="PackedScene" uid="uid://dy3kg2kcc62cx" path="res://map/spawners/pickup_spawner.tscn" id="8_a0a41"]
+[ext_resource type="PackedScene" uid="uid://dtsb4wtp82heo" path="res://map/spawners/puzzle_spawner.tscn" id="9_uflfc"]
 [ext_resource type="PackedScene" uid="uid://b4d6fhecioyhy" path="res://pickups/healing_pickup.tscn" id="11_mhowc"]
 
 [node name="Layout" type="Node3D"]
@@ -42,6 +43,8 @@ position = Vector2(244, 164)
 [node name="HazardSpawner" parent="Spawners" instance=ExtResource("6_5218q")]
 
 [node name="PickupSpawner" parent="Spawners" instance=ExtResource("8_a0a41")]
+
+[node name="PuzzleSpawner" parent="Spawners" instance=ExtResource("9_uflfc")]
 
 [node name="SpawnPointSpawner" parent="Spawners" instance=ExtResource("2_cf5th")]
 

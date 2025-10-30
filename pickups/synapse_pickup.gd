@@ -1,32 +1,10 @@
-extends Node3D
-class_name HealingPickup
+extends Pickup
+class_name SynapsePickup
 
-@onready var sprite_3d: Sprite3D = %Sprite3D
-@onready var area_3d: Area3D = %Area3D
-@onready var animation_player: AnimationPlayer = %AnimationPlayer
-
-var healed_amount:= 50.0
-
-
-func _ready() -> void:
+func enter():
 	Vars.synapses_left += 1
-	area_3d.area_entered.connect(on_area_3d_area_entered)
-	Bus.beat.connect(on_beat)
-	await get_tree().create_timer(0.0).timeout
-	area_3d.get_child(0).disabled = false
 
 
-func destroy():
-	queue_free()
-
-
-func on_beat(beat_count: int):
-	if beat_count % 2 == 0:
-		animation_player.play("beat")
-
-
-func on_area_3d_area_entered(area: Area3D):
-	print(Vars.synapses)
+func on_activated():
 	Vars.synapses += 1
 	Bus.synapse_picked_up.emit()
-	destroy()

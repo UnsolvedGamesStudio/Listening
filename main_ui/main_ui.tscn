@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://86r6xeju02bg"]
+[gd_scene load_steps=10 format=3 uid="uid://86r6xeju02bg"]
 
 [ext_resource type="Script" uid="uid://cfglrrbbq2g8" path="res://main_ui/health_bar.gd" id="1_m5yyi"]
 [ext_resource type="PackedScene" uid="uid://5is6n10g8b8b" path="res://main_ui/element_container_ui.tscn" id="1_rvqvy"]
 [ext_resource type="Texture2D" uid="uid://b7mmj4bh7r1aa" path="res://main_ui/textures/reticle.png" id="1_sgsgb"]
+[ext_resource type="Script" uid="uid://cfp4ke5l2plub" path="res://main_ui/timer.gd" id="2_5q6g2"]
 [ext_resource type="Script" uid="uid://dc33b50ljm764" path="res://main_ui/enemies_left_label.gd" id="4_6kiqu"]
+[ext_resource type="PackedScene" uid="uid://cho60r3e5ojhj" path="res://main_ui/item_container_ui.tscn" id="4_ru8ot"]
 [ext_resource type="Texture2D" uid="uid://c3125rp5l3jx8" path="res://main_ui/textures/synapse_icon.png" id="5_vm8jh"]
 [ext_resource type="Script" uid="uid://4vdnnrr7u74b" path="res://main_ui/synapses_label.gd" id="6_sqw8h"]
 [ext_resource type="PackedScene" uid="uid://b7xx6wfttusxa" path="res://main_ui/damage_indicator.tscn" id="7_sqw8h"]
@@ -22,17 +24,38 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 metadata/_edit_use_anchors_ = true
 
-[node name="HealthBar" type="ProgressBar" parent="MarginContainer"]
-modulate = Color(0, 18.892157, 0, 1)
-custom_minimum_size = Vector2(100, 10)
+[node name="HealthBarOutline" type="ProgressBar" parent="MarginContainer"]
+modulate = Color(2.358007, 1.841301, 1.0217843, 1)
+custom_minimum_size = Vector2(104, 14)
 layout_mode = 2
+size_flags_horizontal = 0
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/HealthBarOutline"]
+modulate = Color(0, 18.892157, 0, 1)
+z_index = 1
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -5.0
+offset_right = 50.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 max_value = 1.0
 value = 0.5
 show_percentage = false
 script = ExtResource("1_m5yyi")
 
-[node name="Label" type="Label" parent="MarginContainer/HealthBar"]
+[node name="Label" type="Label" parent="MarginContainer/HealthBarOutline/HealthBar"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = -0.15
@@ -47,22 +70,39 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="Middle" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="ElementContainerUI" parent="MarginContainer/VBoxContainer" instance=ExtResource("1_rvqvy")]
-custom_minimum_size = Vector2(25, 100)
+[node name="Timer" type="Label" parent="MarginContainer/Middle"]
+modulate = Color(1, 1, 1, 0.3372549)
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "0.0"
+script = ExtResource("2_5q6g2")
 
-[node name="PauseHint" type="Label" parent="MarginContainer"]
+[node name="PauseHint" type="Label" parent="MarginContainer/Middle"]
 modulate = Color(1, 1, 1, 0.3372549)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 text = "Press ESC to pause"
+
+[node name="Right" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="ElementContainerUI" parent="MarginContainer/Right" instance=ExtResource("1_rvqvy")]
+custom_minimum_size = Vector2(25, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="ItemContainerUI" parent="MarginContainer/Right" instance=ExtResource("4_ru8ot")]
+self_modulate = Color(1, 1, 1, 0.5882353)
+layout_mode = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15

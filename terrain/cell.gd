@@ -39,9 +39,6 @@ func update_faces(cell_list: Array, cell_size: int) -> void:
 
 
 func add_occupant(area: Area3D):
-	if area.owner is not Player and area.owner is not Enemy:
-		return
-	
 	occupants.append(area.owner)
 
 
@@ -50,7 +47,8 @@ func remove_occupant(area: Area3D):
 
 
 func on_area_entered(area: Area3D):
-	if not area.is_in_group("player_collision") and not area.is_in_group("enemy_collision"):
+	if not area.is_in_group("player_collision") and not area.is_in_group("enemy_collision")\
+	and not area.is_in_group("obstacle_collision"):
 		return
 	
 	add_occupant(area)
@@ -58,10 +56,7 @@ func on_area_entered(area: Area3D):
 	if area.is_in_group("player_collision"):
 		Vars.player_cell = self
 	
-	if area.is_in_group("enemy_collision"):
-		if not "owner" in area:
-			return
-		
+	if area.is_in_group("enemy_collision") or area.is_in_group("obstacle_collision") :
 		if not "occupied_cell" in area.owner:
 			return
 		
