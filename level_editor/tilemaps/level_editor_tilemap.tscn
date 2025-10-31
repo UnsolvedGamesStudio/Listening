@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dilbsihag48bm"]
+
+[ext_resource type="TileSet" uid="uid://lpv2grascrwh" path="res://level_editor/level_editor_tilemap.tres" id="1_klcpn"]
+
+[node name="LevelEditorTilemap" type="TileMapLayer"]
+tile_set = ExtResource("1_klcpn")

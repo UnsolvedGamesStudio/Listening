@@ -6,36 +6,12 @@ var occupants: Array[Node3D]
 
 var cell_grid_position: Vector2i = Vector2.ZERO
 
-@onready var top_face: MeshInstance3D = %TopFace
-@onready var north_face: MeshInstance3D = %NorthFace
-@onready var east_face: MeshInstance3D = %EastFace
-@onready var south_face: MeshInstance3D = %SouthFace
-@onready var west_face: MeshInstance3D = %WestFace
-@onready var bottom_face: MeshInstance3D = %BottomFace
-
 @onready var cell_collision: CellCollision = $CellCollision
 
 
 func _ready() -> void:
 	cell_collision.area_entered.connect(on_area_entered)
 	cell_collision.area_exited.connect(on_area_exited)
-
-
-func update_faces(cell_list: Array, cell_size: int) -> void:
-	cell_grid_position = Vector2i(position.x / cell_size as int, position.z / 2 as int)
-	Vars.cell_coordinates.append(cell_grid_position)
-	
-	if cell_list.has(cell_grid_position + Vector2i.UP):
-		north_face.queue_free()
-	
-	if cell_list.has(cell_grid_position + Vector2i.RIGHT):
-		east_face.queue_free()
-	
-	if cell_list.has(cell_grid_position + Vector2i.DOWN):
-		south_face.queue_free()
-	
-	if cell_list.has(cell_grid_position + Vector2i.LEFT):
-		west_face.queue_free()
 
 
 func add_occupant(area: Area3D):

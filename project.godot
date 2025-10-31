@@ -47,7 +47,6 @@ enabled=PackedStringArray("res://addons/SimpleSampler/plugin.cfg", "res://addons
 
 [global_group]
 
-map=""
 move_to_cell_indicator=""
 beat_vizualizer=""
 element_container_ui=""
@@ -59,6 +58,8 @@ combo_manager=""
 main_scene=""
 player_spawn=""
 obstacle_collision=""
+editor_tiles=""
+map=""
 
 [gui]
 

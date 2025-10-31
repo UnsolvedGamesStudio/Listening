@@ -4,8 +4,6 @@ class_name RangedAttackEB
 const PROJECTILE = preload("uid://bwaev5gyis5tp")
 const DEFAULT_PROJECTILE_TEXTURE = preload("uid://dgygswxu7j8ds")
 
-var enabled:= true
-
 var shoots_every_x_beat:= 6
 var projectile_range:= 2
 var projectile_damage:= 10.0
@@ -17,7 +15,7 @@ var attack_anim: AnimationPlayer
 var melee_range:= 1
 
 
-func _ready() -> void:
+func enter() -> void:
 	set_stats()
 	Bus.beat.connect(on_beat)
 	attack_anim = O.attack_anim

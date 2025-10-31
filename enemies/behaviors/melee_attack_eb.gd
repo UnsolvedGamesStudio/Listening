@@ -1,7 +1,6 @@
 extends EnemyBehavior
 class_name MeleeAttackEB
 
-var enabled:= true
 var melees_every_x_beat:= 4
 var melee_range:= 1
 var melee_damage:= 20.0
@@ -9,7 +8,7 @@ var melee_damage:= 20.0
 var attack_anim: AnimationPlayer
 
 
-func _ready() -> void:
+func enter() -> void:
 	set_stats()
 	attack_anim = O.attack_anim
 	Bus.beat.connect(on_beat)

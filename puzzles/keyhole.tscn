@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmltvam4lo0l1"]
+[gd_scene load_steps=6 format=3 uid="uid://dmltvam4lo0l1"]
 
 [ext_resource type="Script" uid="uid://bjofeygc2i0sj" path="res://puzzles/keyhole.gd" id="1_vobuj"]
 [ext_resource type="Texture2D" uid="uid://p42o3wloyjmx" path="res://puzzles/textures/keyhole.png" id="1_x4g1l"]
@@ -6,16 +6,40 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_ei6pj"]
 radius = 0.5839425
 
+[sub_resource type="Animation" id="Animation_vobuj"]
+resource_name = "shake"
+length = 0.5
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:rotation:z")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03333334, 0.06666667, 0.1, 0.13333334, 0.16666667, 0.23333333, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1.1892072, 1, 1.1892072, 1, 1.1892072, 1, 1.1892072, 1.1892072),
+"update": 0,
+"values": [0.0, 0.155, 0.0, -0.175, 0.0, 0.155, 0.0, -0.175, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_djx0u"]
+_data = {
+&"shake": SubResource("Animation_vobuj")
+}
+
 [node name="Keyhole" type="Node3D"]
 script = ExtResource("1_vobuj")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprites" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="Sprites"]
 unique_name_in_owner = true
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0.001)
 texture_filter = 0
 texture = ExtResource("1_x4g1l")
 
-[node name="Sprite3D2" type="Sprite3D" parent="."]
+[node name="Sprite3D2" type="Sprite3D" parent="Sprites"]
 unique_name_in_owner = true
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -0.01)
 texture_filter = 0
@@ -29,3 +53,9 @@ collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_ei6pj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_djx0u")
+}

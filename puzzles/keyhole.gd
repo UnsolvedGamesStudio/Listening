@@ -3,6 +3,7 @@ extends Node3D
 @onready var sprite_3d: Sprite3D = %Sprite3D
 @onready var sprite_3d_2: Sprite3D = %Sprite3D2
 @onready var area_3d: Area3D = %Area3D
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 var original_scale:= Vector3(1.0, 1.0, 1.0)
 var required_item:= Vars.item_types.F_KEY
@@ -11,8 +12,21 @@ func _ready() -> void:
 	original_scale = sprite_3d.scale
 
 
+func _physics_process(delta: float) -> void:
+	var player: Player = get_tree().get_first_node_in_group("player")
+	
+	if player == null:
+		return
+	
+	if player.los.get_collider() == area_3d and global_position.distance_to(player.global_position) < Vars.interact_range:
+		looked_at_by_player(true)
+	else:
+		looked_at_by_player(false)
+
+
 func activate():
 	if not has_item() == true:
+		animation_player.play("shake")
 		return
 	
 	open()
@@ -45,8 +59,13 @@ func has_item():
 
 func looked_at_by_player(on: bool):
 	if on == true:
-		sprite_3d.modulate = Color(0.409, 0.84, 0.0, 1.0)
-		sprite_3d_2.modulate = Color(0.409, 0.84, 0.0, 1.0)
+		if has_item() == true:
+			sprite_3d.modulate = Color(0.409, 0.84, 0.0, 1.0)
+			sprite_3d_2.modulate = Color(0.409, 0.84, 0.0, 1.0)
+		else:
+			sprite_3d.modulate = Color(0.954, 0.001, 0.954)
+			sprite_3d_2.modulate = Color(0.954, 0.001, 0.954)
+		
 		sprite_3d.scale = original_scale * 1.5
 		sprite_3d_2.scale = original_scale * 1.5
 	

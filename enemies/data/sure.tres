@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=3 format=3 uid="uid://cww8hkyygekti"]
+
+[ext_resource type="Texture2D" uid="uid://dgygswxu7j8ds" path="res://projectile/textures/default_projectile.png" id="1_u70ph"]
+[ext_resource type="Script" uid="uid://xik6wqrvw2sj" path="res://enemies/data/enemy_resource.gd" id="2_x7y3q"]
+
+[resource]
+script = ExtResource("2_x7y3q")
+id = "sure"
+name = "Sure..."
+description = "Boredom"
+max_hp = 150.0
+movement_speed = 1
+impassable = true
+body_damage = 0.0
+counts_towards_goal = false
+moves_every_x_beat = 16
+melees_every_x_beat = 0
+shoots_every_x_beat = 0
+melee_damage = 0.0
+projectile_enabled = false
+projectile_damage = 0.0
+projectile_speed = 0.0
+projectile_range = 0

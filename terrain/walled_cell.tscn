@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0qtdogq2osyf"]
+
+[ext_resource type="Script" uid="uid://5g0ky2a22hhi" path="res://terrain/walled_cell.gd" id="1_cceiw"]
+[ext_resource type="PackedScene" uid="uid://bw8gqh3mcauhb" path="res://terrain/ceiling.tscn" id="2_c4jo1"]
+[ext_resource type="PackedScene" uid="uid://itikcsbog7mw" path="res://terrain/wall.tscn" id="3_jfg1x"]
+[ext_resource type="PackedScene" uid="uid://d3u7i3tehxhh6" path="res://terrain/floor.tscn" id="4_audej"]
+
+[node name="WalledCell" type="Node3D"]
+script = ExtResource("1_cceiw")
+
+[node name="TopFace" parent="." instance=ExtResource("2_c4jo1")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 1.509958e-07, 0, -1.509958e-07, -1, 0, 0, 0, 1, 0, 4, 0)
+
+[node name="NorthFace" parent="." instance=ExtResource("3_jfg1x")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -1)
+
+[node name="EastFace" parent="." instance=ExtResource("3_jfg1x")]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1, 0, 0)
+
+[node name="WestFace" parent="." instance=ExtResource("3_jfg1x")]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1, 0, 0)
+
+[node name="SouthFace" parent="." instance=ExtResource("3_jfg1x")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="BottomFace" parent="." instance=ExtResource("4_audej")]
+unique_name_in_owner = true

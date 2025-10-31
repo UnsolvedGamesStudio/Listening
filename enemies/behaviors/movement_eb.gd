@@ -1,9 +1,6 @@
 extends EnemyBehavior
 class_name MovementEB
-
-var enabled:= true
-var movement_raycast: RayCast3D
-
+##Todo: make enemy not attack while moving
 var moves_every_x_beat:= 2
 var movement_speed:= 4
 
@@ -11,13 +8,11 @@ var melee_range:= 1
 var projectile_range:= 2
 
 
-func _ready() -> void:
+func enter() -> void:
 	set_stats()
-	movement_raycast = O.movement_raycast
-	if movement_raycast == null:
-		printerr(self, " of ", O, ": movement_raycast not found")
-		return
+	
 	Bus.beat.connect(on_beat)
+	
 	for behavior in get_parent().get_children():
 		if behavior is MeleeAttackEB:
 			melee_range = behavior.melee_range
@@ -39,6 +34,12 @@ func set_stats():
 
 
 func move():
+	var movement_raycast = O.movement_raycast
+	
+	if movement_raycast == null:
+		printerr(self, " of ", O, ": movement_raycast not found")
+		return
+	
 	if movement_raycast.get_collider() == null:
 		return
 	
@@ -95,12 +96,12 @@ func on_beat(beat_count: int):
 	if enabled == false:
 		return
 	
-	var move_speed:= moves_every_x_beat
+	var move_rate:= moves_every_x_beat
 	
 	if moves_every_x_beat == 0:
-		move_speed = 99999
+		move_rate = 99999
 	
-	var correct_beat_for_move:= beat_count % move_speed == 0
+	var correct_beat_for_move:= beat_count % move_rate == 0
 	
 	if correct_beat_for_move:
 		check_movement()

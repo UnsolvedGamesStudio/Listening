@@ -5,6 +5,7 @@ var current_scene: Node
 
 var scenes: Dictionary[String, PackedScene] = {
 	"layout": preload("uid://d1rnngxhnemng"),
+	"level" : preload("uid://cup1ntaax8sgg")
 }
 
 

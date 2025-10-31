@@ -1,5 +1,6 @@
 extends CanvasLayer
-##Todo: add a pause/unpause sigil
+## Todo: add a pause/unpause sigil
+## Todo: add a tiny swipe clock to show when unpause will happen
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 var waiting_for_beat:= false

@@ -10,7 +10,6 @@ var reticle: TextureRect
 
 var P: Player
 var los: RayCast3D
-var interact_range:= 4.0
 
 var animating_reticle_pressed:= false
 
@@ -20,8 +19,37 @@ func _ready() -> void:
 	P = get_parent()
 
 
-func _physics_process(delta: float) -> void:
-	update_looked_at_object()
+#func _physics_process(delta: float) -> void:
+	#var collider: Area3D = P.current_los_collider()
+	#
+	#if collider == null:
+		#P.looked_at_object = null
+		#return
+	#
+	#highlight_object(collider)
+#
+#
+#func highlight_object(collider: Area3D):
+	#var object:= collider.owner
+	#
+	#if not "looked_at_by_player" in object:
+		#return
+	#
+	#if should_activate_object(object) == false:
+		#object.looked_at_by_player(false)
+	#
+	#if should_activate_object(object) == true:
+		#object.looked_at_by_player(true)
+
+
+#func should_activate_object(object: Node3D):
+	#if not P.looked_at_object == object:
+		#return false
+	#
+	#if check_distance(object) >= interact_range:
+		#return false
+	#
+	#return true
 
 
 func _input(event: InputEvent) -> void:
@@ -29,37 +57,6 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	interact()
-
-
-func update_looked_at_object():
-	if P.check_los() == null:
-		toggle_looked_at_object(false)
-		P.current_los_collider = null
-		return
-	
-	if not P.current_los_collider == P.check_los():
-		toggle_looked_at_object(false)
-		P.current_los_collider = P.check_los()
-		toggle_looked_at_object(true)
-
-
-func toggle_looked_at_object(on: bool):
-	
-	if P.current_los_collider == null:
-		if is_instance_valid(reticle):
-			if animating_reticle_pressed == false:
-				reticle.texture = RETICLE
-		
-		return
-	
-	if check_distance(P.current_los_collider.owner) >= interact_range:
-		return
-	
-	if P.current_los_collider.owner.has_method("looked_at_by_player"):
-		if animating_reticle_pressed == false:
-			reticle.texture = RETICLE_OPEN
-		
-		P.current_los_collider.owner.looked_at_by_player(on)
 
 
 func check_distance(object: Node3D):
@@ -80,14 +77,14 @@ func interact():
 
 
 func activate_item():
-	var collider:= P.current_los_collider
+	var collider: Area3D = P.current_los_collider()
 	
 	if collider == null:
 		return
 	
 	var object: = collider.owner
 	
-	if check_distance(object) >= interact_range:
+	if check_distance(object) >= Vars.interact_range:
 		return
 	
 	if "activate_on_interact" in object:
@@ -96,7 +93,6 @@ func activate_item():
 	
 	if not object.has_method("activate"):
 		return
-	
 	
 	object.activate()
 

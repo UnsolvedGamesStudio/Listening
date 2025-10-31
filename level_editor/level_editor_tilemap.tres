@@ -1,0 +1,89 @@
+[gd_resource type="TileSet" load_steps=24 format=3 uid="uid://lpv2grascrwh"]
+
+[ext_resource type="Texture2D" uid="uid://db0h4w7etjcx7" path="res://level_editor/textures/map_cell.png" id="1_50ula"]
+[ext_resource type="PackedScene" uid="uid://cqc1iuhqntykk" path="res://enemies/enemy_scenes/enemy_1.tscn" id="2_eidu8"]
+[ext_resource type="PackedScene" uid="uid://dwksm2bi3elij" path="res://enemies/enemy_scenes/enemy_2.tscn" id="3_2cs5i"]
+[ext_resource type="PackedScene" uid="uid://bhqs3evyal73f" path="res://enemies/enemy_scenes/sure.tscn" id="4_3shlq"]
+[ext_resource type="Texture2D" uid="uid://d3swrn3a28lxk" path="res://level_editor/textures/enemy_tiles.png" id="4_50ula"]
+[ext_resource type="PackedScene" uid="uid://ciib1opj8rndx" path="res://pickups/key_pickup.tscn" id="6_2cs5i"]
+[ext_resource type="Texture2D" uid="uid://ds7esfeg8ue4b" path="res://level_editor/textures/key_tiles.png" id="6_igeg8"]
+[ext_resource type="Texture2D" uid="uid://djogefuvahxmn" path="res://level_editor/textures/lock_tiles.png" id="7_ycaiu"]
+[ext_resource type="PackedScene" uid="uid://c5gdwlmng0rsy" path="res://puzzles/locked_wall.tscn" id="8_3shlq"]
+[ext_resource type="PackedScene" uid="uid://c7wmmnca4o1dx" path="res://player/spawn_point.tscn" id="8_eidu8"]
+[ext_resource type="Texture2D" uid="uid://dy0umo4pgu5jm" path="res://level_editor/textures/player_spawn.png" id="8_igeg8"]
+[ext_resource type="PackedScene" uid="uid://b4d6fhecioyhy" path="res://pickups/healing_pickup.tscn" id="9_l7cd0"]
+[ext_resource type="Texture2D" uid="uid://bhqj8jqxnu0q" path="res://level_editor/textures/pickups.png" id="9_ycaiu"]
+[ext_resource type="PackedScene" uid="uid://7meyinovsje0" path="res://pickups/synapse_pickup.tscn" id="10_eidu8"]
+[ext_resource type="Texture2D" uid="uid://d33t4kcxy55l4" path="res://level_editor/textures/hazards.png" id="10_twauv"]
+[ext_resource type="PackedScene" uid="uid://c86l6d7h0h8wa" path="res://hazards/spikes/spikes.tscn" id="12_rejae"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_twauv"]
+resource_name = "Tiles"
+texture = ExtResource("1_50ula")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5jdw0"]
+resource_name = "Enemies"
+texture = ExtResource("4_50ula")
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("2_eidu8")
+1:0/0 = 0
+1:0/0/custom_data_0 = ExtResource("3_2cs5i")
+2:0/0 = 0
+2:0/0/custom_data_0 = ExtResource("4_3shlq")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1h6v4"]
+resource_name = "Keys"
+texture = ExtResource("6_igeg8")
+margins = Vector2i(1, 1)
+separation = Vector2i(2, 0)
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("6_2cs5i")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hkqec"]
+resource_name = "Locks"
+texture = ExtResource("7_ycaiu")
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("8_3shlq")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ycaiu"]
+resource_name = "Player Spawn"
+texture = ExtResource("8_igeg8")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("8_eidu8")
+0:1/0 = 0
+0:1/0/custom_data_0 = ExtResource("8_eidu8")
+1:0/0 = 0
+1:0/0/custom_data_0 = ExtResource("8_eidu8")
+1:1/0 = 0
+1:1/0/custom_data_0 = ExtResource("8_eidu8")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l7cd0"]
+resource_name = "Pickups"
+texture = ExtResource("9_ycaiu")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("9_l7cd0")
+1:0/0 = 0
+1:0/0/custom_data_0 = ExtResource("10_eidu8")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eidu8"]
+resource_name = "Hazards"
+texture = ExtResource("10_twauv")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("12_rejae")
+
+[resource]
+tile_size = Vector2i(32, 32)
+custom_data_layer_0/name = "scene"
+custom_data_layer_0/type = 24
+sources/1 = SubResource("TileSetAtlasSource_5jdw0")
+sources/0 = SubResource("TileSetAtlasSource_twauv")
+sources/2 = SubResource("TileSetAtlasSource_1h6v4")
+sources/3 = SubResource("TileSetAtlasSource_hkqec")
+sources/4 = SubResource("TileSetAtlasSource_ycaiu")
+sources/5 = SubResource("TileSetAtlasSource_l7cd0")
+sources/6 = SubResource("TileSetAtlasSource_eidu8")

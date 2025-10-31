@@ -1,6 +1,6 @@
 extends Node3D
 class_name Pickup
-
+#Todo: try to make the highlight the interact's responsibility again
 @onready var sprite_3d: Sprite3D = %Sprite3D
 @onready var area_3d: Area3D = %Area3D
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
@@ -23,6 +23,18 @@ func _ready() -> void:
 	area_3d.area_entered.connect(on_area_3d_area_entered)
 	Bus.beat.connect(on_beat)
 	animation_player.speed_scale = Bgm.rhythm_notifier.beat_length * 4
+
+
+func _physics_process(delta: float) -> void:
+	var player: Player = get_tree().get_first_node_in_group("player")
+	
+	if player == null:
+		return
+	
+	if player.los.get_collider() == area_3d and global_position.distance_to(player.global_position) < Vars.interact_range:
+		looked_at_by_player(true)
+	else:
+		looked_at_by_player(false)
 
 
 func enter():

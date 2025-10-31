@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtsb4wtp82heo"]
-
-[ext_resource type="Script" uid="uid://cq4po57htc3mq" path="res://map/spawners/puzzle_spawner.gd" id="1_0hakr"]
-
-[node name="PuzzleSpawner" type="Node"]
-script = ExtResource("1_0hakr")

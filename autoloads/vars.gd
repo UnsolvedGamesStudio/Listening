@@ -7,6 +7,7 @@ var level_time:= 0.0
 ## Player
 var synapses_left:= 0
 var synapses:= 0
+var interact_range:= 4.0
 
 
 ## Layout

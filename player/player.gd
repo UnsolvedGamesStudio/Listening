@@ -2,6 +2,7 @@ extends Node3D
 class_name Player
 ## Todo: add indicator of effective range, probably a line with a ball at the end?
 ## Todo: add signals for "successful actions", so you can't cheese the score as much?
+## Todo: figure out discolored pixels on sprite3d and mesh
 const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 
 @onready var camera: Camera3D = %Camera3D
@@ -11,6 +12,7 @@ const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 @onready var headbob: AnimationPlayer = %Headbob
 @onready var movement_raycast: RayCast3D = %MovementRaycast
 @onready var los: RayCast3D = %LineOfSight
+@onready var move_to_cell_indicator: Node3D = %MoveToCellIndicator
 
 @export var camera_raycast_distance:= 200.0
 @export var interact_range: float = 1.0
@@ -20,8 +22,8 @@ const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 var tilt_lower_limit:= deg_to_rad(-90)
 var tilt_upper_limit:= deg_to_rad(90)
 
-var current_looked_at_cell: Cell
-var current_los_collider: Area3D
+var looked_at_cell: Cell
+var looked_at_object: Area3D
 var is_moving:= false
 
 var invincible_cheat:= false
@@ -51,18 +53,28 @@ func _ready() -> void:
 	movement_raycast.target_position.z = -Vars.cell_size / 1.75
 	interact_range = Vars.cell_size * 10000
 	los.global_position = camera.global_position
-	
 	await get_tree().create_timer(0.0).timeout
 	
+	move_to_cell_indicator.reparent(get_parent())
+	go_to_spawn()
 	player_collision.get_child(0).disabled = false
-	global_position = get_tree().get_first_node_in_group("player_spawn").global_position
 	update_looked_at_cell()
 	Bus.player_moved.emit()
 	lose_hp(50.0)
 
+## Todo: choose randomly from all spawn points
+func go_to_spawn():
+	var spawn_point:= get_tree().get_first_node_in_group("player_spawn")
+
+	if spawn_point == null:
+		printerr(self, ": player spawn not set")
+		return
+	
+	global_position = spawn_point.global_position
+
 
 func reset_vars():
-	current_looked_at_cell = null
+	looked_at_cell = null
 	max_hp = base_max_hp
 	hp = max_hp
 	movement_speed = base_movement_speed
@@ -74,7 +86,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if mouse_input:
 		camera_movement(event)
 		update_looked_at_cell()
-		check_los()
+
+
+func _physics_process(delta: float) -> void:
+	current_los_collider()
 
 
 func _input(event: InputEvent) -> void:
@@ -126,7 +141,7 @@ func move_forward():
 	
 	update_looked_at_cell()
 	
-	if current_looked_at_cell == null:
+	if looked_at_cell == null:
 		return
 	
 	if check_impassable() == true:
@@ -138,7 +153,7 @@ func move_forward():
 		Vars.last_activated_circle.texture = MOVE_SIGIL
 	
 	var tween:= get_tree().create_tween()
-	tween.tween_property(self, "global_position", current_looked_at_cell.global_position, move_speed)
+	tween.tween_property(self, "global_position", looked_at_cell.global_position, move_speed)
 	
 	tween.play()
 	headbob.play("bob")
@@ -149,7 +164,7 @@ func move_forward():
 
 
 func check_impassable():
-	for occupant in current_looked_at_cell.occupants:
+	for occupant in looked_at_cell.occupants:
 		if not is_instance_valid(occupant):
 			return false
 		
@@ -167,13 +182,23 @@ func set_moving_false():
 
 
 func update_looked_at_cell():
+	
 	var cell: Area3D = check_movement_raycast()
-	var move_to_cell_indicator = get_tree().get_first_node_in_group("move_to_cell_indicator")
-
+	
 	if not cell is CellCollision:
 		return
 	
-	current_looked_at_cell = cell.get_parent()
+	looked_at_cell = cell.get_parent()
+	
+	update_move_to_cell_indicator(cell)
+
+
+func update_move_to_cell_indicator(cell: Area3D):
+	if check_impassable() == true:
+		return
+	
+	if cell == Vars.player_cell:
+		return
 	
 	move_to_cell_indicator.global_position = cell.global_position
 	move_to_cell_indicator.global_rotation_degrees.y = snapped(neck.global_rotation_degrees.y, 90)
@@ -186,7 +211,7 @@ func check_movement_raycast():
 	return movement_raycast.get_collider()
 
 
-func check_los():
+func current_los_collider():
 	##!! middle of screen is dependent on the viewport scale settings
 	var middle_of_screen = get_viewport().size / 4
 	var origin:= camera.project_ray_origin(middle_of_screen)
