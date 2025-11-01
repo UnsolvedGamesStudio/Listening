@@ -128,7 +128,8 @@ func lose_hp(amount: float):
 
 
 func die():
-	SceneManager.reload_game()
+	var scene_manager:= get_tree().get_first_node_in_group("main_scene")
+	scene_manager.reload_game()
 
 
 func heal(amount: float):

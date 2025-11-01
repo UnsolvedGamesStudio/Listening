@@ -4,6 +4,8 @@ class_name EnemyIndicator
 @onready var ray_cast_3d: RayCast3D = %RayCast3D
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 
+@export var color:= Color.RED
+
 
 func _process(delta: float) -> void:
 	if not ray_cast_3d.is_colliding():

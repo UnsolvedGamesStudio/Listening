@@ -5,6 +5,16 @@ const CELL = preload("uid://b0qtdogq2osyf")
 
 func _ready() -> void:
 	generate_layout()
+	start_level()
+
+
+func start_level():
+	var main: SceneManager = get_tree().get_first_node_in_group("main_scene")
+	main.fade.play("fade_in")
+	await main.fade.animation_finished
+	
+	if Bgm.playing == false:
+		Bgm.start_song()
 
 
 func generate_layout():

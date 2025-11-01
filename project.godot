@@ -21,7 +21,6 @@ Find="*res://find.gd"
 Bgm="*res://autoloads/bgm/bgm.tscn"
 Vars="*res://autoloads/vars.gd"
 NoteValue="*res://addons/SimpleSampler/note_value.gd"
-SceneManager="*res://scene_manager.gd"
 
 [debug]
 

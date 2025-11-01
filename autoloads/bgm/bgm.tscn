@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dewfhmrag5pkp"]
+[gd_scene load_steps=13 format=3 uid="uid://dewfhmrag5pkp"]
 
 [ext_resource type="AudioStream" uid="uid://cehj8qpgycok1" path="res://assets/music/so simple 140 bpm.wav" id="1_qfgnj"]
 [ext_resource type="Script" uid="uid://dbs7tn7suqlhg" path="res://autoloads/bgm/bgm.gd" id="2_vucbv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dtpmtwvvk0ac7" path="res://addons/SimpleSampler/sample_resource.gd" id="6_yq28d"]
 [ext_resource type="Resource" uid="uid://c67s4yjf8k7l0" path="res://assets/samples/test.tres" id="7_qfgnj"]
 [ext_resource type="AudioStream" uid="uid://hmaa8n3edwg0" path="res://assets/samples/clean-808-kick_A_minor.wav" id="8_wbxdo"]
+[ext_resource type="AudioStream" uid="uid://b2k6m68kkjla0" path="res://assets/music/stasis v1.mp3" id="9_qfgnj"]
 
 [sub_resource type="Animation" id="Animation_4owoj"]
 length = 0.001
@@ -94,3 +95,8 @@ process_mode = 3
 libraries = {
 &"": SubResource("AnimationLibrary_j4ark")
 }
+
+[node name="NonBeatBGM" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("9_qfgnj")
+bus = &"BGM"

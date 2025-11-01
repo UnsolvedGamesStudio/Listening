@@ -6,6 +6,7 @@ extends AudioStreamPlayer
 @onready var kick: AudioStreamPlayer = %Kick
 @onready var pause_menu_music: AudioStreamPlayer = %PauseMenuMusic
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var non_beat_bgm: AudioStreamPlayer = %NonBeatBGM
 
 var combo_label: ComboManager
 
@@ -26,8 +27,11 @@ var songs: Dictionary[String, AudioStream] = {
 func _ready() -> void:
 	rhythm_notifier.beat.connect(on_beat)
 	midi_player.note.connect(on_midi_note_played)
-	
+
+
+func start_song():
 	play()
+	kick.play()
 	midi_player.play()
 
 
