@@ -1,10 +1,9 @@
 extends Node
-class_name SceneManager
 
-@onready var fade: AnimationPlayer = %Fade
-
-var main: Node
+var main: MainScene
 var current_scene: Node
+var next_scene: String
+
 
 var scenes: Dictionary[String, PackedScene] = {
 	"layout" : preload("uid://d1rnngxhnemng"),
@@ -12,28 +11,34 @@ var scenes: Dictionary[String, PackedScene] = {
 	"title_screen" : preload("uid://bqk51arvtg2x")
 }
 
-@export_enum("level", "title_screen") var scene_to_load:= "layout"
-
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	main = get_tree().get_first_node_in_group("main_scene")
+	next_scene = main.scene_to_load
 	load_game()
 
 
 func switch_scene(scene: String):
 	current_scene.queue_free()
-	scene_to_load = scene
+	next_scene = scene
 	load_game()
 
 
 func load_game():
-	var layout_scene_inst:= scenes[scene_to_load].instantiate()
+	var scene_inst:= scenes[next_scene].instantiate()
 	
-	main.add_child(layout_scene_inst)
-	current_scene = layout_scene_inst
+	main.add_child(scene_inst)
+	current_scene = scene_inst
+	if scene_inst.has_method("start_level"):
+		scene_inst.start_level()
 
 
 func reload_game():
+	if get_tree().paused == true:
+		get_tree().paused = false
+	
+	Engine.time_scale = 1.0
 	if current_scene == null:
 		return
 	

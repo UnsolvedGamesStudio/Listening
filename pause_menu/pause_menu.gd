@@ -21,7 +21,7 @@ func _input(event: InputEvent) -> void:
 		pause()
 	
 	if Vars.paused == true:
-		waiting_for_beat = true
+		unpause_attempt()
 
 
 func pause():
@@ -32,6 +32,14 @@ func pause():
 	Vars.paused = true
 	
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
+func unpause_attempt():
+	if Bgm.playing == true:
+		waiting_for_beat = true
+		return
+	
+	unpause()
 
 
 func unpause():
@@ -45,7 +53,7 @@ func unpause():
 
 
 func on_beat(beat):
-	if waiting_for_beat == false or Vars.paused == false:
+	if waiting_for_beat == false:
 		return
 	
 	unpause()

@@ -19,7 +19,10 @@ func _ready() -> void:
 	Bus.player_took_damage.connect(on_player_took_damage)
 
 
-func on_player_took_damage(origin: Node3D):
+func on_player_took_damage(origin: Node3D = null):
+	if origin == null:
+		return
+	
 	var player: Player = get_tree().get_first_node_in_group("player")
 	animation_player.play(get_hit_direction(player, origin, player.camera))
 

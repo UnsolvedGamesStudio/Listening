@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://i3xbqc7wfdun"]
+
+[ext_resource type="Script" uid="uid://db1s31nfb1sps" path="res://enemies/behaviors/specific/lose_alpha_from_element_eb.gd" id="1_kh1nf"]
+
+[node name="LoseAlphaFromElementEB" type="Node"]
+script = ExtResource("1_kh1nf")

@@ -21,6 +21,8 @@ Find="*res://find.gd"
 Bgm="*res://autoloads/bgm/bgm.tscn"
 Vars="*res://autoloads/vars.gd"
 NoteValue="*res://addons/SimpleSampler/note_value.gd"
+Filters="*res://screen_filters/filters.tscn"
+SceneManager="*res://scene_manager.gd"
 
 [debug]
 
@@ -59,6 +61,7 @@ player_spawn=""
 obstacle_collision=""
 editor_tiles=""
 map=""
+enemy_room_notifier=""
 
 [gui]
 

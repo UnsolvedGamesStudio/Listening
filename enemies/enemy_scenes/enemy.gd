@@ -40,7 +40,10 @@ func _ready() -> void:
 
 
 func init_behaviors():
-	for behavior: EnemyBehavior in behaviors_container.get_children():
+	for behavior in behaviors_container.get_children():
+		if not "O" in behavior:
+			return
+		
 		behavior.O = self
 
 
@@ -61,9 +64,16 @@ func _physics_process(delta: float) -> void:
 		movement_raycast.target_position = get_direction_to_player()
 	
 	if on_top_of_player == true:
-		sprite_3d.modulate.a = 0.0
+		set_sprite_alpha(0.0)
 	else:
-		sprite_3d.modulate.a = 1.0
+		set_sprite_alpha(1.0)
+
+
+func set_sprite_alpha(amount: float):
+	if sprite_3d == null:
+		return
+	
+	sprite_3d.modulate.a = amount
 
 
 func update_enemy_indicator():
@@ -124,6 +134,7 @@ func check_sees_player():
 	if player_distance > vision_limit:
 		sees_player = false
 		return
+	
 	
 	vision_raycast.look_at(Find.P().enemy_aim_point.global_position + Vector3(0.0001, 0.0001, 0.0001))
 	

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://den8yot1hi48"]
+
+[ext_resource type="Script" uid="uid://c385bhmtyqh6h" path="res://enemies/behaviors/rotate_to_player_eb.gd" id="1_kshj0"]
+
+[node name="RotateToPlayerEB" type="Node"]
+script = ExtResource("1_kshj0")

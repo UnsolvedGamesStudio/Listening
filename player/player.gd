@@ -30,7 +30,7 @@ var invincible_cheat:= false
 var invincible:= false
 
 ## Stats
-const base_max_hp:= 200.0
+const base_max_hp:= 250.0
 var max_hp:= base_max_hp:
 	set(value):
 		max_hp = clampf(value, 1.0, 9999.9)
@@ -60,7 +60,7 @@ func _ready() -> void:
 	player_collision.get_child(0).disabled = false
 	update_looked_at_cell()
 	Bus.player_moved.emit()
-	lose_hp(50.0)
+	lose_hp(75.0)
 
 ## Todo: choose randomly from all spawn points
 func go_to_spawn():
@@ -110,7 +110,7 @@ func camera_movement(event: InputEvent):
 	camera.rotation.x = clampf(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 
-func take_damage(origin: Node3D, amount: float):
+func take_damage(amount: float, origin: Node3D = null, ):
 	Bus.player_took_damage.emit(origin)
 	lose_hp(amount)
 
@@ -128,8 +128,7 @@ func lose_hp(amount: float):
 
 
 func die():
-	var scene_manager:= get_tree().get_first_node_in_group("main_scene")
-	scene_manager.reload_game()
+	SceneManager.reload_game()
 
 
 func heal(amount: float):
@@ -252,7 +251,7 @@ func get_hit_angles(attacker: Node3D) -> Vector2:
 
 func on_player_collision_area_entered(area: Area3D):
 	if "damage" in area.owner:
-		take_damage(area.owner, area.owner.damage)
+		take_damage(area.owner.damage, area.owner)
 	
 	if "body_damage" in area.owner:
-		take_damage(area.owner, area.owner.body_damage)
+		take_damage(area.owner.body_damage, area.owner)

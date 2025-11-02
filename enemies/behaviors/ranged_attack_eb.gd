@@ -38,7 +38,7 @@ func set_stats():
 
 
 func find_melee_range():
-	for behavior: EnemyBehavior in get_parent().get_children():
+	for behavior in get_parent().get_children():
 		if behavior is MeleeAttackEB:
 			melee_range = behavior.melee_range
 

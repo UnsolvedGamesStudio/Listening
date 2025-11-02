@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://pm4s0telhvbu" path="res://enemies/enemy_scenes/enemy.gd" id="1_epsnb"]
 [ext_resource type="Texture2D" uid="uid://cx0ni1wvl78g0" path="res://enemies/textures/iseen_a_skull.png" id="1_fw1ev"]
-[ext_resource type="Script" uid="uid://hkfw0lmbbs63" path="res://enemies/enemy_data_loader.gd" id="3_07tka"]
 [ext_resource type="PackedScene" uid="uid://ycxhwv4g5a5v" path="res://vfx/EnemyIndicator.tscn" id="3_orwns"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7frlh"]
@@ -137,13 +136,11 @@ _data = {
 &"ranged_attack": SubResource("Animation_a6vjd")
 }
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_ihhgt"]
+radius = 0.2
+
 [node name="Enemy" type="Node3D"]
 script = ExtResource("1_epsnb")
-preferred_range = 1
-
-[node name="DataLoader" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("3_07tka")
 
 [node name="ToAnimate" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -217,3 +214,9 @@ libraries = {
 
 [node name="Behaviors" type="Node" parent="."]
 unique_name_in_owner = true
+
+[node name="RoomNotifier" type="Area3D" parent="." groups=["enemy_room_notifier"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomNotifier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35609412, 0)
+shape = SubResource("SphereShape3D_ihhgt")

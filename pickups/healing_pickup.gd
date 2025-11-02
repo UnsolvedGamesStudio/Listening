@@ -1,7 +1,7 @@
 extends Pickup
 class_name HealingPickup
 
-var healed_amount:= 50.0
+var healed_amount:= 75.0
 
 
 func on_activated():

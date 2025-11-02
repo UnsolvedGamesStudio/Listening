@@ -11,13 +11,6 @@ class_name EnemyResource
 enum ranges{MELEE, RANGED, CONTACT}
 @export var vision_limit:= 10.0
 
-@export var behaviors: Array[NodePath] = [
-	"res://enemies/behaviors/get_hurt_eb.tscn",
-	"res://enemies/behaviors/movement_eb.tscn",
-	"res://enemies/behaviors/ranged_attack_eb.tscn",
-	"res://enemies/behaviors/melee_attack_eb.tscn",
-]
-
 @export_category("Stats")
 @export var max_hp:= 100.0
 @export var movement_speed:= 4

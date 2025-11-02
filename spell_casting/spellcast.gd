@@ -6,7 +6,7 @@ const CAST_SIGIL = preload("uid://c5nwti415vrqj")
 const EMPTY_CAST_SIGIL = preload("uid://cquqsopjsxe0b")
 const DEFAULT_SPELL = preload("uid://d0jjxcbead86g")
 
-const PROJECTILE = preload("uid://bwaev5gyis5tp")
+const PROJECTILE = preload("uid://bxvo7ewsxt46f")
 
 @export var spell_range:= 8.0
 
@@ -77,7 +77,7 @@ func cast_spell():
 
 
 func create_projectile():
-	var projectile_inst: Projectile = PROJECTILE.instantiate()
+	var projectile_inst: SpellProjectile = PROJECTILE.instantiate()
 	var look_at_direction: Vector3 = Find.P().get_look_at_direction()
 	
 	projectile_inst.direction = look_at_direction.normalized()
@@ -85,6 +85,9 @@ func create_projectile():
 	projectile_inst.damage = determine_damage()
 	projectile_inst.origin_node = Find.P()
 	projectile_inst.max_distance = spell_range
+	
+	for value in container:
+		projectile_inst.elements.append(value)
 	
 	owner.get_parent().add_child(projectile_inst)
 	

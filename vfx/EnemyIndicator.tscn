@@ -1,25 +1,30 @@
 [gd_scene load_steps=5 format=3 uid="uid://ycxhwv4g5a5v"]
 
 [ext_resource type="Script" uid="uid://dn3lg4m2lq5sb" path="res://vfx/enemy_indicator.gd" id="1_pgj8b"]
-[ext_resource type="Texture2D" uid="uid://dbyd2im7ned86" path="res://vfx/enemy_indicator.png" id="3_jp4rt"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pgj8b"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gdonx"]
+load_path = "res://.godot/imported/enemy_indicator.png-0f7790bf2cab8c79a925a8bddac29c93.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gdonx"]
+resource_local_to_scene = true
 transparency = 1
 shading_mode = 0
-albedo_color = Color(0.7529412, 0.1254902, 0.06666667, 1)
-albedo_texture = ExtResource("3_jp4rt")
+albedo_color = Color(1, 0.3098913, 0.42997882, 1)
+albedo_texture = SubResource("CompressedTexture2D_gdonx")
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pgj8b"]
-material = SubResource("StandardMaterial3D_pgj8b")
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_gdonx")
 
 [node name="EnemyIndicator" type="Node3D"]
 script = ExtResource("1_pgj8b")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
 mesh = SubResource("PlaneMesh_pgj8b")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="GroundRaycast" type="RayCast3D" parent="."]
 unique_name_in_owner = true
 target_position = Vector3(0, -100, 0)
 collision_mask = 2

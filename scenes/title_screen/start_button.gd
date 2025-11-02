@@ -6,7 +6,6 @@ var mouse_in:= false
 func _ready() -> void:
 	mouse_entered.connect(on_mouse_entered)
 	mouse_exited.connect(on_mouse_exited)
-	
 
 
 func _process(delta: float) -> void:
@@ -17,12 +16,20 @@ func _process(delta: float) -> void:
 
 
 func _gui_input(event: InputEvent) -> void:
+	var main: MainScene = get_tree().get_first_node_in_group("main_scene")
+	
 	if not event.is_action_pressed("cast"):
 		return
 	
-	var scene_manager: SceneManager = get_tree().get_first_node_in_group("main_scene")
+	start()
+
+
+func start():
+	Filters.fade.play("fade_out")
+	await Filters.fade.animation_finished
 	Bgm.non_beat_bgm.stop()
-	scene_manager.switch_scene("layout")
+	Filters.fade.play("fade_out")
+	SceneManager.switch_scene("layout")
 
 
 func on_mouse_entered():

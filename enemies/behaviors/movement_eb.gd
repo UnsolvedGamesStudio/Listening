@@ -1,6 +1,9 @@
 extends EnemyBehavior
 class_name MovementEB
-##Todo: make enemy not attack while moving
+## Todo: make enemy not attack while moving
+## Todo: let enemies optionally chase you without seeing you until you leave their range
+@export var see_through_walls:= false
+
 var moves_every_x_beat:= 2
 var movement_speed:= 4
 

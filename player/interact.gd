@@ -19,39 +19,6 @@ func _ready() -> void:
 	P = get_parent()
 
 
-#func _physics_process(delta: float) -> void:
-	#var collider: Area3D = P.current_los_collider()
-	#
-	#if collider == null:
-		#P.looked_at_object = null
-		#return
-	#
-	#highlight_object(collider)
-#
-#
-#func highlight_object(collider: Area3D):
-	#var object:= collider.owner
-	#
-	#if not "looked_at_by_player" in object:
-		#return
-	#
-	#if should_activate_object(object) == false:
-		#object.looked_at_by_player(false)
-	#
-	#if should_activate_object(object) == true:
-		#object.looked_at_by_player(true)
-
-
-#func should_activate_object(object: Node3D):
-	#if not P.looked_at_object == object:
-		#return false
-	#
-	#if check_distance(object) >= interact_range:
-		#return false
-	#
-	#return true
-
-
 func _input(event: InputEvent) -> void:
 	if not event.is_action_pressed("interact"):
 		return
@@ -98,6 +65,9 @@ func activate_item():
 
 
 func reticle_pressed_show():
+	if not is_instance_valid(reticle):
+		return
+	
 	animating_reticle_pressed = true
 	reticle.texture = RETICLE_PRESSED
 	await get_tree().create_timer(0.15).timeout

@@ -1,0 +1,172 @@
+[gd_scene load_steps=15 format=3 uid="uid://d0g3bx2vjpgnv"]
+
+[ext_resource type="Script" uid="uid://cqrnvp223sbhx" path="res://screen_filters/filters.gd" id="1_i0nlq"]
+
+[sub_resource type="Gradient" id="Gradient_o5qli"]
+offsets = PackedFloat32Array(0, 0.99065423)
+colors = PackedColorArray(1.0077376e-07, 0.10643753, 0.015201207, 1, 0, 0.40322116, 0.25403672, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0wfyh"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y6vua"]
+width = 206
+height = 346
+noise = SubResource("FastNoiseLite_0wfyh")
+color_ramp = SubResource("Gradient_o5qli")
+seamless = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="Animation" id="Animation_0wfyh"]
+resource_name = "appear"
+length = 0.5
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.36666667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.39215687), Color(1, 1, 1, 0.5294118), Color(1, 1, 1, 0.39215687)]
+}
+
+[sub_resource type="Animation" id="Animation_sugp2"]
+resource_name = "disappear"
+length = 0.5
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.39215687), Color(1, 1, 1, 0.5294118), Color(1, 1, 1, 0.39215687), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sugp2"]
+_data = {
+&"appear": SubResource("Animation_0wfyh"),
+&"disappear": SubResource("Animation_sugp2")
+}
+
+[sub_resource type="Animation" id="Animation_jyhfs"]
+resource_name = "shift"
+loop_mode = 1
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:noise:seed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 30]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tbgi4"]
+_data = {
+&"shift": SubResource("Animation_jyhfs")
+}
+
+[sub_resource type="Gradient" id="Gradient_xawky"]
+colors = PackedColorArray(0.15835452, 0, 0.0061759874, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i0nlq"]
+gradient = SubResource("Gradient_xawky")
+fill = 1
+fill_from = Vector2(0.255, 0.29)
+fill_to = Vector2(1.405, 0)
+
+[sub_resource type="Animation" id="Animation_o5qli"]
+resource_name = "fade_out"
+length = 1.2
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Filters/FadeRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xawky"]
+resource_name = "fade_in"
+length = 1.2
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Filters/FadeRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5df70"]
+_data = {
+&"fade_in": SubResource("Animation_o5qli"),
+&"fade_out": SubResource("Animation_xawky")
+}
+
+[node name="Filters" type="CanvasLayer"]
+script = ExtResource("1_i0nlq")
+
+[node name="Noise" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("NoiseTexture2D_y6vua")
+metadata/_edit_use_anchors_ = true
+
+[node name="NoiseFade" type="AnimationPlayer" parent="Noise"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_sugp2")
+}
+
+[node name="NoiseShift" type="AnimationPlayer" parent="Noise"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_tbgi4")
+}
+
+[node name="FadeRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_i0nlq")
+metadata/_edit_use_anchors_ = true
+
+[node name="Fade" type="AnimationPlayer" parent="FadeRect"]
+unique_name_in_owner = true
+root_node = NodePath("../../..")
+libraries = {
+&"": SubResource("AnimationLibrary_5df70")
+}

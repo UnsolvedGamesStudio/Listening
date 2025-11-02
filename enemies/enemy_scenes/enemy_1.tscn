@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cqc1iuhqntykk"]
+[gd_scene load_steps=18 format=3 uid="uid://cqc1iuhqntykk"]
 
 [ext_resource type="Script" uid="uid://pm4s0telhvbu" path="res://enemies/enemy_scenes/enemy.gd" id="1_dvt88"]
 [ext_resource type="Texture2D" uid="uid://cx0ni1wvl78g0" path="res://enemies/textures/iseen_a_skull.png" id="3_yhk72"]
@@ -126,6 +126,9 @@ _data = {
 &"ranged_attack": SubResource("Animation_a6vjd")
 }
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_8dnoj"]
+radius = 0.2
+
 [node name="Enemy" type="Node3D"]
 script = ExtResource("1_dvt88")
 
@@ -209,3 +212,9 @@ unique_name_in_owner = true
 [node name="MeleeAttackEB" parent="Behaviors" instance=ExtResource("5_ptsd7")]
 
 [node name="RangedAttackEB" parent="Behaviors" instance=ExtResource("7_dqe6f")]
+
+[node name="RoomNotifier" type="Area3D" parent="." groups=["enemy_room_notifier"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomNotifier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35609412, 0)
+shape = SubResource("SphereShape3D_8dnoj")

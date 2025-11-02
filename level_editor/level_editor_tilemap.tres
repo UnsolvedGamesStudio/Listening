@@ -1,10 +1,11 @@
-[gd_resource type="TileSet" load_steps=24 format=3 uid="uid://lpv2grascrwh"]
+[gd_resource type="TileSet" load_steps=25 format=3 uid="uid://lpv2grascrwh"]
 
 [ext_resource type="Texture2D" uid="uid://db0h4w7etjcx7" path="res://level_editor/textures/map_cell.png" id="1_50ula"]
 [ext_resource type="PackedScene" uid="uid://cqc1iuhqntykk" path="res://enemies/enemy_scenes/enemy_1.tscn" id="2_eidu8"]
 [ext_resource type="PackedScene" uid="uid://dwksm2bi3elij" path="res://enemies/enemy_scenes/enemy_2.tscn" id="3_2cs5i"]
-[ext_resource type="PackedScene" uid="uid://bhqs3evyal73f" path="res://enemies/enemy_scenes/sure.tscn" id="4_3shlq"]
+[ext_resource type="PackedScene" uid="uid://bhqs3evyal73f" path="res://enemies/enemy_scenes/boredom.tscn" id="4_3shlq"]
 [ext_resource type="Texture2D" uid="uid://d3swrn3a28lxk" path="res://level_editor/textures/enemy_tiles.png" id="4_50ula"]
+[ext_resource type="PackedScene" uid="uid://061m5bvukwlk" path="res://enemies/enemy_scenes/dread.tscn" id="5_awf5f"]
 [ext_resource type="PackedScene" uid="uid://ciib1opj8rndx" path="res://pickups/key_pickup.tscn" id="6_2cs5i"]
 [ext_resource type="Texture2D" uid="uid://ds7esfeg8ue4b" path="res://level_editor/textures/key_tiles.png" id="6_igeg8"]
 [ext_resource type="Texture2D" uid="uid://djogefuvahxmn" path="res://level_editor/textures/lock_tiles.png" id="7_ycaiu"]
@@ -32,6 +33,8 @@ texture = ExtResource("4_50ula")
 1:0/0/custom_data_0 = ExtResource("3_2cs5i")
 2:0/0 = 0
 2:0/0/custom_data_0 = ExtResource("4_3shlq")
+3:0/0 = 0
+3:0/0/custom_data_0 = ExtResource("5_awf5f")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1h6v4"]
 resource_name = "Keys"

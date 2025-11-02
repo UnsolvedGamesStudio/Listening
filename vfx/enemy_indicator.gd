@@ -1,17 +1,24 @@
 extends Node3D
 class_name EnemyIndicator
 
-@onready var ray_cast_3d: RayCast3D = %RayCast3D
-@onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
+@onready var ground_raycast: RayCast3D = %GroundRaycast
+@onready var mesh_instance_3d: MeshInstance3D = %MeshInstance3D
 
-@export var color:= Color.RED
+@export var gray:= false
+
+
+func _ready() -> void:
+	if gray == false:
+		return
+	
+	mesh_instance_3d.get_active_material(0).albedo_color = Color.WHITE
 
 
 func _process(delta: float) -> void:
-	if not ray_cast_3d.is_colliding():
+	if not ground_raycast.is_colliding():
 		return
 	
-	if not is_instance_valid(ray_cast_3d.get_collider()):
+	if not is_instance_valid(ground_raycast.get_collider()):
 		return
 	
-	global_position.y = ray_cast_3d.get_collider().global_position.y + 0.6
+	global_position.y = ground_raycast.get_collider().global_position.y + 0.6

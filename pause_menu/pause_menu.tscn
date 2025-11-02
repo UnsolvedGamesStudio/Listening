@@ -68,6 +68,7 @@ _data = {
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
+layer = 2
 offset = Vector2(0, 500)
 transform = Transform2D(1, 0, 0, 1, 0, 500)
 script = ExtResource("1_uwtdo")
@@ -150,12 +151,22 @@ mouse_default_cursor_shape = 2
 text = "Resume"
 script = ExtResource("2_rd7dy")
 
-[node name="ExitButton2" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="PlayAgainButton" type="Button" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(100.215, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Restart"
+script = ExtResource("2_rd7dy")
+type = 2
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 focus_behavior_recursive = 1
 mouse_default_cursor_shape = 2
 text = "Exit game"
 script = ExtResource("2_rd7dy")
+type = 1
 
 [node name="CheatButtonContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

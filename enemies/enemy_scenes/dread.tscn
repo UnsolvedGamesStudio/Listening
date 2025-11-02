@@ -1,0 +1,176 @@
+[gd_scene load_steps=20 format=3 uid="uid://061m5bvukwlk"]
+
+[ext_resource type="Script" uid="uid://pm4s0telhvbu" path="res://enemies/enemy_scenes/enemy.gd" id="1_5lhxg"]
+[ext_resource type="Resource" uid="uid://cdiemjse6tvdf" path="res://enemies/data/dread.tres" id="2_5lhxg"]
+[ext_resource type="PackedScene" uid="uid://ycxhwv4g5a5v" path="res://vfx/EnemyIndicator.tscn" id="4_jvcgx"]
+[ext_resource type="PackedScene" uid="uid://d3qw0t4lwkfbh" path="res://enemies/behaviors/movement_eb.tscn" id="6_miyy1"]
+[ext_resource type="PackedScene" uid="uid://ckrngbta7laek" path="res://enemies/behaviors/melee_attack_eb.tscn" id="7_pa56o"]
+[ext_resource type="ArrayMesh" uid="uid://fp3ej2jqaf5f" path="res://enemies/meshes/bent_stickman.tres" id="8_5lhxg"]
+[ext_resource type="PackedScene" uid="uid://b8rwjdbr6qey4" path="res://enemies/behaviors/ranged_attack_eb.tscn" id="8_px4t6"]
+[ext_resource type="PackedScene" uid="uid://i3xbqc7wfdun" path="res://enemies/behaviors/specific/lose_alpha_from_element_eb.tscn" id="9_xv41r"]
+[ext_resource type="PackedScene" uid="uid://drd57nfhjpv8h" path="res://enemies/behaviors/specific/damaging_aura_eb.tscn" id="10_8ebju"]
+[ext_resource type="PackedScene" uid="uid://den8yot1hi48" path="res://enemies/behaviors/rotate_to_player_eb.tscn" id="10_jvcgx"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8dnoj"]
+viewport_path = NodePath("ToAnimate/HealthBar3D/SubViewport")
+
+[sub_resource type="Animation" id="Animation_7frlh"]
+resource_name = "bob"
+loop_mode = 2
+step = 0.0333333
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToAnimate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 1.5, 0, 1, 1, 0, 1.7, 0)
+
+[sub_resource type="Animation" id="Animation_3t1x0"]
+resource_name = "die"
+length = 0.56666946
+step = 0.0333333
+
+[sub_resource type="Animation" id="Animation_07tka"]
+resource_name = "hurt"
+length = 0.30000305
+step = 0.0333333
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a6vjd"]
+_data = {
+&"bob": SubResource("Animation_7frlh"),
+&"die": SubResource("Animation_3t1x0"),
+&"hurt": SubResource("Animation_07tka")
+}
+
+[sub_resource type="Animation" id="Animation_orwns"]
+resource_name = "attack"
+length = 0.4
+step = 0.0333333
+
+[sub_resource type="Animation" id="Animation_a6vjd"]
+resource_name = "ranged_attack"
+length = 0.8
+step = 0.0333333
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_07tka"]
+_data = {
+&"attack": SubResource("Animation_orwns"),
+&"ranged_attack": SubResource("Animation_a6vjd")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xv41r"]
+radius = 0.2
+
+[node name="Enemy" type="Node3D"]
+script = ExtResource("1_5lhxg")
+data = ExtResource("2_5lhxg")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+visible = false
+billboard = 2
+texture_filter = 0
+
+[node name="Mesh" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.066113114, 0)
+
+[node name="BentStickman" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(-10, -1.1359191e-06, 0, 0, 0, -14.509642, 8.742278e-07, -12.9934, 0, 0.60384786, 0, 0)
+mesh = ExtResource("8_5lhxg")
+skeleton = NodePath("")
+
+[node name="EnemyCollision" type="Area3D" parent="." groups=["enemy_collision"]]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+collision_layer = 4
+collision_mask = 16
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="EnemyCollision"]
+transform = Transform3D(0.034568053, 0, 0.99940234, 0, 1, 0, -0.99940234, 0, 0.034568053, 0.011221588, 0.20828247, -0.39322442)
+polygon = PackedVector2Array(-0.3431666, -1.6616684, -0.38182753, 1.6619921, 2.5967398, 1.6198001, -0.32246965, 1.6102505)
+
+[node name="VisionRaycast" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1.0526316, 0, 0, 0, 1.0526316, 0, 0, 0, 1.0526316, 0, 0.90122867, -0.055304468)
+target_position = Vector3(0, 0, -1000)
+collision_mask = 10
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="ToAnimate" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="HealthBar3D" type="Sprite3D" parent="ToAnimate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7076497, 0)
+visible = false
+billboard = 2
+texture_filter = 0
+texture = SubResource("ViewportTexture_8dnoj")
+
+[node name="SubViewport" type="SubViewport" parent="ToAnimate/HealthBar3D"]
+size = Vector2i(50, 5)
+
+[node name="HealthBar" type="ProgressBar" parent="ToAnimate/HealthBar3D/SubViewport"]
+unique_name_in_owner = true
+modulate = Color(0, 18.892157, 0, 1)
+custom_minimum_size = Vector2(50, 5)
+offset_right = 50.0
+offset_bottom = 5.0
+max_value = 1.0
+step = 0.001
+value = 0.5
+show_percentage = false
+
+[node name="MovementRaycast" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+target_position = Vector3(0, 0, -1.5)
+collision_mask = 3
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="EnemyIndicator" parent="." instance=ExtResource("4_jvcgx")]
+unique_name_in_owner = true
+visible = false
+
+[node name="IdleAnim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_a6vjd")
+}
+autoplay = "bob"
+
+[node name="AttackAnim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_07tka")
+}
+
+[node name="Behaviors" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="MovementEB" parent="Behaviors" instance=ExtResource("6_miyy1")]
+see_through_walls = true
+
+[node name="MeleeAttackEB" parent="Behaviors" instance=ExtResource("7_pa56o")]
+enabled = false
+
+[node name="RangedAttackEB" parent="Behaviors" instance=ExtResource("8_px4t6")]
+enabled = false
+
+[node name="RotateToPlayerEB" parent="Behaviors" node_paths=PackedStringArray("to_rotate") instance=ExtResource("10_jvcgx")]
+to_rotate = NodePath("../../Mesh")
+
+[node name="LoseAlphaFromElement" parent="Behaviors" node_paths=PackedStringArray("mesh") instance=ExtResource("9_xv41r")]
+mesh = NodePath("../../Mesh/BentStickman")
+
+[node name="DamagingAuraEB" parent="Behaviors" instance=ExtResource("10_8ebju")]
+
+[node name="RoomNotifier" type="Area3D" parent="." groups=["enemy_room_notifier"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomNotifier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35609412, 0)
+shape = SubResource("SphereShape3D_xv41r")

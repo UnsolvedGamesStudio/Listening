@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://bhqs3evyal73f"]
+[gd_scene load_steps=12 format=3 uid="uid://bhqs3evyal73f"]
 
 [ext_resource type="Script" uid="uid://pm4s0telhvbu" path="res://enemies/enemy_scenes/enemy.gd" id="1_42w3n"]
-[ext_resource type="Resource" uid="uid://cww8hkyygekti" path="res://enemies/data/sure.tres" id="2_2427j"]
+[ext_resource type="Resource" uid="uid://cww8hkyygekti" path="res://enemies/data/boredom.tres" id="2_2427j"]
 [ext_resource type="Texture2D" uid="uid://du06bnyretbta" path="res://enemies/textures/rock.png" id="3_07rg8"]
 [ext_resource type="PackedScene" uid="uid://ycxhwv4g5a5v" path="res://vfx/EnemyIndicator.tscn" id="3_2427j"]
 [ext_resource type="PackedScene" uid="uid://cmviqulbv2o3x" path="res://enemies/behaviors/get_hurt_eb.tscn" id="4_u8suu"]
@@ -33,6 +33,9 @@ tracks/0/keys = {
 _data = {
 &"die": SubResource("Animation_5so5x")
 }
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_c2kus"]
+radius = 0.2
 
 [node name="Enemy" type="Node3D"]
 script = ExtResource("1_42w3n")
@@ -95,7 +98,7 @@ collide_with_bodies = false
 
 [node name="EnemyIndicator" parent="." instance=ExtResource("3_2427j")]
 unique_name_in_owner = true
-visible = false
+gray = true
 
 [node name="Behaviors" type="Node" parent="."]
 unique_name_in_owner = true
@@ -113,3 +116,9 @@ libraries = {
 [node name="AttackAnim" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 root_node = NodePath("../IdleAnim")
+
+[node name="RoomNotifier" type="Area3D" parent="." groups=["enemy_room_notifier"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomNotifier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35609412, 0)
+shape = SubResource("SphereShape3D_c2kus")
