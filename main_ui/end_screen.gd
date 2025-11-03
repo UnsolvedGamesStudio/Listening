@@ -1,11 +1,27 @@
 extends CanvasLayer
 
+@onready var header: Label = %Header
+@onready var body: Label = %Body
+
 
 func _ready() -> void:
 	Bus.game_won.connect(on_game_won)
+	Bus.game_lost.connect(on_game_lost)
 
 
 func on_game_won():
+	header.text = "Congratulations!"
+	body.text = "You are starting to remember."
+	appear()
+
+
+func on_game_lost():
+	header.text = "Sorry for your loss."
+	body.text = "You get another chance."
+	appear()
+
+
+func appear():
 	var tween:= create_tween()
 	tween.set_ignore_time_scale(true)
 	tween.set_ease(Tween.EASE_IN)

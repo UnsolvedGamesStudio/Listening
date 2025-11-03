@@ -15,6 +15,9 @@ var container:= Vars.element_container
 
 
 func _input(event: InputEvent) -> void:
+	if get_parent().can_act == false:
+		return
+	
 	if event.is_action_pressed("cast"):
 		on_cast_pressed()
 	

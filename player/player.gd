@@ -28,6 +28,7 @@ var is_moving:= false
 
 var invincible_cheat:= false
 var invincible:= false
+var can_act:= true
 
 ## Stats
 const base_max_hp:= 250.0
@@ -74,6 +75,8 @@ func go_to_spawn():
 
 
 func reset_vars():
+	invincible = false
+	can_act = true
 	looked_at_cell = null
 	max_hp = base_max_hp
 	hp = max_hp
@@ -93,6 +96,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if can_act == false:
+		return
+	
 	if event.is_action_pressed("forward") and is_moving == false:
 		move_forward()
 
@@ -128,7 +134,9 @@ func lose_hp(amount: float):
 
 
 func die():
-	SceneManager.reload_game()
+	can_act = false
+	invincible = true
+	Bus.game_lost.emit()
 
 
 func heal(amount: float):

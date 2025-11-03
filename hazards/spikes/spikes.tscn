@@ -190,7 +190,7 @@ mesh = SubResource("CylinderMesh_iveop")
 skeleton = NodePath("")
 
 [node name="Hitbox" type="Area3D" parent="."]
-collision_layer = 48
+collision_layer = 304
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]

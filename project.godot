@@ -59,9 +59,11 @@ combo_manager=""
 main_scene=""
 player_spawn=""
 obstacle_collision=""
-editor_tiles=""
-map=""
 enemy_room_notifier=""
+editor_objects=""
+editor_cells=""
+level_blueprint=""
+forgetter=""
 
 [gui]
 
@@ -124,6 +126,7 @@ exit={
 3d_physics/layer_6="enemy_damage"
 3d_physics/layer_7="interactable"
 3d_physics/layer_8="obstacles"
+3d_physics/layer_9="hazards"
 
 [rendering]
 

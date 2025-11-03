@@ -9,22 +9,10 @@
 [node name="Layout" type="Node3D"]
 script = ExtResource("1_v6hxy")
 
+[node name="LevelBlueprint" parent="." instance=ExtResource("2_hcp3l")]
+
 [node name="LevelGenerator" parent="." instance=ExtResource("2_b0xiq")]
 
 [node name="BeatVisualizer" parent="." instance=ExtResource("3_tupbf")]
-
-[node name="Map" type="CanvasLayer" parent="."]
-visible = false
-scale = Vector2(0.25, 0.25)
-transform = Transform2D(0.25, 0, 0, 0.25, 0, 0)
-
-[node name="Panel" type="Panel" parent="Map"]
-self_modulate = Color(1, 1, 1, 0)
-anchors_preset = -1
-anchor_right = 0.041666668
-anchor_bottom = 0.074074075
-metadata/_edit_use_anchors_ = true
-
-[node name="Map" parent="Map/Panel" instance=ExtResource("2_hcp3l")]
 
 [node name="Player" parent="." instance=ExtResource("4_trw21")]

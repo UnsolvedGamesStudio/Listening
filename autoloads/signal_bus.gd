@@ -20,3 +20,4 @@ signal item_picked_up(item: Vars.item_types)
 signal item_removed(item: Vars.item_types)
 
 signal game_won
+signal game_lost

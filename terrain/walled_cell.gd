@@ -14,9 +14,7 @@ class_name WalledCell
 var cell_grid_position: Vector2i = Vector2.ZERO
 
 
-func update_faces(cell_list: Array, cell_size: int) -> void:
-	Vars.cell_coordinates.append(cell_grid_position)
-	
+func update_faces(cell_list: Array, cell_size: float) -> void:
 	if cell_list.has(cell_grid_position + Vector2i.UP):
 		north_face.queue_free()
 	

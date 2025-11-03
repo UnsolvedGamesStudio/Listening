@@ -85,7 +85,8 @@ func go_to_player():
 	area_3d.get_child(0).set_deferred("disabled", true)
 	animation_player.stop()
 	
-	%Particles.emitting = false
+	if not find_child("Particles") == null:
+		find_child("Particles").emitting = false
 	
 	var player: Player = get_tree().get_first_node_in_group("player")
 	var tween:= create_tween()

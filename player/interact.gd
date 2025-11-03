@@ -20,6 +20,9 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if get_parent().can_act == false:
+		return
+	
 	if not event.is_action_pressed("interact"):
 		return
 	

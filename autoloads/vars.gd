@@ -18,12 +18,14 @@ const directions: Dictionary[String, Vector3i] = {
 	"west" : Vector3i(-1, 0, 0)
 }
 
-const cell_size:= 2
+const cell_size:= 2.0
 var cell_nodes: Array[Cell] = []
 var cell_coordinates: Array[Vector2i] = []
 var player_spawn_cell: Cell
 
 var player_cell: Cell
+
+var forgetters: Array[Forgetter] = []
 
 ## Beat Visualizer
 var combo:= 0

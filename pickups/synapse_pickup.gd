@@ -1,6 +1,7 @@
 extends Pickup
 class_name SynapsePickup
 
+
 func enter():
 	Vars.synapses_left += 1
 
