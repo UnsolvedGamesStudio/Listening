@@ -39,8 +39,8 @@ var in_timing_window:= false
 ## Spells
 var elements: Array[Resource] = [
 	preload("res://spell_casting/elements/joy.tres"),
-	preload("res://spell_casting/elements/anger.tres"),
 	preload("res://spell_casting/elements/sadness.tres"),
+	preload("res://spell_casting/elements/anger.tres"),
 ]
 
 ## Spellcasting

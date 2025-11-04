@@ -26,6 +26,7 @@ func _input(event: InputEvent) -> void:
 
 func pause():
 	animation_player.play("pop_in")
+	Filters.pause_shader_fade.play("fade_in")
 	await get_tree().create_timer(0.0, true, false, true).timeout
 	Bgm.bus = "PauseMenuMusic"
 	get_tree().paused = true
@@ -44,6 +45,7 @@ func unpause_attempt():
 
 func unpause():
 	animation_player.play("pop_out")
+	Filters.pause_shader_fade.play("fade_out")
 	Bgm.bus = "BGM"
 	get_tree().paused = false
 	Vars.paused = false

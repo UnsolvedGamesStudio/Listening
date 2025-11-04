@@ -57,6 +57,7 @@ func _ready() -> void:
 	await get_tree().create_timer(0.0).timeout
 	
 	move_to_cell_indicator.reparent(get_parent())
+	movement_raycast.reparent(get_parent())
 	go_to_spawn()
 	player_collision.get_child(0).disabled = false
 	update_looked_at_cell()
@@ -92,6 +93,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	movement_raycast.global_position = neck.global_position
+	movement_raycast.global_rotation = neck.global_rotation
 	current_los_collider()
 
 
@@ -116,9 +119,23 @@ func camera_movement(event: InputEvent):
 	camera.rotation.x = clampf(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 
-func take_damage(amount: float, origin: Node3D = null, ):
+func take_damage(amount: float, origin: Node3D = null):
 	Bus.player_took_damage.emit(origin)
 	lose_hp(amount)
+	notify_enemy_of_projectile(origin)
+
+
+func notify_enemy_of_projectile(origin: Node3D):
+	if origin == null:
+		return
+	
+	if not "origin_node" in origin:
+		return
+	
+	if not origin.origin_node.has_signal("projectile_hit_player"):
+		return
+	
+	origin.origin_node.projectile_hit_player.emit()
 
 
 func lose_hp(amount: float):
@@ -255,6 +272,12 @@ func get_hit_angles(attacker: Node3D) -> Vector2:
 	
 	# Return as a Vector2(horizontal, vertical)
 	return Vector2(horizontal_angle, vertical_angle)
+
+
+func shrink(amount: float):
+	var tween:= create_tween()
+	var target_value: Vector3 = scale / amount
+	tween.tween_property(self, "scale", target_value, 0.5)
 
 
 func on_player_collision_area_entered(area: Area3D):

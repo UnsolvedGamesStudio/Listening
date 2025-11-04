@@ -1,5 +1,5 @@
 extends Node
-## Todo: "orienter" tiles that serve to rotate directional objects when they spawn
+## Todo: read and translate the rotation of the tile (tiledata) into the spawn rotation
 ## Todo: wall tilemap
 ## Todo: make it delete tilemaps after spawning
 ## Todo: have the level editor be a tool script that generates the layout as an editable packed scene

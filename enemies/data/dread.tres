@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_xy2qo")
 id = "dread"
-name = "Can't Escape"
+name = "Watching Over You"
 vision_limit = 50.0
 movement_speed = 16
 impassable = true
@@ -17,5 +17,5 @@ melees_every_x_beat = 0
 shoots_every_x_beat = 0
 melee_damage = 30.0
 projectile_damage = 2.5
-projectile_range = 4
+projectile_range = 1
 projectile_scale = Vector3(0.1, 0.1, 0.1)

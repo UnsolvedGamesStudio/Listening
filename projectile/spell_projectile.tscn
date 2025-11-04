@@ -43,7 +43,7 @@ tracks/0/path = NodePath("Sprite3D:transparency")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.06666667, 0.26666668),
+"times": PackedFloat32Array(0, 0.26666668),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.0]
@@ -94,12 +94,10 @@ cull_mode = 1
 albedo_color = Color(0, 0.36322755, 0.6538916, 1)
 texture_filter = 0
 texture_repeat = false
-billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
+disable_receive_shadows = true
+billboard_mode = 1
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_3dxjh"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_dkllc"]
 material = SubResource("StandardMaterial3D_makwg")
 size = Vector2(0.025, 0.025)
 
@@ -120,11 +118,13 @@ debug_fill = false
 [node name="Sprite3D" type="Sprite3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+transparency = 1.0
 billboard = 2
 texture_filter = 0
 texture = ExtResource("2_dkllc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_dr2av")
 }
@@ -141,10 +141,13 @@ debug_color = Color(0.97987014, 0, 0.38836122, 0.41960785)
 
 [node name="FlyingParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1.0000001, 0, 1.0000001, -4.3711392e-08, 0, 0, 0)
+visible = false
+cast_shadow = 0
+emitting = false
 lifetime = 0.4
 randomness = 0.53
 process_material = SubResource("ParticleProcessMaterial_hrg8b")
-draw_pass_1 = SubResource("PlaneMesh_3dxjh")
+draw_pass_1 = SubResource("PlaneMesh_dkllc")
 
 [node name="KillTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -159,3 +162,9 @@ collision_mask = 2
 [node name="WallCollision" type="CollisionShape3D" parent="WallDetect"]
 shape = SubResource("SphereShape3D_dr2av")
 debug_color = Color(0, 0.5372549, 0.9607843, 0.3529412)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+unique_name_in_owner = true
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_attenuation = 1.5

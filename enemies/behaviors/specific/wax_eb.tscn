@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgrumupwkn31k"]
+
+[ext_resource type="Script" uid="uid://cjadl5rpqvha6" path="res://enemies/behaviors/specific/wax_eb.gd" id="1_a8wr2"]
+
+[node name="WaxEB" type="Node"]
+script = ExtResource("1_a8wr2")

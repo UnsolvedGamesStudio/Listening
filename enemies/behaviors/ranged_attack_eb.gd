@@ -1,7 +1,7 @@
 extends EnemyBehavior
 class_name RangedAttackEB
 
-const PROJECTILE = preload("uid://bwaev5gyis5tp")
+const PROJECTILE = preload("uid://6n70akjpdb5c")
 const DEFAULT_PROJECTILE_TEXTURE = preload("uid://dgygswxu7j8ds")
 
 var shoots_every_x_beat:= 6
@@ -12,7 +12,7 @@ var projectile_scale:= Vector3(1.0, 1.0, 1.0)
 
 var attack_anim: AnimationPlayer
 
-var melee_range:= 1
+var melee_range:= 0
 
 
 func enter() -> void:
@@ -47,6 +47,7 @@ func ranged_attack():
 	if not attack_anim == null:
 		attack_anim.play("ranged_attack")
 	
+	O.fired_projectile.emit()
 	create_projectile()
 
 
@@ -64,6 +65,7 @@ func check_ranged():
 
 
 func create_projectile():
+	var data: EnemyResource = O.data
 	var projectile_inst: Projectile = PROJECTILE.instantiate()
 	
 	projectile_inst.damage = projectile_damage
@@ -74,7 +76,7 @@ func create_projectile():
 	get_parent().add_child(projectile_inst)
 	
 	projectile_inst.scale = projectile_scale
-	projectile_inst.sprite_3d.texture = DEFAULT_PROJECTILE_TEXTURE
+	projectile_inst.sprite_3d.texture = data.projectile_texture
 	projectile_inst.hitbox.set_collision_layer_value(6, true)
 	projectile_inst.global_position = O.sprite_3d.global_position
 	

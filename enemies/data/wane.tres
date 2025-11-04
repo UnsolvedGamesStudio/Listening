@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=3 format=3 uid="uid://dulaug22nx57o"]
+
+[ext_resource type="Texture2D" uid="uid://chmecnmge07ic" path="res://projectile/textures/fireball.png" id="1_tbodl"]
+[ext_resource type="Script" uid="uid://xik6wqrvw2sj" path="res://enemies/data/enemy_resource.gd" id="2_2fwq6"]
+
+[resource]
+script = ExtResource("2_2fwq6")
+id = "wane"
+name = "Wane"
+description = "Burnout"
+preferred_range = 1
+vision_limit = 15.0
+max_hp = 200.0
+movement_speed = 3
+body_damage = 30.0
+moves_every_x_beat = 6
+shoots_every_x_beat = 8
+melee_range = 0
+melee_damage = 10.0
+projectile_texture = ExtResource("1_tbodl")
+projectile_damage = 35.0
+projectile_speed = 45.0
+projectile_range = 4
+joy_damage_mult = 1.4
+sad_damage_mult = 0.6
+anger_damage_mult = 0.8

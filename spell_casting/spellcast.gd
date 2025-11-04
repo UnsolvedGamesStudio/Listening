@@ -62,14 +62,12 @@ func add_element(element: int):
 
 func cast_spell():
 	var container_ui: ElementContainerUI = get_tree().get_first_node_in_group("element_container_ui")
+	Bgm.play_sample(container)
 	
 	if container == []:
-		Bgm.play_midi(true)
 		if not Vars.last_activated_circle == null:
 			Vars.last_activated_circle.texture = EMPTY_CAST_SIGIL
 		return
-	
-	Bgm.play_midi(false)
 	
 	if not Vars.last_activated_circle == null:
 		Vars.last_activated_circle.texture = CAST_SIGIL

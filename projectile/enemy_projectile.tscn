@@ -1,0 +1,141 @@
+[gd_scene load_steps=9 format=3 uid="uid://6n70akjpdb5c"]
+
+[ext_resource type="Script" uid="uid://bralxx3e2dje3" path="res://projectile/enemy_projectile.gd" id="1_ayf6a"]
+[ext_resource type="Texture2D" uid="uid://dgygswxu7j8ds" path="res://projectile/textures/default_projectile.png" id="2_saffc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5pofb"]
+radius = 0.028029997
+
+[sub_resource type="Animation" id="Animation_dr2av"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3, 3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_makwg"]
+resource_name = "lifetime"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:transparency")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.06666667, 0.26666668),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(3, 3, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dr2av"]
+_data = {
+&"RESET": SubResource("Animation_dr2av"),
+&"lifetime": SubResource("Animation_makwg")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wl2ay"]
+radius = 0.27556098
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ftmid"]
+radius = 0.022055706
+
+[node name="EnemyProjectile" type="CharacterBody3D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_ayf6a")
+
+[node name="BodyCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_5pofb")
+disabled = true
+debug_color = Color(0, 0.5372549, 0.9607843, 0)
+debug_fill = false
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("2_saffc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_dr2av")
+}
+autoplay = "lifetime"
+
+[node name="Hitbox" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 10
+
+[node name="HitboxCollision" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("SphereShape3D_wl2ay")
+debug_color = Color(0.97987014, 0, 0.38836122, 0.41960785)
+
+[node name="KillTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.3
+one_shot = true
+
+[node name="WallDetect" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="WallCollision" type="CollisionShape3D" parent="WallDetect"]
+shape = SubResource("SphereShape3D_ftmid")
+debug_color = Color(0, 0.5372549, 0.9607843, 0.3529412)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+unique_name_in_owner = true
+light_color = Color(1, 1, 0.77254903, 1)
+omni_range = 1.0158099

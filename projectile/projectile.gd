@@ -7,6 +7,7 @@ const POP_TEXTURE = preload("uid://cyk5g3u4ymo2g")
 @onready var wall_detect: Area3D = %WallDetect
 @onready var hitbox: Area3D = %Hitbox
 @onready var kill_timer: Timer = %KillTimer
+@onready var omni_light_3d: OmniLight3D = %OmniLight3D
 
 var destroyed:= false
 
@@ -30,6 +31,11 @@ func _ready() -> void:
 	hitbox.area_entered.connect(on_hitbox_area_entered)
 	sprite_3d.modulate = color
 	starting_position = origin_node.global_position
+	enter()
+
+
+func enter():
+	pass
 
 
 func _physics_process(delta: float) -> void:
@@ -48,7 +54,7 @@ func destroy():
 	destroyed = true
 	kill_timer.start(linger_time)
 	velocity = Vector3.ZERO
-	
+	omni_light_3d.queue_free()
 	spawn_destroyed_fx()
 	
 	await kill_timer.timeout

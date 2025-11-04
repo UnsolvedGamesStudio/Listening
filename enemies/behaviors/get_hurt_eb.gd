@@ -61,13 +61,49 @@ func set_stats():
 	hp = max_hp
 
 
-func take_damage(amount: float):
-	hp -= amount
-	
+func take_damage(amount: float, with_elements: bool = false, elements: Array[int] = []):
 	if "hurt" in O.idle_anim.get_animation_list():
 		O.idle_anim.play("hurt")
 	
-	generate_text(amount)
+	var final_damage:= amount
+	var weakness_mult: float = calculate_weaknesses(elements)
+	final_damage *= weakness_mult
+	
+	lose_hp(final_damage)	
+	generate_text(final_damage, weakness_mult)
+	O.took_damage.emit(final_damage)
+
+
+func calculate_weaknesses(elements: Array[int] = []):
+	var total_mult:= 1.0
+	
+	if 0 in elements:
+		total_mult = mult_handle_negative(O.data.joy_damage_mult, total_mult)
+	
+	if 1 in elements:
+		total_mult = mult_handle_negative(O.data.sad_damage_mult, total_mult)
+	
+	if 2 in elements:
+		total_mult = mult_handle_negative(O.data.anger_damage_mult, total_mult)
+	
+	return total_mult
+
+
+func mult_handle_negative(mult: float, total_mult: float):
+	if mult == 1.0:
+		return total_mult
+	
+	if mult > 1.0:
+		total_mult += mult - 1
+		return total_mult
+	
+	if mult < 1.0:
+		total_mult -= mult
+		return total_mult
+
+
+func lose_hp(amount: float):
+	hp -= amount
 	
 	if hp <= 0:
 		die()
@@ -88,6 +124,8 @@ func die():
 	
 	if "die" in O.idle_anim.get_animation_list():
 		O.idle_anim.play("die")
+	else:
+		O.queue_free()
 	
 	if O.idle_anim.is_playing():
 		await O.idle_anim.animation_finished
@@ -95,17 +133,38 @@ func die():
 	O.queue_free()
 
 
-func generate_text(amount: float):
+func generate_text(amount: float, mult: float):
 	var player: Player = get_tree().get_first_node_in_group("player")
 	var text_inst: Node3D = DAMAGE_POPUP.instantiate()
 	var rand_vector3:= Vector3( randf_range(-0.5, 0.1), randf_range(-0.5, 0.5), randf_range(-0.5, 0.5) )
+	
 	add_child(text_inst)
 	text_inst.global_position = O.sprite_3d.global_position + rand_vector3
-	text_inst.label.text = str( int(amount) )
+	text_inst.scale *= clampf(mult, 0.8, 3.0)
+	
+	var label: Label = text_inst.label
+	var neutral_color:= Color.BLACK
+	var strong_color:= Color.DEEP_PINK
+	var weak_color:= Color.ROYAL_BLUE
+	
+	label.text = str( int(amount) )
+	
+	if mult == 1.0:
+		label.add_theme_color_override("font_color", neutral_color)
+	
+	if mult > 1.0:
+		label.add_theme_color_override("font_color", strong_color)
+	
+	if mult < 1.0:
+		label.add_theme_color_override("font_color", weak_color)
 
 
 func on_hurtbox_area_entered(area: Area3D):
 	if not "damage" in area.owner:
+		return
+	
+	if "elements" in area.owner:
+		take_damage(area.owner.damage, true, area.owner.elements)
 		return
 	
 	take_damage(area.owner.damage)

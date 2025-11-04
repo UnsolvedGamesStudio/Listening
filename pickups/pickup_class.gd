@@ -1,6 +1,7 @@
 extends Node3D
 class_name Pickup
-#Todo: try to make the highlight the interact's responsibility again
+## Todo: try to make the highlight the interact's responsibility again
+## Todo: add a view of what object is on the player's tile
 @onready var sprite_3d: Sprite3D = %Sprite3D
 @onready var area_3d: Area3D = %Area3D
 @onready var animation_player: AnimationPlayer = %AnimationPlayer

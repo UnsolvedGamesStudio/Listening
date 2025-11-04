@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=3 format=3 uid="uid://bpfcaia60x5l0"]
+
+[ext_resource type="Texture2D" uid="uid://dgygswxu7j8ds" path="res://projectile/textures/default_projectile.png" id="1_312vl"]
+[ext_resource type="Script" uid="uid://xik6wqrvw2sj" path="res://enemies/data/enemy_resource.gd" id="2_1y6wi"]
+
+[resource]
+script = ExtResource("2_1y6wi")
+id = "wax"
+name = "Wax"
+description = "Mania"
+vision_limit = 7.5
+max_hp = 300.0
+movement_speed = 8
+moves_every_x_beat = 3
+melees_every_x_beat = 1
+shoots_every_x_beat = 1
+melee_damage = 10.0
+joy_damage_mult = 0.6
+sad_damage_mult = 1.4
+anger_damage_mult = 0.8

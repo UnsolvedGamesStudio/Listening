@@ -1,12 +1,14 @@
-[gd_resource type="TileSet" load_steps=29 format=3 uid="uid://lpv2grascrwh"]
+[gd_resource type="TileSet" load_steps=32 format=3 uid="uid://lpv2grascrwh"]
 
 [ext_resource type="Texture2D" uid="uid://db0h4w7etjcx7" path="res://level_editor/textures/map_cell.png" id="1_50ula"]
 [ext_resource type="PackedScene" uid="uid://cqc1iuhqntykk" path="res://enemies/enemy_scenes/enemy_1.tscn" id="2_eidu8"]
 [ext_resource type="PackedScene" uid="uid://dwksm2bi3elij" path="res://enemies/enemy_scenes/enemy_2.tscn" id="3_2cs5i"]
+[ext_resource type="PackedScene" uid="uid://bnl5bv5ntklqt" path="res://enemies/enemy_scenes/wane.tscn" id="3_34tut"]
 [ext_resource type="PackedScene" uid="uid://bhqs3evyal73f" path="res://enemies/enemy_scenes/boredom.tscn" id="4_3shlq"]
 [ext_resource type="Texture2D" uid="uid://d3swrn3a28lxk" path="res://level_editor/textures/enemy_tiles.png" id="4_50ula"]
 [ext_resource type="PackedScene" uid="uid://061m5bvukwlk" path="res://enemies/enemy_scenes/dread.tscn" id="5_awf5f"]
 [ext_resource type="PackedScene" uid="uid://ciib1opj8rndx" path="res://pickups/key_pickup.tscn" id="6_2cs5i"]
+[ext_resource type="PackedScene" uid="uid://bm12hq1n81tt1" path="res://enemies/enemy_scenes/wax.tscn" id="6_d3nab"]
 [ext_resource type="Texture2D" uid="uid://ds7esfeg8ue4b" path="res://level_editor/textures/key_tiles.png" id="6_igeg8"]
 [ext_resource type="Texture2D" uid="uid://djogefuvahxmn" path="res://level_editor/textures/lock_tiles.png" id="7_ycaiu"]
 [ext_resource type="PackedScene" uid="uid://c5gdwlmng0rsy" path="res://puzzles/locked_wall.tscn" id="8_3shlq"]
@@ -17,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://7meyinovsje0" path="res://pickups/synapse_pickup.tscn" id="10_eidu8"]
 [ext_resource type="Texture2D" uid="uid://d33t4kcxy55l4" path="res://level_editor/textures/hazards.png" id="10_twauv"]
 [ext_resource type="PackedScene" uid="uid://c86l6d7h0h8wa" path="res://hazards/spikes/spikes.tscn" id="12_rejae"]
+[ext_resource type="PackedScene" uid="uid://du111uv3smns3" path="res://pickups/shrinking_pickup.tscn" id="16_0rogf"]
 [ext_resource type="Texture2D" uid="uid://bgu3cdflev8e0" path="res://level_editor/textures/tile_forgetter.png" id="18_awf5f"]
 [ext_resource type="PackedScene" uid="uid://3fekdhfnam6y" path="res://puzzles/forgetter.tscn" id="18_ihw02"]
 [ext_resource type="PackedScene" uid="uid://b0ct4efrkp6xh" path="res://pickups/rememberer.tscn" id="19_ihw02"]
@@ -38,6 +41,10 @@ texture = ExtResource("4_50ula")
 2:0/0/custom_data_0 = ExtResource("4_3shlq")
 3:0/0 = 0
 3:0/0/custom_data_0 = ExtResource("5_awf5f")
+4:0/0 = 0
+4:0/0/custom_data_0 = ExtResource("6_d3nab")
+0:1/0 = 0
+0:1/0/custom_data_0 = ExtResource("3_34tut")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1h6v4"]
 resource_name = "Keys"
@@ -74,6 +81,8 @@ texture_region_size = Vector2i(32, 32)
 0:0/0/custom_data_0 = ExtResource("9_l7cd0")
 1:0/0 = 0
 1:0/0/custom_data_0 = ExtResource("10_eidu8")
+2:0/0 = 0
+2:0/0/custom_data_0 = ExtResource("16_0rogf")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eidu8"]
 resource_name = "Hazards"

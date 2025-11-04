@@ -32,9 +32,8 @@ func activate():
 
 func remembember_all_forgetters():
 	for forgetter in Vars.forgetters:
-		if not forgetter.puzzle_id == puzzle_id:
-			return
 		
-		forgetter.remember()
+		if forgetter.puzzle_id == puzzle_id:
+			forgetter.remember()
 	
 	vanish()

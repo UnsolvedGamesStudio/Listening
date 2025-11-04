@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ycxhwv4g5a5v" path="res://vfx/EnemyIndicator.tscn" id="3_2427j"]
 [ext_resource type="PackedScene" uid="uid://cmviqulbv2o3x" path="res://enemies/behaviors/get_hurt_eb.tscn" id="4_u8suu"]
 [ext_resource type="PackedScene" uid="uid://d3qw0t4lwkfbh" path="res://enemies/behaviors/movement_eb.tscn" id="5_cxg6r"]
+[ext_resource type="PackedScene" uid="uid://d0ruxhcq4o58e" path="res://enemies/room_notifier.tscn" id="7_ykmb4"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7frlh"]
 radius = 0.3896371
@@ -33,9 +34,6 @@ tracks/0/keys = {
 _data = {
 &"die": SubResource("Animation_5so5x")
 }
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_c2kus"]
-radius = 0.2
 
 [node name="Enemy" type="Node3D"]
 script = ExtResource("1_42w3n")
@@ -107,6 +105,8 @@ unique_name_in_owner = true
 
 [node name="MovementEB" parent="Behaviors" instance=ExtResource("5_cxg6r")]
 
+[node name="RoomNotifier" parent="." instance=ExtResource("7_ykmb4")]
+
 [node name="IdleAnim" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
@@ -116,9 +116,3 @@ libraries = {
 [node name="AttackAnim" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 root_node = NodePath("../IdleAnim")
-
-[node name="RoomNotifier" type="Area3D" parent="." groups=["enemy_room_notifier"]]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomNotifier"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35609412, 0)
-shape = SubResource("SphereShape3D_c2kus")

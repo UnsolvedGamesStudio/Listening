@@ -28,6 +28,7 @@ func set_stats():
 
 func melee_attack():
 	Find.P().take_damage(melee_damage, O)
+	O.used_melee.emit()
 	
 	if not attack_anim == null:
 		attack_anim.play("attack")

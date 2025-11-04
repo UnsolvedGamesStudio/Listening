@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ckrngbta7laek" path="res://enemies/behaviors/melee_attack_eb.tscn" id="5_ptsd7"]
 [ext_resource type="PackedScene" uid="uid://d3qw0t4lwkfbh" path="res://enemies/behaviors/movement_eb.tscn" id="6_efcc8"]
 [ext_resource type="PackedScene" uid="uid://b8rwjdbr6qey4" path="res://enemies/behaviors/ranged_attack_eb.tscn" id="7_dqe6f"]
+[ext_resource type="PackedScene" uid="uid://d0ruxhcq4o58e" path="res://enemies/room_notifier.tscn" id="8_lkkme"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7frlh"]
 radius = 0.3896371
@@ -126,9 +127,6 @@ _data = {
 &"ranged_attack": SubResource("Animation_a6vjd")
 }
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_8dnoj"]
-radius = 0.2
-
 [node name="Enemy" type="Node3D"]
 script = ExtResource("1_dvt88")
 
@@ -189,6 +187,19 @@ collide_with_bodies = false
 [node name="EnemyIndicator" parent="." instance=ExtResource("4_8dnoj")]
 unique_name_in_owner = true
 
+[node name="Behaviors" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="GetHurtEB" parent="Behaviors" instance=ExtResource("4_lkkme")]
+
+[node name="MovementEB" parent="Behaviors" instance=ExtResource("6_efcc8")]
+
+[node name="MeleeAttackEB" parent="Behaviors" instance=ExtResource("5_ptsd7")]
+
+[node name="RangedAttackEB" parent="Behaviors" instance=ExtResource("7_dqe6f")]
+
+[node name="RoomNotifier" parent="." instance=ExtResource("8_lkkme")]
+
 [node name="IdleAnim" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
@@ -201,20 +212,3 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_07tka")
 }
-
-[node name="Behaviors" type="Node" parent="."]
-unique_name_in_owner = true
-
-[node name="GetHurtEB" parent="Behaviors" instance=ExtResource("4_lkkme")]
-
-[node name="MovementEB" parent="Behaviors" instance=ExtResource("6_efcc8")]
-
-[node name="MeleeAttackEB" parent="Behaviors" instance=ExtResource("5_ptsd7")]
-
-[node name="RangedAttackEB" parent="Behaviors" instance=ExtResource("7_dqe6f")]
-
-[node name="RoomNotifier" type="Area3D" parent="." groups=["enemy_room_notifier"]]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomNotifier"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35609412, 0)
-shape = SubResource("SphereShape3D_8dnoj")

@@ -15,7 +15,7 @@ func _ready() -> void:
 	Vars.forgetters.append(self)
 	set_collision_size()
 	area_3d.area_entered.connect(on_area_3d_area_entered)
-	await get_tree().create_timer(0.01).timeout
+	await get_tree().create_timer(0.25).timeout
 	active = false
 
 
@@ -56,7 +56,12 @@ func remember():
 func on_area_3d_area_entered(area: Area3D):
 	if active == false:
 		return
-	await get_tree().create_timer(0.01).timeout
+	
+	await get_tree().create_timer(0.25).timeout
+	
+	if area.owner is RemembererPickup:
+		return
+	
 	if area.owner is Cell:
 		forget_cell(area)
 	else:

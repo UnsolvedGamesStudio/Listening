@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="EnemyResource" load_steps=4 format=3 uid="uid://cwljawr36evsw"]
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=3 format=3 uid="uid://cwljawr36evsw"]
 
 [ext_resource type="Texture2D" uid="uid://dgygswxu7j8ds" path="res://projectile/textures/default_projectile.png" id="1_apj0g"]
 [ext_resource type="Script" uid="uid://xik6wqrvw2sj" path="res://enemies/data/enemy_resource.gd" id="2_tavwi"]
-[ext_resource type="Texture2D" uid="uid://up16qvqyk6lp" path="res://enemies/textures/iseen_a_skull2.png" id="3_tavwi"]
 
 [resource]
 script = ExtResource("2_tavwi")
@@ -11,8 +10,8 @@ max_hp = 200.0
 movement_speed = 2
 moves_every_x_beat = 8
 shoots_every_x_beat = 1
-texture = ExtResource("3_tavwi")
 melee_damage = 30.0
 projectile_damage = 2.5
+projectile_speed = 80.0
 projectile_range = 4
 projectile_scale = Vector3(0.1, 0.1, 0.1)

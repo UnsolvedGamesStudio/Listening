@@ -1,5 +1,5 @@
 extends AudioStreamPlayer
-
+## Todo: Try to make the spells play just one of the notes in the chord, per element
 @onready var rhythm_notifier: RhythmNotifier = %RhythmNotifier
 @onready var midi_player: MidiPlayer = %MidiPlayer
 @onready var sampler_instrument: SamplerInstrument = %SamplerInstrument
@@ -40,6 +40,7 @@ func on_midi_note_played(event, track):
 
 
 func midi_to_name(midi_number):
+	## Todo: change this to be timing based, or have an option to be, and an option for chord size
 	if current_chord.size() >= 4:
 		current_chord.clear()
 	
@@ -56,16 +57,77 @@ func midi_to_name(midi_number):
 	current_chord.append([note_name, octave_number - 4])
 
 
-func play_midi(empty: bool = false):
-	var octave_modifier:= 1
-	var sample:= sampler_instrument.samples[0]
+func play_sample(elements: Array[int] = []):
+	if current_chord == []:
+		return
 	
-	if empty == true:
-		octave_modifier = 0
+	var sample:= sampler_instrument.samples[0]
 	
 	sampler_instrument.stop()
 	
-	print(current_chord)
+	if elements == []:
+		play_single_note(current_chord.pick_random(), 1)
+	
+	if elements.size() == 3:
+		play_full_chord()
+		return
+	
+	for element in elements:
+		if element == 0:
+			play_single_note(current_chord[-1], 1)
+		
+		if element == 1:
+			play_single_note(current_chord[0], 1)
+		
+		if element == 2:
+			play_single_note(current_chord[2], 1)
+	
+	## v Plays each note with octave based on when it is played v
+	#var plays:= 0
+	#for element in elements:
+		#print(plays)
+		#if element == 0:
+			#play_single_note(current_chord[-1], 2)
+			#if plays == 1:
+				#play_single_note(current_chord[-1], 1)
+			#if plays == 2:
+				#play_single_note(current_chord[-1], 0)
+#
+		#if element == 1:
+			#play_single_note(current_chord[0], 0)
+			#if plays == 1:
+				#play_single_note(current_chord[-1], -1)
+			#if plays == 2:
+				#play_single_note(current_chord[-1], -2)
+		#
+		#if element == 2:
+			#play_single_note(current_chord[2], 1)
+			#if plays == 1:
+				#play_single_note(current_chord[-1], 0)
+			#if plays == 2:
+				#play_single_note(current_chord[-1], -1)
+		#
+		#plays +=1
+
+
+func play_single_note(note, octave: int = 0):
+	var octave_modifier:= -1
+	if current_chord == []:
+		return
+	
+	var sample:= sampler_instrument.samples[0]
+	
+	sample.tone = note[0]
+	sample.octave = -1
+	
+	sampler_instrument.play_note(note[0], octave + octave_modifier)
+
+
+func play_full_chord(octave_modifier: int = 1):
+	if current_chord == []:
+		return
+	
+	var sample:= sampler_instrument.samples[0]
 	
 	for note in current_chord:
 		sample.tone = note[0]

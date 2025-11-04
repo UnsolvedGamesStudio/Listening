@@ -69,9 +69,9 @@ _data = {
 script = ExtResource("1_bsr0a")
 
 [node name="HealthBar3D" type="Sprite3D" parent="."]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.26, 0)
+transform = Transform3D(2.8444445, 0, 0, 0, 2.8444445, 0, 0, 0, 2.8444445, 0, 0.28944448, 0)
 layers = 2
-modulate = Color(1, 1, 1, 0)
+modulate = Color(1, 1, 1, 1.6407406)
 billboard = 2
 double_sided = false
 texture_filter = 0
@@ -96,6 +96,8 @@ offset_bottom = 6.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.627451, 0.23529412, 0.3137255, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
 text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1

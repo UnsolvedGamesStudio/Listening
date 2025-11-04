@@ -31,6 +31,11 @@ var sees_player:= false
 
 var counts_towards_goal:= true
 
+signal took_damage(amount: float)
+signal used_melee
+signal fired_projectile
+signal projectile_hit_player
+
 
 func _ready() -> void:
 	init_stats()
@@ -109,6 +114,10 @@ func get_direction_to_player():
 
 func within_distance_to_player(distance: int):
 	if Vars.player_cell == null:
+		return false
+	
+	if occupied_cell == null:
+		printerr(self, ": occupied_cell not found")
 		return false
 	
 	var cell_distance:= roundi( (occupied_cell.cell_grid_position - Vars.player_cell.cell_grid_position).length() )

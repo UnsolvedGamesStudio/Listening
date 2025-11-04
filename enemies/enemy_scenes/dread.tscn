@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://i3xbqc7wfdun" path="res://enemies/behaviors/specific/lose_alpha_from_element_eb.tscn" id="9_xv41r"]
 [ext_resource type="PackedScene" uid="uid://drd57nfhjpv8h" path="res://enemies/behaviors/specific/damaging_aura_eb.tscn" id="10_8ebju"]
 [ext_resource type="PackedScene" uid="uid://den8yot1hi48" path="res://enemies/behaviors/rotate_to_player_eb.tscn" id="10_jvcgx"]
+[ext_resource type="PackedScene" uid="uid://d0ruxhcq4o58e" path="res://enemies/room_notifier.tscn" id="11_jvcgx"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_8dnoj"]
 viewport_path = NodePath("ToAnimate/HealthBar3D/SubViewport")
@@ -58,9 +59,6 @@ _data = {
 &"attack": SubResource("Animation_orwns"),
 &"ranged_attack": SubResource("Animation_a6vjd")
 }
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_xv41r"]
-radius = 0.2
 
 [node name="Enemy" type="Node3D"]
 script = ExtResource("1_5lhxg")
@@ -152,14 +150,14 @@ libraries = {
 [node name="Behaviors" type="Node3D" parent="."]
 unique_name_in_owner = true
 
-[node name="MovementEB" parent="Behaviors" instance=ExtResource("6_miyy1")]
-see_through_walls = true
-
 [node name="MeleeAttackEB" parent="Behaviors" instance=ExtResource("7_pa56o")]
 enabled = false
 
 [node name="RangedAttackEB" parent="Behaviors" instance=ExtResource("8_px4t6")]
 enabled = false
+
+[node name="MovementEB" parent="Behaviors" instance=ExtResource("6_miyy1")]
+see_through_walls = true
 
 [node name="RotateToPlayerEB" parent="Behaviors" node_paths=PackedStringArray("to_rotate") instance=ExtResource("10_jvcgx")]
 to_rotate = NodePath("../../Mesh")
@@ -169,8 +167,4 @@ mesh = NodePath("../../Mesh/BentStickman")
 
 [node name="DamagingAuraEB" parent="Behaviors" instance=ExtResource("10_8ebju")]
 
-[node name="RoomNotifier" type="Area3D" parent="." groups=["enemy_room_notifier"]]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomNotifier"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35609412, 0)
-shape = SubResource("SphereShape3D_xv41r")
+[node name="RoomNotifier" parent="." instance=ExtResource("11_jvcgx")]

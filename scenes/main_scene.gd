@@ -1,4 +1,4 @@
 extends Node
 class_name MainScene
 
-@export_enum("level", "title_screen") var scene_to_load:= "layout"
+@export_enum("layout") var scene_to_load:= "title_screen"
