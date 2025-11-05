@@ -1,5 +1,6 @@
 extends EnemyBehavior
 ## Todo: if a wax mound is in range, make it eat it to regenerate
+## Todo: make wane drop wax
 @export var get_hurt_eb: GetHurtEB
 @export var light: OmniLight3D
 @export var self_damage_amount:= 25.0

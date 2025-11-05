@@ -1,7 +1,7 @@
 extends Button
 
 @export var type: types
-enum types {RESUME, EXIT, PLAY_AGAIN}
+enum types {RESUME, EXIT, PLAY_AGAIN, HUB}
 
 
 func _ready() -> void:
@@ -17,4 +17,14 @@ func on_button_up():
 		get_tree().quit()
 	
 	if type == types.PLAY_AGAIN:
-		SceneManager.reload_game()
+		if owner.has_method("unpause"):
+			owner.unpause()
+		
+		SceneManager.reload_level()
+	
+	if type == types.HUB:
+		if owner.has_method("unpause"):
+			owner.unpause()
+		
+		SceneManager.switch_scene("hub_world")
+		Bgm.stop_song()

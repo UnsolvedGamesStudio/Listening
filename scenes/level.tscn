@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cup1ntaax8sgg"]
 
 [ext_resource type="PackedScene" uid="uid://dflkyrrs1kf1s" path="res://timing_bar/beat_vizualizer.tscn" id="2_1ainy"]
-[ext_resource type="PackedScene" uid="uid://d3u7i3tehxhh6" path="res://terrain/floor.tscn" id="3_oi3di"]
+[ext_resource type="PackedScene" uid="uid://d3u7i3tehxhh6" path="res://terrain/cells/floor_cell.tscn" id="3_oi3di"]
 [ext_resource type="PackedScene" uid="uid://itikcsbog7mw" path="res://terrain/wall.tscn" id="4_0b4ue"]
 [ext_resource type="PackedScene" uid="uid://ce10gkdeiprj7" path="res://player/player.tscn" id="4_km5ld"]
 

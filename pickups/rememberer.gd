@@ -1,6 +1,6 @@
 extends Pickup
 class_name RemembererPickup
-## Todo: create cloud particles in place of forgotten
+## Todo: create cloud particles in place of forgotten and different particles when remembered
 @onready var label: Label = %Label
 
 var puzzle_id:= -1

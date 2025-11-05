@@ -137,5 +137,6 @@ debug_color = Color(0, 0.5372549, 0.9607843, 0.3529412)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 unique_name_in_owner = true
+visible = false
 light_color = Color(1, 1, 0.77254903, 1)
 omni_range = 1.0158099

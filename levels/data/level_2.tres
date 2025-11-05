@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=4 format=3 uid="uid://eaohvebjnkqq"]
+
+[ext_resource type="Texture2D" uid="uid://b4s6ykblvadm" path="res://terrain/textures/papertexture-2061711_640.png" id="1_0d76p"]
+[ext_resource type="PackedScene" uid="uid://ccywvjqsju55m" path="res://levels/blueprints/level_2_blueprint.tscn" id="2_mb4w8"]
+[ext_resource type="Script" uid="uid://bdhljiae46x1x" path="res://levels/data/level_data.gd" id="3_p22uq"]
+
+[resource]
+script = ExtResource("3_p22uq")
+level_name = "Tantalus (WIP)"

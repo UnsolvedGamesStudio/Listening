@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://cymlv5avqago2"]
+
+[ext_resource type="Script" uid="uid://cnier2fyv1lb5" path="res://terrain/cells/unwalled_cell.gd" id="1_4n1le"]
+[ext_resource type="PackedScene" uid="uid://bw8gqh3mcauhb" path="res://terrain/ceiling.tscn" id="2_4qois"]
+[ext_resource type="PackedScene" uid="uid://de0flumabcluq" path="res://terrain/cells/cell.tscn" id="3_sm8or"]
+[ext_resource type="Material" uid="uid://bd5kwov3i5lgu" path="res://terrain/textures/floor_material.tres" id="4_4qois"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7ypjj"]
+material = ExtResource("4_4qois")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8d6ju"]
+size = Vector3(2, 0.001, 2)
+
+[node name="FloorCellCeiling" type="Node3D"]
+script = ExtResource("1_4n1le")
+
+[node name="TopFace" parent="." instance=ExtResource("2_4qois")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 1.509958e-07, 0, -1.509958e-07, -1, 0, 0, 0, 1, 0, 4, 0)
+
+[node name="BottomFace" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_4n1le")
+
+[node name="Cell" parent="BottomFace" instance=ExtResource("3_sm8or")]
+unique_name_in_owner = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BottomFace"]
+mesh = SubResource("PlaneMesh_7ypjj")
+
+[node name="Area3D" type="Area3D" parent="BottomFace/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.557168e-08, -0.50048876, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BottomFace/MeshInstance3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4995, 0.0042419434)
+shape = SubResource("BoxShape3D_8d6ju")
+debug_color = Color(0.9926967, 0, 0.25486487, 0.41960785)

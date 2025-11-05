@@ -1,0 +1,170 @@
+[gd_scene load_steps=11 format=3 uid="uid://oqqdlvk5l7s8"]
+
+[ext_resource type="Script" uid="uid://bjjl8xitp77ry" path="res://hub_world/level_loader.gd" id="1_6x6pu"]
+[ext_resource type="PlaneMesh" uid="uid://covn2ehde4snx" path="res://vfx/particle_mesh.tres" id="2_b3c8u"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ggjwm"]
+load_path = "res://.godot/imported/enemy_indicator.png-0f7790bf2cab8c79a925a8bddac29c93.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_li2hn"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.94937307, 2.4732084, 3.1229057, 1)
+albedo_texture = SubResource("CompressedTexture2D_ggjwm")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_k3r13"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_li2hn")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6x6pu"]
+viewport_path = NodePath("LevelNameLabel3D/SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6x6pu"]
+size = Vector3(1.9, 4, 1.9)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wj35b"]
+emission_shape = 3
+emission_box_extents = Vector3(0.9, 1, 0.9)
+gravity = Vector3(0, 5, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = -2.2351742e-06
+damping_min = 3.0000002
+damping_max = 3.0000002
+turbulence_enabled = true
+turbulence_noise_strength = 3.69
+turbulence_noise_scale = 5.555
+turbulence_noise_speed = Vector3(1, 0, 1)
+turbulence_influence_min = 0.08800001
+turbulence_influence_max = 0.128
+
+[sub_resource type="Animation" id="Animation_oead0"]
+resource_name = "idle"
+loop_mode = 2
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WarpEffect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WarpEffect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.05, 0), Vector3(0, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WarpEffect2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WarpEffect2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1, 0), Vector3(0, 0.05, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oetdi"]
+_data = {
+&"idle": SubResource("Animation_oead0")
+}
+
+[node name="LevelLoader" type="Node3D"]
+script = ExtResource("1_6x6pu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("PlaneMesh_k3r13")
+
+[node name="WarpEffect" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("PlaneMesh_k3r13")
+
+[node name="WarpEffect2" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0)
+mesh = SubResource("PlaneMesh_k3r13")
+
+[node name="LevelNameLabel3D" type="Sprite3D" parent="."]
+transform = Transform3D(2.8444445, 0, 0, 0, 2.8444445, 0, 0, 0, 2.8444445, 0, 1.2908214, 0)
+layers = 2
+modulate = Color(1, 1, 1, 1.6407406)
+billboard = 2
+double_sided = false
+texture_filter = 0
+render_priority = 1
+texture = SubResource("ViewportTexture_6x6pu")
+
+[node name="SubViewport" type="SubViewport" parent="LevelNameLabel3D"]
+transparent_bg = true
+size = Vector2i(200, 200)
+
+[node name="LevelNameLabel" type="Label" parent="LevelNameLabel3D/SubViewport"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -6.5
+offset_right = 20.0
+offset_bottom = 6.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.99999994, 0.104506545, 0.8650311, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Level Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area3D" type="Area3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_6x6pu")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0019454, 0)
+process_material = SubResource("ParticleProcessMaterial_wj35b")
+draw_pass_1 = ExtResource("2_b3c8u")
+
+[node name="Warp" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_oetdi")
+}
+autoplay = "idle"

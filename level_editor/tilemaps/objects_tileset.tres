@@ -1,0 +1,160 @@
+[gd_resource type="TileSet" load_steps=32 format=3 uid="uid://lpv2grascrwh"]
+
+[ext_resource type="PackedScene" uid="uid://cqc1iuhqntykk" path="res://enemies/enemy_scenes/enemy_1.tscn" id="1_xlmst"]
+[ext_resource type="PackedScene" uid="uid://bnl5bv5ntklqt" path="res://enemies/enemy_scenes/wane.tscn" id="2_picxt"]
+[ext_resource type="PackedScene" uid="uid://dwksm2bi3elij" path="res://enemies/enemy_scenes/enemy_2.tscn" id="3_tmd81"]
+[ext_resource type="PackedScene" uid="uid://bhqs3evyal73f" path="res://enemies/enemy_scenes/boredom.tscn" id="4_4egai"]
+[ext_resource type="PackedScene" uid="uid://bm12hq1n81tt1" path="res://enemies/enemy_scenes/wax.tscn" id="5_a0av3"]
+[ext_resource type="Texture2D" uid="uid://d3swrn3a28lxk" path="res://level_editor/textures/enemy_tiles.png" id="6_tyv0d"]
+[ext_resource type="PackedScene" uid="uid://ciib1opj8rndx" path="res://pickups/key_pickup.tscn" id="7_fy8em"]
+[ext_resource type="Texture2D" uid="uid://ds7esfeg8ue4b" path="res://level_editor/textures/key_tiles.png" id="8_8ejya"]
+[ext_resource type="PackedScene" uid="uid://c5gdwlmng0rsy" path="res://puzzles/locked_wall.tscn" id="9_vjw6d"]
+[ext_resource type="Texture2D" uid="uid://djogefuvahxmn" path="res://level_editor/textures/lock_tiles.png" id="10_xpg0n"]
+[ext_resource type="PackedScene" uid="uid://c7wmmnca4o1dx" path="res://player/spawn_point.tscn" id="11_p8tcd"]
+[ext_resource type="Texture2D" uid="uid://dy0umo4pgu5jm" path="res://level_editor/textures/player_spawn.png" id="12_do3f7"]
+[ext_resource type="PackedScene" uid="uid://b4d6fhecioyhy" path="res://pickups/healing_pickup.tscn" id="13_ljakf"]
+[ext_resource type="PackedScene" uid="uid://7meyinovsje0" path="res://pickups/synapse_pickup.tscn" id="14_5q57f"]
+[ext_resource type="PackedScene" uid="uid://du111uv3smns3" path="res://pickups/shrinking_pickup.tscn" id="15_j5ejy"]
+[ext_resource type="Texture2D" uid="uid://bhqj8jqxnu0q" path="res://level_editor/textures/pickups.png" id="16_5amkr"]
+[ext_resource type="PackedScene" uid="uid://c86l6d7h0h8wa" path="res://hazards/spikes/spikes.tscn" id="17_6nvqy"]
+[ext_resource type="Texture2D" uid="uid://d33t4kcxy55l4" path="res://level_editor/textures/hazards.png" id="18_3apw0"]
+[ext_resource type="PackedScene" uid="uid://3fekdhfnam6y" path="res://puzzles/forgetter.tscn" id="19_njp5m"]
+[ext_resource type="PackedScene" uid="uid://b0ct4efrkp6xh" path="res://pickups/rememberer.tscn" id="20_mex6l"]
+[ext_resource type="Texture2D" uid="uid://bgu3cdflev8e0" path="res://level_editor/textures/tile_forgetter.png" id="21_88r7q"]
+[ext_resource type="Texture2D" uid="uid://c2mc4syhlqu3c" path="res://level_editor/textures/unique_object_tiles.png" id="22_eniq0"]
+[ext_resource type="PackedScene" uid="uid://cqb65v1tel2pb" path="res://level_editor/unique_object_placer.tscn" id="22_picxt"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5jdw0"]
+resource_name = "Enemies"
+texture = ExtResource("6_tyv0d")
+0:1/0 = 0
+0:1/0/custom_data_0 = ExtResource("2_picxt")
+4:0/0 = 0
+4:0/0/custom_data_0 = ExtResource("5_a0av3")
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("1_xlmst")
+1:0/0 = 0
+1:0/0/custom_data_0 = ExtResource("3_tmd81")
+2:0/0 = 0
+2:0/0/custom_data_0 = ExtResource("4_4egai")
+3:0/0 = 0
+3:0/0/custom_data_0 = ExtResource("4_4egai")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1h6v4"]
+resource_name = "Keys"
+texture = ExtResource("8_8ejya")
+margins = Vector2i(1, 1)
+separation = Vector2i(2, 0)
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("7_fy8em")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hkqec"]
+resource_name = "Locks"
+texture = ExtResource("10_xpg0n")
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("9_vjw6d")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ycaiu"]
+resource_name = "Player Spawn"
+texture = ExtResource("12_do3f7")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("11_p8tcd")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l7cd0"]
+resource_name = "Pickups"
+texture = ExtResource("16_5amkr")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("13_ljakf")
+1:0/0 = 0
+1:0/0/custom_data_0 = ExtResource("14_5q57f")
+2:0/0 = 0
+2:0/0/custom_data_0 = ExtResource("15_j5ejy")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eidu8"]
+resource_name = "Hazards"
+texture = ExtResource("18_3apw0")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("17_6nvqy")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gofoe"]
+resource_name = "Tile Forgetter"
+texture = ExtResource("21_88r7q")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("19_njp5m")
+0:0/0/custom_data_1 = 1
+1:0/0 = 0
+1:0/0/custom_data_0 = ExtResource("19_njp5m")
+1:0/0/custom_data_1 = 2
+2:0/0 = 0
+2:0/0/custom_data_0 = ExtResource("19_njp5m")
+2:0/0/custom_data_1 = 3
+3:0/0 = 0
+3:0/0/custom_data_0 = ExtResource("19_njp5m")
+3:0/0/custom_data_1 = 4
+0:1/0 = 0
+0:1/0/custom_data_0 = ExtResource("20_mex6l")
+0:1/0/custom_data_1 = 1
+1:1/0 = 0
+1:1/0/custom_data_0 = ExtResource("20_mex6l")
+1:1/0/custom_data_1 = 2
+2:1/0 = 0
+2:1/0/custom_data_0 = ExtResource("20_mex6l")
+2:1/0/custom_data_1 = 3
+3:1/0 = 0
+3:1/0/custom_data_0 = ExtResource("20_mex6l")
+3:1/0/custom_data_1 = 4
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1j3dw"]
+texture = ExtResource("22_eniq0")
+texture_region_size = Vector2i(32, 32)
+3:0/0 = 0
+3:0/0/custom_data_0 = ExtResource("22_picxt")
+3:0/0/custom_data_2 = 4
+2:0/0 = 0
+2:0/0/custom_data_0 = ExtResource("22_picxt")
+2:0/0/custom_data_2 = 3
+1:0/0 = 0
+1:0/0/custom_data_0 = ExtResource("22_picxt")
+1:0/0/custom_data_2 = 2
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("22_picxt")
+0:0/0/custom_data_2 = 1
+4:0/0 = 0
+4:0/0/custom_data_0 = ExtResource("22_picxt")
+4:0/0/custom_data_2 = 5
+4:1/0 = 0
+4:1/0/custom_data_0 = ExtResource("22_picxt")
+4:1/0/custom_data_2 = 10
+3:1/0 = 0
+3:1/0/custom_data_0 = ExtResource("22_picxt")
+3:1/0/custom_data_2 = 9
+2:1/0 = 0
+2:1/0/custom_data_0 = ExtResource("22_picxt")
+2:1/0/custom_data_2 = 8
+1:1/0 = 0
+1:1/0/custom_data_0 = ExtResource("22_picxt")
+1:1/0/custom_data_2 = 7
+0:1/0 = 0
+0:1/0/custom_data_0 = ExtResource("22_picxt")
+0:1/0/custom_data_2 = 6
+
+[resource]
+tile_size = Vector2i(32, 32)
+custom_data_layer_0/name = "scene"
+custom_data_layer_0/type = 24
+custom_data_layer_1/name = "puzzle_id"
+custom_data_layer_1/type = 2
+custom_data_layer_2/name = "unique_object_id"
+custom_data_layer_2/type = 2
+sources/1 = SubResource("TileSetAtlasSource_5jdw0")
+sources/2 = SubResource("TileSetAtlasSource_1h6v4")
+sources/3 = SubResource("TileSetAtlasSource_hkqec")
+sources/4 = SubResource("TileSetAtlasSource_ycaiu")
+sources/5 = SubResource("TileSetAtlasSource_l7cd0")
+sources/6 = SubResource("TileSetAtlasSource_eidu8")
+sources/7 = SubResource("TileSetAtlasSource_gofoe")
+sources/8 = SubResource("TileSetAtlasSource_1j3dw")

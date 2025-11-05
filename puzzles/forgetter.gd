@@ -1,7 +1,6 @@
 extends Node3D
 class_name Forgetter
-##Todo: add export to the tilemap letting you pick how many synapses are\
-## required for which number of forgetter
+
 @onready var area_3d: Area3D = %Area3D
 @onready var collision_shape_3d: CollisionShape3D = %CollisionShape3D
 
@@ -26,10 +25,19 @@ func set_collision_size():
 
 func forget_cell(area: Area3D):
 	var cell = area.owner
-	if not cell.owner.owner is WalledCell:
+	
+	if not cell.owner.owner == null:
+		forget(cell.owner.owner)
 		return
 	
-	forget(cell.owner.owner)
+	if not cell.owner == null:
+		forget(cell.owner)
+		return
+	
+	if cell is Cell:
+		forget(cell)
+		return
+
 
 
 func forget_entity(area: Area3D):
@@ -40,6 +48,10 @@ func forget_entity(area: Area3D):
 
 
 func forget(object: Node3D):
+	if object == null:
+		printerr(self, " forget(): object not found")
+		return
+	
 	object.hide()
 	object.process_mode = Node.PROCESS_MODE_DISABLED
 	forgotten_nodes.append(object)

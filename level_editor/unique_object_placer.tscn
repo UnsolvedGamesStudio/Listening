@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqb65v1tel2pb"]
+
+[ext_resource type="Script" uid="uid://c2oqc77a807qv" path="res://level_editor/unique_object_placer.gd" id="1_4j2wo"]
+
+[node name="UniqueObjectPlacer" type="Node3D"]
+script = ExtResource("1_4j2wo")

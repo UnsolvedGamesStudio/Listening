@@ -42,6 +42,12 @@ window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 window/stretch/scale_mode="integer"
 
+[editor]
+
+movie_writer/ogv/audio_quality=0.7000000000000001
+movie_writer/ogv/encoding_speed=3
+movie_writer/movie_file="D:/Documents/godot projects/exports/movie/video.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/SimpleSampler/plugin.cfg", "res://addons/godot_midi/plugin.cfg")
@@ -61,9 +67,9 @@ player_spawn=""
 obstacle_collision=""
 enemy_room_notifier=""
 editor_objects=""
-editor_cells=""
 level_blueprint=""
 forgetter=""
+editor_cells=""
 
 [gui]
 

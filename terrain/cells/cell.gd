@@ -1,12 +1,12 @@
 extends Node3D
 class_name Cell
 
+@onready var cell_collision: CellCollision = $CellCollision
 
 var occupants: Array[Node3D]
-
 var cell_grid_position: Vector2i = Vector2.ZERO
 
-@onready var cell_collision: CellCollision = $CellCollision
+var cell:= self
 
 
 func _ready() -> void:

@@ -29,7 +29,8 @@ func start():
 	await Filters.fade.animation_finished
 	Bgm.non_beat_bgm.stop()
 	Filters.fade.play("fade_out")
-	SceneManager.switch_scene("layout")
+	
+	SceneManager.switch_scene("hub_world")
 
 
 func on_mouse_entered():

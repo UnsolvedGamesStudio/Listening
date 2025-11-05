@@ -34,6 +34,9 @@ func _input(event: InputEvent) -> void:
 func on_cast_pressed():
 	var success: String = Bgm.check_accuracy()
 	
+	if Bgm.playing == false:
+		Bgm.play_sample(container)
+	
 	if success == "missed":
 		return
 	
@@ -42,6 +45,11 @@ func on_cast_pressed():
 
 func add_element(element: int):
 	var container_ui: ElementContainerUI = get_tree().get_first_node_in_group("element_container_ui")
+	
+	if container_ui == null:
+		printerr(self, ": container_ui not found")
+		return
+	
 	var success: String = Bgm.check_accuracy()
 	
 	if success == "missed":

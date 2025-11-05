@@ -1,13 +1,8 @@
 extends Node
 ## Todo: read and translate the rotation of the tile (tiledata) into the spawn rotation
 ## Todo: wall tilemap
-## Todo: make it delete tilemaps after spawning
 ## Todo: have the level editor be a tool script that generates the layout as an editable packed scene
-
-const WALLED_CELL = preload("uid://b0qtdogq2osyf")
-
 @export var enabled:= true
-
 
 
 func _ready() -> void:
@@ -25,6 +20,8 @@ func generate():
 		return
 	
 	generate_each_layer(blueprint)
+	
+	blueprint.queue_free()
 
 
 func generate_each_layer(blueprint: Node):
@@ -39,29 +36,32 @@ func generate_each_layer(blueprint: Node):
 
 
 func generate_cells(used_tiles: Array[Vector2i], layer: TileMapLayer):
-	var editor_tiles: TileMapLayer = get_tree().get_first_node_in_group("editor_cells")
 	var cell_size: float = Vars.cell_size
 	
-	if editor_tiles == null:
-		printerr(self, ": blueprint not found.")
-		return
-	
 	for tile in used_tiles:
-		var cell_inst: WalledCell = WALLED_CELL.instantiate()
+		var scene_data: PackedScene = layer.get_cell_tile_data(tile).get_custom_data("scene")
+		if scene_data == null:
+			return
+		
+		var cell_inst: Node = scene_data.instantiate()
 		
 		add_child(cell_inst)
-		cell_inst.global_position = Vector3(tile.x * cell_size, 0.0, tile.y * cell_size)
-		cell_inst.cell_grid_position = Vector2i(cell_inst.global_position.x / Vars.cell_size as int, cell_inst.global_position.z / 2 as int)
-		cell_inst.cell.cell_grid_position = Vector2i(cell_inst.global_position.x / Vars.cell_size as int, cell_inst.global_position.z / 2 as int)
+		
+		cell_inst.global_position = Vector3(tile.x * cell_size, layer.elevation, tile.y * cell_size)
+		cell_inst.cell.cell_grid_position = Vector2i(cell_inst.cell.global_position.x / Vars.cell_size as int, cell_inst.cell.global_position.z / 2 as int)
+		
 		Vars.cell_nodes.append(cell_inst.cell)
 		Vars.cell_coordinates.append(tile)
-		cell_inst.update_faces(used_tiles, cell_size)
+		
+		if cell_inst.has_method("update_faces"):
+			cell_inst.update_faces(used_tiles, cell_size)
 
 
 func generate_object_tiles(used_tiles: Array[Vector2i], layer: TileMapLayer):
 	for tile in used_tiles:
 		var scene_data: PackedScene = layer.get_cell_tile_data(tile).get_custom_data("scene")
 		var puzzle_id: int = layer.get_cell_tile_data(tile).get_custom_data("puzzle_id")
+		var unique_object_id: int = layer.get_cell_tile_data(tile).get_custom_data("unique_object_id")
 		
 		if scene_data == null:
 			return
@@ -70,6 +70,7 @@ func generate_object_tiles(used_tiles: Array[Vector2i], layer: TileMapLayer):
 		set_puzzle_id(scene_inst, puzzle_id)
 		add_child(scene_inst)
 		scene_inst.global_position = Vector3(tile.x * Vars.cell_size, 0.0, tile.y * Vars.cell_size)
+		spawn_unique_object(scene_inst, unique_object_id)
 
 
 func set_puzzle_id(scene_inst: Node, puzzle_id: int):
@@ -81,8 +82,26 @@ func set_puzzle_id(scene_inst: Node, puzzle_id: int):
 	if scene_inst is RemembererPickup:
 		var blueprint: LevelEditorBlueprint = get_tree().get_first_node_in_group("level_blueprint")
 		
-		if puzzle_id - 1 > blueprint.remembering_costs.size():
+		if puzzle_id > blueprint.remembering_costs.size():
 			return
 		
 		var cost:= blueprint.remembering_costs[puzzle_id - 1]
 		scene_inst.required_synapses = cost
+
+
+func spawn_unique_object(scene_inst: Node, unique_object_id: int):
+	if scene_inst is UniqueObjectPlacer:
+		var blueprint: LevelEditorBlueprint = get_tree().get_first_node_in_group("level_blueprint")
+		
+		if not "unique_objects" in blueprint:
+			return
+	
+		if blueprint.unique_objects == []:
+			return
+		
+		if unique_object_id > blueprint.unique_objects.size():
+			return
+		
+		var object_scene:= blueprint.unique_objects[unique_object_id - 1].instantiate()
+		add_child(object_scene)
+		object_scene.global_position = scene_inst.global_position

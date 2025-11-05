@@ -1,8 +1,14 @@
 extends Node3D
 class_name Player
-## Todo: add indicator of effective range, probably a line with a ball at the end?
-## Todo: add signals for "successful actions", so you can't cheese the score as much?
-## Todo: figure out discolored pixels on sprite3d and mesh
+## Todo: Add indicator of effective range, maybe a line with a ball at the end?
+## Todo: Add signals for "successful actions", so you can't cheese the score as much?
+## Todo: Figure out discolored pixels on sprite3d and mesh
+## Todo: Consumable items (scroll to select, right click to use)
+## Todo: Different effects based on spell combos
+## Todo: Add instruments with different buffs and samples
+## Todo: Add equipable accessories with buffs
+## Todo: Fast travel spots
+## Todo: MAYBE make all player actions work no matter what, but improve them if successful, or have it be a toggle for now
 const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 
 @onready var camera: Camera3D = %Camera3D
@@ -93,8 +99,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	movement_raycast.global_position = neck.global_position
-	movement_raycast.global_rotation = neck.global_rotation
 	current_los_collider()
 
 
@@ -119,10 +123,21 @@ func camera_movement(event: InputEvent):
 	camera.rotation.x = clampf(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 
+## Upside-down camera movement:
+	#neck.rotate_y(event.relative.x * (camera_speed / 12000.0))
+	#camera.rotate_x(-event.relative.y * (camera_speed / 12000.0))
+	#player_collision.rotate_y(-event.relative.x * (camera_speed / 12000.0))
+	#camera.rotation.x = clampf(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+
+
 func take_damage(amount: float, origin: Node3D = null):
+	notify_enemy_of_projectile(origin)
+	
+	if amount <= 0.0:
+		return
+	
 	Bus.player_took_damage.emit(origin)
 	lose_hp(amount)
-	notify_enemy_of_projectile(origin)
 
 
 func notify_enemy_of_projectile(origin: Node3D):

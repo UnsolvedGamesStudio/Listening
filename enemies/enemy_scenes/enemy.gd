@@ -1,6 +1,5 @@
 extends Node3D
 class_name Enemy
-## Todo: save healthbar as scene
 const PROJECTILE = preload("uid://bwaev5gyis5tp")
 const DEFAULT_PROJECTILE_TEXTURE = preload("uid://dgygswxu7j8ds")
 

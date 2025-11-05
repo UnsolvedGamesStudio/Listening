@@ -32,14 +32,41 @@ func appear():
 	tween.tween_callback(pause)
 
 
+func disappear():
+	var tween:= create_tween()
+	tween.set_ignore_time_scale(true)
+	tween.set_ease(Tween.EASE_IN)
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	Bgm.bus = "BGM"
+	pop_out()
+	tween.tween_property(Engine, "time_scale", 1.0, 0.5)
+
+
 func pause():
 	get_tree().paused = true
 	Vars.paused = true
 
 
+func unpause():
+	disappear()
+	Filters.pause_shader_fade.play("fade_out")
+	Bgm.bus = "BGM"
+	get_tree().paused = false
+	Vars.paused = false
+	
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+
 func pop_in():
 	await get_tree().create_timer(0.5, true, false, true).timeout
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	var tween:= create_tween()
+	tween.set_ease(Tween.EASE_IN)
+	tween.set_ignore_time_scale(true)
+	tween.tween_property(self, "offset:y", 0.0, 0.5)
+
+
+func pop_out():
 	var tween:= create_tween()
 	tween.set_ease(Tween.EASE_IN)
 	tween.set_ignore_time_scale(true)

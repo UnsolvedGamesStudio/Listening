@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt2bkedotxagp"]
+
+[ext_resource type="TileSet" uid="uid://ct3ebunqf07ne" path="res://level_editor/tilemaps/cells_tileset.tres" id="1_486sk"]
+[ext_resource type="Script" uid="uid://kt2vd0vscemw" path="res://level_editor/tilemaps/cells_tilemap.gd" id="2_0pgpi"]
+
+[node name="CellsTilemap" type="TileMapLayer"]
+tile_set = ExtResource("1_486sk")
+script = ExtResource("2_0pgpi")

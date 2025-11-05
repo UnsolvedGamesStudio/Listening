@@ -165,6 +165,7 @@ debug_color = Color(0, 0.5372549, 0.9607843, 0.3529412)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 unique_name_in_owner = true
+visible = false
 light_energy = 0.1
 light_indirect_energy = 0.1
 omni_attenuation = 1.5

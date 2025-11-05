@@ -1,5 +1,4 @@
 extends AudioStreamPlayer
-## Todo: Try to make the spells play just one of the notes in the chord, per element
 @onready var rhythm_notifier: RhythmNotifier = %RhythmNotifier
 @onready var midi_player: MidiPlayer = %MidiPlayer
 @onready var sampler_instrument: SamplerInstrument = %SamplerInstrument
@@ -35,6 +34,12 @@ func start_song():
 	midi_player.play()
 
 
+func stop_song():
+	stop()
+	kick.stop()
+	midi_player.stop()
+
+
 func on_midi_note_played(event, track):
 	midi_to_name(event.note)
 
@@ -59,6 +64,7 @@ func midi_to_name(midi_number):
 
 func play_sample(elements: Array[int] = []):
 	if current_chord == []:
+		play_note_no_music(elements)
 		return
 	
 	var sample:= sampler_instrument.samples[0]
@@ -66,7 +72,7 @@ func play_sample(elements: Array[int] = []):
 	sampler_instrument.stop()
 	
 	if elements == []:
-		play_single_note(current_chord.pick_random(), 1)
+		play_single_note(current_chord.pick_random(), 2)
 	
 	if elements.size() == 3:
 		play_full_chord()
@@ -110,10 +116,24 @@ func play_sample(elements: Array[int] = []):
 		#plays +=1
 
 
+func play_note_no_music(elements):
+		var note_names = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+		
+		if elements == []:
+			play_single_note(note_names.pick_random(), 2)
+		
+		else:
+			for element in elements:
+				if element == 0:
+					play_single_note("C", 1)
+				if element == 1:
+					play_single_note("E", 1)
+				if element == 2:
+					play_single_note("G", 1)
+
+
 func play_single_note(note, octave: int = 0):
 	var octave_modifier:= -1
-	if current_chord == []:
-		return
 	
 	var sample:= sampler_instrument.samples[0]
 	
@@ -137,6 +157,9 @@ func play_full_chord(octave_modifier: int = 1):
 
 
 func check_accuracy():
+	if beat_visualizer == null:
+		return "perfect"
+	
 	var beat_area: Area2D = beat_visualizer.beat_area
 	var circle: TimingCircle
 	var accuracy:= "missed"

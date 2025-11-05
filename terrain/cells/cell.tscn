@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://de0flumabcluq"]
 
-[ext_resource type="Script" uid="uid://cek31j454p35k" path="res://terrain/cell.gd" id="1_ds1sf"]
+[ext_resource type="Script" uid="uid://cek31j454p35k" path="res://terrain/cells/cell.gd" id="1_ds1sf"]
 [ext_resource type="Script" uid="uid://bel6rvqf1qsvx" path="res://terrain/cell_collision.gd" id="2_memsh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ds1sf"]

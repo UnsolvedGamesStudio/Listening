@@ -1,10 +1,4 @@
 extends Node3D
+class_name Layout
 
-
-func start_level():
-	Filters.fade.play("fade_in")
-	await Filters.fade.animation_finished
-	Bgm.bus = "BGM"
-	
-	if Bgm.playing == false:
-		Bgm.start_song()
+@onready var level_generator: Node = %LevelGenerator

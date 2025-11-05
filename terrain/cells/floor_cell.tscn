@@ -1,20 +1,23 @@
 [gd_scene load_steps=5 format=3 uid="uid://d3u7i3tehxhh6"]
 
-[ext_resource type="Material" uid="uid://bd5kwov3i5lgu" path="res://terrain/textures/floor_material.tres" id="1_1i6dr"]
-[ext_resource type="PackedScene" uid="uid://de0flumabcluq" path="res://terrain/cell.tscn" id="2_o1dgs"]
+[ext_resource type="PackedScene" uid="uid://de0flumabcluq" path="res://terrain/cells/cell.tscn" id="1_i71dc"]
+[ext_resource type="Script" uid="uid://cnier2fyv1lb5" path="res://terrain/cells/unwalled_cell.gd" id="1_tdoft"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_7ypjj"]
-material = ExtResource("1_1i6dr")
+[sub_resource type="BoxMesh" id="BoxMesh_i71dc"]
+size = Vector3(2, 1, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8d6ju"]
 size = Vector3(2, 0.001, 2)
 
 [node name="FloorCell" type="Node3D"]
+script = ExtResource("1_tdoft")
 
-[node name="Cell" parent="." instance=ExtResource("2_o1dgs")]
+[node name="Cell" parent="." instance=ExtResource("1_i71dc")]
+unique_name_in_owner = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("PlaneMesh_7ypjj")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_i71dc")
 
 [node name="Area3D" type="Area3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.557168e-08, -0.50048876, 0)
