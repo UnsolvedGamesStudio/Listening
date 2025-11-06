@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cx0ni1wvl78g0"
-path.s3tc="res://.godot/imported/iseen_a_skull.png-7b5ec3fbe58d66849dba65282918f3cf.s3tc.ctex"
+path="res://.godot/imported/iseen_a_skull.png-7b5ec3fbe58d66849dba65282918f3cf.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://enemies/textures/iseen_a_skull.png"
-dest_files=["res://.godot/imported/iseen_a_skull.png-7b5ec3fbe58d66849dba65282918f3cf.s3tc.ctex"]
+dest_files=["res://.godot/imported/iseen_a_skull.png-7b5ec3fbe58d66849dba65282918f3cf.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

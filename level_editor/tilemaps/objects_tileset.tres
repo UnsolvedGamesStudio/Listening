@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=32 format=3 uid="uid://lpv2grascrwh"]
+[gd_resource type="TileSet" load_steps=33 format=3 uid="uid://lpv2grascrwh"]
 
 [ext_resource type="PackedScene" uid="uid://cqc1iuhqntykk" path="res://enemies/enemy_scenes/enemy_1.tscn" id="1_xlmst"]
 [ext_resource type="PackedScene" uid="uid://bnl5bv5ntklqt" path="res://enemies/enemy_scenes/wane.tscn" id="2_picxt"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://7meyinovsje0" path="res://pickups/synapse_pickup.tscn" id="14_5q57f"]
 [ext_resource type="PackedScene" uid="uid://du111uv3smns3" path="res://pickups/shrinking_pickup.tscn" id="15_j5ejy"]
 [ext_resource type="Texture2D" uid="uid://bhqj8jqxnu0q" path="res://level_editor/textures/pickups.png" id="16_5amkr"]
+[ext_resource type="PackedScene" uid="uid://dqpxy77one4hb" path="res://pickups/neuron_pickup.tscn" id="16_tmd81"]
 [ext_resource type="PackedScene" uid="uid://c86l6d7h0h8wa" path="res://hazards/spikes/spikes.tscn" id="17_6nvqy"]
 [ext_resource type="Texture2D" uid="uid://d33t4kcxy55l4" path="res://level_editor/textures/hazards.png" id="18_3apw0"]
 [ext_resource type="PackedScene" uid="uid://3fekdhfnam6y" path="res://puzzles/forgetter.tscn" id="19_njp5m"]
@@ -71,6 +72,8 @@ texture_region_size = Vector2i(32, 32)
 1:0/0/custom_data_0 = ExtResource("14_5q57f")
 2:0/0 = 0
 2:0/0/custom_data_0 = ExtResource("15_j5ejy")
+3:0/0 = 0
+3:0/0/custom_data_0 = ExtResource("16_tmd81")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eidu8"]
 resource_name = "Hazards"

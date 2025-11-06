@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0tw8jr20jhhj"
-path="res://.godot/imported/interact_sigil.png-df12927f208b12f619b4d8003753e2a0.ctex"
+uid="uid://n3guqraf3vnf"
+path="res://.godot/imported/neuron-Sheet.png-d7f883b3edcd8c13deb01da7f34e97d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://timing_bar/textures/interact_sigil.png"
-dest_files=["res://.godot/imported/interact_sigil.png-df12927f208b12f619b4d8003753e2a0.ctex"]
+source_file="res://pickups/textures/neuron-Sheet.png"
+dest_files=["res://.godot/imported/neuron-Sheet.png-d7f883b3edcd8c13deb01da7f34e97d7.ctex"]
 
 [params]
 

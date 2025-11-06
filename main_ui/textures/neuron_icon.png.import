@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0tw8jr20jhhj"
-path="res://.godot/imported/interact_sigil.png-df12927f208b12f619b4d8003753e2a0.ctex"
+uid="uid://1rqhvrarolql"
+path="res://.godot/imported/neuron_icon.png-49863b0728f448b8a32b440ad1fe1ad7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://timing_bar/textures/interact_sigil.png"
-dest_files=["res://.godot/imported/interact_sigil.png-df12927f208b12f619b4d8003753e2a0.ctex"]
+source_file="res://main_ui/textures/neuron_icon.png"
+dest_files=["res://.godot/imported/neuron_icon.png-49863b0728f448b8a32b440ad1fe1ad7.ctex"]
 
 [params]
 
@@ -37,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d1638drra7ygp"
-path.s3tc="res://.godot/imported/wane-Sheet.png-66a5a50abd366dbd0fe7893e35c1d299.s3tc.ctex"
+path="res://.godot/imported/wane-Sheet.png-66a5a50abd366dbd0fe7893e35c1d299.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://enemies/textures/wane-Sheet.png"
-dest_files=["res://.godot/imported/wane-Sheet.png-66a5a50abd366dbd0fe7893e35c1d299.s3tc.ctex"]
+dest_files=["res://.godot/imported/wane-Sheet.png-66a5a50abd366dbd0fe7893e35c1d299.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

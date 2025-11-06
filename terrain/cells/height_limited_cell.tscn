@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://d2emw1jx7dwb2"]
+
+[ext_resource type="Script" uid="uid://5g0ky2a22hhi" path="res://terrain/cells/walled_cell.gd" id="1_b0f2n"]
+[ext_resource type="Material" uid="uid://c3by8wql8tw8j" path="res://terrain/textures/wall_material.tres" id="2_d8fh8"]
+[ext_resource type="Script" uid="uid://cnier2fyv1lb5" path="res://terrain/cells/unwalled_cell.gd" id="3_b0f2n"]
+[ext_resource type="PackedScene" uid="uid://itikcsbog7mw" path="res://terrain/wall.tscn" id="3_d8fh8"]
+[ext_resource type="PackedScene" uid="uid://de0flumabcluq" path="res://terrain/cells/cell.tscn" id="4_0u8it"]
+[ext_resource type="Script" uid="uid://cw1w7bhx4bnqj" path="res://terrain/cells/shrinker.gd" id="5_0u8it"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_l05um"]
+material = ExtResource("2_d8fh8")
+size = Vector3(1.999, 3.5, 1.999)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8d6ju"]
+size = Vector3(2, 3.4962935, 2.0029297)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i71dc"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d8fh8"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b0f2n"]
+size = Vector3(1.95, 3.9, 1.95)
+
+[node name="HeightLimitedCell" type="Node3D"]
+script = ExtResource("1_b0f2n")
+
+[node name="TopFace" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-1, 1.509958e-07, 0, -1.509958e-07, -1, 0, 0, 0, 1, 0, 4, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TopFace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8872595e-07, 1.7498753, 0)
+mesh = SubResource("BoxMesh_l05um")
+
+[node name="Area3D" type="Area3D" parent="TopFace/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.557168e-08, -0.50048876, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TopFace/MeshInstance3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50165224, 0.0027770996)
+shape = SubResource("BoxShape3D_8d6ju")
+debug_color = Color(0.9926967, 0, 0.25486487, 0.41960785)
+
+[node name="NorthFace" parent="." instance=ExtResource("3_d8fh8")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -1)
+
+[node name="EastFace" parent="." instance=ExtResource("3_d8fh8")]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1, 0, 0)
+
+[node name="WestFace" parent="." instance=ExtResource("3_d8fh8")]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1, 0, 0)
+
+[node name="SouthFace" parent="." instance=ExtResource("3_d8fh8")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="BottomFace" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_b0f2n")
+
+[node name="Cell" parent="BottomFace" instance=ExtResource("4_0u8it")]
+unique_name_in_owner = true
+max_player_height = 0.25
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BottomFace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_i71dc")
+
+[node name="Area3D" type="Area3D" parent="BottomFace/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.557168e-08, -0.50048876, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BottomFace/MeshInstance3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4995, 0.0042419434)
+shape = SubResource("BoxShape3D_d8fh8")
+debug_color = Color(0.9926967, 0, 0.25486487, 0.41960785)
+
+[node name="Shrinker" type="Area3D" parent="." node_paths=PackedStringArray("cell")]
+collision_layer = 0
+collision_mask = 500
+script = ExtResource("5_0u8it")
+cell = NodePath("../BottomFace/Cell")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shrinker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_b0f2n")

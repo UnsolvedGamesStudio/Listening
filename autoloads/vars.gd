@@ -4,9 +4,39 @@ extends Node
 var paused:= false
 var level_time:= 0.0
 
-## Player
-var synapses_left:= 0
+
+## Collectibles
+var level_collects: Dictionary[String, Dictionary] = {
+	"level_1" : {
+		"total_synapses" : 0,
+		"total_neurons" : 0,
+		"synapses" : 0,
+		"neurons" : 0,
+	},
+	
+	"level_2" : {
+		"total_synapses" : 0,
+		"total_neurons" : 0,
+		"synapses" : 0,
+		"neurons" : 0,
+	},
+	
+	"level_3" : {
+		"total_synapses" : 0,
+		"total_neurons" : 0,
+		"synapses" : 0,
+		"neurons" : 0,
+	},
+	
+}
+
+var total_neurons:= 2
+var neurons:= 0
+var total_synapses:= 0
 var synapses:= 0
+
+
+## Player
 var interact_range:= 4.0
 
 
@@ -19,6 +49,7 @@ const directions: Dictionary[String, Vector3i] = {
 }
 
 const cell_size:= 2.0
+
 var cell_nodes: Array[Cell] = []
 var cell_coordinates: Array[Vector2i] = []
 var player_spawn_cell: Cell
@@ -70,5 +101,5 @@ func reset():
 	last_element = "none"
 	living_enemies.clear()
 	synapses = 0
-	synapses_left = 0
+	total_synapses = 0
 	inventory.clear()

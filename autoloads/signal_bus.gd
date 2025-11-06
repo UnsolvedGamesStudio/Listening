@@ -16,6 +16,7 @@ signal player_lost_hp
 signal spell_landed(elements: Array[int])
 
 signal synapse_picked_up
+signal neuron_picked_up
 signal item_picked_up(item: Vars.item_types)
 signal item_removed(item: Vars.item_types)
 

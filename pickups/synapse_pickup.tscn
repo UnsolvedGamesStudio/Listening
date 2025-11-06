@@ -17,6 +17,7 @@ turbulence_noise_scale = 0.05
 
 [sub_resource type="Animation" id="Animation_lcksh"]
 resource_name = "on_beat"
+loop_mode = 1
 step = 0.0333333
 tracks/0/type = "value"
 tracks/0/imported = false

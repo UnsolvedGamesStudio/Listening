@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://clmbdswxbp53"
-path.s3tc="res://.godot/imported/wax-Sheet.png-7d2dea5a72d350b45aceb41305bfd1fe.s3tc.ctex"
+path="res://.godot/imported/wax-Sheet.png-7d2dea5a72d350b45aceb41305bfd1fe.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://enemies/textures/wax-Sheet.png"
-dest_files=["res://.godot/imported/wax-Sheet.png-7d2dea5a72d350b45aceb41305bfd1fe.s3tc.ctex"]
+dest_files=["res://.godot/imported/wax-Sheet.png-7d2dea5a72d350b45aceb41305bfd1fe.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

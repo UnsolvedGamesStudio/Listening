@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
 
 
 func activate():
-	if not has_item() == true:
+	if has_item() == false:
 		animation_player.play("shake")
 		return
 	
@@ -52,7 +52,8 @@ func open():
 func has_item():
 	for item: Vars.item_types in Vars.inventory:
 		if item == required_item:
-			return true
+			if Vars.inventory[required_item]["amount"] > 0:
+				return true
 	
 	return false
 

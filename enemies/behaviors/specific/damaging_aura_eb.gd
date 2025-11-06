@@ -3,7 +3,7 @@ class_name DamagingAuraEB
 
 @onready var area_3d: Area3D = %Area3D
 
-@export var damage_per_tick:= 0.05
+@export var damage_per_tick:= 0.1
 
 var main: MainScene 
 var player_inside:= false

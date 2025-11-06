@@ -3,6 +3,8 @@ class_name Cell
 
 @onready var cell_collision: CellCollision = $CellCollision
 
+@export var max_player_height:= 10.0
+
 var occupants: Array[Node3D]
 var cell_grid_position: Vector2i = Vector2.ZERO
 

@@ -52,6 +52,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 [node name="MovementRaycastTransform" type="RemoteTransform3D" parent="Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 remote_path = NodePath("../MovementRaycast")
+update_scale = false
 
 [node name="Camera3D" type="Camera3D" parent="Neck"]
 unique_name_in_owner = true

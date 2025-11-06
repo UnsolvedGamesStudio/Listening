@@ -2,13 +2,12 @@ extends Node3D
 class_name Player
 ## Todo: Add indicator of effective range, maybe a line with a ball at the end?
 ## Todo: Add signals for "successful actions", so you can't cheese the score as much?
-## Todo: Figure out discolored pixels on sprite3d and mesh
 ## Todo: Consumable items (scroll to select, right click to use)
 ## Todo: Different effects based on spell combos
 ## Todo: Add instruments with different buffs and samples
 ## Todo: Add equipable accessories with buffs
 ## Todo: Fast travel spots
-## Todo: MAYBE make all player actions work no matter what, but improve them if successful, or have it be a toggle for now
+## Todo: make beat vis return a score only if the forward button was pressed at the right time
 const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 
 @onready var camera: Camera3D = %Camera3D
@@ -32,6 +31,8 @@ var looked_at_cell: Cell
 var looked_at_object: Area3D
 var is_moving:= false
 
+var auto_move:= true
+var waiting_to_move:= false
 var invincible_cheat:= false
 var invincible:= false
 var can_act:= true
@@ -69,6 +70,8 @@ func _ready() -> void:
 	update_looked_at_cell()
 	Bus.player_moved.emit()
 	lose_hp(75.0)
+	
+	Bus.beat.connect(on_beat)
 
 ## Todo: choose randomly from all spawn points
 func go_to_spawn():
@@ -100,13 +103,16 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	current_los_collider()
+	
+	if auto_move == true and Input.is_action_pressed("forward") and is_moving == false:
+		waiting_to_move = true
 
 
 func _input(event: InputEvent) -> void:
 	if can_act == false:
 		return
 	
-	if event.is_action_pressed("forward") and is_moving == false:
+	if event.is_action_pressed("forward") and is_moving == false and auto_move == false:
 		move_forward()
 
 
@@ -176,7 +182,7 @@ func heal(amount: float):
 
 
 func move_forward():
-	if Bgm.check_accuracy() == "missed":
+	if Bgm.check_accuracy() == "missed" and auto_move == false:
 		return
 	
 	update_looked_at_cell()
@@ -245,8 +251,13 @@ func update_move_to_cell_indicator(cell: Area3D):
 
 
 func check_movement_raycast():
-	if movement_raycast.get_collider() == null:
+	var collider:= movement_raycast.get_collider()
+	if collider == null:
 		return
+	
+	if "max_player_height" in collider.owner:
+		if scale.y > collider.owner.max_player_height:
+			return
 	
 	return movement_raycast.get_collider()
 
@@ -301,3 +312,9 @@ func on_player_collision_area_entered(area: Area3D):
 	
 	if "body_damage" in area.owner:
 		take_damage(area.owner.body_damage, area.owner)
+
+
+func on_beat(beat_count: int):
+	if Input.is_action_pressed("forward") and is_moving == false and waiting_to_move == true:
+		move_forward()
+		waiting_to_move = false

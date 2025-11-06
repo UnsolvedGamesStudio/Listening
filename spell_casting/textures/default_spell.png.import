@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0jjxcbead86g"
-path.s3tc="res://.godot/imported/default_spell.png-26d8b071a5f7f184633cc7481aeac0ef.s3tc.ctex"
+path="res://.godot/imported/default_spell.png-26d8b071a5f7f184633cc7481aeac0ef.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://spell_casting/textures/default_spell.png"
-dest_files=["res://.godot/imported/default_spell.png-26d8b071a5f7f184633cc7481aeac0ef.s3tc.ctex"]
+dest_files=["res://.godot/imported/default_spell.png-26d8b071a5f7f184633cc7481aeac0ef.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

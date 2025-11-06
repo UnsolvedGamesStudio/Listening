@@ -1,8 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://xqc1yxn05bn"]
+[gd_scene load_steps=2 format=3 uid="uid://xqc1yxn05bn"]
 
 [ext_resource type="Script" uid="uid://ddi8nw37cgvp1" path="res://scenes/main_scene.gd" id="1_o5qli"]
-[ext_resource type="PackedScene" uid="uid://ccywvjqsju55m" path="res://levels/blueprints/level_2_blueprint.tscn" id="2_0wfyh"]
 
 [node name="Main" type="Node" groups=["main_scene"]]
 script = ExtResource("1_o5qli")
-level_layout_to_load = ExtResource("2_0wfyh")
+scene_to_load = "layout"
