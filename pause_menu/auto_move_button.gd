@@ -6,8 +6,8 @@ func _ready() -> void:
 
 
 func on_toggled(toggled_on: bool):
-	if toggled_on == true:
+	if toggled_on == false:
 		Find.P().auto_move = true
 	
-	if toggled_on == false:
+	if toggled_on == true:
 		Find.P().auto_move = false

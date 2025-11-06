@@ -6,8 +6,8 @@ func _ready() -> void:
 
 
 func on_toggled(toggled_on: bool):
-	if toggled_on == true:
-		Find.P().invincible_cheat = true
-	
 	if toggled_on == false:
 		Find.P().invincible_cheat = false
+	
+	if toggled_on == true:
+		Find.P().invincible_cheat = true

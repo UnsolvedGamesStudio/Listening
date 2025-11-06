@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8wfatk83re85"]
+
+[ext_resource type="Texture2D" uid="uid://gwhp7j51mnqa" path="res://instruments/textures/lute.png" id="1_2oggr"]
+
+[node name="HeldInstrument" type="CanvasLayer"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(270.99997, 407)
+rotation = 0.37297392
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("1_2oggr")

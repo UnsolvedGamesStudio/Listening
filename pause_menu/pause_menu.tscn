@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dohwuclbdrfh1"]
+[gd_scene load_steps=12 format=3 uid="uid://dohwuclbdrfh1"]
 
 [ext_resource type="Script" uid="uid://drn422cycc5qn" path="res://pause_menu/offset_slider.gd" id="1_5hbt6"]
 [ext_resource type="Script" uid="uid://d2xrtoqxe8yqr" path="res://pause_menu/pause_menu.gd" id="1_uwtdo"]
 [ext_resource type="Script" uid="uid://b56jfy7g127ku" path="res://pause_menu/pause_menu_button.gd" id="2_rd7dy"]
 [ext_resource type="Script" uid="uid://ckomaugmasljd" path="res://pause_menu/cheat_button.gd" id="4_b4s0c"]
+[ext_resource type="Script" uid="uid://cqai6xw6f7e72" path="res://pause_menu/auto_move_button.gd" id="5_s1glv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uwtdo"]
 content_margin_left = 8.0
@@ -11,6 +12,10 @@ content_margin_top = 5.0
 content_margin_right = 8.0
 content_margin_bottom = 5.0
 bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7wlu"]
 content_margin_left = 8.0
@@ -135,6 +140,11 @@ size_flags_vertical = 4
 theme_override_constants/separation = 5
 alignment = 1
 
+[node name="Spacer" type="Panel" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
 [node name="OffsetSliderContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -208,21 +218,22 @@ mouse_default_cursor_shape = 2
 action_mode = 0
 script = ExtResource("4_b4s0c")
 
-[node name="CheatButtonContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+[node name="AutomoveButtonContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_b4s0c")
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CheatButtonContainer2"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/AutomoveButtonContainer2"]
 layout_mode = 2
 text = "Disable auto-move"
 
-[node name="CheatButton" type="CheckButton" parent="MarginContainer/VBoxContainer/CheatButtonContainer2"]
+[node name="AutomoveButton" type="CheckButton" parent="MarginContainer/VBoxContainer/AutomoveButtonContainer2"]
 layout_mode = 2
 size_flags_horizontal = 8
+tooltip_text = "With auto-move enabled, you don't need the proper timing."
 focus_mode = 0
 mouse_default_cursor_shape = 2
 action_mode = 0
-script = ExtResource("4_b4s0c")
+script = ExtResource("5_s1glv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

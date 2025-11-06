@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ce10gkdeiprj7"]
+[gd_scene load_steps=12 format=3 uid="uid://ce10gkdeiprj7"]
 
 [ext_resource type="Script" uid="uid://bxbkaxat5hcgk" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://86r6xeju02bg" path="res://main_ui/main_ui.tscn" id="2_boad6"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ds6ehm1oneoe7" path="res://player/interact.tscn" id="3_g1dw6"]
 [ext_resource type="PackedScene" uid="uid://dohwuclbdrfh1" path="res://pause_menu/pause_menu.tscn" id="4_hg6s5"]
 [ext_resource type="PackedScene" uid="uid://dvtaknhhjh26e" path="res://terrain/move_to_cell_indicator.tscn" id="4_yw30f"]
+[ext_resource type="PackedScene" uid="uid://b8wfatk83re85" path="res://instruments/held_instrument.tscn" id="5_rgyib"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_g1dw6"]
 radius = 0.3
@@ -40,6 +41,9 @@ script = ExtResource("1_oul6g")
 [node name="MainUI" parent="." instance=ExtResource("2_boad6")]
 
 [node name="PauseMenu" parent="." instance=ExtResource("4_hg6s5")]
+
+[node name="HeldInstrument" parent="." instance=ExtResource("5_rgyib")]
+layer = 0
 
 [node name="Spellcast" parent="." instance=ExtResource("2_rkbax")]
 
