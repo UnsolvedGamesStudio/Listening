@@ -2,16 +2,14 @@
 
 [ext_resource type="Script" uid="uid://bjjl8xitp77ry" path="res://hub_world/level_loader.gd" id="1_6x6pu"]
 [ext_resource type="PlaneMesh" uid="uid://covn2ehde4snx" path="res://vfx/particle_mesh.tres" id="2_b3c8u"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ggjwm"]
-load_path = "res://.godot/imported/enemy_indicator.png-0f7790bf2cab8c79a925a8bddac29c93.s3tc.ctex"
+[ext_resource type="Texture2D" uid="uid://dbyd2im7ned86" path="res://vfx/enemy_indicator.png" id="2_qtyh0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_li2hn"]
 resource_local_to_scene = true
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0.94937307, 2.4732084, 3.1229057, 1)
-albedo_texture = SubResource("CompressedTexture2D_ggjwm")
+albedo_texture = ExtResource("2_qtyh0")
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_k3r13"]

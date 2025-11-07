@@ -4,6 +4,7 @@ class_name RotateToPlayerEB
 @export var to_rotate: Node3D
 var valid:= true
 
+
 func enter() -> void:
 	if to_rotate == null:
 		printerr(self, " of ", owner, ": to_rotate not found")

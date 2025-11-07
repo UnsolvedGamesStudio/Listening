@@ -1,5 +1,6 @@
 extends Node3D
 class_name Enemy
+
 const PROJECTILE = preload("uid://bwaev5gyis5tp")
 const DEFAULT_PROJECTILE_TEXTURE = preload("uid://dgygswxu7j8ds")
 
@@ -142,7 +143,6 @@ func check_sees_player():
 	if player_distance > vision_limit:
 		sees_player = false
 		return
-	
 	
 	vision_raycast.look_at(Find.P().enemy_aim_point.global_position + Vector3(0.0001, 0.0001, 0.0001))
 	

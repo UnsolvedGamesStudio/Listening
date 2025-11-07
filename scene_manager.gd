@@ -56,7 +56,7 @@ func generate_blueprint(scene_inst: Node):
 	if current_blueprint == null:
 		return
 	
-	var blueprint_inst: LevelEditorBlueprint = current_blueprint.instantiate()
+	var blueprint_inst = current_blueprint.instantiate()
 	
 	scene_inst.add_child(blueprint_inst)
 

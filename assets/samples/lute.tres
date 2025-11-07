@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="NoteSample" load_steps=3 format=3 uid="uid://bm6btfvrx3t1a"]
+
+[ext_resource type="Script" uid="uid://dtpmtwvvk0ac7" path="res://addons/SimpleSampler/sample_resource.gd" id="1_43l5c"]
+[ext_resource type="AudioStream" uid="uid://b13vj0b7e4baf" path="res://assets/samples/lute_sample.ogg" id="2_gxdjw"]
+
+[resource]
+script = ExtResource("1_43l5c")
+stream = ExtResource("2_gxdjw")
+octave = 0
+metadata/_custom_type_script = "uid://dtpmtwvvk0ac7"

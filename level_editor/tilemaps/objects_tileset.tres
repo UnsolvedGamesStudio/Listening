@@ -1,12 +1,10 @@
-[gd_resource type="TileSet" load_steps=33 format=3 uid="uid://lpv2grascrwh"]
+[gd_resource type="TileSet" load_steps=32 format=3 uid="uid://lpv2grascrwh"]
 
-[ext_resource type="PackedScene" uid="uid://cqc1iuhqntykk" path="res://enemies/enemy_scenes/enemy_1.tscn" id="1_xlmst"]
-[ext_resource type="PackedScene" uid="uid://bnl5bv5ntklqt" path="res://enemies/enemy_scenes/wane.tscn" id="2_picxt"]
-[ext_resource type="PackedScene" uid="uid://dwksm2bi3elij" path="res://enemies/enemy_scenes/enemy_2.tscn" id="3_tmd81"]
-[ext_resource type="PackedScene" uid="uid://bhqs3evyal73f" path="res://enemies/enemy_scenes/boredom.tscn" id="4_4egai"]
-[ext_resource type="PackedScene" uid="uid://bm12hq1n81tt1" path="res://enemies/enemy_scenes/wax.tscn" id="5_a0av3"]
+[ext_resource type="Texture2D" uid="uid://0gh2qphl4tm4" path="res://level_editor/textures/box_tiles.png" id="1_4egai"]
+[ext_resource type="PackedScene" uid="uid://6etr4cvlbgr2" path="res://music_box/music_box.tscn" id="1_a0av3"]
 [ext_resource type="Texture2D" uid="uid://d3swrn3a28lxk" path="res://level_editor/textures/enemy_tiles.png" id="6_tyv0d"]
 [ext_resource type="PackedScene" uid="uid://ciib1opj8rndx" path="res://pickups/key_pickup.tscn" id="7_fy8em"]
+[ext_resource type="PackedScene" uid="uid://061m5bvukwlk" path="res://enemies/enemy_scenes/dread.tscn" id="7_tyv0d"]
 [ext_resource type="Texture2D" uid="uid://ds7esfeg8ue4b" path="res://level_editor/textures/key_tiles.png" id="8_8ejya"]
 [ext_resource type="PackedScene" uid="uid://c5gdwlmng0rsy" path="res://puzzles/locked_wall.tscn" id="9_vjw6d"]
 [ext_resource type="Texture2D" uid="uid://djogefuvahxmn" path="res://level_editor/textures/lock_tiles.png" id="10_xpg0n"]
@@ -25,21 +23,51 @@
 [ext_resource type="Texture2D" uid="uid://c2mc4syhlqu3c" path="res://level_editor/textures/unique_object_tiles.png" id="22_eniq0"]
 [ext_resource type="PackedScene" uid="uid://cqb65v1tel2pb" path="res://level_editor/unique_object_placer.tscn" id="22_picxt"]
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a0av3"]
+resource_name = "Boxes"
+texture = ExtResource("1_4egai")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("1_a0av3")
+0:0/0/custom_data_3 = 1
+0:1/0 = 0
+0:1/0/custom_data_0 = ExtResource("1_a0av3")
+0:1/0/custom_data_3 = 6
+1:0/0 = 0
+1:0/0/custom_data_0 = ExtResource("1_a0av3")
+1:0/0/custom_data_3 = 2
+1:1/0 = 0
+1:1/0/custom_data_0 = ExtResource("1_a0av3")
+1:1/0/custom_data_3 = 7
+2:0/0 = 0
+2:0/0/custom_data_0 = ExtResource("1_a0av3")
+2:0/0/custom_data_3 = 3
+2:1/0 = 0
+2:1/0/custom_data_0 = ExtResource("1_a0av3")
+2:1/0/custom_data_3 = 8
+3:0/0 = 0
+3:0/0/custom_data_0 = ExtResource("1_a0av3")
+3:0/0/custom_data_3 = 4
+3:1/0 = 0
+3:1/0/custom_data_0 = ExtResource("1_a0av3")
+3:1/0/custom_data_3 = 9
+4:0/0 = 0
+4:0/0/custom_data_0 = ExtResource("1_a0av3")
+4:0/0/custom_data_3 = 5
+4:1/0 = 0
+4:1/0/custom_data_0 = ExtResource("1_a0av3")
+4:1/0/custom_data_3 = 10
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5jdw0"]
 resource_name = "Enemies"
 texture = ExtResource("6_tyv0d")
-0:1/0 = 0
-0:1/0/custom_data_0 = ExtResource("2_picxt")
-4:0/0 = 0
-4:0/0/custom_data_0 = ExtResource("5_a0av3")
 0:0/0 = 0
-0:0/0/custom_data_0 = ExtResource("1_xlmst")
 1:0/0 = 0
-1:0/0/custom_data_0 = ExtResource("3_tmd81")
-2:0/0 = 0
-2:0/0/custom_data_0 = ExtResource("4_4egai")
 3:0/0 = 0
-3:0/0/custom_data_0 = ExtResource("4_4egai")
+3:0/0/custom_data_0 = ExtResource("7_tyv0d")
+4:0/0 = 0
+0:1/0 = 0
+2:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1h6v4"]
 resource_name = "Keys"
@@ -83,7 +111,7 @@ texture_region_size = Vector2i(32, 32)
 0:0/0/custom_data_0 = ExtResource("17_6nvqy")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gofoe"]
-resource_name = "Tile Forgetter"
+resource_name = "Tile Forgetters"
 texture = ExtResource("21_88r7q")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -112,6 +140,7 @@ texture_region_size = Vector2i(32, 32)
 3:1/0/custom_data_1 = 4
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1j3dw"]
+resource_name = "Unique Objects"
 texture = ExtResource("22_eniq0")
 texture_region_size = Vector2i(32, 32)
 3:0/0 = 0
@@ -153,6 +182,8 @@ custom_data_layer_1/name = "puzzle_id"
 custom_data_layer_1/type = 2
 custom_data_layer_2/name = "unique_object_id"
 custom_data_layer_2/type = 2
+custom_data_layer_3/name = "box_id"
+custom_data_layer_3/type = 2
 sources/1 = SubResource("TileSetAtlasSource_5jdw0")
 sources/2 = SubResource("TileSetAtlasSource_1h6v4")
 sources/3 = SubResource("TileSetAtlasSource_hkqec")
@@ -161,3 +192,4 @@ sources/5 = SubResource("TileSetAtlasSource_l7cd0")
 sources/6 = SubResource("TileSetAtlasSource_eidu8")
 sources/7 = SubResource("TileSetAtlasSource_gofoe")
 sources/8 = SubResource("TileSetAtlasSource_1j3dw")
+sources/0 = SubResource("TileSetAtlasSource_a0av3")

@@ -1,5 +1,5 @@
 extends Node
-
+## Todo: make empty sample note be based on camera rotation so you can actually play music
 @onready var label: Label = $Label
 
 const CAST_SIGIL = preload("uid://c5nwti415vrqj")
@@ -39,6 +39,8 @@ func on_cast_pressed():
 	
 	if success == "missed":
 		return
+	
+	Bus.player_cast.emit(container, success)
 	
 	cast_spell()
 

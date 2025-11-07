@@ -8,6 +8,7 @@ class_name Player
 ## Todo: Add equipable accessories with buffs
 ## Todo: Fast travel spots
 ## Todo: make beat vis return a score only if the forward button was pressed at the right time
+## Todo: a painting scene that hosts a random drawing
 const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 
 @onready var camera: Camera3D = %Camera3D
@@ -22,7 +23,6 @@ const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 @export var camera_raycast_distance:= 200.0
 @export var interact_range: float = 1.0
 @export var camera_speed:= 50
-@export var spawn_pos:= Vector3(0, 0, 0)
 
 var tilt_lower_limit:= deg_to_rad(-90)
 var tilt_upper_limit:= deg_to_rad(90)
@@ -56,7 +56,6 @@ var movement_speed:= 20:
 func _ready() -> void:
 	reset_vars()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	position = spawn_pos
 	player_collision.area_entered.connect(on_player_collision_area_entered)
 	movement_raycast.target_position.z = -Vars.cell_size / 1.75
 	interact_range = Vars.cell_size * 10000
@@ -104,8 +103,13 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	current_los_collider()
 	
+	
 	if auto_move == true and Input.is_action_pressed("forward") and is_moving == false:
-		waiting_to_move = true
+		if SceneManager.current_scene is HubWorld:
+			move_forward()
+		
+		else:
+			waiting_to_move = true
 
 
 func _input(event: InputEvent) -> void:

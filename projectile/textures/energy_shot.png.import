@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ltw5a023lpvh"
-path="res://.godot/imported/lute.png-b2b2be4d6603a9626c61d62161a08e5c.ctex"
+uid="uid://ckuxhghmpkq8r"
+path="res://.godot/imported/energy_shot.png-2badf6c76d983a9db36c8b0527b41c78.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://instruments/textures/lute.png"
-dest_files=["res://.godot/imported/lute.png-b2b2be4d6603a9626c61d62161a08e5c.ctex"]
+source_file="res://projectile/textures/energy_shot.png"
+dest_files=["res://.godot/imported/energy_shot.png-2badf6c76d983a9db36c8b0527b41c78.ctex"]
 
 [params]
 

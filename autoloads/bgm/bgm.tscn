@@ -6,7 +6,7 @@
 [ext_resource type="MidiResource" uid="uid://dvvjseifubaqs" path="res://assets/music/so_simple_chords_140_bpm.mid" id="4_1i4ta"]
 [ext_resource type="Script" uid="uid://2ag1petdt53" path="res://addons/SimpleSampler/sampler_instrument.gd" id="5_syuoy"]
 [ext_resource type="Script" uid="uid://dtpmtwvvk0ac7" path="res://addons/SimpleSampler/sample_resource.gd" id="6_yq28d"]
-[ext_resource type="Resource" uid="uid://c67s4yjf8k7l0" path="res://assets/samples/test.tres" id="7_qfgnj"]
+[ext_resource type="Resource" uid="uid://bm6btfvrx3t1a" path="res://assets/samples/lute.tres" id="7_qfgnj"]
 [ext_resource type="AudioStream" uid="uid://hmaa8n3edwg0" path="res://assets/samples/clean-808-kick_A_minor.wav" id="8_wbxdo"]
 [ext_resource type="AudioStream" uid="uid://b2k6m68kkjla0" path="res://assets/music/stasis v1.mp3" id="9_qfgnj"]
 

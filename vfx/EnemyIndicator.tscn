@@ -1,16 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://ycxhwv4g5a5v"]
 
 [ext_resource type="Script" uid="uid://dn3lg4m2lq5sb" path="res://vfx/enemy_indicator.gd" id="1_pgj8b"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gdonx"]
-load_path = "res://.godot/imported/enemy_indicator.png-0f7790bf2cab8c79a925a8bddac29c93.s3tc.ctex"
+[ext_resource type="Texture2D" uid="uid://dbyd2im7ned86" path="res://vfx/enemy_indicator.png" id="2_liwn3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gdonx"]
 resource_local_to_scene = true
 transparency = 1
 shading_mode = 0
 albedo_color = Color(1, 0.3098913, 0.42997882, 1)
-albedo_texture = SubResource("CompressedTexture2D_gdonx")
+albedo_texture = ExtResource("2_liwn3")
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pgj8b"]

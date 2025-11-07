@@ -5,7 +5,7 @@ class_name DamagingAuraEB
 
 @export var damage_per_tick:= 0.1
 
-var main: MainScene 
+var main: Node
 var player_inside:= false
 
 

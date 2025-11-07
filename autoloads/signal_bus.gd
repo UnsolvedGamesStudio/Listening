@@ -12,6 +12,7 @@ signal beat_failure
 signal player_moved
 signal player_took_damage(origin: Node3D)
 signal player_lost_hp
+signal player_cast(elements: Array[int], success: String)
 
 signal spell_landed(elements: Array[int])
 

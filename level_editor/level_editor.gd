@@ -3,6 +3,7 @@ class_name LevelEditorBlueprint
 ## Todo: make a tool button that creates a packed scene
 @export var remembering_costs: Array[int] = [10, 20, 30, 40]
 @export var unique_objects: Array[PackedScene] = []
+@export var chest_loot_scenes: Dictionary[int, Array] = {}
 
 
 func _ready() -> void:

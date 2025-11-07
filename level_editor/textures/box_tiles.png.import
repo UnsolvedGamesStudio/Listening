@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ltw5a023lpvh"
-path="res://.godot/imported/lute.png-b2b2be4d6603a9626c61d62161a08e5c.ctex"
+uid="uid://0gh2qphl4tm4"
+path="res://.godot/imported/box_tiles.png-1b3b50c2f51a19cb3a8512810baeb18a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://instruments/textures/lute.png"
-dest_files=["res://.godot/imported/lute.png-b2b2be4d6603a9626c61d62161a08e5c.ctex"]
+source_file="res://level_editor/textures/box_tiles.png"
+dest_files=["res://.godot/imported/box_tiles.png-1b3b50c2f51a19cb3a8512810baeb18a.ctex"]
 
 [params]
 

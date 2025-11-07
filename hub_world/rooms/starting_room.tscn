@@ -10,7 +10,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_loyhd"]
 albedo_color = Color(0.036830127, 0.15851668, 0.1551865, 1)
-metallic = 1.0
+metallic = 0.5
 metallic_specular = 1.0
 roughness = 0.0
 emission_enabled = true
@@ -86,7 +86,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.6666667, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [1.0, 0.0, 1.0]
+"values": [0.5, 0.0, 0.5]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6w4r1"]

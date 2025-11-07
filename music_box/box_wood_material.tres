@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cjcvnhgl25upt"]
+
+[ext_resource type="Texture2D" uid="uid://dv223hr2je4jy" path="res://music_box/textures/wood.png" id="1_d6exo"]
+
+[resource]
+resource_name = "default"
+cull_mode = 2
+albedo_color = Color(0.52640504, 0.29099274, 0.26589158, 1)
+albedo_texture = ExtResource("1_d6exo")
+roughness = 0.23
+emission = Color(0.89046204, 0.30988908, 0.432466, 1)
+emission_energy_multiplier = 0.08
+uv1_scale = Vector3(4, 2, 0)

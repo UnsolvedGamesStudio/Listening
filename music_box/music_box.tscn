@@ -1,0 +1,222 @@
+[gd_scene load_steps=16 format=3 uid="uid://6etr4cvlbgr2"]
+
+[ext_resource type="Script" uid="uid://dxski3f8ee0yt" path="res://addons/SimpleSampler/sampler_instrument_3D.gd" id="1_4nsho"]
+[ext_resource type="Script" uid="uid://dm64hacx3vw56" path="res://music_box/music_box.gd" id="1_5fj6j"]
+[ext_resource type="Script" uid="uid://dtpmtwvvk0ac7" path="res://addons/SimpleSampler/sample_resource.gd" id="2_4nsho"]
+[ext_resource type="AudioStream" uid="uid://xrgviiricsyi" path="res://assets/samples/music-box-delicate.wav" id="3_5fj6j"]
+[ext_resource type="PackedScene" uid="uid://bqnqjiovhcpib" path="res://music_box/box.tscn" id="5_8w1r8"]
+[ext_resource type="Material" uid="uid://dcnsdvyhr5d2a" path="res://music_box/box_metal_material.tres" id="6_nfgyf"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5em6l"]
+top_radius = 0.1
+bottom_radius = 0.1
+radial_segments = 14
+
+[sub_resource type="Resource" id="Resource_euagl"]
+script = ExtResource("2_4nsho")
+stream = ExtResource("3_5fj6j")
+octave = -1
+metadata/_custom_type_script = "uid://dtpmtwvvk0ac7"
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_08db7"]
+top_radius = 0.005
+bottom_radius = 0.005
+height = 0.1
+radial_segments = 14
+
+[sub_resource type="Animation" id="Animation_5em6l"]
+resource_name = "already_opened"
+length = 0.1
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stand:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, 3.6, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SmallBox:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.374, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nfgyf"]
+resource_name = "raise"
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stand:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 0, 1), Vector3(2, 3.6, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SmallBox:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.374, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpotLight3D:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [16.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_08db7"]
+_data = {
+&"already_opened": SubResource("Animation_5em6l"),
+&"raise": SubResource("Animation_nfgyf")
+}
+
+[sub_resource type="Animation" id="Animation_2vxj7"]
+resource_name = "crank"
+length = 2.0
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Crank:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(25.132742, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3hr3o"]
+_data = {
+&"crank": SubResource("Animation_2vxj7")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5em6l"]
+size = Vector3(1.2, 0.55, 0.8)
+
+[node name="MusicBox" type="Node3D"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+script = ExtResource("1_5fj6j")
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 4, 0)
+light_color = Color(1, 0.8235294, 0.65882355, 1)
+light_energy = 16.0
+spot_angle = 10.2043
+
+[node name="Crank" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36409858, 0.14344302, -3.183051e-08)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crank"]
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, -0.13336402, 0.068461, 2.0015501e-05)
+material_override = ExtResource("6_nfgyf")
+mesh = SubResource("CylinderMesh_5em6l")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Crank"]
+transform = Transform3D(-3.0597966e-09, 0.07, -6.119594e-09, -0.07, -3.059797e-09, -6.1195937e-09, -6.1195937e-09, 6.119594e-09, 0.07, -0.07089627, 0.000116333365, 2.0020963e-05)
+material_override = ExtResource("6_nfgyf")
+mesh = SubResource("CylinderMesh_5em6l")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Crank"]
+transform = Transform3D(-3.0597966e-09, 0.04, -6.119594e-09, -0.07, -1.7484555e-09, -6.1195933e-09, -6.1195937e-09, 3.4969108e-09, 0.07, -0.17355573, 0.13153383, 2.0011988e-05)
+material_override = ExtResource("6_nfgyf")
+mesh = SubResource("CylinderMesh_5em6l")
+skeleton = NodePath("../..")
+
+[node name="Box" parent="." instance=ExtResource("5_8w1r8")]
+unique_name_in_owner = true
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0.0076045394, 0)
+
+[node name="SmallBox" parent="." instance=ExtResource("5_8w1r8")]
+unique_name_in_owner = true
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SmallBox"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 9.094947e-15, 0, 1, 0, -9.094947e-15, 0, 1, 0, 10.531657, 0)
+light_color = Color(0.7490196, 0.6745098, 0.5058824, 1)
+light_energy = 0.0
+omni_range = 0.5
+
+[node name="SamplerInstrument" type="AudioStreamPlayer3D" parent="SmallBox"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.804844, 0)
+volume_db = 35.556
+bus = &"MusicBox"
+script = ExtResource("1_4nsho")
+samples = Array[ExtResource("2_4nsho")]([SubResource("Resource_euagl")])
+metadata/_custom_type_script = "uid://dxski3f8ee0yt"
+
+[node name="ObjectOrigin" type="Marker3D" parent="SmallBox"]
+unique_name_in_owner = true
+transform = Transform3D(100, 0, 4.5474735e-12, 0, 100, 0, -4.5474735e-12, 0, 100, 0, 12.146431, 0)
+
+[node name="Stand" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0.0076045394, 0)
+
+[node name="Stand" type="MeshInstance3D" parent="Stand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.051, 0)
+material_override = ExtResource("6_nfgyf")
+mesh = SubResource("CylinderMesh_08db7")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_08db7")
+}
+
+[node name="CrankAnim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_3hr3o")
+}
+
+[node name="ObjectTarget" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.948711e-08, 0, -0.79483986)
+
+[node name="Area3D" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0024414063, 0.30407715, 8.326673e-17)
+shape = SubResource("BoxShape3D_5em6l")
