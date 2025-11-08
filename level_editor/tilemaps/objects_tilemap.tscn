@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dilbsihag48bm"]
+[gd_scene load_steps=41 format=3 uid="uid://dilbsihag48bm"]
 
 [ext_resource type="PackedScene" uid="uid://6etr4cvlbgr2" path="res://music_box/music_box.tscn" id="1_cf6e4"]
 [ext_resource type="Texture2D" uid="uid://0gh2qphl4tm4" path="res://level_editor/textures/box_tiles.png" id="2_1uy3p"]
@@ -22,10 +22,13 @@
 [ext_resource type="Texture2D" uid="uid://bhqj8jqxnu0q" path="res://level_editor/textures/pickups.png" id="15_g1r3g"]
 [ext_resource type="PackedScene" uid="uid://c86l6d7h0h8wa" path="res://hazards/spikes/spikes.tscn" id="16_hdd36"]
 [ext_resource type="Texture2D" uid="uid://d33t4kcxy55l4" path="res://level_editor/textures/hazards.png" id="17_ar6ua"]
+[ext_resource type="PackedScene" uid="uid://dsni4a2x3dlwl" path="res://pickups/dopamine/dopamine_pickup.tscn" id="17_wyto8"]
 [ext_resource type="PackedScene" uid="uid://3fekdhfnam6y" path="res://puzzles/forgetter.tscn" id="18_tjakk"]
+[ext_resource type="PackedScene" uid="uid://dyh16x4hu7h17" path="res://pickups/dopamine/dopamine_cluster.tscn" id="19_i6a1y"]
 [ext_resource type="PackedScene" uid="uid://b0ct4efrkp6xh" path="res://pickups/rememberer.tscn" id="19_m4r6b"]
 [ext_resource type="Texture2D" uid="uid://bgu3cdflev8e0" path="res://level_editor/textures/tile_forgetter.png" id="20_ritcd"]
 [ext_resource type="PackedScene" uid="uid://cqb65v1tel2pb" path="res://level_editor/unique_object_placer.tscn" id="21_kcmjl"]
+[ext_resource type="PackedScene" uid="uid://3ynjvc7p8e5k" path="res://pickups/dopamine/large_dopamine.tscn" id="21_x5feu"]
 [ext_resource type="Texture2D" uid="uid://c2mc4syhlqu3c" path="res://level_editor/textures/unique_object_tiles.png" id="22_j1o3j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a0av3"]
@@ -39,7 +42,7 @@ texture_region_size = Vector2i(32, 32)
 0:1/0/custom_data_0 = ExtResource("1_cf6e4")
 0:1/0/custom_data_3 = 6
 1:0/0 = 0
-1:0/0/custom_data_0 = ExtResource("4_tu4kg")
+1:0/0/custom_data_0 = ExtResource("1_cf6e4")
 1:0/0/custom_data_3 = 2
 1:1/0 = 0
 1:1/0/custom_data_0 = ExtResource("1_cf6e4")
@@ -112,6 +115,12 @@ texture_region_size = Vector2i(32, 32)
 2:0/0/custom_data_0 = ExtResource("13_hsd26")
 3:0/0 = 0
 3:0/0/custom_data_0 = ExtResource("14_w1yg8")
+0:1/0 = 0
+0:1/0/custom_data_0 = ExtResource("17_wyto8")
+1:1/0 = 0
+1:1/0/custom_data_0 = ExtResource("19_i6a1y")
+2:1/0 = 0
+2:1/0/custom_data_0 = ExtResource("21_x5feu")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eidu8"]
 resource_name = "Hazards"

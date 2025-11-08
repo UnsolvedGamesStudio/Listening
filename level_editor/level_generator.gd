@@ -73,20 +73,42 @@ func generate_object_tiles(used_tiles: Array[Vector2i], layer: TileMapLayer):
 		
 		if "puzzle_id" in scene_inst:
 			var puzzle_id: int = layer.get_cell_tile_data(tile).get_custom_data("puzzle_id")
-			set_puzzle_id(scene_inst, puzzle_id)
+			puzzle_setup(scene_inst, puzzle_id)
 		
 		if scene_inst is MusicBox:
 			var box_id: int = layer.get_cell_tile_data(tile).get_custom_data("box_id")
-			set_box_id(scene_inst, box_id)
+			box_setup(scene_inst, box_id)
 		
 		add_child(scene_inst)
 		scene_inst.global_position = Vector3(tile.x * Vars.cell_size, 0.0, tile.y * Vars.cell_size)
 		
+		rotate_scene(scene_inst, tile, layer)
+		
+		
 		if scene_inst is UniqueObjectPlacer:
-			spawn_unique_object(scene_inst, unique_object_id)
+			unique_object_setup(scene_inst, unique_object_id)
 
 
-func set_puzzle_id(scene_inst: Node, puzzle_id: int):
+func rotate_scene(scene: Node3D, tile: Vector2i, layer: TileMapLayer):
+		var alternate:= layer.get_cell_alternative_tile(tile)
+		var flip_h:= alternate & TileSetAtlasSource.TRANSFORM_FLIP_H == TileSetAtlasSource.TRANSFORM_FLIP_H
+		var flip_v:= alternate & TileSetAtlasSource.TRANSFORM_FLIP_V == TileSetAtlasSource.TRANSFORM_FLIP_V
+		
+		if flip_h == false and flip_v == false:
+			return
+		
+		if flip_h == true and flip_v == false:
+			scene.global_rotation_degrees.y = 90.0
+		
+		if flip_h == true and flip_v == true:
+			scene.global_rotation_degrees.y = 0.0
+		
+		if flip_h == false and flip_v == true:
+			scene.global_rotation_degrees.y = -90.0
+
+
+
+func puzzle_setup(scene_inst: Node, puzzle_id: int):
 	scene_inst.puzzle_id = puzzle_id
 	
 	if scene_inst is RemembererPickup:
@@ -99,28 +121,7 @@ func set_puzzle_id(scene_inst: Node, puzzle_id: int):
 		scene_inst.required_synapses = cost
 
 
-func set_box_id(box: MusicBox, box_id: int):
-	var blueprint: Node = get_tree().get_first_node_in_group("level_blueprint")
-	box.box_id = box_id
-	
-	if not "chest_loot_scenes" in blueprint:
-		return
-	
-	if blueprint.chest_loot_scenes == {}:
-		return
-	
-	if box_id > blueprint.chest_loot_scenes.size():
-		return
-	
-	for object in blueprint.chest_loot_scenes[box_id - 1]:
-		print(object)
-		if object is not PackedScene:
-			return
-		
-		box.contents.append(object)
-
-
-func spawn_unique_object(placer: UniqueObjectPlacer, unique_object_id: int):
+func unique_object_setup(placer: UniqueObjectPlacer, unique_object_id: int):
 	var blueprint: Node = get_tree().get_first_node_in_group("level_blueprint")
 	
 	if not "unique_objects" in blueprint:
@@ -135,3 +136,24 @@ func spawn_unique_object(placer: UniqueObjectPlacer, unique_object_id: int):
 	var object_scene: Node = blueprint.unique_objects[unique_object_id - 1].instantiate()
 	add_child(object_scene)
 	object_scene.global_position = placer.global_position
+
+
+func box_setup(box: MusicBox, box_id: int):
+	var blueprint: Node = get_tree().get_first_node_in_group("level_blueprint")
+	box.box_id = box_id
+	blueprint.init_box_arrays()
+	
+	if not "box_arrays" in blueprint:
+		return
+	
+	if blueprint.box_arrays == []:
+		return
+	
+	if box_id > blueprint.box_arrays.size():
+		return
+	
+	for object in blueprint.box_arrays[box_id - 1]:
+		if object is not PackedScene:
+			return
+		
+		box.contents.append(object)

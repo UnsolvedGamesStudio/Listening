@@ -116,12 +116,17 @@ func element_expiry():
 
 
 func determine_damage():
+	var player: Player = owner
 	var damage:= 0.0
 	var bonus_from_score: float = min(100.0, Vars.score / 20.0)
 	
-	damage += (20 * Vars.element_container.size() ) + bonus_from_score
+	damage += (
+		(player.damage * Vars.element_container.size())
+		+ 
+		bonus_from_score
+		)
 	
-	return damage
+	return damage * player.damage_mult
 
 
 func determine_color():

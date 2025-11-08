@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://86r6xeju02bg"]
+[gd_scene load_steps=15 format=3 uid="uid://86r6xeju02bg"]
 
 [ext_resource type="Script" uid="uid://cfglrrbbq2g8" path="res://main_ui/health_bar.gd" id="1_m5yyi"]
 [ext_resource type="PackedScene" uid="uid://5is6n10g8b8b" path="res://main_ui/element_container_ui.tscn" id="1_rvqvy"]
@@ -7,7 +7,9 @@
 [ext_resource type="Script" uid="uid://dc33b50ljm764" path="res://main_ui/enemies_left_label.gd" id="4_6kiqu"]
 [ext_resource type="PackedScene" uid="uid://cho60r3e5ojhj" path="res://main_ui/item_container_ui.tscn" id="4_ru8ot"]
 [ext_resource type="Texture2D" uid="uid://c3125rp5l3jx8" path="res://main_ui/textures/synapse_icon.png" id="5_vm8jh"]
+[ext_resource type="Texture2D" uid="uid://c0ta80v7sjuka" path="res://main_ui/textures/dopamine_icon.png" id="6_fatuu"]
 [ext_resource type="Texture2D" uid="uid://1rqhvrarolql" path="res://main_ui/textures/neuron_icon.png" id="6_lsa3w"]
+[ext_resource type="Script" uid="uid://bx3wcjn2irwtp" path="res://main_ui/dopamine_label.gd" id="6_nad05"]
 [ext_resource type="Script" uid="uid://4vdnnrr7u74b" path="res://main_ui/synapses_label.gd" id="6_sqw8h"]
 [ext_resource type="PackedScene" uid="uid://b7xx6wfttusxa" path="res://main_ui/damage_indicator.tscn" id="7_sqw8h"]
 [ext_resource type="Script" uid="uid://djqbaobsxmkx8" path="res://main_ui/neurons_label.gd" id="7_uwb8r"]
@@ -109,6 +111,20 @@ layout_mode = 2
 text = "0/0"
 script = ExtResource("6_sqw8h")
 
+[node name="DopamineCount" type="HBoxContainer" parent="MarginContainer/Left"]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="DopamineIcon" type="TextureRect" parent="MarginContainer/Left/DopamineCount"]
+layout_mode = 2
+texture = ExtResource("6_fatuu")
+stretch_mode = 5
+
+[node name="DopamineLabel" type="Label" parent="MarginContainer/Left/DopamineCount"]
+layout_mode = 2
+text = "x0"
+script = ExtResource("6_nad05")
+
 [node name="EnemyCount" type="HBoxContainer" parent="MarginContainer/Left"]
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
@@ -120,7 +136,7 @@ stretch_mode = 5
 
 [node name="EnemiesLeftLabel" type="Label" parent="MarginContainer/Left/EnemyCount"]
 layout_mode = 2
-text = "0/0"
+text = "x0"
 script = ExtResource("4_6kiqu")
 
 [node name="Middle" type="VBoxContainer" parent="MarginContainer"]
@@ -164,6 +180,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="Reticle" type="TextureRect" parent="CenterContainer" groups=["reticle"]]
 modulate = Color(1, 1, 1, 0.32941177)

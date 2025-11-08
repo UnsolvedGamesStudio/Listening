@@ -125,7 +125,7 @@ _data = {
 size = Vector3(1.2, 0.55, 0.8)
 
 [node name="MusicBox" type="Node3D"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
 script = ExtResource("1_5fj6j")
 
 [node name="Timer" type="Timer" parent="."]
@@ -215,7 +215,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.948711e-08, 0, -0.79483986)
 [node name="Area3D" type="Area3D" parent="."]
 unique_name_in_owner = true
 collision_layer = 64
-collision_mask = 0
+collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0024414063, 0.30407715, 8.326673e-17)

@@ -70,6 +70,7 @@ editor_objects=""
 level_blueprint=""
 forgetter=""
 editor_cells=""
+dopamine_cluster=""
 
 [gui]
 

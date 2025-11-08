@@ -1,0 +1,91 @@
+[gd_scene load_steps=12 format=3 uid="uid://dsni4a2x3dlwl"]
+
+[ext_resource type="Script" uid="uid://dxgvi78wt3efu" path="res://pickups/dopamine/dopamine_pickup.gd" id="1_wgocq"]
+[ext_resource type="Texture2D" uid="uid://crpbl5wnqdl5i" path="res://pickups/textures/dopamine-Sheet.png" id="2_bbqef"]
+[ext_resource type="Shape3D" uid="uid://jvf00jl70m8b" path="res://pickups/dopamine/dopamine_collision_shape.tres" id="3_ajl7s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgocq"]
+atlas = ExtResource("2_bbqef")
+region = Rect2(0, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajl7s"]
+atlas = ExtResource("2_bbqef")
+region = Rect2(34, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbqef"]
+atlas = ExtResource("2_bbqef")
+region = Rect2(68, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iia1w"]
+atlas = ExtResource("2_bbqef")
+region = Rect2(102, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mx0f4"]
+atlas = ExtResource("2_bbqef")
+region = Rect2(136, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t82hb"]
+atlas = ExtResource("2_bbqef")
+region = Rect2(170, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smojl"]
+atlas = ExtResource("2_bbqef")
+region = Rect2(204, 0, 34, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g0d2g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgocq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ajl7s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bbqef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iia1w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mx0f4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t82hb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smojl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="DopaminePickup" type="Node3D"]
+script = ExtResource("1_wgocq")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+billboard = 1
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_g0d2g")
+autoplay = "default"
+frame_progress = 0.24933708
+
+[node name="OmniLight3D" type="OmniLight3D" parent="AnimatedSprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005108312, -0.026411295, 0)
+light_color = Color(0.99478894, 1, 0.9154129, 1)
+light_energy = 0.188
+light_indirect_energy = 0.768
+omni_range = 7.763
+omni_attenuation = 1.918
+
+[node name="Area3D" type="Area3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 64
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = ExtResource("3_ajl7s")

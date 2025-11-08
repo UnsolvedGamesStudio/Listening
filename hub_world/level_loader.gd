@@ -1,8 +1,9 @@
 extends Node3D
 class_name LevelLoader
 ## Todo: Add a skybox to the hubworld
-## Todo: Make a pre-level screen, with song selection and collectibles acquired
+## Todo: Make a pre-level screen, with song selection and collectibles acquired, and equip choices
 ## Todo: add an indicator of required synapses
+## Todo: allow color customization
 @onready var level_name_label: Label = %LevelNameLabel
 @onready var area_3d: Area3D = %Area3D
 

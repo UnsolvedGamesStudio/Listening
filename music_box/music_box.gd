@@ -1,6 +1,6 @@
 extends Node3D
 class_name MusicBox
-
+## Todo: clean up music box script
 @onready var sampler_instrument: SamplerInstrument3D = %SamplerInstrument
 @onready var timer: Timer = %Timer
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
@@ -13,6 +13,7 @@ class_name MusicBox
 @onready var object_origin: Marker3D = %ObjectOrigin
 
 @export var contents: Array[PackedScene] = []
+var object_instances: Array[Node3D] = []
 
 var box_id:= 0
 
@@ -23,7 +24,20 @@ var times_to_open:= 2
 
 
 func _ready() -> void:
+	for object: PackedScene in contents:
+		var object_inst: Node3D = object.instantiate()
+		object_inst.process_mode = Node.PROCESS_MODE_DISABLED
+		get_parent().add_child(object_inst)
+		object_inst.global_position = Vector3(100.0, 100.0, 100.0)
+		object_instances.append(object_inst)
+	
+	if contents == []:
+		return
+	
+	contents[0].instantiate()
 	Bus.beat.connect(on_beat)
+	area_3d.area_entered.connect(on_area_3d_area_entered)
+	area_3d.area_exited.connect(on_area_3d_area_exited)
 
 
 func _physics_process(delta: float) -> void:
@@ -52,27 +66,35 @@ func play_single_note(note):
 
 func empty_contents():
 	var object_list: Array[Node3D] = []
-	for object: PackedScene in contents:
-		var object_inst: Node3D = object.instantiate()
-		get_parent().add_child(object_inst)
-		object_inst.scale = Vector3(0.01, 0.01, 0.01)
-		object_inst.global_position = object_origin.global_position
-		object_list.append(object_inst)
-		tween_object(object_inst, object_list)
+	for object: Node3D in object_instances:
+		object.process_mode = Node.PROCESS_MODE_INHERIT
+		object.global_position = object_origin.global_position
+		object.scale = Vector3(0.01, 0.01, 0.01)
+		object_list.append(object)
+		tween_object(object, object_list)
 
 
 func tween_object(object: Node3D, object_list: Array[Node3D]):
 	var tween:= create_tween()
-	var target_pos:= object_target.global_position
+	var target_pos:= Vector3.ZERO
 	var random_offset: float = [0.8, -0.8, 0.5, -0.5, 0.3, -0.3].pick_random()
-	var extra_object_pos:= target_pos + Vector3(random_offset, target_pos.y, random_offset)
+	var first_object_target:= object_target.global_position
+	var extra_object_target:= target_pos + Vector3(random_offset, target_pos.y, random_offset)
 	
 	if object_list.size() <= 1:
-		tween.parallel().tween_property(object, "global_position", target_pos, Bgm.rhythm_notifier.beat_length * 2)
+		target_pos = first_object_target
 	
 	if object_list.size() > 1:
-		tween.parallel().tween_property(object, "global_position", extra_object_pos, Bgm.rhythm_notifier.beat_length * 2)
+		target_pos = extra_object_target
 	
+	if object.is_in_group("dopamine_cluster"):
+		target_pos = global_position
+	
+	if object is Dopamine:
+		target_pos = global_position + object.rand_position_offset
+		target_pos.y += 1.0
+	
+	tween.parallel().tween_property(object, "global_position", target_pos, Bgm.rhythm_notifier.beat_length * 2)
 	tween.parallel().tween_property(object, "scale", Vector3(1.0, 1.0, 1.0), Bgm.rhythm_notifier.beat_length * 2)
 
 
@@ -98,7 +120,7 @@ func on_beat(beat_count: int):
 	if opened == true:
 		return
 	
-	if beat_count % 2 == 0:
+	if beat_count % 4 == 0:
 		return
 	
 	var chord: Array[Array] = Bgm.current_chord
@@ -112,7 +134,7 @@ func on_beat(beat_count: int):
 	
 	times_played += 1
 	
-	if times_played >= times_to_open:
+	if times_played >= 0:
 		if opened == true:
 			return
 		
@@ -133,3 +155,31 @@ func open():
 	small_box.open.play("open")
 	omni_light_3d.light_energy = 2.0
 	empty_contents()
+
+
+func on_area_3d_area_entered(area: Area3D):
+	if not area.is_in_group("player_collision"):
+		return
+	
+	if not area.owner is Player:
+		return
+	
+	var player: Node3D = area.owner
+	var raise_amount:= 0.4
+	
+	if opened == true:
+		raise_amount = 0.6
+	
+	create_tween().tween_property(player.camera, "position:y", raise_amount, 0.1)
+
+
+func on_area_3d_area_exited(area: Area3D):
+	if not area.is_in_group("player_collision"):
+		return
+	
+	if not area.owner is Player:
+		return
+	
+	var player: Node3D = area.owner
+	
+	create_tween().tween_property(player.camera, "position:y", 0.0, 0.1)

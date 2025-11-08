@@ -1,16 +1,14 @@
 extends Node3D
 class_name Player
-## Todo: Make headbob anim a tween with adaptive speed
 ## Todo: Add indicator of effective range, maybe a line with a ball at the end?
-## Todo: Add signals for "successful actions" for spellcasting, so you can't cheese the score as much?
+## Todo: Add signals for "successful actions", so you can't cheese the score as much?
 ## Todo: Consumable items (scroll to select, right click to use)
 ## Todo: Different effects based on spell combos
 ## Todo: Add instruments with different buffs and samples
 ## Todo: Add equipable accessories with buffs
+## Todo: Fast travel spots
+## Todo: make beat vis return a score only if the forward button was pressed at the right time
 ## Todo: a painting scene that hosts a random drawing
-## Todo: spotlight decoration
-## Todo: make actions with the right timing count towards score
-
 const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 
 @onready var camera: Camera3D = %Camera3D
@@ -33,12 +31,15 @@ var looked_at_cell: Cell
 var looked_at_object: Area3D
 var is_moving:= false
 
+var auto_move:= true
+var waiting_to_move:= false
 var invincible_cheat:= false
 var invincible:= false
 var can_act:= true
 
 ## Stats
-var max_hp:= 250.0:
+const base_max_hp:= 250.0
+var max_hp:= base_max_hp:
 	set(value):
 		max_hp = clampf(value, 1.0, 9999.9)
 
@@ -46,17 +47,10 @@ var hp:= max_hp:
 	set(value):
 		hp = clampf(value, 0.0, max_hp)
 
-var movement_speed:= 2.5:
+const base_movement_speed:= 4
+var movement_speed:= 20:
 	set(value):
-		movement_speed = clampf(value, 1.0, 4.0)
-
-var damage_mult:= 1.0:
-	set(value):
-		damage_mult = clampf(value, 0.1, 5.0)
-
-var damage:= 20.0:
-	set(value):
-		damage = clampf(value, 1.0, 1000.0)
+		movement_speed = clampi(value, 1, 20)
 
 
 func _ready() -> void:
@@ -66,17 +60,19 @@ func _ready() -> void:
 	movement_raycast.target_position.z = -Vars.cell_size / 1.75
 	interact_range = Vars.cell_size * 10000
 	los.global_position = camera.global_position
-	
 	await get_tree().create_timer(0.0).timeout
 	
 	move_to_cell_indicator.reparent(get_parent())
 	movement_raycast.reparent(get_parent())
 	go_to_spawn()
 	player_collision.get_child(0).disabled = false
+	update_looked_at_cell()
 	Bus.player_moved.emit()
 	lose_hp(75.0)
+	
+	Bus.beat.connect(on_beat)
 
-
+## Todo: choose randomly from all spawn points
 func go_to_spawn():
 	var spawn_point:= get_tree().get_first_node_in_group("player_spawn")
 
@@ -92,7 +88,9 @@ func reset_vars():
 	invincible = false
 	can_act = true
 	looked_at_cell = null
+	max_hp = base_max_hp
 	hp = max_hp
+	movement_speed = base_movement_speed
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -100,19 +98,27 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if mouse_input:
 		camera_movement(event)
-		update_move_to_cell_indicator()
+		update_looked_at_cell()
 
 
 func _physics_process(delta: float) -> void:
 	current_los_collider()
-	snap_rotations()
 	
-	if Input.is_action_pressed("forward") and can_act == true:
+	
+	if auto_move == true and Input.is_action_pressed("forward") and is_moving == false:
+		if SceneManager.current_scene is HubWorld:
+			move_forward()
+		
+		else:
+			waiting_to_move = true
+
+
+func _input(event: InputEvent) -> void:
+	if can_act == false:
+		return
+	
+	if event.is_action_pressed("forward") and is_moving == false and auto_move == false:
 		move_forward()
-
-
-func snap_rotations():
-	movement_raycast.global_rotation_degrees.y = snappedf(neck.global_rotation_degrees.y, 90)
 
 
 func camera_movement(event: InputEvent):
@@ -181,37 +187,35 @@ func heal(amount: float):
 
 
 func move_forward():
-	if is_moving == true:
+	if Bgm.check_accuracy() == "missed" and auto_move == false:
 		return
 	
-	var target_cell: Node3D = get_looked_at_cell()
+	update_looked_at_cell()
 	
-	if target_cell == null:
+	if looked_at_cell == null:
 		return
 	
-	if check_impassable(target_cell) == true:
+	if check_impassable() == true:
 		return
 	
-	is_moving = true
+	var move_speed: float = Bgm.rhythm_notifier.bpm / (movement_speed * 100)
 	
-	var tween_length: float = (Bgm.rhythm_notifier.beat_length * 1.8) / (movement_speed)
+	if not Vars.last_activated_circle == null:
+		Vars.last_activated_circle.texture = MOVE_SIGIL
+	
 	var tween:= get_tree().create_tween()
+	tween.tween_property(self, "global_position", looked_at_cell.global_position, move_speed)
 	
-	tween.tween_property(self, "global_position", target_cell.global_position, tween_length)
+	tween.play()
 	headbob.play("bob")
-	await tween.finished
-	Bus.player_moved.emit()
-	
-	is_moving = false
-	
-	update_move_to_cell_indicator()
+	is_moving = true
+	tween.tween_callback(update_looked_at_cell)
+	tween.tween_callback(set_moving_false)
+	tween.tween_callback(Bus.player_moved.emit)
 
 
-func check_impassable(cell: Node3D):
-	if cell == null:
-		return
-	
-	for occupant in cell.occupants:
+func check_impassable():
+	for occupant in looked_at_cell.occupants:
 		if not is_instance_valid(occupant):
 			return false
 		
@@ -224,46 +228,43 @@ func check_impassable(cell: Node3D):
 	return false
 
 
-func update_move_to_cell_indicator():
-	if is_moving == true:
-		return
-	
-	var target_cell: Node3D = get_looked_at_cell()
-	
-	if target_cell == null:
-		move_to_cell_indicator.hide()
-		return
-	
-	if check_impassable(target_cell) == true:
-		move_to_cell_indicator.hide()
-		return
-	
-	if move_to_cell_indicator.visible == false:
-		move_to_cell_indicator.show()
-	
-	move_to_cell_indicator.global_position = target_cell.global_position
-	move_to_cell_indicator.global_rotation_degrees.y = movement_raycast.global_rotation_degrees.y
+func set_moving_false():
+	is_moving = false
 
 
-func get_looked_at_cell():
-	var collider: Area3D = movement_raycast.get_collider()
+func update_looked_at_cell():
 	
+	var cell: Area3D = check_movement_raycast()
+	
+	if not cell is CellCollision:
+		return
+	
+	looked_at_cell = cell.get_parent()
+	
+	update_move_to_cell_indicator(cell)
+
+
+func update_move_to_cell_indicator(cell: Area3D):
+	if check_impassable() == true:
+		return
+	
+	if cell == Vars.player_cell:
+		return
+	
+	move_to_cell_indicator.global_position = cell.global_position
+	move_to_cell_indicator.global_rotation_degrees.y = snapped(neck.global_rotation_degrees.y, 90)
+
+
+func check_movement_raycast():
+	var collider:= movement_raycast.get_collider()
 	if collider == null:
 		return
 	
-	if not collider is CellCollision:
-		return
-	
-	if not collider.owner is Cell:
-		return
-	
-	var cell:= collider.owner
-	
-	if "max_player_height" in cell:
+	if "max_player_height" in collider.owner:
 		if scale.y > collider.owner.max_player_height:
 			return
 	
-	return cell
+	return movement_raycast.get_collider()
 
 
 func current_los_collider():
@@ -316,3 +317,9 @@ func on_player_collision_area_entered(area: Area3D):
 	
 	if "body_damage" in area.owner:
 		take_damage(area.owner.body_damage, area.owner)
+
+
+func on_beat(beat_count: int):
+	if Input.is_action_pressed("forward") and is_moving == false and waiting_to_move == true:
+		move_forward()
+		waiting_to_move = false

@@ -1,5 +1,6 @@
 extends Node
 ## Todo: turn dict strigs into enum
+## Todo: load premade scenes like hub world instead of preload
 var main: MainScene
 var current_scene: Node
 var current_blueprint: PackedScene

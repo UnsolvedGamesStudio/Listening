@@ -78,3 +78,8 @@ func on_area_3d_area_entered(area: Area3D):
 		forget_cell(area)
 	else:
 		forget_entity(area)
+
+
+func _exit_tree() -> void:
+	if self in Vars.forgetters:
+		Vars.forgetters.erase(self)

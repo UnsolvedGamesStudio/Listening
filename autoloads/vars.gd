@@ -34,6 +34,7 @@ var total_neurons:= 2
 var neurons:= 0
 var total_synapses:= 0
 var synapses:= 0
+var dopamine:= 0.0
 
 
 ## Player

@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://527u77hpxvru"]
+
+[ext_resource type="Texture2D" uid="uid://0iivurbxnu5e" path="res://terrain/textures/papertexture-2061711_640.jpg" id="1_nh5oo"]
+
+[resource]
+cull_mode = 2
+albedo_texture = ExtResource("1_nh5oo")
+texture_filter = 0

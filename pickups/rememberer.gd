@@ -32,6 +32,8 @@ func activate():
 
 func remembember_all_forgetters():
 	for forgetter in Vars.forgetters:
+		if not is_instance_valid(forgetter):
+			return
 		
 		if forgetter.puzzle_id == puzzle_id:
 			forgetter.remember()

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyh16x4hu7h17"]
+
+[ext_resource type="PackedScene" uid="uid://dsni4a2x3dlwl" path="res://pickups/dopamine/dopamine_pickup.tscn" id="1_pdprg"]
+
+[node name="DopamineCluster" type="Node3D" groups=["dopamine_cluster"]]
+
+[node name="DopaminePickup" parent="." instance=ExtResource("1_pdprg")]
+
+[node name="DopaminePickup2" parent="." instance=ExtResource("1_pdprg")]
+
+[node name="DopaminePickup3" parent="." instance=ExtResource("1_pdprg")]
+
+[node name="DopaminePickup4" parent="." instance=ExtResource("1_pdprg")]
+
+[node name="DopaminePickup5" parent="." instance=ExtResource("1_pdprg")]

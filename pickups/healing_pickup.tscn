@@ -16,9 +16,8 @@ tangential_accel_max = 0.84999776
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lcksh"]
 cull_mode = 2
+shading_mode = 0
 albedo_color = Color(0.9631655, 1.3511204, 1.5738473e-06, 1)
-emission = Color(0, 0.87058824, 0, 1)
-emission_energy_multiplier = 1.28
 billboard_mode = 1
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_emkgw"]
@@ -73,6 +72,7 @@ shape = SubResource("SphereShape3D_bgvgf")
 [node name="Particles" type="GPUParticles3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1.0000001, 0, 1.0000001, -4.3711392e-08, 0, 0.2413302, 0)
+cast_shadow = 0
 amount = 10
 lifetime = 2.25
 randomness = 0.52

@@ -34,8 +34,16 @@ func check_distance(object: Node3D):
 
 
 func interact():
+	var success = Bgm.check_accuracy()
+	
+	if success == "missed":
+		return
+	
 	reticle_pressed_show()
 	activate_item()
+	
+	if not Vars.last_activated_circle == null:
+		Vars.last_activated_circle.texture = INTERACT_SIGIL
 
 
 func activate_item():

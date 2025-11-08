@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0iivurbxnu5e"
-path.s3tc="res://.godot/imported/papertexture-2061711_640.jpg-b36abb6c4ed5eaddb09277b874bce4da.s3tc.ctex"
+uid="uid://crpbl5wnqdl5i"
+path="res://.godot/imported/dopamine-Sheet.png-540c01ac25c5fd00564d585ca3c0cf1d.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://terrain/textures/papertexture-2061711_640.jpg"
-dest_files=["res://.godot/imported/papertexture-2061711_640.jpg-b36abb6c4ed5eaddb09277b874bce4da.s3tc.ctex"]
+source_file="res://pickups/textures/dopamine-Sheet.png"
+dest_files=["res://.godot/imported/dopamine-Sheet.png-540c01ac25c5fd00564d585ca3c0cf1d.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

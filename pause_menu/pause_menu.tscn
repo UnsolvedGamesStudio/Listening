@@ -219,6 +219,7 @@ action_mode = 0
 script = ExtResource("4_b4s0c")
 
 [node name="AutomoveButtonContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_b4s0c")
 

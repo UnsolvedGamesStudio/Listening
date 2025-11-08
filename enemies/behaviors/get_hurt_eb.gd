@@ -119,7 +119,8 @@ func die():
 	else:
 		hurtbox.queue_free()
 	
-	Vars.living_enemies.erase(O)
+	if O in Vars.living_enemies:
+		Vars.living_enemies.erase(O)
 	
 	
 	if "die" in O.idle_anim.get_animation_list():
