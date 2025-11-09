@@ -36,10 +36,12 @@ var total_synapses:= 0
 var synapses:= 0
 var dopamine:= 0.0
 
-
 ## Player
 var interact_range:= 4.0
 
+## Instruments
+enum instrument_types {LUTE, CARILLON}
+var current_instrument:= instrument_types.LUTE
 
 ## Layout
 const directions: Dictionary[String, Vector3i] = {

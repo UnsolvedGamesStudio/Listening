@@ -1,5 +1,6 @@
 extends Node
-## Todo: make empty sample note be based on camera rotation so you can actually play music
+## Todo: Make empty sample note be based on camera rotation so you can actually play music
+## Todo: Make the first element get replaced instead of the last
 @onready var label: Label = $Label
 
 const CAST_SIGIL = preload("uid://c5nwti415vrqj")
@@ -64,6 +65,7 @@ func add_element(element: int):
 	
 	if container.size() >= 3:
 		container.push_front(element)
+		container.erase(3)
 	else:
 		container.append(element)
 	

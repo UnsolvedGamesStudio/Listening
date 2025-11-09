@@ -7,12 +7,10 @@ class_name Player
 ## Todo: Different effects based on spell combos
 ## Todo: Add instruments with different buffs and samples
 ## Todo: Add equipable accessories with buffs
-## Todo: a painting scene that hosts a random drawing
-## Todo: spotlight decoration
-## Todo: make actions with the right timing count towards score
-
-const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
-
+## Todo: A painting node that hosts a random drawing
+## Todo: Spotlight decoration
+## Todo: Kake actions with the right timing count towards score
+## Todo: Kake held instrument go up when camera goes way down
 @onready var camera: Camera3D = %Camera3D
 @onready var neck: Node3D = %Neck
 @onready var player_collision: Area3D = %PlayerCollision
@@ -74,7 +72,6 @@ func _ready() -> void:
 	go_to_spawn()
 	player_collision.get_child(0).disabled = false
 	Bus.player_moved.emit()
-	lose_hp(75.0)
 
 
 func go_to_spawn():

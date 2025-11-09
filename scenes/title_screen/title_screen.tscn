@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bo41bw4t36d44" path="res://scenes/title_screen/start_button.gd" id="2_vuv2h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xawky"]
-albedo_color = Color(0.9211805, 8.085966e-06, 0.5763812, 1)
+albedo_color = Color(0.92156863, 0, 0.5764706, 1)
 metallic = 0.75
 metallic_specular = 1.0
 roughness = 0.0

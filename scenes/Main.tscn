@@ -4,4 +4,3 @@
 
 [node name="Main" type="Node" groups=["main_scene"]]
 script = ExtResource("1_o5qli")
-scene_to_load = "hub_world"

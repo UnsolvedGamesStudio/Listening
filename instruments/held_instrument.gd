@@ -1,17 +1,28 @@
 extends CanvasLayer
 class_name HeldInstrument
-
+## Todo: make carillon do a shockwave instead of a projectile
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
+
+@export var sample: NoteSample = preload("res://assets/samples/lute_sample.tres")
+
 var player: Player
 
 
 func _ready() -> void:
-	player = get_parent()
-	
 	if player == null:
+		printerr(self, ": Player not found")
 		queue_free()
 	
 	Bus.player_cast.connect(on_player_cast)
+	set_sample()
+
+
+func set_sample():
+	if sample == null:
+		printerr(self, ": sample not found")
+		return
+	
+	Bgm.sampler_instrument.samples[0] = sample
 
 
 func animate_played(elements: Array[int] = []):

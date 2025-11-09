@@ -1,9 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://dflkyrrs1kf1s"]
+[gd_scene load_steps=9 format=3 uid="uid://dflkyrrs1kf1s"]
 
 [ext_resource type="Texture2D" uid="uid://c4axu3iewcc0a" path="res://timing_bar/textures/timing_bar.png" id="1_boco5"]
 [ext_resource type="Script" uid="uid://dbgh2fsud7i6r" path="res://timing_bar/beat_vizualizer.gd" id="1_kra6h"]
 [ext_resource type="Texture2D" uid="uid://dfpijhj0xwh2c" path="res://timing_bar/textures/timing_bar_middle.png" id="3_yv7sp"]
 [ext_resource type="Script" uid="uid://hnqf1ox4jhrw" path="res://main_ui/combo_manager.gd" id="4_3jijn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3jijn"]
+bg_color = Color(0, 0, 0, 0.15)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yv7sp"]
 radius = 2.4665587
@@ -45,14 +52,34 @@ grow_vertical = 0
 texture = ExtResource("1_boco5")
 stretch_mode = 1
 
-[node name="ComboLabel" type="Label" parent="TimingBar"]
-modulate = Color(1, 1, 1, 0.58431375)
+[node name="PanelContainer" type="PanelContainer" parent="TimingBar"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.47291666
-anchor_top = -2.75
-anchor_right = 0.5229167
-anchor_bottom = -1.125
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -62.0
+offset_right = 20.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3jijn")
+
+[node name="MarginContainer" type="MarginContainer" parent="TimingBar/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TimingBar/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ComboLabel" type="Label" parent="TimingBar/PanelContainer/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.58431375)
+layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "x0"
 horizontal_alignment = 1
@@ -60,15 +87,10 @@ vertical_alignment = 1
 script = ExtResource("4_3jijn")
 metadata/_edit_use_anchors_ = true
 
-[node name="ScoreLabel" type="Label" parent="TimingBar/ComboLabel"]
+[node name="ScoreLabel" type="Label" parent="TimingBar/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.58431375)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.5833333
-anchor_top = 0.42307693
-anchor_right = 1.4166666
-anchor_bottom = 2.0480769
+layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Dmg bonus: 0"
 horizontal_alignment = 1

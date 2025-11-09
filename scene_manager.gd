@@ -11,12 +11,16 @@ var scenes: Dictionary[String, PackedScene] = {
 	"layout" : preload("uid://d1rnngxhnemng"),
 	"level" : preload("uid://cup1ntaax8sgg"),
 	"title_screen" : preload("uid://bqk51arvtg2x"),
+	"prep_screen" : preload("uid://cglbfa3a2dw7v"),
 }
 
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	main = get_tree().get_first_node_in_group("main_scene")
+	
+	if main == null:
+		return
 	
 	current_blueprint = main.level_layout_to_load
 	

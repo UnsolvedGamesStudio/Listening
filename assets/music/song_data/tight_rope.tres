@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SongData" load_steps=2 format=3 uid="uid://bv4fypx7ab87u"]
+
+[ext_resource type="Script" uid="uid://cm2xsueacjqna" path="res://assets/music/song_data/song_data.gd" id="1_6hb0r"]
+
+[resource]
+script = ExtResource("1_6hb0r")
+name = "Tight Rope"
+author = "RedFlagDiver"
+volume = 16.0
+file_path = "res://assets/music/tight_rope.ogg"
+chords_midi_path = "res://assets/music/chord_midis/tight_rope_chords.mid"
+metadata/_custom_type_script = "uid://cm2xsueacjqna"

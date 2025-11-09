@@ -33,6 +33,7 @@ alignment = 1
 script = ExtResource("1_k5wb2")
 
 [node name="Element1Container" type="PanelContainer" parent="HBoxContainer/ElementContainers"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -42,6 +43,7 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Element2Container" type="PanelContainer" parent="HBoxContainer/ElementContainers"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -51,6 +53,7 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Element3Container" type="PanelContainer" parent="HBoxContainer/ElementContainers"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6

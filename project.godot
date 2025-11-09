@@ -71,6 +71,7 @@ level_blueprint=""
 forgetter=""
 editor_cells=""
 dopamine_cluster=""
+prep_screen_song_preview=""
 
 [gui]
 

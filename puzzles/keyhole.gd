@@ -4,9 +4,11 @@ extends Node3D
 @onready var sprite_3d_2: Sprite3D = %Sprite3D2
 @onready var area_3d: Area3D = %Area3D
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var sfx: AudioStreamPlayer3D = %SFX
 
 var original_scale:= Vector3(1.0, 1.0, 1.0)
 var required_item:= Vars.item_types.F_KEY
+
 
 func _ready() -> void:
 	original_scale = sprite_3d.scale
@@ -39,6 +41,7 @@ func open():
 	area_3d.get_child(0).disabled = true
 	O.impassable = false
 	O.occupied_cell = null
+	sfx.play(0.35)
 	
 	var tween:= create_tween()
 	var original_y:= O.global_position.y

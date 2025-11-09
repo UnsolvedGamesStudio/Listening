@@ -97,7 +97,7 @@ _data = {
 [node name="StartingRoom" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("3_ihdwo")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2, -7.3313713e-06, 0)
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, -2, -7.3313713e-06, 0)
 
 [node name="FloorCell" parent="." instance=ExtResource("1_gsl5u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -112,6 +112,7 @@ level_data = ExtResource("3_682pm")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -7.3313713e-06, 0)
 
 [node name="PlayerSpawnPoint" parent="StartingCell" instance=ExtResource("2_kd8b7")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="FloorCell18" parent="." instance=ExtResource("1_gsl5u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -7.3313713e-06, -2)

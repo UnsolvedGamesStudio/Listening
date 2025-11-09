@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="NoteSample" load_steps=3 format=3 uid="uid://dcdoc3ee51eao"]
+
+[ext_resource type="Script" uid="uid://dtpmtwvvk0ac7" path="res://addons/SimpleSampler/sample_resource.gd" id="1_71n46"]
+[ext_resource type="AudioStream" uid="uid://csq7v8bu4nw3k" path="res://assets/samples/carillon.ogg" id="2_17oy4"]
+
+[resource]
+script = ExtResource("1_71n46")
+stream = ExtResource("2_17oy4")
+octave = 0
+metadata/_custom_type_script = "uid://dtpmtwvvk0ac7"

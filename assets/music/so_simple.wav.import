@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cehj8qpgycok1"
-path="res://.godot/imported/so simple 140 bpm.wav-6fca2c2710b2ba2fd5fc9e699a097c96.sample"
+path="res://.godot/imported/so_simple.wav-6674ad80cce6504a54f8d8a552f2afd1.sample"
 
 [deps]
 
-source_file="res://assets/music/so simple 140 bpm.wav"
-dest_files=["res://.godot/imported/so simple 140 bpm.wav-6fca2c2710b2ba2fd5fc9e699a097c96.sample"]
+source_file="res://assets/music/so_simple.wav"
+dest_files=["res://.godot/imported/so_simple.wav-6674ad80cce6504a54f8d8a552f2afd1.sample"]
 
 [params]
 

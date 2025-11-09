@@ -21,8 +21,8 @@ tracks/0/keys = {
 "values": [Vector2(288.13, 401.555), Vector2(284.965, 383.735), Vector2(288.13, 401.555)]
 }
 
-[sub_resource type="Animation" id="Animation_ca33o"]
-resource_name = "used"
+[sub_resource type="Animation" id="Animation_8jaha"]
+resource_name = "used_empty"
 length = 0.6
 step = 0.0333333
 tracks/0/type = "value"
@@ -32,10 +32,10 @@ tracks/0/path = NodePath("ToMove:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.13333333, 0.33333334, 0.5, 0.6),
-"transitions": PackedFloat32Array(0.49999997, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.36666667, 0.6),
+"transitions": PackedFloat32Array(0.49999997, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(288.13, 401.555), Vector2(288.13, 411), Vector2(284.245, 371.675), Vector2(284.245, 366.725), Vector2(286.475, 391), Vector2(288.13, 401.555)]
+"values": [Vector2(288.13, 401.555), Vector2(288.13, 411), Vector2(288.13, 397.055), Vector2(286.05, 394.625), Vector2(288.13, 401.555)]
 }
 
 [sub_resource type="Animation" id="Animation_8c4sm"]
@@ -55,8 +55,8 @@ tracks/0/keys = {
 "values": [Vector2(288.13, 401.555), Vector2(288.13, 411), Vector2(284.245, 349.34), Vector2(289, 339), Vector2(294, 391), Vector2(288.13, 401.555)]
 }
 
-[sub_resource type="Animation" id="Animation_8jaha"]
-resource_name = "used_empty"
+[sub_resource type="Animation" id="Animation_ca33o"]
+resource_name = "used"
 length = 0.6
 step = 0.0333333
 tracks/0/type = "value"
@@ -66,10 +66,10 @@ tracks/0/path = NodePath("ToMove:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.36666667, 0.6),
-"transitions": PackedFloat32Array(0.49999997, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.06666667, 0.13333333, 0.33333334, 0.5, 0.6),
+"transitions": PackedFloat32Array(0.49999997, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(288.13, 401.555), Vector2(288.13, 411), Vector2(288.13, 397.055), Vector2(286.05, 394.625), Vector2(288.13, 401.555)]
+"values": [Vector2(288.13, 401.555), Vector2(288.13, 411), Vector2(284.245, 371.675), Vector2(284.245, 366.725), Vector2(286.475, 391), Vector2(288.13, 401.555)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8c4sm"]

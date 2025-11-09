@@ -1,14 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://dewfhmrag5pkp"]
+[gd_scene load_steps=14 format=3 uid="uid://dewfhmrag5pkp"]
 
-[ext_resource type="AudioStream" uid="uid://cehj8qpgycok1" path="res://assets/music/so simple 140 bpm.wav" id="1_qfgnj"]
+[ext_resource type="AudioStream" uid="uid://dg173eddps7dv" path="res://assets/music/tight_rope.ogg" id="1_4owoj"]
+[ext_resource type="AudioStream" uid="uid://cehj8qpgycok1" path="res://assets/music/so_simple.wav" id="1_qfgnj"]
 [ext_resource type="Script" uid="uid://dbs7tn7suqlhg" path="res://autoloads/bgm/bgm.gd" id="2_vucbv"]
 [ext_resource type="Script" uid="uid://dos3qhffr4v0a" path="res://addons/rhythm_notifier/rhythm_notifier.gd" id="3_1oder"]
-[ext_resource type="MidiResource" uid="uid://dvvjseifubaqs" path="res://assets/music/so_simple_chords_140_bpm.mid" id="4_1i4ta"]
+[ext_resource type="MidiResource" uid="uid://dvvjseifubaqs" path="res://assets/music/chord_midis/so_simple_chords.mid" id="4_1i4ta"]
 [ext_resource type="Script" uid="uid://2ag1petdt53" path="res://addons/SimpleSampler/sampler_instrument.gd" id="5_syuoy"]
 [ext_resource type="Script" uid="uid://dtpmtwvvk0ac7" path="res://addons/SimpleSampler/sample_resource.gd" id="6_yq28d"]
-[ext_resource type="Resource" uid="uid://bm6btfvrx3t1a" path="res://assets/samples/lute.tres" id="7_qfgnj"]
+[ext_resource type="Resource" uid="uid://bm6btfvrx3t1a" path="res://assets/samples/lute_sample.tres" id="7_qfgnj"]
 [ext_resource type="AudioStream" uid="uid://hmaa8n3edwg0" path="res://assets/samples/clean-808-kick_A_minor.wav" id="8_wbxdo"]
-[ext_resource type="AudioStream" uid="uid://b2k6m68kkjla0" path="res://assets/music/stasis v1.mp3" id="9_qfgnj"]
+[ext_resource type="AudioStream" uid="uid://b2k6m68kkjla0" path="res://assets/music/stasis_v1.mp3" id="9_qfgnj"]
 
 [sub_resource type="Animation" id="Animation_4owoj"]
 length = 0.001
@@ -50,15 +51,16 @@ _data = {
 
 [node name="BGM" type="AudioStreamPlayer"]
 process_mode = 3
-stream = ExtResource("1_qfgnj")
+stream = ExtResource("1_4owoj")
+volume_db = 10.0
 bus = &"BGM"
 script = ExtResource("2_vucbv")
 
 [node name="RhythmNotifier" type="Node" parent="." node_paths=PackedStringArray("audio_stream_player")]
 unique_name_in_owner = true
 script = ExtResource("3_1oder")
-bpm = 140.0
-beat_length = 0.42857142857142855
+bpm = 120.0
+beat_length = 0.5
 audio_stream_player = NodePath("..")
 
 [node name="MidiPlayer" type="MidiPlayer" parent="."]

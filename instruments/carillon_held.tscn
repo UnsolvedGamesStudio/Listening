@@ -1,0 +1,207 @@
+[gd_scene load_steps=10 format=3 uid="uid://kgpvtuwlbuwb"]
+
+[ext_resource type="Script" uid="uid://b8n0337li4v1b" path="res://instruments/held_instrument.gd" id="1_b8eu6"]
+[ext_resource type="Resource" uid="uid://dcdoc3ee51eao" path="res://assets/samples/carillon_sample.tres" id="2_ffltk"]
+[ext_resource type="Texture2D" uid="uid://s8f2lxr2a718" path="res://instruments/textures/carillon shaft.png" id="2_pokfc"]
+[ext_resource type="Texture2D" uid="uid://b2ngbhl362eiy" path="res://instruments/textures/carillon.png" id="3_ffltk"]
+
+[sub_resource type="Animation" id="Animation_2oggr"]
+resource_name = "idle"
+length = 2.2
+loop_mode = 1
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToMove:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(288.13, 401.555), Vector2(284.965, 383.735), Vector2(288.13, 401.555)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ToMove/Carillon:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.96666664, 1.5, 2.1666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.03490658503988659, 0.0, -0.03490658503988659, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ToMove/Shaft:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 0.96666664, 1.5, 1.8666667, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.00349065850398846, 0.0, 0.00349065850398846, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_8jaha"]
+resource_name = "used_empty"
+length = 0.6
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToMove:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.36666667, 0.6),
+"transitions": PackedFloat32Array(0.49999997, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(288.13, 401.555), Vector2(288.13, 411), Vector2(288.13, 397.055), Vector2(286.05, 394.625), Vector2(288.13, 401.555)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ToMove/Carillon:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.5, 0.56666666, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.17453292519943295, -0.10471975511965978, 0.0, 0.03141592653589813, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ToMove/Shaft:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.5, 0.56666666, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.16057029118347813, 0.18675022996339305, -0.08377580409572802, 0.03141592653589813, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_8c4sm"]
+resource_name = "used_strong"
+length = 0.6
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToMove:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.13333333, 0.33333334, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(288.13, 401.555), Vector2(288.13, 411), Vector2(284.245, 349.34), Vector2(289, 339), Vector2(294, 391), Vector2(288.13, 401.555)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ToMove/Carillon:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.5, 0.56666666, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.2617993877991494, -0.2617993877991494, 0.0, 0.08377580409572802, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ToMove/Shaft:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.46666667, 0.53333336, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.72954762733363, -0.6649704450098399, -0.08377580409572802, 0.03141592653589813, 0.08377580409572802]
+}
+
+[sub_resource type="Animation" id="Animation_ca33o"]
+resource_name = "used"
+length = 0.6
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToMove:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333333, 0.33333334, 0.5, 0.6),
+"transitions": PackedFloat32Array(0.49999997, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(288.13, 401.555), Vector2(288.13, 411), Vector2(284.245, 371.675), Vector2(284.245, 366.725), Vector2(286.475, 391), Vector2(288.13, 401.555)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ToMove/Carillon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.5, 0.56666666, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.2617993877991494, -0.20943951023931956, 0.0, 0.08377580409572802, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ToMove/Shaft:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.46666667, 0.53333336, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.09075712110370494, 0.01919862177193802, -0.08377580409572802, 0.03141592653589813, 0.03490658503988659]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fy1ww"]
+_data = {
+&"idle": SubResource("Animation_2oggr"),
+&"used_empty": SubResource("Animation_8jaha"),
+&"used_strong": SubResource("Animation_8c4sm"),
+&"used_weak": SubResource("Animation_ca33o")
+}
+
+[node name="CarillonHeld" type="CanvasLayer"]
+layer = -1
+script = ExtResource("1_b8eu6")
+sample = ExtResource("2_ffltk")
+
+[node name="ToMove" type="Node2D" parent="."]
+position = Vector2(288.13, 401.555)
+
+[node name="Shaft" type="Sprite2D" parent="ToMove"]
+position = Vector2(-105.20099, -45.554993)
+rotation = 0.0837758
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("2_pokfc")
+offset = Vector2(-1, -5)
+
+[node name="Carillon" type="Sprite2D" parent="ToMove"]
+position = Vector2(-105.227196, -80.57797)
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("3_ffltk")
+offset = Vector2(-0.9737854, 30.02298)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_fy1ww")
+}
+autoplay = "idle"

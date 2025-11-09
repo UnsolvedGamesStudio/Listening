@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://c24ep73mhjfs8"]
+
+[ext_resource type="Theme" uid="uid://b2d4535til41s" path="res://assets/theme.tres" id="1_biwcg"]
+[ext_resource type="Texture2D" uid="uid://ltw5a023lpvh" path="res://instruments/textures/lute.png" id="1_woxx7"]
+[ext_resource type="Script" uid="uid://cqseyva7exueg" path="res://prep_screen/instrument_button.gd" id="2_w10gp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_biwcg"]
+bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.25882354, 0.6431373, 0.34901962, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="InstrumentButton" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0.5)
+offset_right = 64.0
+offset_bottom = 64.0
+pivot_offset = Vector2(32, 31)
+theme = ExtResource("1_biwcg")
+script = ExtResource("2_w10gp")
+
+[node name="SelectionOutline" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_biwcg")
+
+[node name="InstrumentIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("1_woxx7")
+expand_mode = 1
+stretch_mode = 5

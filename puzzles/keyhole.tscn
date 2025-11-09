@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmltvam4lo0l1"]
+[gd_scene load_steps=7 format=3 uid="uid://dmltvam4lo0l1"]
 
 [ext_resource type="Script" uid="uid://bjofeygc2i0sj" path="res://puzzles/keyhole.gd" id="1_vobuj"]
 [ext_resource type="Texture2D" uid="uid://p42o3wloyjmx" path="res://puzzles/textures/keyhole.png" id="1_x4g1l"]
+[ext_resource type="AudioStream" uid="uid://6hltppxhbqa8" path="res://assets/sfx/unlock_sfx.ogg" id="3_djx0u"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ei6pj"]
 radius = 0.5839425
@@ -59,3 +60,10 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_djx0u")
 }
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_djx0u")
+volume_db = 50.0
+pitch_scale = 0.8
+bus = &"SFX"
