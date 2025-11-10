@@ -27,11 +27,21 @@ func set_stats():
 
 
 func melee_attack():
+	if O.vision_raycast.get_collider().owner is ShellObject:
+		O.vision_raycast.get_collider().owner.take_damage(melee_damage)
+		play_attack_anim()
+		return
+	
 	Find.P().take_damage(melee_damage, O)
 	O.used_melee.emit()
+	play_attack_anim()
+
+
+func play_attack_anim():
+	if attack_anim == null:
+		return
 	
-	if not attack_anim == null:
-		attack_anim.play("attack")
+	attack_anim.play("attack")
 
 
 func check_melee():

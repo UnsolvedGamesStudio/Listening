@@ -5,18 +5,22 @@ class_name TimingCircle
 @onready var easy_zone: Area2D = %EasyZone
 @onready var medium_zone: Area2D = %MediumZone
 @onready var perfect_zone: Area2D = %PerfectZone
-@onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
+@onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = %VisibleOnScreenNotifier2D
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
-var speed:= 8 ##1 = highest. value is rounded up to the next even number.
+var speed:= 8 ## 1 = highest. value is rounded up to the next even number.
 var beat_area: Area2D
+var touched_middle:= false
+var original_texture: Texture
 
 
 func _ready() -> void:
 	var easiest_zone:= perfect_zone
 	
+	original_texture = texture
 	visible_on_screen_notifier_2d.connect("screen_exited", on_screen_exited)
 	Bus.beat_success_to_circle.connect(on_beat_success_to_circle)
+	Bus.beat.connect(on_beat)
 	easiest_zone.area_entered.connect(on_easiest_zone_area_entered)
 	easiest_zone.area_exited.connect(on_easiest_zone_area_exited)
 	
@@ -59,6 +63,13 @@ func recolor(level: int):
 		return
 
 
+func change_texure(new_texture: Texture):
+	if not texture == original_texture:
+		return
+	
+	texture = new_texture
+
+
 func deactivate_zones():
 	for zone: Area2D in zones.get_children():
 		zone.monitorable = false
@@ -74,6 +85,8 @@ func on_beat_success_to_circle(level: int, circle: TimingCircle, element: int):
 
 
 func on_easiest_zone_area_entered(area: Area2D):
+	touched_middle = true
+	
 	if area.owner is BeatVisualizer and Bgm.circles_are_in == false:
 		Bgm.circles_are_in = true
 	
@@ -81,8 +94,15 @@ func on_easiest_zone_area_entered(area: Area2D):
 
 
 func on_easiest_zone_area_exited(area: Area2D):
-	material.set_shader_parameter("clr", Color(0.68, 0.053, 0.223, 1.0))
 	Vars.in_timing_window = false
+
+
+func on_beat(beat_count: int):
+	if beat_count % 2 == 0:
+		scale = Vector2(1.1, 1.1)
+	
+	if beat_count % 2 == 1:
+		scale = Vector2(1.0, 1.0)
 
 
 func on_screen_exited():

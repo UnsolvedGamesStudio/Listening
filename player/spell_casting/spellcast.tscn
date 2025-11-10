@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bc7nsyavco5xh"]
 
-[ext_resource type="Script" uid="uid://c7e7m01dy0ty" path="res://spell_casting/spellcast.gd" id="1_pt1ts"]
+[ext_resource type="Script" uid="uid://c7e7m01dy0ty" path="res://player/spell_casting/spellcast.gd" id="1_pt1ts"]
 
 [node name="Spellcast" type="Node"]
 script = ExtResource("1_pt1ts")

@@ -23,6 +23,7 @@ Vars="*res://autoloads/vars.gd"
 NoteValue="*res://addons/SimpleSampler/note_value.gd"
 Filters="*res://screen_filters/filters.tscn"
 SceneManager="*res://scene_manager.gd"
+SpellCombos="*res://autoloads/spell_combos.gd"
 
 [debug]
 
@@ -136,6 +137,7 @@ exit={
 3d_physics/layer_8="obstacles"
 3d_physics/layer_9="hazards"
 3d_physics/layer_10="room_notifier"
+3d_physics/layer_11="shell_object"
 
 [rendering]
 

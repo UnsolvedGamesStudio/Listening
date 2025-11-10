@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvi5fhknrqn1k"
-path="res://.godot/imported/joy_sigil.png-83cbd955fa7b67d0af1a74c1b186c83f.ctex"
+uid="uid://c3brioukmdf24"
+path="res://.godot/imported/lightning_sigil.png-f647b792b1d76e97866cd5aba1d22015.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://spell_casting/textures/joy_sigil.png"
-dest_files=["res://.godot/imported/joy_sigil.png-83cbd955fa7b67d0af1a74c1b186c83f.ctex"]
+source_file="res://player/spell_casting/textures/lightning_sigil.png"
+dest_files=["res://.godot/imported/lightning_sigil.png-f647b792b1d76e97866cd5aba1d22015.ctex"]
 
 [params]
 

@@ -23,4 +23,3 @@ func on_area_entered(area: Area3D):
 			return
 		
 		area.owner.scale *= cell.max_player_height
-		print(area.owner.scale)

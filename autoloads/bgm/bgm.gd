@@ -156,7 +156,7 @@ func play_full_chord(octave_modifier: int = 1):
 		sampler_instrument.play_note(note[0], note[1] - octave_modifier)
 
 
-func check_accuracy():
+func check_accuracy(punished_for_bad_timing:= false):
 	if beat_visualizer == null:
 		return "perfect"
 	
@@ -196,7 +196,7 @@ func check_accuracy():
 		circle.deactivate_zones()
 		circle.recolor(level)
 	
-	if accuracy == "missed":
+	if accuracy == "missed" and punished_for_bad_timing == true:
 		Bus.beat_failure.emit()
 	
 	beat_visualizer.generate_text(accuracy)

@@ -19,6 +19,9 @@ class_name Player
 @onready var movement_raycast: RayCast3D = %MovementRaycast
 @onready var los: RayCast3D = %LineOfSight
 @onready var move_to_cell_indicator: Node3D = %MoveToCellIndicator
+@onready var abilities: Node = %Abilities
+
+const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 
 @export var camera_raycast_distance:= 200.0
 @export var interact_range: float = 1.0
@@ -106,6 +109,9 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed("forward") and can_act == true:
 		move_forward()
+	
+	if Input.is_action_just_pressed("forward") and can_act == true and is_moving == false:
+		Bus.beat_press_attempted.emit()
 
 
 func snap_rotations():
@@ -190,6 +196,7 @@ func move_forward():
 		return
 	
 	is_moving = true
+	trigger_beat_check()
 	
 	var tween_length: float = (Bgm.rhythm_notifier.beat_length * 1.8) / (movement_speed)
 	var tween:= get_tree().create_tween()
@@ -202,6 +209,16 @@ func move_forward():
 	is_moving = false
 	
 	update_move_to_cell_indicator()
+
+
+func trigger_beat_check():
+	if not Input.is_action_just_pressed("forward"):
+		return
+	
+	Bgm.check_accuracy()
+	
+	if not Vars.last_activated_circle == null:
+		Vars.last_activated_circle.change_texure(MOVE_SIGIL)
 
 
 func check_impassable(cell: Node3D):

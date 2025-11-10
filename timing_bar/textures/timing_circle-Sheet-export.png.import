@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3brioukmdf24"
-path="res://.godot/imported/lightning_sigil.png-9b2786f72e9b1bfaa3d15a745bbf2edd.ctex"
+uid="uid://ca2icgchnt6fk"
+path="res://.godot/imported/timing_circle-Sheet-export.png-3714ec9f1f5dd4a19b3f76e61dd810c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://spell_casting/textures/lightning_sigil.png"
-dest_files=["res://.godot/imported/lightning_sigil.png-9b2786f72e9b1bfaa3d15a745bbf2edd.ctex"]
+source_file="res://timing_bar/textures/timing_circle-Sheet-export.png"
+dest_files=["res://.godot/imported/timing_circle-Sheet-export.png-3714ec9f1f5dd4a19b3f76e61dd810c4.ctex"]
 
 [params]
 

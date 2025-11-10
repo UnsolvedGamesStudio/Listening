@@ -8,9 +8,9 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4mav4"]
 resource_local_to_scene = true
 shader = ExtResource("1_4mav4")
-shader_parameter/clr = Color(0, 0.03137255, 0, 1)
+shader_parameter/clr = Color(0, 0.025840001, 0, 0)
 shader_parameter/type = 1
-shader_parameter/thickness = 1.0
+shader_parameter/thickness = 2.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tjtfn"]
 radius = 13.0
@@ -146,6 +146,7 @@ shape = SubResource("CircleShape2D_4mav4")
 debug_color = Color(0.9011016, 0.3098072, 0, 0)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+unique_name_in_owner = true
 z_index = -1
 rect = Rect2(-8, -8, 16, 16)
 

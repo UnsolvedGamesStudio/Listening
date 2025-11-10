@@ -112,7 +112,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="BeatActivator" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.49411765)
 position = Vector2(2, 532)
 texture = ExtResource("3_yv7sp")
 

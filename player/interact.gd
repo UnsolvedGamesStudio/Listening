@@ -26,7 +26,15 @@ func _input(event: InputEvent) -> void:
 	if not event.is_action_pressed("interact"):
 		return
 	
+	Bus.beat_press_attempted.emit()
 	interact()
+
+
+func trigger_beat_check():
+	Bgm.check_accuracy()
+	
+	if not Vars.last_activated_circle == null:
+		Vars.last_activated_circle.change_texure(INTERACT_SIGIL)
 
 
 func check_distance(object: Node3D):
@@ -56,6 +64,7 @@ func activate_item():
 	if not object.has_method("activate"):
 		return
 	
+	trigger_beat_check()
 	object.activate()
 
 

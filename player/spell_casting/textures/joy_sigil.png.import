@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgy3lkdlcu6i3"
-path="res://.godot/imported/sadness_sigil.png-5129d5d9bfd812f299b69b915aa55767.ctex"
+uid="uid://cvi5fhknrqn1k"
+path="res://.godot/imported/joy_sigil.png-14f8d526b32c08495fd93c47119cbfc3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://spell_casting/textures/sadness_sigil.png"
-dest_files=["res://.godot/imported/sadness_sigil.png-5129d5d9bfd812f299b69b915aa55767.ctex"]
+source_file="res://player/spell_casting/textures/joy_sigil.png"
+dest_files=["res://.godot/imported/joy_sigil.png-14f8d526b32c08495fd93c47119cbfc3.ctex"]
 
 [params]
 

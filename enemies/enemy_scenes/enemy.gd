@@ -149,7 +149,7 @@ func check_sees_player():
 	if vision_raycast.get_collider() == null:
 		return
 	
-	if vision_raycast.get_collider().is_in_group("player_collision"):
+	if vision_raycast.get_collider().is_in_group("player_collision") or vision_raycast.get_collider().owner is ShellObject:
 		sees_player = true
 	else:
 		sees_player = false

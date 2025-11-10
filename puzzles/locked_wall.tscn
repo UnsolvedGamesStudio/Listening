@@ -4,18 +4,26 @@
 [ext_resource type="PackedScene" uid="uid://dgneaw016pnir" path="res://puzzles/keyhole_interactable.tscn" id="1_p1utb"]
 [ext_resource type="Material" uid="uid://527u77hpxvru" path="res://terrain/cells/locked_cell_material.tres" id="3_6568k"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_p1utb"]
+size = Vector3(2, 4.1, 2)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_bp5gm"]
 material = ExtResource("3_6568k")
 size = Vector2(2, 4.1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_p1utb"]
-size = Vector3(2, 4.1, 2)
 
 [node name="LockedWall" type="Node3D"]
 script = ExtResource("1_6568k")
 
 [node name="KeyholeInteractable" parent="." instance=ExtResource("1_p1utb")]
 transform = Transform3D(0.9, 0, 0, 0, -3.934025e-08, 0.9, 0, -0.9, -3.934025e-08, 0, 2, 0)
+
+[node name="Body" type="StaticBody3D" parent="."]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 1.85, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
+shape = SubResource("BoxShape3D_p1utb")
 
 [node name="NorthFace" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true

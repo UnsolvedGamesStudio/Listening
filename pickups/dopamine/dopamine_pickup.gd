@@ -11,6 +11,7 @@ var rand_position_offset:= Vector3( randf_range(-0.5, 0.5), randf_range(-0.4, 0.
 
 func _ready() -> void:
 	await get_tree().create_timer(0.0).timeout
+	animated_sprite_3d.speed_scale *= randf_range(0.9, 1.1)
 	global_position += rand_position_offset
 	area_3d.area_entered.connect(on_area_3d_area_entered)
 

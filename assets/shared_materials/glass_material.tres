@@ -1,0 +1,29 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dr64ug02l34y2"]
+
+[ext_resource type="Shader" uid="uid://ojon0136p0gr" path="res://abilities/shell/glass_shader.gdshader" id="1_7xqgs"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7xqgs"]
+resource_local_to_scene = true
+load_path = "res://.godot/imported/break.png-b93a506a1109e201cecd952b7af49260.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cet5x"]
+render_priority = 2
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+albedo_texture = SubResource("CompressedTexture2D_7xqgs")
+uv1_scale = Vector3(500, 500, 500)
+uv1_offset = Vector3(0.475, 0, 0.475)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 2.5491166
+texture_filter = 0
+texture_repeat = false
+
+[resource]
+render_priority = 1
+next_pass = SubResource("StandardMaterial3D_cet5x")
+shader = ExtResource("1_7xqgs")
+shader_parameter/albedo = Color(1, 1, 1, 0)
+shader_parameter/roughness = 0.45200002147
+shader_parameter/normal_strength = -6.889999567275
+shader_parameter/edge_color = Color(0.7295144, 0.96602684, 0.9125339, 1)

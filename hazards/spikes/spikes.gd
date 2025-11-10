@@ -4,7 +4,7 @@ class_name SpikesTile
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var hitbox: Area3D = $Hitbox
 
-var damage:= 25.0
+var damage:= 50.0
 var every_x_beat:= 3
 var up:= true
 

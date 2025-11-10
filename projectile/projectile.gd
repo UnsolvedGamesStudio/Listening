@@ -55,13 +55,13 @@ func destroy():
 	kill_timer.start(linger_time)
 	velocity = Vector3.ZERO
 	omni_light_3d.queue_free()
+	hitbox.get_child(0).set_deferred("disabled", true) 
+	wall_detect.get_child(0).set_deferred("disabled", true) 
 	spawn_destroyed_fx()
 	
 	await kill_timer.timeout
 	
 	sprite_3d.hide()
-	hitbox.get_child(0).disabled = true
-	wall_detect.get_child(0).disabled = true
 	kill_timer.start(5.0)
 	await kill_timer.timeout
 	queue_free()

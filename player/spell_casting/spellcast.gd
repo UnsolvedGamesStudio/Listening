@@ -33,7 +33,7 @@ func _input(event: InputEvent) -> void:
 
 
 func on_cast_pressed():
-	var success: String = Bgm.check_accuracy()
+	var success: String = Bgm.check_accuracy(true)
 	
 	if Bgm.playing == false:
 		Bgm.play_sample(container)
@@ -53,19 +53,19 @@ func add_element(element: int):
 		printerr(self, ": container_ui not found")
 		return
 	
-	var success: String = Bgm.check_accuracy()
+	var success: String = Bgm.check_accuracy(true)
 	
 	if success == "missed":
 		return
 	
 	if not Vars.last_activated_circle == null:
-		Vars.last_activated_circle.texture = Vars.elements[element].texture
+		Vars.last_activated_circle.change_texure(Vars.elements[element].texture)
 	
 	element_expiry()
 	
-	if container.size() >= 3:
+	if container.size() > 2:
 		container.push_front(element)
-		container.erase(3)
+		container.remove_at(3)
 	else:
 		container.append(element)
 	
@@ -84,9 +84,38 @@ func cast_spell():
 	if not Vars.last_activated_circle == null:
 		Vars.last_activated_circle.texture = CAST_SIGIL
 	
+	print(container)
+	
+	if not check_for_combo(container) == null:
+		var key: StringName = check_for_combo(container)
+		Bus.player_used_combo.emit(key)
+		
+		if "supress_attack" in SpellCombos.combos[key]:
+			container.clear()
+			container_ui.update()
+			return
+	
 	create_projectile()
 	container.clear()
 	container_ui.update()
+
+
+func check_for_combo(elements: Array[int]):
+	for key in SpellCombos.combos:
+		if is_combo_match(elements, SpellCombos.combos[key]["combo"]):
+			return key
+
+
+func is_combo_match(spell: Array, combo: Array) -> bool:
+	return count_elements(spell) == count_elements(combo)
+
+
+func count_elements(arr: Array) -> Dictionary:
+	var counts := {}
+	for e in arr:
+		counts[e] = counts.get(e, 0) + 1
+	return counts
+
 
 
 func create_projectile():

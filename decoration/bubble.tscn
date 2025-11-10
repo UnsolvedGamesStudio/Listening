@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bivbet0wks778"]
+
+[ext_resource type="Material" uid="uid://dr64ug02l34y2" path="res://assets/shared_materials/glass_material.tres" id="1_eb88b"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_qtrpr"]
+material = ExtResource("1_eb88b")
+radial_segments = 10
+rings = 10
+
+[node name="Bubble" type="MeshInstance3D"]
+mesh = SubResource("SphereMesh_qtrpr")
