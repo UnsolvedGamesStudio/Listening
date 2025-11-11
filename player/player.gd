@@ -11,6 +11,8 @@ class_name Player
 ## Todo: Spotlight decoration
 ## Todo: Kake actions with the right timing count towards score
 ## Todo: Kake held instrument go up when camera goes way down
+
+## Web issues: big delay, aspect ratio is off, hub world shading is off, mouse mode broken
 @onready var camera: Camera3D = %Camera3D
 @onready var neck: Node3D = %Neck
 @onready var player_collision: Area3D = %PlayerCollision
@@ -59,10 +61,16 @@ var damage:= 20.0:
 	set(value):
 		damage = clampf(value, 1.0, 1000.0)
 
+var is_on_web_os:= false
+
 
 func _ready() -> void:
-	reset_vars()
+	if OS.get_name() == "Web":
+		is_on_web_os = true
+	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	reset_vars()
 	player_collision.area_entered.connect(on_player_collision_area_entered)
 	movement_raycast.target_position.z = -Vars.cell_size / 1.75
 	interact_range = Vars.cell_size * 10000

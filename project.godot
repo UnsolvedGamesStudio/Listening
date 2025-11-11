@@ -17,13 +17,13 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 [autoload]
 
 Bus="*res://autoloads/signal_bus.gd"
-Find="*res://find.gd"
 Bgm="*res://autoloads/bgm/bgm.tscn"
 Vars="*res://autoloads/vars.gd"
 NoteValue="*res://addons/SimpleSampler/note_value.gd"
 Filters="*res://screen_filters/filters.tscn"
-SceneManager="*res://scene_manager.gd"
 SpellCombos="*res://autoloads/spell_combos.gd"
+SceneManager="*res://autoloads/scene_manager.gd"
+Find="*res://autoloads/find.gd"
 
 [debug]
 
@@ -51,7 +51,7 @@ movie_writer/movie_file="D:/Documents/godot projects/exports/movie/video.avi"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/SimpleSampler/plugin.cfg", "res://addons/godot_midi/plugin.cfg")
+enabled=PackedStringArray("res://addons/SimpleSampler/plugin.cfg", "res://addons/midi/plugin.cfg", "res://addons/midi_import/plugin.cfg")
 
 [global_group]
 

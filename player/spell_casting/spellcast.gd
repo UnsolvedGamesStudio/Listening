@@ -84,8 +84,6 @@ func cast_spell():
 	if not Vars.last_activated_circle == null:
 		Vars.last_activated_circle.texture = CAST_SIGIL
 	
-	print(container)
-	
 	if not check_for_combo(container) == null:
 		var key: StringName = check_for_combo(container)
 		Bus.player_used_combo.emit(key)

@@ -112,7 +112,7 @@ func looked_at_by_player(on: bool):
 func activate():
 	activated = true
 
-
+## Todo: Fix jank playing
 func on_beat(beat_count: int):
 	if activated == false:
 		return
@@ -123,7 +123,7 @@ func on_beat(beat_count: int):
 	if beat_count % 4 == 0:
 		return
 	
-	var chord: Array[Array] = Bgm.current_chord
+	var chord: Array = Bgm.get_notes()
 	
 	chord.reverse()
 	

@@ -6,16 +6,17 @@ extends AudioStreamPlayer
 @onready var pause_menu_music: AudioStreamPlayer = %PauseMenuMusic
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var non_beat_bgm: AudioStreamPlayer = %NonBeatBGM
+@onready var chord_timing: Timer = %ChordTiming
 
 var combo_label: ComboManager
-
-var current_chord: Array[Array] = []
-
 var beat_visualizer: CanvasLayer
 
+var current_chord: Array[Array] = []
 var beat_count:= 0
 var last_timing:= 0.0
 var circles_are_in:= false
+
+var event_history: Dictionary[float, int] = {}
 
 
 var songs: Dictionary[String, AudioStream] = {
@@ -25,7 +26,17 @@ var songs: Dictionary[String, AudioStream] = {
 
 func _ready() -> void:
 	rhythm_notifier.beat.connect(on_beat)
-	midi_player.note.connect(on_midi_note_played)
+	midi_player.midi_event.connect(on_midi_event)
+
+var current_midi_notes:= []
+
+func on_midi_event( channel, event ):
+	match event.type:
+		SMF.MIDIEventType.note_on:
+			add_note_to_array(event.note)
+		
+		SMF.MIDIEventType.note_off:
+			remove_note_from_array(event.note)
 
 
 func start_song():
@@ -40,30 +51,65 @@ func stop_song():
 	midi_player.stop()
 
 
-func on_midi_note_played(event, track):
-	midi_to_name(event.note)
-
-
-func midi_to_name(midi_number):
-	## Todo: change this to be timing based, or have an option to be, and an option for chord size
-	if current_chord.size() >= 4:
-		current_chord.clear()
+func add_note_to_array(note):
+	if note in current_midi_notes:
+		return
 	
+	current_midi_notes.append(note)
+
+
+func remove_note_from_array(note):
+	current_midi_notes.erase(note)
+
+
+func get_notes() -> Array:
+	var returned_array:= []
+	var sorted_notes:= current_midi_notes
+	sorted_notes.sort()
+	
+	for note in sorted_notes:
+		returned_array.append( translate_midi(note) )
+	
+	return returned_array
+
+
+## make octave accurate
+func translate_midi(midi_number):
 	# A list of note names for one octave
 	var note_names = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+	
 	# The number of notes in one octave
 	var notes_per_octave = 12
+	
 	# The offset of the octave number from the midi number
 	var octave_offset = 0
+	
 	# Calculate the note name and the octave number using modulo and division
 	var note_name = note_names[midi_number % notes_per_octave]
 	var octave_number = midi_number / notes_per_octave + octave_offset
-	# Return the note name and the octave number as a string
-	current_chord.append([note_name, octave_number - 4])
+	
+	# Return the note name and the octave number as an array
+	return [note_name, octave_number]
+
+#func read_chord(midi_number):
+	#if current_chord.size() >= 4:
+		#current_chord.clear()
+	#
+	## A list of note names for one octave
+	#var note_names = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+	## The number of notes in one octave
+	#var notes_per_octave = 12
+	## The offset of the octave number from the midi number
+	#var octave_offset = 0
+	## Calculate the note name and the octave number using modulo and division
+	#var note_name = note_names[midi_number % notes_per_octave]
+	#var octave_number = midi_number / notes_per_octave + octave_offset
+	## Return the note name and the octave number as a string
+	#current_chord.append([note_name, octave_number - 4])
 
 
 func play_sample(elements: Array[int] = []):
-	if current_chord == []:
+	if get_notes() == []:
 		play_note_no_music(elements)
 		return
 	
@@ -72,7 +118,7 @@ func play_sample(elements: Array[int] = []):
 	sampler_instrument.stop()
 	
 	if elements == []:
-		play_single_note(current_chord.pick_random(), 2)
+		play_single_note(get_notes().pick_random(), 2)
 	
 	if elements.size() == 3:
 		play_full_chord()
@@ -80,80 +126,82 @@ func play_sample(elements: Array[int] = []):
 	
 	for element in elements:
 		if element == 0:
-			play_single_note(current_chord[-1], 1)
+			play_highest_note()
 		
 		if element == 1:
-			play_single_note(current_chord[0], 1)
+			play_lowest_note()
 		
 		if element == 2:
-			play_single_note(current_chord[2], 1)
+			play_middle_note()
+
+
+func play_lowest_note():
+	var note_to_play: Array = get_notes()[0]
+	play_single_note(note_to_play, 1)
+	print(note_to_play)
+
+
+func play_highest_note():
+	var note_to_play: Array = get_notes()[-1]
+	play_single_note(note_to_play, 1)
+	print(note_to_play)
+
+
+func play_middle_note():
+	var current_notes := get_notes()
+	var count := current_notes.size()
+	if count == 0:
+		return
 	
-	## v Plays each note with octave based on when it is played v
-	#var plays:= 0
-	#for element in elements:
-		#print(plays)
-		#if element == 0:
-			#play_single_note(current_chord[-1], 2)
-			#if plays == 1:
-				#play_single_note(current_chord[-1], 1)
-			#if plays == 2:
-				#play_single_note(current_chord[-1], 0)
-#
-		#if element == 1:
-			#play_single_note(current_chord[0], 0)
-			#if plays == 1:
-				#play_single_note(current_chord[-1], -1)
-			#if plays == 2:
-				#play_single_note(current_chord[-1], -2)
-		#
-		#if element == 2:
-			#play_single_note(current_chord[2], 1)
-			#if plays == 1:
-				#play_single_note(current_chord[-1], 0)
-			#if plays == 2:
-				#play_single_note(current_chord[-1], -1)
-		#
-		#plays +=1
+	var idx := (count - 1) / 2.0
+	if count % 2 == 0:
+		# even → two middle elements → random tie-breaker
+		idx += randi() % 2
+	
+	var note_to_play = current_notes[idx]
+	play_single_note(note_to_play, 1)
+	print(note_to_play)
 
 
 func play_note_no_music(elements):
-		var note_names = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+		#var note_names:= ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+		#var c_maj:= ["C", "D", "E", "F", "G", "A", "B"]
+		var b_melodic_min:= ["B", "C#", "D", "E", "F#", "G#", "A#"]
 		
 		if elements == []:
-			play_single_note(note_names.pick_random(), 2)
+			sampler_instrument.play_note(b_melodic_min.pick_random(), 1)
 		
 		else:
 			for element in elements:
 				if element == 0:
-					play_single_note("C", 1)
+					sampler_instrument.play_note("B", 0)
 				if element == 1:
-					play_single_note("E", 1)
+					sampler_instrument.play_note("E", 0)
 				if element == 2:
-					play_single_note("G", 1)
+					sampler_instrument.play_note("G#", 0)
 
 
-func play_single_note(note, octave: int = 0):
-	var octave_modifier:= -1
-	
+func play_single_note(note, octave_modifier: int = 0):
 	var sample:= sampler_instrument.samples[0]
 	
 	sample.tone = note[0]
-	sample.octave = -1
+	sample.octave = note[1] - 5 + octave_modifier
 	
-	sampler_instrument.play_note(note[0], octave + octave_modifier)
+	if sample.octave < 0:
+		sample.octave = 0
+	
+	sampler_instrument.play_note(sample.tone, sample.octave)
 
 
-func play_full_chord(octave_modifier: int = 1):
-	if current_chord == []:
+## Use play_single_chord
+func play_full_chord(octave_modifier: int = 0):
+	if get_notes() == []:
 		return
 	
 	var sample:= sampler_instrument.samples[0]
 	
-	for note in current_chord:
-		sample.tone = note[0]
-		sample.octave = note[1]
-		
-		sampler_instrument.play_note(note[0], note[1] - octave_modifier)
+	for note in get_notes():
+		play_single_note(note, octave_modifier)
 
 
 func check_accuracy(punished_for_bad_timing:= false):

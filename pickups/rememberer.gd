@@ -8,7 +8,7 @@ var required_synapses:= 11
 
 
 func enter():
-	label.text = str("🧠 ", required_synapses)
+	label.text = str(required_synapses)
 
 
 func looked_at_by_player(on: bool):

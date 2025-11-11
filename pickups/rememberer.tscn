@@ -1,28 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://b0ct4efrkp6xh"]
 
 [ext_resource type="Script" uid="uid://qqpattfk3uo7" path="res://pickups/rememberer.gd" id="1_osxpn"]
-[ext_resource type="Texture2D" uid="uid://di2kls167grne" path="res://pickups/textures/drop-Sheet.png" id="2_ujtk5"]
+[ext_resource type="Texture2D" uid="uid://c3125rp5l3jx8" path="res://main_ui/textures/synapse_icon.png" id="2_osxpn"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_osxpn"]
 viewport_path = NodePath("Sprite3D/Label3D/SubViewport")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bgvgf"]
-
-[sub_resource type="Animation" id="Animation_lcksh"]
-resource_name = "on_beat"
-step = 0.0333333
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [1, 0]
-}
 
 [sub_resource type="Animation" id="Animation_osxpn"]
 resource_name = "bounce"
@@ -39,6 +23,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(3, 3, 3), Vector3(3.2, 3.2, 3.2), Vector3(3, 3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_lcksh"]
+resource_name = "on_beat"
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_emkgw"]
@@ -60,13 +60,11 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 2.016114, 0)
 billboard = 2
 double_sided = false
 texture_filter = 0
-texture = ExtResource("2_ujtk5")
-hframes = 2
-frame = 1
+texture = ExtResource("2_osxpn")
 region_rect = Rect2(0, 0, 32, 16)
 
 [node name="Label3D" type="Sprite3D" parent="Sprite3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.31840622, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.13955373, 0)
 billboard = 2
 texture_filter = 0
 texture = SubResource("ViewportTexture_osxpn")
@@ -82,7 +80,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "🧠 30 "
+text = "30"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
