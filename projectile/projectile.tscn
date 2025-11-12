@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwaev5gyis5tp"]
+[gd_scene load_steps=8 format=3 uid="uid://bwaev5gyis5tp"]
 
 [ext_resource type="Script" uid="uid://0lclde4xd8rw" path="res://projectile/projectile.gd" id="1_makwg"]
 [ext_resource type="Texture2D" uid="uid://dgygswxu7j8ds" path="res://projectile/textures/default_projectile.png" id="2_makwg"]
@@ -84,12 +84,12 @@ _data = {
 [sub_resource type="SphereShape3D" id="SphereShape3D_makwg"]
 radius = 0.27556098
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_dr2av"]
-radius = 0.022055706
-
-[node name="Projectile" type="CharacterBody3D"]
+[node name="Projectile" type="RigidBody3D"]
 collision_layer = 0
-collision_mask = 0
+collision_mask = 2
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_makwg")
 
 [node name="BodyCollision" type="CollisionShape3D" parent="."]
@@ -124,15 +124,6 @@ debug_color = Color(0.97987014, 0, 0.38836122, 0.41960785)
 unique_name_in_owner = true
 wait_time = 0.3
 one_shot = true
-
-[node name="WallDetect" type="Area3D" parent="."]
-unique_name_in_owner = true
-collision_layer = 0
-collision_mask = 2
-
-[node name="WallCollision" type="CollisionShape3D" parent="WallDetect"]
-shape = SubResource("SphereShape3D_dr2av")
-debug_color = Color(0, 0.5372549, 0.9607843, 0.3529412)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 unique_name_in_owner = true

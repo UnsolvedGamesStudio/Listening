@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1rnngxhnemng"]
+[gd_scene load_steps=6 format=3 uid="uid://d1rnngxhnemng"]
 
 [ext_resource type="Script" uid="uid://d0wkhkbfau2f6" path="res://terrain/layout.gd" id="1_v6hxy"]
 [ext_resource type="PackedScene" uid="uid://br0viovfq64bh" path="res://level_editor/level_generator.tscn" id="2_b0xiq"]
 [ext_resource type="PackedScene" uid="uid://dflkyrrs1kf1s" path="res://timing_bar/beat_vizualizer.tscn" id="3_tupbf"]
 [ext_resource type="PackedScene" uid="uid://ce10gkdeiprj7" path="res://player/player.tscn" id="4_trw21"]
+[ext_resource type="AudioStream" uid="uid://btu6qvvkk8lsp" path="res://assets/ambience/room_tone.ogg" id="5_b0xiq"]
 
-[node name="Layout" type="Node3D"]
+[node name="Layout" type="Node3D" groups=["layout"]]
 script = ExtResource("1_v6hxy")
 
 [node name="LevelGenerator" parent="." instance=ExtResource("2_b0xiq")]
@@ -14,3 +15,10 @@ unique_name_in_owner = true
 [node name="BeatVisualizer" parent="." instance=ExtResource("3_tupbf")]
 
 [node name="Player" parent="." instance=ExtResource("4_trw21")]
+
+[node name="LayoutAmbience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_b0xiq")
+volume_db = 1.5
+pitch_scale = 0.95
+autoplay = true
+bus = &"Ambience"

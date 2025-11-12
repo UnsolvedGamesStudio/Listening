@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://6n70akjpdb5c"]
+[gd_scene load_steps=8 format=3 uid="uid://6n70akjpdb5c"]
 
 [ext_resource type="Script" uid="uid://bralxx3e2dje3" path="res://projectile/enemy_projectile.gd" id="1_ayf6a"]
 [ext_resource type="Texture2D" uid="uid://dgygswxu7j8ds" path="res://projectile/textures/default_projectile.png" id="2_saffc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5pofb"]
-radius = 0.028029997
+radius = 0.024898652
 
 [sub_resource type="Animation" id="Animation_dr2av"]
 resource_name = "RESET"
@@ -84,17 +84,16 @@ _data = {
 [sub_resource type="SphereShape3D" id="SphereShape3D_wl2ay"]
 radius = 0.27556098
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_ftmid"]
-radius = 0.022055706
-
-[node name="EnemyProjectile" type="CharacterBody3D"]
-collision_layer = 0
+[node name="EnemyProjectile" type="RigidBody3D"]
+collision_layer = 2
 collision_mask = 0
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_ayf6a")
 
 [node name="BodyCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_5pofb")
-disabled = true
 debug_color = Color(0, 0.5372549, 0.9607843, 0)
 debug_fill = false
 
@@ -125,15 +124,6 @@ debug_color = Color(0.97987014, 0, 0.38836122, 0.41960785)
 unique_name_in_owner = true
 wait_time = 0.1
 one_shot = true
-
-[node name="WallDetect" type="Area3D" parent="."]
-unique_name_in_owner = true
-collision_layer = 0
-collision_mask = 2
-
-[node name="WallCollision" type="CollisionShape3D" parent="WallDetect"]
-shape = SubResource("SphereShape3D_ftmid")
-debug_color = Color(0, 0.5372549, 0.9607843, 0.3529412)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 unique_name_in_owner = true

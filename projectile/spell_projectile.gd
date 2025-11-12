@@ -22,6 +22,10 @@ func on_hitbox_area_entered(area: Area3D):
 		if not area.owner is Enemy:
 			return
 	
+	hit_enemy.emit(area.owner)
 	Bus.spell_landed.emit(elements)
+	
+	if not sfx == null:
+		sfx.play()
 	
 	destroy()

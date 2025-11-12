@@ -99,7 +99,7 @@ _data = {
 &"fade_sound_in": SubResource("Animation_loyhd")
 }
 
-[node name="HubWorld" type="Node3D"]
+[node name="HubWorld" type="Node3D" groups=["layout"]]
 script = ExtResource("1_loyhd")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -133,6 +133,7 @@ bus = &"HubWorldMusic"
 stream = ExtResource("3_loyhd")
 pitch_scale = 0.95
 autoplay = true
+bus = &"Ambience"
 
 [node name="SoundFade" type="AnimationPlayer" parent="."]
 libraries = {

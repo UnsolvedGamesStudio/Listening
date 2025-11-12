@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://sg7bcj7egmtx"]
+
+[ext_resource type="Script" uid="uid://dxa4yr1bg1wue" path="res://projectile/projectile_effects/blast_pe.gd" id="1_xf75p"]
+[ext_resource type="PackedScene" uid="uid://cabfwuhvqiwog" path="res://hazards/explosion/explosion.tscn" id="2_crj21"]
+
+[node name="BlastPe" type="Node"]
+script = ExtResource("1_xf75p")
+explosion_scene = ExtResource("2_crj21")

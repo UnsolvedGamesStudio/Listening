@@ -20,6 +20,8 @@ script = ExtResource("1_pgj8b")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.007759303, 0)
+sorting_offset = 2.0
 mesh = SubResource("PlaneMesh_pgj8b")
 
 [node name="GroundRaycast" type="RayCast3D" parent="."]

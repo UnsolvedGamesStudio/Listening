@@ -1,15 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5gdwlmng0rsy"]
+[gd_scene load_steps=5 format=3 uid="uid://c5gdwlmng0rsy"]
 
 [ext_resource type="Script" uid="uid://b1d1ue50x01g6" path="res://puzzles/obstacle.gd" id="1_6568k"]
 [ext_resource type="PackedScene" uid="uid://dgneaw016pnir" path="res://puzzles/keyhole_interactable.tscn" id="1_p1utb"]
-[ext_resource type="Material" uid="uid://527u77hpxvru" path="res://terrain/cells/locked_cell_material.tres" id="3_6568k"]
+[ext_resource type="PackedScene" uid="uid://itikcsbog7mw" path="res://terrain/wall.tscn" id="4_7u0j8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p1utb"]
 size = Vector3(2, 4.1, 2)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_bp5gm"]
-material = ExtResource("3_6568k")
-size = Vector2(2, 4.1)
 
 [node name="LockedWall" type="Node3D"]
 script = ExtResource("1_6568k")
@@ -19,31 +15,27 @@ transform = Transform3D(0.9, 0, 0, 0, -3.934025e-08, 0.9, 0, -0.9, -3.934025e-08
 
 [node name="Body" type="StaticBody3D" parent="."]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 1.85, 0)
-collision_layer = 2
+collision_layer = 2048
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
 shape = SubResource("BoxShape3D_p1utb")
 
-[node name="NorthFace" type="MeshInstance3D" parent="."]
+[node name="NorthFace" parent="." instance=ExtResource("4_7u0j8")]
 unique_name_in_owner = true
-transform = Transform3D(-0.9, 1.3589622e-07, 5.9402124e-15, 0, -3.934025e-08, 0.9, 1.3589622e-07, 0.9, 3.934025e-08, 0, 1.849839, -0.9)
-mesh = SubResource("PlaneMesh_bp5gm")
+transform = Transform3D(0.9, 7.86805e-08, 1.3589622e-07, -7.86805e-08, 0.9, 0, -1.3589622e-07, -1.0658141e-14, 0.9, -1.1880425e-14, 0.04983902, -0.90000004)
 
-[node name="EastFace" type="MeshInstance3D" parent="."]
+[node name="EastFace" parent="." instance=ExtResource("4_7u0j8")]
 unique_name_in_owner = true
-transform = Transform3D(-3.934025e-08, -0.9, -3.934025e-08, 0, -3.934025e-08, 0.9, -0.9, 3.934025e-08, 1.7196169e-15, 0.9, 1.849839, 0)
-mesh = SubResource("PlaneMesh_bp5gm")
+transform = Transform3D(3.5527137e-15, -3.934025e-08, 0.8999999, 1.719617e-15, 0.9, 3.9340247e-08, -0.8999999, 1.7196171e-15, 3.5527137e-15, 0.90000004, 0.04983902, -3.4392337e-15)
 
-[node name="SouthFace" type="MeshInstance3D" parent="."]
+[node name="SouthFace" parent="." instance=ExtResource("4_7u0j8")]
 unique_name_in_owner = true
-transform = Transform3D(0.9, -3.934025e-08, -1.7196171e-15, 0, -3.934025e-08, 0.9, -3.934025e-08, -0.9, -3.934025e-08, 0, 1.849839, 0.9)
-mesh = SubResource("PlaneMesh_bp5gm")
+transform = Transform3D(0.9, -1.0587912e-22, 3.934025e-08, 0, 0.9, 0, -3.934025e-08, 0, 0.9, 3.4392341e-15, 0.04983902, 0.90000004)
 
-[node name="WestFace" type="MeshInstance3D" parent="."]
+[node name="WestFace" parent="." instance=ExtResource("4_7u0j8")]
 unique_name_in_owner = true
-transform = Transform3D(6.794811e-08, 0.9, 3.934025e-08, 0, -3.934025e-08, 0.9, 0.9, -6.794811e-08, -2.9701062e-15, -0.9, 1.849839, 0)
-mesh = SubResource("PlaneMesh_bp5gm")
+transform = Transform3D(6.794811e-08, 0, -0.9, 0, 0.9, 0, 0.9, 0, 6.794811e-08, -0.90000004, 0.04983902, 5.9402124e-15)
 
 [node name="Area3D" type="Area3D" parent="." groups=["obstacle_collision"]]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 1.85, 0)

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpuf8g1pd0oed"]
+
+[ext_resource type="Script" uid="uid://d008mft5fs2sf" path="res://player/abilities/blast_ability.gd" id="1_0camt"]
+
+[node name="BlastAbility" type="Node"]
+script = ExtResource("1_0camt")

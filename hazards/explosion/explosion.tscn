@@ -1,0 +1,121 @@
+[gd_scene load_steps=12 format=3 uid="uid://cabfwuhvqiwog"]
+
+[ext_resource type="Texture2D" uid="uid://bbidawktpeg0l" path="res://vfx/blast-Sheet.png" id="1_7d5v2"]
+[ext_resource type="Script" uid="uid://ds8nyxulshiie" path="res://hazards/explosion/explosion.gd" id="1_wxdcp"]
+[ext_resource type="AudioStream" uid="uid://cpbghu4i4l8m5" path="res://assets/sfx/bang_sfx.ogg" id="2_vv2pp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8pb1y"]
+atlas = ExtResource("1_7d5v2")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unllw"]
+atlas = ExtResource("1_7d5v2")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4yjt"]
+atlas = ExtResource("1_7d5v2")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fah0p"]
+atlas = ExtResource("1_7d5v2")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nuvyv"]
+animations = [{
+"frames": [{
+"duration": 0.2,
+"texture": SubResource("AtlasTexture_8pb1y")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_unllw")
+}, {
+"duration": 0.4,
+"texture": SubResource("AtlasTexture_8pb1y")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_d4yjt")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_fah0p")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wxdcp"]
+radius = 0.9204884
+
+[sub_resource type="Animation" id="Animation_wxdcp"]
+resource_name = "lifetime"
+length = 3.0
+step = 0.0333333
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j2c0q"]
+_data = {
+&"lifetime": SubResource("Animation_wxdcp")
+}
+
+[node name="Explosion" type="Node3D"]
+script = ExtResource("1_wxdcp")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+cast_shadow = 0
+pixel_size = 0.025
+billboard = 1
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_nuvyv")
+autoplay = "default"
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12452915, 0)
+stream = ExtResource("2_vv2pp")
+volume_db = -21.963
+autoplay = true
+bus = &"SFX"
+
+[node name="Hitbox" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 48
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23100704, 0)
+shape = SubResource("SphereShape3D_wxdcp")
+disabled = true
+debug_color = Color(0.94396615, 6.2569975e-06, 0.6014791, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_j2c0q")
+}
+autoplay = "lifetime"

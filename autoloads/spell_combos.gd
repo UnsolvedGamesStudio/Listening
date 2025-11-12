@@ -119,8 +119,9 @@ var combos: Dictionary[StringName, Dictionary] = {
 	## Anger
 	"spell_13" : {
 		"combo" : [ANG, ANG, ANG],
-		"name" : "Spell",
+		"name" : "Violence",
 		"unlocked" : true,
+		"projectile_effect_path" : "res://projectile/projectile_effects/blast_pe.tscn",
 		"icon_path" : "res://player/combo_textures/default_combo_icon.png",
 		"color" : Color.WHITE,
 		"sfx_path" : "",

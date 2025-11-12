@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckrngbta7laek"]
+[gd_scene load_steps=3 format=3 uid="uid://ckrngbta7laek"]
 
 [ext_resource type="Script" uid="uid://bta3b7id8y0a7" path="res://enemies/behaviors/melee_attack_eb.gd" id="1_gpckg"]
+[ext_resource type="AudioStream" uid="uid://rs214qc25ocr" path="res://assets/sfx/melee_sfx.wav" id="2_kih37"]
 
-[node name="MeleeAttackEB" type="Node"]
+[node name="MeleeAttackEB" type="Node3D"]
 script = ExtResource("1_gpckg")
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_kih37")
+volume_db = -12.624
+bus = &"SFX"

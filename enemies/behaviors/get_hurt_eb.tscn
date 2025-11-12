@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmviqulbv2o3x"]
+[gd_scene load_steps=3 format=3 uid="uid://cmviqulbv2o3x"]
 
 [ext_resource type="Script" uid="uid://c8kgfw5qr3c1y" path="res://enemies/behaviors/get_hurt_eb.gd" id="1_5158y"]
+[ext_resource type="AudioStream" uid="uid://cqyd8ahrw0ksd" path="res://assets/sfx/dying_sfx.ogg" id="2_vonsh"]
 
-[node name="GetHurtEB" type="Node"]
+[node name="GetHurtEB" type="Node3D"]
 script = ExtResource("1_5158y")
+
+[node name="DieSFX" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_vonsh")
+volume_db = -8.772
+bus = &"SFX"

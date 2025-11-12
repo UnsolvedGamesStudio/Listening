@@ -73,6 +73,7 @@ forgetter=""
 editor_cells=""
 dopamine_cluster=""
 prep_screen_song_preview=""
+layout=""
 
 [gui]
 
@@ -138,6 +139,11 @@ exit={
 3d_physics/layer_9="hazards"
 3d_physics/layer_10="room_notifier"
 3d_physics/layer_11="shell_object"
+3d_physics/layer_12="Layer 12"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
 
 [rendering]
 

@@ -8,6 +8,7 @@ class_name ShellObject
 @onready var timer: Timer = $Timer
 @onready var mesh_instance_3d: MeshInstance3D = %MeshInstance3D
 @onready var area_3d: Area3D = %Area3D
+@onready var created_sfx: AudioStreamPlayer3D = %CreatedSFX
 
 var ability: Node
 var finished_appearing:= false
@@ -29,6 +30,7 @@ func _ready() -> void:
 	mesh_instance_3d.get_active_material(0).next_pass.next_pass.uv1_scale = Vector3(500.0, 500.0, 500.0)
 	body_entered.connect(on_body_entered)
 	area_3d.area_entered.connect(on_area_3d_area_entered)
+	created_sfx.play()
 
 
 func _physics_process(delta: float) -> void:

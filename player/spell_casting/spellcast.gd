@@ -73,7 +73,6 @@ func add_element(element: int):
 
 
 func cast_spell():
-	var container_ui: ElementContainerUI = get_tree().get_first_node_in_group("element_container_ui")
 	Bgm.play_sample(container)
 	
 	if container == []:
@@ -84,16 +83,55 @@ func cast_spell():
 	if not Vars.last_activated_circle == null:
 		Vars.last_activated_circle.texture = CAST_SIGIL
 	
-	if not check_for_combo(container) == null:
-		var key: StringName = check_for_combo(container)
-		Bus.player_used_combo.emit(key)
-		
-		if "supress_attack" in SpellCombos.combos[key]:
-			container.clear()
-			container_ui.update()
-			return
+	apply_combo_effect()
 	
-	create_projectile()
+	if check_for_suppress() == true:
+		remove_all_elements()
+		return
+	
+	create_projectile(get_projectile_effect())
+	
+	remove_all_elements()
+
+
+func apply_combo_effect():
+	var key: StringName = check_for_combo(container)
+	
+	if key == "":
+		return
+	
+	Bus.player_used_combo.emit(key)
+
+
+func check_for_suppress():
+	var key: StringName = check_for_combo(container)
+	
+	if key == "":
+		return
+	
+	if "supress_attack" in SpellCombos.combos[key]:
+		return true
+	
+	return false
+
+
+func get_projectile_effect():
+	var key: StringName = check_for_combo(container)
+	
+	if key == "":
+		return ""
+	
+	var projectile_effect_path:= ""
+	
+	if "projectile_effect_path" in SpellCombos.combos[key]:
+		projectile_effect_path = SpellCombos.combos[key]["projectile_effect_path"]
+	
+	return projectile_effect_path
+
+
+func remove_all_elements():
+	var container_ui: ElementContainerUI = get_tree().get_first_node_in_group("element_container_ui")
+	
 	container.clear()
 	container_ui.update()
 
@@ -102,6 +140,8 @@ func check_for_combo(elements: Array[int]):
 	for key in SpellCombos.combos:
 		if is_combo_match(elements, SpellCombos.combos[key]["combo"]):
 			return key
+	
+	return ""
 
 
 func is_combo_match(spell: Array, combo: Array) -> bool:
@@ -115,8 +155,7 @@ func count_elements(arr: Array) -> Dictionary:
 	return counts
 
 
-
-func create_projectile():
+func create_projectile(projectile_effect_path: String = ""):
 	var projectile_inst: SpellProjectile = PROJECTILE.instantiate()
 	var look_at_direction: Vector3 = Find.P().get_look_at_direction()
 	
@@ -125,13 +164,13 @@ func create_projectile():
 	projectile_inst.damage = determine_damage()
 	projectile_inst.origin_node = Find.P()
 	projectile_inst.max_distance = spell_range
+	projectile_inst.projectile_effect_path = projectile_effect_path
 	
 	for value in container:
 		projectile_inst.elements.append(value)
 	
 	owner.get_parent().add_child(projectile_inst)
 	
-	projectile_inst.sprite_3d.texture = DEFAULT_SPELL
 	projectile_inst.hitbox.set_collision_layer_value(5, true)
 	projectile_inst.global_position = Find.P().camera.global_position
 

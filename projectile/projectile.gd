@@ -1,17 +1,19 @@
-extends CharacterBody3D
+extends RigidBody3D
 class_name Projectile
 
 const POP_TEXTURE = preload("uid://cyk5g3u4ymo2g")
 
 @onready var sprite_3d: Sprite3D = %Sprite3D
-@onready var wall_detect: Area3D = %WallDetect
 @onready var hitbox: Area3D = %Hitbox
 @onready var kill_timer: Timer = %KillTimer
 @onready var omni_light_3d: OmniLight3D = %OmniLight3D
 
+@export var sfx: AudioStreamPlayer3D
+
 var destroyed:= false
 
 var origin_node: Node3D
+var projectile_effect_path:= ""
 var direction:= Vector3.ZERO
 var color:= Color.WHITE
 
@@ -25,12 +27,17 @@ var destroyed_fx:= preload("uid://dotmsm333w37o")
 var starting_position:= Vector3.ZERO
 var distance_traveled:= 0.0
 
+signal hit_terrain(hit_pos: Vector3, hit_normal: Vector3)
+signal hit_player
+signal hit_enemy(enemy)
+
 
 func _ready() -> void:
-	wall_detect.area_entered.connect(on_wall_detect_area_entered)
 	hitbox.area_entered.connect(on_hitbox_area_entered)
 	sprite_3d.modulate = color
 	starting_position = origin_node.global_position
+	init_projectile_effect()
+	
 	enter()
 
 
@@ -38,13 +45,47 @@ func enter():
 	pass
 
 
+func init_projectile_effect():
+	if projectile_effect_path == "":
+		return
+	
+	if not FileAccess.file_exists(projectile_effect_path):
+		printerr(self, ": projectile_effect has invalid path")
+		return
+	
+	var effect_scene: PackedScene = load(projectile_effect_path)
+	var effect_inst: ProjectileEffect = effect_scene.instantiate()
+	effect_inst.projectile = self
+	add_child(effect_inst)
+
+
 func _physics_process(delta: float) -> void:
-	velocity += direction * speed * delta
+	if destroyed == true:
+		return
+	
+	detect_walls()
+	
+	apply_impulse(direction * speed * delta)
 	distance_traveled = starting_position.distance_to(global_position)
 	if distance_traveled >= max(2.5, max_distance):
 		destroy()
+
+
+func detect_walls():
+	var space_state = get_world_3d().direct_space_state
+	var from_pos = global_position
+	var to_pos = global_position + direction * speed * get_physics_process_delta_time() * 2.0
 	
-	move_and_slide()
+	var query = PhysicsRayQueryParameters3D.create(from_pos, to_pos)
+	query.exclude = [self]
+	
+	var result = space_state.intersect_ray(query)
+	
+	if result:
+		var hit_pos: Vector3 = result.position
+		var hit_normal: Vector3 = result.normal
+		collided(result.collider)
+		hit_terrain.emit(hit_pos, hit_normal)
 
 
 func destroy():
@@ -52,11 +93,11 @@ func destroy():
 		return
 	
 	destroyed = true
-	kill_timer.start(linger_time)
-	velocity = Vector3.ZERO
+	sprite_3d.hide()
+	freeze = true
+	
 	omni_light_3d.queue_free()
 	hitbox.get_child(0).set_deferred("disabled", true) 
-	wall_detect.get_child(0).set_deferred("disabled", true) 
 	spawn_destroyed_fx()
 	
 	await kill_timer.timeout
@@ -68,6 +109,9 @@ func destroy():
 
 
 func spawn_destroyed_fx():
+	if not projectile_effect_path == "":
+		return
+	
 	if produce_destroyed_fx == false:
 		return
 	
@@ -90,12 +134,8 @@ func on_hitbox_area_entered(area: Area3D):
 	destroy()
 
 
-func on_wall_detect_area_entered(area: Area3D):
-	if not origin_node == null:
-		if not "owner" in area:
-			return
-		
-		if area.owner == origin_node:
-			return
+func collided(body: CollisionObject3D):
+	if not sfx == null:
+		sfx.play()
 	
 	destroy()

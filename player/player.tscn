@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ce10gkdeiprj7"]
+[gd_scene load_steps=15 format=3 uid="uid://ce10gkdeiprj7"]
 
 [ext_resource type="Script" uid="uid://bxbkaxat5hcgk" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://86r6xeju02bg" path="res://main_ui/main_ui.tscn" id="2_boad6"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://d262iiqxl5dvs" path="res://player/held_instrument_manager.gd" id="5_rgyib"]
 [ext_resource type="PackedScene" uid="uid://bkt3xpwbltnif" path="res://player/trigger_combo.tscn" id="7_hg6s5"]
 [ext_resource type="PackedScene" uid="uid://dbkojsebkkehc" path="res://player/abilities/shell_ability.tscn" id="9_8t03j"]
+[ext_resource type="PackedScene" uid="uid://cqty5ekbal6tr" path="res://player/player_sfx.tscn" id="12_ebec5"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_g1dw6"]
 radius = 0.3
@@ -61,7 +62,7 @@ unique_name_in_owner = true
 
 [node name="Neck" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.642, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Neck"]
 unique_name_in_owner = true
@@ -110,11 +111,13 @@ disabled = true
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9143802, 0)
 
+[node name="MoveToCellIndicator" parent="." groups=["move_to_cell_indicator"] instance=ExtResource("4_yw30f")]
+unique_name_in_owner = true
+
 [node name="Headbob" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_yw30f")
 }
 
-[node name="MoveToCellIndicator" parent="." groups=["move_to_cell_indicator"] instance=ExtResource("4_yw30f")]
-unique_name_in_owner = true
+[node name="PlayerSFX" parent="." instance=ExtResource("12_ebec5")]
