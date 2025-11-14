@@ -1,6 +1,8 @@
 extends EnemyBehavior
 class_name MeleeAttackEB
 
+@onready var sfx: AudioStreamPlayer3D = %SFX
+
 var melees_every_x_beat:= 4
 var melee_range:= 1
 var melee_damage:= 20.0
@@ -32,6 +34,7 @@ func melee_attack():
 		play_attack_anim()
 		return
 	
+	sfx.play()
 	Find.P().take_damage(melee_damage, O)
 	O.used_melee.emit()
 	play_attack_anim()

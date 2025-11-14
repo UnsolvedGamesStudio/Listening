@@ -22,6 +22,7 @@ class_name Player
 @onready var los: RayCast3D = %LineOfSight
 @onready var move_to_cell_indicator: Node3D = %MoveToCellIndicator
 @onready var abilities: Node = %Abilities
+@onready var player_sfx: Node = $PlayerSFX
 
 const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 
@@ -120,6 +121,13 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("forward") and can_act == true and is_moving == false:
 		Bus.beat_press_attempted.emit()
+	
+	if is_moving == true and player_sfx.steps.is_playing() == false:
+		player_sfx.steps.play()
+	
+	if is_moving == false:
+		player_sfx.steps.stop()
+
 
 
 func snap_rotations():

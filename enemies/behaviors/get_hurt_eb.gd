@@ -3,6 +3,8 @@ class_name GetHurtEB
 
 const DAMAGE_POPUP = preload("uid://caxugm1j30feu")
 
+@onready var die_sfx: AudioStreamPlayer3D = %DieSFX
+
 var hurtbox: Area3D
 var health_bar: ProgressBar
 
@@ -69,7 +71,7 @@ func take_damage(amount: float, with_elements: bool = false, elements: Array[int
 	var weakness_mult: float = calculate_weaknesses(elements)
 	final_damage *= weakness_mult
 	
-	lose_hp(final_damage)	
+	lose_hp(final_damage)
 	generate_text(final_damage, weakness_mult)
 	O.took_damage.emit(final_damage)
 
@@ -122,6 +124,8 @@ func die():
 	if O in Vars.living_enemies:
 		Vars.living_enemies.erase(O)
 	
+	die_sfx.reparent(O.get_parent())
+	die_sfx.play()
 	
 	if "die" in O.idle_anim.get_animation_list():
 		O.idle_anim.play("die")
@@ -160,12 +164,19 @@ func generate_text(amount: float, mult: float):
 		label.add_theme_color_override("font_color", weak_color)
 
 
-func on_hurtbox_area_entered(area: Area3D):
-	if not "damage" in area.owner:
+func hit_by_projectile(projectile: Projectile):
+	if not "damage" in projectile:
 		return
 	
-	if "elements" in area.owner:
-		take_damage(area.owner.damage, true, area.owner.elements)
+	if "elements" in projectile:
+		take_damage(projectile.damage, true, projectile.elements)
+		return
+	
+	take_damage(projectile.damage)
+
+
+func on_hurtbox_area_entered(area: Area3D):
+	if not "damage" in area.owner:
 		return
 	
 	take_damage(area.owner.damage)

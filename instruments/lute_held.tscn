@@ -83,6 +83,7 @@ _data = {
 [node name="LuteHeld" type="CanvasLayer"]
 layer = -1
 script = ExtResource("1_2bm64")
+volume_db = -10.0
 
 [node name="ToMove" type="Node2D" parent="."]
 position = Vector2(288.13, 401.555)

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cenh0w2b0tga"
-path="res://.godot/imported/guitar.wav-413b8e14f8be08c00b4522535d5811f4.sample"
+path="res://.godot/imported/guitar.wav-adf07b000469f8f2d52b854ed7a733e7.sample"
 
 [deps]
 
-source_file="res://samples/guitar.wav"
-dest_files=["res://.godot/imported/guitar.wav-413b8e14f8be08c00b4522535d5811f4.sample"]
+source_file="res://assets/samples/guitar.wav"
+dest_files=["res://.godot/imported/guitar.wav-adf07b000469f8f2d52b854ed7a733e7.sample"]
 
 [params]
 

@@ -4,6 +4,7 @@ class_name HeldInstrument
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 @export var sample: NoteSample = preload("res://assets/samples/lute_sample.tres")
+@export_range(-80.0, 80.0) var volume_db:= 0.0
 
 var player: Player
 

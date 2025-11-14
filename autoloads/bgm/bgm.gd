@@ -138,13 +138,11 @@ func play_sample(elements: Array[int] = []):
 func play_lowest_note():
 	var note_to_play: Array = get_notes()[0]
 	play_single_note(note_to_play, 1)
-	print(note_to_play)
 
 
 func play_highest_note():
 	var note_to_play: Array = get_notes()[-1]
 	play_single_note(note_to_play, 1)
-	print(note_to_play)
 
 
 func play_middle_note():
@@ -160,25 +158,24 @@ func play_middle_note():
 	
 	var note_to_play = current_notes[idx]
 	play_single_note(note_to_play, 1)
-	print(note_to_play)
 
 
 func play_note_no_music(elements):
-		#var note_names:= ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
-		#var c_maj:= ["C", "D", "E", "F", "G", "A", "B"]
-		var b_melodic_min:= ["B", "C#", "D", "E", "F#", "G#", "A#"]
-		
-		if elements == []:
-			sampler_instrument.play_note(b_melodic_min.pick_random(), 1)
-		
-		else:
-			for element in elements:
-				if element == 0:
-					sampler_instrument.play_note("B", 0)
-				if element == 1:
-					sampler_instrument.play_note("E", 0)
-				if element == 2:
-					sampler_instrument.play_note("G#", 0)
+	#var note_names:= ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+	#var c_maj:= ["C", "D", "E", "F", "G", "A", "B"]
+	var b_melodic_min:= ["B", "C#", "D", "E", "F#", "G#", "A#"]
+	
+	if elements == []:
+		sampler_instrument.play_note(b_melodic_min.pick_random(), 1)
+	
+	else:
+		for element in elements:
+			if element == 0:
+				sampler_instrument.play_note("B", 0)
+			if element == 1:
+				sampler_instrument.play_note("E", 0)
+			if element == 2:
+				sampler_instrument.play_note("G#", 0)
 
 
 func play_single_note(note, octave_modifier: int = 0):

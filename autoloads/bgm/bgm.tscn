@@ -67,11 +67,10 @@ audio_stream_player = NodePath("..")
 [node name="SamplerInstrument" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 process_mode = 3
-volume_db = -11.45
-max_polyphony = 6
+max_polyphony = 8
 bus = &"Sampler"
 script = ExtResource("5_syuoy")
-max_notes = 6
+max_notes = 8
 samples = Array[ExtResource("6_yq28d")]([ExtResource("7_qfgnj")])
 metadata/_custom_type_script = "uid://2ag1petdt53"
 

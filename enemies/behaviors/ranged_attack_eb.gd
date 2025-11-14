@@ -4,6 +4,8 @@ class_name RangedAttackEB
 const PROJECTILE = preload("uid://6n70akjpdb5c")
 const DEFAULT_PROJECTILE_TEXTURE = preload("uid://dgygswxu7j8ds")
 
+@onready var sfx: AudioStreamPlayer3D = %SFX
+
 var shoots_every_x_beat:= 6
 var projectile_range:= 2
 var projectile_damage:= 10.0
@@ -48,6 +50,7 @@ func ranged_attack():
 		attack_anim.play("ranged_attack")
 	
 	O.fired_projectile.emit()
+	sfx.play()
 	create_projectile()
 
 
@@ -77,7 +80,6 @@ func create_projectile():
 	
 	projectile_inst.scale = projectile_scale
 	projectile_inst.sprite_3d.texture = data.projectile_texture
-	projectile_inst.hitbox.set_collision_layer_value(6, true)
 	projectile_inst.global_position = O.sprite_3d.global_position
 	
 	var projectile_direction:= projectile_inst.global_position.direction_to(Find.P().enemy_aim_point.global_position)

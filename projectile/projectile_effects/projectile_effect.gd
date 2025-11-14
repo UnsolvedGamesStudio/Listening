@@ -11,9 +11,7 @@ func _ready() -> void:
 		return
 	
 	projectile.hit_terrain.connect(on_projectile_hit_terrain)
-	
-	if projectile.has_signal("hit_enemy"):
-		projectile.hit_enemy.connect(on_projectile_hit_entity)
+	projectile.hit_entity.connect(on_projectile_hit_entity)
 	
 	enter()
 

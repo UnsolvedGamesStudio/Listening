@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dsni4a2x3dlwl"]
+[gd_scene load_steps=13 format=3 uid="uid://dsni4a2x3dlwl"]
 
 [ext_resource type="Script" uid="uid://dxgvi78wt3efu" path="res://pickups/dopamine/dopamine_pickup.gd" id="1_wgocq"]
 [ext_resource type="Texture2D" uid="uid://crpbl5wnqdl5i" path="res://pickups/textures/dopamine-Sheet.png" id="2_bbqef"]
 [ext_resource type="Shape3D" uid="uid://jvf00jl70m8b" path="res://pickups/dopamine/dopamine_collision_shape.tres" id="3_ajl7s"]
+[ext_resource type="AudioStream" uid="uid://cr5tk37de2pxq" path="res://assets/sfx/dopamine_pickup_sfx.ogg" id="4_o1h2k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wgocq"]
 atlas = ExtResource("2_bbqef")
@@ -80,6 +81,10 @@ light_energy = 0.188
 light_indirect_energy = 0.768
 omni_range = 7.763
 omni_attenuation = 1.918
+
+[node name="SFX" type="AudioStreamPlayer" parent="AnimatedSprite3D"]
+unique_name_in_owner = true
+stream = ExtResource("4_o1h2k")
 
 [node name="Area3D" type="Area3D" parent="."]
 unique_name_in_owner = true

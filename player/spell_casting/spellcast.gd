@@ -129,6 +129,16 @@ func get_projectile_effect():
 	return projectile_effect_path
 
 
+#func get_projectile_stats(projectile_inst: Projectile):
+	#var key: StringName = check_for_combo(container)
+	#
+	#if key == "":
+		#return ""
+	#
+	#if "projectile_speed" in SpellCombos.combos[key]:
+		#projectile_inst.projectile_speed = SpellCombos.combos[key]["projectile_speed"]
+
+
 func remove_all_elements():
 	var container_ui: ElementContainerUI = get_tree().get_first_node_in_group("element_container_ui")
 	
@@ -171,7 +181,6 @@ func create_projectile(projectile_effect_path: String = ""):
 	
 	owner.get_parent().add_child(projectile_inst)
 	
-	projectile_inst.hitbox.set_collision_layer_value(5, true)
 	projectile_inst.global_position = Find.P().camera.global_position
 
 

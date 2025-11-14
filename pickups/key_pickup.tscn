@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ciib1opj8rndx"]
+[gd_scene load_steps=11 format=3 uid="uid://ciib1opj8rndx"]
 
 [ext_resource type="Script" uid="uid://d1oh0ke0xfu6d" path="res://pickups/key_pickup.gd" id="1_on6h4"]
 [ext_resource type="Texture2D" uid="uid://ds7esfeg8ue4b" path="res://level_editor/textures/key_tiles.png" id="2_on6h4"]
+[ext_resource type="AudioStream" uid="uid://rs214qc25ocr" path="res://assets/sfx/melee_sfx.wav" id="3_on6h4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_usfr8"]
 atlas = ExtResource("2_on6h4")
@@ -90,3 +91,10 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_emkgw")
 }
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_on6h4")
+volume_db = -6.0
+pitch_scale = 4.0
+bus = &"SFX"

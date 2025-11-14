@@ -20,8 +20,9 @@ func create_explosion(pos):
 
 
 func on_projectile_hit_terrain(hit_pos: Vector3, hit_normal: Vector3):
-	var pos:= hit_pos + hit_normal * 0.25
-	
+	## Todo: get the proper normals
+	#var pos:= hit_pos + hit_normal * 0.25
+	var pos:= projectile.global_position
 	create_explosion(pos)
 
 

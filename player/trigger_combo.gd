@@ -1,6 +1,10 @@
 extends Node
 
 
+func _ready() -> void:
+	Bus.player_used_combo.connect(on_player_used_combo)
+
+
 func on_player_used_combo(combo_name: StringName):
 	if self.has_method(combo_name):
 		call(combo_name, combo_name)
@@ -66,9 +70,9 @@ func spell_11(combo_name):
 func spell_12(combo_name):
 	print("do a spell 12")
 
-## Violence
+## Violence (ANG = ANG + ANG)
 func spell_13(combo_name):
-	activate_player_ability("BlastAbility")
+	pass
 
 
 func spell_14(combo_name):

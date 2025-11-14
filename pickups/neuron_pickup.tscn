@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqpxy77one4hb"]
+[gd_scene load_steps=10 format=3 uid="uid://dqpxy77one4hb"]
 
 [ext_resource type="Script" uid="uid://bhaaicftpcw12" path="res://pickups/neuron_pickup.gd" id="1_kudkk"]
 [ext_resource type="Texture2D" uid="uid://n3guqraf3vnf" path="res://pickups/textures/neuron-Sheet.png" id="2_hqk12"]
+[ext_resource type="AudioStream" uid="uid://cwtijmuc0g1v5" path="res://assets/sfx/healing_sfx.ogg" id="3_hqk12"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6nqee"]
 radius = 0.83355063
@@ -99,3 +100,10 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_emkgw")
 }
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_hqk12")
+volume_db = 1.0
+pitch_scale = 0.75
+bus = &"SFX"

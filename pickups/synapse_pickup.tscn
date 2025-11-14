@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://7meyinovsje0"]
+[gd_scene load_steps=9 format=3 uid="uid://7meyinovsje0"]
 
 [ext_resource type="Script" uid="uid://dm3hq7mfobrwx" path="res://pickups/synapse_pickup.gd" id="1_byumj"]
 [ext_resource type="Texture2D" uid="uid://di2kls167grne" path="res://pickups/textures/drop-Sheet.png" id="2_tiukb"]
 [ext_resource type="PlaneMesh" uid="uid://covn2ehde4snx" path="res://vfx/particle_mesh.tres" id="3_tiukb"]
+[ext_resource type="AudioStream" uid="uid://cwtijmuc0g1v5" path="res://assets/sfx/healing_sfx.ogg" id="4_58epu"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bgvgf"]
 
@@ -77,3 +78,10 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_emkgw")
 }
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_58epu")
+volume_db = -1.733
+pitch_scale = 3.0
+bus = &"SFX"

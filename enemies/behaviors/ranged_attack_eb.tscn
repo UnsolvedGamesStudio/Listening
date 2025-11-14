@@ -9,5 +9,4 @@ script = ExtResource("1_nkrd7")
 [node name="SFX" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("2_wu23b")
-volume_db = -9.315
 bus = &"SFX"

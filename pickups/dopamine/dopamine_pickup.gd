@@ -3,6 +3,7 @@ class_name Dopamine
 ## Todo: maybe make the dopamine into a gauge, making it more unique as a currency, could also be used as a charge
 @onready var animated_sprite_3d: AnimatedSprite3D = %AnimatedSprite3D
 @onready var area_3d: Area3D = %Area3D
+@onready var sfx: AudioStreamPlayer = %SFX
 
 @export var worth:= 1.0
 
@@ -28,6 +29,7 @@ func go_to_player():
 	var camera_pos:= player.camera.global_position
 	var target_pos:= Vector3(camera_pos.x, camera_pos.y * 0.8, camera_pos.z)
 	
+	tween.set_ease(Tween.EASE_IN)
 	tween.parallel().tween_property(animated_sprite_3d, "global_position", target_pos, Bgm.rhythm_notifier.beat_length * tween_length_mult)
 	tween.parallel().tween_property(self, "scale", Vector3(0.6, 0.6, 0.6), Bgm.rhythm_notifier.beat_length * tween_length_mult)
 	await tween.finished
@@ -35,6 +37,8 @@ func go_to_player():
 
 
 func picked_up():
+	sfx.reparent(get_parent())
+	sfx.play()
 	Vars.dopamine += worth
 	queue_free()
 
