@@ -1,5 +1,7 @@
 extends Button
 
+@onready var title_appear: AnimationPlayer = %TitleAppear
+
 var mouse_in:= false
 
 
@@ -9,6 +11,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if scale.x < 0.1:
+		return
+	
 	if mouse_in == true:
 		scale += (Vector2.ONE / randf_range(50, 500))
 	else:
@@ -25,6 +30,7 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func start():
+	title_appear.play_backwards("appear")
 	Filters.fade.play("fade_out")
 	await Filters.fade.animation_finished
 	Bgm.non_beat_bgm.stop()

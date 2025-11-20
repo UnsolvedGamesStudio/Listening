@@ -6,11 +6,11 @@ class_name EnemyBehavior
 
 
 func _ready() -> void:
-	if not get_parent().get_parent() is Enemy:
-		printerr(self, " of ", get_parent().get_parent(), ": get_parent().get_parent() is not enemy")
+	if not get_parent().get_parent().get_parent() is Enemy:
+		printerr(self, " of ", get_parent().get_parent().get_parent(), ": get_parent().get_parent() is not enemy")
 		return
 	
-	O = get_parent().get_parent()
+	O = get_parent().get_parent().get_parent()
 	
 	await O.ready
 	enter()

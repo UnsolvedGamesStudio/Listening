@@ -1,11 +1,11 @@
 extends EnemyBehavior
 class_name GetHurtEB
-
+## Todo: On hit animation
 const DAMAGE_POPUP = preload("uid://caxugm1j30feu")
 
 @onready var die_sfx: AudioStreamPlayer3D = %DieSFX
 
-var hurtbox: Area3D
+var hurtbox
 var health_bar: ProgressBar
 
 var max_hp:= 100.0:
@@ -19,21 +19,7 @@ var hp:= max_hp:
 
 func enter() -> void:
 	set_stats()
-	
-	if "enemy_collision" in O:
-		hurtbox = O.enemy_collision
-	
-	if "health_bar" in O:
-		health_bar = O.health_bar
-	
-	if health_bar == null:
-		printerr(self, " of ", O, ": health_bar not found")
-	
-	if hurtbox == null:
-		printerr(self, " of ", O, ": hurtbox (enemy_collision) not found")
-	
-	else:
-		hurtbox.area_entered.connect(on_hurtbox_area_entered)
+	O.hit_by_projectile.connect(on_hit_by_projectile)
 
 
 func _physics_process(delta: float) -> void:
@@ -116,10 +102,7 @@ func die():
 		if "enabled" in behavior:
 			behavior.enabled = false
 	
-	if hurtbox == null:
-		printerr(self, " of ", O, ": hurtbox not found")
-	else:
-		hurtbox.queue_free()
+	enabled = false
 	
 	if O in Vars.living_enemies:
 		Vars.living_enemies.erase(O)
@@ -164,7 +147,10 @@ func generate_text(amount: float, mult: float):
 		label.add_theme_color_override("font_color", weak_color)
 
 
-func hit_by_projectile(projectile: Projectile):
+func on_hit_by_projectile(projectile: Projectile):
+	if enabled == false:
+		return
+	
 	if not "damage" in projectile:
 		return
 	
@@ -176,6 +162,9 @@ func hit_by_projectile(projectile: Projectile):
 
 
 func on_hurtbox_area_entered(area: Area3D):
+	if enabled == false:
+		return
+	
 	if not "damage" in area.owner:
 		return
 	

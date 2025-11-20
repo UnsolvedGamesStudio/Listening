@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dohwuclbdrfh1"]
+[gd_scene load_steps=13 format=3 uid="uid://dohwuclbdrfh1"]
 
 [ext_resource type="Script" uid="uid://drn422cycc5qn" path="res://pause_menu/offset_slider.gd" id="1_5hbt6"]
 [ext_resource type="Script" uid="uid://d2xrtoqxe8yqr" path="res://pause_menu/pause_menu.gd" id="1_uwtdo"]
@@ -11,7 +11,7 @@ content_margin_left = 8.0
 content_margin_top = 5.0
 content_margin_right = 8.0
 content_margin_bottom = 5.0
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0.15294118, 0.5372549, 0.8039216, 0.45882353)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -22,11 +22,22 @@ content_margin_left = 8.0
 content_margin_top = 5.0
 content_margin_right = 8.0
 content_margin_bottom = 5.0
-bg_color = Color(0.17968586, 0.36960748, 0.2089456, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+bg_color = Color(0.15294118, 0.5372549, 0.8039216, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1glv"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.25882354, 0.7490196, 0.9098039, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b4s0c"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -92,9 +103,30 @@ offset = Vector2(0, 500)
 transform = Transform2D(1, 0, 0, 1, 0, 500)
 script = ExtResource("1_uwtdo")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="Combos" type="PanelContainer" parent="."]
 process_mode = 2
-modulate = Color(1, 1, 1, 0.5294118)
+anchors_preset = -1
+anchor_left = 0.0546875
+anchor_top = 0.35714287
+anchor_right = 0.2734375
+anchor_bottom = 0.55133927
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uwtdo")
+metadata/_edit_use_anchors_ = true
+
+[node name="CombosLabel" type="Label" parent="Combos"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Joy + Joy + Sad:
+Shell
+
+Mad + Mad + Mad:
+Violence"
+horizontal_alignment = 1
+
+[node name="Tutorial" type="PanelContainer" parent="."]
+process_mode = 2
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -103,11 +135,11 @@ offset_top = 9.0
 offset_right = 149.0
 offset_bottom = 118.0
 grow_horizontal = 2
+size_flags_horizontal = 4
 size_flags_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_uwtdo")
-metadata/_edit_use_anchors_ = true
 
-[node name="ControlsTutorialLabel" type="Label" parent="PanelContainer"]
+[node name="ControlsTutorialLabel" type="Label" parent="Tutorial"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Press Tab to exit the game.
@@ -172,6 +204,7 @@ rounded = true
 layout_mode = 2
 focus_behavior_recursive = 1
 mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_s1glv")
 text = "Resume"
 script = ExtResource("2_rd7dy")
 
@@ -180,6 +213,7 @@ process_mode = 2
 custom_minimum_size = Vector2(100.215, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_s1glv")
 text = "Restart level"
 script = ExtResource("2_rd7dy")
 type = 2
@@ -190,6 +224,7 @@ process_mode = 2
 custom_minimum_size = Vector2(100.215, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_s1glv")
 text = "Back to hub world"
 script = ExtResource("2_rd7dy")
 type = 3
@@ -198,6 +233,7 @@ type = 3
 layout_mode = 2
 focus_behavior_recursive = 1
 mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_s1glv")
 text = "Exit game"
 script = ExtResource("2_rd7dy")
 type = 1
@@ -215,6 +251,8 @@ layout_mode = 2
 size_flags_horizontal = 8
 focus_mode = 0
 mouse_default_cursor_shape = 2
+theme_override_colors/button_checked_color = Color(0.83137256, 0.5019608, 0.73333335, 1)
+theme_override_colors/button_unchecked_color = Color(0.34901962, 0.8117647, 0.5764706, 1)
 action_mode = 0
 script = ExtResource("4_b4s0c")
 

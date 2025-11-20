@@ -12,19 +12,13 @@ func enter():
 		return
 
 
-func create_explosion(pos):
+func create_explosion(position):
 	var explosion_inst: Node3D = explosion_scene.instantiate()
 	
 	Find.layout().add_child(explosion_inst)
-	explosion_inst.global_position = pos
+	explosion_inst.global_position = position
 
 
-func on_projectile_hit_terrain(hit_pos: Vector3, hit_normal: Vector3):
-	## Todo: get the proper normals
-	#var pos:= hit_pos + hit_normal * 0.25
-	var pos:= projectile.global_position
-	create_explosion(pos)
-
-
-func on_projectile_hit_entity(entity: Node3D):
-	create_explosion(projectile.global_position)
+func on_projectile_hit_body(hit_pos: Vector3, hit_normal: Vector3):
+	var position:= hit_pos + hit_normal * 0.5
+	create_explosion(position)

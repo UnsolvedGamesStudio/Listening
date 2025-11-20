@@ -16,12 +16,18 @@ func _ready() -> void:
 	cell_collision.area_exited.connect(on_area_exited)
 
 
-func add_occupant(area: Area3D):
-	occupants.append(area.owner)
+func add_occupant(occupant: Node):
+	if occupant in occupants:
+		return
+	
+	occupants.append(occupant)
 
 
-func remove_occupant(area: Area3D):
-	occupants.erase(area.owner)
+func remove_occupant(occupant: Node):
+	if not occupant in occupants:
+		return
+	
+	occupants.erase(occupant)
 
 
 func on_area_entered(area: Area3D):
@@ -29,7 +35,7 @@ func on_area_entered(area: Area3D):
 	and not area.is_in_group("obstacle_collision"):
 		return
 	
-	add_occupant(area)
+	add_occupant(area.owner)
 	
 	if area.is_in_group("player_collision"):
 		Vars.player_cell = self
@@ -42,4 +48,4 @@ func on_area_entered(area: Area3D):
 
 
 func on_area_exited(area: Area3D):
-	remove_occupant(area)
+	remove_occupant(area.owner)

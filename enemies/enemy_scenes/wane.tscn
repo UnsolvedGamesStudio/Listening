@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://bnl5bv5ntklqt"]
+[gd_scene load_steps=18 format=3 uid="uid://bnl5bv5ntklqt"]
 
 [ext_resource type="Script" uid="uid://pm4s0telhvbu" path="res://enemies/enemy_scenes/enemy.gd" id="1_v2q0o"]
 [ext_resource type="Resource" uid="uid://dulaug22nx57o" path="res://enemies/data/wane.tres" id="2_v2q0o"]
 [ext_resource type="Texture2D" uid="uid://d1638drra7ygp" path="res://enemies/textures/wane-Sheet.png" id="3_v2q0o"]
 [ext_resource type="PackedScene" uid="uid://d0ruxhcq4o58e" path="res://enemies/room_notifier.tscn" id="3_vbrl4"]
 [ext_resource type="PackedScene" uid="uid://ycxhwv4g5a5v" path="res://vfx/EnemyIndicator.tscn" id="4_q2738"]
+[ext_resource type="PackedScene" uid="uid://bichiu55qpo3e" path="res://enemies/enemy_scenes/enemy_body.tscn" id="4_vbrl4"]
 [ext_resource type="PackedScene" uid="uid://cmviqulbv2o3x" path="res://enemies/behaviors/get_hurt_eb.tscn" id="5_eyp1c"]
 [ext_resource type="PackedScene" uid="uid://d3qw0t4lwkfbh" path="res://enemies/behaviors/movement_eb.tscn" id="6_exvqs"]
 [ext_resource type="PackedScene" uid="uid://b8rwjdbr6qey4" path="res://enemies/behaviors/ranged_attack_eb.tscn" id="8_v2q0o"]
@@ -154,26 +155,23 @@ light_color = Color(0.83137256, 0.34117648, 0.15294118, 1)
 light_energy = 0.87
 omni_range = 3.537057
 
-[node name="EnemyCollision" type="Area3D" parent="ToAnimate" groups=["enemy_collision"]]
-unique_name_in_owner = true
-collision_layer = 4
-collision_mask = 16
+[node name="EnemyBody" parent="ToAnimate" instance=ExtResource("4_vbrl4")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ToAnimate/EnemyCollision"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToAnimate/EnemyBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7938212, 0)
 shape = SubResource("CylinderShape3D_v2q0o")
 
+[node name="Behaviors" type="Node3D" parent="ToAnimate"]
+unique_name_in_owner = true
+
+[node name="GetHurtEB" parent="ToAnimate/Behaviors" instance=ExtResource("5_eyp1c")]
+
+[node name="RangedAttackEB" parent="ToAnimate/Behaviors" instance=ExtResource("8_v2q0o")]
+
+[node name="MovementEB" parent="ToAnimate/Behaviors" instance=ExtResource("6_exvqs")]
+
 [node name="EnemyIndicator" parent="." instance=ExtResource("4_q2738")]
 unique_name_in_owner = true
-
-[node name="Behaviors" type="Node" parent="."]
-unique_name_in_owner = true
-
-[node name="GetHurtEB" parent="Behaviors" instance=ExtResource("5_eyp1c")]
-
-[node name="RangedAttackEB" parent="Behaviors" instance=ExtResource("8_v2q0o")]
-
-[node name="MovementEB" parent="Behaviors" instance=ExtResource("6_exvqs")]
 
 [node name="RoomNotifier" parent="." instance=ExtResource("3_vbrl4")]
 

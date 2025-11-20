@@ -8,7 +8,7 @@
 resource_local_to_scene = true
 transparency = 1
 shading_mode = 0
-albedo_color = Color(0.94937307, 2.4732084, 3.1229057, 1)
+albedo_color = Color(0.36842093, 2.2219553, 1.953598, 1)
 albedo_texture = ExtResource("2_qtyh0")
 texture_filter = 0
 

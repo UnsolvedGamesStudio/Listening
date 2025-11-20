@@ -36,12 +36,9 @@ gdscript/warnings/unused_signal=0
 
 window/size/viewport_width=512
 window/size/viewport_height=448
-window/size/maximize_disabled=true
 window/size/window_width_override=1024
 window/size/window_height_override=896
-window/stretch/mode="viewport"
-window/stretch/aspect="keep_height"
-window/stretch/scale_mode="integer"
+window/stretch/mode="canvas_items"
 
 [editor]
 
@@ -74,6 +71,7 @@ editor_cells=""
 dopamine_cluster=""
 prep_screen_song_preview=""
 layout=""
+player_hp_bar=""
 
 [gui]
 
@@ -139,7 +137,7 @@ exit={
 3d_physics/layer_9="hazards"
 3d_physics/layer_10="room_notifier"
 3d_physics/layer_11="shell_object"
-3d_physics/layer_12="Layer 12"
+3d_physics/layer_12="enemy_body"
 
 [physics]
 

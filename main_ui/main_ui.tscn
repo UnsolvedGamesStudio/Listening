@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://86r6xeju02bg"]
+[gd_scene load_steps=18 format=3 uid="uid://86r6xeju02bg"]
 
 [ext_resource type="Theme" uid="uid://b2d4535til41s" path="res://assets/theme.tres" id="1_fp2hw"]
 [ext_resource type="Script" uid="uid://cfglrrbbq2g8" path="res://main_ui/health_bar.gd" id="1_m5yyi"]
@@ -15,6 +15,27 @@
 [ext_resource type="PackedScene" uid="uid://b7xx6wfttusxa" path="res://main_ui/damage_indicator.tscn" id="7_sqw8h"]
 [ext_resource type="Script" uid="uid://djqbaobsxmkx8" path="res://main_ui/neurons_label.gd" id="7_uwb8r"]
 [ext_resource type="Texture2D" uid="uid://dam31kn2ab3bc" path="res://level_editor/textures/enemy_cell.png" id="9_uwb8r"]
+
+[sub_resource type="Animation" id="Animation_fp2hw"]
+resource_name = "healed"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.36666667, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.4), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hcckg"]
+_data = {
+&"healed": SubResource("Animation_fp2hw")
+}
 
 [node name="MainUI" type="CanvasLayer"]
 
@@ -39,45 +60,50 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="HealthBar" type="ProgressBar" parent="MarginContainer/Left/HealthBarOutline"]
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/Left/HealthBarOutline" groups=["player_hp_bar"]]
 z_index = 1
 custom_minimum_size = Vector2(100, 10)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -5.0
-offset_right = 50.0
-offset_bottom = 5.0
+anchors_preset = -1
+anchor_left = 0.01923077
+anchor_top = 0.14285715
+anchor_right = 0.9807692
+anchor_bottom = 0.85714287
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(52, 4)
 size_flags_horizontal = 0
 theme_type_variation = &"hp"
 max_value = 1.0
 value = 0.5
 show_percentage = false
 script = ExtResource("1_m5yyi")
+metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="MarginContainer/Left/HealthBarOutline/HealthBar"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/Left/HealthBarOutline/HealthBar"]
+libraries = {
+&"": SubResource("AnimationLibrary_hcckg")
+}
+
+[node name="Label" type="Label" parent="MarginContainer/Left/HealthBarOutline"]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = -0.15
-anchor_right = 1.0
-anchor_bottom = 1.15
-offset_top = 1.5
-offset_bottom = -1.5
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 53.0
+offset_top = -7.0
+offset_right = 71.0
+offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.23921569, 0.43529412, 0.2627451, 1)
+theme_override_colors/font_color = Color(0.56078434, 0.8156863, 0.19607843, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "HP"
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="Spacer" type="Panel" parent="MarginContainer/Left"]
 modulate = Color(1, 1, 1, 0)

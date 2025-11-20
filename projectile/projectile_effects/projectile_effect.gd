@@ -10,8 +10,7 @@ func _ready() -> void:
 		queue_free()
 		return
 	
-	projectile.hit_terrain.connect(on_projectile_hit_terrain)
-	projectile.hit_entity.connect(on_projectile_hit_entity)
+	projectile.hit_body.connect(on_projectile_hit_body)
 	
 	enter()
 
@@ -20,9 +19,5 @@ func enter():
 	pass
 
 
-func on_projectile_hit_terrain(hit_pos: Vector3, hit_normal: Vector3):
-	pass
-
-
-func on_projectile_hit_entity(entity: Node3D):
+func on_projectile_hit_body(hit_pos: Vector3, hit_normal: Vector3):
 	pass

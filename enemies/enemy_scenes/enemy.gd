@@ -1,7 +1,7 @@
 extends Node3D
 class_name Enemy
-
-const PROJECTILE = preload("uid://bwaev5gyis5tp")
+## Todo: Before adding new enemies, make every enemy nothing but a collection of behavior nodes; whatever it takes to make every enemy self-sufficiant
+const PROJECTILE = preload("uid://6n70akjpdb5c")
 const DEFAULT_PROJECTILE_TEXTURE = preload("uid://dgygswxu7j8ds")
 
 @onready var to_animate: Node3D = %ToAnimate
@@ -9,14 +9,12 @@ const DEFAULT_PROJECTILE_TEXTURE = preload("uid://dgygswxu7j8ds")
 @onready var idle_anim: AnimationPlayer = %IdleAnim
 @onready var attack_anim: AnimationPlayer = %AttackAnim
 @onready var vision_raycast: RayCast3D = %VisionRaycast
-@onready var movement_raycast: RayCast3D = %MovementRaycast
 @onready var behaviors_container: Node = %Behaviors
-@onready var enemy_collision: Area3D = %EnemyCollision
-
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var enemy_indicator: EnemyIndicator = %EnemyIndicator
 
 @export var data: EnemyResource = preload("uid://c8heqp3v32a1n")
+
 var preferred_range
 enum ranges{MELEE, RANGED, CONTACT}
 
@@ -31,6 +29,7 @@ var sees_player:= false
 
 var counts_towards_goal:= true
 
+signal hit_by_projectile(projectile: Projectile)
 signal took_damage(amount: float)
 signal used_melee
 signal fired_projectile
@@ -64,9 +63,6 @@ func _physics_process(delta: float) -> void:
 	check_on_top_of_player()
 	check_sees_player()
 	update_enemy_indicator()
-	
-	if not get_direction_to_player() == null:
-		movement_raycast.target_position = get_direction_to_player()
 	
 	if on_top_of_player == true:
 		set_sprite_alpha(0.0)

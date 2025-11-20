@@ -7,6 +7,7 @@ class_name LevelLoader
 @onready var level_name_label: Label = %LevelNameLabel
 @onready var area_3d: Area3D = %Area3D
 
+@export var enabled:= true
 @export var level_data: LevelData
 
 
@@ -16,6 +17,9 @@ func _ready() -> void:
 
 
 func load_level():
+	if enabled == false:
+		return
+	
 	var blueprint = level_data.level_blueprint
 	SceneManager.current_blueprint = blueprint
 	Filters.fade.play("fade_out")

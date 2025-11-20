@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bqokni4d5a22j" path="res://player/spell_casting/textures/spell_projectile.png" id="2_mvva0"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hrg8b"]
-radius = 0.2
+radius = 0.060193617
 
 [sub_resource type="Animation" id="Animation_dr2av"]
 resource_name = "RESET"
@@ -82,7 +82,7 @@ _data = {
 }
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_makwg"]
-radius = 0.5233098
+radius = 0.5385368
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hrg8b"]
 emission_shape = 1
@@ -101,14 +101,14 @@ billboard_mode = 1
 material = SubResource("StandardMaterial3D_makwg")
 size = Vector2(0.025, 0.025)
 
-[node name="SpellProjectile" type="RigidBody3D" node_paths=PackedStringArray("sfx")]
+[node name="SpellProjectile" type="RigidBody3D"]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 6
 gravity_scale = 0.0
+continuous_cd = true
 contact_monitor = true
-max_contacts_reported = 1
+max_contacts_reported = 6
 script = ExtResource("1_dkllc")
-sfx = NodePath("")
 
 [node name="CollisionSize" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
@@ -133,14 +133,12 @@ autoplay = "lifetime"
 
 [node name="Hitbox" type="Area3D" parent="."]
 unique_name_in_owner = true
-visible = false
 collision_layer = 0
 collision_mask = 4
 
 [node name="HitboxCollision" type="CollisionShape3D" parent="Hitbox"]
 unique_name_in_owner = true
 shape = SubResource("SphereShape3D_makwg")
-disabled = true
 debug_color = Color(0.97987014, 0, 0.38836122, 0.41960785)
 
 [node name="FlyingParticles" type="GPUParticles3D" parent="."]

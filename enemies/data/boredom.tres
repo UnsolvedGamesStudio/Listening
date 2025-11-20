@@ -12,7 +12,6 @@ movement_speed = 1
 impassable = true
 body_damage = 0.0
 counts_towards_goal = false
-moves_every_x_beat = 16
 melees_every_x_beat = 0
 shoots_every_x_beat = 0
 melee_damage = 0.0

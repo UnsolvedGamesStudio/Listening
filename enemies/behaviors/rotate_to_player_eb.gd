@@ -2,6 +2,7 @@ extends EnemyBehavior
 class_name RotateToPlayerEB
 
 @export var to_rotate: Node3D
+
 var valid:= true
 
 

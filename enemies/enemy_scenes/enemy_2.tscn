@@ -1,17 +1,18 @@
-[gd_scene load_steps=19 format=3 uid="uid://dwksm2bi3elij"]
+[gd_scene load_steps=20 format=3 uid="uid://dwksm2bi3elij"]
 
 [ext_resource type="Script" uid="uid://pm4s0telhvbu" path="res://enemies/enemy_scenes/enemy.gd" id="1_cmw5j"]
 [ext_resource type="Resource" uid="uid://cwljawr36evsw" path="res://enemies/data/enemy_2.tres" id="2_gdugp"]
 [ext_resource type="PackedScene" uid="uid://ycxhwv4g5a5v" path="res://vfx/EnemyIndicator.tscn" id="3_gdugp"]
 [ext_resource type="Texture2D" uid="uid://up16qvqyk6lp" path="res://enemies/textures/iseen_a_skull2.png" id="3_tynow"]
+[ext_resource type="PackedScene" uid="uid://bichiu55qpo3e" path="res://enemies/enemy_scenes/enemy_body.tscn" id="4_pehek"]
 [ext_resource type="PackedScene" uid="uid://cmviqulbv2o3x" path="res://enemies/behaviors/get_hurt_eb.tscn" id="4_uup4c"]
 [ext_resource type="PackedScene" uid="uid://d3qw0t4lwkfbh" path="res://enemies/behaviors/movement_eb.tscn" id="5_pehek"]
 [ext_resource type="PackedScene" uid="uid://ckrngbta7laek" path="res://enemies/behaviors/melee_attack_eb.tscn" id="6_b1gtg"]
 [ext_resource type="PackedScene" uid="uid://b8rwjdbr6qey4" path="res://enemies/behaviors/ranged_attack_eb.tscn" id="7_pwkjs"]
 [ext_resource type="PackedScene" uid="uid://d0ruxhcq4o58e" path="res://enemies/room_notifier.tscn" id="9_gdugp"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_7frlh"]
-radius = 0.7182831
+[sub_resource type="SphereShape3D" id="SphereShape3D_b1gtg"]
+radius = 0.6829613
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_8dnoj"]
 viewport_path = NodePath("ToAnimate/HealthBar3D/SubViewport")
@@ -151,13 +152,11 @@ hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="EnemyCollision" type="Area3D" parent="ToAnimate" groups=["enemy_collision"]]
-unique_name_in_owner = true
-collision_layer = 4
-collision_mask = 16
+[node name="EnemyBody" parent="ToAnimate" instance=ExtResource("4_pehek")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ToAnimate/EnemyCollision"]
-shape = SubResource("SphereShape3D_7frlh")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToAnimate/EnemyBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.024470568, 0)
+shape = SubResource("SphereShape3D_b1gtg")
 
 [node name="HealthBar3D" type="Sprite3D" parent="ToAnimate"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7076497, 0)
@@ -179,26 +178,20 @@ step = 0.001
 value = 0.5
 show_percentage = false
 
-[node name="MovementRaycast" type="RayCast3D" parent="."]
+[node name="Behaviors" type="Node3D" parent="ToAnimate"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-target_position = Vector3(0, 0, -1.5)
-collide_with_areas = true
-collide_with_bodies = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+
+[node name="GetHurtEB" parent="ToAnimate/Behaviors" instance=ExtResource("4_uup4c")]
+
+[node name="MovementEB" parent="ToAnimate/Behaviors" instance=ExtResource("5_pehek")]
+
+[node name="MeleeAttackEB" parent="ToAnimate/Behaviors" instance=ExtResource("6_b1gtg")]
+
+[node name="RangedAttackEB" parent="ToAnimate/Behaviors" instance=ExtResource("7_pwkjs")]
 
 [node name="EnemyIndicator" parent="." instance=ExtResource("3_gdugp")]
 unique_name_in_owner = true
-
-[node name="Behaviors" type="Node" parent="."]
-unique_name_in_owner = true
-
-[node name="GetHurtEB" parent="Behaviors" instance=ExtResource("4_uup4c")]
-
-[node name="MovementEB" parent="Behaviors" instance=ExtResource("5_pehek")]
-
-[node name="MeleeAttackEB" parent="Behaviors" instance=ExtResource("6_b1gtg")]
-
-[node name="RangedAttackEB" parent="Behaviors" instance=ExtResource("7_pwkjs")]
 
 [node name="RoomNotifier" parent="." instance=ExtResource("9_gdugp")]
 

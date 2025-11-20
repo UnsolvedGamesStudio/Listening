@@ -9,25 +9,18 @@ var hurtbox: Area3D
 
 
 func enter() -> void:
-	if "enemy_collision" in O:
-		hurtbox = O.enemy_collision
-	
-	if hurtbox == null:
-		printerr(self, " of ", O, ": hurtbox (enemy_collision) not found")
-	
-	else:
-		hurtbox.area_entered.connect(on_hurtbox_area_entered)
+	O.hit_by_projectile.connect(on_hit_by_projectile)
 
 
-func on_hurtbox_area_entered(area: Area3D):
-	if not area.owner is SpellProjectile:
+func on_hit_by_projectile(projectile: Projectile):
+	if not "elements" in projectile:
 		return
 	
 	var material: Material = mesh.get_active_material(0)
 	
-	for value: int in area.owner.elements:
+	for value: int in projectile.elements:
 		
-		if value == 0:
+		if value == element:
 			
 			material.albedo_color.a -= amount_to_remove
 		

@@ -76,7 +76,7 @@ func create_projectile():
 	projectile_inst.max_distance = float(projectile_range) + 3.0
 	projectile_inst.origin_node = O
 	
-	get_parent().add_child(projectile_inst)
+	Find.layout().add_child(projectile_inst)
 	
 	projectile_inst.scale = projectile_scale
 	projectile_inst.sprite_3d.texture = data.projectile_texture

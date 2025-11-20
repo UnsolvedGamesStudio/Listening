@@ -297,8 +297,7 @@ func get_looked_at_cell():
 
 
 func current_los_collider():
-	##!! middle of screen is dependent on the viewport scale settings
-	var middle_of_screen = get_viewport().size / 4
+	var middle_of_screen = get_viewport().get_visible_rect().size / 2
 	var origin:= camera.project_ray_origin(middle_of_screen)
 	var target:= origin + camera.project_ray_normal(middle_of_screen) * interact_range
 	
@@ -308,7 +307,7 @@ func current_los_collider():
 
 
 func get_look_at_direction(distance: float = camera_raycast_distance):
-	var middle_of_screen = get_viewport().size / 4
+	var middle_of_screen = get_viewport().get_visible_rect().size / 2
 	return camera.project_ray_normal(middle_of_screen) * camera_raycast_distance
 
 

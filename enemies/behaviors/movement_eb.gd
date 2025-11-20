@@ -2,7 +2,9 @@ extends EnemyBehavior
 class_name MovementEB
 ## Todo: make enemy not attack while moving
 ## Todo: let enemies optionally chase you without seeing you until you leave their range
-@export var see_through_walls:= false
+@onready var movement_raycast: RayCast3D = %MovementRaycast
+
+#@export var see_through_walls:= false
 
 var moves_every_x_beat:= 2
 var movement_speed:= 4
@@ -24,6 +26,17 @@ func enter() -> void:
 			projectile_range = behavior.projectile_range
 
 
+func _physics_process(delta: float) -> void:
+	set_raycast_target()
+
+
+func set_raycast_target():
+	if O.get_direction_to_player() == null:
+		return
+	
+	movement_raycast.target_position = O.get_direction_to_player()
+
+
 func set_stats():
 	var data: EnemyResource = O.data
 	
@@ -37,13 +50,8 @@ func set_stats():
 
 
 func move():
-	var movement_raycast = O.movement_raycast
-	
-	if movement_raycast == null:
-		printerr(self, " of ", O, ": movement_raycast not found")
-		return
-	
 	if movement_raycast.get_collider() == null:
+		print(movement_raycast.target_position)
 		return
 	
 	var raycast_result = movement_raycast.get_collider().owner
@@ -63,6 +71,12 @@ func move():
 	
 	if cell_occupied(target_cell) == true:
 		return
+	
+	if not O.occupied_cell == null:
+		target_cell.remove_occupant(O)
+	
+	target_cell.add_occupant(O)
+	Find.P().update_move_to_cell_indicator()
 	
 	var tween:= get_tree().create_tween()
 	tween.tween_property(O, "global_position:x", target_cell.global_position.x, move_speed)

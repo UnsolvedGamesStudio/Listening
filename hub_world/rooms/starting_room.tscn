@@ -106,6 +106,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 0)
 
 [node name="LevelLoader2" parent="Level2Cell" instance=ExtResource("4_kd8b7")]
+visible = false
+enabled = false
 level_data = ExtResource("3_682pm")
 
 [node name="StartingCell" parent="." instance=ExtResource("1_gsl5u")]
@@ -121,6 +123,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -7.3313713e-06, -2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -7.3313713e-06, -4)
 
 [node name="LevelLoader3" parent="Level3Cell" instance=ExtResource("4_kd8b7")]
+visible = false
+enabled = false
 level_data = ExtResource("6_aatpt")
 
 [node name="FloorCell3" parent="." instance=ExtResource("1_gsl5u")]
@@ -181,10 +185,11 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.00
 transform = Transform3D(-0.094995, 0, 1.509958e-08, 0, 0.1, 0, -1.4343846e-08, 0, -0.1, -1.9, 1.4530206, 2)
 mesh = SubResource("ArrayMesh_682pm")
 
-[node name="Area3D" type="Area3D" parent="SmallBrain"]
+[node name="Area3D" type="RigidBody3D" parent="SmallBrain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 1.4210855e-14, 0, 1, 0, 0, 0)
 collision_layer = 2
 collision_mask = 0
+gravity_scale = 0.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SmallBrain/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 5.684342e-14, 0, 1, 3.2937012, 0.45638943, 0.5042)

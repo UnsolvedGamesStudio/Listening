@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://bm12hq1n81tt1"]
+[gd_scene load_steps=19 format=3 uid="uid://bm12hq1n81tt1"]
 
 [ext_resource type="Script" uid="uid://pm4s0telhvbu" path="res://enemies/enemy_scenes/enemy.gd" id="1_m21hj"]
 [ext_resource type="Texture2D" uid="uid://clmbdswxbp53" path="res://enemies/textures/wax-Sheet.png" id="2_m21hj"]
 [ext_resource type="Resource" uid="uid://bpfcaia60x5l0" path="res://enemies/data/wax.tres" id="2_sadtc"]
 [ext_resource type="PackedScene" uid="uid://ycxhwv4g5a5v" path="res://vfx/EnemyIndicator.tscn" id="3_6ylel"]
 [ext_resource type="PackedScene" uid="uid://cmviqulbv2o3x" path="res://enemies/behaviors/get_hurt_eb.tscn" id="4_bltlj"]
+[ext_resource type="PackedScene" uid="uid://bichiu55qpo3e" path="res://enemies/enemy_scenes/enemy_body.tscn" id="4_hnwyi"]
 [ext_resource type="PackedScene" uid="uid://d3qw0t4lwkfbh" path="res://enemies/behaviors/movement_eb.tscn" id="5_sadtc"]
 [ext_resource type="PackedScene" uid="uid://ckrngbta7laek" path="res://enemies/behaviors/melee_attack_eb.tscn" id="6_juo5d"]
 [ext_resource type="PackedScene" uid="uid://cgrumupwkn31k" path="res://enemies/behaviors/specific/wax_eb.tscn" id="8_sadtc"]
@@ -136,44 +137,35 @@ omni_range = 5.905134
 
 [node name="VisionRaycast" type="RayCast3D" parent="ToAnimate/Sprite3D"]
 unique_name_in_owner = true
-transform = Transform3D(1.0526316, 0, 0, 0, 1.0526316, 0, 0, 0, 1.0526316, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4490714, 0)
 target_position = Vector3(0, 0, -1000)
 collision_mask = 1034
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="EnemyCollision" type="Area3D" parent="ToAnimate" groups=["enemy_collision"]]
-unique_name_in_owner = true
-collision_layer = 4
-collision_mask = 16
+[node name="EnemyBody" parent="ToAnimate" instance=ExtResource("4_hnwyi")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ToAnimate/EnemyCollision"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToAnimate/EnemyBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96081054, 0)
 shape = SubResource("CylinderShape3D_m21hj")
 
-[node name="MovementRaycast" type="RayCast3D" parent="."]
+[node name="Behaviors" type="Node3D" parent="ToAnimate"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-target_position = Vector3(0, 0, -1.5)
-collide_with_areas = true
-collide_with_bodies = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8689611, 0)
+
+[node name="GetHurtEB" parent="ToAnimate/Behaviors" instance=ExtResource("4_bltlj")]
+
+[node name="MovementEB" parent="ToAnimate/Behaviors" instance=ExtResource("5_sadtc")]
+
+[node name="MeleeAttackEB" parent="ToAnimate/Behaviors" instance=ExtResource("6_juo5d")]
+
+[node name="WaxEB" parent="ToAnimate/Behaviors" node_paths=PackedStringArray("get_hurt_eb", "light") instance=ExtResource("8_sadtc")]
+get_hurt_eb = NodePath("../GetHurtEB")
+light = NodePath("../../Sprite3D/OmniLight3D")
 
 [node name="EnemyIndicator" parent="." instance=ExtResource("3_6ylel")]
 unique_name_in_owner = true
-
-[node name="Behaviors" type="Node" parent="."]
-unique_name_in_owner = true
-
-[node name="GetHurtEB" parent="Behaviors" instance=ExtResource("4_bltlj")]
-
-[node name="MovementEB" parent="Behaviors" instance=ExtResource("5_sadtc")]
-
-[node name="MeleeAttackEB" parent="Behaviors" instance=ExtResource("6_juo5d")]
-
-[node name="WaxEB" parent="Behaviors" node_paths=PackedStringArray("get_hurt_eb", "light") instance=ExtResource("8_sadtc")]
-get_hurt_eb = NodePath("../GetHurtEB")
-light = NodePath("../../ToAnimate/Sprite3D/OmniLight3D")
 
 [node name="RoomNotifier" parent="." instance=ExtResource("9_juo5d")]
 

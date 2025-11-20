@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bichiu55qpo3e"]
+
+[node name="EnemyCollision" type="RigidBody3D" groups=["enemy_collision"]]
+collision_layer = 4
+collision_mask = 0
+gravity_scale = 0.0

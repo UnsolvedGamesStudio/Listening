@@ -2,5 +2,12 @@
 
 [ext_resource type="Script" uid="uid://ccafp7t4eyxxd" path="res://enemies/behaviors/movement_eb.gd" id="1_glmia"]
 
-[node name="MovementEB" type="Node"]
+[node name="MovementEB" type="Node3D"]
 script = ExtResource("1_glmia")
+
+[node name="MovementRaycast" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -1.5)
+collide_with_areas = true
+collide_with_bodies = false
+debug_shape_custom_color = Color(2.1658839e-06, 0.42217875, 0.5548489, 1)
