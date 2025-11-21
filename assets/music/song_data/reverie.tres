@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SongData" load_steps=2 format=3 uid="uid://b3cbgo4s0mytf"]
+
+[ext_resource type="Script" uid="uid://cm2xsueacjqna" path="res://assets/music/song_data/song_data.gd" id="1_ue1tg"]
+
+[resource]
+script = ExtResource("1_ue1tg")
+name = "Reverie"
+author = "RedFlagDiver"
+bpm = 100
+volume = -3.0
+file_path = "res://assets/music/reverie.ogg"
+chords_midi_path = "res://assets/music/chord_midis/reverie_chords.mid"
+metadata/_custom_type_script = "uid://cm2xsueacjqna"

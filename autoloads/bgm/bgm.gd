@@ -190,7 +190,6 @@ func play_single_note(note, octave_modifier: int = 0):
 	sampler_instrument.play_note(sample.tone, sample.octave)
 
 
-## Use play_single_chord
 func play_full_chord(octave_modifier: int = 0):
 	if get_notes() == []:
 		return

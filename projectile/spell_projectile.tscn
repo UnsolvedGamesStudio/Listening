@@ -1,10 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://bxvo7ewsxt46f"]
+[gd_scene load_steps=13 format=3 uid="uid://bxvo7ewsxt46f"]
 
 [ext_resource type="Script" uid="uid://d07bvstd4u2bp" path="res://projectile/spell_projectile.gd" id="1_dkllc"]
-[ext_resource type="Texture2D" uid="uid://bqokni4d5a22j" path="res://player/spell_casting/textures/spell_projectile.png" id="2_mvva0"]
+[ext_resource type="Texture2D" uid="uid://cwhx3n7i0n6nf" path="res://projectile/textures/bubble-Sheet.png" id="2_dkllc"]
+[ext_resource type="Script" uid="uid://bbwpu3t8hja4j" path="res://projectile/projectile_sprite.gd" id="3_mvva0"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dkllc"]
+friction = 0.0
+bounce = 0.3
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hrg8b"]
-radius = 0.060193617
+radius = 0.07632152
 
 [sub_resource type="Animation" id="Animation_dr2av"]
 resource_name = "RESET"
@@ -59,7 +64,7 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"queue_free"
+"method": &"destroy"
 }]
 }
 tracks/2/type = "value"
@@ -82,7 +87,7 @@ _data = {
 }
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_makwg"]
-radius = 0.5385368
+radius = 0.49109828
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hrg8b"]
 emission_shape = 1
@@ -102,13 +107,18 @@ material = SubResource("StandardMaterial3D_makwg")
 size = Vector2(0.025, 0.025)
 
 [node name="SpellProjectile" type="RigidBody3D"]
-collision_layer = 0
-collision_mask = 6
-gravity_scale = 0.0
+collision_layer = 4096
+collision_mask = 4102
+physics_material_override = SubResource("PhysicsMaterial_dkllc")
 continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 6
 script = ExtResource("1_dkllc")
+gravity = Vector3(0, -1, 0)
+destroy_on_terrain = false
+bouncy = true
+speed_up_on_bounce = 10.0
+momentum_decay_rate = 0.8
 
 [node name="CollisionSize" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
@@ -118,11 +128,13 @@ debug_fill = false
 [node name="Sprite3D" type="Sprite3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
-transparency = 0.028000046
-pixel_size = 0.005
+transparency = 1.0
 billboard = 1
 texture_filter = 0
-texture = ExtResource("2_mvva0")
+texture = ExtResource("2_dkllc")
+hframes = 2
+script = ExtResource("3_mvva0")
+animate = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

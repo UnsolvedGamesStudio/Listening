@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2emw1jx7dwb2"]
+[gd_scene load_steps=13 format=3 uid="uid://d2emw1jx7dwb2"]
 
 [ext_resource type="Script" uid="uid://5g0ky2a22hhi" path="res://terrain/cells/walled_cell.gd" id="1_b0f2n"]
 [ext_resource type="Material" uid="uid://c3by8wql8tw8j" path="res://terrain/textures/wall_material.tres" id="2_d8fh8"]
@@ -14,11 +14,14 @@ size = Vector3(1.999, 3.5, 1.999)
 [sub_resource type="BoxShape3D" id="BoxShape3D_8d6ju"]
 size = Vector3(2, 3.4962935, 2.0029297)
 
-[sub_resource type="BoxMesh" id="BoxMesh_i71dc"]
+[sub_resource type="BoxMesh" id="BoxMesh_d8fh8"]
 size = Vector3(2, 1, 2)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_d8fh8"]
-size = Vector3(2, 0.001, 2)
+[sub_resource type="BoxShape3D" id="BoxShape3D_i71dc"]
+size = Vector3(0.16003418, 0.11242676, 0.13867188)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_320jl"]
+size = Vector3(1.9980469, 1.0009824, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b0f2n"]
 size = Vector3(1.95, 3.9, 1.95)
@@ -26,9 +29,11 @@ size = Vector3(1.95, 3.9, 1.95)
 [node name="HeightLimitedCell" type="Node3D"]
 script = ExtResource("1_b0f2n")
 
-[node name="TopFace" type="Node3D" parent="."]
+[node name="TopFace" type="StaticBody3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(-1, 1.509958e-07, 0, -1.509958e-07, -1, 0, 0, 0, 1, 0, 4, 0)
+collision_layer = 2
+collision_mask = 0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="TopFace"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8872595e-07, 1.7498753, 0)
@@ -40,7 +45,12 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TopFace/MeshInstance3D/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50165224, 0.0027770996)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.003)
+shape = SubResource("BoxShape3D_8d6ju")
+debug_color = Color(0.9926967, 0, 0.25486487, 0.41960785)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TopFace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0.003)
 shape = SubResource("BoxShape3D_8d6ju")
 debug_color = Color(0.9926967, 0, 0.25486487, 0.41960785)
 
@@ -60,8 +70,10 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1, 
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
-[node name="BottomFace" type="Node3D" parent="."]
+[node name="BottomFace" type="StaticBody3D" parent="."]
 unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("3_b0f2n")
 
 [node name="Cell" parent="BottomFace" instance=ExtResource("4_0u8it")]
@@ -70,17 +82,20 @@ max_player_height = 0.25
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BottomFace"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("BoxMesh_i71dc")
+mesh = SubResource("BoxMesh_d8fh8")
 
-[node name="Area3D" type="Area3D" parent="BottomFace/MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.557168e-08, -0.50048876, 0)
+[node name="CellDetect" type="Area3D" parent="BottomFace/MeshInstance3D"]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BottomFace/MeshInstance3D/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4995, 0.0042419434)
-shape = SubResource("BoxShape3D_d8fh8")
-debug_color = Color(0.9926967, 0, 0.25486487, 0.41960785)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BottomFace/MeshInstance3D/CellDetect"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8536967, 0)
+shape = SubResource("BoxShape3D_i71dc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BottomFace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0009765625, -0.5004912, 0.0042419434)
+shape = SubResource("BoxShape3D_320jl")
+debug_color = Color(0.83842415, 0.0011944127, 0.92669535, 0.41960785)
 
 [node name="Shrinker" type="Area3D" parent="." node_paths=PackedStringArray("cell")]
 collision_layer = 0

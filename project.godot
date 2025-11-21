@@ -13,6 +13,8 @@ config_version=5
 config/name="Psychodrama"
 run/main_scene="uid://xqc1yxn05bn"
 config/features=PackedStringArray("4.5", "Forward Plus")
+boot_splash/image="uid://cr8gjsy3e2jpb"
+boot_splash/minimum_display_time=25
 
 [autoload]
 
@@ -39,6 +41,7 @@ window/size/viewport_height=448
 window/size/window_width_override=1024
 window/size/window_height_override=896
 window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="uid://cg4tlnn6sfc5j"
 
 [editor]
 
@@ -72,6 +75,7 @@ dopamine_cluster=""
 prep_screen_song_preview=""
 layout=""
 player_hp_bar=""
+player_dopamine_bar=""
 
 [gui]
 
@@ -138,6 +142,7 @@ exit={
 3d_physics/layer_10="room_notifier"
 3d_physics/layer_11="shell_object"
 3d_physics/layer_12="enemy_body"
+3d_physics/layer_13="projectile_body"
 
 [physics]
 

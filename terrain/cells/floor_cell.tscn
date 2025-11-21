@@ -3,13 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://de0flumabcluq" path="res://terrain/cells/cell.tscn" id="1_i71dc"]
 [ext_resource type="Script" uid="uid://cnier2fyv1lb5" path="res://terrain/cells/unwalled_cell.gd" id="1_tdoft"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_i71dc"]
+[sub_resource type="BoxMesh" id="BoxMesh_d8fh8"]
 size = Vector3(2, 1, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i71dc"]
 size = Vector3(0.16003418, 0.11242676, 0.13867188)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8d6ju"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_320jl"]
 size = Vector3(1.9980469, 1.0009824, 2)
 
 [node name="FloorCell" type="StaticBody3D"]
@@ -22,7 +22,7 @@ unique_name_in_owner = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("BoxMesh_i71dc")
+mesh = SubResource("BoxMesh_d8fh8")
 
 [node name="CellDetect" type="Area3D" parent="MeshInstance3D"]
 collision_layer = 2
@@ -34,5 +34,5 @@ shape = SubResource("BoxShape3D_i71dc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0009765625, -0.5004912, 0.0042419434)
-shape = SubResource("BoxShape3D_8d6ju")
+shape = SubResource("BoxShape3D_320jl")
 debug_color = Color(0.83842415, 0.0011944127, 0.92669535, 0.41960785)

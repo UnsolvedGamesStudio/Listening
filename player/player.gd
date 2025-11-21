@@ -10,7 +10,7 @@ class_name Player
 ## Todo: A painting node that hosts a random drawing
 ## Todo: Spotlight decoration
 ## Todo: Kake actions with the right timing count towards score
-## Todo: Kake held instrument go up when camera goes way down
+## Todo: Make held instrument go up when camera goes way down
 
 ## Web issues: big delay, aspect ratio is off, hub world shading is off, mouse mode broken
 @onready var camera: Camera3D = %Camera3D

@@ -1,0 +1,175 @@
+[gd_scene load_steps=13 format=3 uid="uid://demw14e6tx6wp"]
+
+[ext_resource type="Script" uid="uid://d07bvstd4u2bp" path="res://projectile/spell_projectile.gd" id="1_xc7aq"]
+[ext_resource type="Texture2D" uid="uid://cwhx3n7i0n6nf" path="res://projectile/textures/bubble-Sheet.png" id="2_reluy"]
+[ext_resource type="Script" uid="uid://bbwpu3t8hja4j" path="res://projectile/projectile_sprite.gd" id="3_76wss"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dkllc"]
+friction = 0.0
+bounce = 0.3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hrg8b"]
+radius = 0.07632152
+
+[sub_resource type="Animation" id="Animation_dr2av"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3, 3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_makwg"]
+resource_name = "lifetime"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:transparency")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333335),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"destroy"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.10000001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dr2av"]
+_data = {
+&"RESET": SubResource("Animation_dr2av"),
+&"lifetime": SubResource("Animation_makwg")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_makwg"]
+radius = 0.49109828
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hrg8b"]
+emission_shape = 1
+emission_sphere_radius = 0.3
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_makwg"]
+cull_mode = 1
+albedo_color = Color(0, 0.36322755, 0.6538916, 1)
+texture_filter = 0
+texture_repeat = false
+disable_receive_shadows = true
+billboard_mode = 1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dkllc"]
+material = SubResource("StandardMaterial3D_makwg")
+size = Vector2(0.025, 0.025)
+
+[node name="SpellProjectile" type="RigidBody3D"]
+collision_layer = 4096
+collision_mask = 4102
+physics_material_override = SubResource("PhysicsMaterial_dkllc")
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 6
+script = ExtResource("1_xc7aq")
+gravity = Vector3(0, -1, 0)
+destroy_on_terrain = false
+speed_up_on_bounce = 10.0
+momentum_decay_rate = 0.8
+
+[node name="CollisionSize" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("SphereShape3D_hrg8b")
+debug_fill = false
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+transparency = 1.0
+billboard = 1
+texture_filter = 0
+texture = ExtResource("2_reluy")
+hframes = 2
+script = ExtResource("3_76wss")
+animate = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_dr2av")
+}
+autoplay = "lifetime"
+
+[node name="Hitbox" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+
+[node name="HitboxCollision" type="CollisionShape3D" parent="Hitbox"]
+unique_name_in_owner = true
+shape = SubResource("SphereShape3D_makwg")
+debug_color = Color(0.97987014, 0, 0.38836122, 0.41960785)
+
+[node name="FlyingParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1.0000001, 0, 1.0000001, -4.3711392e-08, 0, 0, 0)
+visible = false
+cast_shadow = 0
+emitting = false
+lifetime = 0.4
+randomness = 0.53
+process_material = SubResource("ParticleProcessMaterial_hrg8b")
+draw_pass_1 = SubResource("PlaneMesh_dkllc")
+
+[node name="KillTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.3
+one_shot = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+unique_name_in_owner = true
+visible = false
+light_energy = 0.1
+light_indirect_energy = 0.1
+omni_attenuation = 1.5

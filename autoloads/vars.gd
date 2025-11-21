@@ -30,11 +30,16 @@ var level_collects: Dictionary[String, Dictionary] = {
 	
 }
 
-var total_neurons:= 2
+var total_neurons:= 0
 var neurons:= 0
 var total_synapses:= 0
 var synapses:= 0
-var dopamine:= 0.0
+var max_dopamine:= 100.0:
+	set(value):
+		max_dopamine = clampf(value, 0.0, 9999.9)
+var dopamine:= max_dopamine / 2.0:
+	set(value):
+		dopamine = clampf(value, 0.0, max_dopamine)
 
 ## Player
 var interact_range:= 4.0

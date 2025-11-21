@@ -1,7 +1,8 @@
 @tool
 extends PanelContainer
 class_name SongSelectButton
-## Todo: song sorting system (default: bpm)
+## Todo: Song sorting system (default: bpm)
+## Todo: Reference the song data in Bgm, and read from it when starting the level
 @onready var name_label: Label = %NameLabel
 @onready var selection_outline: PanelContainer = %SelectionOutline
 @onready var bpm_label: Label = %BpmLabel
@@ -66,6 +67,7 @@ func apply_values():
 	Bgm.stream = song_stream
 	Bgm.volume_db = song_data.volume
 	Bgm.rhythm_notifier.bpm = song_data.bpm
+	Bgm.midi_player.file = song_data.chords_midi_path
 
 
 func on_clicked():

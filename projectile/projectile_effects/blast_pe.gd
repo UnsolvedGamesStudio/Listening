@@ -1,7 +1,8 @@
 extends ProjectileEffect
 class_name BlastPE
-## Todo: generate soot decals on the walls
-## Todo: rework animation
+## Todo: Generate soot decals on the walls
+## Todo: Rework animation
+## Todo: Add tiny cooldown
 @export var explosion_scene: PackedScene
 
 
@@ -19,6 +20,14 @@ func create_explosion(position):
 	explosion_inst.global_position = position
 
 
-func on_projectile_hit_body(hit_pos: Vector3, hit_normal: Vector3):
-	var position:= hit_pos + hit_normal * 0.5
+func on_projectile_hit_body(hit_pos: Vector3, hit_normal: Vector3, body: Node):
+	if body.owner is Enemy:
+		return
+	
+	var position:= hit_pos + hit_normal * 0.4
+	create_explosion(position)
+
+
+func on_hitbox_hit_body(hit_pos: Vector3, body: RigidBody3D):
+	var position = hit_pos.lerp(body.global_position, 0.5)
 	create_explosion(position)

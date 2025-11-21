@@ -9,7 +9,7 @@ const DEFAULT_SPELL = preload("uid://d0jjxcbead86g")
 
 const PROJECTILE = preload("uid://bxvo7ewsxt46f")
 
-@export var spell_range:= 8.0
+@export var spell_range_mult:= 1.0
 
 var element_expiry_time_mult:= 20.0
 var container:= Vars.element_container
@@ -83,29 +83,68 @@ func cast_spell():
 	if not Vars.last_activated_circle == null:
 		Vars.last_activated_circle.texture = CAST_SIGIL
 	
-	apply_combo_effect()
+	var key: StringName = check_for_combo(container)
 	
-	if check_for_suppress() == true:
+	if enough_dopamine(key) == false:
+		create_projectile()
 		remove_all_elements()
 		return
 	
-	create_projectile(get_projectile_effect())
+	apply_combo_effect(key)
+	
+	if check_for_suppress(key) == true:
+		remove_all_elements()
+		return
+	
+	fire(key)
+
+
+
+func fire(key):
+	var delay:= 0.2
+	var amount:= 1
+	
+	if not key == "":
+		if "extra_amount" in SpellCombos.combos[key]:
+			amount += SpellCombos.combos[key]["extra_amount"]
+		
+		if "delay" in SpellCombos.combos[key]:
+			delay = SpellCombos.combos[key]["delay"]
+	
+	for index in amount:
+		if not index == 0:
+			await get_tree().create_timer(delay).timeout
+		
+		create_projectile(get_projectile_effect(key))
 	
 	remove_all_elements()
 
 
-func apply_combo_effect():
-	var key: StringName = check_for_combo(container)
-	
+func apply_combo_effect(key: String):
 	if key == "":
 		return
 	
 	Bus.player_used_combo.emit(key)
 
 
-func check_for_suppress():
-	var key: StringName = check_for_combo(container)
+func enough_dopamine(key: String):
+	if key == "":
+		return
 	
+	if not "mana_cost" in SpellCombos.combos[key]:
+		return true
+	
+	var cost: float = SpellCombos.combos[key]["mana_cost"]
+	
+	if cost <= Vars.dopamine:
+		Vars.dopamine -= cost
+		return true
+	
+	Bus.not_enough_dopamine.emit()
+	return false
+
+
+func check_for_suppress(key: String):
 	if key == "":
 		return
 	
@@ -115,9 +154,7 @@ func check_for_suppress():
 	return false
 
 
-func get_projectile_effect():
-	var key: StringName = check_for_combo(container)
-	
+func get_projectile_effect(key: String):
 	if key == "":
 		return ""
 	
@@ -173,7 +210,7 @@ func create_projectile(projectile_effect_path: String = ""):
 	projectile_inst.color = determine_color()
 	projectile_inst.damage = determine_damage()
 	projectile_inst.origin_node = Find.P()
-	projectile_inst.max_distance = spell_range
+	projectile_inst.max_distance *= spell_range_mult
 	projectile_inst.projectile_effect_path = projectile_effect_path
 	
 	for value in container:

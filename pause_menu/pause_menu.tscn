@@ -118,8 +118,14 @@ metadata/_edit_use_anchors_ = true
 [node name="CombosLabel" type="Label" parent="Combos"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Joy + Joy + Sad:
+text = "Joy + Joy + Joy:
+Bubble
+
+Joy + Joy + Sad:
 Shell
+
+Sad + Sad + Joy:
+Wish
 
 Mad + Mad + Mad:
 Violence"
@@ -145,6 +151,7 @@ size_flags_horizontal = 4
 text = "Press Tab to exit the game.
 A, S, and D add elements to your emotion spell.
 Press Left Click to cast the created spell.
+(Elements and spells require timing.)
 Press W to go to the highlighted tile.
 Press Space to interact."
 horizontal_alignment = 1

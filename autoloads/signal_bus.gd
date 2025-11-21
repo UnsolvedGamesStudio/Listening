@@ -16,6 +16,7 @@ signal player_took_damage(origin: Node3D)
 signal player_lost_hp
 signal player_cast(elements: Array[int], success: String)
 signal player_used_combo(combo: StringName)
+signal not_enough_dopamine
 
 signal spell_landed(elements: Array[int])
 

@@ -1,24 +1,42 @@
-[gd_scene load_steps=18 format=3 uid="uid://86r6xeju02bg"]
+[gd_scene load_steps=30 format=3 uid="uid://86r6xeju02bg"]
 
 [ext_resource type="Theme" uid="uid://b2d4535til41s" path="res://assets/theme.tres" id="1_fp2hw"]
 [ext_resource type="Script" uid="uid://cfglrrbbq2g8" path="res://main_ui/health_bar.gd" id="1_m5yyi"]
 [ext_resource type="PackedScene" uid="uid://5is6n10g8b8b" path="res://main_ui/element_container_ui.tscn" id="1_rvqvy"]
 [ext_resource type="Texture2D" uid="uid://b7mmj4bh7r1aa" path="res://main_ui/textures/reticle.png" id="1_sgsgb"]
 [ext_resource type="Script" uid="uid://cfp4ke5l2plub" path="res://main_ui/timer.gd" id="2_5q6g2"]
+[ext_resource type="Texture2D" uid="uid://mpiq4jvlp2lv" path="res://main_ui/textures/heart_icon-Sheet.png" id="3_fp2hw"]
 [ext_resource type="Script" uid="uid://dc33b50ljm764" path="res://main_ui/enemies_left_label.gd" id="4_6kiqu"]
+[ext_resource type="Script" uid="uid://7y6rd2j8oaqd" path="res://main_ui/heart_icon.gd" id="4_hcckg"]
 [ext_resource type="PackedScene" uid="uid://cho60r3e5ojhj" path="res://main_ui/item_container_ui.tscn" id="4_ru8ot"]
+[ext_resource type="Script" uid="uid://cmkj8tsil1scq" path="res://main_ui/dopamine_bar.gd" id="5_ht8ex"]
+[ext_resource type="Texture2D" uid="uid://cbey0gb1teonl" path="res://main_ui/textures/rainbow_texture1.png" id="5_u7vgo"]
 [ext_resource type="Texture2D" uid="uid://c3125rp5l3jx8" path="res://main_ui/textures/synapse_icon.png" id="5_vm8jh"]
+[ext_resource type="Texture2D" uid="uid://bfn8qtdt6yinm" path="res://main_ui/textures/rainbow_texture2.png" id="6_7tm0h"]
 [ext_resource type="Texture2D" uid="uid://c0ta80v7sjuka" path="res://main_ui/textures/dopamine_icon.png" id="6_fatuu"]
 [ext_resource type="Texture2D" uid="uid://1rqhvrarolql" path="res://main_ui/textures/neuron_icon.png" id="6_lsa3w"]
-[ext_resource type="Script" uid="uid://bx3wcjn2irwtp" path="res://main_ui/dopamine_label.gd" id="6_nad05"]
 [ext_resource type="Script" uid="uid://4vdnnrr7u74b" path="res://main_ui/synapses_label.gd" id="6_sqw8h"]
+[ext_resource type="Texture2D" uid="uid://5tu57vgngts6" path="res://main_ui/textures/rainbow_texture3.png" id="7_7hcy2"]
 [ext_resource type="PackedScene" uid="uid://b7xx6wfttusxa" path="res://main_ui/damage_indicator.tscn" id="7_sqw8h"]
 [ext_resource type="Script" uid="uid://djqbaobsxmkx8" path="res://main_ui/neurons_label.gd" id="7_uwb8r"]
+[ext_resource type="Texture2D" uid="uid://c6om4mvcxheye" path="res://main_ui/textures/rainbow_texture4.png" id="8_7hcy2"]
 [ext_resource type="Texture2D" uid="uid://dam31kn2ab3bc" path="res://level_editor/textures/enemy_cell.png" id="9_uwb8r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ht8ex"]
+bg_color = Color(3.308989e-07, 0.22164837, 0.16118711, 0.39215687)
+corner_detail = 6
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7tm0h"]
+bg_color = Color(0.25882354, 0.6431373, 0.34901962, 1)
+corner_detail = 6
 
 [sub_resource type="Animation" id="Animation_fp2hw"]
 resource_name = "healed"
-length = 0.7
+length = 0.75
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -26,7 +44,7 @@ tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.36666667, 0.7),
+"times": PackedFloat32Array(0, 0.33333334, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1, 1.4), Vector2(1, 1)]
@@ -35,6 +53,41 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hcckg"]
 _data = {
 &"healed": SubResource("Animation_fp2hw")
+}
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_18af8"]
+frames = 4
+frame_0/texture = ExtResource("5_u7vgo")
+frame_0/duration = 0.25
+frame_1/texture = ExtResource("6_7tm0h")
+frame_1/duration = 0.25
+frame_2/texture = ExtResource("7_7hcy2")
+frame_2/duration = 0.25
+frame_3/texture = ExtResource("8_7hcy2")
+frame_3/duration = 0.25
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ht8ex"]
+texture = SubResource("AnimatedTexture_18af8")
+
+[sub_resource type="Animation" id="Animation_7hcy2"]
+resource_name = "not_enough"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.7092816, 0.31052577, 0.31147066, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kkjxn"]
+_data = {
+&"not_enough": SubResource("Animation_7hcy2")
 }
 
 [node name="MainUI" type="CanvasLayer"]
@@ -51,59 +104,99 @@ metadata/_edit_use_anchors_ = true
 [node name="Left" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="HealthBarOutline" type="ProgressBar" parent="MarginContainer/Left"]
-self_modulate = Color(0.78092533, 0.7470902, 0.677051, 0.44200003)
-custom_minimum_size = Vector2(104, 14)
-layout_mode = 2
-size_flags_horizontal = 0
-max_value = 1.0
-value = 1.0
-show_percentage = false
-
-[node name="HealthBar" type="ProgressBar" parent="MarginContainer/Left/HealthBarOutline" groups=["player_hp_bar"]]
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/Left" groups=["player_hp_bar"]]
 z_index = 1
 custom_minimum_size = Vector2(100, 10)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.01923077
-anchor_top = 0.14285715
-anchor_right = 0.9807692
-anchor_bottom = 0.85714287
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(52, 4)
+layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"hp"
+theme_override_styles/background = SubResource("StyleBoxFlat_ht8ex")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7tm0h")
 max_value = 1.0
 value = 0.5
 show_percentage = false
 script = ExtResource("1_m5yyi")
 metadata/_edit_use_anchors_ = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/Left/HealthBarOutline/HealthBar"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/Left/HealthBar"]
 libraries = {
 &"": SubResource("AnimationLibrary_hcckg")
 }
 
-[node name="Label" type="Label" parent="MarginContainer/Left/HealthBarOutline"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Left/HealthBar"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(16, 0)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 53.0
-offset_top = -7.0
-offset_right = 71.0
-offset_bottom = 6.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.56078434, 0.8156863, 0.19607843, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+anchors_preset = -1
+anchor_left = 1.06
+anchor_top = -0.2
+anchor_right = 1.22
+anchor_bottom = 1.2
+metadata/_edit_use_anchors_ = true
+
+[node name="HeartIcon" type="Sprite2D" parent="MarginContainer/Left/HealthBar/PanelContainer"]
+position = Vector2(6, 7)
+texture = ExtResource("3_fp2hw")
+hframes = 2
+script = ExtResource("4_hcckg")
+
+[node name="Timer" type="Timer" parent="MarginContainer/Left/HealthBar/PanelContainer/HeartIcon"]
+unique_name_in_owner = true
+wait_time = 0.15
+one_shot = true
+
+[node name="HealthBarLabel" type="Label" parent="MarginContainer/Left/HealthBar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.23
+anchor_top = -0.2
+anchor_right = 1.36
+anchor_bottom = 1.1
 theme_override_constants/outline_size = 4
-text = "HP"
-horizontal_alignment = 1
-vertical_alignment = 1
+text = "20"
+metadata/_edit_use_anchors_ = true
+
+[node name="DopamineBar" type="ProgressBar" parent="MarginContainer/Left" groups=["player_dopamine_bar"]]
+z_index = 1
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_ht8ex")
+theme_override_styles/fill = SubResource("StyleBoxTexture_ht8ex")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+script = ExtResource("5_ht8ex")
+metadata/_edit_use_anchors_ = true
+
+[node name="DopamineIcon" type="TextureRect" parent="MarginContainer/Left/DopamineBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.04
+anchor_top = -0.3
+anchor_right = 1.2
+anchor_bottom = 1.3
+texture = ExtResource("6_fatuu")
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="DopamineBarLabel" type="Label" parent="MarginContainer/Left/DopamineBar/DopamineIcon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.1875
+anchor_top = 0.09375
+anchor_right = 1.9375
+anchor_bottom = 0.90625
+theme_override_constants/outline_size = 4
+text = "20"
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/Left/DopamineBar"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_kkjxn")
+}
 
 [node name="Spacer" type="Panel" parent="MarginContainer/Left"]
 modulate = Color(1, 1, 1, 0)
@@ -121,6 +214,7 @@ stretch_mode = 5
 
 [node name="NeuronsLabel" type="Label" parent="MarginContainer/Left/NeuronCount"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 text = "0/0"
 script = ExtResource("7_uwb8r")
 
@@ -135,22 +229,9 @@ stretch_mode = 5
 
 [node name="SynapsesLabel" type="Label" parent="MarginContainer/Left/SynapsesCount"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 text = "0/0"
 script = ExtResource("6_sqw8h")
-
-[node name="DopamineCount" type="HBoxContainer" parent="MarginContainer/Left"]
-layout_mode = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="DopamineIcon" type="TextureRect" parent="MarginContainer/Left/DopamineCount"]
-layout_mode = 2
-texture = ExtResource("6_fatuu")
-stretch_mode = 5
-
-[node name="DopamineLabel" type="Label" parent="MarginContainer/Left/DopamineCount"]
-layout_mode = 2
-text = "x0"
-script = ExtResource("6_nad05")
 
 [node name="EnemyCount" type="HBoxContainer" parent="MarginContainer/Left"]
 layout_mode = 2
@@ -163,6 +244,7 @@ stretch_mode = 5
 
 [node name="EnemiesLeftLabel" type="Label" parent="MarginContainer/Left/EnemyCount"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 text = "x0"
 script = ExtResource("4_6kiqu")
 

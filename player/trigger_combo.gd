@@ -62,9 +62,9 @@ func spell_9(combo_name):
 func spell_10(combo_name):
 	print("do a spell 10")
 
-
+## Wish (SAD + SAD + JOY)
 func spell_11(combo_name):
-	print("do a spell 11")
+	Find.P().heal(50.0)
 
 
 func spell_12(combo_name):
