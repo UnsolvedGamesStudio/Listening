@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://f8fo4fd7ydmy" path="res://assets/sfx/ice_shell_sfx.ogg" id="3_siw0y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_siw0y"]
-size = Vector3(1.3724976, 1.8554688, 0.20874023)
+size = Vector3(1.408905, 1.340332, 0.20874023)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1nw6h"]
 size = Vector3(2.6651, 4.0290604, 0.32495117)
@@ -32,7 +32,7 @@ light_specular = 0.736
 omni_range = 5.73
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009918213, 1.4333305, -1.1780541)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008285522, 1.6908989, -1.1780541)
 shape = SubResource("BoxShape3D_siw0y")
 
 [node name="Area3D" type="Area3D" parent="."]

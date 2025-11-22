@@ -13,7 +13,6 @@ func _gui_input(event: InputEvent) -> void:
 
 func on_clicked():
 	Filters.fade.play("fade_out")
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	await Filters.fade.animation_finished
 	SceneManager.switch_scene("layout")
 

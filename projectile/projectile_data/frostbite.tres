@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ProjectileData" load_steps=3 format=3 uid="uid://dmfidnse885hb"]
+
+[ext_resource type="Script" uid="uid://bvbp1tvil18db" path="res://projectile/projectile_data/projectile_data.gd" id="1_na2r2"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_na2r2"]
+
+[resource]
+script = ExtResource("1_na2r2")
+speed_mult = 0.05
+max_distance_mult = 2.0
+max_lifetime_mult = 5.0
+destroy_on_entity = false
+pierce_entities = true
+bouncy = true
+texture = SubResource("ImageTexture_na2r2")

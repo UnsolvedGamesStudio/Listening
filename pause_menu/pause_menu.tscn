@@ -106,10 +106,10 @@ script = ExtResource("1_uwtdo")
 [node name="Combos" type="PanelContainer" parent="."]
 process_mode = 2
 anchors_preset = -1
-anchor_left = 0.0546875
-anchor_top = 0.35714287
-anchor_right = 0.2734375
-anchor_bottom = 0.55133927
+anchor_left = 0.03125
+anchor_top = 0.2924107
+anchor_right = 0.28515625
+anchor_bottom = 0.80803573
 size_flags_horizontal = 4
 size_flags_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_uwtdo")
@@ -118,17 +118,19 @@ metadata/_edit_use_anchors_ = true
 [node name="CombosLabel" type="Label" parent="Combos"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Joy + Joy + Joy:
-Bubble
-
-Joy + Joy + Sad:
-Shell
-
-Sad + Sad + Joy:
-Wish
-
+theme_override_constants/line_spacing = 7
+text = "Glad + Sad:
+Wish (33)
+Glad + Glad + Glad:
+Bubble (15)
+Glad + Glad + Sad:
+Shell (15)
+Sad + Sad + Sad:
+Frostbite (15)
+Sad + Sad + Mad:
+Weight (15)
 Mad + Mad + Mad:
-Violence"
+Violence (15)"
 horizontal_alignment = 1
 
 [node name="Tutorial" type="PanelContainer" parent="."]

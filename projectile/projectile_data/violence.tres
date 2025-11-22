@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ProjectileData" load_steps=5 format=3 uid="uid://buahldoniyh22"]
+
+[ext_resource type="Script" uid="uid://bvbp1tvil18db" path="res://projectile/projectile_data/projectile_data.gd" id="1_ccoar"]
+[ext_resource type="Texture2D" uid="uid://dgx3jryq3jhtr" path="res://projectile/textures/violence1.png" id="2_23q2k"]
+[ext_resource type="Texture2D" uid="uid://6wvw4685ao8n" path="res://projectile/textures/violence2.png" id="3_8ib3r"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_23q2k"]
+frames = 2
+frame_0/texture = ExtResource("2_23q2k")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("3_8ib3r")
+frame_1/duration = 0.1
+
+[resource]
+script = ExtResource("1_ccoar")
+speed_mult = 2.0
+produce_destroyed_vfx = false
+texture = SubResource("AnimatedTexture_23q2k")

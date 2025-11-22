@@ -92,7 +92,6 @@ gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_ayf6a")
-produce_destroyed_fx = false
 
 [node name="CollisionSize" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_saffc")
@@ -125,6 +124,10 @@ debug_color = Color(0.97987014, 0, 0.38836122, 0.41960785)
 [node name="KillTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 0.1
+one_shot = true
+
+[node name="Lifetime" type="Timer" parent="."]
+unique_name_in_owner = true
 one_shot = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]

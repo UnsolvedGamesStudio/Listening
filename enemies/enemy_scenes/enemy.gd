@@ -29,7 +29,7 @@ var sees_player:= false
 
 var counts_towards_goal:= true
 
-signal hit_by_projectile(projectile: Projectile)
+signal hit_by_player_damage(projectile: Projectile)
 signal took_damage(amount: float)
 signal used_melee
 signal fired_projectile
@@ -68,6 +68,29 @@ func _physics_process(delta: float) -> void:
 		set_sprite_alpha(0.0)
 	else:
 		set_sprite_alpha(1.0)
+
+
+func drop_loot():
+	if data == null:
+		printerr(self, " : data not found")
+		return
+	
+	if data.drop == null:
+		return
+	
+	if not FileAccess.file_exists(data.drop):
+		printerr(self, ": data.drop has invalid path")
+		return
+	
+	var drop_scene: PackedScene = load(data.drop)
+	var drop_inst:= drop_scene.instantiate()
+	
+	if not drop_inst is Node:
+		printerr(self, ": drop_inst is not a node")
+		return
+	
+	Find.layout().add_child(drop_inst)
+	drop_inst.global_position = global_position
 
 
 func set_sprite_alpha(amount: float):

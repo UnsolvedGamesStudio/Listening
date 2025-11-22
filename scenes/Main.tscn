@@ -14,7 +14,7 @@ gravity = Vector3(0, 98, 0)
 
 [node name="Main" type="Node" groups=["main_scene"]]
 script = ExtResource("1_o5qli")
-scene_to_load = "layout"
+scene_to_load = "hub_world"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3

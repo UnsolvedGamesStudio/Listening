@@ -11,8 +11,8 @@ func _ready() -> void:
 func on_activated():
 	Vars.neurons += 1
 	Bus.neuron_picked_up.emit()
+	sfx.reparent(get_parent())
+	sfx.play()
 	
 	if Vars.neurons == Vars.total_neurons:
-		sfx.reparent(get_parent())
-		sfx.play()
 		Bus.game_won.emit()

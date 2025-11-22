@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ProjectileData" load_steps=2 format=3 uid="uid://dumw47ydxp8tv"]
+
+[ext_resource type="Script" uid="uid://bvbp1tvil18db" path="res://projectile/projectile_data/projectile_data.gd" id="1_hc4f5"]
+
+[resource]
+script = ExtResource("1_hc4f5")
+damage_mult = 1.5
+speed_mult = 8.0
+max_distance_mult = 10.0
+max_lifetime_mult = 100.0
+destroy_on_entity = false
+destroy_on_terrain = false
+bouncy = true
+cannon_ball = true
+cannon_ball_friction = 1.104
+cannon_ball_bounce = 0.0
+produce_destroyed_vfx = false

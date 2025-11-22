@@ -10,3 +10,4 @@ preferred_range = 1
 shoots_every_x_beat = 3
 projectile_damage = 15.0
 projectile_speed = 30.0
+drop = "res://pickups/dopamine/dopamine_pickup.tscn"

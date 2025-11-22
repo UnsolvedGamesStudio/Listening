@@ -1,8 +1,6 @@
 extends Node
 ## Todo: Make empty sample note be based on camera rotation so you can actually play music
 ## Todo: Make the first element get replaced instead of the last
-@onready var label: Label = $Label
-
 const CAST_SIGIL = preload("uid://c5nwti415vrqj")
 const EMPTY_CAST_SIGIL = preload("uid://cquqsopjsxe0b")
 const DEFAULT_SPELL = preload("uid://d0jjxcbead86g")
@@ -64,8 +62,8 @@ func add_element(element: int):
 	element_expiry()
 	
 	if container.size() > 2:
-		container.push_front(element)
-		container.remove_at(3)
+		container.push_back(element)
+		container.remove_at(0)
 	else:
 		container.append(element)
 	
@@ -101,21 +99,26 @@ func cast_spell():
 
 
 func fire(key):
-	var delay:= 0.2
 	var amount:= 1
+	var delay:= 0.2
+	var data: ProjectileData
+	var projectile_override: PackedScene
 	
 	if not key == "":
-		if "extra_amount" in SpellCombos.combos[key]:
-			amount += SpellCombos.combos[key]["extra_amount"]
+		if "data" in SpellCombos.combos[key]:
+			data = SpellCombos.combos[key]["data"]
+			if not data == null:
+				amount += data.extra_amount
+				delay = data.delay
 		
-		if "delay" in SpellCombos.combos[key]:
-			delay = SpellCombos.combos[key]["delay"]
+		if "projectile_override" in SpellCombos.combos[key]:
+			projectile_override = SpellCombos.combos[key]["projectile_override"]
 	
 	for index in amount:
 		if not index == 0:
 			await get_tree().create_timer(delay).timeout
 		
-		create_projectile(get_projectile_effect(key))
+		create_projectile(get_projectile_effect(key), data, projectile_override)
 	
 	remove_all_elements()
 
@@ -202,9 +205,19 @@ func count_elements(arr: Array) -> Dictionary:
 	return counts
 
 
-func create_projectile(projectile_effect_path: String = ""):
-	var projectile_inst: SpellProjectile = PROJECTILE.instantiate()
+func create_projectile(projectile_effect_path: String = "", data: ProjectileData = null, projectile_override: PackedScene = null):
+	var projectile_inst: SpellProjectile
+	
+	if projectile_override == null:
+		projectile_inst = PROJECTILE.instantiate()
+	else:
+		projectile_inst = projectile_override.instantiate()
+	
 	var look_at_direction: Vector3 = Find.P().get_look_at_direction()
+	
+	if not data == null:
+		projectile_inst.data = data
+	
 	
 	projectile_inst.direction = look_at_direction.normalized()
 	projectile_inst.color = determine_color()

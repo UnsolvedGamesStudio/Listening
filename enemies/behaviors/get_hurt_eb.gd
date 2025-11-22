@@ -19,7 +19,7 @@ var hp:= max_hp:
 
 func enter() -> void:
 	set_stats()
-	O.hit_by_projectile.connect(on_hit_by_projectile)
+	O.hit_by_player_damage.connect(on_hit_by_player_damage)
 
 
 func _physics_process(delta: float) -> void:
@@ -118,6 +118,7 @@ func die():
 	if O.idle_anim.is_playing():
 		await O.idle_anim.animation_finished
 	
+	O.drop_loot()
 	O.queue_free()
 
 
@@ -147,25 +148,15 @@ func generate_text(amount: float, mult: float):
 		label.add_theme_color_override("font_color", weak_color)
 
 
-func on_hit_by_projectile(projectile: Projectile):
+func on_hit_by_player_damage(source: Node):
 	if enabled == false:
 		return
 	
-	if not "damage" in projectile:
+	if not "damage" in source:
 		return
 	
-	if "elements" in projectile:
-		take_damage(projectile.damage, true, projectile.elements)
+	if "elements" in source:
+		take_damage(source.damage, true, source.elements)
 		return
 	
-	take_damage(projectile.damage)
-
-
-func on_hurtbox_area_entered(area: Area3D):
-	if enabled == false:
-		return
-	
-	if not "damage" in area.owner:
-		return
-	
-	take_damage(area.owner.damage)
+	take_damage(source.damage)

@@ -1,0 +1,143 @@
+[gd_scene load_steps=14 format=3 uid="uid://ms34vjhby2i0"]
+
+[ext_resource type="Script" uid="uid://bcy2gagmyuvg0" path="res://projectile/projectile_effects/damaging_aura_pe.gd" id="1_gxlbl"]
+[ext_resource type="Material" uid="uid://dr64ug02l34y2" path="res://assets/shared_materials/glass_material.tres" id="2_gxlbl"]
+[ext_resource type="Shader" uid="uid://ojon0136p0gr" path="res://abilities/shell/glass_shader.gdshader" id="3_uujoa"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_s3myo"]
+material = ExtResource("2_gxlbl")
+radius = 0.6
+height = 1.2
+radial_segments = 30
+rings = 20
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gar07"]
+load_path = "res://.godot/imported/frostbite-export.png-e0a8c3918162a4b6ae4c31127fe7dfaa.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n2ljj"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = SubResource("CompressedTexture2D_gar07")
+uv1_scale = Vector3(3.44, 3.44, 3.44)
+uv1_offset = Vector3(1, 0, 0)
+texture_filter = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2iq3h"]
+render_priority = 1
+next_pass = SubResource("StandardMaterial3D_n2ljj")
+shader = ExtResource("3_uujoa")
+shader_parameter/albedo = Color(0, 2.2494333, 3.1238236, 0.6901961)
+shader_parameter/roughness = 0.45200002147
+shader_parameter/normal_strength = -6.889999567275
+shader_parameter/edge_color = Color(0.7295144, 0.96602684, 0.9125339, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_gxlbl"]
+material = SubResource("ShaderMaterial_2iq3h")
+radius = 0.125
+height = 0.25
+radial_segments = 20
+rings = 15
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uujoa"]
+radius = 0.6
+
+[sub_resource type="Animation" id="Animation_uujoa"]
+resource_name = "appear"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.001, 0.001, 0.001), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gar07"]
+_data = {
+&"appear": SubResource("Animation_uujoa")
+}
+
+[sub_resource type="Animation" id="Animation_gar07"]
+resource_name = "wobble"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Big:scale:x")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.493726, 3.2333336, 4.666667, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 1.105, 0.89, 1.085, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Big:scale:y")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9937259, 2.7333333, 4.166667, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 1.105, 0.89, 1.085, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Big:scale:z")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 2.2333333, 3.6666667, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 1.105, 0.89, 1.085, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n2ljj"]
+_data = {
+&"wobble": SubResource("Animation_gar07")
+}
+
+[node name="DamagingAuraPE" type="Node3D"]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+script = ExtResource("1_gxlbl")
+
+[node name="Big" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_s3myo")
+
+[node name="Small" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_gxlbl")
+
+[node name="Hitbox" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("SphereShape3D_uujoa")
+
+[node name="DamageCooldown" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.05
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gar07")
+}
+autoplay = "appear"
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_n2ljj")
+}
+autoplay = "wobble"

@@ -12,4 +12,4 @@ func update_value():
 	value = lerp(value, Find.P().hp / 100, 0.33)
 	get_theme_stylebox("fill").bg_color.r = max_value - value
 	get_theme_stylebox("fill").bg_color.g = value
-	health_bar_label.text = str(Find.P().hp)
+	health_bar_label.text = str(Find.P().hp as int)

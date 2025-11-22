@@ -9,10 +9,10 @@ var hurtbox: Area3D
 
 
 func enter() -> void:
-	O.hit_by_projectile.connect(on_hit_by_projectile)
+	O.hit_by_player_damage.connect(on_hit_by_player_damage)
 
 
-func on_hit_by_projectile(projectile: Projectile):
+func on_hit_by_player_damage(projectile: Projectile):
 	if not "elements" in projectile:
 		return
 	

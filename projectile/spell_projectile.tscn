@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://bxvo7ewsxt46f"]
 
 [ext_resource type="Script" uid="uid://d07bvstd4u2bp" path="res://projectile/spell_projectile.gd" id="1_dkllc"]
-[ext_resource type="Texture2D" uid="uid://cwhx3n7i0n6nf" path="res://projectile/textures/bubble-Sheet.png" id="2_dkllc"]
+[ext_resource type="Texture2D" uid="uid://bqokni4d5a22j" path="res://player/spell_casting/textures/spell_projectile.png" id="2_mvva0"]
 [ext_resource type="Script" uid="uid://bbwpu3t8hja4j" path="res://projectile/projectile_sprite.gd" id="3_mvva0"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dkllc"]
@@ -9,7 +9,7 @@ friction = 0.0
 bounce = 0.3
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hrg8b"]
-radius = 0.07632152
+radius = 0.07116634
 
 [sub_resource type="Animation" id="Animation_dr2av"]
 resource_name = "RESET"
@@ -53,27 +53,13 @@ tracks/0/keys = {
 "update": 0,
 "values": [1.0, 0.0]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
+tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"destroy"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite3D:scale")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.10000001),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -114,11 +100,6 @@ continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 6
 script = ExtResource("1_dkllc")
-gravity = Vector3(0, -1, 0)
-destroy_on_terrain = false
-bouncy = true
-speed_up_on_bounce = 10.0
-momentum_decay_rate = 0.8
 
 [node name="CollisionSize" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
@@ -131,10 +112,8 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 transparency = 1.0
 billboard = 1
 texture_filter = 0
-texture = ExtResource("2_dkllc")
-hframes = 2
+texture = ExtResource("2_mvva0")
 script = ExtResource("3_mvva0")
-animate = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -166,6 +145,10 @@ draw_pass_1 = SubResource("PlaneMesh_dkllc")
 [node name="KillTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 0.3
+one_shot = true
+
+[node name="Lifetime" type="Timer" parent="."]
+unique_name_in_owner = true
 one_shot = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]

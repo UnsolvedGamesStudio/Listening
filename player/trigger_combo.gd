@@ -26,9 +26,9 @@ func activate_player_ability(ability_name: StringName):
 func spell_1(combo_name):
 	print("do a spell 1")
 
-
+## Wish (SAD + JOY)
 func spell_2(combo_name):
-	print("do a spell 2")
+	Find.P().heal(100.0)
 
 
 func spell_3(combo_name):
@@ -62,9 +62,9 @@ func spell_9(combo_name):
 func spell_10(combo_name):
 	print("do a spell 10")
 
-## Wish (SAD + SAD + JOY)
+
 func spell_11(combo_name):
-	Find.P().heal(50.0)
+	print("do a spell 11")
 
 
 func spell_12(combo_name):

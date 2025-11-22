@@ -1,10 +1,10 @@
 extends Node3D
 class_name Dopamine
-## Todo: maybe make the dopamine into a gauge, making it more unique as a currency, could also be used as a charge
+## Todo: Make pickups follow the player, not via tween
 @onready var animated_sprite_3d: AnimatedSprite3D = %AnimatedSprite3D
-@onready var area_3d: Area3D = %Area3D
 @onready var sfx: AudioStreamPlayer = %SFX
-
+@onready var magnet_range: Area3D = %MagnetRange
+@onready var pickup_range: Area3D = %PickupRange
 @export var worth:= 1.0
 
 var rand_position_offset:= Vector3( randf_range(-0.5, 0.5), randf_range(-0.4, 0.25), randf_range(-0.5, 0.5) )
@@ -14,11 +14,13 @@ func _ready() -> void:
 	await get_tree().create_timer(0.0).timeout
 	animated_sprite_3d.speed_scale *= randf_range(0.9, 1.1)
 	global_position += rand_position_offset
-	area_3d.area_entered.connect(on_area_3d_area_entered)
+	magnet_range.area_entered.connect(on_magnet_range_area_entered)
+	pickup_range.area_entered.connect(on_pickup_range_area_entered)
 
 
 func go_to_player():
-	area_3d.get_child(0).set_deferred("disabled", true)
+	magnet_range.get_child(0).set_deferred("disabled", true)
+	pickup_range.get_child(0).set_deferred("disabled", true)
 	
 	if not find_child("Particles") == null:
 		find_child("Particles").emitting = false
@@ -43,8 +45,15 @@ func picked_up():
 	queue_free()
 
 
-func on_area_3d_area_entered(area: Area3D):
+func on_magnet_range_area_entered(area: Area3D):
 	if not area.is_in_group("player_collision"):
 		return
 	
 	go_to_player()
+
+
+func on_pickup_range_area_entered(area: Area3D):
+	if not area.is_in_group("player_collision"):
+		return
+	
+	picked_up()

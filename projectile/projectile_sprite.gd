@@ -1,11 +1,13 @@
 extends Sprite3D
 
-@export var animate:= false
+var animate:= false
 
 
 func _ready() -> void:
 	Bus.beat.connect(on_beat)
-	frame = randi_range(0, 1)
+	
+	if animate == true:
+		frame = randi_range(0, 1)
 
 
 func on_beat(beat_count):

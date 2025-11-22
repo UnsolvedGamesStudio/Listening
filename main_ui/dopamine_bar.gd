@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 func update_value():
 	max_value = Vars.max_dopamine / 100
 	value = lerp(value, Vars.dopamine / 100, 0.33)
-	dopamine_bar_label.text = str(Vars.dopamine)
+	dopamine_bar_label.text = str(Vars.dopamine as int)
 
 
 func on_not_enough_dopamine():

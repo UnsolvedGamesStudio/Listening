@@ -24,3 +24,4 @@ projectile_range = 4
 joy_damage_mult = 1.4
 sad_damage_mult = 0.6
 anger_damage_mult = 0.8
+drop = "res://pickups/dopamine/large_dopamine.tscn"

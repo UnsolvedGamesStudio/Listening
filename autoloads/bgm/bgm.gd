@@ -168,6 +168,11 @@ func play_note_no_music(elements):
 	if elements == []:
 		sampler_instrument.play_note(b_melodic_min.pick_random(), 1)
 	
+	if elements.size() == 3:
+				sampler_instrument.play_note("B", 0)
+				sampler_instrument.play_note("E", 0)
+				sampler_instrument.play_note("G#", 0)
+	
 	else:
 		for element in elements:
 			if element == 0:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dsni4a2x3dlwl"]
+[gd_scene load_steps=14 format=3 uid="uid://dsni4a2x3dlwl"]
 
 [ext_resource type="Script" uid="uid://dxgvi78wt3efu" path="res://pickups/dopamine/dopamine_pickup.gd" id="1_wgocq"]
 [ext_resource type="Texture2D" uid="uid://crpbl5wnqdl5i" path="res://pickups/textures/dopamine-Sheet.png" id="2_bbqef"]
@@ -62,6 +62,9 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_o1h2k"]
+radius = 0.09753953
+
 [node name="DopaminePickup" type="Node3D"]
 script = ExtResource("1_wgocq")
 worth = 5.0
@@ -87,11 +90,20 @@ omni_attenuation = 1.918
 unique_name_in_owner = true
 stream = ExtResource("4_o1h2k")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="MagnetRange" type="Area3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 64
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MagnetRange"]
 shape = ExtResource("3_ajl7s")
+
+[node name="PickupRange" type="Area3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9775678, 0)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupRange"]
+shape = SubResource("SphereShape3D_o1h2k")

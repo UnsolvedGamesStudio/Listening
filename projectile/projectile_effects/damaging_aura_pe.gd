@@ -1,0 +1,24 @@
+extends ProjectileEffect
+class_name DamagingAuraPE
+
+@onready var damage_cooldown: Timer = %DamageCooldown
+@onready var hitbox: Area3D = %Hitbox
+
+@export var damage:= 3.3
+
+
+func enter():
+	projectile.disable_hitbox()
+	damage_cooldown.timeout.connect(on_damage_cooldown_timeout)
+
+
+func on_projectile_was_destroyed():
+	var tween:= create_tween()
+	tween.tween_property(self, "scale", Vector3(0.01, 0.01, 0.01), 1.0)
+	tween.tween_callback(queue_free)
+
+
+func on_damage_cooldown_timeout():
+	for body in hitbox.get_overlapping_bodies():
+		if body.owner.has_signal("hit_by_player_damage"):
+			body.owner.hit_by_player_damage.emit(self)

@@ -23,6 +23,7 @@ class_name Player
 @onready var move_to_cell_indicator: Node3D = %MoveToCellIndicator
 @onready var abilities: Node = %Abilities
 @onready var player_sfx: Node = $PlayerSFX
+@onready var heal_particles: GPUParticles3D = %HealParticles
 
 const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 
@@ -102,6 +103,7 @@ func reset_vars():
 	can_act = true
 	looked_at_cell = null
 	hp = max_hp
+	Vars.dopamine = Vars.max_dopamine / 2.0
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -123,6 +125,7 @@ func _physics_process(delta: float) -> void:
 		Bus.beat_press_attempted.emit()
 	
 	if is_moving == true and player_sfx.steps.is_playing() == false:
+		player_sfx.steps.pitch_scale = randf_range(0.9, 1.1)
 		player_sfx.steps.play()
 	
 	if is_moving == false:
@@ -197,6 +200,10 @@ func die():
 
 func heal(amount: float):
 	hp += amount
+	player_sfx.heal.play()
+	heal_particles.emitting = true
+	await get_tree().create_timer(1.0).timeout
+	heal_particles.emitting = false
 
 
 func move_forward():
@@ -337,6 +344,7 @@ func shrink(amount: float):
 	var tween:= create_tween()
 	var target_value: Vector3 = scale / amount
 	tween.tween_property(self, "scale", target_value, 0.5)
+	interact_range *= amount
 
 
 func on_player_collision_area_entered(area: Area3D):

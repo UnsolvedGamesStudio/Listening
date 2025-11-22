@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ProjectileData" load_steps=3 format=3 uid="uid://canfwloypqctw"]
+
+[ext_resource type="Script" uid="uid://bvbp1tvil18db" path="res://projectile/projectile_data/projectile_data.gd" id="1_v4mrj"]
+[ext_resource type="Texture2D" uid="uid://cwhx3n7i0n6nf" path="res://projectile/textures/bubble-Sheet.png" id="2_4loqu"]
+
+[resource]
+script = ExtResource("1_v4mrj")
+extra_amount = 8
+delay = 0.11
+damage_mult = 0.33
+speed_mult = 0.3
+destroy_on_terrain = false
+bouncy = true
+speed_mult_on_bounce = 0.15
+spawn_randomness = 0.33
+texture = ExtResource("2_4loqu")
+h_frames = 2
+animate = true

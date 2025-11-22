@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://b4d6fhecioyhy"]
+[gd_scene load_steps=9 format=3 uid="uid://b4d6fhecioyhy"]
 
 [ext_resource type="Script" uid="uid://bqiahf7fqvj5b" path="res://pickups/healing_pickup.gd" id="1_lcksh"]
 [ext_resource type="Texture2D" uid="uid://cxymxxlybqtl" path="res://pickups/textures/sprout-Sheet.png" id="2_lcksh"]
-[ext_resource type="AudioStream" uid="uid://cwtijmuc0g1v5" path="res://assets/sfx/healing_sfx.ogg" id="3_emkgw"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bgvgf"]
 
@@ -85,10 +84,3 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_emkgw")
 }
-
-[node name="SFX" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-stream = ExtResource("3_emkgw")
-volume_db = 2.0
-pitch_scale = 1.2
-bus = &"SFX"
