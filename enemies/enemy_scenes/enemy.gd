@@ -26,6 +26,7 @@ var vision_limit:= 10.0
 var occupied_cell: Cell
 var on_top_of_player:= false
 var sees_player:= false
+var aware_of_player:= false
 
 var counts_towards_goal:= true
 
@@ -114,17 +115,17 @@ func get_direction_to_player():
 	var chosen_directions: Array[Vector3i]= []
 	var direction_to_player: Vector3i = round(global_position.direction_to(Find.P().global_position))
 	
-	if direction_to_player.z == Vars.directions["north"].z:
-		chosen_directions.append(Vars.directions["north"])
+	if direction_to_player.z == Vars.DIRECTIONS["north"].z:
+		chosen_directions.append(Vars.DIRECTIONS["north"])
 	
-	if direction_to_player.x == Vars.directions["east"].x:
-		chosen_directions.append(Vars.directions["east"])
+	if direction_to_player.x == Vars.DIRECTIONS["east"].x:
+		chosen_directions.append(Vars.DIRECTIONS["east"])
 	
-	if direction_to_player.z == Vars.directions["south"].z:
-		chosen_directions.append(Vars.directions["south"])
+	if direction_to_player.z == Vars.DIRECTIONS["south"].z:
+		chosen_directions.append(Vars.DIRECTIONS["south"])
 	
-	if direction_to_player.x == Vars.directions["west"].x:
-		chosen_directions.append(Vars.directions["west"])
+	if direction_to_player.x == Vars.DIRECTIONS["west"].x:
+		chosen_directions.append(Vars.DIRECTIONS["west"])
 	if chosen_directions == []:
 		return
 	
@@ -170,5 +171,6 @@ func check_sees_player():
 	
 	if vision_raycast.get_collider().is_in_group("player_collision") or vision_raycast.get_collider().owner is ShellObject:
 		sees_player = true
+		aware_of_player = true
 	else:
 		sees_player = false

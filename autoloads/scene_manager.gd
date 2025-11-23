@@ -12,6 +12,7 @@ var scenes: Dictionary[String, PackedScene] = {
 	"level" : preload("uid://cup1ntaax8sgg"),
 	"title_screen" : preload("uid://bqk51arvtg2x"),
 	"prep_screen" : preload("uid://cglbfa3a2dw7v"),
+	"test_level" : preload("uid://ut6wqeoatv1w"),
 }
 
 

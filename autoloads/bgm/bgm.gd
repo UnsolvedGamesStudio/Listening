@@ -27,6 +27,10 @@ var songs: Dictionary[String, AudioStream] = {
 func _ready() -> void:
 	rhythm_notifier.beat.connect(on_beat)
 	midi_player.midi_event.connect(on_midi_event)
+	
+	if get_tree().get_first_node_in_group("main_scene").always_start_bgm == true:
+		start_song()
+
 
 var current_midi_notes:= []
 

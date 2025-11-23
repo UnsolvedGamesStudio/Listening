@@ -230,7 +230,6 @@ func move_forward():
 	Bus.player_moved.emit()
 	
 	is_moving = false
-	
 	update_move_to_cell_indicator()
 
 

@@ -186,6 +186,7 @@ unique_name_in_owner = true
 [node name="MovementEB" parent="ToAnimate/Behaviors" instance=ExtResource("6_efcc8")]
 
 [node name="MeleeAttackEB" parent="ToAnimate/Behaviors" instance=ExtResource("5_ptsd7")]
+enabled = null
 
 [node name="RangedAttackEB" parent="ToAnimate/Behaviors" instance=ExtResource("7_dqe6f")]
 

@@ -79,6 +79,7 @@ update_scale = false
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70000005, 0)
 target_position = Vector3(0, 0, -2)
+collision_mask = 8193
 collide_with_areas = true
 collide_with_bodies = false
 

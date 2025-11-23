@@ -2,7 +2,6 @@ extends Node
 ## Todo: read and translate the rotation of the tile (tiledata) into the spawn rotation
 ## Todo: wall tilemap
 ## Todo: have the level editor be a tool script that generates the layout as an editable packed scene
-## Todo: investigate cyclic references
 ## Todo: make enemy id's customizable like the boxes etc
 ## Todo: make a modifier tile that reveals another tile when affected enemies are defeated
 @export var enabled:= true
@@ -10,6 +9,7 @@ extends Node
 
 func _ready() -> void:
 	generate()
+	PathFinder.rebuild(PathFinder.cells)
 
 
 func generate():
@@ -54,7 +54,6 @@ func generate_cells(used_tiles: Array[Vector2i], layer: TileMapLayer):
 		cell_inst.cell.cell_grid_position = Vector2i(cell_inst.cell.global_position.x / Vars.cell_size as int, cell_inst.cell.global_position.z / 2 as int)
 		
 		Vars.cell_nodes.append(cell_inst.cell)
-		Vars.cell_coordinates.append(tile)
 		
 		if cell_inst.has_method("update_faces"):
 			cell_inst.update_faces(used_tiles, cell_size)

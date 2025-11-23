@@ -48,23 +48,26 @@ var interact_range:= 4.0
 enum instrument_types {LUTE, CARILLON}
 var current_instrument:= instrument_types.LUTE
 
-## Layout
-const directions: Dictionary[String, Vector3i] = {
+## Layout Todo: Convert to enum
+const DIRECTIONS: Dictionary[String, Vector3i] = {
 	"north" : Vector3i(0, 0, -1),
 	"east" : Vector3i(1, 0, 0),
 	"south" : Vector3i(0, 0, 1),
-	"west" : Vector3i(-1, 0, 0)
+	"west" : Vector3i(-1, 0, 0),
+	"up" : Vector3i(0, 1, 0),
+	"down" : Vector3i(0, -1, 0)
 }
 
-const cell_size:= 2.0
-
 var cell_nodes: Array[Cell] = []
-var cell_coordinates: Array[Vector2i] = []
-var player_spawn_cell: Cell
-
-var player_cell: Cell
 
 var forgetters: Array[Forgetter] = []
+
+## Grid
+const cell_size:= 2.0
+
+var player_spawn_cell: Cell
+var player_cell: Cell
+
 
 ## Beat Visualizer
 var combo:= 0
@@ -99,7 +102,6 @@ func reset():
 	paused = false
 	level_time = 0.0
 	cell_nodes.clear()
-	cell_coordinates.clear()
 	player_cell = null
 	combo = 0
 	score = 0.0

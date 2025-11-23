@@ -1,0 +1,165 @@
+[gd_scene load_steps=7 format=3 uid="uid://ut6wqeoatv1w"]
+
+[ext_resource type="Script" uid="uid://d0wkhkbfau2f6" path="res://terrain/layout.gd" id="1_gbhdq"]
+[ext_resource type="PackedScene" uid="uid://d3u7i3tehxhh6" path="res://terrain/cells/floor_cell.tscn" id="1_gojnm"]
+[ext_resource type="PackedScene" uid="uid://itikcsbog7mw" path="res://terrain/wall.tscn" id="2_f7g2b"]
+[ext_resource type="PackedScene" uid="uid://cqc1iuhqntykk" path="res://enemies/enemy_scenes/enemy_1.tscn" id="3_4ptq8"]
+[ext_resource type="PackedScene" uid="uid://c7wmmnca4o1dx" path="res://player/spawn_point.tscn" id="4_sb12i"]
+[ext_resource type="PackedScene" uid="uid://ce10gkdeiprj7" path="res://player/player.tscn" id="5_gbhdq"]
+
+[node name="Node3D" type="Node3D" groups=["layout"]]
+script = ExtResource("1_gbhdq")
+
+[node name="terrain" type="Node3D" parent="."]
+
+[node name="FloorCell" parent="terrain" instance=ExtResource("1_gojnm")]
+
+[node name="FloorCell2" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="FloorCell3" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="FloorCell4" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+
+[node name="FloorCell5" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+
+[node name="FloorCell6" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="FloorCell7" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="FloorCell8" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="FloorCell9" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+
+[node name="FloorCell10" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
+
+[node name="FloorCell11" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
+
+[node name="FloorCell12" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -10)
+
+[node name="FloorCell13" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="FloorCell14" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+
+[node name="FloorCell15" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4)
+
+[node name="FloorCell16" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -6)
+
+[node name="FloorCell17" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -8)
+
+[node name="FloorCell18" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -10)
+
+[node name="FloorCell19" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="FloorCell20" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2)
+
+[node name="FloorCell21" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+
+[node name="FloorCell22" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -6)
+
+[node name="FloorCell23" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -8)
+
+[node name="FloorCell24" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -10)
+
+[node name="FloorCell25" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="FloorCell26" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
+
+[node name="FloorCell27" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+
+[node name="FloorCell28" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -6)
+
+[node name="FloorCell29" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
+
+[node name="FloorCell30" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -10)
+
+[node name="FloorCell31" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="FloorCell32" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
+
+[node name="FloorCell33" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -4)
+
+[node name="FloorCell34" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
+
+[node name="FloorCell35" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -8)
+
+[node name="FloorCell36" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -10)
+
+[node name="FloorCell37" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+
+[node name="FloorCell38" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -2)
+
+[node name="FloorCell39" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -4)
+
+[node name="FloorCell40" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -6)
+
+[node name="FloorCell41" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -8)
+
+[node name="FloorCell42" parent="terrain" instance=ExtResource("1_gojnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -10)
+
+[node name="Wall2" parent="terrain" instance=ExtResource("2_f7g2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -5)
+
+[node name="Wall6" parent="terrain" instance=ExtResource("2_f7g2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="Wall3" parent="terrain" instance=ExtResource("2_f7g2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -5)
+
+[node name="Wall4" parent="terrain" instance=ExtResource("2_f7g2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -5)
+
+[node name="Wall5" parent="terrain" instance=ExtResource("2_f7g2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -5)
+
+[node name="Enemy" parent="." instance=ExtResource("3_4ptq8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Enemy"]
+
+[node name="PlayerSpawnPoint" parent="." instance=ExtResource("4_sb12i")]
+
+[node name="Player" parent="." instance=ExtResource("5_gbhdq")]
+
+[node name="LevelGenerator" type="Node" parent="."]
+unique_name_in_owner = true

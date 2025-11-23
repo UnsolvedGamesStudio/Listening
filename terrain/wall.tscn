@@ -18,7 +18,7 @@ transform = Transform3D(1, -4.3711392e-08, -1.9106857e-15, 0, -4.371139e-08, 1, 
 mesh = SubResource("PlaneMesh_8d6ju")
 
 [node name="Area3D" type="Area3D" parent="MeshInstance3D"]
-collision_layer = 2
+collision_layer = 8194
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]

@@ -1,0 +1,32 @@
+[gd_scene load_steps=12 format=4 uid="uid://d4kapwpdawyhh"]
+
+[ext_resource type="Script" uid="uid://ri7ko3t1xlih" path="res://level_editor/level_editor.gd" id="1_o44uh"]
+[ext_resource type="PackedScene" uid="uid://7meyinovsje0" path="res://pickups/synapse_pickup.tscn" id="2_qgfrc"]
+[ext_resource type="PackedScene" uid="uid://dsni4a2x3dlwl" path="res://pickups/dopamine/dopamine_pickup.tscn" id="3_rdfb2"]
+[ext_resource type="PackedScene" uid="uid://b4d6fhecioyhy" path="res://pickups/healing_pickup.tscn" id="4_osa6w"]
+[ext_resource type="PackedScene" uid="uid://ciib1opj8rndx" path="res://pickups/key_pickup.tscn" id="5_5nbes"]
+[ext_resource type="PackedScene" uid="uid://du111uv3smns3" path="res://pickups/shrinking_pickup.tscn" id="6_eeivi"]
+[ext_resource type="PackedScene" uid="uid://3ynjvc7p8e5k" path="res://pickups/dopamine/large_dopamine.tscn" id="7_68vj4"]
+[ext_resource type="PackedScene" uid="uid://dqpxy77one4hb" path="res://pickups/neuron_pickup.tscn" id="8_d2bwe"]
+[ext_resource type="PackedScene" uid="uid://dyh16x4hu7h17" path="res://pickups/dopamine/dopamine_cluster.tscn" id="9_xt7bh"]
+[ext_resource type="PackedScene" uid="uid://bt2bkedotxagp" path="res://level_editor/tilemaps/cells_tilemap.tscn" id="10_gsuot"]
+[ext_resource type="PackedScene" uid="uid://dilbsihag48bm" path="res://level_editor/tilemaps/objects_tilemap.tscn" id="11_mny3b"]
+
+[node name="LevelBlueprint" type="Node" groups=["level_blueprint"]]
+script = ExtResource("1_o44uh")
+remembering_costs = Array[int]([5, 8, 30, 40])
+box_1 = Array[PackedScene]([ExtResource("2_qgfrc"), ExtResource("3_rdfb2"), ExtResource("4_osa6w")])
+box_2 = Array[PackedScene]([ExtResource("5_5nbes"), ExtResource("2_qgfrc"), ExtResource("3_rdfb2"), ExtResource("3_rdfb2")])
+box_3 = Array[PackedScene]([ExtResource("6_eeivi"), ExtResource("4_osa6w"), ExtResource("4_osa6w"), ExtResource("4_osa6w"), ExtResource("7_68vj4")])
+box_4 = Array[PackedScene]([ExtResource("8_d2bwe"), ExtResource("4_osa6w"), ExtResource("4_osa6w"), ExtResource("9_xt7bh")])
+
+[node name="Cells" parent="." groups=["editor_cells"] instance=ExtResource("10_gsuot")]
+tile_map_data = PackedByteArray("AAD///z/AQAAAAEAAAAAAPz/AQAAAAEAAAAAAPv/AQAAAAEAAAD///v/AQABAAEAAAD+//v/AQABAAEAAAD+//z/AQAAAAEAAAD+//3/AQAAAAEAAAD///3/AQAAAAEAAAAAAP3/AQAAAAEAAAAAAPr/AQAAAAEAAAD+//n/AQABAAEAAAD///n/AQABAAEAAAAAAPn/AQAAAAEAAAAAAPj/AQAAAAEAAAD///j/AQAAAAEAAAD+//j/AQAAAAEAAAA=")
+
+[node name="TileForgetters" parent="." groups=["editor_objects"] instance=ExtResource("11_mny3b")]
+tile_map_data = PackedByteArray("AAD///z/BAAAAAAAAAA=")
+
+[node name="Layer1" parent="." groups=["editor_objects"] instance=ExtResource("11_mny3b")]
+tile_map_data = PackedByteArray("AAD+//j/AQAAAAAAAAA=")
+
+[node name="Layer2" parent="." groups=["editor_objects"] instance=ExtResource("11_mny3b")]

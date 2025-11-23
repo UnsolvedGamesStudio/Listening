@@ -26,6 +26,7 @@ Filters="*res://screen_filters/filters.tscn"
 SpellCombos="*res://autoloads/spell_combos.gd"
 SceneManager="*res://autoloads/scene_manager.gd"
 Find="*res://autoloads/find.gd"
+PathFinder="*res://autoloads/path_finder.gd"
 
 [debug]
 
@@ -76,6 +77,7 @@ prep_screen_song_preview=""
 layout=""
 player_hp_bar=""
 player_dopamine_bar=""
+cell=""
 
 [gui]
 
@@ -143,6 +145,7 @@ exit={
 3d_physics/layer_11="shell_object"
 3d_physics/layer_12="enemy_body"
 3d_physics/layer_13="projectile_body"
+3d_physics/layer_14="wall_area_stop_raycast"
 
 [physics]
 

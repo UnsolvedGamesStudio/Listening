@@ -95,25 +95,6 @@ func init_position():
 	global_position = get_random_point_in_front(Find.P().camera, spawn_rand)
 
 
-func get_random_point_in_front(player: Node3D, radius: float, forward_offset: float = 0.0) -> Vector3:
-	var origin = player.global_position
-	var forward = -player.global_transform.basis.z
-	var right = player.global_transform.basis.x
-	var up = player.global_transform.basis.y
-	
-	# Optional: move the spawn plane forward in front of the face
-	var center = origin + forward * forward_offset
-	
-	# Random point in a circle (uniform distribution)
-	var angle = randf_range(0.0, TAU)
-	var dist = sqrt(randf()) * radius
-	
-	# Build offset in the plane (right + up)
-	var offset = (right * cos(angle) + up * sin(angle)) * dist
-	
-	return center + offset
-
-
 func init_data():
 	if data == null:
 		return
@@ -173,6 +154,25 @@ func _physics_process(delta: float) -> void:
 	calculate_distance()
 	if distance_traveled >= max_distance:
 		destroy()
+
+
+func get_random_point_in_front(player: Node3D, radius: float, forward_offset: float = 0.0) -> Vector3:
+	var origin = player.global_position
+	var forward = -player.global_transform.basis.z
+	var right = player.global_transform.basis.x
+	var up = player.global_transform.basis.y
+	
+	# Optional: move the spawn plane forward in front of the face
+	var center = origin + forward * forward_offset
+	
+	# Random point in a circle (uniform distribution)
+	var angle = randf_range(0.0, TAU)
+	var dist = sqrt(randf()) * radius
+	
+	# Build offset in the plane (right + up)
+	var offset = (right * cos(angle) + up * sin(angle)) * dist
+	
+	return center + offset
 
 
 func move(delta):

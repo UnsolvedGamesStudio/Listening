@@ -6,6 +6,7 @@ class_name MovementEB
 
 #@export var see_through_walls:= false
 
+var aggro_distance:= 4.0
 var moves_every_x_beat:= 2
 var movement_speed:= 4
 
@@ -26,15 +27,15 @@ func enter() -> void:
 			projectile_range = behavior.projectile_range
 
 
-func _physics_process(delta: float) -> void:
-	set_raycast_target()
-
-
-func set_raycast_target():
-	if O.get_direction_to_player() == null:
-		return
-	
-	movement_raycast.target_position = O.get_direction_to_player()
+#func _physics_process(delta: float) -> void:
+	#set_raycast_target()
+#
+#
+#func set_raycast_target():
+	#if O.get_direction_to_player() == null:
+		#return
+	#
+	#movement_raycast.target_position = O.get_direction_to_player()
 
 
 func set_stats():
@@ -50,21 +51,19 @@ func set_stats():
 
 
 func move():
-	if movement_raycast.get_collider() == null:
-		print(movement_raycast.target_position)
-		return
+	#if movement_raycast.get_collider() == null:
+		#return
+	#
+	#var raycast_result = movement_raycast.get_collider().owner
+	#
+	#if raycast_result == null:
+		#return
+	#
+	#if not raycast_result is Cell:
+		#return
 	
-	var raycast_result = movement_raycast.get_collider().owner
-	
-	if raycast_result == null:
-		return
-	
-	if not raycast_result is Cell:
-		return
-	
-	var target_cell: Cell = raycast_result
-	
-	var move_speed: float = Bgm.rhythm_notifier.bpm / (movement_speed * 100)
+	#var target_cell: Cell = raycast_result
+	var target_cell = get_next_cell_on_path()
 	
 	if target_cell == null:
 		return
@@ -78,11 +77,25 @@ func move():
 	target_cell.add_occupant(O)
 	Find.P().update_move_to_cell_indicator()
 	
+	var move_speed: float = Bgm.rhythm_notifier.bpm / (movement_speed * 100)
 	var tween:= get_tree().create_tween()
 	tween.tween_property(O, "global_position:x", target_cell.global_position.x, move_speed)
 	tween.tween_property(O, "global_position:z", target_cell.global_position.z, move_speed)
 	
 	tween.play()
+
+
+func get_next_cell_on_path():
+	var path:= PathFinder.get_cell_path(O.occupied_cell.cell_grid_position, Vars.player_cell.cell_grid_position)
+	
+	if path == []:
+		return null
+	
+	if path.size() < 2:
+		return null
+	
+	var cell_position: Vector2i = path[1]
+	return PathFinder.cell_nodes[cell_position]
 
 
 func cell_occupied(cell: Cell):
@@ -97,7 +110,10 @@ func cell_occupied(cell: Cell):
 
 
 func check_movement():
-	if O.sees_player == false:
+	if O.aware_of_player == false:
+		return
+	
+	if not O.within_distance_to_player(aggro_distance) == true:
 		return
 	
 	if O.preferred_range == O.ranges.MELEE and O.within_distance_to_player(melee_range) == true:
