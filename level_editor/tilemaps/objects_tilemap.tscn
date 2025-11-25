@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dilbsihag48bm"]
+[gd_scene load_steps=43 format=3 uid="uid://dilbsihag48bm"]
 
 [ext_resource type="PackedScene" uid="uid://6etr4cvlbgr2" path="res://music_box/music_box.tscn" id="1_cf6e4"]
 [ext_resource type="Texture2D" uid="uid://0gh2qphl4tm4" path="res://level_editor/textures/box_tiles.png" id="2_1uy3p"]
@@ -30,6 +30,8 @@
 [ext_resource type="PackedScene" uid="uid://cqb65v1tel2pb" path="res://level_editor/unique_object_placer.tscn" id="21_kcmjl"]
 [ext_resource type="PackedScene" uid="uid://3ynjvc7p8e5k" path="res://pickups/dopamine/large_dopamine.tscn" id="21_x5feu"]
 [ext_resource type="Texture2D" uid="uid://c2mc4syhlqu3c" path="res://level_editor/textures/unique_object_tiles.png" id="22_j1o3j"]
+[ext_resource type="PackedScene" uid="uid://b6tbt42x5krsi" path="res://puzzles/entity_forgetter.tscn" id="26_i6a1y"]
+[ext_resource type="PackedScene" uid="uid://cupxhbyfvr1du" path="res://puzzles/enemy_objective_setter.tscn" id="28_x5feu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a0av3"]
 resource_name = "Boxes"
@@ -69,18 +71,23 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5jdw0"]
 resource_name = "Enemies"
 texture = ExtResource("4_ob0hw")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/custom_data_0 = ExtResource("3_o7txn")
 1:0/0 = 0
 1:0/0/custom_data_0 = ExtResource("5_ke61a")
 2:0/0 = 0
 2:0/0/custom_data_0 = ExtResource("6_wyto8")
-4:0/0 = 0
-4:0/0/custom_data_0 = ExtResource("8_i6a1y")
-0:1/0 = 0
-0:1/0/custom_data_0 = ExtResource("4_tu4kg")
 3:0/0 = 0
 3:0/0/custom_data_0 = ExtResource("3_x362v")
+4:0/0 = 0
+4:0/0/custom_data_0 = ExtResource("8_i6a1y")
+4:1/0 = 0
+3:1/0 = 0
+2:1/0 = 0
+1:1/0 = 0
+0:1/0 = 0
+0:1/0/custom_data_0 = ExtResource("4_tu4kg")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1h6v4"]
 resource_name = "Keys"
@@ -157,6 +164,30 @@ texture_region_size = Vector2i(32, 32)
 3:1/0 = 0
 3:1/0/custom_data_0 = ExtResource("19_m4r6b")
 3:1/0/custom_data_1 = 4
+0:2/0 = 0
+0:2/0/custom_data_0 = ExtResource("26_i6a1y")
+0:2/0/custom_data_1 = 1
+1:2/0 = 0
+1:2/0/custom_data_0 = ExtResource("26_i6a1y")
+1:2/0/custom_data_1 = 2
+2:2/0 = 0
+2:2/0/custom_data_0 = ExtResource("26_i6a1y")
+2:2/0/custom_data_1 = 3
+3:2/0 = 0
+3:2/0/custom_data_0 = ExtResource("26_i6a1y")
+3:2/0/custom_data_1 = 4
+0:3/0 = 0
+0:3/0/custom_data_0 = ExtResource("28_x5feu")
+0:3/0/custom_data_1 = 1
+1:3/0 = 0
+1:3/0/custom_data_0 = ExtResource("28_x5feu")
+1:3/0/custom_data_1 = 2
+2:3/0 = 0
+2:3/0/custom_data_0 = ExtResource("28_x5feu")
+2:3/0/custom_data_1 = 3
+3:3/0 = 0
+3:3/0/custom_data_0 = ExtResource("28_x5feu")
+3:3/0/custom_data_1 = 4
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1j3dw"]
 resource_name = "Unique Objects"

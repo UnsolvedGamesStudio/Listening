@@ -68,6 +68,9 @@ const cell_size:= 2.0
 var player_spawn_cell: Cell
 var player_cell: Cell
 
+## Floor Info
+var floor_heights: Dictionary[int, float] = {} ## Floor number : Floor height
+
 
 ## Beat Visualizer
 var combo:= 0
@@ -102,6 +105,7 @@ func reset():
 	paused = false
 	level_time = 0.0
 	cell_nodes.clear()
+	floor_heights.clear()
 	player_cell = null
 	combo = 0
 	score = 0.0

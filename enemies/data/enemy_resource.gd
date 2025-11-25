@@ -9,6 +9,7 @@ class_name EnemyResource
 @export_group("AI")
 @export var preferred_range: ranges
 enum ranges{MELEE, RANGED, CONTACT}
+@export var aggro_distance:= 4.0
 @export var vision_limit:= 10.0
 
 @export_group("Stats")

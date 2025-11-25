@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dv223hr2je4jy"
-path.s3tc="res://.godot/imported/wood.png-f31a84cbf6b97d8b6d3e4c10f3fc3ba4.s3tc.ctex"
+path="res://.godot/imported/wood.png-f31a84cbf6b97d8b6d3e4c10f3fc3ba4.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://music_box/textures/wood.png"
-dest_files=["res://.godot/imported/wood.png-f31a84cbf6b97d8b6d3e4c10f3fc3ba4.s3tc.ctex"]
+dest_files=["res://.godot/imported/wood.png-f31a84cbf6b97d8b6d3e4c10f3fc3ba4.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://ct3ebunqf07ne"]
+[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://ct3ebunqf07ne"]
 
 [ext_resource type="PackedScene" uid="uid://b0qtdogq2osyf" path="res://terrain/cells/walled_cell.tscn" id="1_qis6s"]
 [ext_resource type="Texture2D" uid="uid://db0h4w7etjcx7" path="res://level_editor/textures/map_cell.png" id="2_p4nvn"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cymlv5avqago2" path="res://terrain/cells/floor_cell_ceiling.tscn" id="4_bkrbf"]
 [ext_resource type="PackedScene" uid="uid://de0flumabcluq" path="res://terrain/cells/cell.tscn" id="5_f5b3x"]
 [ext_resource type="PackedScene" uid="uid://c8gddesxs5pkh" path="res://terrain/cells/ceiling_cell.tscn" id="6_vtuwj"]
+[ext_resource type="PackedScene" uid="uid://c4rkvwbviefks" path="res://terrain/elevator.tscn" id="7_gnawp"]
 [ext_resource type="PackedScene" uid="uid://d2emw1jx7dwb2" path="res://terrain/cells/height_limited_cell.tscn" id="7_qis6s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p4nvn"]
@@ -26,6 +27,8 @@ texture_region_size = Vector2i(32, 32)
 2:1/0/custom_data_0 = ExtResource("6_vtuwj")
 3:1/0 = 0
 3:1/0/custom_data_0 = ExtResource("7_qis6s")
+3:0/0 = 0
+3:0/0/custom_data_0 = ExtResource("7_gnawp")
 
 [resource]
 tile_size = Vector2i(32, 32)

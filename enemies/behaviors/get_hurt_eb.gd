@@ -109,6 +109,7 @@ func die():
 	
 	die_sfx.reparent(O.get_parent())
 	die_sfx.play()
+	Bus.enemy_died.emit(O)
 	
 	if "die" in O.idle_anim.get_animation_list():
 		O.idle_anim.play("die")

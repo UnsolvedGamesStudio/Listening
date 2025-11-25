@@ -47,7 +47,7 @@ animations = [{
 }]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wxdcp"]
-radius = 0.9204884
+radius = 1.0822917
 
 [sub_resource type="Animation" id="Animation_wxdcp"]
 resource_name = "lifetime"
@@ -89,8 +89,9 @@ _data = {
 script = ExtResource("1_wxdcp")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.186697, 0)
 cast_shadow = 0
-pixel_size = 0.025
+pixel_size = 0.04
 billboard = 1
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_nuvyv")

@@ -1,5 +1,5 @@
 extends Node
-
+## Todo: Change a shader on interact instead of modulate
 const INTERACT_SIGIL = preload("uid://b0tw8jr20jhhj")
 
 const RETICLE = preload("uid://b7mmj4bh7r1aa")

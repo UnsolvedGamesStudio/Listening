@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bfltvlgqsp84d"]
+
+[ext_resource type="Texture2D" uid="uid://bdgqowvg1xedu" path="res://abilities/shell/break.png" id="1_eyyhl"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_eyyhl")
+uv1_scale = Vector3(75.57, 75.57, 75.57)
+uv1_offset = Vector3(0.52, -2.88, 0.4)
+uv1_triplanar = true
+texture_filter = 0
+texture_repeat = false

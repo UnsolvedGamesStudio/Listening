@@ -27,6 +27,7 @@ SpellCombos="*res://autoloads/spell_combos.gd"
 SceneManager="*res://autoloads/scene_manager.gd"
 Find="*res://autoloads/find.gd"
 PathFinder="*res://autoloads/path_finder.gd"
+TriggersManager="*res://autoloads/triggers_manager.gd"
 
 [debug]
 
@@ -141,7 +142,7 @@ exit={
 3d_physics/layer_7="interactable"
 3d_physics/layer_8="obstacles"
 3d_physics/layer_9="hazards"
-3d_physics/layer_10="room_notifier"
+3d_physics/layer_10="enemy_room_notifier"
 3d_physics/layer_11="shell_object"
 3d_physics/layer_12="enemy_body"
 3d_physics/layer_13="projectile_body"
@@ -157,5 +158,7 @@ textures/canvas_textures/default_texture_filter=0
 textures/default_filters/use_nearest_mipmap_filter=true
 anti_aliasing/quality/msaa_2d=1
 anti_aliasing/quality/msaa_3d=1
+textures/decals/filter=2
 environment/volumetric_fog/use_filter=0
 environment/defaults/default_clear_color=Color(0.108825, 0.326918, 0.288411, 1)
+lights_and_shadows/decals/filter=2

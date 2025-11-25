@@ -12,6 +12,7 @@ class_name Cell
 var occupants: Array[Node3D]
 var cell_grid_position: Vector2i = Vector2i(42069, 42069)
 
+var starting_floor:= -1
 var cell:= self
 
 

@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://b7xx6wfttusxa" path="res://main_ui/damage_indicator.tscn" id="7_sqw8h"]
 [ext_resource type="Script" uid="uid://djqbaobsxmkx8" path="res://main_ui/neurons_label.gd" id="7_uwb8r"]
 [ext_resource type="Texture2D" uid="uid://c6om4mvcxheye" path="res://main_ui/textures/rainbow_texture4.png" id="8_7hcy2"]
-[ext_resource type="Texture2D" uid="uid://dam31kn2ab3bc" path="res://level_editor/textures/enemy_cell.png" id="9_uwb8r"]
+[ext_resource type="Texture2D" uid="uid://dam31kn2ab3bc" path="res://main_ui/textures/enemy_icon.png" id="9_uwb8r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ht8ex"]
 bg_color = Color(3.308989e-07, 0.22164837, 0.16118711, 0.39215687)

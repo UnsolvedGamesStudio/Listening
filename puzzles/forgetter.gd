@@ -3,6 +3,7 @@ class_name Forgetter
 
 @onready var area_3d: Area3D = %Area3D
 @onready var collision_shape_3d: CollisionShape3D = %CollisionShape3D
+@onready var gpu_particles_3d: GPUParticles3D = %GPUParticles3D
 
 var puzzle_id:= -1
 var active:= true
@@ -13,9 +14,15 @@ var remembered_nodes: Array[Node3D] = []
 func _ready() -> void:
 	Vars.forgetters.append(self)
 	set_collision_size()
+	Bus.necessary_enemies_died.connect(necessary_enemies_died)
 	area_3d.area_entered.connect(on_area_3d_area_entered)
 	await get_tree().create_timer(0.25).timeout
+	enter()
 	active = false
+
+
+func enter():
+	pass
 
 
 func set_collision_size():
@@ -39,7 +46,6 @@ func forget_cell(area: Area3D):
 		return
 
 
-
 func forget_entity(area: Area3D):
 	if not area.owner is Node3D:
 		return
@@ -52,17 +58,38 @@ func forget(object: Node3D):
 		printerr(self, " forget(): object not found")
 		return
 	
+	if "enabled" in object:
+		object.enabled = false
+	
 	object.hide()
 	object.process_mode = Node.PROCESS_MODE_DISABLED
 	forgotten_nodes.append(object)
 
 
 func remember():
+	gpu_particles_3d.activate(0.2, false)
+	triggered()
+	
 	for object: Node3D in forgotten_nodes:
 		object.show()
 		object.process_mode = Node.PROCESS_MODE_INHERIT
+		
+		if "enabled" in object:
+			object.enabled = true
+		
 		remembered_nodes.append(object)
 	forgotten_nodes.clear()
+
+
+func necessary_enemies_died(enemy_puzzle_id: int):
+	if not enemy_puzzle_id == puzzle_id:
+		return
+	
+	remember()
+
+
+func triggered():
+	pass
 
 
 func on_area_3d_area_entered(area: Area3D):

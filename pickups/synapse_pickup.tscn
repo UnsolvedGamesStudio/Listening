@@ -47,7 +47,7 @@ unique_name_in_owner = true
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 1.2762816, 0)
 billboard = 2
 double_sided = false
-texture_filter = 0
+texture_filter = 2
 texture = ExtResource("2_tiukb")
 hframes = 2
 frame = 1
@@ -82,6 +82,6 @@ libraries = {
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("4_58epu")
-volume_db = -1.733
+volume_db = 4.0
 pitch_scale = 3.0
 bus = &"SFX"

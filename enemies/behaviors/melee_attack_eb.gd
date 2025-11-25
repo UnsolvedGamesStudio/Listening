@@ -29,15 +29,17 @@ func set_stats():
 
 
 func melee_attack():
-	if O.vision_raycast.get_collider().owner is ShellObject:
-		O.vision_raycast.get_collider().owner.take_damage(melee_damage)
-		play_attack_anim()
-		return
-	
 	sfx.play()
-	Find.P().take_damage(melee_damage, O)
 	O.used_melee.emit()
 	play_attack_anim()
+	
+	var ray_collider: Node = O.raycast_hit_player()
+	
+	if ray_collider.owner is ShellObject:
+		ray_collider.owner.take_damage(melee_damage)
+		return
+	
+	Find.P().take_damage(melee_damage, O)
 
 
 func play_attack_anim():
@@ -48,12 +50,14 @@ func play_attack_anim():
 
 
 func check_melee():
+	if O.enabled == false:
+		return
+	
 	if O.sees_player == false:
 		return
 	
 	if O.within_distance_to_player(melee_range) == false:
 		return
-	
 	melee_attack()
 
 

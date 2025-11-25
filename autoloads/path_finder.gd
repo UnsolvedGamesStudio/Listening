@@ -42,7 +42,7 @@ func init_cells():
 	for cell in get_tree().get_nodes_in_group("cell"):
 		if not "cell_grid_position" in cell:
 			continue
-	
+		
 		cell.handle_gridless()
 		
 		var grid_position: Vector2i = cell.cell_grid_position

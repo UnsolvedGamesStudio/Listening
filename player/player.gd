@@ -12,7 +12,6 @@ class_name Player
 ## Todo: Kake actions with the right timing count towards score
 ## Todo: Make held instrument go up when camera goes way down
 
-## Web issues: big delay, aspect ratio is off, hub world shading is off, mouse mode broken
 @onready var camera: Camera3D = %Camera3D
 @onready var neck: Node3D = %Neck
 @onready var player_collision: Area3D = %PlayerCollision

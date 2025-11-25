@@ -1,10 +1,12 @@
 extends Node3D
-## Todo: play a chord of the corresponding "key" when unlocking with or picking up keys
+## Todo: Play a chord of the corresponding "key" when unlocking with or picking up keys
+##Todo: Extend the walls of the locked wall if adjacent walls are detected/remove other walls
 @onready var sprite_3d: Sprite3D = %Sprite3D
 @onready var sprite_3d_2: Sprite3D = %Sprite3D2
 @onready var area_3d: Area3D = %Area3D
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
-@onready var sfx: AudioStreamPlayer3D = %SFX
+@onready var unlock_sfx: AudioStreamPlayer3D = %UnlockSFX
+@onready var locked_sfx: AudioStreamPlayer3D = %LockedSFX
 
 var original_scale:= Vector3(1.0, 1.0, 1.0)
 var required_item:= Vars.item_types.F_KEY
@@ -29,6 +31,7 @@ func _physics_process(delta: float) -> void:
 func activate():
 	if has_item() == false:
 		animation_player.play("shake")
+		locked_sfx.play()
 		return
 	
 	open()
@@ -41,7 +44,7 @@ func open():
 	area_3d.get_child(0).disabled = true
 	O.impassable = false
 	O.occupied_cell = null
-	sfx.play(0.35)
+	unlock_sfx.play(0.35)
 	
 	var tween:= create_tween()
 	var original_y:= O.global_position.y

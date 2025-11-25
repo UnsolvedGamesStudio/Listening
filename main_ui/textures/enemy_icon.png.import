@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dam31kn2ab3bc"
-path.s3tc="res://.godot/imported/enemy_cell.png-e048beee1aed8e45c1610749199a5038.s3tc.ctex"
+path="res://.godot/imported/enemy_icon.png-9a809a5c07bf48f29c0eab88f61abc06.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://level_editor/textures/enemy_cell.png"
-dest_files=["res://.godot/imported/enemy_cell.png-e048beee1aed8e45c1610749199a5038.s3tc.ctex"]
+source_file="res://main_ui/textures/enemy_icon.png"
+dest_files=["res://.godot/imported/enemy_icon.png-9a809a5c07bf48f29c0eab88f61abc06.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

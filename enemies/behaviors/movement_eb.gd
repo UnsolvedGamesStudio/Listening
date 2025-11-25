@@ -1,14 +1,13 @@
 extends EnemyBehavior
 class_name MovementEB
 ## Todo: make enemy not attack while moving
-## Todo: let enemies optionally chase you without seeing you until you leave their range
 @onready var movement_raycast: RayCast3D = %MovementRaycast
 
 #@export var see_through_walls:= false
 
-var aggro_distance:= 4.0
 var moves_every_x_beat:= 2
 var movement_speed:= 4
+var aggro_distance:= 4.0
 
 var melee_range:= 1
 var projectile_range:= 2
@@ -47,6 +46,7 @@ func set_stats():
 	
 	moves_every_x_beat = data.moves_every_x_beat
 	movement_speed = data.movement_speed
+	aggro_distance = data.aggro_distance
 	projectile_range = data.projectile_range
 
 
@@ -110,19 +110,34 @@ func cell_occupied(cell: Cell):
 
 
 func check_movement():
+	if O.enabled == false:
+		return
+	
 	if O.aware_of_player == false:
 		return
 	
 	if not O.within_distance_to_player(aggro_distance) == true:
 		return
 	
-	if O.preferred_range == O.ranges.MELEE and O.within_distance_to_player(melee_range) == true:
+	if within_attack_range("melee") == true:
 		return
 	
-	if O.preferred_range == O.ranges.RANGED and O.within_distance_to_player(projectile_range) == true:
+	if within_attack_range("ranged") == true and O.sees_player == true:
 		return
 	
 	move()
+
+
+func within_attack_range(attack_range):
+	if attack_range == "melee":
+		if O.preferred_range == O.ranges.MELEE and O.within_distance_to_player(melee_range) == true:
+			return true
+	
+	if attack_range == "ranged":
+		if O.preferred_range == O.ranges.RANGED and O.within_distance_to_player(projectile_range) == true:
+			return true
+	
+	return false
 
 
 func on_beat(beat_count: int):

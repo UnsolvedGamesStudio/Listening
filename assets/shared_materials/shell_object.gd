@@ -4,11 +4,12 @@ class_name ShellObject
 ## Todo: shader on the break texture to make it grow naturally
 ## Todo: emit particles when broken
 ## Todo: let it work from outside the ability usage, or maybe extra shield is more fun
-
+## Todo: Try converting break texture to a decal
 @onready var timer: Timer = $Timer
 @onready var mesh_instance_3d: MeshInstance3D = %MeshInstance3D
 @onready var area_3d: Area3D = %Area3D
 @onready var created_sfx: AudioStreamPlayer3D = %CreatedSFX
+@onready var break_particles: CPUParticles3D = %BreakParticles
 
 var ability: Node
 var finished_appearing:= false
@@ -65,13 +66,12 @@ func delay_physics():
 func take_damage(amount: float):
 	hp -= amount
 	update_break_state()
-	
 	if hp <= 0:
 		if not ability == null:
 			ability.active_shell = null
 			ability.active = false
 		
-		queue_free()
+		destroy()
 
 
 func update_break_state():
@@ -81,6 +81,12 @@ func update_break_state():
 	
 	var hp_to_scale:= hp / max_hp * 5.5
 	mesh_instance_3d.get_active_material(0).next_pass.next_pass.uv1_scale = Vector3(hp_to_scale, hp_to_scale, hp_to_scale)
+
+
+func destroy():
+	break_particles.reparent(Find.layout())
+	break_particles.activate()
+	queue_free()
 
 
 func heal(amount: float):

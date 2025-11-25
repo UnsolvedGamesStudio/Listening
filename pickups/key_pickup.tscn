@@ -95,6 +95,6 @@ libraries = {
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("3_on6h4")
-volume_db = -6.0
+volume_db = -3.0
 pitch_scale = 4.0
 bus = &"SFX"

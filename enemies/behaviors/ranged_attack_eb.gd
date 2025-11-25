@@ -55,6 +55,9 @@ func ranged_attack():
 
 
 func check_ranged():
+	if O.enabled == false:
+		return
+	
 	if O.sees_player == false:
 		return
 	

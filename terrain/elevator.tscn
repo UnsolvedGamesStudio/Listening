@@ -1,0 +1,113 @@
+[gd_scene load_steps=11 format=3 uid="uid://c4rkvwbviefks"]
+
+[ext_resource type="Script" uid="uid://x3kyvpi7t5ev" path="res://terrain/cells/elevator_cell.gd" id="1_1cfeo"]
+[ext_resource type="PackedScene" uid="uid://de0flumabcluq" path="res://terrain/cells/cell.tscn" id="2_dnrvg"]
+[ext_resource type="Texture2D" uid="uid://bng7ox142cf6w" path="res://terrain/textures/terrain_indicator_arrow.png" id="3_dnrvg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_d8fh8"]
+size = Vector3(2, 0.99, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i71dc"]
+size = Vector3(0.16003418, 0.11242676, 0.13867188)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_320jl"]
+size = Vector3(1.9980469, 1.0009824, 2)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dnrvg"]
+load_path = "res://.godot/imported/enemy_indicator.png-0f7790bf2cab8c79a925a8bddac29c93.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gfn53"]
+resource_local_to_scene = true
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.13999999, 0.61300015, 1, 0.78039217)
+albedo_texture = SubResource("CompressedTexture2D_dnrvg")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6sj41"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_gfn53")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dnrvg"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_gfn53")
+size = Vector2(3, 2)
+
+[node name="Elevator" type="StaticBody3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_1cfeo")
+
+[node name="Cell" parent="." instance=ExtResource("2_dnrvg")]
+unique_name_in_owner = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.495, 0)
+mesh = SubResource("BoxMesh_d8fh8")
+skeleton = NodePath("")
+
+[node name="CellDetect" type="Area3D" parent="MeshInstance3D2"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/CellDetect"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8536967, 0)
+shape = SubResource("BoxShape3D_i71dc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0009765625, -0.5004912, 0.0042419434)
+shape = SubResource("BoxShape3D_320jl")
+debug_color = Color(0.83842415, 0.0011944127, 0.92669535, 0.41960785)
+
+[node name="Arrow" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4631178, 0)
+billboard = 2
+double_sided = false
+texture_filter = 2
+texture = ExtResource("3_dnrvg")
+
+[node name="Panes" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Panes"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.007759303, 0)
+sorting_use_aabb_center = false
+mesh = SubResource("PlaneMesh_6sj41")
+skeleton = NodePath("")
+
+[node name="Ceiling" type="MeshInstance3D" parent="Panes"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8780136, 0)
+sorting_use_aabb_center = false
+mesh = SubResource("PlaneMesh_6sj41")
+skeleton = NodePath("")
+
+[node name="NorthWall" type="MeshInstance3D" parent="Panes"]
+unique_name_in_owner = true
+transform = Transform3D(1.9106855e-15, 4.371139e-08, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, -4.371139e-08, 0, 1.4560506, -0.95)
+sorting_use_aabb_center = false
+mesh = SubResource("PlaneMesh_dnrvg")
+skeleton = NodePath("")
+
+[node name="East" type="MeshInstance3D" parent="Panes"]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.95, 1.4560506, 0)
+sorting_use_aabb_center = false
+mesh = SubResource("PlaneMesh_dnrvg")
+skeleton = NodePath("")
+
+[node name="SouthWall" type="MeshInstance3D" parent="Panes"]
+unique_name_in_owner = true
+transform = Transform3D(1.9106855e-15, 4.371139e-08, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, -4.371139e-08, 0, 1.4560506, 0.95)
+sorting_use_aabb_center = false
+mesh = SubResource("PlaneMesh_dnrvg")
+skeleton = NodePath("")
+
+[node name="West" type="MeshInstance3D" parent="Panes"]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.95, 1.4560506, 0)
+sorting_use_aabb_center = false
+mesh = SubResource("PlaneMesh_dnrvg")
+skeleton = NodePath("")

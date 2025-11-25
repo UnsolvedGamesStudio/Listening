@@ -15,5 +15,5 @@ bus = &"SFX"
 [node name="Heal" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("2_uqpe5")
-volume_db = 11.884
+volume_db = 10.0
 bus = &"SFX"

@@ -8,7 +8,6 @@ script = ExtResource("2_1y6wi")
 id = "wax"
 name = "Wax"
 description = "Mania"
-vision_limit = 7.5
 max_hp = 300.0
 movement_speed = 8
 moves_every_x_beat = 3

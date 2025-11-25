@@ -1,14 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://b63ny4wig2srm"]
+[gd_scene load_steps=10 format=3 uid="uid://b63ny4wig2srm"]
 
 [ext_resource type="PackedScene" uid="uid://b41hsxloqp0kp" path="res://abilities/shell/shield.tscn" id="1_1ct44"]
 [ext_resource type="Script" uid="uid://sq2yhhow1w67" path="res://assets/shared_materials/shell_object.gd" id="1_1nw6h"]
 [ext_resource type="AudioStream" uid="uid://f8fo4fd7ydmy" path="res://assets/sfx/ice_shell_sfx.ogg" id="3_siw0y"]
+[ext_resource type="Shader" uid="uid://ojon0136p0gr" path="res://abilities/shell/glass_shader.gdshader" id="4_r5wtn"]
+[ext_resource type="Script" uid="uid://dlyb1yqv3h6y8" path="res://vfx/cpu_particles.gd" id="5_t43dm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_siw0y"]
 size = Vector3(1.408905, 1.340332, 0.20874023)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1nw6h"]
 size = Vector3(2.6651, 4.0290604, 0.32495117)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t43dm"]
+render_priority = 1
+shader = ExtResource("4_r5wtn")
+shader_parameter/albedo = Color(1, 1, 1, 0)
+shader_parameter/roughness = 0.45200002147
+shader_parameter/normal_strength = -6.889999567275
+shader_parameter/edge_color = Color(0.7295144, 0.96602684, 0.9125339, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_siw0y"]
+material = SubResource("ShaderMaterial_t43dm")
+size = Vector3(0.3, 0.3, 0)
 
 [node name="ShellObject" type="RigidBody3D"]
 collision_layer = 0
@@ -53,3 +67,33 @@ unique_name_in_owner = true
 stream = ExtResource("3_siw0y")
 volume_db = -1.553
 bus = &"SFX"
+
+[node name="BreakParticles" type="CPUParticles3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.3611763, -1.2019268)
+emitting = false
+amount = 12
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.12
+mesh = SubResource("PrismMesh_siw0y")
+emission_shape = 3
+emission_box_extents = Vector3(0.88, 1.125, 0.06)
+particle_flag_rotate_y = true
+direction = Vector3(0, -0.295, 1)
+flatness = 0.4
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 3.0
+angular_velocity_min = -190.0
+angular_velocity_max = 663.0
+linear_accel_min = -4.0
+linear_accel_max = 16.0
+radial_accel_min = -1.0
+radial_accel_max = 1.0
+tangential_accel_min = 1.0
+tangential_accel_max = 37.29
+damping_max = 2.0
+angle_min = -720.0
+angle_max = 720.0
+script = ExtResource("5_t43dm")

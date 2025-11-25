@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bel6rvqf1qsvx" path="res://terrain/cell_collision.gd" id="2_memsh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ds1sf"]
-size = Vector3(2, 4, 2)
+size = Vector3(2, 3.9780273, 2)
 
 [node name="Cell" type="Node3D" groups=["cell"]]
 script = ExtResource("1_ds1sf")
@@ -15,7 +15,7 @@ script = ExtResource("2_memsh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CellCollision"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9890137, 0)
 shape = SubResource("BoxShape3D_ds1sf")
 debug_color = Color(0, 0.5529412, 0.90588236, 0)
 

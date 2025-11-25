@@ -25,5 +25,8 @@ signal neuron_picked_up
 signal item_picked_up(item: Vars.item_types)
 signal item_removed(item: Vars.item_types)
 
+signal enemy_died(enemy: Enemy)
+signal necessary_enemies_died(puzzle_id: int)
+
 signal game_won
 signal game_lost

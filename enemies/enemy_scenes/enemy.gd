@@ -3,6 +3,9 @@ class_name Enemy
 ## Todo: Before adding new enemies, make every enemy nothing but a collection of behavior nodes; whatever it takes to make every enemy self-sufficiant
 const PROJECTILE = preload("uid://6n70akjpdb5c")
 const DEFAULT_PROJECTILE_TEXTURE = preload("uid://dgygswxu7j8ds")
+const TERRAIN_LAYER:= 2
+const PLAYER_LAYER:= 4
+const SHELL_LAYER:= 11
 
 @onready var to_animate: Node3D = %ToAnimate
 @onready var sprite_3d: Sprite3D = %Sprite3D
@@ -14,6 +17,8 @@ const DEFAULT_PROJECTILE_TEXTURE = preload("uid://dgygswxu7j8ds")
 @onready var enemy_indicator: EnemyIndicator = %EnemyIndicator
 
 @export var data: EnemyResource = preload("uid://c8heqp3v32a1n")
+@export var enabled:= true
+@export var puzzle_id:= -1
 
 var preferred_range
 enum ranges{MELEE, RANGED, CONTACT}
@@ -133,14 +138,20 @@ func get_direction_to_player():
 
 
 func within_distance_to_player(distance: int):
-	if Vars.player_cell == null:
+	var player_cell:= Vars.player_cell
+	
+	if player_cell == null:
 		return false
 	
 	if occupied_cell == null:
 		printerr(self, ": occupied_cell not found")
 		return false
 	
-	var cell_distance:= roundi( (occupied_cell.cell_grid_position - Vars.player_cell.cell_grid_position).length() )
+	var height_diff: float = abs( abs( occupied_cell.global_position.y ) -abs( player_cell.global_position.y ) )
+	if height_diff > 0.5:
+		return false
+	
+	var cell_distance:= roundi( (occupied_cell.cell_grid_position - player_cell.cell_grid_position).length() )
 	
 	if cell_distance <= distance:
 		return true
@@ -160,17 +171,38 @@ func check_on_top_of_player():
 
 func check_sees_player():
 	var player_distance = (global_position - Find.P().enemy_aim_point.global_position).length()
+	
 	if player_distance > vision_limit:
 		sees_player = false
 		return
 	
-	vision_raycast.look_at(Find.P().enemy_aim_point.global_position + Vector3(0.0001, 0.0001, 0.0001))
-	
-	if vision_raycast.get_collider() == null:
-		return
-	
-	if vision_raycast.get_collider().is_in_group("player_collision") or vision_raycast.get_collider().owner is ShellObject:
+	if not raycast_hit_player() == null:
 		sees_player = true
 		aware_of_player = true
 	else:
 		sees_player = false
+
+
+func raycast_hit_player():
+	var self_pos:= sprite_3d.global_position
+	var player_pos:= Find.P().enemy_aim_point.global_position
+	
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.new()
+	
+	query.from = self_pos
+	query.to = player_pos
+	query.collide_with_areas = true
+	query.collision_mask = (1 << TERRAIN_LAYER - 1) | (1 << PLAYER_LAYER - 1) | (1 << SHELL_LAYER - 1)
+	
+	var result = space_state.intersect_ray(query)
+	
+	if result == {}:
+		return null
+	
+	var collider: Node = result["collider"]
+	
+	if not collider.owner is Player and not collider.owner is ShellObject:
+		return null
+	
+	return collider

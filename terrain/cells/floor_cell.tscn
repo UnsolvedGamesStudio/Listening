@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cnier2fyv1lb5" path="res://terrain/cells/unwalled_cell.gd" id="1_tdoft"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_d8fh8"]
-size = Vector3(2, 1, 2)
+size = Vector3(2, 0.99, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i71dc"]
 size = Vector3(0.16003418, 0.11242676, 0.13867188)
@@ -21,7 +21,7 @@ script = ExtResource("1_tdoft")
 unique_name_in_owner = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.495, 0)
 mesh = SubResource("BoxMesh_d8fh8")
 
 [node name="CellDetect" type="Area3D" parent="MeshInstance3D"]

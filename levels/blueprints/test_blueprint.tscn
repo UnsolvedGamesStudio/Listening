@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://d4kapwpdawyhh"]
+[gd_scene load_steps=13 format=4 uid="uid://d4kapwpdawyhh"]
 
 [ext_resource type="Script" uid="uid://ri7ko3t1xlih" path="res://level_editor/level_editor.gd" id="1_o44uh"]
 [ext_resource type="PackedScene" uid="uid://7meyinovsje0" path="res://pickups/synapse_pickup.tscn" id="2_qgfrc"]
@@ -10,23 +10,40 @@
 [ext_resource type="PackedScene" uid="uid://dqpxy77one4hb" path="res://pickups/neuron_pickup.tscn" id="8_d2bwe"]
 [ext_resource type="PackedScene" uid="uid://dyh16x4hu7h17" path="res://pickups/dopamine/dopamine_cluster.tscn" id="9_xt7bh"]
 [ext_resource type="PackedScene" uid="uid://bt2bkedotxagp" path="res://level_editor/tilemaps/cells_tilemap.tscn" id="10_gsuot"]
+[ext_resource type="PackedScene" uid="uid://cyvhy058hngw7" path="res://levels/blueprints/blueprint_floor.tscn" id="10_qgfrc"]
 [ext_resource type="PackedScene" uid="uid://dilbsihag48bm" path="res://level_editor/tilemaps/objects_tilemap.tscn" id="11_mny3b"]
 
 [node name="LevelBlueprint" type="Node" groups=["level_blueprint"]]
 script = ExtResource("1_o44uh")
-remembering_costs = Array[int]([5, 8, 30, 40])
+remembering_costs = Array[int]([0, 8, 30, 40])
 box_1 = Array[PackedScene]([ExtResource("2_qgfrc"), ExtResource("3_rdfb2"), ExtResource("4_osa6w")])
 box_2 = Array[PackedScene]([ExtResource("5_5nbes"), ExtResource("2_qgfrc"), ExtResource("3_rdfb2"), ExtResource("3_rdfb2")])
 box_3 = Array[PackedScene]([ExtResource("6_eeivi"), ExtResource("4_osa6w"), ExtResource("4_osa6w"), ExtResource("4_osa6w"), ExtResource("7_68vj4")])
 box_4 = Array[PackedScene]([ExtResource("8_d2bwe"), ExtResource("4_osa6w"), ExtResource("4_osa6w"), ExtResource("9_xt7bh")])
 
-[node name="Cells" parent="." groups=["editor_cells"] instance=ExtResource("10_gsuot")]
-tile_map_data = PackedByteArray("AAD///z/AQAAAAEAAAAAAPz/AQAAAAEAAAAAAPv/AQAAAAEAAAD///v/AQABAAEAAAD+//v/AQABAAEAAAD+//z/AQAAAAEAAAD+//3/AQAAAAEAAAD///3/AQAAAAEAAAAAAP3/AQAAAAEAAAAAAPr/AQAAAAEAAAD+//n/AQABAAEAAAD///n/AQABAAEAAAAAAPn/AQAAAAEAAAAAAPj/AQAAAAEAAAD///j/AQAAAAEAAAD+//j/AQAAAAEAAAA=")
+[node name="Floor1" parent="." instance=ExtResource("10_qgfrc")]
 
-[node name="TileForgetters" parent="." groups=["editor_objects"] instance=ExtResource("11_mny3b")]
-tile_map_data = PackedByteArray("AAD///z/BAAAAAAAAAA=")
+[node name="Cells" parent="Floor1" groups=["editor_cells"] instance=ExtResource("10_gsuot")]
+tile_map_data = PackedByteArray("AAD///z/AQABAAAAAAD+//z/AQABAAAAAAD+//v/AQABAAAAAAD+//r/AQABAAAAAAAAAPr/AQABAAAAAAAAAPv/AQABAAAAAAAAAPz/AQABAAAAAAD///v/AQABAAAAAAD///r/AQADAAAAAAD9//r/AQABAAAAAAD9//v/AQABAAAAAAD9//z/AQABAAAAAAD+//3/AQABAAAAAAD///3/AQABAAAAAAAAAP3/AQABAAAAAAABAP3/AQABAAAAAAABAPz/AQABAAAAAAABAPv/AQABAAAAAAABAPr/AQABAAAAAAD9//3/AQABAAAAAAD9//n/AQABAAAAAAD+//n/AQABAAAAAAD///n/AQABAAAAAAAAAPn/AQABAAAAAAABAPn/AQABAAAAAAD9//7/AQABAAAAAAD+//7/AQABAAAAAAD///7/AQABAAAAAAAAAP7/AQABAAAAAAABAP7/AQABAAAAAAA=")
+script = null
 
-[node name="Layer1" parent="." groups=["editor_objects"] instance=ExtResource("11_mny3b")]
-tile_map_data = PackedByteArray("AAD+//j/AQAAAAAAAAA=")
+[node name="TileForgetters" parent="Floor1" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
 
-[node name="Layer2" parent="." groups=["editor_objects"] instance=ExtResource("11_mny3b")]
+[node name="Layer1" parent="Floor1" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
+tile_map_data = PackedByteArray("AAD///3/BAAAAAAAAAD///z/AQAAAAAAAAA=")
+
+[node name="Layer2" parent="Floor1" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
+
+[node name="Floor2" parent="." instance=ExtResource("10_qgfrc")]
+floor_number = 2
+height = 5.0
+
+[node name="Cells" parent="Floor2" groups=["editor_cells"] instance=ExtResource("10_gsuot")]
+tile_map_data = PackedByteArray("AAD///z/AQABAAAAAAD+//z/AQABAAAAAAD+//v/AQABAAAAAAD+//r/AQABAAAAAAAAAPr/AQABAAAAAAAAAPv/AQABAAAAAAAAAPz/AQABAAAAAAD///v/AQABAAAAAAD+//3/AQABAAAAAAD///3/AQABAAAAAAAAAP3/AQABAAAAAAABAPr/AQABAAAAAAABAPv/AQABAAAAAAABAPz/AQABAAAAAAABAP3/AQABAAAAAAD9//3/AQABAAAAAAD9//z/AQABAAAAAAD9//v/AQABAAAAAAD9//r/AQABAAAAAAD9//n/AQABAAAAAAD+//n/AQABAAAAAAD///n/AQABAAAAAAAAAPn/AQABAAAAAAABAPn/AQABAAAAAAA=")
+script = null
+
+[node name="TileForgetters" parent="Floor2" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
+
+[node name="Layer1" parent="Floor2" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
+
+[node name="Layer2" parent="Floor2" groups=["editor_objects"] instance=ExtResource("11_mny3b")]

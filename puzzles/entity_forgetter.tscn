@@ -1,0 +1,139 @@
+[gd_scene load_steps=17 format=3 uid="uid://b6tbt42x5krsi"]
+
+[ext_resource type="Script" uid="uid://bsaxbtn68vn7m" path="res://puzzles/entity_forgetter.gd" id="1_0uqc4"]
+[ext_resource type="Texture2D" uid="uid://dam31kn2ab3bc" path="res://main_ui/textures/enemy_icon.png" id="2_ixva0"]
+[ext_resource type="Script" uid="uid://bdiw7ll3rab5k" path="res://vfx/gpu_particles.gd" id="3_jmi4b"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0uqc4"]
+viewport_path = NodePath("Label3D/SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u8jcq"]
+size = Vector3(2, 4, 2)
+
+[sub_resource type="Curve" id="Curve_0uqc4"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_g4cbp"]
+curve = SubResource("Curve_0uqc4")
+
+[sub_resource type="Curve" id="Curve_ixva0"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_md80f"]
+curve = SubResource("Curve_ixva0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jmi4b"]
+emission_shape_scale = Vector3(0.75, 0.015, 0.75)
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+spread = 23.452
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+angular_velocity_min = -5.000016
+angular_velocity_max = 4.999984
+angular_velocity_curve = SubResource("CurveTexture_g4cbp")
+gravity = Vector3(0, -2, 0)
+linear_accel_min = -5.630002
+linear_accel_max = 5.6299977
+linear_accel_curve = SubResource("CurveTexture_md80f")
+turbulence_noise_strength = 0.1
+turbulence_noise_scale = 2.796
+turbulence_noise_speed = Vector3(0.33, 0, 0.445)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1woyi"]
+load_path = "res://.godot/imported/cloud.png-2ac91fa22a7a4d0663791d86ff968457.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4cbp"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = SubResource("CompressedTexture2D_1woyi")
+texture_filter = 0
+disable_receive_shadows = true
+billboard_mode = 1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1hgxh"]
+material = SubResource("StandardMaterial3D_g4cbp")
+size = Vector2(0.5, 0.5)
+orientation = 2
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0uqc4"]
+load_path = "res://.godot/imported/enemy_indicator.png-0f7790bf2cab8c79a925a8bddac29c93.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ixva0"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.6, 0.93333334, 0.6784314, 0.22352941)
+albedo_texture = SubResource("CompressedTexture2D_0uqc4")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jmi4b"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ixva0")
+size = Vector2(1, 1)
+
+[node name="EntityForgetter" type="Node3D" groups=["forgetter"]]
+script = ExtResource("1_0uqc4")
+
+[node name="Label3D" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31864458, 0)
+billboard = 2
+texture_filter = 0
+texture = SubResource("ViewportTexture_0uqc4")
+
+[node name="SubViewport" type="SubViewport" parent="Label3D"]
+transparent_bg = true
+size = Vector2i(200, 50)
+
+[node name="Sprite2D" type="Sprite2D" parent="Label3D/SubViewport"]
+position = Vector2(92, 25)
+texture = ExtResource("2_ixva0")
+
+[node name="Label" type="Label" parent="Label3D/SubViewport"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_right = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Area3D" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 964
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_u8jcq")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 20
+lifetime = 1.5
+explosiveness = 1.0
+randomness = 0.52
+process_material = SubResource("ParticleProcessMaterial_jmi4b")
+draw_pass_1 = SubResource("PlaneMesh_1hgxh")
+script = ExtResource("3_jmi4b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.007759303, 0)
+sorting_use_aabb_center = false
+mesh = SubResource("PlaneMesh_jmi4b")
+skeleton = NodePath("")

@@ -16,8 +16,11 @@ class_name Pickup
 @export var animate_every_x_beat:= 4
 @export var interacted_color:= Color(0.0, 0.659, 0.593, 1.0)
 
+@export var starting_move_rate:= 0.0035
+var move_lerp_rate:= starting_move_rate
+
 var current_anim_rate:= animate_every_x_beat
-var activated:= false
+var moving_to_player:= false
 
 
 func _ready() -> void:
@@ -32,6 +35,8 @@ func _physics_process(delta: float) -> void:
 	
 	if player == null:
 		return
+	
+	move_towards_player()
 	
 	if player.los.get_collider() == area_3d and global_position.distance_to(player.global_position) < Vars.interact_range:
 		looked_at_by_player(true)
@@ -71,40 +76,57 @@ func activate():
 	await on_activated()
 	
 	if free_immediately == true:
-		queue_free()
-	
-	if goes_towards_player == true:
-		go_to_player()
+		destroy()
 	
 	if vanishes == true:
 		vanish()
 	
+	if goes_towards_player == true:
+		area_3d.set_deferred("monitoring", false)
+		area_3d.set_deferred("monitorable", false)
+		moving_to_player = true
+		return
+	
 	if goes_towards_player == false and vanishes == false:
-		queue_free()
+		destroy()
 
 
-func go_to_player():
-	area_3d.get_child(0).set_deferred("disabled", true)
-	animation_player.stop()
+func move_towards_player():
+	if moving_to_player == false:
+		return
 	
-	if not find_child("Particles") == null:
-		find_child("Particles").emitting = false
+	var player_pos:= Find.P().camera.global_position + (Vector3.DOWN / 1.05)
 	
-	var player: Player = get_tree().get_first_node_in_group("player")
-	var tween:= create_tween()
-	var camera_pos:= player.camera.global_position
-	var target_pos:= Vector3(camera_pos.x, camera_pos.y * 0.8, camera_pos.z)
+	move_lerp_rate *= 1.15
+	global_position = global_position.lerp(player_pos, move_lerp_rate)
+	sprite_3d.position = sprite_3d.position.lerp(Vector3.ZERO, move_lerp_rate)
 	
-	tween.parallel().tween_property(sprite_3d, "global_position", target_pos, Bgm.rhythm_notifier.beat_length * tween_length_mult)
-	tween.parallel().tween_property(self, "scale", Vector3(0.6, 0.6, 0.6), Bgm.rhythm_notifier.beat_length * tween_length_mult)
-	tween.tween_callback(queue_free)
+	if global_position.distance_to(player_pos) <= 0.1:
+		destroy()
+
+
+#func go_to_player():
+	#area_3d.get_child(0).set_deferred("disabled", true)
+	#animation_player.stop()
+	#
+	#if not find_child("Particles") == null:
+		#find_child("Particles").emitting = false
+	#
+	#var player: Player = get_tree().get_first_node_in_group("player")
+	#var tween:= create_tween()
+	#var camera_pos:= player.camera.global_position
+	#var target_pos:= Vector3(camera_pos.x, camera_pos.y * 0.8, camera_pos.z)
+	#
+	#tween.parallel().tween_property(sprite_3d, "global_position", target_pos, Bgm.rhythm_notifier.beat_length * tween_length_mult)
+	#tween.parallel().tween_property(self, "scale", Vector3(0.6, 0.6, 0.6), Bgm.rhythm_notifier.beat_length * tween_length_mult)
+	#tween.tween_callback(queue_free)
 
 
 func vanish():
 	var tween:= create_tween()
 	
 	tween.tween_property(sprite_3d, "modulate:a", 0.0,  Bgm.rhythm_notifier.beat_length * tween_length_mult)
-	tween.tween_callback(queue_free)
+	tween.tween_callback(destroy)
 
 
 func on_activated():

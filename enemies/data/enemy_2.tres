@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_tavwi")
 id = "test2"
+name = "Feral Peeve"
 max_hp = 200.0
 movement_speed = 2
 moves_every_x_beat = 8

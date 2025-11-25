@@ -22,23 +22,35 @@ func generate():
 		printerr(self, ": level_blueprint not found.")
 		return
 	
-	generate_each_layer(blueprint)
+	for child in blueprint.get_children():
+		if not child is BlueprintFloor:
+			return
+		
+		update_floor_heights(child)
+		generate_floor_layers(child)
 	
 	blueprint.queue_free()
 
 
-func generate_each_layer(blueprint: Node):
-	for layer: TileMapLayer in blueprint.get_children():
+func update_floor_heights(blueprint_floor: BlueprintFloor):
+	var floor_number:= blueprint_floor.floor_number
+	var floor_height:= blueprint_floor.height
+	
+	Vars.floor_heights[floor_number] = floor_height
+
+
+func generate_floor_layers(blueprint_floor: BlueprintFloor):
+	for layer in blueprint_floor.get_children():
 		var used_tiles = layer.get_used_cells()
 		
 		if layer.is_in_group("editor_cells"):
-			generate_cells(used_tiles, layer)
+			generate_cells(used_tiles, layer, blueprint_floor)
 		
 		if layer.is_in_group("editor_objects"):
-			generate_object_tiles(used_tiles, layer)
+			generate_object_tiles(used_tiles, layer, blueprint_floor)
 
 
-func generate_cells(used_tiles: Array[Vector2i], layer: TileMapLayer):
+func generate_cells(used_tiles: Array[Vector2i], layer: TileMapLayer, blueprint_floor: BlueprintFloor):
 	var cell_size: float = Vars.cell_size
 	
 	for tile in used_tiles:
@@ -47,10 +59,12 @@ func generate_cells(used_tiles: Array[Vector2i], layer: TileMapLayer):
 			return
 		
 		var cell_inst: Node = scene_data.instantiate()
-		
 		add_child(cell_inst)
 		
-		cell_inst.global_position = Vector3(tile.x * cell_size, layer.elevation, tile.y * cell_size)
+		if "starting_floor" in cell_inst.cell:
+			cell_inst.cell.starting_floor = blueprint_floor.floor_number
+		
+		cell_inst.global_position = Vector3(tile.x * cell_size, blueprint_floor.height, tile.y * cell_size)
 		cell_inst.cell.cell_grid_position = Vector2i(cell_inst.cell.global_position.x / Vars.cell_size as int, cell_inst.cell.global_position.z / 2 as int)
 		
 		Vars.cell_nodes.append(cell_inst.cell)
@@ -59,7 +73,7 @@ func generate_cells(used_tiles: Array[Vector2i], layer: TileMapLayer):
 			cell_inst.update_faces(used_tiles, cell_size)
 
 
-func generate_object_tiles(used_tiles: Array[Vector2i], layer: TileMapLayer):
+func generate_object_tiles(used_tiles: Array[Vector2i], layer: TileMapLayer, blueprint_floor: BlueprintFloor):
 	for tile in used_tiles:
 		var scene_data: PackedScene = layer.get_cell_tile_data(tile).get_custom_data("scene")
 		var unique_object_id: int = layer.get_cell_tile_data(tile).get_custom_data("unique_object_id")
@@ -79,10 +93,9 @@ func generate_object_tiles(used_tiles: Array[Vector2i], layer: TileMapLayer):
 			box_setup(scene_inst, box_id)
 		
 		add_child(scene_inst)
-		scene_inst.global_position = Vector3(tile.x * Vars.cell_size, 0.0, tile.y * Vars.cell_size)
+		scene_inst.global_position = Vector3(tile.x * Vars.cell_size, blueprint_floor.height, tile.y * Vars.cell_size)
 		
 		rotate_scene(scene_inst, tile, layer)
-		
 		
 		if scene_inst is UniqueObjectPlacer:
 			unique_object_setup(scene_inst, unique_object_id)
