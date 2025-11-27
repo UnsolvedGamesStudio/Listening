@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://xqc1yxn05bn"]
+[gd_scene load_steps=6 format=3 uid="uid://xqc1yxn05bn"]
 
 [ext_resource type="Script" uid="uid://ddi8nw37cgvp1" path="res://scenes/main_scene.gd" id="1_o5qli"]
+[ext_resource type="Resource" uid="uid://cw5tuboiq6ahv" path="res://assets/music/song_data/so_simple.tres" id="2_rarhs"]
 [ext_resource type="Script" uid="uid://duv71sufvwmty" path="res://scenes/cursor_manager.gd" id="2_rvslj"]
 [ext_resource type="Texture2D" uid="uid://be7uvcmrgobq8" path="res://vfx/2d_particle.png" id="3_0bbpv"]
 
@@ -14,7 +15,7 @@ gravity = Vector3(0, 98, 0)
 
 [node name="Main" type="Node" groups=["main_scene"]]
 script = ExtResource("1_o5qli")
-scene_to_load = "layout"
+default_song = ExtResource("2_rarhs")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3

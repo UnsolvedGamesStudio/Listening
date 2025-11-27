@@ -1,7 +1,7 @@
 extends EnemyBehavior
 class_name MovementEB
 ## Todo: make enemy not attack while moving
-@onready var movement_raycast: RayCast3D = %MovementRaycast
+#@onready var movement_raycast: RayCast3D = %MovementRaycast
 
 #@export var see_through_walls:= false
 
@@ -68,11 +68,11 @@ func move():
 	if target_cell == null:
 		return
 	
-	if cell_occupied(target_cell) == true:
-		return
-	
 	if not O.occupied_cell == null:
 		target_cell.remove_occupant(O)
+	
+	if cell_occupied(target_cell) == true:
+		return
 	
 	target_cell.add_occupant(O)
 	Find.P().update_move_to_cell_indicator()
@@ -86,7 +86,7 @@ func move():
 
 
 func get_next_cell_on_path():
-	var path:= PathFinder.get_cell_path(O.occupied_cell.cell_grid_position, Vars.player_cell.cell_grid_position)
+	var path:= PathFinder.get_cell_path(O.occupied_cell.cell_grid_position, Vars.player_cell.cell_grid_position, false)
 	
 	if path == []:
 		return null

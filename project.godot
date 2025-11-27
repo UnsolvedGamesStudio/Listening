@@ -79,6 +79,7 @@ layout=""
 player_hp_bar=""
 player_dopamine_bar=""
 cell=""
+wall=""
 
 [gui]
 
@@ -147,6 +148,7 @@ exit={
 3d_physics/layer_12="enemy_body"
 3d_physics/layer_13="projectile_body"
 3d_physics/layer_14="wall_area_stop_raycast"
+3d_physics/layer_15="debris"
 
 [physics]
 

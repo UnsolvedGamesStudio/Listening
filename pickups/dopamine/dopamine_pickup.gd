@@ -1,8 +1,7 @@
 extends RigidBody3D
 class_name Dopamine
-## Todo: Make pickups follow the player, not via tween
 ## Todo: Make pitch depend on last bounce height
-## Todo: Make coming out of container more polished
+## Todo: Make coming out of container more fun
 @onready var animated_sprite_3d: AnimatedSprite3D = %AnimatedSprite3D
 @onready var omni_light_3d: OmniLight3D = %OmniLight3D
 @onready var pickup_sfx: AudioStreamPlayer = %PickupSFX
@@ -18,7 +17,7 @@ var move_lerp_rate:= starting_move_rate
 
 var bounce_counts:= 0
 var magnet_triggered:= false
-var rand_position_offset:= Vector3( randf_range(-0.5, 0.5), randf_range(-0.4, 0.25), randf_range(-0.5, 0.5) )
+var rand_position_offset:= Vector3( randf_range(-0.5, 0.5), randf_range(-0.4, 0.4), randf_range(-0.5, 0.5) )
 
 
 func _ready() -> void:

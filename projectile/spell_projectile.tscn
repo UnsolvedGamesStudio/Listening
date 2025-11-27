@@ -1,8 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bxvo7ewsxt46f"]
+[gd_scene load_steps=16 format=3 uid="uid://bxvo7ewsxt46f"]
 
 [ext_resource type="Script" uid="uid://d07bvstd4u2bp" path="res://projectile/spell_projectile.gd" id="1_dkllc"]
 [ext_resource type="Texture2D" uid="uid://bqokni4d5a22j" path="res://player/spell_casting/textures/spell_projectile.png" id="2_mvva0"]
 [ext_resource type="Script" uid="uid://bbwpu3t8hja4j" path="res://projectile/projectile_sprite.gd" id="3_mvva0"]
+[ext_resource type="AudioStream" uid="uid://vn3c0l6cs3n8" path="res://assets/sfx/projectile_spawn_sfx.ogg" id="4_bv401"]
+[ext_resource type="AudioStream" uid="uid://douxm844lgxqp" path="res://assets/sfx/ball_bounce_soft_sfx.ogg" id="5_3t7nv"]
+[ext_resource type="AudioStream" uid="uid://6prr255pdp4w" path="res://assets/sfx/projectile_impact_sfx.ogg" id="5_m30nv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dkllc"]
 friction = 0.0
@@ -94,7 +97,7 @@ size = Vector2(0.025, 0.025)
 
 [node name="SpellProjectile" type="RigidBody3D"]
 collision_layer = 4096
-collision_mask = 4102
+collision_mask = 20486
 physics_material_override = SubResource("PhysicsMaterial_dkllc")
 continuous_cd = true
 contact_monitor = true
@@ -157,3 +160,33 @@ visible = false
 light_energy = 0.1
 light_indirect_energy = 0.1
 omni_attenuation = 1.5
+
+[node name="SFX" type="Node3D" parent="."]
+
+[node name="SpawnSFX" type="AudioStreamPlayer3D" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("4_bv401")
+max_distance = 10.0
+bus = &"SFX"
+
+[node name="BounceSFX" type="AudioStreamPlayer3D" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("5_3t7nv")
+max_distance = 10.0
+bus = &"SFX"
+
+[node name="PassiveSFX" type="AudioStreamPlayer3D" parent="SFX"]
+unique_name_in_owner = true
+max_distance = 10.0
+bus = &"SFX"
+
+[node name="DestroySFX" type="AudioStreamPlayer3D" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("5_m30nv")
+max_distance = 10.0
+bus = &"SFX"
+
+[node name="ExpireSFX" type="AudioStreamPlayer3D" parent="SFX"]
+unique_name_in_owner = true
+max_distance = 10.0
+bus = &"SFX"

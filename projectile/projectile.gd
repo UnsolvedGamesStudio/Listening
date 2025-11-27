@@ -153,6 +153,7 @@ func _physics_process(delta: float) -> void:
 	decay_speed(delta)
 	calculate_distance()
 	if distance_traveled >= max_distance:
+		on_expired()
 		destroy()
 
 
@@ -211,6 +212,7 @@ func handle_collision(body: Node):
 			bounce_off(body, normal)
 		
 		if check_destroy(body, normal) == true:
+			on_destroyed()
 			destroy(normal)
 
 
@@ -235,8 +237,11 @@ func check_destroy(body: Node, normal) -> bool:
 func bounce_off(body, normal):
 	direction = direction.bounce(normal).normalized()
 	
-	if body.get_collision_layer_value(13) == false:
-		speed *= speed_mult_on_bounce
+	if body.get_collision_layer_value(13) == true:
+		return
+	
+	speed *= speed_mult_on_bounce
+	on_bounce()
 
 
 func enter():
@@ -295,7 +300,23 @@ func spawn_destroyed_vfx(hit_normal:= Vector3.ZERO):
 	pop.global_position = global_position + hit_normal * offset
 
 
+func on_bounce():
+	pass
+
+
+func on_destroyed():
+	pass
+
+
+func on_expired():
+	pass
+
+
 func on_lifetime_timeout():
+	if destroyed == true:
+		return
+	
+	on_expired()
 	destroy()
 
 

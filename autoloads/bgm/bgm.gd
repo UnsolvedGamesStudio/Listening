@@ -11,7 +11,7 @@ extends AudioStreamPlayer
 var combo_label: ComboManager
 var beat_visualizer: CanvasLayer
 
-var current_chord: Array[Array] = []
+var current_midi_notes:= []
 var beat_count:= 0
 var last_timing:= 0.0
 var circles_are_in:= false
@@ -32,8 +32,6 @@ func _ready() -> void:
 		start_song()
 
 
-var current_midi_notes:= []
-
 func on_midi_event( channel, event ):
 	match event.type:
 		SMF.MIDIEventType.note_on:
@@ -47,6 +45,7 @@ func start_song():
 	play()
 	kick.play()
 	midi_player.play()
+	midi_player.set_tempo(rhythm_notifier.bpm)
 
 
 func stop_song():
@@ -168,30 +167,31 @@ func play_note_no_music(elements):
 	#var note_names:= ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 	#var c_maj:= ["C", "D", "E", "F", "G", "A", "B"]
 	var b_melodic_min:= ["B", "C#", "D", "E", "F#", "G#", "A#"]
+	var sample:= sampler_instrument.samples[0]
 	
 	if elements == []:
-		sampler_instrument.play_note(b_melodic_min.pick_random(), 1)
+		sampler_instrument.play_note(b_melodic_min.pick_random(), sample.octave + 1)
 	
 	if elements.size() == 3:
-				sampler_instrument.play_note("B", 0)
-				sampler_instrument.play_note("E", 0)
-				sampler_instrument.play_note("G#", 0)
+				sampler_instrument.play_note("B", sample.octave)
+				sampler_instrument.play_note("E", sample.octave)
+				sampler_instrument.play_note("G#", sample.octave)
 	
 	else:
 		for element in elements:
 			if element == 0:
-				sampler_instrument.play_note("B", 0)
+				sampler_instrument.play_note("B", sample.octave)
 			if element == 1:
-				sampler_instrument.play_note("E", 0)
+				sampler_instrument.play_note("E", sample.octave)
 			if element == 2:
-				sampler_instrument.play_note("G#", 0)
+				sampler_instrument.play_note("G#", sample.octave)
 
 
 func play_single_note(note, octave_modifier: int = 0):
 	var sample:= sampler_instrument.samples[0]
 	
 	sample.tone = note[0]
-	sample.octave = note[1] - 5 + octave_modifier
+	sample.octave = note[1] + octave_modifier - 1
 	
 	if sample.octave < 0:
 		sample.octave = 0

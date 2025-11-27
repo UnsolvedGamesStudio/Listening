@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dilbsihag48bm"]
+[gd_scene load_steps=46 format=3 uid="uid://dilbsihag48bm"]
 
 [ext_resource type="PackedScene" uid="uid://6etr4cvlbgr2" path="res://music_box/music_box.tscn" id="1_cf6e4"]
 [ext_resource type="Texture2D" uid="uid://0gh2qphl4tm4" path="res://level_editor/textures/box_tiles.png" id="2_1uy3p"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bm12hq1n81tt1" path="res://enemies/enemy_scenes/wax.tscn" id="8_i6a1y"]
 [ext_resource type="Texture2D" uid="uid://djogefuvahxmn" path="res://level_editor/textures/lock_tiles.png" id="8_ke61a"]
 [ext_resource type="PackedScene" uid="uid://c7wmmnca4o1dx" path="res://player/spawn_point.tscn" id="9_wyto8"]
+[ext_resource type="PackedScene" uid="uid://cqspqpeplglmo" path="res://levels/secret_rooms/wall_crack.tscn" id="10_hsd26"]
 [ext_resource type="Texture2D" uid="uid://dy0umo4pgu5jm" path="res://level_editor/textures/player_spawn.png" id="10_i6a1y"]
 [ext_resource type="PackedScene" uid="uid://b4d6fhecioyhy" path="res://pickups/healing_pickup.tscn" id="11_x5feu"]
 [ext_resource type="PackedScene" uid="uid://7meyinovsje0" path="res://pickups/synapse_pickup.tscn" id="12_1a3vd"]
@@ -32,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://c2mc4syhlqu3c" path="res://level_editor/textures/unique_object_tiles.png" id="22_j1o3j"]
 [ext_resource type="PackedScene" uid="uid://b6tbt42x5krsi" path="res://puzzles/entity_forgetter.tscn" id="26_i6a1y"]
 [ext_resource type="PackedScene" uid="uid://cupxhbyfvr1du" path="res://puzzles/enemy_objective_setter.tscn" id="28_x5feu"]
+[ext_resource type="Texture2D" uid="uid://dr5y65kek1wdi" path="res://level_editor/textures/wall_cracks.png" id="33_1a3vd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a0av3"]
 resource_name = "Boxes"
@@ -88,6 +90,13 @@ texture_region_size = Vector2i(32, 32)
 1:1/0 = 0
 0:1/0 = 0
 0:1/0/custom_data_0 = ExtResource("4_tu4kg")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1a3vd"]
+resource_name = "Wall Cracks"
+texture = ExtResource("33_1a3vd")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("10_hsd26")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1h6v4"]
 resource_name = "Keys"
@@ -243,6 +252,7 @@ sources/6 = SubResource("TileSetAtlasSource_eidu8")
 sources/7 = SubResource("TileSetAtlasSource_gofoe")
 sources/8 = SubResource("TileSetAtlasSource_1j3dw")
 sources/0 = SubResource("TileSetAtlasSource_a0av3")
+sources/10 = SubResource("TileSetAtlasSource_1a3vd")
 
 [node name="ObjectsTilemap" type="TileMapLayer"]
 tile_set = SubResource("TileSet_yxmo0")

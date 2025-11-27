@@ -112,6 +112,7 @@ bus = &"SFX"
 unique_name_in_owner = true
 stream = ExtResource("4_ymwu5")
 pitch_scale = 0.8
+max_distance = 15.0
 bus = &"SFX"
 
 [node name="MagnetRange" type="Area3D" parent="."]

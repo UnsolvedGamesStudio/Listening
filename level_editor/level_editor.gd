@@ -5,7 +5,7 @@ class_name LevelEditorBlueprint
 @export var remembering_costs: Array[int] = [10, 20, 30, 40]
 @export var unique_objects: Array[PackedScene] = []
 
-@export_category("Music Box Contents")
+@export_group("Music Box Contents")
 @export var box_1: Array[PackedScene] = []
 @export var box_2: Array[PackedScene] = []
 @export var box_3: Array[PackedScene] = []
@@ -18,6 +18,9 @@ class_name LevelEditorBlueprint
 @export var box_10: Array[PackedScene] = []
 
 var box_arrays: Array[Array] = [box_1, box_2, box_3, box_4, box_5, box_6, box_7, box_8, box_9, box_10]
+
+@export_group("Secret Rooms")
+@export var secret_room_1: Array[PackedScene] = []
 
 
 func _ready() -> void:

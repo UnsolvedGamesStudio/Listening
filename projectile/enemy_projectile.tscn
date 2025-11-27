@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bralxx3e2dje3" path="res://projectile/enemy_projectile.gd" id="1_ayf6a"]
 [ext_resource type="Texture2D" uid="uid://dgygswxu7j8ds" path="res://projectile/textures/default_projectile.png" id="2_saffc"]
-[ext_resource type="AudioStream" uid="uid://vn3c0l6cs3n8" path="res://assets/sfx/enemy_projectile_sfx.ogg" id="3_saffc"]
+[ext_resource type="AudioStream" uid="uid://vn3c0l6cs3n8" path="res://assets/sfx/projectile_spawn_sfx.ogg" id="3_saffc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_saffc"]
 radius = 0.060193617
@@ -87,7 +87,7 @@ radius = 0.27556098
 
 [node name="EnemyProjectile" type="RigidBody3D"]
 collision_layer = 0
-collision_mask = 0
+collision_mask = 16384
 gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 1

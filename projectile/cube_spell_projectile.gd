@@ -1,18 +1,23 @@
 extends SpellProjectile
 class_name CubeSpellProjectile
 ## Todo: Make compatible bodies be blown away by explosions
+## Todo: Make the curve feel more natural
 @onready var kill_timer_2: Timer = %KillTimer2
 
+var breaks_walls:= false
 
-func enter():
+
+func sub_enter():
 	scale *= origin_node.scale
 	animation_player.speed_scale /= origin_node.scale.x
-	apply_impulse(Vector3(0.0, 30.0, 0.0))
+	apply_impulse(Vector3(0.0, 35.0, 0.0))
 
 
 func in_process():
 	if destroyed == true:
 		return
+	
+	set_can_break()
 	
 	var damage_modifier:= linear_velocity.length() / 35
 	speed += 3.0
@@ -22,6 +27,14 @@ func in_process():
 		freeze = true
 		disable_damage()
 		delayed_despawn()
+
+
+func set_can_break():
+	var horizontal: float = abs(Vector3(linear_velocity.x, 0.0, linear_velocity.z).length())
+	if horizontal > 1.0:
+		breaks_walls = true
+	else:
+		breaks_walls = false
 
 
 func delayed_despawn():

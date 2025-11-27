@@ -117,7 +117,9 @@ func rotate_scene(scene: Node3D, tile: Vector2i, layer: TileMapLayer):
 		
 		if flip_h == false and flip_v == true:
 			scene.global_rotation_degrees.y = -90.0
-
+		
+		if scene is WallCrack:
+			print(scene.global_rotation_degrees)
 
 
 func puzzle_setup(scene_inst: Node, puzzle_id: int):

@@ -145,6 +145,7 @@ texture = ExtResource("3_yhk72")
 [node name="VisionRaycast" type="RayCast3D" parent="ToAnimate/Sprite3D"]
 unique_name_in_owner = true
 transform = Transform3D(1.0526316, 0, 0, 0, 1.0526316, 0, 0, 0, 1.0526316, 0, 0, 0)
+visible = false
 collision_mask = 1034
 hit_from_inside = true
 collide_with_areas = true
@@ -182,7 +183,6 @@ unique_name_in_owner = true
 [node name="GetHurtEB" parent="ToAnimate/Behaviors" instance=ExtResource("4_lkkme")]
 
 [node name="MovementEB" parent="ToAnimate/Behaviors" instance=ExtResource("6_efcc8")]
-visible = false
 
 [node name="MeleeAttackEB" parent="ToAnimate/Behaviors" instance=ExtResource("5_ptsd7")]
 

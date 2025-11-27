@@ -3,7 +3,7 @@ class_name DamagingAuraEB
 
 @onready var area_3d: Area3D = %Area3D
 
-@export var damage_per_tick:= 0.1
+@export var damage_per_tick:= 0.33
 
 var main: Node
 var player_inside:= false
@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 	if player_inside == false:
 		return
 	
-	find_player().take_damage(damage_per_tick)
+	find_player().take_damage(damage_per_tick, O)
 
 
 func on_area_3d_area_entered(area: Area3D):

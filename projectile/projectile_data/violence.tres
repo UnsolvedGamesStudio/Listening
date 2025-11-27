@@ -13,6 +13,7 @@ frame_1/duration = 0.1
 
 [resource]
 script = ExtResource("1_ccoar")
+damage_mult = 0.5
 speed_mult = 2.0
 produce_destroyed_vfx = false
 texture = SubResource("AnimatedTexture_23q2k")

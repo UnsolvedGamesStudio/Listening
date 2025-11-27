@@ -23,10 +23,18 @@ func _ready() -> void:
 	if main == null:
 		return
 	
-	current_blueprint = main.level_layout_to_load
+	load_debug()
 	
 	next_scene = main.scene_to_load
 	load_game()
+
+
+func load_debug():
+	Bgm.stream = load(main.default_song.file_path)
+	Bgm.midi_player.file = main.default_song.chords_midi_path
+	Bgm.rhythm_notifier.bpm = main.default_song.bpm
+	Bgm.volume_db = main.default_song.volume
+	current_blueprint = main.level_layout_to_load
 
 
 func load_game():

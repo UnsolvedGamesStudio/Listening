@@ -7,9 +7,9 @@
 script = ExtResource("2_xy2qo")
 id = "dread"
 name = "Watching Over You"
-aggro_distance = 20.0
+aggro_distance = 50.0
 vision_limit = 50.0
-movement_speed = 16
+movement_speed = 32
 impassable = true
 body_damage = 0.0
 counts_towards_goal = false

@@ -6,10 +6,13 @@
 
 [resource]
 script = ExtResource("1_na2r2")
-speed_mult = 0.05
+speed_mult = 0.035
 max_distance_mult = 2.0
 max_lifetime_mult = 5.0
 destroy_on_entity = false
 pierce_entities = true
 bouncy = true
 texture = SubResource("ImageTexture_na2r2")
+passive_sfx = "res://assets/sfx/eerie_frost.ogg"
+bounce_sfx = "res://assets/sfx/splashy_bounce.ogg"
+randomize_pitch_range = 0.0

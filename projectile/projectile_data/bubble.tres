@@ -7,7 +7,7 @@
 script = ExtResource("1_v4mrj")
 extra_amount = 8
 delay = 0.11
-damage_mult = 0.33
+damage_mult = 0.25
 speed_mult = 0.3
 destroy_on_terrain = false
 bouncy = true
@@ -16,3 +16,8 @@ spawn_randomness = 0.33
 texture = ExtResource("2_4loqu")
 h_frames = 2
 animate = true
+spawn_sfx = "res://assets/sfx/bubble_blow_sfx.ogg"
+bounce_sfx = "res://assets/sfx/splashy_bounce.ogg"
+expire_sfx = "res://assets/sfx/bubble_pop_sfx.ogg"
+destroy_sfx = "res://assets/sfx/bubble_pop_sfx.ogg"
+randomize_pitch_range = 0.1

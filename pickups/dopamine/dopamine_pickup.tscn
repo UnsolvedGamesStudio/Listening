@@ -109,6 +109,7 @@ volume_db = -4.0
 unique_name_in_owner = true
 stream = ExtResource("4_t4nw7")
 pitch_scale = 1.2
+max_distance = 12.0
 
 [node name="MagnetRange" type="Area3D" parent="."]
 unique_name_in_owner = true

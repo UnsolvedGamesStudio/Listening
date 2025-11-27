@@ -4,7 +4,7 @@ class_name DamagingAuraPE
 @onready var damage_cooldown: Timer = %DamageCooldown
 @onready var hitbox: Area3D = %Hitbox
 
-@export var damage:= 3.3
+@export var damage:= 5.0
 
 
 func enter():

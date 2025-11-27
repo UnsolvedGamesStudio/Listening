@@ -3,6 +3,7 @@ extends Node3D
 @onready var hitbox: Area3D = %Hitbox
 
 var damage:= 50.0
+var breaks_walls:= true
 
 
 func _ready() -> void:

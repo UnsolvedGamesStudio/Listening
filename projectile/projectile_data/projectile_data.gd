@@ -34,3 +34,10 @@ class_name ProjectileData
 @export var texture: Texture
 @export var h_frames:= 1
 @export var animate:= false
+@export_subgroup("SFX")
+@export_file_path() var spawn_sfx:= "res://assets/sfx/projectile_spawn_sfx.ogg"
+@export_file_path() var passive_sfx:= ""
+@export_file_path() var bounce_sfx:= "res://assets/sfx/projectile_impact_sfx.ogg"
+@export_file_path() var expire_sfx:= ""
+@export_file_path() var destroy_sfx:= "res://assets/sfx/projectile_impact_sfx.ogg"
+@export_range(0.0, 1.5) var randomize_pitch_range:= 0.05

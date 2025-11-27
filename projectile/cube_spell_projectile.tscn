@@ -1,10 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://cka2qq171e5bm"]
+[gd_scene load_steps=19 format=3 uid="uid://cka2qq171e5bm"]
 
 [ext_resource type="Script" uid="uid://d1sp26xfinvxw" path="res://projectile/cube_spell_projectile.gd" id="1_t8bb5"]
 [ext_resource type="Texture2D" uid="uid://bqokni4d5a22j" path="res://player/spell_casting/textures/spell_projectile.png" id="2_bt85c"]
 [ext_resource type="Resource" uid="uid://dumw47ydxp8tv" path="res://projectile/projectile_data/weight.tres" id="2_f6lp2"]
 [ext_resource type="Texture2D" uid="uid://dv223hr2je4jy" path="res://music_box/textures/wood.png" id="2_t8bb5"]
 [ext_resource type="Script" uid="uid://bbwpu3t8hja4j" path="res://projectile/projectile_sprite.gd" id="3_t8bb5"]
+[ext_resource type="AudioStream" uid="uid://vn3c0l6cs3n8" path="res://assets/sfx/projectile_spawn_sfx.ogg" id="6_f6lp2"]
+[ext_resource type="AudioStream" uid="uid://douxm844lgxqp" path="res://assets/sfx/ball_bounce_soft_sfx.ogg" id="7_4thxw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dkllc"]
 
@@ -72,8 +74,8 @@ material = SubResource("StandardMaterial3D_makwg")
 size = Vector2(0.025, 0.025)
 
 [node name="CubeSpellProjectile" type="RigidBody3D"]
-collision_layer = 4096
-collision_mask = 4102
+collision_layer = 16384
+collision_mask = 16390
 mass = 5.0
 physics_material_override = SubResource("PhysicsMaterial_dkllc")
 gravity_scale = 2.322
@@ -84,10 +86,12 @@ script = ExtResource("1_t8bb5")
 data = ExtResource("2_f6lp2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 mesh = SubResource("BoxMesh_y1fvx")
 
 [node name="CollisionSize" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 shape = SubResource("BoxShape3D_y1fvx")
 debug_fill = false
 
@@ -109,7 +113,8 @@ libraries = {
 
 [node name="Hitbox" type="Area3D" parent="."]
 unique_name_in_owner = true
-collision_layer = 0
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+collision_layer = 16
 collision_mask = 4
 
 [node name="CollisionSize" type="CollisionShape3D" parent="Hitbox"]
@@ -147,3 +152,33 @@ visible = false
 light_energy = 0.1
 light_indirect_energy = 0.1
 omni_attenuation = 1.5
+
+[node name="SFX" type="Node3D" parent="."]
+
+[node name="SpawnSFX" type="AudioStreamPlayer3D" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("6_f6lp2")
+max_distance = 10.0
+bus = &"SFX"
+
+[node name="PassiveSFX" type="AudioStreamPlayer3D" parent="SFX"]
+unique_name_in_owner = true
+max_distance = 10.0
+bus = &"SFX"
+
+[node name="BounceSFX" type="AudioStreamPlayer3D" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("7_4thxw")
+pitch_scale = 1.1
+max_distance = 10.0
+bus = &"SFX"
+
+[node name="DestroySFX" type="AudioStreamPlayer3D" parent="SFX"]
+unique_name_in_owner = true
+max_distance = 10.0
+bus = &"SFX"
+
+[node name="ExpireSFX" type="AudioStreamPlayer3D" parent="SFX"]
+unique_name_in_owner = true
+max_distance = 10.0
+bus = &"SFX"

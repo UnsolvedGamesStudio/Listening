@@ -5,34 +5,35 @@
 [ext_resource type="PackedScene" uid="uid://itikcsbog7mw" path="res://terrain/wall.tscn" id="4_7u0j8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p1utb"]
-size = Vector3(2, 4.1, 2)
+size = Vector3(1.9, 4, 1.9)
 
 [node name="LockedWall" type="Node3D"]
 script = ExtResource("1_6568k")
 
 [node name="KeyholeInteractable" parent="." instance=ExtResource("1_p1utb")]
-transform = Transform3D(0.9, 0, 0, 0, -3.934025e-08, 0.9, 0, -0.9, -3.934025e-08, 0, 2, 0)
+transform = Transform3D(0.95, 0, 0, 0, -4.152582e-08, 0.95, 0, -0.95, -4.152582e-08, 0, 2, 0)
 
 [node name="NorthFace" parent="." instance=ExtResource("4_7u0j8")]
 unique_name_in_owner = true
-transform = Transform3D(-0.9, 0, 7.86805e-08, 0, 0.9, 0, -7.86805e-08, 0, -0.9, -1.1880425e-14, 0.04983902, -0.90000004)
+transform = Transform3D(-0.95, 0, 1.4344602e-07, 0, 0.95, 0, -1.4344602e-07, 0, -0.95, 0, 0, -0.95)
 
 [node name="EastFace" parent="." instance=ExtResource("4_7u0j8")]
 unique_name_in_owner = true
-transform = Transform3D(3.5527137e-15, -3.934025e-08, 0.8999999, 1.719617e-15, 0.9, 3.9340247e-08, -0.8999999, 1.7196171e-15, 3.5527137e-15, 0.90000004, 0.04983902, -3.4392337e-15)
+transform = Transform3D(-4.152582e-08, -4.1525823e-08, 0.95, 1.8151514e-15, 0.95, 4.1525823e-08, -0.95, 3.6303027e-15, -4.152582e-08, 0.95, 0, 0)
 
 [node name="SouthFace" parent="." instance=ExtResource("4_7u0j8")]
 unique_name_in_owner = true
-transform = Transform3D(0.9, -1.0587912e-22, 3.934025e-08, 0, 0.9, 0, -3.934025e-08, 0, 0.9, 3.4392341e-15, 0.04983902, 0.90000004)
+transform = Transform3D(0.95, -2.1354071e-37, 4.1525823e-08, 0, 0.95, 4.8852417e-30, -4.1525823e-08, -4.8852417e-30, 0.95, 0, 0, 0.95)
 
 [node name="WestFace" parent="." instance=ExtResource("4_7u0j8")]
 unique_name_in_owner = true
-transform = Transform3D(6.794811e-08, 0, -0.9, 0, 0.9, 0, 0.9, 0, 6.794811e-08, -0.90000004, 0.04983902, 5.9402124e-15)
+transform = Transform3D(7.172301e-08, 0, -0.95, 0, 0.95, 0, 0.95, 0, 7.172301e-08, -0.95, 0, 0)
 
 [node name="Area3D" type="Area3D" parent="." groups=["obstacle_collision"]]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 1.85, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85, 0)
 collision_layer = 128
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0013060584)
 shape = SubResource("BoxShape3D_p1utb")
