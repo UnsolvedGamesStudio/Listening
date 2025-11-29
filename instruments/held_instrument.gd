@@ -15,15 +15,6 @@ func _ready() -> void:
 		queue_free()
 	
 	Bus.player_cast.connect(on_player_cast)
-	set_sample()
-
-
-func set_sample():
-	if sample == null:
-		printerr(self, ": sample not found")
-		return
-	
-	Bgm.sampler_instrument.samples[0] = sample
 
 
 func animate_played(elements: Array[int] = []):

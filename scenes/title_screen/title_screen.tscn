@@ -132,13 +132,13 @@ _data = {
 script = ExtResource("1_5df70")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3062625, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0561719, 0)
 light_energy = 8.938
 omni_range = 91.137
 omni_attenuation = 7.116
 
 [node name="Title" type="Sprite3D" parent="."]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.333, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0829093, 0)
 layers = 2
 pixel_size = 0.04
 billboard = 2
@@ -169,23 +169,27 @@ sky_mode = 1
 
 [node name="StartButton" type="Button" parent="UI"]
 anchors_preset = -1
-anchor_left = 0.375
-anchor_top = 0.34375
-anchor_right = 0.625
-anchor_bottom = 0.41964287
-scale = Vector2(1e-05, 1e-05)
-pivot_offset = Vector2(60, 17)
+anchor_left = 0.49218634
+anchor_top = 0.38169605
+anchor_right = 0.49219096
+anchor_bottom = 0.38169745
+offset_left = -99.999405
+offset_top = 59.000168
+offset_right = 107.99823
+offset_bottom = 114.99954
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(107, 31)
 focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 32
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_ri6bm")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_d6x3v")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5uxxq")
 text = "Start Game"
 script = ExtResource("2_vuv2h")
-metadata/_edit_use_anchors_ = true
 
 [node name="SmallBrain" type="MeshInstance3D" parent="." groups=["small_brain"]]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
@@ -195,7 +199,7 @@ mesh = SubResource("ArrayMesh_5df70")
 mesh = SubResource("ArrayMesh_xawky")
 
 [node name="CameraAxis" type="Node3D" parent="."]
-transform = Transform3D(0.9659257, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.9659257, 0, 0.8362484, 0)
+transform = Transform3D(0.96592563, 0, -0.25881898, 0, 1, 0, 0.25881898, 0, 0.96592563, 0, 0.8362484, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraAxis"]
 transform = Transform3D(1, 0, 0, 0, 0.9918922, -0.12708193, 0, 0.12708193, 0.9918922, 0, -0.6378586, 3.1659017)

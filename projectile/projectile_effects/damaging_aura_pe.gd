@@ -3,11 +3,15 @@ class_name DamagingAuraPE
 
 @onready var damage_cooldown: Timer = %DamageCooldown
 @onready var hitbox: Area3D = %Hitbox
+@onready var appear: AnimationPlayer = %Appear
 
 @export var damage:= 5.0
 
 
 func enter():
+	if projectile.origin_node.scale.y < 1.0:
+		appear.speed_scale /= (projectile.origin_node.scale.y * 2.0)
+	
 	projectile.disable_hitbox()
 	damage_cooldown.timeout.connect(on_damage_cooldown_timeout)
 

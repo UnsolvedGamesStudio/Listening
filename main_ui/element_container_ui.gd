@@ -14,8 +14,8 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	timer_bar.value = element_expiry_timer.time_left / element_expiry_timer.wait_time
-	timer_bar.modulate.r = timer_bar.max_value - timer_bar.value
-	timer_bar.modulate.g = timer_bar.value
+	timer_bar.get_theme_stylebox("fill").bg_color.r = timer_bar.max_value - timer_bar.value
+	timer_bar.get_theme_stylebox("fill").bg_color.g = timer_bar.value
 
 
 func update():

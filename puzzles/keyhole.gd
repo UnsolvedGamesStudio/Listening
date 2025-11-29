@@ -67,11 +67,11 @@ func has_item():
 func looked_at_by_player(on: bool):
 	if on == true:
 		if has_item() == true:
-			sprite_3d.modulate = Color(0.409, 0.84, 0.0, 1.0)
-			sprite_3d_2.modulate = Color(0.409, 0.84, 0.0, 1.0)
+			sprite_3d.modulate = Color(0.0, 0.924, 0.94)
+			sprite_3d_2.modulate = Color(0.0, 0.924, 0.94)
 		else:
-			sprite_3d.modulate = Color(0.954, 0.001, 0.954)
-			sprite_3d_2.modulate = Color(0.954, 0.001, 0.954)
+			sprite_3d.modulate = Color(0.68, 0.256, 0.15, 1.0)
+			sprite_3d_2.modulate = Color(0.68, 0.256, 0.15, 1.0)
 		
 		sprite_3d.scale = original_scale * 1.5
 		sprite_3d_2.scale = original_scale * 1.5

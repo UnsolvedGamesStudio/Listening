@@ -64,7 +64,8 @@ texture = ExtResource("2_osxpn")
 region_rect = Rect2(0, 0, 32, 16)
 
 [node name="Label3D" type="Sprite3D" parent="Sprite3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.13955373, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15986162, 0)
+pixel_size = 0.0075
 billboard = 2
 texture_filter = 0
 texture = SubResource("ViewportTexture_osxpn")
@@ -80,6 +81,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 14
 text = "30"
 horizontal_alignment = 1
 vertical_alignment = 1

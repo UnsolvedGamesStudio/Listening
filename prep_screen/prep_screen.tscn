@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cglbfa3a2dw7v"]
+[gd_scene load_steps=13 format=3 uid="uid://cglbfa3a2dw7v"]
 
 [ext_resource type="Texture2D" uid="uid://b4s6ykblvadm" path="res://terrain/textures/papertexture-2061711_640.png" id="1_im2fx"]
 [ext_resource type="Script" uid="uid://bq3pthjy1lald" path="res://prep_screen/prep_screen.gd" id="1_uxus4"]
@@ -9,6 +9,8 @@
 [ext_resource type="Resource" uid="uid://bv4fypx7ab87u" path="res://assets/music/song_data/tight_rope.tres" id="4_vyhib"]
 [ext_resource type="Resource" uid="uid://b3cbgo4s0mytf" path="res://assets/music/song_data/reverie.tres" id="5_46iml"]
 [ext_resource type="Script" uid="uid://c1trbbd4jt2tb" path="res://prep_screen/start_level_button.gd" id="5_77kmu"]
+[ext_resource type="FontVariation" uid="uid://dp8trxjqpgoeg" path="res://assets/fonts/short_story_baseline_fixed.tres" id="8_jpipw"]
+[ext_resource type="StyleBox" uid="uid://dn78ncm4grcm7" path="res://assets/ui_theme/panel.tres" id="10_6omq5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vyhib"]
 bg_color = Color(0.15294118, 0.5372549, 0.8039216, 1)
@@ -25,7 +27,7 @@ layer = 0
 script = ExtResource("1_uxus4")
 
 [node name="BG" type="TextureRect" parent="."]
-self_modulate = Color(0.5921569, 0.92941177, 0.7921569, 1)
+self_modulate = Color(0.83137256, 0.5019608, 0.73333335, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -52,7 +54,7 @@ theme_override_constants/separation = 20
 [node name="Title" type="Label" parent="MarginContainer/TopContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8627451, 0.91764706, 0.93333334, 1)
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 28
 text = "Level Name"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -78,7 +80,7 @@ size_flags_horizontal = 3
 [node name="Title" type="Label" parent="MarginContainer/TopContainer/SongSelectionPanel/SongSelectionMargin/ScrollContainer/SongSelectionContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.15294118, 0.25490198, 0.1764706, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 14
 text = "Select your song"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -112,10 +114,11 @@ mouse_default_cursor_shape = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vyhib")
 script = ExtResource("5_77kmu")
 
-[node name="Title" type="Label" parent="MarginContainer/TopContainer/StartButton"]
+[node name="Start" type="Label" parent="MarginContainer/TopContainer/StartButton"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.15294118, 0.25490198, 0.1764706, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("8_jpipw")
+theme_override_font_sizes/font_size = 14
 text = "Start"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -128,10 +131,14 @@ theme_override_constants/separation = 8
 [node name="InstrumentButton" parent="MarginContainer/HBoxContainer" instance=ExtResource("3_x7pfc")]
 layout_mode = 2
 mouse_default_cursor_shape = 2
+theme = null
+theme_override_styles/panel = ExtResource("10_6omq5")
 
 [node name="InstrumentButton2" parent="MarginContainer/HBoxContainer" instance=ExtResource("3_x7pfc")]
 layout_mode = 2
 mouse_default_cursor_shape = 2
+theme = null
+theme_override_styles/panel = ExtResource("10_6omq5")
 icon = ExtResource("4_78k1q")
 instrument = 1
 

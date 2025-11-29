@@ -8,12 +8,12 @@ func _ready() -> void:
 
 
 func shrink(area: Area3D):
-	if check_elligible(area) == false:
-		return
-	
 	var cell_height:= cell.max_player_height
 	
-	if cell_height > 1.0:
+	if cell_height >= 1.0:
+		return
+	
+	if check_elligible(area) == false:
 		return
 	
 	area.owner.scale = Vector3(cell_height, cell_height, cell_height)

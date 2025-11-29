@@ -17,6 +17,7 @@ func create_explosion(position):
 	var explosion_inst: Node3D = explosion_scene.instantiate()
 	
 	Find.layout().add_child(explosion_inst)
+	explosion_inst.scale = Find.P().scale
 	explosion_inst.global_position = position
 
 

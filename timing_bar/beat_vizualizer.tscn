@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dflkyrrs1kf1s"]
+[gd_scene load_steps=10 format=3 uid="uid://dflkyrrs1kf1s"]
 
 [ext_resource type="Texture2D" uid="uid://c4axu3iewcc0a" path="res://timing_bar/textures/timing_bar.png" id="1_boco5"]
 [ext_resource type="Script" uid="uid://dbgh2fsud7i6r" path="res://timing_bar/beat_vizualizer.gd" id="1_kra6h"]
@@ -6,11 +6,14 @@
 [ext_resource type="Script" uid="uid://hnqf1ox4jhrw" path="res://main_ui/combo_manager.gd" id="4_3jijn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3jijn"]
-bg_color = Color(0, 0, 0, 0.15)
+bg_color = Color(0.067200005, 0.56, 0.51893324, 0)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3jijn"]
+content_margin_left = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yv7sp"]
 radius = 2.4665587
@@ -68,6 +71,7 @@ grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_3jijn")
 
 [node name="MarginContainer" type="MarginContainer" parent="TimingBar/PanelContainer"]
+custom_minimum_size = Vector2(82, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
@@ -80,7 +84,8 @@ layout_mode = 2
 [node name="ComboLabel" type="Label" parent="TimingBar/PanelContainer/MarginContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0.58431375)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 14
 text = "x0"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -91,9 +96,10 @@ metadata/_edit_use_anchors_ = true
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.58431375)
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 7
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3jijn")
 text = "Dmg bonus: 0"
-horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
@@ -102,9 +108,9 @@ unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.33958334
+anchor_left = 0.58984375
 anchor_top = -1.375
-anchor_right = 0.35208333
+anchor_right = 0.60234374
 anchor_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2

@@ -1,6 +1,7 @@
 extends Projectile
 class_name SpellProjectile
 ## Todo: change light color based on spell
+@onready var collision_size: CollisionShape3D = %CollisionSize
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var spawn_sfx: AudioStreamPlayer3D = %SpawnSFX
 @onready var passive_sfx: AudioStreamPlayer3D = %PassiveSFX
@@ -12,15 +13,8 @@ var elements: Array[int] = []
 
 
 func enter():
-	if not data == null:
-		init_sfx(spawn_sfx, data.spawn_sfx)
-		init_sfx(passive_sfx, data.passive_sfx)
-		init_sfx(bounce_sfx, data.bounce_sfx)
-		init_sfx(destroy_sfx, data.destroy_sfx)
-		init_sfx(expire_sfx, data.expire_sfx)
-	
-	scale *= origin_node.scale
-	animation_player.speed_scale /= origin_node.scale.x
+	adapt_size()
+	init_sfx()
 	
 	if not spawn_sfx.stream == null:
 		spawn_sfx.play()
@@ -31,7 +25,28 @@ func enter():
 	sub_enter()
 
 
-func init_sfx(stream_player: AudioStreamPlayer3D, sfx_path: String):
+func adapt_size():
+	var scale_to_copy:= origin_node.scale
+	if scale_to_copy >= Vector3(1.0, 1.0, 1.0):
+		return
+	
+	sprite_3d.scale = scale_to_copy
+	collision_size.scale = scale_to_copy
+	hitbox.scale = hitbox.scale.lerp(scale_to_copy, 0.2)
+
+
+func init_sfx():
+	if data == null:
+		return
+	
+	set_fx(spawn_sfx, data.spawn_sfx)
+	set_fx(passive_sfx, data.passive_sfx)
+	set_fx(bounce_sfx, data.bounce_sfx)
+	set_fx(destroy_sfx, data.destroy_sfx)
+	set_fx(expire_sfx, data.expire_sfx)
+
+
+func set_fx(stream_player: AudioStreamPlayer3D, sfx_path: String):
 	var stream: AudioStream = load_sfx(sfx_path)
 	var pitch_range:= data.randomize_pitch_range / 2
 	
@@ -50,7 +65,7 @@ func load_sfx(path):
 	if path == "":
 		return
 	
-	if not FileAccess.file_exists(path):
+	if not ResourceLoader.exists(path):
 		printerr(self, ": projectile sfx has invalid path of '", path, "'")
 		return
 	

@@ -1,9 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://dohwuclbdrfh1"]
+[gd_scene load_steps=19 format=3 uid="uid://dohwuclbdrfh1"]
 
 [ext_resource type="Script" uid="uid://drn422cycc5qn" path="res://pause_menu/offset_slider.gd" id="1_5hbt6"]
 [ext_resource type="Script" uid="uid://d2xrtoqxe8yqr" path="res://pause_menu/pause_menu.gd" id="1_uwtdo"]
 [ext_resource type="Script" uid="uid://b56jfy7g127ku" path="res://pause_menu/pause_menu_button.gd" id="2_rd7dy"]
+[ext_resource type="FontFile" uid="uid://coihm6kr2umjr" path="res://assets/fonts/Short_Story.ttf" id="2_wn31l"]
+[ext_resource type="StyleBox" uid="uid://dn78ncm4grcm7" path="res://assets/ui_theme/panel.tres" id="3_b0obc"]
 [ext_resource type="Script" uid="uid://ckomaugmasljd" path="res://pause_menu/cheat_button.gd" id="4_b4s0c"]
+[ext_resource type="Texture2D" uid="uid://b0tw8jr20jhhj" path="res://timing_bar/textures/interact_sigil.png" id="5_cux0y"]
 [ext_resource type="Script" uid="uid://cqai6xw6f7e72" path="res://pause_menu/auto_move_button.gd" id="5_s1glv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uwtdo"]
@@ -11,33 +14,72 @@ content_margin_left = 8.0
 content_margin_top = 5.0
 content_margin_right = 8.0
 content_margin_bottom = 5.0
-bg_color = Color(0.15294118, 0.5372549, 0.8039216, 0.45882353)
+bg_color = Color(0.16862746, 0.30588236, 0.58431375, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7wlu"]
-content_margin_left = 8.0
-content_margin_top = 5.0
-content_margin_right = 8.0
-content_margin_bottom = 5.0
-bg_color = Color(0.15294118, 0.5372549, 0.8039216, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wn31l"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.105882354, 0.14117648, 0.2784314, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0obc"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.27058825, 0.44705883, 0.8901961, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cux0y"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1glv"]
 content_margin_left = 3.0
 content_margin_top = 3.0
 content_margin_right = 3.0
 content_margin_bottom = 3.0
-bg_color = Color(0.25882354, 0.7490196, 0.9098039, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+bg_color = Color(0.27058825, 0.44705883, 0.8901961, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_teyq6"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.105882354, 0.14117648, 0.2784314, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b4s0c"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -103,13 +145,26 @@ offset = Vector2(0, 500)
 transform = Transform2D(1, 0, 0, 1, 0, 500)
 script = ExtResource("1_uwtdo")
 
+[node name="MarginContainer3" type="MarginContainer" parent="."]
+process_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+metadata/_edit_use_anchors_ = true
+
 [node name="Combos" type="PanelContainer" parent="."]
 process_mode = 2
 anchors_preset = -1
-anchor_left = 0.03125
-anchor_top = 0.2924107
-anchor_right = 0.28515625
-anchor_bottom = 0.80803573
+anchor_left = 0.015625
+anchor_top = 0.35714287
+anchor_right = 0.26953125
+anchor_bottom = 0.8995536
 size_flags_horizontal = 4
 size_flags_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_uwtdo")
@@ -119,6 +174,7 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/line_spacing = 7
+theme_override_font_sizes/font_size = 7
 text = "Glad + Sad:
 Wish (33)
 Glad + Glad + Glad:
@@ -133,148 +189,161 @@ Mad + Mad + Mad:
 Violence (15)"
 horizontal_alignment = 1
 
-[node name="Tutorial" type="PanelContainer" parent="."]
-process_mode = 2
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -149.0
-offset_top = 9.0
-offset_right = 149.0
-offset_bottom = 118.0
-grow_horizontal = 2
-size_flags_horizontal = 4
-size_flags_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_uwtdo")
-
-[node name="ControlsTutorialLabel" type="Label" parent="Tutorial"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Press Tab to exit the game.
-A, S, and D add elements to your emotion spell.
-Press Left Click to cast the created spell.
-(Elements and spells require timing.)
-Press W to go to the highlighted tile.
-Press Space to interact."
-horizontal_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer2" type="MarginContainer" parent="."]
 process_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-custom_minimum_size = Vector2(200, 0)
+[node name="Tutorial" type="PanelContainer" parent="MarginContainer2"]
+process_mode = 2
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uwtdo")
+
+[node name="ControlsTutorialLabel" type="Label" parent="MarginContainer2/Tutorial"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_wn31l")
+theme_override_font_sizes/font_size = 7
+text = "Press Tab to exit the game.
+Press A/S/D on beat to add elements to your emotion spell.
+Press Left Click on beat to cast the created spell.
+Certain combos of elements create unique effects but
+consume dopamine (hold Shift to cast a projectile instead.)
+Press W to go to the highlighted tile.
+Press Space to interact."
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+process_mode = 2
+custom_minimum_size = Vector2(200, 0)
+anchors_preset = -1
+anchor_left = 0.3046875
+anchor_top = 0.36160713
+anchor_right = 0.6953125
+anchor_bottom = 0.74553573
+offset_top = -2.0
+offset_bottom = -2.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 5
 alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="Spacer" type="Panel" parent="MarginContainer/VBoxContainer"]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-
-[node name="OffsetSliderContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+[node name="OffsetSliderContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_c7wlu")
+theme_override_styles/panel = ExtResource("3_b0obc")
 script = ExtResource("1_5hbt6")
 
-[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/OffsetSliderContainer"]
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/OffsetSliderContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="OffsetSliderLabel" type="Label" parent="MarginContainer/VBoxContainer/OffsetSliderContainer/HBoxContainer"]
+[node name="OffsetSliderLabel" type="Label" parent="VBoxContainer/OffsetSliderContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 7
 text = "Beat Offset: 0px"
 
-[node name="OffsetSlider" type="HSlider" parent="MarginContainer/VBoxContainer/OffsetSliderContainer/HBoxContainer"]
+[node name="OffsetSlider" type="HSlider" parent="VBoxContainer/OffsetSliderContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
+theme_override_icons/grabber = ExtResource("5_cux0y")
+theme_override_icons/grabber_highlight = ExtResource("5_cux0y")
+theme_override_icons/grabber_disabled = ExtResource("5_cux0y")
+theme_override_styles/slider = SubResource("StyleBoxFlat_wn31l")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_b0obc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_cux0y")
 min_value = -25.0
 max_value = 25.0
 rounded = true
 
-[node name="ResumeButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 focus_behavior_recursive = 1
 mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 7
 theme_override_styles/normal = SubResource("StyleBoxFlat_s1glv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_teyq6")
 text = "Resume"
 script = ExtResource("2_rd7dy")
 
-[node name="PlayAgainButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="PlayAgainButton" type="Button" parent="VBoxContainer"]
 process_mode = 2
 custom_minimum_size = Vector2(100.215, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 7
 theme_override_styles/normal = SubResource("StyleBoxFlat_s1glv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_teyq6")
 text = "Restart level"
 script = ExtResource("2_rd7dy")
 type = 2
 
-[node name="BackToHubButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="BackToHubButton" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
 process_mode = 2
 custom_minimum_size = Vector2(100.215, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 7
 theme_override_styles/normal = SubResource("StyleBoxFlat_s1glv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_teyq6")
 text = "Back to hub world"
 script = ExtResource("2_rd7dy")
 type = 3
 
-[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 focus_behavior_recursive = 1
 mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 7
 theme_override_styles/normal = SubResource("StyleBoxFlat_s1glv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_teyq6")
 text = "Exit game"
 script = ExtResource("2_rd7dy")
 type = 1
 
-[node name="CheatButtonContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+[node name="CheatButtonContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_b4s0c")
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CheatButtonContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/CheatButtonContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 7
 text = "Toggle invincibility"
 
-[node name="CheatButton" type="CheckButton" parent="MarginContainer/VBoxContainer/CheatButtonContainer"]
+[node name="CheatButton" type="CheckButton" parent="VBoxContainer/CheatButtonContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_override_colors/button_checked_color = Color(0.83137256, 0.5019608, 0.73333335, 1)
-theme_override_colors/button_unchecked_color = Color(0.34901962, 0.8117647, 0.5764706, 1)
+theme_override_colors/button_unchecked_color = Color(0.38, 0.566, 1, 1)
 action_mode = 0
 script = ExtResource("4_b4s0c")
 
-[node name="AutomoveButtonContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+[node name="AutomoveButtonContainer2" type="PanelContainer" parent="VBoxContainer"]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_b4s0c")
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/AutomoveButtonContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/AutomoveButtonContainer2"]
 layout_mode = 2
 text = "Disable auto-move"
 
-[node name="AutomoveButton" type="CheckButton" parent="MarginContainer/VBoxContainer/AutomoveButtonContainer2"]
+[node name="AutomoveButton" type="CheckButton" parent="VBoxContainer/AutomoveButtonContainer2"]
 layout_mode = 2
 size_flags_horizontal = 8
 tooltip_text = "With auto-move enabled, you don't need the proper timing."

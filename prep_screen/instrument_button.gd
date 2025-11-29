@@ -5,7 +5,7 @@ class_name InstrumentButton
 ## Todo: Make tooltip show up to explain the instrument
 ## Todo: MAYBE make this into a physical room instead with 3d ui?
 @onready var instrument_icon: TextureRect = %InstrumentIcon
-@onready var selection_outline: PanelContainer = %SelectionOutline
+#@onready var selection_outline: PanelContainer = %SelectionOutline
 
 @export var icon:= preload("res://instruments/textures/lute.png")
 @export var instrument:= Vars.instrument_types.LUTE
@@ -24,11 +24,10 @@ func _process(delta: float) -> void:
 	if Vars.current_instrument == instrument:
 		scale = Vector2(1.1, 1.1)
 		modulate.a = 1.0
-		self_modulate.a = 1.0
-		selection_outline.show()
+		#selection_outline.show()
 		return
 	
-	selection_outline.hide()
+	#selection_outline.hide()
 	self_modulate.a = 0.5
 	scale = Vector2.ONE
 

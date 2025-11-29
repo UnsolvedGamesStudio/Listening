@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://86r6xeju02bg"]
+[gd_scene load_steps=33 format=3 uid="uid://86r6xeju02bg"]
 
 [ext_resource type="Theme" uid="uid://b2d4535til41s" path="res://assets/theme.tres" id="1_fp2hw"]
 [ext_resource type="Script" uid="uid://cfglrrbbq2g8" path="res://main_ui/health_bar.gd" id="1_m5yyi"]
@@ -21,6 +21,8 @@
 [ext_resource type="Script" uid="uid://djqbaobsxmkx8" path="res://main_ui/neurons_label.gd" id="7_uwb8r"]
 [ext_resource type="Texture2D" uid="uid://c6om4mvcxheye" path="res://main_ui/textures/rainbow_texture4.png" id="8_7hcy2"]
 [ext_resource type="Texture2D" uid="uid://dam31kn2ab3bc" path="res://main_ui/textures/enemy_icon.png" id="9_uwb8r"]
+[ext_resource type="FontFile" uid="uid://coihm6kr2umjr" path="res://assets/fonts/Short_Story.ttf" id="18_ntkvn"]
+[ext_resource type="StyleBox" uid="uid://3mxb1yvwi5f0" path="res://assets/ui_theme/outline_panel.tres" id="20_kkjxn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ht8ex"]
 bg_color = Color(3.308989e-07, 0.22164837, 0.16118711, 0.39215687)
@@ -29,6 +31,7 @@ expand_margin_left = 2.0
 expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7tm0h"]
 bg_color = Color(0.25882354, 0.6431373, 0.34901962, 1)
@@ -90,6 +93,14 @@ _data = {
 &"not_enough": SubResource("Animation_7hcy2")
 }
 
+[sub_resource type="FontVariation" id="FontVariation_euac6"]
+base_font = ExtResource("18_ntkvn")
+opentype_features = {
+1667329140: 0
+}
+spacing_bottom = -2
+baseline_offset = 0.22
+
 [node name="MainUI" type="CanvasLayer"]
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -149,10 +160,11 @@ unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.23
-anchor_top = -0.2
+anchor_top = -0.1
 anchor_right = 1.36
 anchor_bottom = 1.1
 theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 7
 text = "20"
 metadata/_edit_use_anchors_ = true
 
@@ -185,10 +197,11 @@ unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.1875
-anchor_top = 0.09375
+anchor_top = 0.15625
 anchor_right = 1.9375
 anchor_bottom = 0.90625
 theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 7
 text = "20"
 metadata/_edit_use_anchors_ = true
 
@@ -215,6 +228,7 @@ stretch_mode = 5
 [node name="NeuronsLabel" type="Label" parent="MarginContainer/Left/NeuronCount"]
 layout_mode = 2
 theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 14
 text = "0/0"
 script = ExtResource("7_uwb8r")
 
@@ -230,6 +244,7 @@ stretch_mode = 5
 [node name="SynapsesLabel" type="Label" parent="MarginContainer/Left/SynapsesCount"]
 layout_mode = 2
 theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 14
 text = "0/0"
 script = ExtResource("6_sqw8h")
 
@@ -245,6 +260,7 @@ stretch_mode = 5
 [node name="EnemiesLeftLabel" type="Label" parent="MarginContainer/Left/EnemyCount"]
 layout_mode = 2
 theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 14
 text = "x0"
 script = ExtResource("4_6kiqu")
 
@@ -252,13 +268,19 @@ script = ExtResource("4_6kiqu")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+theme_override_constants/separation = 2
 
 [node name="Timer" type="Label" parent="MarginContainer/Middle"]
 modulate = Color(1, 1, 1, 0.3372549)
+custom_minimum_size = Vector2(68.235, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-text = "0.0"
+theme_override_font_sizes/font_size = 14
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
 script = ExtResource("2_5q6g2")
 
 [node name="PauseHint" type="Label" parent="MarginContainer/Middle"]
@@ -266,7 +288,11 @@ modulate = Color(1, 1, 1, 0.3372549)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-text = "Press ESC to pause"
+theme_override_fonts/font = SubResource("FontVariation_euac6")
+theme_override_font_sizes/font_size = 7
+text = "Press ESC
+to see controls"
+horizontal_alignment = 1
 
 [node name="Right" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -279,8 +305,8 @@ layout_mode = 2
 size_flags_horizontal = 8
 
 [node name="ItemContainerUI" parent="MarginContainer/Right" instance=ExtResource("4_ru8ot")]
-self_modulate = Color(1, 1, 1, 0.5882353)
 layout_mode = 2
+theme_override_styles/panel = ExtResource("20_kkjxn")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15

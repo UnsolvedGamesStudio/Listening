@@ -1,9 +1,7 @@
 extends Node
-
-
+## Todo: rework instrument manager
 var paused:= false
 var level_time:= 0.0
-
 
 ## Collectibles
 var level_collects: Dictionary[String, Dictionary] = {

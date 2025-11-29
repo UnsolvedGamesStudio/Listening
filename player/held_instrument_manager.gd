@@ -1,7 +1,7 @@
 extends Node
 
-const CARILLON_HELD = preload("res://instruments/carillon_held.tscn")
 const LUTE_HELD = preload("res://instruments/lute_held.tscn")
+const CARILLON_HELD = preload("res://instruments/carillon_held.tscn")
 
 
 func _ready() -> void:
@@ -25,3 +25,12 @@ func add_scene(scene: PackedScene):
 	add_child(instrument_inst)
 	
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sampler"), instrument_inst.volume_db)
+	set_sample(instrument_inst)
+
+
+func set_sample(inst: HeldInstrument):
+	var sample:= inst.sample
+	if sample == null:
+		return
+	
+	Bgm.sampler_instrument.samples[0] = sample

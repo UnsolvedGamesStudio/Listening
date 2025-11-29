@@ -68,7 +68,7 @@ func init_projectile_effect():
 	if projectile_effect_path == "":
 		return
 	
-	if not FileAccess.file_exists(projectile_effect_path):
+	if not ResourceLoader.exists(projectile_effect_path):
 		printerr(self, ": projectile_effect has invalid path")
 		return
 	

@@ -8,9 +8,14 @@ var breaks_walls:= false
 
 
 func sub_enter():
-	scale *= origin_node.scale
-	animation_player.speed_scale /= origin_node.scale.x
 	apply_impulse(Vector3(0.0, 35.0, 0.0))
+
+
+func adapt_size():
+	if origin_node.scale >= Vector3(1.0, 1.0, 1.0):
+		return
+	
+	scale = origin_node.scale
 
 
 func in_process():

@@ -37,6 +37,7 @@ border_width_bottom = 2
 border_color = Color(0.16862746, 0.30588236, 0.58431375, 1)
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
+anti_aliasing = false
 
 [node name="SongSelectButton" type="PanelContainer"]
 self_modulate = Color(1, 1, 1, 0.5)
@@ -67,8 +68,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_8gewt")
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 32
-text = "Song name"
+theme_override_font_sizes/font_size = 14
+text = "So Simple"
 
 [node name="Box2" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -81,7 +82,8 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-text = "BPM: 120"
+theme_override_font_sizes/font_size = 7
+text = "BPM: 140"
 
 [node name="Box3" type="PanelContainer" parent="VBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
@@ -92,10 +94,11 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_3s2vb")
 
 [node name="AuthorLabel" type="Label" parent="VBoxContainer/Box3"]
 unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.5)
+modulate = Color(1, 1, 1, 0.6862745)
 layout_mode = 2
 size_flags_horizontal = 10
-text = "By: Author"
+theme_override_font_sizes/font_size = 7
+text = "By Floatie"
 
 [node name="SelectionOutline" type="PanelContainer" parent="."]
 unique_name_in_owner = true

@@ -1,4 +1,5 @@
 extends AudioStreamPlayer
+## Todo: Make played octave relative to a default rather than copying the midi
 @onready var rhythm_notifier: RhythmNotifier = %RhythmNotifier
 @onready var midi_player: MidiPlayer = %MidiPlayer
 @onready var sampler_instrument: SamplerInstrument = %SamplerInstrument
@@ -19,11 +20,6 @@ var circles_are_in:= false
 var event_history: Dictionary[float, int] = {}
 
 
-var songs: Dictionary[String, AudioStream] = {
-	"test" : preload("uid://bhcq425mgvjwe")
-}
-
-
 func _ready() -> void:
 	rhythm_notifier.beat.connect(on_beat)
 	midi_player.midi_event.connect(on_midi_event)
@@ -42,8 +38,16 @@ func on_midi_event( channel, event ):
 
 
 func start_song():
+	if playing == true:
+		return
+	
 	play()
 	kick.play()
+	
+	if midi_player.file == null:
+		printerr(self, ": Midi file not found")
+		return
+	
 	midi_player.play()
 	midi_player.set_tempo(rhythm_notifier.bpm)
 
@@ -140,12 +144,12 @@ func play_sample(elements: Array[int] = []):
 
 func play_lowest_note():
 	var note_to_play: Array = get_notes()[0]
-	play_single_note(note_to_play, 1)
+	play_single_note(note_to_play)
 
 
 func play_highest_note():
 	var note_to_play: Array = get_notes()[-1]
-	play_single_note(note_to_play, 1)
+	play_single_note(note_to_play)
 
 
 func play_middle_note():
@@ -160,7 +164,7 @@ func play_middle_note():
 		idx += randi() % 2
 	
 	var note_to_play = current_notes[idx]
-	play_single_note(note_to_play, 1)
+	play_single_note(note_to_play)
 
 
 func play_note_no_music(elements):
@@ -173,25 +177,29 @@ func play_note_no_music(elements):
 		sampler_instrument.play_note(b_melodic_min.pick_random(), sample.octave + 1)
 	
 	if elements.size() == 3:
-				sampler_instrument.play_note("B", sample.octave)
-				sampler_instrument.play_note("E", sample.octave)
-				sampler_instrument.play_note("G#", sample.octave)
+		sampler_instrument.play_note("B", sample.octave)
+		sampler_instrument.play_note("E", sample.octave)
+		sampler_instrument.play_note("G#", sample.octave)
+		return
 	
-	else:
-		for element in elements:
-			if element == 0:
-				sampler_instrument.play_note("B", sample.octave)
-			if element == 1:
-				sampler_instrument.play_note("E", sample.octave)
-			if element == 2:
-				sampler_instrument.play_note("G#", sample.octave)
+	for element in elements:
+		if element == 0:
+			sampler_instrument.play_note("B", sample.octave)
+		if element == 1:
+			sampler_instrument.play_note("E", sample.octave)
+		if element == 2:
+			sampler_instrument.play_note("G#", sample.octave)
 
 
 func play_single_note(note, octave_modifier: int = 0):
 	var sample:= sampler_instrument.samples[0]
+	var exception_octave:= 0 ## Temporary
+	
+	if Vars.current_instrument == Vars.instrument_types.CARILLON:
+		exception_octave = 5
 	
 	sample.tone = note[0]
-	sample.octave = note[1] + octave_modifier - 1
+	sample.octave = note[1] - exception_octave + octave_modifier - 1
 	
 	if sample.octave < 0:
 		sample.octave = 0

@@ -1,6 +1,6 @@
 extends Node
 ## Todo: Make empty sample note be based on camera rotation so you can actually play music
-## Todo: Make the first element get replaced instead of the last
+## Todo: Fix double casting from one circle
 const CAST_SIGIL = preload("uid://c5nwti415vrqj")
 const EMPTY_CAST_SIGIL = preload("uid://cquqsopjsxe0b")
 const DEFAULT_SPELL = preload("uid://d0jjxcbead86g")
@@ -9,7 +9,7 @@ const PROJECTILE = preload("uid://bxvo7ewsxt46f")
 
 @export var spell_range_mult:= 1.0
 
-var element_expiry_time_mult:= 20.0
+var element_expiry_time_mult:= 15.0
 var container:= Vars.element_container
 
 
@@ -18,7 +18,10 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	if event.is_action_pressed("cast"):
-		on_cast_pressed()
+		if Input.is_action_pressed("comboless_cast"):
+			on_cast_pressed(true)
+		else:
+			on_cast_pressed(false)
 	
 	if event.is_action_pressed("element_1"):
 		add_element(0)
@@ -30,7 +33,7 @@ func _input(event: InputEvent) -> void:
 		add_element(2)
 
 
-func on_cast_pressed():
+func on_cast_pressed(comboless:= false):
 	var success: String = Bgm.check_accuracy(true)
 	
 	if Bgm.playing == false:
@@ -41,7 +44,7 @@ func on_cast_pressed():
 	
 	Bus.player_cast.emit(container, success)
 	
-	cast_spell()
+	cast_spell(comboless)
 
 
 func add_element(element: int):
@@ -70,7 +73,7 @@ func add_element(element: int):
 	container_ui.update()
 
 
-func cast_spell():
+func cast_spell(comboless:= false):
 	Bgm.play_sample(container)
 	
 	if container == []:
@@ -81,7 +84,10 @@ func cast_spell():
 	if not Vars.last_activated_circle == null:
 		Vars.last_activated_circle.texture = CAST_SIGIL
 	
-	var key: StringName = check_for_combo(container)
+	var key: StringName = ""
+	
+	if comboless == false:
+		key = check_for_combo(container)
 	
 	if enough_dopamine(key) == false:
 		create_projectile()
@@ -167,16 +173,6 @@ func get_projectile_effect(key: String):
 		projectile_effect_path = SpellCombos.combos[key]["projectile_effect_path"]
 	
 	return projectile_effect_path
-
-
-#func get_projectile_stats(projectile_inst: Projectile):
-	#var key: StringName = check_for_combo(container)
-	#
-	#if key == "":
-		#return ""
-	#
-	#if "projectile_speed" in SpellCombos.combos[key]:
-		#projectile_inst.projectile_speed = SpellCombos.combos[key]["projectile_speed"]
 
 
 func remove_all_elements():

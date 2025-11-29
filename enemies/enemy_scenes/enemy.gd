@@ -84,7 +84,7 @@ func drop_loot():
 	if data.drop == null:
 		return
 	
-	if not FileAccess.file_exists(data.drop):
+	if not ResourceLoader.exists(data.drop):
 		printerr(self, ": data.drop has invalid path")
 		return
 	

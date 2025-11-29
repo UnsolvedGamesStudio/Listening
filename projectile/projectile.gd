@@ -6,6 +6,7 @@ class_name Projectile
 ## Todo: Add phys material if cannon ball instead of removing it
 ## Todo: Make a body for terrain and a body for entities collision
 ## Todo: Add option to intercept enemy projectiles
+## Todo: Add default spell data
 const POP_TEXTURE = preload("uid://cyk5g3u4ymo2g")
 const DESTROYED_VFX:= preload("uid://dotmsm333w37o")
 const TERRAIN_LAYER:= 2
@@ -23,7 +24,7 @@ var damage: float = 10.0:
 	set(value):
 		damage = clampf(value, 0.0, 999999.9)
 
-var speed: float = 60.0
+var speed: float = 70.0
 var max_distance: float = 10.0
 var max_lifetime: float = 5.0
 
@@ -133,7 +134,7 @@ func init_projectile_effect():
 	if projectile_effect_path == "":
 		return
 	
-	if not FileAccess.file_exists(projectile_effect_path):
+	if not ResourceLoader.exists(projectile_effect_path):
 		printerr(self, ": projectile_effect has invalid path")
 		return
 	
@@ -156,12 +157,14 @@ func _physics_process(delta: float) -> void:
 		on_expired()
 		destroy()
 
-
+## Todo: Make compatible with any origin node
 func get_random_point_in_front(player: Node3D, radius: float, forward_offset: float = 0.0) -> Vector3:
 	var origin = player.global_position
 	var forward = -player.global_transform.basis.z
 	var right = player.global_transform.basis.x
 	var up = player.global_transform.basis.y
+	
+	radius *= Find.P().scale.x * 2.0
 	
 	# Optional: move the spawn plane forward in front of the face
 	var center = origin + forward * forward_offset

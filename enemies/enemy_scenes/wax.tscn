@@ -15,8 +15,8 @@
 viewport_path = NodePath("HealthBar3D/SubViewport")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_m21hj"]
-height = 1.9111214
-radius = 0.47314453
+height = 1.9565372
+radius = 0.5722656
 
 [sub_resource type="Animation" id="Animation_sadtc"]
 resource_name = "die"
@@ -147,7 +147,7 @@ collide_with_bodies = false
 [node name="EnemyBody" parent="ToAnimate" instance=ExtResource("4_hnwyi")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ToAnimate/EnemyBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96081054, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9835185, 0)
 shape = SubResource("CylinderShape3D_m21hj")
 
 [node name="Behaviors" type="Node3D" parent="ToAnimate"]

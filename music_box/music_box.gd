@@ -142,6 +142,7 @@ func looked_at_by_player(on: bool):
 	
 	if on == false:
 		to_move.global_position.y = og_pos_of_to_move.y
+		
 		if box_hover.is_playing() == false and hovered == true:
 			box.hover.play("unhover")
 		
@@ -197,7 +198,7 @@ func play_music():
 		return
 	
 	for note in chord:
-		timer.start(randf_range(0.035, 0.045) * chord.size() / (Bgm.rhythm_notifier.bpm / 100))
+		timer.start(randf_range(0.035, 0.045) * chord.size() / (Bgm.rhythm_notifier.bpm / 120))
 		
 		if randf() <= 0.33:
 			play_single_note(chord.pick_random())

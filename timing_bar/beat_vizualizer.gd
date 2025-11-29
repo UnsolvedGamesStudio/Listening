@@ -11,7 +11,7 @@ const BEAT_TIMER = preload("uid://dwk7ovxfs2mxp")
 @onready var beat_activator_anim: AnimationPlayer = %BeatActivatorAnim
 @onready var succes_label_container: Panel = %SuccesLabelContainer
 
-@export_range(1, 10) var height_modifier:= 1.2
+@export_range(1, 10) var height_modifier:= 1.16
 
 var middle_of_screen:= Vector2.ZERO
 var circle_spawn_pos:= Vector2.ZERO
