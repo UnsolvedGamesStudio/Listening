@@ -114,4 +114,6 @@ func reset():
 	living_enemies.clear()
 	synapses = 0
 	total_synapses = 0
+	neurons = 0
+	total_neurons = 0
 	inventory.clear()

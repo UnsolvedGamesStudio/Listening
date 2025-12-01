@@ -19,6 +19,7 @@ class_name Pickup
 @export var starting_move_rate:= 0.0035
 var move_lerp_rate:= starting_move_rate
 
+var activated:= false
 var current_anim_rate:= animate_every_x_beat
 var moving_to_player:= false
 
@@ -73,6 +74,7 @@ func looked_at_by_player(on: bool):
 
 
 func activate():
+	activated = true
 	await on_activated()
 	
 	if free_immediately == true:

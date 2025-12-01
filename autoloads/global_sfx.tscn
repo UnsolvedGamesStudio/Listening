@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://b02u2opsqpdcf"]
+
+[ext_resource type="Script" uid="uid://cneinegcqqd2t" path="res://autoloads/global_sfx.gd" id="1_n5yqq"]
+[ext_resource type="AudioStream" uid="uid://bw3410nnymke4" path="res://assets/sfx/rewind_sfx.ogg" id="2_f6m65"]
+[ext_resource type="AudioStream" uid="uid://d4jn3jjapdyyn" path="res://assets/sfx/ui_hover_sfx.ogg" id="3_6p8kw"]
+[ext_resource type="AudioStream" uid="uid://dr7mp36pfqae6" path="res://assets/sfx/ui_click_sfx.ogg" id="4_035jb"]
+
+[node name="GlobalSFX" type="Node"]
+process_mode = 3
+script = ExtResource("1_n5yqq")
+
+[node name="Rewind" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+stream = ExtResource("2_f6m65")
+volume_db = -3.0
+pitch_scale = 0.95
+bus = &"SFX"
+
+[node name="UIHover" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_6p8kw")
+volume_db = -14.0
+pitch_scale = 0.86
+bus = &"SFX"
+
+[node name="UIClick" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_035jb")
+volume_db = -7.0
+bus = &"SFX"

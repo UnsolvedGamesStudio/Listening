@@ -28,6 +28,7 @@ SceneManager="*res://autoloads/scene_manager.gd"
 Find="*res://autoloads/find.gd"
 PathFinder="*res://autoloads/path_finder.gd"
 TriggersManager="*res://autoloads/triggers_manager.gd"
+GlobalSfx="*res://autoloads/global_sfx.tscn"
 
 [debug]
 

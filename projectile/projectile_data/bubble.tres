@@ -5,10 +5,10 @@
 
 [resource]
 script = ExtResource("1_v4mrj")
-extra_amount = 8
+extra_amount = 10
 delay = 0.11
-damage_mult = 0.25
-speed_mult = 0.3
+damage_mult = 0.14
+speed_mult = 0.2
 destroy_on_terrain = false
 bouncy = true
 speed_mult_on_bounce = 0.15

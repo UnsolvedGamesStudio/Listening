@@ -1,6 +1,6 @@
 extends Node
 ## Todo: Put things like amount in the data
-const DEFAULT_COST:= 15.0
+const DEFAULT_COST:= 20.0
 
 enum {JOY, SAD, ANG}
 
@@ -20,7 +20,7 @@ var combos: Dictionary[StringName, Dictionary] = {
 		"combo" : [JOY, SAD],
 		"name" : "Wish",
 		"data" : null,
-		"mana_cost" : 33.0,
+		"mana_cost" : 40.0,
 		"unlocked" : true,
 		"supress_attack" : null,
 		"icon_path" : "res://player/combo_textures/default_combo_icon.png",

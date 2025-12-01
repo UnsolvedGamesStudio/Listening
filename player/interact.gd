@@ -64,6 +64,10 @@ func activate_item():
 	if not object.has_method("activate"):
 		return
 	
+	if "activated" in object:
+		if object.activated == true:
+			return
+	
 	trigger_beat_check()
 	object.activate()
 

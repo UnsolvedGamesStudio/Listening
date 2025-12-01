@@ -52,6 +52,7 @@ func load_default_song():
 
 
 func load_game():
+	Vars.reset()
 	var scene_inst:= scenes[next_scene].instantiate()
 	
 	if scene_inst is Layout:
@@ -98,5 +99,4 @@ func reload_level():
 		return
 	
 	current_scene.queue_free()
-	Vars.reset()
 	load_game()

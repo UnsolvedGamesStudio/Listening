@@ -106,6 +106,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 0)
 
 [node name="LevelLoader2" parent="Level2Cell" instance=ExtResource("4_kd8b7")]
+process_mode = 4
 visible = false
 enabled = false
 level_data = ExtResource("3_682pm")
@@ -123,6 +124,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -7.3313713e-06, -2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -7.3313713e-06, -4)
 
 [node name="LevelLoader3" parent="Level3Cell" instance=ExtResource("4_kd8b7")]
+process_mode = 4
 visible = false
 enabled = false
 level_data = ExtResource("6_aatpt")

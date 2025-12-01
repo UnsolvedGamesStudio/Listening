@@ -42,6 +42,8 @@ func pause():
 
 
 func unpause_attempt():
+	GlobalSfx.rewind.play()
+	
 	if Bgm.playing == true:
 		waiting_for_beat = true
 		return

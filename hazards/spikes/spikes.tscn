@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c86l6d7h0h8wa"]
+[gd_scene load_steps=9 format=3 uid="uid://c86l6d7h0h8wa"]
 
 [ext_resource type="ArrayMesh" uid="uid://bn4ylrjkxguy1" path="res://hazards/spikes/spike_mesh.tres" id="1_3s87x"]
 [ext_resource type="Script" uid="uid://57tlvk71dd56" path="res://hazards/spikes/spikes.gd" id="1_7fboi"]
+[ext_resource type="AudioStream" uid="uid://d2lc6mefa2ewx" path="res://assets/sfx/spike_out_sfx.ogg" id="3_iveop"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7fboi"]
 albedo_color = Color(3.0096948, 0, 0, 1)
@@ -203,3 +204,15 @@ libraries = {
 &"": SubResource("AnimationLibrary_dwf70")
 }
 speed_scale = 4.0
+
+[node name="OutSFX" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_iveop")
+volume_db = 11.0
+max_distance = 10.0
+
+[node name="InSFX" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_iveop")
+volume_db = 11.0
+max_distance = 10.0

@@ -12,12 +12,15 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func on_clicked():
+	GlobalSfx.ui_click.play()
 	Filters.fade.play("fade_out")
+	GlobalSfx.rewind.play()
 	await Filters.fade.animation_finished
 	SceneManager.switch_scene("layout")
 
 
 func on_mouse_entered():
+	GlobalSfx.ui_hover.play()
 	get_theme_stylebox("panel").border_width_left = 0
 	get_theme_stylebox("panel").border_width_bottom = 0
 

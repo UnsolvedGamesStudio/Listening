@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dohwuclbdrfh1"]
+[gd_scene load_steps=23 format=3 uid="uid://dohwuclbdrfh1"]
 
 [ext_resource type="Script" uid="uid://drn422cycc5qn" path="res://pause_menu/offset_slider.gd" id="1_5hbt6"]
 [ext_resource type="Script" uid="uid://d2xrtoqxe8yqr" path="res://pause_menu/pause_menu.gd" id="1_uwtdo"]
@@ -7,7 +7,10 @@
 [ext_resource type="StyleBox" uid="uid://dn78ncm4grcm7" path="res://assets/ui_theme/panel.tres" id="3_b0obc"]
 [ext_resource type="Script" uid="uid://ckomaugmasljd" path="res://pause_menu/cheat_button.gd" id="4_b4s0c"]
 [ext_resource type="Texture2D" uid="uid://b0tw8jr20jhhj" path="res://timing_bar/textures/interact_sigil.png" id="5_cux0y"]
-[ext_resource type="Script" uid="uid://cqai6xw6f7e72" path="res://pause_menu/auto_move_button.gd" id="5_s1glv"]
+[ext_resource type="Texture2D" uid="uid://dsi82p3d4swsv" path="res://pause_menu/textures/music_icon.png" id="8_cux0y"]
+[ext_resource type="Texture2D" uid="uid://be7uvcmrgobq8" path="res://vfx/2d_particle.png" id="9_1nv8k"]
+[ext_resource type="Script" uid="uid://cweq5gdx57r0c" path="res://pause_menu/sound_slider.gd" id="9_p6csp"]
+[ext_resource type="Texture2D" uid="uid://b05g5frto8yrd" path="res://pause_menu/textures/sfx_icon.png" id="9_teyq6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uwtdo"]
 content_margin_left = 8.0
@@ -19,6 +22,13 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
+
+[sub_resource type="FontVariation" id="FontVariation_cux0y"]
+base_font = ExtResource("2_wn31l")
+opentype_features = {
+1667329140: 0
+}
+baseline_offset = 0.22
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wn31l"]
 content_margin_left = 4.0
@@ -144,6 +154,8 @@ layer = 2
 offset = Vector2(0, 500)
 transform = Transform2D(1, 0, 0, 1, 0, 500)
 script = ExtResource("1_uwtdo")
+metadata/_edit_horizontal_guides_ = [888.0, 660.0]
+metadata/_edit_vertical_guides_ = [512.0, 8.0, 504.0]
 
 [node name="MarginContainer3" type="MarginContainer" parent="."]
 process_mode = 2
@@ -164,7 +176,7 @@ anchors_preset = -1
 anchor_left = 0.015625
 anchor_top = 0.35714287
 anchor_right = 0.26953125
-anchor_bottom = 0.8995536
+anchor_bottom = 0.8660714
 size_flags_horizontal = 4
 size_flags_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_uwtdo")
@@ -173,20 +185,26 @@ metadata/_edit_use_anchors_ = true
 [node name="CombosLabel" type="Label" parent="Combos"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/line_spacing = 7
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = SubResource("FontVariation_cux0y")
 theme_override_font_sizes/font_size = 7
 text = "Glad + Sad:
-Wish (33)
+Wish (40)
+
 Glad + Glad + Glad:
-Bubble (15)
+Bubble (20)
+
 Glad + Glad + Sad:
-Shell (15)
+Shell (20)
+
 Sad + Sad + Sad:
-Frostbite (15)
+Frostbite (20)
+
 Sad + Sad + Mad:
-Weight (15)
+Weight (20)
+
 Mad + Mad + Mad:
-Violence (15)"
+Violence (20)"
 horizontal_alignment = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
@@ -201,6 +219,7 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="Tutorial" type="PanelContainer" parent="MarginContainer2"]
 process_mode = 2
@@ -247,7 +266,6 @@ script = ExtResource("1_5hbt6")
 
 [node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/OffsetSliderContainer"]
 layout_mode = 2
-theme_override_constants/separation = 8
 
 [node name="OffsetSliderLabel" type="Label" parent="VBoxContainer/OffsetSliderContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -258,7 +276,9 @@ text = "Beat Offset: 0px"
 [node name="OffsetSlider" type="HSlider" parent="VBoxContainer/OffsetSliderContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 mouse_default_cursor_shape = 2
+theme_override_constants/center_grabber = 1
 theme_override_icons/grabber = ExtResource("5_cux0y")
 theme_override_icons/grabber_highlight = ExtResource("5_cux0y")
 theme_override_icons/grabber_disabled = ExtResource("5_cux0y")
@@ -334,27 +354,84 @@ theme_override_colors/button_unchecked_color = Color(0.38, 0.566, 1, 1)
 action_mode = 0
 script = ExtResource("4_b4s0c")
 
-[node name="AutomoveButtonContainer2" type="PanelContainer" parent="VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_b4s0c")
-
-[node name="Label" type="Label" parent="VBoxContainer/AutomoveButtonContainer2"]
-layout_mode = 2
-text = "Disable auto-move"
-
-[node name="AutomoveButton" type="CheckButton" parent="VBoxContainer/AutomoveButtonContainer2"]
-layout_mode = 2
-size_flags_horizontal = 8
-tooltip_text = "With auto-move enabled, you don't need the proper timing."
-focus_mode = 0
-mouse_default_cursor_shape = 2
-action_mode = 0
-script = ExtResource("5_s1glv")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 process_mode = 3
 libraries = {
 &"": SubResource("AnimationLibrary_s1glv")
 }
+
+[node name="VolumeSlidersContainer" type="PanelContainer" parent="."]
+process_mode = 2
+anchors_preset = -1
+anchor_left = 0.8691406
+anchor_top = 0.35714287
+anchor_right = 0.984375
+anchor_bottom = 0.8660714
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("3_b0obc")
+script = ExtResource("1_5hbt6")
+
+[node name="Control" type="Control" parent="VolumeSlidersContainer"]
+layout_mode = 2
+
+[node name="Line" type="ColorRect" parent="VolumeSlidersContainer/Control"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 109.0
+offset_right = 46.0
+offset_bottom = 110.0
+
+[node name="MarginContainer" type="MarginContainer" parent="VolumeSlidersContainer"]
+process_mode = 2
+layout_mode = 2
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="VolumeSliders" type="HBoxContainer" parent="VolumeSlidersContainer/MarginContainer"]
+process_mode = 2
+layout_mode = 2
+theme_override_constants/separation = 11
+
+[node name="MusicSlider" type="VSlider" parent="VolumeSlidersContainer/MarginContainer/VolumeSliders"]
+process_mode = 2
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("8_cux0y")
+theme_override_icons/grabber_highlight = ExtResource("8_cux0y")
+theme_override_icons/grabber_disabled = ExtResource("8_cux0y")
+theme_override_icons/tick = ExtResource("9_1nv8k")
+theme_override_styles/slider = SubResource("StyleBoxFlat_wn31l")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_b0obc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_cux0y")
+max_value = 1.0
+step = 0.05
+value = 0.5
+tick_count = 21
+ticks_on_borders = true
+script = ExtResource("9_p6csp")
+
+[node name="SFXSlider" type="VSlider" parent="VolumeSlidersContainer/MarginContainer/VolumeSliders"]
+process_mode = 2
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("9_teyq6")
+theme_override_icons/grabber_highlight = ExtResource("9_teyq6")
+theme_override_icons/grabber_disabled = ExtResource("9_teyq6")
+theme_override_icons/tick = ExtResource("9_1nv8k")
+theme_override_styles/slider = SubResource("StyleBoxFlat_wn31l")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_b0obc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_cux0y")
+max_value = 1.0
+step = 0.05
+value = 0.5
+tick_count = 21
+ticks_on_borders = true
+script = ExtResource("9_p6csp")
+type = 1

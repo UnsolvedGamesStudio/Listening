@@ -3,6 +3,7 @@ extends AudioStreamPlayer
 @onready var rhythm_notifier: RhythmNotifier = %RhythmNotifier
 @onready var midi_player: MidiPlayer = %MidiPlayer
 @onready var sampler_instrument: SamplerInstrument = %SamplerInstrument
+@onready var correct_timing_sound: SamplerInstrument = %CorrectTimingSound
 @onready var kick: AudioStreamPlayer = %Kick
 @onready var pause_menu_music: AudioStreamPlayer = %PauseMenuMusic
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
@@ -243,6 +244,8 @@ func check_accuracy(punished_for_bad_timing:= false):
 			level = 3
 			accuracy = "perfect"
 		
+		play_correct_chime(true)
+		
 		if area.owner is TimingCircle:
 			circle = area.owner
 	
@@ -258,6 +261,7 @@ func check_accuracy(punished_for_bad_timing:= false):
 		circle.recolor(level)
 	
 	if accuracy == "missed" and punished_for_bad_timing == true:
+		play_correct_chime(false)
 		Bus.beat_failure.emit()
 	
 	beat_visualizer.generate_text(accuracy)
@@ -266,7 +270,7 @@ func check_accuracy(punished_for_bad_timing:= false):
 
 func check_silent_timing():
 	var window: float = rhythm_notifier.beat_length
-	var success:= "missed"
+	var accuracy:= "missed"
 	
 	var easy_timing = Bgm.rhythm_notifier.current_position > (last_timing - (window / 2.9) ) and\
 	Bgm.rhythm_notifier.current_position < (last_timing + (window / 2.9) )
@@ -276,13 +280,37 @@ func check_silent_timing():
 	Bgm.rhythm_notifier.current_position < (last_timing + (window / 4.5) )
 	
 	if easy_timing:
-		success = "easy"
+		accuracy = "easy"
 	if medium_timing:
-		success = "medium"
+		accuracy = "medium"
 	if perfect_timing:
-		success = "perfect"
+		accuracy = "perfect"
 	
-	return success
+	return accuracy
+
+
+func play_correct_chime(hit: bool):
+	if correct_timing_sound.playing == true:
+		return
+	
+	var sample:= sampler_instrument.samples[0]
+	var note: Array = []
+	var current_notes:= get_notes()
+	sample.octave = 4
+	
+	if not current_notes == []:
+		note = current_notes[-1]
+	
+	if not note == []:
+		sample.tone = note[0]
+	
+	if sample.octave < 0:
+		sample.octave = 0
+	
+	if hit == false and not current_midi_notes == []:
+		sample.tone = translate_midi(current_midi_notes[-1] - 1)[0]
+	
+	correct_timing_sound.play_note(sample.tone, sample.octave)
 
 
 func play_kick():

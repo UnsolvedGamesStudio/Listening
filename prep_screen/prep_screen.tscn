@@ -1,16 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://cglbfa3a2dw7v"]
+[gd_scene load_steps=14 format=3 uid="uid://cglbfa3a2dw7v"]
 
 [ext_resource type="Texture2D" uid="uid://b4s6ykblvadm" path="res://terrain/textures/papertexture-2061711_640.png" id="1_im2fx"]
 [ext_resource type="Script" uid="uid://bq3pthjy1lald" path="res://prep_screen/prep_screen.gd" id="1_uxus4"]
 [ext_resource type="Theme" uid="uid://b2d4535til41s" path="res://assets/theme.tres" id="2_vx4pu"]
 [ext_resource type="PackedScene" uid="uid://dpyde8e8bwhfa" path="res://prep_screen/song_select_button.tscn" id="3_txoma"]
 [ext_resource type="PackedScene" uid="uid://c24ep73mhjfs8" path="res://prep_screen/instrument_button.tscn" id="3_x7pfc"]
-[ext_resource type="Texture2D" uid="uid://b2ngbhl362eiy" path="res://instruments/textures/carillon.png" id="4_78k1q"]
 [ext_resource type="Resource" uid="uid://bv4fypx7ab87u" path="res://assets/music/song_data/tight_rope.tres" id="4_vyhib"]
 [ext_resource type="Resource" uid="uid://b3cbgo4s0mytf" path="res://assets/music/song_data/reverie.tres" id="5_46iml"]
 [ext_resource type="Script" uid="uid://c1trbbd4jt2tb" path="res://prep_screen/start_level_button.gd" id="5_77kmu"]
 [ext_resource type="FontVariation" uid="uid://dp8trxjqpgoeg" path="res://assets/fonts/short_story_baseline_fixed.tres" id="8_jpipw"]
 [ext_resource type="StyleBox" uid="uid://dn78ncm4grcm7" path="res://assets/ui_theme/panel.tres" id="10_6omq5"]
+[ext_resource type="Texture2D" uid="uid://dwothjuelphcn" path="res://instruments/textures/carillon_icon.png" id="11_6omq5"]
+[ext_resource type="Texture2D" uid="uid://jyl46ghng7mn" path="res://instruments/textures/lute_icon.png" id="11_pauu0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vyhib"]
 bg_color = Color(0.15294118, 0.5372549, 0.8039216, 1)
@@ -131,15 +132,14 @@ theme_override_constants/separation = 8
 [node name="InstrumentButton" parent="MarginContainer/HBoxContainer" instance=ExtResource("3_x7pfc")]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-theme = null
 theme_override_styles/panel = ExtResource("10_6omq5")
+icon = ExtResource("11_pauu0")
 
 [node name="InstrumentButton2" parent="MarginContainer/HBoxContainer" instance=ExtResource("3_x7pfc")]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-theme = null
 theme_override_styles/panel = ExtResource("10_6omq5")
-icon = ExtResource("4_78k1q")
+icon = ExtResource("11_6omq5")
 instrument = 1
 
 [node name="SongPreview" type="AudioStreamPlayer" parent="." groups=["prep_screen_song_preview"]]

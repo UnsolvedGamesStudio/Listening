@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://86r6xeju02bg"]
+[gd_scene load_steps=34 format=3 uid="uid://86r6xeju02bg"]
 
 [ext_resource type="Theme" uid="uid://b2d4535til41s" path="res://assets/theme.tres" id="1_fp2hw"]
 [ext_resource type="Script" uid="uid://cfglrrbbq2g8" path="res://main_ui/health_bar.gd" id="1_m5yyi"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://djqbaobsxmkx8" path="res://main_ui/neurons_label.gd" id="7_uwb8r"]
 [ext_resource type="Texture2D" uid="uid://c6om4mvcxheye" path="res://main_ui/textures/rainbow_texture4.png" id="8_7hcy2"]
 [ext_resource type="Texture2D" uid="uid://dam31kn2ab3bc" path="res://main_ui/textures/enemy_icon.png" id="9_uwb8r"]
+[ext_resource type="Script" uid="uid://bjdna7ooo0a0y" path="res://main_ui/level_collectible.gd" id="11_euac6"]
 [ext_resource type="FontFile" uid="uid://coihm6kr2umjr" path="res://assets/fonts/Short_Story.ttf" id="18_ntkvn"]
 [ext_resource type="StyleBox" uid="uid://3mxb1yvwi5f0" path="res://assets/ui_theme/outline_panel.tres" id="20_kkjxn"]
 
@@ -218,6 +219,7 @@ layout_mode = 2
 
 [node name="NeuronCount" type="HBoxContainer" parent="MarginContainer/Left"]
 layout_mode = 2
+script = ExtResource("11_euac6")
 metadata/_edit_use_anchors_ = true
 
 [node name="NeuronIcon" type="TextureRect" parent="MarginContainer/Left/NeuronCount"]
@@ -234,6 +236,7 @@ script = ExtResource("7_uwb8r")
 
 [node name="SynapsesCount" type="HBoxContainer" parent="MarginContainer/Left"]
 layout_mode = 2
+script = ExtResource("11_euac6")
 metadata/_edit_use_anchors_ = true
 
 [node name="SynapseIcon" type="TextureRect" parent="MarginContainer/Left/SynapsesCount"]
@@ -250,6 +253,7 @@ script = ExtResource("6_sqw8h")
 
 [node name="EnemyCount" type="HBoxContainer" parent="MarginContainer/Left"]
 layout_mode = 2
+script = ExtResource("11_euac6")
 metadata/_edit_use_anchors_ = true
 
 [node name="SynapseIcon" type="TextureRect" parent="MarginContainer/Left/EnemyCount"]
@@ -271,7 +275,6 @@ size_flags_vertical = 0
 theme_override_constants/separation = 2
 
 [node name="Timer" type="Label" parent="MarginContainer/Middle"]
-modulate = Color(1, 1, 1, 0.3372549)
 custom_minimum_size = Vector2(68.235, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -284,7 +287,7 @@ justification_flags = 0
 script = ExtResource("2_5q6g2")
 
 [node name="PauseHint" type="Label" parent="MarginContainer/Middle"]
-modulate = Color(1, 1, 1, 0.3372549)
+modulate = Color(1, 1, 1, 0.6745098)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0

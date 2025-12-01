@@ -72,6 +72,7 @@ func apply_values():
 
 func on_clicked():
 	selected_song = self
+	GlobalSfx.ui_click.play()
 	apply_values()
 
 
@@ -79,6 +80,7 @@ func on_mouse_entered():
 	if not selected_song == self:
 		scale.y = 1.1
 	
+	GlobalSfx.ui_hover.play()
 	song_preview.volume_db = song_data.volume
 	song_preview.stream = song_stream
 	song_preview.play()

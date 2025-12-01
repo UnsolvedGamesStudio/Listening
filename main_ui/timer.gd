@@ -24,7 +24,7 @@ static func convert_time_to_string(time: float) -> String:
 	var minutes: int = int(time / 60.0) % 60
 	var seconds: int = int(time) % 60
 	#var centiseconds: int = int(time * 100.0) % 100
-	var string: String = "%2d" % [seconds]
+	var string: String = str(seconds as int)
 	#var string: String = "%02d.%02d" % [seconds, centiseconds]
 	
 	if minutes > 0 or hours > 0:

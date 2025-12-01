@@ -38,6 +38,7 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func on_clicked():
+	GlobalSfx.ui_click.play()
 	Vars.current_instrument = instrument
 
 
@@ -45,6 +46,7 @@ func on_mouse_entered():
 	if Vars.current_instrument == instrument:
 		return
 	
+	GlobalSfx.ui_hover.play()
 	modulate.a = 0.8
 
 

@@ -6,6 +6,16 @@ enum types {RESUME, EXIT, PLAY_AGAIN, HUB}
 
 func _ready() -> void:
 	button_up.connect(on_button_up)
+	mouse_entered.connect(on_mouse_entered)
+	button_down.connect(on_button_down)
+
+
+func on_mouse_entered():
+	GlobalSfx.ui_hover.play()
+
+
+func on_button_down():
+	GlobalSfx.ui_click.play()
 
 
 func on_button_up():
@@ -18,13 +28,22 @@ func on_button_up():
 	
 	if type == types.PLAY_AGAIN:
 		if owner.has_method("unpause"):
+			GlobalSfx.rewind.play()
 			owner.unpause()
 		
 		SceneManager.reload_level()
 	
 	if type == types.HUB:
 		if owner.has_method("unpause"):
+			GlobalSfx.rewind.play()
 			owner.unpause()
+		
+		Filters.fade.play("fade_out")
+		
 		
 		SceneManager.switch_scene("hub_world")
 		Bgm.stop_song()
+		
+		await Filters.fade.animation_finished
+		
+		Filters.fade.play("fade_in")

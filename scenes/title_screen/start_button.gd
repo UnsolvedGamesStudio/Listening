@@ -71,8 +71,10 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func start():
+	GlobalSfx.ui_click.play()
 	title_appear.play_backwards("appear")
 	Filters.fade.play("fade_out")
+	GlobalSfx.rewind.play()
 	await Filters.fade.animation_finished
 	Bgm.non_beat_bgm.stop()
 	Filters.fade.play("fade_out")
@@ -82,6 +84,7 @@ func start():
 
 
 func on_mouse_entered():
+	GlobalSfx.ui_hover.play()
 	mouse_in = true
 
 
