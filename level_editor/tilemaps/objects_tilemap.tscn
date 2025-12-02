@@ -257,3 +257,5 @@ sources/10 = SubResource("TileSetAtlasSource_1a3vd")
 [node name="ObjectsTilemap" type="TileMapLayer"]
 tile_set = SubResource("TileSet_yxmo0")
 collision_enabled = false
+
+[connection signal="changed" from="." to="." method="_on_changed"]

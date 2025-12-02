@@ -1,6 +1,5 @@
 extends Node
 
-
 var to_die_ids: Dictionary[int, int] = {} ## Puzzle id : Amount left
 
 func _ready() -> void:

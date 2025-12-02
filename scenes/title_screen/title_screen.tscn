@@ -1,9 +1,11 @@
-[gd_scene load_steps=16 format=4 uid="uid://bqk51arvtg2x"]
+[gd_scene load_steps=19 format=4 uid="uid://bqk51arvtg2x"]
 
 [ext_resource type="Script" uid="uid://dr2lkvinonh3v" path="res://scenes/title_screen/title_screen.gd" id="1_5df70"]
 [ext_resource type="Texture2D" uid="uid://bl01myg3ktmfp" path="res://scenes/title_screen/textures/title.png" id="2_ri6bm"]
 [ext_resource type="Script" uid="uid://bo41bw4t36d44" path="res://scenes/title_screen/start_button.gd" id="2_vuv2h"]
 [ext_resource type="Script" uid="uid://c7dnvyawarifn" path="res://scenes/title_screen/web_disclaimer.gd" id="3_d6x3v"]
+[ext_resource type="StyleBox" uid="uid://dn78ncm4grcm7" path="res://assets/ui_theme/panel.tres" id="5_5uxxq"]
+[ext_resource type="Script" uid="uid://b56jfy7g127ku" path="res://pause_menu/pause_menu_button.gd" id="6_cxcmr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ri6bm"]
 content_margin_left = 4.0
@@ -26,6 +28,17 @@ bg_color = Color(0, 0, 0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5uxxq"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_teyq6"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.105882354, 0.14117648, 0.2784314, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xawky"]
 albedo_color = Color(0.92156863, 0, 0.5764706, 1)
@@ -188,14 +201,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="StartButton" type="Button" parent="UI"]
 anchors_preset = -1
-anchor_left = 0.49218634
-anchor_top = 0.38169605
-anchor_right = 0.49219096
-anchor_bottom = 0.38169745
-offset_left = -99.999405
-offset_top = 59.000168
-offset_right = 107.99823
-offset_bottom = 114.99954
+anchor_left = 0.296875
+anchor_top = 0.51339287
+anchor_right = 0.703125
+anchor_bottom = 0.63839287
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(107, 31)
@@ -209,6 +218,24 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_d6x3v")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5uxxq")
 text = "Start Game"
 script = ExtResource("2_vuv2h")
+metadata/_edit_use_anchors_ = true
+
+[node name="ResetButton" type="Button" parent="UI"]
+anchors_preset = -1
+anchor_left = 0.015625
+anchor_top = 0.017857144
+anchor_right = 0.1796875
+anchor_bottom = 0.08258928
+offset_right = -38.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 7
+theme_override_styles/normal = ExtResource("5_5uxxq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_teyq6")
+text = "Reset Progress"
+script = ExtResource("6_cxcmr")
+type = 4
+metadata/_edit_use_anchors_ = true
 
 [node name="SmallBrain" type="MeshInstance3D" parent="." groups=["small_brain"]]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)

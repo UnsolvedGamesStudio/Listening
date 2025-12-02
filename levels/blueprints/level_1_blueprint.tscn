@@ -37,6 +37,7 @@ tile_map_data = PackedByteArray("AAAAAPj/BQABAAAAAAABAPn/BQAAAAAAAAADAPn/BQAAAAA
 tile_map_data = PackedByteArray("AAAFAOT/BQAAAAAAAAAFAOL/BQAAAAAAAAA=")
 
 [node name="Floor2" parent="." instance=ExtResource("10_xron4")]
+visible = false
 floor_number = 2
 height = 5.0
 

@@ -26,7 +26,7 @@ func _ready() -> void:
 	load_debug()
 	
 	next_scene = main.scene_to_load
-	load_game()
+	load_scene()
 
 
 func load_debug():
@@ -51,12 +51,19 @@ func load_default_song():
 	Bgm.volume_db = main.default_song.volume
 
 
-func load_game():
+func load_scene():
 	Vars.reset()
 	var scene_inst:= scenes[next_scene].instantiate()
 	
+	## Check if entering a level
 	if scene_inst is Layout:
+		Bus.loading_level.emit()
 		generate_blueprint(scene_inst)
+	
+	## Check if entering the hub
+	if current_scene is Layout and scene_inst is HubWorld:
+		Bus.level_exited.emit()
+		SaveManager.write_save_data()
 	
 	main.add_child(scene_inst)
 	current_scene = scene_inst
@@ -75,10 +82,10 @@ func start_level():
 		Bgm.start_song()
 
 
-func switch_scene(scene: String, blueprint: String = ""):
+func switch_scene(scene: String, blueprint: String = "", level_data: LevelData = null):
 	current_scene.queue_free()
 	next_scene = scene
-	load_game()
+	load_scene()
 
 
 func generate_blueprint(scene_inst: Node):
@@ -99,4 +106,9 @@ func reload_level():
 		return
 	
 	current_scene.queue_free()
-	load_game()
+	load_scene()
+
+
+func quit_game():
+	SaveManager.write_save_data()
+	get_tree().quit()

@@ -1,6 +1,9 @@
 extends Node3D
 class_name Enemy
 ## Todo: Before adding new enemies, make every enemy nothing but a collection of behavior nodes; whatever it takes to make every enemy self-sufficiant
+## Todo: Add indication that enemy already dropped the synapse (and other similar cases) / hasn't dropped it yet
+## Todo: Make collectible drops add themselves to stats (see music box)
+## Todo: Make them aggro when hit
 const PROJECTILE = preload("uid://6n70akjpdb5c")
 const DEFAULT_PROJECTILE_TEXTURE = preload("uid://dgygswxu7j8ds")
 const TERRAIN_LAYER:= 2
@@ -19,6 +22,8 @@ const SHELL_LAYER:= 11
 @export var data: EnemyResource = preload("uid://c8heqp3v32a1n")
 @export var enabled:= true
 @export var puzzle_id:= -1
+
+@export var uuid: String = ""
 
 var preferred_range
 enum ranges{MELEE, RANGED, CONTACT}
@@ -45,6 +50,7 @@ signal projectile_hit_player
 func _ready() -> void:
 	init_stats()
 	init_behaviors()
+	
 	if counts_towards_goal == true:
 		Vars.living_enemies.append(self)
 
@@ -75,7 +81,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		set_sprite_alpha(1.0)
 
-
+## Todo: Turn into behavior
 func drop_loot():
 	if data == null:
 		printerr(self, " : data not found")
@@ -95,8 +101,23 @@ func drop_loot():
 		printerr(self, ": drop_inst is not a node")
 		return
 	
+	var inst_uuid:= uuid + "_" + str(0)
+	
+	if SaveManager.check_node_collected(drop_inst, inst_uuid) == true:
+		drop_inst.queue_free()
+		return
+	
+	set_inst_uuid(drop_inst, inst_uuid)
+	
 	Find.layout().add_child(drop_inst)
 	drop_inst.global_position = global_position
+
+
+func set_inst_uuid(drop_inst, inst_uuid):
+	if not "uuid" in drop_inst:
+		return
+	
+	drop_inst.uuid = inst_uuid
 
 
 func set_sprite_alpha(amount: float):

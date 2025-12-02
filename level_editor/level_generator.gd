@@ -24,7 +24,7 @@ func generate():
 	
 	for child in blueprint.get_children():
 		if not child is BlueprintFloor:
-			return
+			continue
 		
 		update_floor_heights(child)
 		generate_floor_layers(child)
@@ -56,7 +56,7 @@ func generate_cells(used_tiles: Array[Vector2i], layer: TileMapLayer, blueprint_
 	for tile in used_tiles:
 		var scene_data: PackedScene = layer.get_cell_tile_data(tile).get_custom_data("scene")
 		if scene_data == null:
-			return
+			continue
 		
 		var cell_inst: Node = scene_data.instantiate()
 		add_child(cell_inst)
@@ -80,9 +80,16 @@ func generate_object_tiles(used_tiles: Array[Vector2i], layer: TileMapLayer, blu
 		
 		if scene_data == null:
 			printerr(tile, ": no scene data found")
-			return
+			continue
 		
 		var scene_inst: Node = scene_data.instantiate()
+		var inst_uuid:= "%d_%d" % [tile.x, tile.y]
+		
+		if SaveManager.check_node_collected(scene_inst, inst_uuid) == true:
+			scene_inst.queue_free()
+			continue
+		
+		set_uuid(scene_inst, inst_uuid)
 		
 		if "puzzle_id" in scene_inst:
 			var puzzle_id: int = layer.get_cell_tile_data(tile).get_custom_data("puzzle_id")
@@ -101,6 +108,13 @@ func generate_object_tiles(used_tiles: Array[Vector2i], layer: TileMapLayer, blu
 			unique_object_setup(scene_inst, unique_object_id)
 
 
+func set_uuid(inst: Node, inst_uuid: String):
+	if not "uuid" in inst:
+		return
+	
+	inst.uuid = inst_uuid
+
+
 func rotate_scene(scene: Node3D, tile: Vector2i, layer: TileMapLayer):
 		var alternate:= layer.get_cell_alternative_tile(tile)
 		var flip_h:= alternate & TileSetAtlasSource.TRANSFORM_FLIP_H == TileSetAtlasSource.TRANSFORM_FLIP_H
@@ -117,9 +131,6 @@ func rotate_scene(scene: Node3D, tile: Vector2i, layer: TileMapLayer):
 		
 		if flip_h == false and flip_v == true:
 			scene.global_rotation_degrees.y = -90.0
-		
-		if scene is WallCrack:
-			print(scene.global_rotation_degrees)
 
 
 func puzzle_setup(scene_inst: Node, puzzle_id: int):
@@ -168,6 +179,6 @@ func box_setup(box: MusicBox, box_id: int):
 	
 	for object in blueprint.box_arrays[box_id - 1]:
 		if object is not PackedScene:
-			return
+			continue
 		
 		box.contents.append(object)

@@ -91,7 +91,7 @@ metadata/_custom_type_script = "uid://2ag1petdt53"
 
 [node name="CorrectTimingSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-volume_db = -20.0
+volume_db = -18.0
 bus = &"SFX"
 script = ExtResource("5_syuoy")
 samples = Array[ExtResource("6_yq28d")]([SubResource("Resource_yl5a4")])

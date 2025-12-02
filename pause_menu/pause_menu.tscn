@@ -154,8 +154,8 @@ layer = 2
 offset = Vector2(0, 500)
 transform = Transform2D(1, 0, 0, 1, 0, 500)
 script = ExtResource("1_uwtdo")
-metadata/_edit_horizontal_guides_ = [888.0, 660.0]
-metadata/_edit_vertical_guides_ = [512.0, 8.0, 504.0]
+metadata/_edit_horizontal_guides_ = [878.0, 650.0]
+metadata/_edit_vertical_guides_ = [512.0, 8.0, 504.0, 256.0]
 
 [node name="MarginContainer3" type="MarginContainer" parent="."]
 process_mode = 2
@@ -174,9 +174,9 @@ metadata/_edit_use_anchors_ = true
 process_mode = 2
 anchors_preset = -1
 anchor_left = 0.015625
-anchor_top = 0.35714287
+anchor_top = 0.33482143
 anchor_right = 0.26953125
-anchor_bottom = 0.8660714
+anchor_bottom = 0.84375
 size_flags_horizontal = 4
 size_flags_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_uwtdo")
@@ -247,22 +247,29 @@ process_mode = 2
 custom_minimum_size = Vector2(200, 0)
 anchors_preset = -1
 anchor_left = 0.3046875
-anchor_top = 0.36160713
+anchor_top = 0.33482143
 anchor_right = 0.6953125
-anchor_bottom = 0.74553573
-offset_top = -2.0
-offset_bottom = -2.0
+anchor_bottom = 0.71875
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 5
-alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="OffsetSliderContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("3_b0obc")
 script = ExtResource("1_5hbt6")
+
+[node name="Control" type="Control" parent="VBoxContainer/OffsetSliderContainer"]
+layout_mode = 2
+
+[node name="Line" type="ColorRect" parent="VBoxContainer/OffsetSliderContainer/Control"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.38235295
+anchor_right = 0.5054348
+anchor_bottom = 1.0882353
+metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/OffsetSliderContainer"]
 layout_mode = 2
@@ -279,15 +286,21 @@ layout_mode = 2
 focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_override_constants/center_grabber = 1
+theme_override_constants/grabber_offset = -1
+theme_override_constants/tick_offset = 1
 theme_override_icons/grabber = ExtResource("5_cux0y")
 theme_override_icons/grabber_highlight = ExtResource("5_cux0y")
 theme_override_icons/grabber_disabled = ExtResource("5_cux0y")
+theme_override_icons/tick = ExtResource("9_1nv8k")
 theme_override_styles/slider = SubResource("StyleBoxFlat_wn31l")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_b0obc")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_cux0y")
 min_value = -25.0
 max_value = 25.0
 rounded = true
+tick_count = 25
+ticks_on_borders = true
+ticks_position = 2
 
 [node name="ResumeButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -301,6 +314,7 @@ script = ExtResource("2_rd7dy")
 
 [node name="PlayAgainButton" type="Button" parent="VBoxContainer"]
 process_mode = 2
+visible = false
 custom_minimum_size = Vector2(100.215, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -320,7 +334,7 @@ mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 7
 theme_override_styles/normal = SubResource("StyleBoxFlat_s1glv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_teyq6")
-text = "Back to hub world"
+text = "Save and go back to hub world"
 script = ExtResource("2_rd7dy")
 type = 3
 
@@ -331,7 +345,7 @@ mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 7
 theme_override_styles/normal = SubResource("StyleBoxFlat_s1glv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_teyq6")
-text = "Exit game"
+text = "Save and quit"
 script = ExtResource("2_rd7dy")
 type = 1
 
@@ -365,22 +379,24 @@ libraries = {
 process_mode = 2
 anchors_preset = -1
 anchor_left = 0.8691406
-anchor_top = 0.35714287
+anchor_top = 0.33482143
 anchor_right = 0.984375
-anchor_bottom = 0.8660714
+anchor_bottom = 0.84375
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("3_b0obc")
 script = ExtResource("1_5hbt6")
+metadata/_edit_use_anchors_ = true
 
 [node name="Control" type="Control" parent="VolumeSlidersContainer"]
 layout_mode = 2
 
 [node name="Line" type="ColorRect" parent="VolumeSlidersContainer/Control"]
 layout_mode = 0
-offset_left = -3.0
-offset_top = 109.0
-offset_right = 46.0
-offset_bottom = 110.0
+anchor_left = -0.069767445
+anchor_top = 0.5
+anchor_right = 1.0697675
+anchor_bottom = 0.5045872
+metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="VolumeSlidersContainer"]
 process_mode = 2
@@ -400,6 +416,7 @@ size_flags_vertical = 3
 focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_override_constants/center_grabber = 1
+theme_override_constants/tick_offset = 1
 theme_override_icons/grabber = ExtResource("8_cux0y")
 theme_override_icons/grabber_highlight = ExtResource("8_cux0y")
 theme_override_icons/grabber_disabled = ExtResource("8_cux0y")
@@ -412,6 +429,7 @@ step = 0.05
 value = 0.5
 tick_count = 21
 ticks_on_borders = true
+ticks_position = 2
 script = ExtResource("9_p6csp")
 
 [node name="SFXSlider" type="VSlider" parent="VolumeSlidersContainer/MarginContainer/VolumeSliders"]
@@ -421,6 +439,7 @@ size_flags_vertical = 3
 focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_override_constants/center_grabber = 1
+theme_override_constants/tick_offset = 1
 theme_override_icons/grabber = ExtResource("9_teyq6")
 theme_override_icons/grabber_highlight = ExtResource("9_teyq6")
 theme_override_icons/grabber_disabled = ExtResource("9_teyq6")
@@ -433,5 +452,6 @@ step = 0.05
 value = 0.5
 tick_count = 21
 ticks_on_borders = true
+ticks_position = 2
 script = ExtResource("9_p6csp")
 type = 1

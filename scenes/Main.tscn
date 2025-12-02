@@ -15,6 +15,7 @@ gravity = Vector3(0, 98, 0)
 
 [node name="Main" type="Node" groups=["main_scene"]]
 script = ExtResource("1_o5qli")
+scene_to_load = "layout"
 default_song = ExtResource("2_rarhs")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

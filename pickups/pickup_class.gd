@@ -16,12 +16,15 @@ class_name Pickup
 @export var animate_every_x_beat:= 4
 @export var interacted_color:= Color(0.0, 0.659, 0.593, 1.0)
 
+@export var uuid: String = ""
+
 @export var starting_move_rate:= 0.0035
 var move_lerp_rate:= starting_move_rate
 
 var activated:= false
 var current_anim_rate:= animate_every_x_beat
 var moving_to_player:= false
+
 
 
 func _ready() -> void:

@@ -3,6 +3,8 @@ class_name NeuronPickup
 
 @onready var sfx: AudioStreamPlayer = %SFX
 
+var category:= "neurons"
+
 
 func _ready() -> void:
 	Vars.total_neurons += 1
@@ -13,6 +15,7 @@ func on_activated():
 	Bus.neuron_picked_up.emit()
 	sfx.reparent(get_parent())
 	sfx.play()
+	SaveManager.set_collected(category, uuid)
 	
 	if Vars.neurons == Vars.total_neurons:
 		Bus.game_won.emit()

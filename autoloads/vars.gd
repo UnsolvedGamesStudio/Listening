@@ -3,35 +3,11 @@ extends Node
 var paused:= false
 var level_time:= 0.0
 
-## Collectibles
-var level_collects: Dictionary[String, Dictionary] = {
-	"level_1" : {
-		"total_synapses" : 0,
-		"total_neurons" : 0,
-		"synapses" : 0,
-		"neurons" : 0,
-	},
-	
-	"level_2" : {
-		"total_synapses" : 0,
-		"total_neurons" : 0,
-		"synapses" : 0,
-		"neurons" : 0,
-	},
-	
-	"level_3" : {
-		"total_synapses" : 0,
-		"total_neurons" : 0,
-		"synapses" : 0,
-		"neurons" : 0,
-	},
-	
-}
 
 var total_neurons:= 0
-var neurons:= 0
+var neurons:= get_collected("synapses")
 var total_synapses:= 0
-var synapses:= 0
+var synapses:= get_collected("synapses")
 var max_dopamine:= 100.0:
 	set(value):
 		max_dopamine = clampf(value, 0.0, 9999.9)
@@ -100,6 +76,7 @@ enum item_types{F_KEY}
 
 
 func reset():
+	TriggersManager.to_die_ids.clear()
 	paused = false
 	level_time = 0.0
 	cell_nodes.clear()
@@ -112,8 +89,12 @@ func reset():
 	element_container.clear()
 	last_element = "none"
 	living_enemies.clear()
-	synapses = 0
-	total_synapses = 0
-	neurons = 0
-	total_neurons = 0
+	synapses = get_collected("synapses")
+	total_synapses = get_collected("synapses")
+	neurons = get_collected("neurons")
+	total_neurons = get_collected("neurons")
 	inventory.clear()
+
+
+func get_collected(category: String) -> int:
+	return SaveManager.saved_data[category].size()

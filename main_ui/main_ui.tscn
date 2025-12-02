@@ -219,7 +219,6 @@ layout_mode = 2
 
 [node name="NeuronCount" type="HBoxContainer" parent="MarginContainer/Left"]
 layout_mode = 2
-script = ExtResource("11_euac6")
 metadata/_edit_use_anchors_ = true
 
 [node name="NeuronIcon" type="TextureRect" parent="MarginContainer/Left/NeuronCount"]

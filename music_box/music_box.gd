@@ -17,6 +17,9 @@ class_name MusicBox
 @onready var open_sfx: AudioStreamPlayer3D = %OpenSFX
 
 @export var contents: Array[PackedScene] = []
+
+@export var uuid: String = ""
+
 var object_instances: Array[Node3D] = []
 
 var box_id:= 0
@@ -30,20 +33,37 @@ var og_pos_of_to_move:= Vector3.ZERO
 func _ready() -> void:
 	og_pos_of_to_move = to_move.global_position
 	
-	for object: PackedScene in contents:
-		var object_inst: Node3D = object.instantiate()
-		object_inst.process_mode = Node.PROCESS_MODE_DISABLED
-		get_parent().add_child(object_inst)
-		object_inst.global_position = Vector3(-100.0, -100.0, -100.0)
-		object_instances.append(object_inst)
+	init_contents()
 	
 	if contents == []:
 		return
 	
-	contents[0].instantiate()
-	#Bus.beat.connect(on_beat)
 	area_3d.area_entered.connect(on_area_3d_area_entered)
 	area_3d.area_exited.connect(on_area_3d_area_exited)
+
+
+func init_contents():
+	for i in range(contents.size()):
+		var scene: PackedScene = contents[i]
+		var object_inst: Node3D = scene.instantiate()
+		var inst_uuid:= uuid + "_" + str(i)
+		
+		if SaveManager.check_node_collected(object_inst, inst_uuid) == true:
+			object_inst.queue_free()
+			continue
+		
+		set_inst_uuid(object_inst, inst_uuid)
+		object_inst.process_mode = Node.PROCESS_MODE_DISABLED
+		get_parent().add_child(object_inst)
+		object_inst.global_position = Vector3(-100.0, -100.0, -100.0)
+		object_instances.append(object_inst)
+
+
+func set_inst_uuid(inst, inst_uuid):
+	if not "uuid" in inst:
+		return
+	
+	inst.uuid = inst_uuid
 
 
 func _physics_process(delta: float) -> void:
