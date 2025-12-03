@@ -1,0 +1,151 @@
+[gd_scene load_steps=23 format=3 uid="uid://c68q06qr8h5xi"]
+
+[ext_resource type="Script" uid="uid://cm24cge1m8xwf" path="res://decoration/critters/mouse.gd" id="1_7shys"]
+[ext_resource type="PackedScene" uid="uid://dwwqg64m47km3" path="res://decoration/critters/critter_hurtbox.tscn" id="2_im2v1"]
+[ext_resource type="PackedScene" uid="uid://cwb4k1gcdpu2m" path="res://decoration/critters/critter_movement.tscn" id="2_r2l80"]
+[ext_resource type="AudioStream" uid="uid://u1b4in7jupp7" path="res://assets/sfx/mouse_idle.ogg" id="3_1o5tm"]
+[ext_resource type="PackedScene" uid="uid://cgv5kne52pn1o" path="res://decoration/critters/critter_get_hurt.tscn" id="3_4se78"]
+[ext_resource type="AudioStream" uid="uid://cly28y4nmyy1x" path="res://assets/sfx/mouse_scream_sfx.ogg" id="4_1o5tm"]
+
+[sub_resource type="Gradient" id="Gradient_dgxte"]
+offsets = PackedFloat32Array(0, 0.24460432)
+colors = PackedColorArray(0, 0, 0, 0.12156863, 1, 1, 1, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7shys"]
+noise_type = 0
+frequency = 0.08
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r2l80"]
+width = 226
+noise = SubResource("FastNoiseLite_7shys")
+color_ramp = SubResource("Gradient_dgxte")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4se78"]
+transparency = 1
+albedo_texture = SubResource("NoiseTexture2D_r2l80")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dgxte"]
+next_pass = SubResource("StandardMaterial3D_4se78")
+albedo_color = Color(0.15294118, 0.12156863, 0.105882354, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dgxte"]
+material = SubResource("StandardMaterial3D_dgxte")
+top_radius = 0.0
+bottom_radius = 0.111
+height = 0.115
+radial_segments = 4
+rings = 0
+cap_top = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7shys"]
+albedo_color = Color(0.93333334, 0.70980394, 0.6117647, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7shys"]
+material = SubResource("StandardMaterial3D_7shys")
+top_radius = 0.0
+bottom_radius = 0.007
+height = 0.321
+radial_segments = 4
+rings = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r2l80"]
+albedo_color = Color(0.93333334, 0.70980394, 0.6117647, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4se78"]
+material = SubResource("StandardMaterial3D_r2l80")
+radius = 0.017
+height = 0.033
+radial_segments = 4
+rings = 4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7shys"]
+size = Vector3(0.23828125, 0.12059082, 0.44047874)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4se78"]
+size = Vector3(1, 0.49389648, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r2l80"]
+size = Vector3(0.17498016, 0.05811719, 0.32305908)
+
+[sub_resource type="Animation" id="Animation_r2l80"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_4se78"]
+resource_name = "moving"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_im2v1"]
+_data = {
+&"idle": SubResource("Animation_r2l80"),
+&"moving": SubResource("Animation_4se78")
+}
+
+[node name="Mouse" type="RigidBody3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_7shys")
+
+[node name="Meshes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06197186, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.9289634, 0, 0, 0)
+mesh = SubResource("CylinderMesh_dgxte")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.04727173, 0.33654785)
+mesh = SubResource("CylinderMesh_7shys")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04727173, -0.21987534)
+mesh = SubResource("SphereMesh_4se78")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06197186, 0)
+shape = SubResource("BoxShape3D_7shys")
+
+[node name="Hurtbox" parent="." instance=ExtResource("2_im2v1")]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25305176, 0)
+shape = SubResource("BoxShape3D_4se78")
+
+[node name="WallDetect" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallDetect"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006549835, 0.05692632, -0.18545532)
+shape = SubResource("BoxShape3D_r2l80")
+debug_color = Color(0.41099185, 0.603334, 0, 0.14901961)
+
+[node name="AmbientSFX" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_1o5tm")
+autoplay = true
+max_distance = 10.0
+bus = &"SFX"
+
+[node name="DieSFX" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_1o5tm")
+volume_db = -10.0
+pitch_scale = 1.2
+max_distance = 10.0
+bus = &"SFX"
+
+[node name="CritterMovement" parent="." instance=ExtResource("2_r2l80")]
+min_random_time = 4.0
+max_random_time = 8.0
+speed_boost_frequency = 5.0
+speed_boost_mult = 2.5
+
+[node name="CritterGetHurt" parent="." instance=ExtResource("3_4se78")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_im2v1")
+}

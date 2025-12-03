@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dilbsihag48bm"]
+[gd_scene load_steps=51 format=3 uid="uid://dilbsihag48bm"]
 
 [ext_resource type="PackedScene" uid="uid://6etr4cvlbgr2" path="res://music_box/music_box.tscn" id="1_cf6e4"]
 [ext_resource type="Texture2D" uid="uid://0gh2qphl4tm4" path="res://level_editor/textures/box_tiles.png" id="2_1uy3p"]
@@ -18,7 +18,11 @@
 [ext_resource type="Texture2D" uid="uid://dy0umo4pgu5jm" path="res://level_editor/textures/player_spawn.png" id="10_i6a1y"]
 [ext_resource type="PackedScene" uid="uid://b4d6fhecioyhy" path="res://pickups/healing_pickup.tscn" id="11_x5feu"]
 [ext_resource type="PackedScene" uid="uid://7meyinovsje0" path="res://pickups/synapse_pickup.tscn" id="12_1a3vd"]
+[ext_resource type="PackedScene" uid="uid://mkpfa2rbhknh" path="res://decoration/tendrils_decoration.tscn" id="12_hdd36"]
+[ext_resource type="PackedScene" uid="uid://txkmy4mp47k1" path="res://decoration/critters/crawling_bug.tscn" id="13_hdd36"]
 [ext_resource type="PackedScene" uid="uid://du111uv3smns3" path="res://pickups/shrinking_pickup.tscn" id="13_hsd26"]
+[ext_resource type="PackedScene" uid="uid://c68q06qr8h5xi" path="res://decoration/critters/mouse.tscn" id="14_ar6ua"]
+[ext_resource type="Texture2D" uid="uid://cqigeg781bbmc" path="res://level_editor/textures/decoration_tiles.png" id="14_tjakk"]
 [ext_resource type="PackedScene" uid="uid://dqpxy77one4hb" path="res://pickups/neuron_pickup.tscn" id="14_w1yg8"]
 [ext_resource type="Texture2D" uid="uid://bhqj8jqxnu0q" path="res://level_editor/textures/pickups.png" id="15_g1r3g"]
 [ext_resource type="PackedScene" uid="uid://c86l6d7h0h8wa" path="res://hazards/spikes/spikes.tscn" id="16_hdd36"]
@@ -97,6 +101,16 @@ texture = ExtResource("33_1a3vd")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/custom_data_0 = ExtResource("10_hsd26")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m4r6b"]
+texture = ExtResource("14_tjakk")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("12_hdd36")
+1:0/0 = 0
+1:0/0/custom_data_0 = ExtResource("13_hdd36")
+2:0/0 = 0
+2:0/0/custom_data_0 = ExtResource("14_ar6ua")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1h6v4"]
 resource_name = "Keys"
@@ -253,6 +267,7 @@ sources/7 = SubResource("TileSetAtlasSource_gofoe")
 sources/8 = SubResource("TileSetAtlasSource_1j3dw")
 sources/0 = SubResource("TileSetAtlasSource_a0av3")
 sources/10 = SubResource("TileSetAtlasSource_1a3vd")
+sources/11 = SubResource("TileSetAtlasSource_m4r6b")
 
 [node name="ObjectsTilemap" type="TileMapLayer"]
 tile_set = SubResource("TileSet_yxmo0")

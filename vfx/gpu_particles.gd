@@ -1,5 +1,14 @@
 extends GPUParticles3D
 
+@export var scale_mult:= 1.0
+@export var particle_size:= 1.0
+@export var texture: Texture
+
+
+func _ready() -> void:
+	scale *= scale_mult
+	draw_pass_1.size *= particle_size
+
 
 func activate(time:= 0.2, destroy:= true):
 	var layout:= Find.layout()

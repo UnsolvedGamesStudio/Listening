@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgv5kne52pn1o"]
+
+[ext_resource type="Script" uid="uid://dkqydausw10dt" path="res://decoration/critters/critter_get_hurt.gd" id="1_6sbk8"]
+
+[node name="CritterGetHurt" type="Node"]
+script = ExtResource("1_6sbk8")

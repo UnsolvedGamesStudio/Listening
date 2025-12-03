@@ -1,21 +1,22 @@
 [gd_scene load_steps=4 format=3 uid="uid://bw8gqh3mcauhb"]
 
-[ext_resource type="Material" uid="uid://c3by8wql8tw8j" path="res://terrain/textures/wall_material.tres" id="1_b01wm"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_8d6ju"]
-size = Vector3(2, 0.001, 2)
+[ext_resource type="Material" uid="uid://cvl3k4gjeucae" path="res://terrain/textures/ceiling_sky_material.tres" id="1_b01wm"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_sf26d"]
 material = ExtResource("1_b01wm")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8d6ju"]
+size = Vector3(2, 0.001, 2)
 
 [node name="Ceiling" type="StaticBody3D"]
 collision_layer = 2
 collision_mask = 0
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 0)
+mesh = SubResource("PlaneMesh_sf26d")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5571734e-08, -0.0009889603, 0.0042419434)
 shape = SubResource("BoxShape3D_8d6ju")
 debug_color = Color(0.8937149, 0.56088555, 0, 0.41960785)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("PlaneMesh_sf26d")

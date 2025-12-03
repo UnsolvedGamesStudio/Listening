@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwb4k1gcdpu2m"]
+
+[ext_resource type="Script" uid="uid://j1lyw6h1bnw0" path="res://decoration/critters/critter_movement.gd" id="1_jip02"]
+
+[node name="CritterMovement" type="Node"]
+script = ExtResource("1_jip02")
+
+[node name="DirectionTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+autostart = true
+
+[node name="SpeedBoostTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+autostart = true

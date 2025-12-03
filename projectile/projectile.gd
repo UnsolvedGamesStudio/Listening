@@ -25,7 +25,7 @@ var damage: float = 10.0:
 		damage = clampf(value, 0.0, 999999.9)
 
 var speed: float = 70.0
-var max_distance: float = 10.0
+var max_distance: float = 11.0
 var max_lifetime: float = 5.0
 
 var destroy_on_entity:= true

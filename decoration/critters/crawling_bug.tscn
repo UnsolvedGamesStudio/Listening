@@ -1,0 +1,154 @@
+[gd_scene load_steps=20 format=3 uid="uid://txkmy4mp47k1"]
+
+[ext_resource type="Script" uid="uid://cn2qg28uml135" path="res://decoration/critters/crawling_bug.gd" id="1_ni4vr"]
+[ext_resource type="Texture2D" uid="uid://ci10pjw8d8x30" path="res://decoration/textures/buggy1.png" id="2_ni4vr"]
+[ext_resource type="Texture2D" uid="uid://br53m0le28jnw" path="res://decoration/textures/buggy2.png" id="3_g44wr"]
+[ext_resource type="PackedScene" uid="uid://cwb4k1gcdpu2m" path="res://decoration/critters/critter_movement.tscn" id="4_s4uih"]
+[ext_resource type="PackedScene" uid="uid://dwwqg64m47km3" path="res://decoration/critters/critter_hurtbox.tscn" id="4_te06y"]
+[ext_resource type="AudioStream" uid="uid://o3gtx5hh0mda" path="res://assets/sfx/bug_die_sfx.ogg" id="6_a2n5w"]
+[ext_resource type="PackedScene" uid="uid://cgv5kne52pn1o" path="res://decoration/critters/critter_get_hurt.tscn" id="6_pjp0q"]
+[ext_resource type="AudioStream" uid="uid://uxkikal34y2r" path="res://assets/sfx/bug_walk_sfx.ogg" id="7_p23iv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xp650"]
+size = Vector3(0.37329102, 0.007507324, 0.42211914)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ko1j3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ni4vr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_g44wr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s4uih"]
+size = Vector3(0.6444702, 0.001, 0.60180664)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_te06y"]
+size = Vector3(0.5588989, 0.08733639, 0.55929565)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pjp0q"]
+emission_shape_scale = Vector3(0.115, 0, 0.13)
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+spread = 14.43
+initial_velocity_min = 0.19999999
+initial_velocity_max = 1.5
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -0.8000022
+tangential_accel_max = 0.74999774
+turbulence_noise_scale = 0.394
+turbulence_noise_speed = Vector3(0.1, 0, 0.1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tf61r"]
+load_path = "res://.godot/imported/cloud.png-2ac91fa22a7a4d0663791d86ff968457.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t3cqf"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = SubResource("CompressedTexture2D_tf61r")
+texture_filter = 0
+disable_receive_shadows = true
+billboard_mode = 1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_p23iv"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_t3cqf")
+size = Vector2(0.1, 0.1)
+orientation = 2
+
+[sub_resource type="Animation" id="Animation_r2l80"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_4se78"]
+resource_name = "moving"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_te06y"]
+_data = {
+&"idle": SubResource("Animation_r2l80"),
+&"moving": SubResource("Animation_4se78")
+}
+
+[node name="CrawlingBug" type="RigidBody3D"]
+collision_layer = 0
+collision_mask = 2
+gravity_scale = 0.0
+script = ExtResource("1_ni4vr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0032958984, -0.0007019043, 0.00036621094)
+shape = SubResource("BoxShape3D_xp650")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-1, -8.742278e-08, 3.821371e-15, 0, -4.371139e-08, -1, 8.742278e-08, -1, 4.371139e-08, 0, 0, 0)
+pixel_size = 0.015
+shaded = true
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_ko1j3")
+autoplay = "default"
+frame_progress = 0.16435413
+
+[node name="WallDetect" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallDetect"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0010681152, -0.024425775, -0.3248291)
+shape = SubResource("BoxShape3D_s4uih")
+debug_color = Color(0.41099185, 0.603334, 0, 0.14901961)
+
+[node name="Hurtbox" parent="." instance=ExtResource("4_te06y")]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(0.9999911, -0.000652834, 0.004162773, 0.0006540479, 0.99999976, -0.00028956734, -0.004162582, 0.0002922938, 0.9999913, -0.005186839, -0.045398127, -0.0073761228)
+shape = SubResource("BoxShape3D_te06y")
+
+[node name="PoofParticles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 15
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+randomness = 0.52
+process_material = SubResource("ParticleProcessMaterial_pjp0q")
+draw_pass_1 = SubResource("PlaneMesh_p23iv")
+
+[node name="WalkSFX" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_p23iv")
+volume_db = 50.0
+autoplay = true
+max_distance = 7.0
+bus = &"SFX"
+
+[node name="DieSFX" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_a2n5w")
+volume_db = 15.0
+max_distance = 8.0
+bus = &"SFX"
+
+[node name="CritterMovement" parent="." instance=ExtResource("4_s4uih")]
+min_random_time = 0.5
+max_random_time = 6.0
+turn_speed = 1.0
+speed_boost_frequency = 2.0
+speed_boost_chance = 0.2
+
+[node name="CritterGetHurt" parent="." instance=ExtResource("6_pjp0q")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_te06y")
+}

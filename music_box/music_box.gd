@@ -80,7 +80,11 @@ func _physics_process(delta: float) -> void:
 
 func empty_contents():
 	var object_list: Array[Node3D] = []
+	
 	for object: Node3D in object_instances:
+		if not is_instance_valid(object):
+			continue
+	
 		object.process_mode = Node.PROCESS_MODE_INHERIT
 		object.global_position = object_origin.global_position
 		object.scale = Vector3(0.01, 0.01, 0.01)

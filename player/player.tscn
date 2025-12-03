@@ -93,10 +93,11 @@ collide_with_bodies = false
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.282909, 0)
-light_color = Color(1, 0.8320722, 0.71004725, 1)
+light_color = Color(0.9999997, 0.92281556, 0.86836505, 1)
+light_energy = 1.55
 light_volumetric_fog_energy = 1.495
 shadow_enabled = true
-omni_range = 5.3116255
+omni_range = 6.0
 
 [node name="PlayerCollision" type="Area3D" parent="." groups=["player_collision"]]
 unique_name_in_owner = true

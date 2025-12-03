@@ -2,10 +2,6 @@ extends Node3D
 class_name Cell
 
 @onready var cell_collision: CellCollision = $CellCollision
-@onready var north_cell_detect: RayCast3D = %NorthCellDetect
-@onready var east_cell_detect: RayCast3D = %EastCellDetect
-@onready var south_cell_detect: RayCast3D = %SouthCellDetect
-@onready var west_cell_detect: RayCast3D = %WestCellDetect
 
 @export var max_player_height:= 10.0
 
@@ -21,39 +17,39 @@ func _ready() -> void:
 	cell_collision.area_exited.connect(on_area_exited)
 
 
-func get_adjacent_cells():
-	var adjacent_cells: Array[Cell]
-	var y_pos:= 0.0
-	var detected
-	
-	detected = check_cell_detect(north_cell_detect)
-	if not detected == null:
-		adjacent_cells.append(detected)
-	
-	detected = check_cell_detect(east_cell_detect)
-	if not detected == null:
-		adjacent_cells.append(detected)
-	
-	detected = check_cell_detect(south_cell_detect)
-	if not detected == null:
-		adjacent_cells.append(detected)
-	
-	detected = check_cell_detect(west_cell_detect)
-	if not detected == null:
-		adjacent_cells.append(detected)
-	
-	return adjacent_cells
+#func get_adjacent_cells():
+	#var adjacent_cells: Array[Cell]
+	#var y_pos:= 0.0
+	#var detected
+	#
+	#detected = check_cell_detect(north_cell_detect)
+	#if not detected == null:
+		#adjacent_cells.append(detected)
+	#
+	#detected = check_cell_detect(east_cell_detect)
+	#if not detected == null:
+		#adjacent_cells.append(detected)
+	#
+	#detected = check_cell_detect(south_cell_detect)
+	#if not detected == null:
+		#adjacent_cells.append(detected)
+	#
+	#detected = check_cell_detect(west_cell_detect)
+	#if not detected == null:
+		#adjacent_cells.append(detected)
+	#
+	#return adjacent_cells
 
 
-func check_cell_detect(cell_detect):
-	if cell_detect == null:
-		return
-	
-	if cell_detect.get_collider() == null:
-		return null
-	
-	if cell_detect.get_collider().owner.is_in_group("cell"):
-		return cell_detect.get_collider().owner
+#func check_cell_detect(cell_detect):
+	#if cell_detect == null:
+		#return
+	#
+	#if cell_detect.get_collider() == null:
+		#return null
+	#
+	#if cell_detect.get_collider().owner.is_in_group("cell"):
+		#return cell_detect.get_collider().owner
 
 
 func add_occupant(occupant: Node):

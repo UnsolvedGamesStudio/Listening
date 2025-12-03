@@ -174,6 +174,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="RoomNotifier" parent="." instance=ExtResource("3_vbrl4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.094088376, 0)
 
 [node name="IdleAnim" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

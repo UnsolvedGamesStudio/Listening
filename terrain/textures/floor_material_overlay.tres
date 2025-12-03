@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b74hwoerq7pj4"]
+
+[ext_resource type="Texture2D" uid="uid://b41c5i32xvqau" path="res://terrain/textures/grass_floor.png" id="1_s515t"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("1_s515t")
+metallic = 0.1
+metallic_specular = 0.55
+roughness = 0.0
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_offset = Vector3(0.5, 0.75, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0

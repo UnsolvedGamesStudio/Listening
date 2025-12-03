@@ -9,7 +9,7 @@ script = ExtResource("1_cceiw")
 
 [node name="NorthFace" parent="." instance=ExtResource("3_jfg1x")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -1)
 
 [node name="EastFace" parent="." instance=ExtResource("3_jfg1x")]
 unique_name_in_owner = true
@@ -17,7 +17,7 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1, 0
 
 [node name="WestFace" parent="." instance=ExtResource("3_jfg1x")]
 unique_name_in_owner = true
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1, 0, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1, 0, 0)
 
 [node name="SouthFace" parent="." instance=ExtResource("3_jfg1x")]
 unique_name_in_owner = true

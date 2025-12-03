@@ -1,8 +1,7 @@
 extends Node3D
 ## Todo: Play a chord of the corresponding "key" when unlocking with or picking up keys
 ##Todo: Extend the walls of the locked wall if adjacent walls are detected/remove other walls
-@onready var sprite_3d: Sprite3D = %Sprite3D
-@onready var sprite_3d_2: Sprite3D = %Sprite3D2
+@onready var decal: Decal = %Decal
 @onready var area_3d: Area3D = %Area3D
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var unlock_sfx: AudioStreamPlayer3D = %UnlockSFX
@@ -13,7 +12,7 @@ var required_item:= Vars.item_types.F_KEY
 
 
 func _ready() -> void:
-	original_scale = sprite_3d.scale
+	original_scale = decal.scale
 
 
 func _physics_process(delta: float) -> void:
@@ -67,17 +66,12 @@ func has_item():
 func looked_at_by_player(on: bool):
 	if on == true:
 		if has_item() == true:
-			sprite_3d.modulate = Color(0.0, 0.924, 0.94)
-			sprite_3d_2.modulate = Color(0.0, 0.924, 0.94)
+			decal.modulate = Color(0.0, 0.924, 0.94)
 		else:
-			sprite_3d.modulate = Color(0.68, 0.256, 0.15, 1.0)
-			sprite_3d_2.modulate = Color(0.68, 0.256, 0.15, 1.0)
+			decal.modulate = Color(0.68, 0.256, 0.15, 1.0)
 		
-		sprite_3d.scale = original_scale * 1.5
-		sprite_3d_2.scale = original_scale * 1.5
+		decal.scale = original_scale * 1.25
 	
 	else:
-		sprite_3d.modulate = Color(1.0, 1.0, 1.0, 1.0)
-		sprite_3d_2.modulate = Color(1.0, 1.0, 1.0, 1.0)
-		sprite_3d.scale = original_scale
-		sprite_3d_2.scale = original_scale
+		decal.modulate = Color(1.0, 1.0, 1.0, 1.0)
+		decal.scale = original_scale

@@ -55,6 +55,7 @@ unique_name_in_owner = true
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.022028953, 0.211, 0)
 cast_shadow = 2
 billboard = 2
+shaded = true
 double_sided = false
 texture_filter = 0
 texture = ExtResource("2_lcksh")

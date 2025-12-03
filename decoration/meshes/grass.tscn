@@ -1,0 +1,138 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1cy7j3ek4vwp"]
+
+[ext_resource type="Script" uid="uid://1hreb06uq86q" path="res://decoration/meshes/grass.gd" id="1_6rwkg"]
+[ext_resource type="PackedScene" uid="uid://bh2101vq81cc1" path="res://decoration/meshes/short_grass.tscn" id="1_iuj8b"]
+[ext_resource type="PackedScene" uid="uid://bx4rktbngj4ri" path="res://decoration/meshes/long_grass.tscn" id="2_6rwkg"]
+
+[node name="Grass" type="Node3D"]
+script = ExtResource("1_6rwkg")
+
+[node name="ShortGrasses" type="Node3D" parent="."]
+
+[node name="ShortGrass" parent="ShortGrasses" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8670371, 0, -0.42582268)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass7" parent="ShortGrasses" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5080634, 0, -0.2810709)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass8" parent="ShortGrasses" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13061273, 0, 0.22432005)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass9" parent="ShortGrasses" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7212577, 0, 0.7983159)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass10" parent="ShortGrasses" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8141445, 0, 0.85251397)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass6" parent="ShortGrasses" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42367685, 0, 0.69111276)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass2" parent="ShortGrasses" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6738361, 0, -0.79935837)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass3" parent="ShortGrasses" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13061273, 0, -0.36534548)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass4" parent="ShortGrasses" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6299704, 0, 0.33410585)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass5" parent="ShortGrasses" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.49883664, 0, 0.038452804)
+skeleton = NodePath("../..")
+
+[node name="LongGrasses" type="Node3D" parent="."]
+
+[node name="LongGrass" parent="LongGrasses" instance=ExtResource("2_6rwkg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.78661454, 0, 0.2897725)
+skeleton = NodePath("../..")
+
+[node name="LongGrass2" parent="LongGrasses" instance=ExtResource("2_6rwkg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3399566, 0, 0.44934988)
+skeleton = NodePath("../..")
+
+[node name="LongGrass3" parent="LongGrasses" instance=ExtResource("2_6rwkg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16486797, 0, -0.8912463)
+skeleton = NodePath("../..")
+
+[node name="LongGrass4" parent="LongGrasses" instance=ExtResource("2_6rwkg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32667008, 0, -0.18494463)
+skeleton = NodePath("../..")
+
+[node name="LongGrass5" parent="LongGrasses" instance=ExtResource("2_6rwkg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46092066, 0, -0.558774)
+skeleton = NodePath("../..")
+
+[node name="ShortGrasses2" type="Node3D" parent="."]
+transform = Transform3D(0.79231095, 0, 0.6101175, 0, 1, 0, -0.6101175, 0, 0.79231095, -0.053590775, 0, 0.14877)
+
+[node name="ShortGrass" parent="ShortGrasses2" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8670371, 0, -0.42582268)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass7" parent="ShortGrasses2" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5080634, 0, -0.2810709)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass8" parent="ShortGrasses2" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13061273, 0, 0.22432005)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass9" parent="ShortGrasses2" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5154184, 0, 0.5310088)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass10" parent="ShortGrasses2" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5916401, 0, 0.68117493)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass6" parent="ShortGrasses2" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42367685, 0, 0.69111276)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass2" parent="ShortGrasses2" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52412844, 0, -0.6840763)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass3" parent="ShortGrasses2" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13061273, 0, -0.36534548)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass4" parent="ShortGrasses2" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6299704, 0, 0.33410585)
+skeleton = NodePath("../..")
+
+[node name="ShortGrass5" parent="ShortGrasses2" instance=ExtResource("1_iuj8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.49883664, 0, 0.038452804)
+skeleton = NodePath("../..")
+
+[node name="LongGrasses2" type="Node3D" parent="."]
+transform = Transform3D(0.995859, 0, -0.09091074, 0, 1, 0, 0.09091074, 0, 0.995859, 0.10931799, 0, 0.20978636)
+
+[node name="LongGrass" parent="LongGrasses2" instance=ExtResource("2_6rwkg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.78661454, 0, 0.2897725)
+skeleton = NodePath("../..")
+
+[node name="LongGrass2" parent="LongGrasses2" instance=ExtResource("2_6rwkg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3399566, 0, 0.44934988)
+skeleton = NodePath("../..")
+
+[node name="LongGrass3" parent="LongGrasses2" instance=ExtResource("2_6rwkg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16486797, 0, -0.8912463)
+skeleton = NodePath("../..")
+
+[node name="LongGrass4" parent="LongGrasses2" instance=ExtResource("2_6rwkg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32667008, 0, -0.18494463)
+skeleton = NodePath("../..")
+
+[node name="LongGrass5" parent="LongGrasses2" instance=ExtResource("2_6rwkg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46092066, 0, -0.558774)
+skeleton = NodePath("../..")

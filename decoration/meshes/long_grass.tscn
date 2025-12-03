@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bx4rktbngj4ri"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rgjys"]
+cull_mode = 2
+albedo_color = Color(0.56078434, 0.8156863, 0.19607843, 1)
+texture_filter = 0
+billboard_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rgjys"]
+material = SubResource("StandardMaterial3D_rgjys")
+size = Vector2(0.013, 0.1)
+center_offset = Vector3(0, 0.05, 0)
+orientation = 2
+
+[node name="LongGrass" type="MeshInstance3D"]
+mesh = SubResource("PlaneMesh_rgjys")

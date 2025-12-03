@@ -77,6 +77,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.066113114, 0)
 
 [node name="BentStickman" type="MeshInstance3D" parent="Mesh"]
 transform = Transform3D(-10, -1.1359191e-06, 0, 0, 0, -14.509642, 8.742278e-07, -12.9934, 0, 0.60384786, 0, 0)
+layers = 2
 mesh = ExtResource("8_5lhxg")
 skeleton = NodePath("")
 
@@ -160,3 +161,4 @@ libraries = {
 }
 
 [node name="RoomNotifier" parent="." instance=ExtResource("11_jvcgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.292089, 0)

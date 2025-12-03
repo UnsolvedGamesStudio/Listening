@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1rnngxhnemng"]
+[gd_scene load_steps=11 format=3 uid="uid://d1rnngxhnemng"]
 
 [ext_resource type="Script" uid="uid://d0wkhkbfau2f6" path="res://terrain/layout.gd" id="1_v6hxy"]
 [ext_resource type="PackedScene" uid="uid://br0viovfq64bh" path="res://level_editor/level_generator.tscn" id="2_b0xiq"]
@@ -6,8 +6,40 @@
 [ext_resource type="PackedScene" uid="uid://ce10gkdeiprj7" path="res://player/player.tscn" id="4_trw21"]
 [ext_resource type="AudioStream" uid="uid://btu6qvvkk8lsp" path="res://assets/ambience/room_tone.ogg" id="5_b0xiq"]
 
+[sub_resource type="Gradient" id="Gradient_1xy32"]
+offsets = PackedFloat32Array(0.26618704, 0.9928058)
+colors = PackedColorArray(0.26630175, 0.29621428, 0.29188913, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1342u"]
+gradient = SubResource("Gradient_1xy32")
+width = 10
+height = 10
+fill = 1
+fill_from = Vector2(1, 0.8522167)
+fill_to = Vector2(0, 0)
+repeat = 2
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_cf5th"]
+panorama = SubResource("GradientTexture2D_1342u")
+
+[sub_resource type="Sky" id="Sky_5218q"]
+sky_material = SubResource("PanoramaSkyMaterial_cf5th")
+
+[sub_resource type="Environment" id="Environment_mhowc"]
+background_mode = 2
+sky = SubResource("Sky_5218q")
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 16.0
+fog_mode = 1
+fog_density = 1.0
+volumetric_fog_density = 0.134
+volumetric_fog_albedo = Color(0.535566, 0.75898, 0.81535, 1)
+
 [node name="Layout" type="Node3D" groups=["layout"]]
 script = ExtResource("1_v6hxy")
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mhowc")
 
 [node name="LevelGenerator" parent="." instance=ExtResource("2_b0xiq")]
 unique_name_in_owner = true

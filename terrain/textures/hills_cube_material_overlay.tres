@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://d3il54gmgg101"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d8fh8"]
+load_path = "res://.godot/imported/hills_wallpaper.png-7711051dd21592a245a9549739126dd8.ctex"
+
+[resource]
+transparency = 1
+cull_mode = 2
+albedo_texture = SubResource("CompressedTexture2D_d8fh8")
+uv1_scale = Vector3(3, 1.75, 3)
+texture_filter = 2
+point_size = 128.0
+stencil_flags = 2

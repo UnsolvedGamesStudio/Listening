@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://25m1ivtr2fdw"]
+
+[ext_resource type="Script" uid="uid://bdiw7ll3rab5k" path="res://vfx/gpu_particles.gd" id="1_a2w0y"]
+
+[sub_resource type="Curve" id="Curve_tf61r"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tf61r"]
+curve = SubResource("Curve_tf61r")
+
+[sub_resource type="Curve" id="Curve_g4cbp"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_md80f"]
+curve = SubResource("Curve_g4cbp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tf61r"]
+emission_shape_scale = Vector3(0.75, 0.015, 0.75)
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+spread = 23.452
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+angular_velocity_min = -5.000016
+angular_velocity_max = 4.999984
+angular_velocity_curve = SubResource("CurveTexture_tf61r")
+gravity = Vector3(0, -2, 0)
+linear_accel_min = -5.630002
+linear_accel_max = 5.6299977
+linear_accel_curve = SubResource("CurveTexture_md80f")
+turbulence_noise_strength = 0.1
+turbulence_noise_scale = 2.796
+turbulence_noise_speed = Vector3(0.33, 0, 0.445)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tf61r"]
+load_path = "res://.godot/imported/cloud.png-2ac91fa22a7a4d0663791d86ff968457.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t3cqf"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = SubResource("CompressedTexture2D_tf61r")
+texture_filter = 0
+disable_receive_shadows = true
+billboard_mode = 1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_md80f"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_t3cqf")
+size = Vector2(0.5, 0.5)
+orientation = 2
+
+[node name="PoofParticles" type="GPUParticles3D"]
+emitting = false
+amount = 20
+lifetime = 1.5
+explosiveness = 1.0
+randomness = 0.52
+process_material = SubResource("ParticleProcessMaterial_tf61r")
+draw_pass_1 = SubResource("PlaneMesh_md80f")
+script = ExtResource("1_a2w0y")

@@ -26,17 +26,6 @@ func enter() -> void:
 			projectile_range = behavior.projectile_range
 
 
-#func _physics_process(delta: float) -> void:
-	#set_raycast_target()
-#
-#
-#func set_raycast_target():
-	#if O.get_direction_to_player() == null:
-		#return
-	#
-	#movement_raycast.target_position = O.get_direction_to_player()
-
-
 func set_stats():
 	var data: EnemyResource = O.data
 	
@@ -51,18 +40,6 @@ func set_stats():
 
 
 func move():
-	#if movement_raycast.get_collider() == null:
-		#return
-	#
-	#var raycast_result = movement_raycast.get_collider().owner
-	#
-	#if raycast_result == null:
-		#return
-	#
-	#if not raycast_result is Cell:
-		#return
-	
-	#var target_cell: Cell = raycast_result
 	var target_cell = get_next_cell_on_path()
 	
 	if target_cell == null:
@@ -101,9 +78,10 @@ func get_next_cell_on_path():
 func cell_occupied(cell: Cell):
 	for occupant in cell.occupants:
 		if not is_instance_valid(occupant):
-			return
+			continue
 		
 		if occupant is Enemy:
+			print(occupant.data.name)
 			return true
 	
 	return false

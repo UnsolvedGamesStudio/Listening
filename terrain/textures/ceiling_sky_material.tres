@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://cvl3k4gjeucae"]
+
+[ext_resource type="Shader" uid="uid://bkvbrhy03jggl" path="res://terrain/textures/fading_texture.gdshader" id="1_gwtvp"]
+[ext_resource type="Texture2D" uid="uid://b2mpp84cugomi" path="res://terrain/textures/ceiling_sky_pastel.png" id="2_bxhag"]
+[ext_resource type="Texture2D" uid="uid://b80gy4a6qlhym" path="res://terrain/textures/ceiling_sky.png" id="3_pjy85"]
+
+[sub_resource type="Curve" id="Curve_ko1j3"]
+_data = [Vector2(0, 0), 0.0, -0.17383756, 0, 0, Vector2(0.3236994, 0.48314613), 2.2317934, 2.2317934, 0, 0, Vector2(0.49710983, 1), 0.0, 0.0, 0, 0, Vector2(0.8439306, 0.68539333), -2.2088873, -2.2088873, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_5rbqk"]
+curve = SubResource("Curve_ko1j3")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_gwtvp")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("3_pjy85")
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/specular = 0.5
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/fade_texture = ExtResource("2_bxhag")
+shader_parameter/fade_curve = SubResource("CurveTexture_5rbqk")
+shader_parameter/fade_duration = 360.0
+shader_parameter/fade_speed = 1.0

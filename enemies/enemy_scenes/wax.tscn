@@ -168,6 +168,7 @@ light = NodePath("../../Sprite3D/OmniLight3D")
 unique_name_in_owner = true
 
 [node name="RoomNotifier" parent="." instance=ExtResource("9_juo5d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12783343, 0)
 
 [node name="IdleAnim" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

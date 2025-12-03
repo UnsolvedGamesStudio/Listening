@@ -29,6 +29,7 @@ func generate():
 		update_floor_heights(child)
 		generate_floor_layers(child)
 	
+	Bus.level_done_generating.emit()
 	blueprint.queue_free()
 
 
@@ -120,17 +121,18 @@ func rotate_scene(scene: Node3D, tile: Vector2i, layer: TileMapLayer):
 		var flip_h:= alternate & TileSetAtlasSource.TRANSFORM_FLIP_H == TileSetAtlasSource.TRANSFORM_FLIP_H
 		var flip_v:= alternate & TileSetAtlasSource.TRANSFORM_FLIP_V == TileSetAtlasSource.TRANSFORM_FLIP_V
 		
+		
 		if flip_h == false and flip_v == false:
 			return
 		
 		if flip_h == true and flip_v == false:
-			scene.global_rotation_degrees.y = 90.0
+			scene.global_rotation_degrees.y = -90.0
 		
 		if flip_h == true and flip_v == true:
-			scene.global_rotation_degrees.y = 0.0
+			scene.global_rotation_degrees.y = 180.0
 		
 		if flip_h == false and flip_v == true:
-			scene.global_rotation_degrees.y = -90.0
+			scene.global_rotation_degrees.y = 90.0
 
 
 func puzzle_setup(scene_inst: Node, puzzle_id: int):

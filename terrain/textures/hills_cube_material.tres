@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b3oipikfhdemm"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xhjm3"]
+load_path = "res://.godot/imported/hills_wallpaper_pastel.png-af742c2fc424ea5d84968ebfb0b97e25.ctex"
+
+[resource]
+cull_mode = 2
+albedo_texture = SubResource("CompressedTexture2D_xhjm3")
+roughness = 0.63
+uv1_scale = Vector3(3, 1.75, 3)
+uv1_world_triplanar = true
+texture_filter = 2
