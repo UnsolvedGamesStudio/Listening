@@ -58,6 +58,7 @@ func check_melee():
 	
 	if O.within_distance_to_player(melee_range) == false:
 		return
+	
 	melee_attack()
 
 

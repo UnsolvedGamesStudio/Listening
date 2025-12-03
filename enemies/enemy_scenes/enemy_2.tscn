@@ -194,6 +194,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 unique_name_in_owner = true
 
 [node name="RoomNotifier" parent="." instance=ExtResource("9_gdugp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09351516, 0)
 
 [node name="IdleAnim" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

@@ -61,7 +61,7 @@ func move():
 	
 	tween.play()
 
-
+## Todo: Make returned cell not ignore height
 func get_next_cell_on_path():
 	var path:= PathFinder.get_cell_path(O.occupied_cell.cell_grid_position, Vars.player_cell.cell_grid_position, false)
 	
@@ -80,9 +80,22 @@ func cell_occupied(cell: Cell):
 		if not is_instance_valid(occupant):
 			continue
 		
+		if is_same_cell_height(occupant) == false:
+			return
+		
 		if occupant is Enemy:
 			print(occupant.data.name)
 			return true
+	
+	return false
+
+
+func is_same_cell_height(occupant):
+	if not "occupied_cell" in occupant:
+		return false
+	
+	if occupant.occupied_cell.global_position.y == O.occupied_cell.global_position.y:
+		return true
 	
 	return false
 

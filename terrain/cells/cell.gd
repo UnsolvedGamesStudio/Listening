@@ -13,6 +13,8 @@ var cell:= self
 
 
 func _ready() -> void:
+	handle_gridless()
+	
 	cell_collision.area_entered.connect(on_area_entered)
 	cell_collision.area_exited.connect(on_area_exited)
 

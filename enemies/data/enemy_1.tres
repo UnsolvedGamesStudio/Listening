@@ -8,6 +8,7 @@ script = ExtResource("2_wldrd")
 id = "test2"
 name = "Pet Peeve"
 preferred_range = 1
+moves_every_x_beat = 1
 shoots_every_x_beat = 3
 projectile_damage = 15.0
 projectile_speed = 30.0

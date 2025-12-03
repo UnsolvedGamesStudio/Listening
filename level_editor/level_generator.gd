@@ -26,14 +26,14 @@ func generate():
 		if not child is BlueprintFloor:
 			continue
 		
-		update_floor_heights(child)
+		update_floor_levels(child)
 		generate_floor_layers(child)
 	
-	Bus.level_done_generating.emit()
-	blueprint.queue_free()
+	#Bus.level_done_generating.emit()
+	#blueprint.queue_free()
 
 
-func update_floor_heights(blueprint_floor: BlueprintFloor):
+func update_floor_levels(blueprint_floor: BlueprintFloor):
 	var floor_number:= blueprint_floor.floor_number
 	var floor_height:= blueprint_floor.height
 	
@@ -58,6 +58,7 @@ func generate_cells(used_tiles: Array[Vector2i], layer: TileMapLayer, blueprint_
 		var scene_data: PackedScene = layer.get_cell_tile_data(tile).get_custom_data("scene")
 		if scene_data == null:
 			continue
+		
 		
 		var cell_inst: Node = scene_data.instantiate()
 		add_child(cell_inst)

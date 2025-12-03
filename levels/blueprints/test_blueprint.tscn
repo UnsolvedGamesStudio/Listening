@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://d4kapwpdawyhh"]
+[gd_scene load_steps=13 format=3 uid="uid://d4kapwpdawyhh"]
 
 [ext_resource type="Script" uid="uid://ri7ko3t1xlih" path="res://level_editor/level_editor.gd" id="1_o44uh"]
 [ext_resource type="PackedScene" uid="uid://7meyinovsje0" path="res://pickups/synapse_pickup.tscn" id="2_qgfrc"]
@@ -24,13 +24,13 @@ box_4 = Array[PackedScene]([ExtResource("8_d2bwe"), ExtResource("4_osa6w"), ExtR
 [node name="Floor1" parent="." instance=ExtResource("10_qgfrc")]
 
 [node name="Cells" parent="Floor1" groups=["editor_cells"] instance=ExtResource("10_gsuot")]
-tile_map_data = PackedByteArray("AAD///z/AQABAAAAAAD+//z/AQABAAAAAAD+//v/AQABAAAAAAD+//r/AQABAAAAAAAAAPr/AQABAAAAAAAAAPv/AQABAAAAAAAAAPz/AQABAAAAAAD///v/AQABAAAAAAD///r/AQADAAAAAAD9//r/AQABAAAAAAD9//v/AQABAAAAAAD9//z/AQABAAAAAAD+//3/AQABAAAAAAD///3/AQABAAAAAAAAAP3/AQABAAAAAAABAP3/AQABAAAAAAABAPz/AQABAAAAAAABAPv/AQABAAAAAAABAPr/AQABAAAAAAD9//3/AQABAAAAAAD9//n/AQABAAAAAAD+//n/AQABAAAAAAD///n/AQABAAAAAAAAAPn/AQABAAAAAAABAPn/AQABAAAAAAD9//7/AQABAAAAAAD+//7/AQABAAAAAAD///7/AQABAAAAAAAAAP7/AQABAAAAAAABAP7/AQABAAAAAAA=")
+tile_map_data = PackedByteArray(0, 0, 0, 0, 252, 255, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 253, 255, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 254, 255, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 255, 255, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = null
 
 [node name="TileForgetters" parent="Floor1" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
 
 [node name="Layer1" parent="Floor1" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
-tile_map_data = PackedByteArray("AAD///3/BAAAAAAAAAD///z/AQAAAAAAAAA=")
+tile_map_data = PackedByteArray(0, 0, 0, 0, 252, 255, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="Layer2" parent="Floor1" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
 
@@ -39,11 +39,12 @@ floor_number = 2
 height = 5.0
 
 [node name="Cells" parent="Floor2" groups=["editor_cells"] instance=ExtResource("10_gsuot")]
-tile_map_data = PackedByteArray("AAD///z/AQABAAAAAAD+//z/AQABAAAAAAD+//v/AQABAAAAAAD+//r/AQABAAAAAAAAAPr/AQABAAAAAAAAAPv/AQABAAAAAAAAAPz/AQABAAAAAAD///v/AQABAAAAAAD+//3/AQABAAAAAAD///3/AQABAAAAAAAAAP3/AQABAAAAAAABAPr/AQABAAAAAAABAPv/AQABAAAAAAABAPz/AQABAAAAAAABAP3/AQABAAAAAAD9//3/AQABAAAAAAD9//z/AQABAAAAAAD9//v/AQABAAAAAAD9//r/AQABAAAAAAD9//n/AQABAAAAAAD+//n/AQABAAAAAAD///n/AQABAAAAAAAAAPn/AQABAAAAAAABAPn/AQABAAAAAAA=")
+tile_map_data = PackedByteArray(0, 0, 0, 0, 252, 255, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 253, 255, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 254, 255, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 255, 255, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0)
 script = null
 
 [node name="TileForgetters" parent="Floor2" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
 
 [node name="Layer1" parent="Floor2" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 253, 255, 1, 0, 1, 0, 0, 0, 0, 0)
 
 [node name="Layer2" parent="Floor2" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
