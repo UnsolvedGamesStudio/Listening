@@ -1,14 +1,15 @@
-[gd_resource type="Resource" script_class="EnemyResource" load_steps=3 format=3 uid="uid://cdiemjse6tvdf"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://cdiemjse6tvdf"]
 
 [ext_resource type="Texture2D" uid="uid://dgygswxu7j8ds" path="res://projectile/textures/default_projectile.png" id="1_57rgr"]
-[ext_resource type="Script" uid="uid://xik6wqrvw2sj" path="res://enemies/data/enemy_resource.gd" id="2_xy2qo"]
+[ext_resource type="Script" uid="uid://xik6wqrvw2sj" path="res://enemies/data/enemy_data.gd" id="2_57rgr"]
 
 [resource]
-script = ExtResource("2_xy2qo")
+script = ExtResource("2_57rgr")
 id = "dread"
 name = "Watching Over You"
 aggro_distance = 50.0
 vision_limit = 50.0
+can_move_diagonally = true
 movement_speed = 32
 impassable = true
 body_damage = 0.0

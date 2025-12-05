@@ -1,25 +1,25 @@
 extends Node
-## Todo: read and translate the rotation of the tile (tiledata) into the spawn rotation
-## Todo: wall tilemap
-## Todo: have the level editor be a tool script that generates the layout as an editable packed scene
-## Todo: make enemy id's customizable like the boxes etc
-## Todo: make a modifier tile that reveals another tile when affected enemies are defeated
+## Todo: Read and translate the rotation of the tile (tiledata) into the spawn rotation
+## Todo: Wall tilemap
+## Todo: Have the level editor be a tool script that generates the layout as an editable packed scene
+## Todo: Make enemy id's customizable like the boxes etc
+## Todo: Make a modifier tile that reveals another tile when affected enemies are defeated
+## Todo: Make more things work from the "level ready" signal, rather than being called from other classes
 @export var enabled:= true
 
 
-func _ready() -> void:
-	generate()
-	PathFinder.rebuild(PathFinder.cells)
-
-
-func generate():
+func activate():
 	var blueprint: Node = get_tree().get_first_node_in_group("level_blueprint")
 	
+	generate(blueprint)
+
+
+func generate(blueprint):
 	if enabled == false:
 		return
 	
 	if blueprint == null:
-		printerr(self, ": level_blueprint not found.")
+		print(self, ": No level_blueprint.")
 		return
 	
 	for child in blueprint.get_children():
@@ -29,8 +29,8 @@ func generate():
 		update_floor_levels(child)
 		generate_floor_layers(child)
 	
-	#Bus.level_done_generating.emit()
-	#blueprint.queue_free()
+	blueprint.queue_free()
+	Bus.level_done_generating.emit()
 
 
 func update_floor_levels(blueprint_floor: BlueprintFloor):
@@ -50,7 +50,7 @@ func generate_floor_layers(blueprint_floor: BlueprintFloor):
 		if layer.is_in_group("editor_objects"):
 			generate_object_tiles(used_tiles, layer, blueprint_floor)
 
-
+## Todo: Maybe combine both generation functions
 func generate_cells(used_tiles: Array[Vector2i], layer: TileMapLayer, blueprint_floor: BlueprintFloor):
 	var cell_size: float = Vars.cell_size
 	
@@ -59,39 +59,37 @@ func generate_cells(used_tiles: Array[Vector2i], layer: TileMapLayer, blueprint_
 		if scene_data == null:
 			continue
 		
-		
 		var cell_inst: Node = scene_data.instantiate()
 		add_child(cell_inst)
 		
 		if "starting_floor" in cell_inst.cell:
 			cell_inst.cell.starting_floor = blueprint_floor.floor_number
 		
-		cell_inst.global_position = Vector3(tile.x * cell_size, blueprint_floor.height, tile.y * cell_size)
-		cell_inst.cell.cell_grid_position = Vector2i(cell_inst.cell.global_position.x / Vars.cell_size as int, cell_inst.cell.global_position.z / 2 as int)
+		var world_pos:= tile_to_world(tile, blueprint_floor.height)
+		
+		cell_inst.global_position = world_pos
 		
 		Vars.cell_nodes.append(cell_inst.cell)
-		
-		if cell_inst.has_method("update_faces"):
-			cell_inst.update_faces(used_tiles, cell_size)
 
 
 func generate_object_tiles(used_tiles: Array[Vector2i], layer: TileMapLayer, blueprint_floor: BlueprintFloor):
 	for tile in used_tiles:
-		var scene_data: PackedScene = layer.get_cell_tile_data(tile).get_custom_data("scene")
-		var unique_object_id: int = layer.get_cell_tile_data(tile).get_custom_data("unique_object_id")
+		var cell_data:= layer.get_cell_tile_data(tile)
+		var scene_data: PackedScene = cell_data.get_custom_data("scene")
+		var unique_object_id: int = cell_data.get_custom_data("unique_object_id")
 		
 		if scene_data == null:
 			printerr(tile, ": no scene data found")
 			continue
 		
 		var scene_inst: Node = scene_data.instantiate()
-		var inst_uuid:= "%d_%d" % [tile.x, tile.y]
+		var inst_save_id:= "%d_%d" % [tile.x, tile.y]
 		
-		if SaveManager.check_node_collected(scene_inst, inst_uuid) == true:
+		if SaveManager.check_node_collected(scene_inst, inst_save_id) == true:
 			scene_inst.queue_free()
 			continue
 		
-		set_uuid(scene_inst, inst_uuid)
+		set_save_id(scene_inst, inst_save_id)
 		
 		if "puzzle_id" in scene_inst:
 			var puzzle_id: int = layer.get_cell_tile_data(tile).get_custom_data("puzzle_id")
@@ -102,7 +100,8 @@ func generate_object_tiles(used_tiles: Array[Vector2i], layer: TileMapLayer, blu
 			box_setup(scene_inst, box_id)
 		
 		add_child(scene_inst)
-		scene_inst.global_position = Vector3(tile.x * Vars.cell_size, blueprint_floor.height, tile.y * Vars.cell_size)
+		
+		scene_inst.global_position = tile_to_world(tile, blueprint_floor.height)
 		
 		rotate_scene(scene_inst, tile, layer)
 		
@@ -110,30 +109,30 @@ func generate_object_tiles(used_tiles: Array[Vector2i], layer: TileMapLayer, blu
 			unique_object_setup(scene_inst, unique_object_id)
 
 
-func set_uuid(inst: Node, inst_uuid: String):
-	if not "uuid" in inst:
+func set_save_id(inst: Node, inst_save_id: String):
+	if not "save_id" in inst:
 		return
 	
-	inst.uuid = inst_uuid
+	inst.save_id = inst_save_id
 
 
 func rotate_scene(scene: Node3D, tile: Vector2i, layer: TileMapLayer):
-		var alternate:= layer.get_cell_alternative_tile(tile)
-		var flip_h:= alternate & TileSetAtlasSource.TRANSFORM_FLIP_H == TileSetAtlasSource.TRANSFORM_FLIP_H
-		var flip_v:= alternate & TileSetAtlasSource.TRANSFORM_FLIP_V == TileSetAtlasSource.TRANSFORM_FLIP_V
-		
-		
-		if flip_h == false and flip_v == false:
-			return
-		
-		if flip_h == true and flip_v == false:
-			scene.global_rotation_degrees.y = -90.0
-		
-		if flip_h == true and flip_v == true:
-			scene.global_rotation_degrees.y = 180.0
-		
-		if flip_h == false and flip_v == true:
-			scene.global_rotation_degrees.y = 90.0
+	var alternate:= layer.get_cell_alternative_tile(tile)
+	var flip_h:= alternate & TileSetAtlasSource.TRANSFORM_FLIP_H == TileSetAtlasSource.TRANSFORM_FLIP_H
+	var flip_v:= alternate & TileSetAtlasSource.TRANSFORM_FLIP_V == TileSetAtlasSource.TRANSFORM_FLIP_V
+	
+	
+	if flip_h == false and flip_v == false:
+		return
+	
+	if flip_h == true and flip_v == false:
+		scene.global_rotation_degrees.y = -90.0
+	
+	if flip_h == true and flip_v == true:
+		scene.global_rotation_degrees.y = 180.0
+	
+	if flip_h == false and flip_v == true:
+		scene.global_rotation_degrees.y = 90.0
 
 
 func puzzle_setup(scene_inst: Node, puzzle_id: int):
@@ -185,3 +184,7 @@ func box_setup(box: MusicBox, box_id: int):
 			continue
 		
 		box.contents.append(object)
+
+
+func tile_to_world(tile: Vector2i, height: float) -> Vector3:
+	return Vector3(tile.x * Vars.cell_size, height, tile.y * Vars.cell_size)

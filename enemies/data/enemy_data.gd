@@ -1,5 +1,5 @@
 extends Resource
-class_name EnemyResource
+class_name EnemyData
 
 @export_group("Info")
 @export var id:= "id"
@@ -11,6 +11,8 @@ class_name EnemyResource
 enum ranges{MELEE, RANGED, CONTACT}
 @export var aggro_distance:= 4.0
 @export var vision_limit:= 10.0
+@export var vertical_vision_range:= 2.0
+@export var can_move_diagonally:= false
 
 @export_group("Stats")
 @export var max_hp:= 100.0

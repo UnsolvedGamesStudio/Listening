@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://bst4ecl263gsh"]
+
+[ext_resource type="Shader" uid="uid://bkvbrhy03jggl" path="res://terrain/textures/fading_texture.gdshader" id="1_f2k54"]
+[ext_resource type="Texture2D" uid="uid://cywvh5sygdpbg" path="res://terrain/textures/sunset_anim_curve.tres" id="2_f3866"]
+[ext_resource type="Texture2D" uid="uid://s8e0mkkpoy8n" path="res://terrain/textures/grass_floor_pastel.png" id="3_4jr3y"]
+[ext_resource type="Texture2D" uid="uid://b41c5i32xvqau" path="res://terrain/textures/grass_floor.png" id="4_cnosr"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_f2k54")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("4_cnosr")
+shader_parameter/metallic = 0.35999999195328
+shader_parameter/roughness = 0.406000019285
+shader_parameter/specular = 0.43999999016512
+shader_parameter/uv1_scale = Vector3(-3, 2, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/fade_texture = ExtResource("3_4jr3y")
+shader_parameter/fade_curve = ExtResource("2_f3866")
+shader_parameter/fade_duration = 360.0
+shader_parameter/fade_speed = 1.0

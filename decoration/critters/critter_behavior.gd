@@ -13,7 +13,7 @@ func _ready() -> void:
 	
 	enter()
 	
-	await Bus.level_done_generating
+	await Bus.level_layout_ready
 	
 	level_ready()
 

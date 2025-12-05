@@ -20,5 +20,5 @@ func _process(delta: float) -> void:
 	
 	if not is_instance_valid(ground_raycast.get_collider()):
 		return
-	
-	global_position.y = ground_raycast.get_collider().global_position.y + 0.6
+	var collision_point:= ground_raycast.get_collision_point()
+	global_position.y = collision_point.y

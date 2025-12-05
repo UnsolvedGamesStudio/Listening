@@ -14,5 +14,5 @@ func on_activated():
 	sfx.reparent(get_parent())
 	sfx.play()
 	Vars.synapses += 1
-	SaveManager.set_collected(category, uuid)
+	SaveManager.set_collected(category, save_id)
 	Bus.synapse_picked_up.emit()

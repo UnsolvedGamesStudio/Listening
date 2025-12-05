@@ -10,8 +10,9 @@ signal beat_success_to_spellcast(element: int)
 signal beat_failure
 
 signal level_done_generating
-signal loading_level()
-signal level_exited()
+signal level_layout_ready
+signal loading_level
+signal level_exited
 
 signal player_moved
 signal player_took_damage(origin: Node3D)

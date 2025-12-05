@@ -1,19 +1,20 @@
 extends Node
 ## Todo: turn dict strigs into enum
 ## Todo: load premade scenes like hub world instead of preload
+## Todo: Create a state machine for the game's states: title screen, generating level, playing level, etc
 var main: MainScene
 var current_scene: Node
 var current_blueprint: PackedScene
-var next_scene: String
 
-var scenes: Dictionary[String, PackedScene] = {
-	"hub_world" : preload("uid://bb0is713hmgcy"),
-	"layout" : preload("uid://d1rnngxhnemng"),
-	"level" : preload("uid://cup1ntaax8sgg"),
-	"title_screen" : preload("uid://bqk51arvtg2x"),
-	"prep_screen" : preload("uid://cglbfa3a2dw7v"),
-	"test_level" : preload("uid://ut6wqeoatv1w"),
+enum scenes {
+	TITLE_SCREEN,
+	LAYOUT,
+	TEST_LEVEL,
+	HUB_WORLD,
+	PREP_SCREEN,
 }
+
+var next_scene: scenes
 
 
 func _ready() -> void:
@@ -53,15 +54,20 @@ func load_default_song():
 
 func load_scene():
 	Vars.reset()
-	var scene_inst:= scenes[next_scene].instantiate()
+	var packed_scene: PackedScene = get_scene_for_state(next_scene)
+	
+	if is_scene_valid(packed_scene) == false:
+		return
+	
+	var scene_inst:= packed_scene.instantiate()
 	
 	## Check if entering a level
-	if scene_inst is Layout:
+	if scene_inst.is_in_group("layout"):
 		Bus.loading_level.emit()
 		generate_blueprint(scene_inst)
 	
 	## Check if entering the hub
-	if current_scene is Layout and scene_inst is HubWorld:
+	if scene_inst.is_in_group("hub_world"):
 		Bus.level_exited.emit()
 		SaveManager.write_save_data()
 	
@@ -70,9 +76,27 @@ func load_scene():
 	
 	Filters.fade.play("fade_in")
 	
-	if scene_inst is Layout:
-		await Filters.fade.animation_finished
+	if scene_inst.is_in_group("playable_level"):
+		entering_playable_level(scene_inst)
+
+
+func is_scene_valid(scene):
+	if scene == null:
+		push_error(self, ": Scene ", scenes.keys()[next_scene],  " not found")
+		get_tree().quit()
+		return false
+	
+	return true
+
+
+func entering_playable_level(scene_inst):
+	if scene_inst.is_in_group("layout"):
 		start_level()
+		LevelGenerator.activate()
+		await scene_inst.ready
+	
+	Bus.level_done_generating.emit()
+	Bus.level_layout_ready.emit()
 
 
 func start_level():
@@ -82,7 +106,7 @@ func start_level():
 		Bgm.start_song()
 
 
-func switch_scene(scene: String, blueprint: String = "", level_data: LevelData = null):
+func switch_scene(scene: scenes, blueprint: String = "", level_data: LevelData = null):
 	current_scene.queue_free()
 	next_scene = scene
 	load_scene()
@@ -90,6 +114,9 @@ func switch_scene(scene: String, blueprint: String = "", level_data: LevelData =
 
 func generate_blueprint(scene_inst: Node):
 	if current_blueprint == null:
+		return
+	
+	if not scene_inst.is_in_group("blueprint_layout"):
 		return
 	
 	var blueprint_inst = current_blueprint.instantiate()
@@ -112,3 +139,24 @@ func reload_level():
 func quit_game():
 	SaveManager.write_save_data()
 	get_tree().quit()
+
+
+func get_scene_for_state(scene: scenes):
+	var returned_scene: PackedScene
+	
+	if scene == scenes.TITLE_SCREEN:
+		returned_scene = preload("uid://bqk51arvtg2x")
+	
+	if scene == scenes.TEST_LEVEL:
+		returned_scene = preload("uid://ut6wqeoatv1w")
+	
+	if scene == scenes.HUB_WORLD:
+		returned_scene = preload("uid://bb0is713hmgcy")
+	
+	if scene == scenes.PREP_SCREEN:
+		returned_scene = preload("uid://cglbfa3a2dw7v")
+	
+	if scene == scenes.LAYOUT:
+		returned_scene = preload("uid://d1rnngxhnemng")
+	
+	return returned_scene

@@ -7,6 +7,7 @@ const DEFAULT_PROJECTILE_TEXTURE = preload("uid://dgygswxu7j8ds")
 @onready var sfx: AudioStreamPlayer3D = %SFX
 
 var shoots_every_x_beat:= 6
+var projectile_enabled:= true
 var projectile_range:= 2
 var projectile_damage:= 10.0
 var projectile_speed:= 25.0
@@ -26,13 +27,15 @@ func enter() -> void:
 
 
 func set_stats():
-	var data: EnemyResource = O.data
+	var data: EnemyData = O.data
 	
 	if data == null:
 		printerr(self, " of ", O, ": data not found")
 		return
 	
 	shoots_every_x_beat = data.shoots_every_x_beat
+	
+	projectile_enabled = data.projectile_enabled
 	projectile_range = data.projectile_range
 	projectile_damage = data.projectile_damage
 	projectile_speed = data.projectile_speed
@@ -55,23 +58,29 @@ func ranged_attack():
 
 
 func check_ranged():
+	if projectile_enabled == false:
+		return
+	
 	if O.enabled == false:
 		return
 	
 	if O.sees_player == false:
 		return
 	
-	if O.within_distance_to_player(projectile_range) == false:
+	if O.is_moving == true:
 		return
 	
-	if O.within_distance_to_player(melee_range) == true:
+	if O.within_tiles_to_player(projectile_range) == false:
+		return
+	
+	if O.within_tiles_to_player(melee_range) == true:
 		return
 	
 	ranged_attack()
 
 
 func create_projectile():
-	var data: EnemyResource = O.data
+	var data: EnemyData = O.data
 	var projectile_inst: Projectile = PROJECTILE.instantiate()
 	
 	projectile_inst.damage = projectile_damage

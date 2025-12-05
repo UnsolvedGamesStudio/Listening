@@ -18,47 +18,47 @@ size = Vector3(1.9980469, 1.0009824, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_b0f2n"]
 size = Vector3(1.95, 3.9, 1.95)
 
-[node name="HeightLimitedCell" type="Node3D"]
+[node name="HeightLimitedCell" type="Node3D" groups=["walled_cell"]]
 script = ExtResource("1_b0f2n")
 
 [node name="InsideWalls" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9, 0, 0, 0, 1, 0, 0.4, 0)
 
 [node name="NorthFace" parent="InsideWalls" instance=ExtResource("4_522tv")]
-transform = Transform3D(1, 0, -2.3841855e-07, 0, 1, 0, 2.3841855e-07, 0, 1, 0, 0, 0.999)
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, -1.0009999)
 
 [node name="EastFace" parent="InsideWalls" instance=ExtResource("4_522tv")]
 transform = Transform3D(1.9470718e-07, 0, 1, 0, 1, 0, -1, 0, 1.9470718e-07, 1, 0, 0.0009999871)
 
 [node name="SouthFace" parent="InsideWalls" instance=ExtResource("4_522tv")]
-transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, -0.999)
+transform = Transform3D(1, 0, -6.3573026e-08, 0, 1, 0, 6.3573026e-08, 0, 1, 0, 0, 1.0009999)
 
 [node name="WestFace" parent="InsideWalls" instance=ExtResource("4_522tv")]
-transform = Transform3D(-1.0728441e-07, 0, -1, 0, 1, 0, 1, 0, -1.0728441e-07, -0.999, 0, 0)
+transform = Transform3D(-1.6292068e-07, 0, -1, 0, 1, 0, 1, 0, -1.6292068e-07, -0.999, 0, 0)
 
 [node name="BaseTerrain" type="Node3D" parent="."]
+
+[node name="NorthFace" parent="BaseTerrain" instance=ExtResource("3_d8fh8")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -1)
+
+[node name="EastFace" parent="BaseTerrain" instance=ExtResource("3_d8fh8")]
+unique_name_in_owner = true
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 1, 0, 0)
+
+[node name="SouthFace" parent="BaseTerrain" instance=ExtResource("3_d8fh8")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="WestFace" parent="BaseTerrain" instance=ExtResource("3_d8fh8")]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1, 0, 0)
 
 [node name="TopFace" parent="BaseTerrain" instance=ExtResource("7_27ovq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 
 [node name="LoweredCeiling" parent="BaseTerrain" instance=ExtResource("7_27ovq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
-
-[node name="NorthFace" parent="BaseTerrain" instance=ExtResource("3_d8fh8")]
-unique_name_in_owner = true
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -1)
-
-[node name="EastFace" parent="BaseTerrain" instance=ExtResource("3_d8fh8")]
-unique_name_in_owner = true
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1, 0, 0)
-
-[node name="WestFace" parent="BaseTerrain" instance=ExtResource("3_d8fh8")]
-unique_name_in_owner = true
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1, 0, 0)
-
-[node name="SouthFace" parent="BaseTerrain" instance=ExtResource("3_d8fh8")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
 [node name="BottomFace" type="StaticBody3D" parent="BaseTerrain"]
 unique_name_in_owner = true

@@ -18,7 +18,7 @@ class_name MusicBox
 
 @export var contents: Array[PackedScene] = []
 
-@export var uuid: String = ""
+@export var save_id: String = ""
 
 var object_instances: Array[Node3D] = []
 
@@ -46,24 +46,24 @@ func init_contents():
 	for i in range(contents.size()):
 		var scene: PackedScene = contents[i]
 		var object_inst: Node3D = scene.instantiate()
-		var inst_uuid:= uuid + "_" + str(i)
+		var inst_save_id:= save_id + "_" + str(i)
 		
-		if SaveManager.check_node_collected(object_inst, inst_uuid) == true:
+		if SaveManager.check_node_collected(object_inst, inst_save_id) == true:
 			object_inst.queue_free()
 			continue
 		
-		set_inst_uuid(object_inst, inst_uuid)
+		set_inst_save_id(object_inst, inst_save_id)
 		object_inst.process_mode = Node.PROCESS_MODE_DISABLED
 		get_parent().add_child(object_inst)
 		object_inst.global_position = Vector3(-100.0, -100.0, -100.0)
 		object_instances.append(object_inst)
 
 
-func set_inst_uuid(inst, inst_uuid):
-	if not "uuid" in inst:
+func set_inst_save_id(inst, inst_save_id):
+	if not "save_id" in inst:
 		return
 	
-	inst.uuid = inst_uuid
+	inst.save_id = inst_save_id
 
 
 func _physics_process(delta: float) -> void:

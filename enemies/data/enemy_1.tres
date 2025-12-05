@@ -1,15 +1,20 @@
-[gd_resource type="Resource" script_class="EnemyResource" load_steps=3 format=3 uid="uid://c8heqp3v32a1n"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://c8heqp3v32a1n"]
 
 [ext_resource type="Texture2D" uid="uid://dgygswxu7j8ds" path="res://projectile/textures/default_projectile.png" id="1_2nrf5"]
-[ext_resource type="Script" uid="uid://xik6wqrvw2sj" path="res://enemies/data/enemy_resource.gd" id="2_wldrd"]
+[ext_resource type="Script" uid="uid://xik6wqrvw2sj" path="res://enemies/data/enemy_data.gd" id="2_mfd4u"]
 
 [resource]
-script = ExtResource("2_wldrd")
+script = ExtResource("2_mfd4u")
 id = "test2"
 name = "Pet Peeve"
-preferred_range = 1
-moves_every_x_beat = 1
+preferred_range = 2
+aggro_distance = 20.0
+vision_limit = 20.0
+vertical_vision_range = 20.0
+movement_speed = 2
+moves_every_x_beat = 2
 shoots_every_x_beat = 3
+projectile_enabled = false
 projectile_damage = 15.0
 projectile_speed = 30.0
 drop = "res://pickups/dopamine/dopamine_pickup.tscn"

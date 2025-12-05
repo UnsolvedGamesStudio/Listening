@@ -26,7 +26,7 @@ func _input(event: InputEvent) -> void:
 
 
 func pause():
-	if SceneManager.current_scene is HubWorld:
+	if SceneManager.current_scene.is_in_group("layout"):
 		back_to_hub_button.hide()
 	else:
 		back_to_hub_button.show()

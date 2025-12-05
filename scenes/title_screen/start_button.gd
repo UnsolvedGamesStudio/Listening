@@ -80,7 +80,7 @@ func start():
 	Filters.fade.play("fade_out")
 	Bgm.non_beat_bgm.pitch_scale = 1.0
 	
-	SceneManager.switch_scene("hub_world")
+	SceneManager.switch_scene(SceneManager.scenes.HUB_WORLD)
 
 
 func on_mouse_entered():

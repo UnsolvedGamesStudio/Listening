@@ -1,4 +1,4 @@
-#extends Node3D
+extends Node3D
 #class_name Player
 ### Todo: Add indicator of effective range, maybe a line with a ball at the end?
 ### Todo: Add signals for "successful actions", so you can't cheese the score as much?
@@ -106,7 +106,7 @@
 	#
 	#
 	#if auto_move == true and Input.is_action_pressed("forward") and is_moving == false:
-		#if SceneManager.current_scene is HubWorld:
+		#if SceneManager.current_scene.is_in_group("layout"):
 			#move_forward()
 		#
 		#else:

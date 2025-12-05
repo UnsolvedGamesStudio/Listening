@@ -39,7 +39,7 @@ func update_value():
 
 
 func set_stats():
-	var data: EnemyResource = O.data
+	var data: EnemyData = O.data
 	
 	if data == null:
 		printerr(self, " of ", O, ": data not found")

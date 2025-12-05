@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://itikcsbog7mw" path="res://terrain/wall.tscn" id="3_jfg1x"]
 [ext_resource type="PackedScene" uid="uid://d3u7i3tehxhh6" path="res://terrain/cells/floor_cell.tscn" id="4_audej"]
 
-[node name="WalledCell" type="Node3D"]
+[node name="WalledCell" type="Node3D" groups=["walled_cell"]]
 script = ExtResource("1_cceiw")
 
 [node name="NorthFace" parent="." instance=ExtResource("3_jfg1x")]

@@ -1,16 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwvoawpjhacas"]
+[gd_scene load_steps=3 format=3 uid="uid://cwvoawpjhacas"]
 
-[ext_resource type="Material" uid="uid://b74hwoerq7pj4" path="res://terrain/textures/floor_material_overlay.tres" id="1_4et2n"]
-[ext_resource type="Material" uid="uid://bd5kwov3i5lgu" path="res://terrain/textures/floor_material.tres" id="2_vs2el"]
+[ext_resource type="Material" uid="uid://bst4ecl263gsh" path="res://terrain/textures/grass_cube_material.tres" id="1_uvwf8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_d8fh8"]
-material = ExtResource("2_vs2el")
+material = ExtResource("1_uvwf8")
 size = Vector3(2, 0.99, 2)
 
 [node name="FloorVisuals" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.495, 0)
-material_overlay = ExtResource("1_4et2n")
 mesh = SubResource("BoxMesh_d8fh8")
 skeleton = NodePath("../..")

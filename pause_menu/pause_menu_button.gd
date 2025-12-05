@@ -39,7 +39,7 @@ func on_button_up():
 			owner.unpause()
 		
 		Filters.fade.play("fade_out")
-		SceneManager.switch_scene("hub_world")
+		SceneManager.switch_scene(SceneManager.scenes.HUB_WORLD)
 		Bgm.stop_song()
 		
 		await Filters.fade.animation_finished

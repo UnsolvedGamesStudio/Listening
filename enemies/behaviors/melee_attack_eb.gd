@@ -17,7 +17,7 @@ func enter() -> void:
 
 
 func set_stats():
-	var data: EnemyResource = O.data
+	var data: EnemyData = O.data
 	
 	if data == null:
 		printerr(self, " of ", O, ": data not found")
@@ -56,7 +56,10 @@ func check_melee():
 	if O.sees_player == false:
 		return
 	
-	if O.within_distance_to_player(melee_range) == false:
+	if O.is_moving == true:
+		return
+	
+	if O.within_tiles_to_player(melee_range) == false:
 		return
 	
 	melee_attack()

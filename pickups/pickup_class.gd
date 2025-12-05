@@ -16,7 +16,7 @@ class_name Pickup
 @export var animate_every_x_beat:= 4
 @export var interacted_color:= Color(0.0, 0.659, 0.593, 1.0)
 
-@export var uuid: String = ""
+@export var save_id: String = ""
 
 @export var starting_move_rate:= 0.0035
 var move_lerp_rate:= starting_move_rate

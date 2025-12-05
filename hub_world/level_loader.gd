@@ -24,7 +24,7 @@ func load_level():
 	SceneManager.current_blueprint = blueprint
 	Filters.fade.play("fade_out")
 	await Filters.fade.animation_finished
-	SceneManager.switch_scene("prep_screen", "", level_data)
+	SceneManager.switch_scene(SceneManager.scenes.PREP_SCREEN, "", level_data)
 
 
 func on_area_3d_area_entered(area: Area3D):

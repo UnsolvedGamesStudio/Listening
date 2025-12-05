@@ -101,6 +101,7 @@ metadata/_custom_type_script = "uid://2ag1petdt53"
 unique_name_in_owner = true
 process_mode = 3
 script = ExtResource("7_4owoj")
+file = "uid://cq8yoxknei1rc"
 loop = true
 metadata/_custom_type_script = "uid://b1ncyajtuicss"
 

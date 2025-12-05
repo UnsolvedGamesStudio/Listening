@@ -2,7 +2,7 @@ extends Node
 class_name EnemyBehavior
 
 @export var enabled:= true
-@onready var O: Node3D
+@onready var O: Enemy
 
 
 func _ready() -> void:

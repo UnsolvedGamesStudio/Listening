@@ -1,10 +1,10 @@
 @tool
 extends TileMapLayer
 ## Unused, to be used when needing a reference from placing them outside the tilemap
-@export_tool_button("Generate uuid") var generate_uuid = _generate_uuid_v4
+@export_tool_button("Generate save_id") var generate_save_id = _generate_save_id_v4
 
 
-func _generate_uuid_v4() -> String:
+func _generate_save_id_v4() -> String:
 	var return_value:= ""
 	
 	var p1 = _generate_hex_bytes(4)

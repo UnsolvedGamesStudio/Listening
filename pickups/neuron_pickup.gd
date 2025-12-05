@@ -15,7 +15,7 @@ func on_activated():
 	Bus.neuron_picked_up.emit()
 	sfx.reparent(get_parent())
 	sfx.play()
-	SaveManager.set_collected(category, uuid)
+	SaveManager.set_collected(category, save_id)
 	
 	if Vars.neurons == Vars.total_neurons:
 		Bus.game_won.emit()

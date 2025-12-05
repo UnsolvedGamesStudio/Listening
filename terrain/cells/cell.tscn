@@ -10,7 +10,7 @@ size = Vector3(2, 3.9780273, 2)
 script = ExtResource("1_ds1sf")
 
 [node name="CellCollision" type="Area3D" parent="."]
-collision_mask = 649
+collision_mask = 651
 script = ExtResource("2_memsh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CellCollision"]

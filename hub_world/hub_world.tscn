@@ -118,7 +118,7 @@ _data = {
 &"fade_sound_in": SubResource("Animation_loyhd")
 }
 
-[node name="HubWorld" type="Node3D" groups=["layout"]]
+[node name="HubWorld" type="Node3D" groups=["hub_world", "playable_level"]]
 script = ExtResource("1_loyhd")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

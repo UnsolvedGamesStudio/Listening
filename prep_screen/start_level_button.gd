@@ -16,7 +16,7 @@ func on_clicked():
 	Filters.fade.play("fade_out")
 	GlobalSfx.rewind.play()
 	await Filters.fade.animation_finished
-	SceneManager.switch_scene("layout")
+	SceneManager.switch_scene(SceneManager.scenes.LAYOUT)
 
 
 func on_mouse_entered():

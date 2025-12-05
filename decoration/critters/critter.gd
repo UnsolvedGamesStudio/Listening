@@ -8,7 +8,9 @@ var dead:= false
 func _ready() -> void:
 	enter()
 	add_child(free_timer)
-	await Bus.level_done_generating
+	
+	await Bus.level_layout_ready
+	
 	level_ready()
 
 

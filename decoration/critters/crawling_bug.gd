@@ -1,5 +1,5 @@
 extends Critter
-
+## Todo: Make insect turn around when ceiling is not detected, and make it transition from ceiling to wall to floor
 @onready var animated_sprite_3d: AnimatedSprite3D = %AnimatedSprite3D
 @onready var wall_detect: Area3D = %WallDetect
 @onready var hurtbox: Area3D = %Hurtbox

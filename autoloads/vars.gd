@@ -3,11 +3,10 @@ extends Node
 var paused:= false
 var level_time:= 0.0
 
-
 var total_neurons:= 0
-var neurons:= get_collected("synapses")
+var neurons: int = SaveManager.get_collected_amount("synapses")
 var total_synapses:= 0
-var synapses:= get_collected("synapses")
+var synapses: int = SaveManager.get_collected_amount("synapses")
 var max_dopamine:= 100.0:
 	set(value):
 		max_dopamine = clampf(value, 0.0, 9999.9)
@@ -89,12 +88,8 @@ func reset():
 	element_container.clear()
 	last_element = "none"
 	living_enemies.clear()
-	synapses = get_collected("synapses")
-	total_synapses = get_collected("synapses")
-	neurons = get_collected("neurons")
-	total_neurons = get_collected("neurons")
+	synapses = SaveManager.get_collected_amount("synapses")
+	total_synapses = SaveManager.get_collected_amount("synapses")
+	neurons = SaveManager.get_collected_amount("neurons")
+	total_neurons = SaveManager.get_collected_amount("neurons")
 	inventory.clear()
-
-
-func get_collected(category: String) -> int:
-	return SaveManager.saved_data[category].size()

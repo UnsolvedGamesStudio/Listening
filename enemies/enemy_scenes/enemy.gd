@@ -19,11 +19,11 @@ const SHELL_LAYER:= 11
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var enemy_indicator: EnemyIndicator = %EnemyIndicator
 
-@export var data: EnemyResource = preload("uid://c8heqp3v32a1n")
+@export var data: EnemyData = preload("uid://c8heqp3v32a1n")
+
 @export var enabled:= true
 @export var puzzle_id:= -1
-
-@export var uuid: String = ""
+@export var save_id: String = ""
 
 var preferred_range
 enum ranges{MELEE, RANGED, CONTACT}
@@ -32,11 +32,13 @@ var body_damage:= 10.0
 var impassable:= false
 
 var vision_limit:= 10.0
+var vertical_vision_range:= 2.0
 
 var occupied_cell: Cell
 var on_top_of_player:= false
 var sees_player:= false
 var aware_of_player:= false
+var is_moving:= false
 
 var counts_towards_goal:= true
 
@@ -68,6 +70,7 @@ func init_stats():
 	body_damage = data.body_damage
 	impassable = data.impassable
 	vision_limit = data.vision_limit
+	vertical_vision_range = data.vertical_vision_range
 	counts_towards_goal = data.counts_towards_goal
 
 
@@ -101,23 +104,23 @@ func drop_loot():
 		printerr(self, ": drop_inst is not a node")
 		return
 	
-	var inst_uuid:= uuid + "_" + str(0)
+	var inst_save_id:= save_id + "_" + str(0)
 	
-	if SaveManager.check_node_collected(drop_inst, inst_uuid) == true:
+	if SaveManager.check_node_collected(drop_inst, inst_save_id) == true:
 		drop_inst.queue_free()
 		return
 	
-	set_inst_uuid(drop_inst, inst_uuid)
+	set_inst_save_id(drop_inst, inst_save_id)
 	
 	Find.layout().add_child(drop_inst)
 	drop_inst.global_position = global_position
 
 
-func set_inst_uuid(drop_inst, inst_uuid):
-	if not "uuid" in drop_inst:
+func set_inst_save_id(drop_inst, inst_save_id):
+	if not "save_id" in drop_inst:
 		return
 	
-	drop_inst.uuid = inst_uuid
+	drop_inst.save_id = inst_save_id
 
 
 func set_sprite_alpha(amount: float):
@@ -158,9 +161,10 @@ func get_direction_to_player():
 	return chosen_directions.pick_random()
 
 
-func within_distance_to_player(distance: int):
+func within_tiles_to_player(distance: float):
 	var player_cell:= Vars.player_cell
 	
+	distance *= Vars.cell_size
 	if player_cell == null:
 		return false
 	
@@ -169,10 +173,13 @@ func within_distance_to_player(distance: int):
 		return false
 	
 	var height_diff: float = abs( abs( occupied_cell.global_position.y ) -abs( player_cell.global_position.y ) )
+	
 	if height_diff > 0.5:
 		return false
 	
-	var cell_distance:= roundi( (occupied_cell.cell_grid_position - player_cell.cell_grid_position).length() )
+	var own_cell_pos:= occupied_cell.global_position
+	var player_cell_pos:= player_cell.global_position
+	var cell_distance:= roundi( (own_cell_pos - player_cell_pos).length() )
 	
 	if cell_distance <= distance:
 		return true

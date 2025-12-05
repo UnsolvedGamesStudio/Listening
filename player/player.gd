@@ -77,7 +77,7 @@ func _ready() -> void:
 	interact_range = Vars.cell_size * 10000
 	los.global_position = camera.global_position
 	
-	await get_tree().create_timer(0.0).timeout
+	await Bus.level_layout_ready
 	
 	move_to_cell_indicator.reparent(get_parent())
 	movement_raycast.reparent(get_parent())
@@ -129,7 +129,6 @@ func _physics_process(delta: float) -> void:
 	
 	if is_moving == false:
 		player_sfx.steps.stop()
-
 
 
 func snap_rotations():
@@ -225,9 +224,10 @@ func move_forward():
 	
 	tween.tween_property(self, "global_position", target_cell.global_position, tween_length)
 	headbob.play("bob")
-	await tween.finished
-	Bus.player_moved.emit()
 	
+	await tween.finished
+	
+	Bus.player_moved.emit()
 	is_moving = false
 	update_move_to_cell_indicator()
 

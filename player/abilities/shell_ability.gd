@@ -27,7 +27,7 @@ func activate():
 
 
 func tween_pop_up(shell_inst):
-	var tween_length:= Bgm.rhythm_notifier.beat_length / 2
+	var tween_length: float = Bgm.rhythm_notifier.beat_length / 2
 	
 	shell_inst.mesh_instance_3d.scale.x = 0.01
 	shell_inst.mesh_instance_3d.scale.z = 0.01
@@ -44,7 +44,7 @@ func tween_pop_up(shell_inst):
 
 
 func tween_shrink(shell_inst):
-	var tween_length:= Bgm.rhythm_notifier.beat_length / 2
+	var tween_length: float = Bgm.rhythm_notifier.beat_length / 2
 	var tween:= create_tween()
 	tween.tween_property(shell_inst.mesh_instance_3d, "scale:x", 0.1, tween_length)
 	tween.tween_property(shell_inst.mesh_instance_3d, "scale:z", 0.1, tween_length)

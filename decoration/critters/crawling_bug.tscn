@@ -108,6 +108,7 @@ debug_color = Color(0.41099185, 0.603334, 0, 0.14901961)
 
 [node name="Hurtbox" parent="." instance=ExtResource("4_te06y")]
 unique_name_in_owner = true
+collision_layer = 512
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
 transform = Transform3D(0.9999911, -0.000652834, 0.004162773, 0.0006540479, 0.99999976, -0.00028956734, -0.004162582, 0.0002922938, 0.9999913, -0.005186839, -0.045398127, -0.0073761228)
@@ -141,8 +142,9 @@ bus = &"SFX"
 [node name="CritterMovement" parent="." instance=ExtResource("4_s4uih")]
 min_random_time = 0.5
 max_random_time = 6.0
-turn_speed = 1.0
-speed_boost_frequency = 2.0
+turn_speed = 8.0
+base_speed = 0.5
+speed_boost_frequency = 1.0
 speed_boost_chance = 0.2
 
 [node name="CritterGetHurt" parent="." instance=ExtResource("6_pjp0q")]
