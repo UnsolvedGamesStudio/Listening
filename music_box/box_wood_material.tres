@@ -5,9 +5,12 @@
 [resource]
 resource_name = "default"
 cull_mode = 2
-albedo_color = Color(0.52640504, 0.29099274, 0.26589158, 1)
+albedo_color = Color(0.65529525, 0.17994705, 0.21829566, 1)
 albedo_texture = ExtResource("1_d6exo")
-roughness = 0.23
+metallic = 0.23
+metallic_specular = 0.19
+roughness = 0.19
 emission = Color(0.89046204, 0.30988908, 0.432466, 1)
 emission_energy_multiplier = 0.08
 uv1_scale = Vector3(4, 2, 0)
+texture_filter = 2

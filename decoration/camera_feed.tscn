@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://0i4shrbl44dm"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_w17i1"]
+viewport_path = NodePath("CameraFeed/SubViewport")
+
+[node name="CameraFeed" type="Sprite3D"]
+texture_filter = 0
+texture = SubResource("ViewportTexture_w17i1")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(-0.50595856, 0, 0.8625578, 0, 1, 0, -0.8625578, 0, -0.50595856, 4.412018, 1.2834725, 0.31760097)

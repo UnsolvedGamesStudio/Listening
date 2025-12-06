@@ -30,4 +30,5 @@ func on_teleporter_area_entered(area: Area3D):
 		printerr(self, ": Teleport position not set")
 		return
 	
+	get_tree().get_first_node_in_group("secret_room").show()
 	teleport_player(player)

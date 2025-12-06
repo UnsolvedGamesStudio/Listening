@@ -19,6 +19,7 @@ script = ExtResource("1_o5qli")
 scene_to_load = 1
 level_layout_to_load = ExtResource("2_vcsgt")
 default_song = ExtResource("2_rarhs")
+prevent_saving = true
 always_start_bgm = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

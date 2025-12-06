@@ -5,7 +5,7 @@ func _ready() -> void:
 
 
 func hide_in_hub():
-	if SceneManager.current_scene.is_in_group("layout"):
+	if SceneManager.current_scene.is_in_group("hub_world"):
 		hide()
 	else:
 		show()

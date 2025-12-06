@@ -88,6 +88,7 @@ walled_cell=""
 hub_world=""
 blueprint_layout=""
 playable_level=""
+secret_room=""
 
 [gui]
 
@@ -150,6 +151,7 @@ exit={
 
 3d_render/layer_1="decal_surface"
 3d_render/layer_2="not_decal_surface"
+3d_render/layer_3="player_body"
 3d_physics/layer_1="room_inside"
 3d_physics/layer_2="terrain"
 3d_physics/layer_3="enemies"

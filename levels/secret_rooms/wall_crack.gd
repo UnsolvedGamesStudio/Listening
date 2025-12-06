@@ -1,5 +1,6 @@
 extends Node3D
 class_name WallCrack
+## Todo: Maybe add a secret room manager to the level
 ## Todo: Add break particles
 ## Todo: Decouple cracked wall and secret room doorway/make new tile for simple cracked wall
 ## Todo: Hide secret room when not in use
@@ -10,10 +11,11 @@ const SECRET_ROOM_DOORWAY = preload("uid://bovh35e65gy48")
 @onready var decal: Decal = %Decal
 @onready var direction: Marker3D = %Direction
 
-@export var secret_room:= preload("uid://bg6epqgk85ku3")
+@export var secret_room_packed_scene:= preload("uid://bg6epqgk85ku3")
 
 static var secret_room_amount:= 0
 
+var secret_room: Node3D
 var wall: Node3D
 
 
@@ -26,7 +28,7 @@ func _ready() -> void:
 
 
 func generate_secret_room():
-	var room_inst: Node3D = secret_room.instantiate()
+	var room_inst: Node3D = secret_room_packed_scene.instantiate()
 	var room_pos:= Vector3(200.0 * secret_room_amount, -200.0, 200.0)
 	
 	Find.layout().add_child(room_inst)
@@ -35,6 +37,7 @@ func generate_secret_room():
 	
 	generate_doorway(room_inst)
 	
+	secret_room = room_inst
 	secret_room_amount += 1
 
 

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c7wmmnca4o1dx" path="res://player/spawn_point.tscn" id="4_sb12i"]
 [ext_resource type="PackedScene" uid="uid://cqc1iuhqntykk" path="res://enemies/enemy_scenes/enemy_1.tscn" id="4_we1x4"]
 [ext_resource type="PackedScene" uid="uid://ce10gkdeiprj7" path="res://player/player.tscn" id="5_gbhdq"]
-[ext_resource type="PackedScene" uid="uid://dcl2xie0sgtnp" path="res://terrain/cells/walled_cell_ceiling.tscn" id="5_w17i1"]
+[ext_resource type="PackedScene" uid="uid://ugnt6a8ceul7" path="res://decoration/framed_mirror.tscn" id="5_w17i1"]
 
 [node name="TestLevel" type="Node3D" groups=["layout", "playable_level"]]
 
@@ -33,15 +33,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -4)
 [node name="Enemy" parent="Terrain/FloorCell7" instance=ExtResource("4_we1x4")]
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("4_sb12i")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 
 [node name="Player" parent="." instance=ExtResource("5_gbhdq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
-[node name="WalledCell" parent="." instance=ExtResource("5_w17i1")]
-
-[node name="WalledCell2" parent="." instance=ExtResource("5_w17i1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
-
-[node name="WalledCell3" parent="." instance=ExtResource("5_w17i1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+[node name="FramedMirror" parent="." instance=ExtResource("5_w17i1")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ce10gkdeiprj7"]
+[gd_scene load_steps=21 format=3 uid="uid://ce10gkdeiprj7"]
 
 [ext_resource type="Script" uid="uid://bxbkaxat5hcgk" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://86r6xeju02bg" path="res://main_ui/main_ui.tscn" id="2_boad6"]
@@ -12,9 +12,47 @@
 [ext_resource type="PackedScene" uid="uid://dbkojsebkkehc" path="res://player/abilities/shell_ability.tscn" id="9_8t03j"]
 [ext_resource type="PackedScene" uid="uid://cqty5ekbal6tr" path="res://player/player_sfx.tscn" id="12_ebec5"]
 [ext_resource type="PackedScene" uid="uid://cq12v0t8iygax" path="res://vfx/healing_particle_cloud.tscn" id="12_yllr7"]
+[ext_resource type="Texture2D" uid="uid://txm6cignwm3l" path="res://assets/camera_icon.png" id="13_yllr7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yllr7"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+albedo_color = Color(1, 0.6826594, 0.65819323, 0.0627451)
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yllr7"]
+material = SubResource("StandardMaterial3D_yllr7")
+top_radius = 0.0
+bottom_radius = 0.7
+height = 0.755
+radial_segments = 4
+rings = 0
+cap_top = false
+cap_bottom = false
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_g1dw6"]
 radius = 0.50683594
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebec5"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+albedo_color = Color(0.5504, 0.83419997, 0.86, 0.0627451)
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ebec5"]
+material = SubResource("StandardMaterial3D_ebec5")
+radial_segments = 40
+rings = 0
+cap_top = false
+cap_bottom = false
 
 [sub_resource type="Animation" id="Animation_g1dw6"]
 resource_name = "bob"
@@ -67,7 +105,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.642, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Neck"]
 unique_name_in_owner = true
+cull_mask = 1048571
 current = true
+
+[node name="FakeCamera" type="Sprite3D" parent="Neck/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0033361912, 0)
+layers = 4
+flip_h = true
+pixel_size = 0.0025
+texture = ExtResource("13_yllr7")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Neck/Camera3D/FakeCamera"]
+transform = Transform3D(0.7071067, 0, 0.7071067, 0.7071067, 0, -0.7071067, -1.4901161e-08, 1, 1.4901161e-08, 0, 0, -0.35749954)
+layers = 4
+mesh = SubResource("CylinderMesh_yllr7")
+skeleton = NodePath("")
 
 [node name="MovementRaycastTransform" type="RemoteTransform3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70000005, 0)
@@ -108,6 +160,11 @@ collision_mask = 36
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerCollision"]
 shape = SubResource("CylinderShape3D_g1dw6")
 debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="FakeHitbox" type="MeshInstance3D" parent="PlayerCollision"]
+layers = 4
+mesh = SubResource("CylinderMesh_ebec5")
+skeleton = NodePath("../..")
 
 [node name="EnemyAimPoint" type="Marker3D" parent="."]
 unique_name_in_owner = true

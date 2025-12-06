@@ -14,7 +14,7 @@ func _generate_save_id_v4() -> String:
 	var p5 = _generate_hex_bytes(6)
 	
 	return_value = p1 + "-" + p2 + "-" + p3 + "-" + p4 + "-" + p5
-	print(return_value)
+	#print(return_value)
 	return return_value
 
 

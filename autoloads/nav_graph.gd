@@ -121,7 +121,8 @@ func get_cell_path(start_pos: Vector3, end_pos: Vector3, draw_path:= false) -> A
 	var end_id = cell_to_id[end_pos]
 	var path:= astar.get_point_path(start_id, end_id)
 	
-	draw_debug_path(path)
+	if draw_path == true:
+		draw_debug_path(path)
 	
 	return path
 
@@ -155,7 +156,6 @@ func get_next_cell(start_pos: Vector3, end_pos: Vector3, allow_diagonals: bool =
 	
 	next_cell = get_cell_node(current_path[1])
 	
-	#print(next_cell)
 	return next_cell
 
 
@@ -169,8 +169,9 @@ func can_connect(a_pos: Vector3, b_pos: Vector3, ignore_occupants: Array) -> boo
 	var a_cell = get_cell_node(a_pos)
 	var b_cell = get_cell_node(b_pos)
 	
-	# Occupancy check (ignore start/end occupants)
 	if b_cell.is_cell_blocked(ignore_occupants):
+		return false
+	if b_cell.forgotten == true:
 		return false
 	
 	# Check walls

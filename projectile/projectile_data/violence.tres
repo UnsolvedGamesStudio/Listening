@@ -13,7 +13,7 @@ frame_1/duration = 0.1
 
 [resource]
 script = ExtResource("1_ccoar")
-damage_mult = 0.5
+damage_mult = 0.75
 speed_mult = 2.0
 max_lifetime_mult = 1.2
 produce_destroyed_vfx = false

@@ -1,4 +1,5 @@
 extends Node
+## Todo: Take current level/scene into account
 #var user_path:= "user://save_data/save_data.json"
 var json_path:= "res://save_data/save_data.json"
 
@@ -22,6 +23,9 @@ func _ready() -> void:
 
 ## Todo: If file is blank, initialize the dict
 func write_save_data():
+	if get_tree().get_first_node_in_group("main_scene").prevent_saving == true:
+		return
+	
 	var file = FileAccess.open(json_path, FileAccess.ModeFlags.WRITE)
 	
 	if file == null:
@@ -61,6 +65,12 @@ func read_save_data():
 	return parsed_text
 
 
+func save_position(category: String, position: Vector3):
+	var save_id:= str(position.x, "_", position.y, "_", position.z)
+	
+	set_collected(category, save_id)
+
+
 func set_collected(category: String, save_id: String):
 	_saved_data.get_or_add(category, {})
 	_saved_data[category].get_or_add(save_id, true)
@@ -74,6 +84,12 @@ func check_node_collected(object, inst_save_id):
 		return true
 	
 	return false
+
+
+func position_collected(category: String, position: Vector3):
+	var save_id:= str(position.x, "_", position.y, "_", position.z)
+	
+	return check_id_collected(category, save_id)
 
 
 func check_id_collected(category: String, save_id: String):

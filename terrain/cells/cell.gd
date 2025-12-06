@@ -7,6 +7,7 @@ class_name Cell
 
 var occupants: Array[Node3D]
 
+var forgotten:= false
 var starting_floor:= -1
 var cell:= self
 
@@ -67,7 +68,6 @@ func is_cell_blocked(ignore: Array) -> bool:
 		if occupant in ignore:
 			continue  # skip ignored entities
 		
-		prints(occupant, ignore)
 		return true  # any other occupant blocks the cell
 	
 	return false

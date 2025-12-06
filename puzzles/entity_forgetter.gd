@@ -7,6 +7,9 @@ class_name EntityForgetter
 
 
 func enter():
+	if previously_collected == true:
+		queue_free()
+	
 	Bus.enemy_died.connect(on_enemy_died)
 	update_label()
 

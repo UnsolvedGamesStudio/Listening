@@ -1,10 +1,12 @@
 {
+	"forgetters": {
+
+	},
 	"neurons": {
 
 	},
+	"rememberer": {
+	},
 	"synapses": {
-		"0_-8": true,
-		"2_-20_0": true,
-		"4_-8": true
 	}
 }

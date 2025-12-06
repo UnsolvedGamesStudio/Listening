@@ -40,10 +40,15 @@ func move_towards_player():
 	var player_cell_pos:= Vars.player_cell.global_position
 	
 	var target_cell: Cell
-	var allow_diagonals:= true
+	var allow_diagonals:= can_move_diagonally
 	var ignore_occupants: Array = [O, Find.P()]
 	
-	target_cell = NavGraph.get_next_cell(own_cell_pos, player_cell_pos, allow_diagonals, ignore_occupants, true)
+	target_cell = NavGraph.get_next_cell(
+		own_cell_pos, 
+		player_cell_pos, 
+		allow_diagonals, 
+		ignore_occupants, 
+		false)
 	
 	move_to_cell(target_cell)
 

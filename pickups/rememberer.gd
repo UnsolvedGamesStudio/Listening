@@ -1,7 +1,9 @@
 extends Pickup
 class_name RemembererPickup
-## Todo: Free if tiles were remembered
+## Todo: Add safety check to make sure no forgetters are remaining, to prevent softlocks
 @onready var label: Label = %Label
+
+var original_position:= Vector3.ZERO
 
 var puzzle_id:= -1
 var required_synapses:= 11
@@ -9,6 +11,11 @@ var required_synapses:= 11
 
 func enter():
 	label.text = str(required_synapses)
+	
+	await Bus.level_done_generating
+	
+	original_position = global_position
+	
 
 
 func looked_at_by_player(on: bool):
@@ -25,6 +32,7 @@ func looked_at_by_player(on: bool):
 func activate():
 	if Vars.synapses >= required_synapses:
 		remembember_all_forgetters()
+		SaveManager.save_position("rememberer", global_position)
 	
 	else:
 		animation_player.play("bounce")
