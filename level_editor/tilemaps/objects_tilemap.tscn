@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://dilbsihag48bm"]
+[gd_scene load_steps=53 format=3 uid="uid://dilbsihag48bm"]
 
 [ext_resource type="PackedScene" uid="uid://6etr4cvlbgr2" path="res://music_box/music_box.tscn" id="1_cf6e4"]
 [ext_resource type="Texture2D" uid="uid://0gh2qphl4tm4" path="res://level_editor/textures/box_tiles.png" id="2_1uy3p"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://bhqj8jqxnu0q" path="res://level_editor/textures/pickups.png" id="15_g1r3g"]
 [ext_resource type="PackedScene" uid="uid://ugnt6a8ceul7" path="res://decoration/framed_mirror.tscn" id="15_tjakk"]
 [ext_resource type="PackedScene" uid="uid://c86l6d7h0h8wa" path="res://hazards/spikes/spikes.tscn" id="16_hdd36"]
+[ext_resource type="PackedScene" uid="uid://d4mdi2w55raag" path="res://decoration/ceiling_light.tscn" id="16_m4r6b"]
 [ext_resource type="Texture2D" uid="uid://d33t4kcxy55l4" path="res://level_editor/textures/hazards.png" id="17_ar6ua"]
 [ext_resource type="PackedScene" uid="uid://dsni4a2x3dlwl" path="res://pickups/dopamine/dopamine_pickup.tscn" id="17_wyto8"]
 [ext_resource type="PackedScene" uid="uid://3fekdhfnam6y" path="res://puzzles/forgetter.tscn" id="18_tjakk"]
@@ -104,6 +105,7 @@ texture_region_size = Vector2i(32, 32)
 0:0/0/custom_data_0 = ExtResource("10_hsd26")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m4r6b"]
+resource_name = "Decoration"
 texture = ExtResource("14_tjakk")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -114,6 +116,8 @@ texture_region_size = Vector2i(32, 32)
 2:0/0/custom_data_0 = ExtResource("14_ar6ua")
 3:0/0 = 0
 3:0/0/custom_data_0 = ExtResource("15_tjakk")
+4:0/0 = 0
+4:0/0/custom_data_0 = ExtResource("16_m4r6b")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1h6v4"]
 resource_name = "Keys"

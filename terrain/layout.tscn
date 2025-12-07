@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1rnngxhnemng"]
+[gd_scene load_steps=10 format=3 uid="uid://d1rnngxhnemng"]
 
 [ext_resource type="PackedScene" uid="uid://dflkyrrs1kf1s" path="res://timing_bar/beat_vizualizer.tscn" id="3_tupbf"]
+[ext_resource type="PackedScene" uid="uid://bdbt8bcqdo4xx" path="res://terrain/layout_light.tscn" id="4_e4vt8"]
 [ext_resource type="PackedScene" uid="uid://ce10gkdeiprj7" path="res://player/player.tscn" id="4_trw21"]
 [ext_resource type="AudioStream" uid="uid://btu6qvvkk8lsp" path="res://assets/ambience/room_tone.ogg" id="5_b0xiq"]
 
@@ -27,7 +28,6 @@ sky_material = SubResource("PanoramaSkyMaterial_cf5th")
 background_mode = 2
 sky = SubResource("Sky_5218q")
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 16.0
 fog_mode = 1
 fog_density = 1.0
 volumetric_fog_density = 0.134
@@ -35,7 +35,7 @@ volumetric_fog_albedo = Color(0.535566, 0.75898, 0.81535, 1)
 
 [node name="Layout" type="Node3D" groups=["blueprint_layout", "layout", "playable_level"]]
 
-[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mhowc")
 
 [node name="BeatVisualizer" parent="." instance=ExtResource("3_tupbf")]
@@ -48,3 +48,8 @@ volume_db = 1.5
 pitch_scale = 0.95
 autoplay = true
 bus = &"Ambience"
+
+[node name="Sun" parent="." instance=ExtResource("4_e4vt8")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 18, 0)
+light_energy = 2.4
+shadow_enabled = true

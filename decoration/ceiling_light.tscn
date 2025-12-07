@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4mdi2w55raag"]
+
+[ext_resource type="PackedScene" uid="uid://bw8gqh3mcauhb" path="res://terrain/ceiling.tscn" id="1_fpt1a"]
+[ext_resource type="Texture2D" uid="uid://dbyd2im7ned86" path="res://vfx/enemy_indicator.png" id="1_hr870"]
+[ext_resource type="Texture2D" uid="uid://leo0aoy1bf1i" path="res://decoration/textures/ceiling_light_gradient.tres" id="2_hr870"]
+
+[node name="CeilingLight" type="Node3D"]
+
+[node name="EdgeDecal" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.996758, 0)
+size = Vector3(1.65, 0.04, 1.65)
+texture_albedo = ExtResource("1_hr870")
+texture_normal = ExtResource("1_hr870")
+emission_energy = 0.0
+modulate = Color(0, 0.12833337, 0.22, 1)
+
+[node name="LightDecal" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.992992, 0)
+size = Vector3(1.5, 0.04, 1.5)
+texture_albedo = ExtResource("2_hr870")
+texture_emission = ExtResource("2_hr870")
+emission_energy = 2.37
+
+[node name="SpotLight3D" type="SpotLight3D" parent="LightDecal"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.036955357, 0)
+light_energy = 1.7
+spot_range = 35.712395
+spot_angle = 57.20182
+
+[node name="OmniLight3D" type="OmniLight3D" parent="LightDecal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1718111, 0)
+light_color = Color(0.81127083, 0.9999997, 0.9995714, 1)
+light_energy = 1.265
+omni_range = 8.155671
+
+[node name="Ceiling" parent="." instance=ExtResource("1_fpt1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)

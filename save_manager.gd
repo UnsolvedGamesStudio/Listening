@@ -1,12 +1,10 @@
 extends Node
+## Todo: Make second dict for save cache
 ## Todo: Take current level/scene into account
 #var user_path:= "user://save_data/save_data.json"
 var json_path:= "res://save_data/save_data.json"
 
-var _saved_data:= {
-	"synapses" : {},
-	"neurons" : {},
-}
+var _saved_data:= {}
 
 
 func _ready() -> void:
@@ -18,6 +16,7 @@ func _ready() -> void:
 	
 	load_save_data()
 	
+	Bus.game_lost.connect(on_game_lost)
 	Bus.loading_level.connect(on_loading_level)
 
 
@@ -114,6 +113,11 @@ func erase_all_save_data():
 	print("Data erased")
 	_saved_data.clear()
 	write_save_data()
+
+
+func on_game_lost():
+	pass
+	
 
 
 func on_loading_level():

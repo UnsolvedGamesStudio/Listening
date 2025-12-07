@@ -28,8 +28,6 @@ func _ready() -> void:
 		previously_collected = true
 	
 	enter()
-	## Todo: Try call deferred instead
-	await get_tree().create_timer(0.05).timeout
 	
 	deactivate_collision()
 
@@ -77,7 +75,7 @@ func forget(object: Node3D):
 		object.enabled = false
 	
 	object.hide()
-	object.process_mode = Node.PROCESS_MODE_DISABLED
+	object.set_deferred("process_mode", Node.PROCESS_MODE_DISABLED)
 	forgotten_nodes.append(object)
 
 
@@ -101,6 +99,8 @@ func remember():
 
 
 func deactivate_collision():
+	await get_tree().create_timer(0.05).timeout
+	
 	area_3d.get_child(0).disabled = true
 
 

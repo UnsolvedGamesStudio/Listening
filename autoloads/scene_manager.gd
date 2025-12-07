@@ -132,8 +132,10 @@ func reload_level():
 	if current_scene == null:
 		return
 	
-	current_scene.queue_free()
-	load_scene()
+	SceneManager.switch_scene(SceneManager.scenes.LAYOUT)
+	
+	#current_scene.queue_free()
+	#load_scene()
 
 
 func quit_game():
