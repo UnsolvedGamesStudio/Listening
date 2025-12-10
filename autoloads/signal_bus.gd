@@ -9,8 +9,12 @@ signal beat_success_to_circle(level: int, circle: TimingCircle, element: int)
 signal beat_success_to_spellcast(element: int)
 signal beat_failure
 
+signal fade_out_ended
+signal fade_in_ended
+
 signal level_done_generating
 signal level_layout_ready
+signal loading_screen_finished
 signal loading_level
 signal level_exited
 

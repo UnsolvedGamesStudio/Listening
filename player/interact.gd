@@ -42,6 +42,9 @@ func check_distance(object: Node3D):
 
 
 func interact():
+	if P.can_interact == false:
+		return
+	
 	reticle_pressed_show()
 	activate_item()
 

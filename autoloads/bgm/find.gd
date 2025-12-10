@@ -11,7 +11,7 @@ func P() -> Player:
 
 
 func layout() -> Node:
-	var layout_scene:= get_tree().get_first_node_in_group("layout")
+	var layout_scene:= get_tree().get_first_node_in_group("playable_level")
 	
 	if layout_scene == null:
 		printerr("Layout not found")

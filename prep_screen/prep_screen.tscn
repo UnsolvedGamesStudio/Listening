@@ -117,7 +117,7 @@ script = ExtResource("5_77kmu")
 
 [node name="Start" type="Label" parent="MarginContainer/TopContainer/StartButton"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.15294118, 0.25490198, 0.1764706, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("8_jpipw")
 theme_override_font_sizes/font_size = 14
 text = "Start"

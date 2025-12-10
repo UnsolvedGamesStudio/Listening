@@ -106,7 +106,7 @@ extends Node3D
 	#
 	#
 	#if auto_move == true and Input.is_action_pressed("forward") and is_moving == false:
-		#if SceneManager.current_scene.is_in_group("layout"):
+		#if SceneManager.active_scene_instance.is_in_group("layout"):
 			#move_forward()
 		#
 		#else:

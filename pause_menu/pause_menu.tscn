@@ -1,27 +1,17 @@
-[gd_scene load_steps=23 format=3 uid="uid://dohwuclbdrfh1"]
+[gd_scene load_steps=21 format=3 uid="uid://dohwuclbdrfh1"]
 
 [ext_resource type="Script" uid="uid://drn422cycc5qn" path="res://pause_menu/offset_slider.gd" id="1_5hbt6"]
 [ext_resource type="Script" uid="uid://d2xrtoqxe8yqr" path="res://pause_menu/pause_menu.gd" id="1_uwtdo"]
 [ext_resource type="Script" uid="uid://b56jfy7g127ku" path="res://pause_menu/pause_menu_button.gd" id="2_rd7dy"]
 [ext_resource type="FontFile" uid="uid://coihm6kr2umjr" path="res://assets/fonts/Short_Story.ttf" id="2_wn31l"]
 [ext_resource type="StyleBox" uid="uid://dn78ncm4grcm7" path="res://assets/ui_theme/panel.tres" id="3_b0obc"]
+[ext_resource type="StyleBox" uid="uid://dwgfil4nr1rcy" path="res://assets/ui_theme/panel_dark.tres" id="3_qi88y"]
 [ext_resource type="Script" uid="uid://ckomaugmasljd" path="res://pause_menu/cheat_button.gd" id="4_b4s0c"]
 [ext_resource type="Texture2D" uid="uid://b0tw8jr20jhhj" path="res://timing_bar/textures/interact_sigil.png" id="5_cux0y"]
 [ext_resource type="Texture2D" uid="uid://dsi82p3d4swsv" path="res://pause_menu/textures/music_icon.png" id="8_cux0y"]
 [ext_resource type="Texture2D" uid="uid://be7uvcmrgobq8" path="res://vfx/2d_particle.png" id="9_1nv8k"]
 [ext_resource type="Script" uid="uid://cweq5gdx57r0c" path="res://pause_menu/sound_slider.gd" id="9_p6csp"]
 [ext_resource type="Texture2D" uid="uid://b05g5frto8yrd" path="res://pause_menu/textures/sfx_icon.png" id="9_teyq6"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uwtdo"]
-content_margin_left = 8.0
-content_margin_top = 5.0
-content_margin_right = 8.0
-content_margin_bottom = 5.0
-bg_color = Color(0.16862746, 0.30588236, 0.58431375, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
 
 [sub_resource type="FontVariation" id="FontVariation_cux0y"]
 base_font = ExtResource("2_wn31l")
@@ -68,28 +58,6 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1glv"]
-content_margin_left = 3.0
-content_margin_top = 3.0
-content_margin_right = 3.0
-content_margin_bottom = 3.0
-bg_color = Color(0.27058825, 0.44705883, 0.8901961, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_teyq6"]
-content_margin_left = 3.0
-content_margin_top = 3.0
-content_margin_right = 3.0
-content_margin_bottom = 3.0
-bg_color = Color(0.105882354, 0.14117648, 0.2784314, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b4s0c"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -179,7 +147,7 @@ anchor_right = 0.26953125
 anchor_bottom = 0.84375
 size_flags_horizontal = 4
 size_flags_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_uwtdo")
+theme_override_styles/panel = ExtResource("3_qi88y")
 metadata/_edit_use_anchors_ = true
 
 [node name="CombosLabel" type="Label" parent="Combos"]
@@ -226,7 +194,7 @@ process_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_uwtdo")
+theme_override_styles/panel = ExtResource("3_qi88y")
 
 [node name="ControlsTutorialLabel" type="Label" parent="MarginContainer2/Tutorial"]
 layout_mode = 2
@@ -257,7 +225,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="OffsetSliderContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_styles/panel = ExtResource("3_b0obc")
+theme_override_styles/panel = ExtResource("3_qi88y")
 script = ExtResource("1_5hbt6")
 
 [node name="Control" type="Control" parent="VBoxContainer/OffsetSliderContainer"]
@@ -307,8 +275,8 @@ layout_mode = 2
 focus_behavior_recursive = 1
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 7
-theme_override_styles/normal = SubResource("StyleBoxFlat_s1glv")
-theme_override_styles/hover = SubResource("StyleBoxFlat_teyq6")
+theme_override_styles/normal = ExtResource("3_b0obc")
+theme_override_styles/hover = ExtResource("3_qi88y")
 text = "Resume"
 script = ExtResource("2_rd7dy")
 
@@ -319,8 +287,8 @@ custom_minimum_size = Vector2(100.215, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 7
-theme_override_styles/normal = SubResource("StyleBoxFlat_s1glv")
-theme_override_styles/hover = SubResource("StyleBoxFlat_teyq6")
+theme_override_styles/normal = ExtResource("3_b0obc")
+theme_override_styles/hover = ExtResource("3_qi88y")
 text = "Restart level"
 script = ExtResource("2_rd7dy")
 type = 2
@@ -332,8 +300,8 @@ custom_minimum_size = Vector2(100.215, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 7
-theme_override_styles/normal = SubResource("StyleBoxFlat_s1glv")
-theme_override_styles/hover = SubResource("StyleBoxFlat_teyq6")
+theme_override_styles/normal = ExtResource("3_b0obc")
+theme_override_styles/hover = ExtResource("3_qi88y")
 text = "Save and go back to hub world"
 script = ExtResource("2_rd7dy")
 type = 3
@@ -343,8 +311,8 @@ layout_mode = 2
 focus_behavior_recursive = 1
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 7
-theme_override_styles/normal = SubResource("StyleBoxFlat_s1glv")
-theme_override_styles/hover = SubResource("StyleBoxFlat_teyq6")
+theme_override_styles/normal = ExtResource("3_b0obc")
+theme_override_styles/hover = ExtResource("3_qi88y")
 text = "Save and quit"
 script = ExtResource("2_rd7dy")
 type = 1
@@ -383,7 +351,7 @@ anchor_top = 0.33482143
 anchor_right = 0.984375
 anchor_bottom = 0.84375
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("3_b0obc")
+theme_override_styles/panel = ExtResource("3_qi88y")
 script = ExtResource("1_5hbt6")
 metadata/_edit_use_anchors_ = true
 

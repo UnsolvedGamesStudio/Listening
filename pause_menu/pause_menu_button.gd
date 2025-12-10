@@ -38,13 +38,8 @@ func on_button_up():
 			GlobalSfx.rewind.play()
 			owner.unpause()
 		
-		Filters.fade.play("fade_out")
-		SceneManager.switch_scene(SceneManager.scenes.HUB_WORLD)
+		SceneManager.change_scene(SceneManager.Scenes.HUB_WORLD)
 		Bgm.stop_song()
-		
-		await Filters.fade.animation_finished
-		
-		Filters.fade.play("fade_in")
 	
 	if type == types.RESET:
 		SaveManager.erase_all_save_data()

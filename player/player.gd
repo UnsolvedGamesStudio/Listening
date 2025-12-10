@@ -2,16 +2,10 @@ extends Node3D
 class_name Player
 ## Todo: Make headbob anim a tween with adaptive speed
 ## Todo: Add indicator of effective range, maybe a line with a ball at the end?
-## Todo: Add signals for "successful actions" for spellcasting, so you can't cheese the score as much?
-## Todo: Consumable items (scroll to select, right click to use)
-## Todo: Different effects based on spell combos
-## Todo: Add instruments with different buffs and samples
-## Todo: Add equipable accessories with buffs
-## Todo: A painting node that hosts a random drawing
-## Todo: Spotlight decoration
-## Todo: Kake actions with the right timing count towards score
+## Todo: Add signals for "successful actions", so you can't cheese the score as much?
 ## Todo: Make held instrument go up when camera goes way down
-
+## Todo: Make an enum+dict that stores all the actions the player can take, and whether they are enabled
+## Todo: Consolidate what should be in here or Vars
 @onready var camera: Camera3D = %Camera3D
 @onready var neck: Node3D = %Neck
 @onready var player_collision: Area3D = %PlayerCollision
@@ -40,6 +34,7 @@ var is_moving:= false
 var invincible_cheat:= false
 var invincible:= false
 var can_act:= true
+var can_interact:= true
 
 ## Stats
 var max_hp:= 250.0:
@@ -116,7 +111,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	current_los_collider()
 	snap_rotations()
-	
 	if Input.is_action_pressed("forward") and can_act == true:
 		move_forward()
 	

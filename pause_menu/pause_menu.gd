@@ -26,10 +26,7 @@ func _input(event: InputEvent) -> void:
 
 
 func pause():
-	if SceneManager.current_scene.is_in_group("layout"):
-		back_to_hub_button.hide()
-	else:
-		back_to_hub_button.show()
+	SceneManager.call_deferred("hide_node_in_hub", back_to_hub_button, SceneManager.Scenes.HUB_WORLD)
 	
 	animation_player.play("pop_in")
 	Filters.pause_shader_fade.play("fade_in")

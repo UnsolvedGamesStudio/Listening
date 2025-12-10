@@ -152,7 +152,7 @@ omni_range = 91.137
 omni_attenuation = 7.116
 
 [node name="Title" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0829093, 0)
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.0829093, 0)
 layers = 2
 pixel_size = 0.04
 billboard = 2
@@ -207,6 +207,7 @@ anchor_right = 0.703125
 anchor_bottom = 0.63839287
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(107, 31)
 focus_mode = 0
 mouse_default_cursor_shape = 2
@@ -245,10 +246,11 @@ mesh = SubResource("ArrayMesh_5df70")
 mesh = SubResource("ArrayMesh_xawky")
 
 [node name="CameraAxis" type="Node3D" parent="."]
-transform = Transform3D(0.96592563, 0, -0.25881898, 0, 1, 0, 0.25881898, 0, 0.96592563, 0, 0.8362484, 0)
+transform = Transform3D(0.9659256, 0, -0.25881898, 0, 1, 0, 0.25881898, 0, 0.9659256, 0, 0.8362484, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraAxis"]
 transform = Transform3D(1, 0, 0, 0, 0.9918922, -0.12708193, 0, 0.12708193, 0.9918922, 0, -0.6378586, 3.1659017)
+current = true
 
 [node name="Spin" type="AnimationPlayer" parent="." groups=["spin_anim"]]
 unique_name_in_owner = true
@@ -263,4 +265,4 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_d6x3v")
 }
-speed_scale = 1.1
+speed_scale = 1.5

@@ -40,6 +40,7 @@ func activate():
 
 func open():
 	var O: Node3D = owner.owner
+	
 	area_3d.get_child(0).disabled = true
 	O.impassable = false
 	O.occupied_cell = null
@@ -64,7 +65,7 @@ func has_item():
 
 
 func looked_at_by_player(on: bool):
-	if on == true:
+	if on:
 		if has_item() == true:
 			decal.modulate = Color(0.0, 0.924, 0.94)
 		else:

@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://758m7p87uvon"]
+
+[ext_resource type="Script" uid="uid://bfur406bian1m" path="res://shop_ui/shop_ui.gd" id="1_1e358"]
+[ext_resource type="Theme" uid="uid://b2d4535til41s" path="res://assets/theme.tres" id="1_b4hmv"]
+[ext_resource type="StyleBox" uid="uid://dwgfil4nr1rcy" path="res://assets/ui_theme/panel_dark.tres" id="3_1e358"]
+[ext_resource type="StyleBox" uid="uid://dwc77do88qrbd" path="res://assets/ui_theme/large_margin_panel.tres" id="3_b4hmv"]
+[ext_resource type="PackedScene" uid="uid://cw5upjj2852iw" path="res://shop_ui/shop_item_panel.tscn" id="3_laq60"]
+[ext_resource type="Script" uid="uid://bipqr72aq4ll4" path="res://shop_ui/close_button.gd" id="5_laq60"]
+
+[node name="ShopUI" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_1e358")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_b4hmv")
+metadata/_edit_use_anchors_ = true
+
+[node name="VSplitContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ItemsAndDescription" type="PanelContainer" parent="MarginContainer/VSplitContainer"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_1e358")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer/ItemsAndDescription"]
+layout_mode = 2
+
+[node name="HSplitContainer" type="HBoxContainer" parent="MarginContainer/VSplitContainer/ItemsAndDescription/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Items" type="VBoxContainer" parent="MarginContainer/VSplitContainer/ItemsAndDescription/MarginContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ShopItemPanel" parent="MarginContainer/VSplitContainer/ItemsAndDescription/MarginContainer/HSplitContainer/Items" instance=ExtResource("3_laq60")]
+layout_mode = 2
+
+[node name="ShopItemPanel2" parent="MarginContainer/VSplitContainer/ItemsAndDescription/MarginContainer/HSplitContainer/Items" instance=ExtResource("3_laq60")]
+layout_mode = 2
+
+[node name="ShopItemPanel3" parent="MarginContainer/VSplitContainer/ItemsAndDescription/MarginContainer/HSplitContainer/Items" instance=ExtResource("3_laq60")]
+layout_mode = 2
+
+[node name="ShopItemPanel4" parent="MarginContainer/VSplitContainer/ItemsAndDescription/MarginContainer/HSplitContainer/Items" instance=ExtResource("3_laq60")]
+layout_mode = 2
+
+[node name="ShopItemPanel5" parent="MarginContainer/VSplitContainer/ItemsAndDescription/MarginContainer/HSplitContainer/Items" instance=ExtResource("3_laq60")]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VSplitContainer/ItemsAndDescription/MarginContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("3_b4hmv")
+
+[node name="Label" type="Label" parent="MarginContainer/VSplitContainer/ItemsAndDescription/MarginContainer/HSplitContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 7
+text = "Description"
+
+[node name="CloseButton" type="Button" parent="MarginContainer/VSplitContainer"]
+custom_minimum_size = Vector2(123.58, 47.375)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = ExtResource("3_1e358")
+theme_override_styles/hover = ExtResource("3_b4hmv")
+text = "Close"
+script = ExtResource("5_laq60")

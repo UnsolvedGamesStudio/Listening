@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbrkcjubtety7"]
+
+[sub_resource type="Animation" id="Animation_pj0sl"]
+resource_name = "shift"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.0333333, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.776617, 0.46954018, 1, 0.37254903), Color(0.370113, 0.72483975, 0, 0.27058825), Color(0.776617, 0.46954018, 1, 0.37254903)]
+}
+
+[sub_resource type="Animation" id="Animation_yuax1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.5167645, 0.5167645, 0.5167645, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cotp5"]
+_data = {
+&"RESET": SubResource("Animation_yuax1"),
+&"shift": SubResource("Animation_pj0sl")
+}
+
+[node name="CrystalLight" type="OmniLight3D"]
+transform = Transform3D(-0.98647594, 0.14427985, 0.0777728, -0.036231816, 0.27080622, -0.9619518, -0.15985161, -0.9517601, -0.26191628, 0, 0, 0)
+light_color = Color(0.5167645, 0.5167645, 0.5167645, 1)
+light_energy = 0.605
+omni_range = 0.89
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_cotp5")
+}
+autoplay = "shift"

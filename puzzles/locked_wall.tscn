@@ -14,26 +14,27 @@ script = ExtResource("1_6568k")
 transform = Transform3D(0.95, 0, 0, 0, -4.152582e-08, 0.95, 0, -0.95, -4.152582e-08, 0, 2, 0)
 
 [node name="Faces" type="Node3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1.052, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="NorthFace" parent="Faces" instance=ExtResource("4_7u0j8")]
-unique_name_in_owner = true
 transform = Transform3D(0.95, 0, -2.2649766e-07, 0, 0.95, 0, 2.2649766e-07, 0, 0.95, 0, 0, -0.95)
+collision_layer = 0
 
 [node name="EastFace" parent="Faces" instance=ExtResource("4_7u0j8")]
-unique_name_in_owner = true
 transform = Transform3D(-4.152582e-08, 4.1525823e-08, -0.95, 1.8151514e-15, 0.95, 4.1525823e-08, 0.95, 0, -4.152582e-08, 0.95, 0, 0)
+collision_layer = 0
 
 [node name="SouthFace" parent="Faces" instance=ExtResource("4_7u0j8")]
-unique_name_in_owner = true
 transform = Transform3D(-0.95, -2.1354062e-37, 4.1525816e-08, 2.1e-44, 0.95, 4.8852417e-30, -4.1525816e-08, 4.8852417e-30, -0.95, 0, 0, 0.95)
+collision_layer = 0
 
 [node name="WestFace" parent="Faces" instance=ExtResource("4_7u0j8")]
-unique_name_in_owner = true
 transform = Transform3D(1.1328623e-08, 0, 0.95, 0, 0.95, 0, -0.95, 0, 1.1328623e-08, -0.95, 0, 0)
+collision_layer = 0
 
 [node name="Area3D" type="Area3D" parent="." groups=["obstacle_collision"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 collision_layer = 128
 collision_mask = 0
 

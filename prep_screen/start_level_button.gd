@@ -13,10 +13,8 @@ func _gui_input(event: InputEvent) -> void:
 
 func on_clicked():
 	GlobalSfx.ui_click.play()
-	Filters.fade.play("fade_out")
 	GlobalSfx.rewind.play()
-	await Filters.fade.animation_finished
-	SceneManager.switch_scene(SceneManager.scenes.LAYOUT)
+	SceneManager.change_scene(SceneManager.Scenes.LAYOUT)
 
 
 func on_mouse_entered():

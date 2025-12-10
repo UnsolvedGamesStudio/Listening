@@ -4,14 +4,7 @@ var current_time: float = 0.0
 
 
 func _ready() -> void:
-	call_deferred("hide_in_hub")
-
-
-func hide_in_hub():
-	if SceneManager.current_scene.is_in_group("layout"):
-		hide()
-	else:
-		show()
+	SceneManager.call_deferred("hide_node_in_hub", self, SceneManager.Scenes.HUB_WORLD)
 
 
 func _process(delta: float) -> void:

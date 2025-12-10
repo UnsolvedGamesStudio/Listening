@@ -5,13 +5,29 @@ extends Node
 ## Todo: Make enemy id's customizable like the boxes etc
 ## Todo: Make a modifier tile that reveals another tile when affected enemies are defeated
 ## Todo: Make more things work from the "level ready" signal, rather than being called from other classes
-@export var enabled:= true
+var main: MainScene
+var enabled:= true
+var current_blueprint: PackedScene
+
+
+func _ready() -> void:
+	main = get_tree().get_first_node_in_group("main_scene")
+	
+	if main == null:
+		push_error("MainScene node not found")
+		return
+	
+	current_blueprint = main.default_blueprint
 
 
 func activate():
-	var blueprint: Node = get_tree().get_first_node_in_group("level_blueprint")
+	if not SceneManager.is_current_scene(SceneManager.Scenes.LAYOUT):
+		return
 	
-	generate(blueprint)
+	var blueprint_inst: Node = current_blueprint.instantiate()
+	add_child(blueprint_inst)
+	
+	generate(blueprint_inst)
 
 
 func generate(blueprint):
@@ -52,6 +68,7 @@ func generate_floor_layers(blueprint_floor: BlueprintFloor):
 
 ## Todo: Maybe combine both generation functions
 func generate_cells(used_tiles: Array[Vector2i], layer: TileMapLayer, blueprint_floor: BlueprintFloor):
+	var layout:= get_tree().get_first_node_in_group("layout")
 	var cell_size: float = Vars.cell_size
 	
 	for tile in used_tiles:
@@ -60,7 +77,7 @@ func generate_cells(used_tiles: Array[Vector2i], layer: TileMapLayer, blueprint_
 			continue
 		
 		var cell_inst: Node = scene_data.instantiate()
-		add_child(cell_inst)
+		layout.add_child(cell_inst)
 		
 		if "starting_floor" in cell_inst.cell:
 			cell_inst.cell.starting_floor = blueprint_floor.floor_number
@@ -73,6 +90,7 @@ func generate_cells(used_tiles: Array[Vector2i], layer: TileMapLayer, blueprint_
 
 
 func generate_object_tiles(used_tiles: Array[Vector2i], layer: TileMapLayer, blueprint_floor: BlueprintFloor):
+	var layout:= get_tree().get_first_node_in_group("layout")
 	for tile in used_tiles:
 		var cell_data:= layer.get_cell_tile_data(tile)
 		var scene_data: PackedScene = cell_data.get_custom_data("scene")
@@ -99,7 +117,7 @@ func generate_object_tiles(used_tiles: Array[Vector2i], layer: TileMapLayer, blu
 			var box_id: int = layer.get_cell_tile_data(tile).get_custom_data("box_id")
 			box_setup(scene_inst, box_id)
 		
-		add_child(scene_inst)
+		layout.add_child(scene_inst)
 		
 		scene_inst.global_position = tile_to_world(tile, blueprint_floor.height)
 		
@@ -149,6 +167,7 @@ func puzzle_setup(scene_inst: Node, puzzle_id: int):
 
 
 func unique_object_setup(placer: UniqueObjectPlacer, unique_object_id: int):
+	var layout:= get_tree().get_first_node_in_group("layout")
 	var blueprint: Node = get_tree().get_first_node_in_group("level_blueprint")
 	
 	if not "unique_objects" in blueprint:
@@ -161,7 +180,7 @@ func unique_object_setup(placer: UniqueObjectPlacer, unique_object_id: int):
 		return
 	
 	var object_scene: Node = blueprint.unique_objects[unique_object_id - 1].instantiate()
-	add_child(object_scene)
+	layout.add_child(object_scene)
 	object_scene.global_position = placer.global_position
 
 

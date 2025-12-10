@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://d0g3bx2vjpgnv"]
+[gd_scene load_steps=25 format=3 uid="uid://d0g3bx2vjpgnv"]
 
 [ext_resource type="Script" uid="uid://cqrnvp223sbhx" path="res://screen_filters/filters.gd" id="1_i0nlq"]
 [ext_resource type="Texture2D" uid="uid://bsv5g3dxvvrml" path="res://screen_filters/textures/dots_vignette_subtle.png" id="2_ydplu"]
 [ext_resource type="Shader" uid="uid://cedebmt1r0vdl" path="res://screen_filters/filter.gdshader" id="3_80yeb"]
+[ext_resource type="Texture2D" uid="uid://c65g0ywrxwakh" path="res://autoloads/textures/faded_texture.tres" id="3_s4fli"]
 
 [sub_resource type="Gradient" id="Gradient_o5qli"]
 offsets = PackedFloat32Array(0, 0.99065423)
@@ -81,15 +82,6 @@ _data = {
 &"shift": SubResource("Animation_jyhfs")
 }
 
-[sub_resource type="Gradient" id="Gradient_xawky"]
-colors = PackedColorArray(0.078431375, 0.07058824, 0.11372549, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_i0nlq"]
-gradient = SubResource("Gradient_xawky")
-fill = 1
-fill_from = Vector2(0.255, 0.29)
-fill_to = Vector2(1.405, 0)
-
 [sub_resource type="Animation" id="Animation_o5qli"]
 resource_name = "fade_out"
 length = 0.8
@@ -124,26 +116,28 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5df70"]
-_data = {
-&"fade_in": SubResource("Animation_o5qli"),
-&"fade_out": SubResource("Animation_xawky")
-}
-
-[sub_resource type="Animation" id="Animation_0q11c"]
+[sub_resource type="Animation" id="Animation_wxfey"]
 resource_name = "fade_out"
-length = 0.5
+length = 0.8
+step = 0.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%Fade/../../FadeBlackRect:color")
+tracks/0/path = NodePath("Filters/FadeRect:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5df70"]
+_data = {
+&"RESET": SubResource("Animation_wxfey"),
+&"fade_in": SubResource("Animation_o5qli"),
+&"fade_out": SubResource("Animation_xawky")
 }
 
 [sub_resource type="Animation" id="Animation_grcp3"]
@@ -162,8 +156,41 @@ tracks/0/keys = {
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_0q11c"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Fade/../../FadeBlackRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_70lj0"]
+resource_name = "RESET"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Fade/../../FadeBlackRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_grcp3"]
 _data = {
+&"RESET": SubResource("Animation_70lj0"),
 &"fade_in": SubResource("Animation_grcp3"),
 &"fade_out": SubResource("Animation_0q11c")
 }
@@ -258,7 +285,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = SubResource("GradientTexture2D_i0nlq")
+texture = ExtResource("3_s4fli")
 metadata/_edit_use_anchors_ = true
 
 [node name="Fade" type="AnimationPlayer" parent="FadeRect"]
@@ -267,6 +294,7 @@ root_node = NodePath("../../..")
 libraries = {
 &"": SubResource("AnimationLibrary_5df70")
 }
+autoplay = "RESET"
 
 [node name="FadeBlackRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -284,6 +312,7 @@ root_node = NodePath("../../FadeRect/Fade")
 libraries = {
 &"": SubResource("AnimationLibrary_grcp3")
 }
+autoplay = "RESET"
 
 [node name="PauseShader" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_80yeb")

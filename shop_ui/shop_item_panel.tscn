@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw5upjj2852iw"]
+
+[ext_resource type="StyleBox" uid="uid://dn78ncm4grcm7" path="res://assets/ui_theme/panel.tres" id="1_uheui"]
+[ext_resource type="Texture2D" uid="uid://b88q1e0j2fb42" path="res://consumables/textures/serotonin.png" id="2_gpof3"]
+[ext_resource type="Texture2D" uid="uid://c0ta80v7sjuka" path="res://main_ui/textures/dopamine_icon.png" id="3_8qblx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b4hmv"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.15294118, 0.5372549, 0.8039216, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
+
+[node name="ShopItemPanel" type="PanelContainer"]
+theme_override_styles/panel = ExtResource("1_uheui")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="IconPanel" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_b4hmv")
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/IconPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("2_gpof3")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Item Name"
+
+[node name="CostContainer" type="HBoxContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = -1
+
+[node name="CostLabel2" type="Label" parent="CostContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "50"
+
+[node name="DopamineIcon" type="TextureRect" parent="CostContainer"]
+custom_minimum_size = Vector2(15.43, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("3_8qblx")
+expand_mode = 1
+stretch_mode = 5
