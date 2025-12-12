@@ -69,7 +69,7 @@ func init_projectile_effect():
 		return
 	
 	if not ResourceLoader.exists(projectile_effect_path):
-		printerr(self, ": projectile_effect has invalid path")
+		push_error(self, ": projectile_effect has invalid path")
 		return
 	
 	var effect_scene: PackedScene = load(projectile_effect_path)
@@ -286,7 +286,7 @@ func check_entity_hit(collider: Object):
 	
 	if collider.is_in_group("enemy_collision"):
 		if not collider.owner is Enemy:
-			printerr(self, ": owner of collider is not Enemy")
+			push_error(self, ": owner of collider is not Enemy")
 			return
 		
 		collided_with_enemy(collider.owner)
@@ -294,7 +294,7 @@ func check_entity_hit(collider: Object):
 	
 	if collider.is_in_group("player_collision"):
 		if not collider.owner is Player:
-			printerr(self, ": owner of collider is not Player")
+			push_error(self, ": owner of collider is not Player")
 			return
 		
 		collided_with_player()

@@ -1,18 +1,19 @@
-[gd_scene load_steps=53 format=3 uid="uid://dilbsihag48bm"]
+[gd_scene load_steps=54 format=3 uid="uid://dilbsihag48bm"]
 
 [ext_resource type="PackedScene" uid="uid://6etr4cvlbgr2" path="res://music_box/music_box.tscn" id="1_cf6e4"]
 [ext_resource type="Texture2D" uid="uid://0gh2qphl4tm4" path="res://level_editor/textures/box_tiles.png" id="2_1uy3p"]
-[ext_resource type="PackedScene" uid="uid://cqc1iuhqntykk" path="res://enemies/enemy_scenes/enemy_1.tscn" id="3_o7txn"]
+[ext_resource type="PackedScene" uid="uid://cqc1iuhqntykk" path="res://enemies/enemy_scenes/pet_peeve.tscn" id="3_o7txn"]
 [ext_resource type="PackedScene" uid="uid://061m5bvukwlk" path="res://enemies/enemy_scenes/dread.tscn" id="3_x362v"]
 [ext_resource type="Texture2D" uid="uid://d3swrn3a28lxk" path="res://level_editor/textures/enemy_tiles.png" id="4_ob0hw"]
 [ext_resource type="PackedScene" uid="uid://bnl5bv5ntklqt" path="res://enemies/enemy_scenes/wane.tscn" id="4_tu4kg"]
 [ext_resource type="PackedScene" uid="uid://ciib1opj8rndx" path="res://pickups/key_pickup.tscn" id="5_1y0l6"]
-[ext_resource type="PackedScene" uid="uid://dwksm2bi3elij" path="res://enemies/enemy_scenes/enemy_2.tscn" id="5_ke61a"]
+[ext_resource type="PackedScene" uid="uid://dwksm2bi3elij" path="res://enemies/enemy_scenes/feral_peeve.tscn" id="5_ke61a"]
 [ext_resource type="Texture2D" uid="uid://ds7esfeg8ue4b" path="res://level_editor/textures/key_tiles.png" id="6_o7txn"]
 [ext_resource type="PackedScene" uid="uid://bhqs3evyal73f" path="res://enemies/enemy_scenes/boredom.tscn" id="6_wyto8"]
 [ext_resource type="PackedScene" uid="uid://c5gdwlmng0rsy" path="res://puzzles/locked_wall.tscn" id="7_tu4kg"]
 [ext_resource type="PackedScene" uid="uid://bm12hq1n81tt1" path="res://enemies/enemy_scenes/wax.tscn" id="8_i6a1y"]
 [ext_resource type="Texture2D" uid="uid://djogefuvahxmn" path="res://level_editor/textures/lock_tiles.png" id="8_ke61a"]
+[ext_resource type="Resource" uid="uid://bnb03hiljkjg8" path="res://enemies/data/test_enemy.tres" id="9_ritcd"]
 [ext_resource type="PackedScene" uid="uid://c7wmmnca4o1dx" path="res://player/spawn_point.tscn" id="9_wyto8"]
 [ext_resource type="PackedScene" uid="uid://cqspqpeplglmo" path="res://levels/secret_rooms/wall_crack.tscn" id="10_hsd26"]
 [ext_resource type="Texture2D" uid="uid://dy0umo4pgu5jm" path="res://level_editor/textures/player_spawn.png" id="10_i6a1y"]
@@ -91,6 +92,7 @@ texture_region_size = Vector2i(32, 32)
 4:0/0 = 0
 4:0/0/custom_data_0 = ExtResource("8_i6a1y")
 4:1/0 = 0
+4:1/0/custom_data_0 = ExtResource("9_ritcd")
 3:1/0 = 0
 2:1/0 = 0
 1:1/0 = 0

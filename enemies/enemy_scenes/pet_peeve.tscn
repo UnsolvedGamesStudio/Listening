@@ -1,33 +1,91 @@
-[gd_scene load_steps=19 format=3 uid="uid://cqc1iuhqntykk"]
+[gd_scene load_steps=26 format=3 uid="uid://cqc1iuhqntykk"]
 
 [ext_resource type="Script" uid="uid://pm4s0telhvbu" path="res://enemies/enemy_scenes/enemy.gd" id="1_dvt88"]
+[ext_resource type="Texture2D" uid="uid://cr7gehcdnwfrq" path="res://enemies/textures/pet_peeve-Sheet.png" id="2_51n1x"]
 [ext_resource type="PackedScene" uid="uid://bichiu55qpo3e" path="res://enemies/enemy_scenes/enemy_body.tscn" id="3_ptsd7"]
-[ext_resource type="Texture2D" uid="uid://cx0ni1wvl78g0" path="res://enemies/textures/iseen_a_skull.png" id="3_yhk72"]
 [ext_resource type="PackedScene" uid="uid://ycxhwv4g5a5v" path="res://vfx/EnemyIndicator.tscn" id="4_8dnoj"]
 [ext_resource type="PackedScene" uid="uid://cmviqulbv2o3x" path="res://enemies/behaviors/get_hurt_eb.tscn" id="4_lkkme"]
 [ext_resource type="PackedScene" uid="uid://ckrngbta7laek" path="res://enemies/behaviors/melee_attack_eb.tscn" id="5_ptsd7"]
 [ext_resource type="PackedScene" uid="uid://d3qw0t4lwkfbh" path="res://enemies/behaviors/movement_eb.tscn" id="6_efcc8"]
 [ext_resource type="PackedScene" uid="uid://b8rwjdbr6qey4" path="res://enemies/behaviors/ranged_attack_eb.tscn" id="7_dqe6f"]
+[ext_resource type="PackedScene" uid="uid://suco4qnttkw5" path="res://enemies/behaviors/anim_to_the_beat_eb.tscn" id="8_6b1qs"]
 [ext_resource type="PackedScene" uid="uid://d0ruxhcq4o58e" path="res://enemies/room_notifier.tscn" id="8_lkkme"]
+[ext_resource type="AudioStream" uid="uid://dy3pox184ct42" path="res://assets/sfx/bone_clank.ogg" id="10_cyt6m"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ptsd7"]
-radius = 0.24169922
-height = 0.69039917
+radius = 0.28222656
+height = 0.5800781
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_8dnoj"]
 viewport_path = NodePath("ToAnimate/HealthBar3D/SubViewport")
 
-[sub_resource type="Animation" id="Animation_7frlh"]
-resource_name = "bob"
-loop_mode = 2
-step = 0.0333333
-tracks/0/type = "position_3d"
+[sub_resource type="Animation" id="Animation_6b1qs"]
+resource_name = "open"
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ToAnimate")
-tracks/0/interp = 2
+tracks/0/path = NodePath("%Sprite3D:frame")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 1.5, 0, 1, 1, 0, 1.7, 0)
+tracks/0/keys = {
+"times": PackedFloat32Array(0.06666667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_6igbd"]
+resource_name = "close"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_8jxwj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c88cg"]
+_data = {
+&"RESET": SubResource("Animation_8jxwj"),
+&"close": SubResource("Animation_6igbd"),
+&"open": SubResource("Animation_6b1qs")
+}
+
+[sub_resource type="Animation" id="Animation_51n1x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToAnimate:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.7, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_3t1x0"]
 resource_name = "die"
@@ -87,11 +145,30 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1), Color(0.84313726, 0.39607844, 0.39607844, 0.69411767), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_7frlh"]
+resource_name = "bob"
+length = 2.0
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToAnimate:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.7, 0), Vector3(0, 1.845, 0), Vector3(0, 1.7, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a6vjd"]
 _data = {
-&"bob": SubResource("Animation_7frlh"),
+&"RESET": SubResource("Animation_51n1x"),
 &"die": SubResource("Animation_3t1x0"),
-&"hurt": SubResource("Animation_07tka")
+&"hurt": SubResource("Animation_07tka"),
+&"idle": SubResource("Animation_7frlh")
 }
 
 [sub_resource type="Animation" id="Animation_orwns"]
@@ -134,13 +211,14 @@ script = ExtResource("1_dvt88")
 
 [node name="ToAnimate" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="ToAnimate"]
 unique_name_in_owner = true
 billboard = 2
 texture_filter = 0
-texture = ExtResource("3_yhk72")
+texture = ExtResource("2_51n1x")
+hframes = 2
 
 [node name="VisionRaycast" type="RayCast3D" parent="ToAnimate/Sprite3D"]
 unique_name_in_owner = true
@@ -154,7 +232,7 @@ collide_with_bodies = false
 [node name="EnemyBody" parent="ToAnimate" instance=ExtResource("3_ptsd7")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ToAnimate/EnemyBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.028427124, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025091171, 0)
 shape = SubResource("CapsuleShape3D_ptsd7")
 
 [node name="HealthBar3D" type="Sprite3D" parent="ToAnimate"]
@@ -188,6 +266,28 @@ unique_name_in_owner = true
 
 [node name="RangedAttackEB" parent="ToAnimate/Behaviors" instance=ExtResource("7_dqe6f")]
 
+[node name="AnimToTheBeatEB" parent="ToAnimate/Behaviors" node_paths=PackedStringArray("anim_player", "audio_player") instance=ExtResource("8_6b1qs")]
+anim_player = NodePath("BeatPlayer")
+anim_every_x_beat = 1
+anim_sequence = Array[String](["close"])
+audio_player = NodePath("AudioStreamPlayer3D")
+audio_every_x_beat = 1
+min_pitch = 1.015
+max_pitch = 1.305
+
+[node name="BeatPlayer" type="AnimationPlayer" parent="ToAnimate/Behaviors/AnimToTheBeatEB"]
+libraries = {
+&"": SubResource("AnimationLibrary_c88cg")
+}
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ToAnimate/Behaviors/AnimToTheBeatEB"]
+stream = ExtResource("10_cyt6m")
+volume_db = 10.0
+max_db = 5.385
+pitch_scale = 0.93027306
+max_distance = 8.0
+bus = &"SFX"
+
 [node name="EnemyIndicator" parent="." instance=ExtResource("4_8dnoj")]
 unique_name_in_owner = true
 
@@ -198,7 +298,7 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_a6vjd")
 }
-autoplay = "bob"
+autoplay = "idle"
 
 [node name="AttackAnim" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

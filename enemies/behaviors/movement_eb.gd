@@ -23,7 +23,7 @@ func set_stats():
 	var data: EnemyData = O.data
 	
 	if data == null:
-		printerr(self, " of ", O, ": data not found")
+		push_error(self, " of ", O, ": data not found")
 		return
 	
 	moves_every_x_beat = data.moves_every_x_beat

@@ -3,6 +3,7 @@ extends PanelContainer
 class_name SongSelectButton
 ## Todo: Song sorting system (default: bpm)
 ## Todo: Reference the song data in Bgm, and read from it when starting the level
+## Todo: Play button sound effects whenever mouse detects a button globally/make a universal button scene with tool
 @onready var name_label: Label = %NameLabel
 @onready var selection_outline: PanelContainer = %SelectionOutline
 @onready var bpm_label: Label = %BpmLabel
@@ -10,6 +11,7 @@ class_name SongSelectButton
 @onready var progress_bar: ProgressBar = %ProgressBar
 
 static var selected_song: SongSelectButton
+static var cursor_moved:= false
 
 @export var song_data: SongData = preload("res://assets/music/song_data/so_simple.tres")
 @export var default:= false
@@ -30,7 +32,7 @@ func _ready() -> void:
 	
 	if default == true:
 		selected_song = self
-		apply_values()
+		apply_data()
 
 
 func _process(delta: float) -> void:
@@ -63,20 +65,25 @@ func _gui_input(event: InputEvent) -> void:
 		on_clicked()
 
 
-func apply_values():
-	Bgm.stream = song_stream
-	Bgm.volume_db = song_data.volume
-	Bgm.rhythm_notifier.bpm = song_data.bpm
-	Bgm.midi_player.file = song_data.chords_midi_path
+func apply_data():
+	Bgm.current_song_data = song_data
 
 
 func on_clicked():
 	selected_song = self
 	GlobalSfx.ui_click.play()
-	apply_values()
+	Bgm.current_song_data = song_data
+
+
+func _input(event: InputEvent) -> void:
+	if not cursor_moved and event is InputEventMouseMotion:
+		cursor_moved = true
 
 
 func on_mouse_entered():
+	if cursor_moved == false:
+		return
+	
 	if not selected_song == self:
 		scale.y = 1.1
 	

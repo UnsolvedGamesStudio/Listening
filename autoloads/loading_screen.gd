@@ -2,19 +2,20 @@ extends CanvasLayer
 
 @onready var loading_circle: TextureRect = %LoadingCircle
 @onready var label: Label = %Label
+@onready var disappear: AnimationPlayer = %Disappear
+@onready var wobble: AnimationPlayer = %Wobble
+@onready var dots_wobble: AnimationPlayer = %DotsWobble
 
 var completion: float = 0.0
 
 var previous_value:= 0.0
 var target_add:= 0.0
 
-var finished:= false
+var finished:= true
 
 
 func _ready() -> void:
-	completion = loading_circle.material.get_shader_parameter("progress")
-	SceneManager.loading_thread_started.connect(on_loading_started)
-	var mat:= loading_circle.material
+	hide()
 
 
 func _process(delta: float) -> void:
@@ -30,7 +31,7 @@ func _process(delta: float) -> void:
 	
 	completion = move_toward(completion, target, delta * 2)
 	loading_circle.material.set_shader_parameter("progress", completion)
-	label.text = str(completion * 100.0 as int)
+	label.text = str( roundi( min( 100.0, completion * 100.0 ) ) )
 	
 	if completion == previous_value:
 		target_add += 0.01
@@ -39,21 +40,19 @@ func _process(delta: float) -> void:
 	
 	if completion >= 1.0 and SceneManager.current_loading_progress >= 1.0:
 		finished = true
-		await get_tree().create_timer(0.1).timeout
+		wobble.stop()
+		disappear.play("shrink")
+		await disappear.animation_finished
 		Bus.loading_screen_finished.emit()
 		hide()
 
 
-func on_loading_started(scene):
-	if SceneManager.scene_paths[scene]["type"] == SceneManager.SceneTypes.UI:
-		await get_tree().create_timer(0.01).timeout
-		Bus.loading_screen_finished.emit()
-		finished = true
-		return
-	
+func start():
 	show()
+	wobble.play("wobble")
+	dots_wobble.play("wobble")
 	completion = 0.0
-	label.text = str(0)
-	loading_circle.material.set_shader_parameter("progress", completion)
 	target_add = 0.0
+	label.text = str(0)
+	loading_circle.material.set_shader_parameter("progress", 0.0)
 	finished = false

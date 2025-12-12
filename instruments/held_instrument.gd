@@ -11,7 +11,7 @@ var player: Player
 
 func _ready() -> void:
 	if player == null:
-		printerr(self, ": Player not found")
+		push_error(self, ": Player not found")
 		queue_free()
 	
 	Bus.player_cast.connect(on_player_cast)

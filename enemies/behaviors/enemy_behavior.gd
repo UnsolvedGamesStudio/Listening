@@ -1,13 +1,13 @@
 extends Node
 class_name EnemyBehavior
-
+## Todo: Connect signals in base class
 @export var enabled:= true
 @onready var O: Enemy
 
 
 func _ready() -> void:
 	if not get_parent().get_parent().get_parent() is Enemy:
-		printerr(self, " of ", get_parent().get_parent().get_parent(), ": get_parent().get_parent() is not enemy")
+		push_error(self, " of ", get_parent().get_parent().get_parent(), ": get_parent().get_parent() is not enemy")
 		return
 	
 	O = get_parent().get_parent().get_parent()
@@ -24,7 +24,7 @@ func find_player() -> Player:
 	var player: Player = get_tree().get_first_node_in_group("player")
 	
 	if player == null:
-		printerr(self, ": player not found")
+		push_error(self, ": player not found")
 	
 	return player
 

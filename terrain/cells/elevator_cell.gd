@@ -25,7 +25,7 @@ func set_desired_height():
 		return
 	
 	if not starting_floor + 1 in Vars.floor_heights:
-		printerr(self, ": No higher floor was set")
+		push_error(self, ": No higher floor was set")
 		return
 	
 	desired_height = Vars.floor_heights[starting_floor + 1]

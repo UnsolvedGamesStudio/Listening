@@ -68,7 +68,7 @@ func detect_wall(object: Node3D):
 
 func remove_wall():
 	if wall == null:
-		printerr(self, ": Wall not found")
+		push_error(self, ": Wall not found")
 		return
 	
 	wall.queue_free()

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://6n70akjpdb5c"]
 
 [ext_resource type="Script" uid="uid://bralxx3e2dje3" path="res://projectile/enemy_projectile.gd" id="1_ayf6a"]
-[ext_resource type="Texture2D" uid="uid://dgygswxu7j8ds" path="res://projectile/textures/default_projectile.png" id="2_saffc"]
+[ext_resource type="Texture2D" uid="uid://oaasrdhpkcsp" path="res://projectile/textures/default_projectile.png" id="2_saffc"]
 [ext_resource type="AudioStream" uid="uid://vn3c0l6cs3n8" path="res://assets/sfx/projectile_spawn_sfx.ogg" id="3_saffc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_saffc"]
@@ -100,6 +100,7 @@ debug_fill = false
 [node name="Sprite3D" type="Sprite3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+pixel_size = 0.005
 billboard = 2
 texture_filter = 0
 texture = ExtResource("2_saffc")

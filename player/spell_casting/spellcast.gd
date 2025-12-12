@@ -51,7 +51,7 @@ func add_element(element: int):
 	var container_ui: ElementContainerUI = get_tree().get_first_node_in_group("element_container_ui")
 	
 	if container_ui == null:
-		printerr(self, ": container_ui not found")
+		push_error(self, ": container_ui not found")
 		return
 	
 	var success: String = Bgm.check_accuracy(true)

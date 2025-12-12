@@ -20,7 +20,7 @@ func set_stats():
 	var data: EnemyData = O.data
 	
 	if data == null:
-		printerr(self, " of ", O, ": data not found")
+		push_error(self, " of ", O, ": data not found")
 		return
 	
 	melees_every_x_beat = data.melees_every_x_beat

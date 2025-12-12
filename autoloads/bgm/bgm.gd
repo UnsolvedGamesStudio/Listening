@@ -13,6 +13,8 @@ extends AudioStreamPlayer
 var combo_label: ComboManager
 var beat_visualizer: CanvasLayer
 
+var current_song_data: SongData
+
 var current_midi_notes:= []
 var beat_count:= 0
 var last_timing:= 0.0
@@ -22,6 +24,10 @@ var event_history: Dictionary[float, int] = {}
 
 
 func _ready() -> void:
+	var main = get_tree().get_first_node_in_group("main_scene")
+	
+	current_song_data = main.default_song
+	
 	rhythm_notifier.beat.connect(on_beat)
 	midi_player.midi_event.connect(on_midi_event)
 	
@@ -42,11 +48,13 @@ func start_song():
 	if playing == true:
 		return
 	
+	init_song_data()
+	
 	play()
 	kick.play()
 	
 	if midi_player.file == null:
-		printerr(self, ": Midi file not found")
+		push_error(self, ": Midi file not found")
 		return
 	
 	midi_player.play()
@@ -57,6 +65,13 @@ func stop_song():
 	stop()
 	kick.stop()
 	midi_player.stop()
+
+
+func init_song_data():
+	stream = load(current_song_data.file_path)
+	rhythm_notifier.bpm = current_song_data.bpm
+	midi_player.file = current_song_data.chords_midi_path
+	volume_db = current_song_data.volume
 
 
 func add_note_to_array(note):

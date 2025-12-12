@@ -4,6 +4,9 @@ class_name Enemy
 ## Todo: Add indication that enemy already dropped the synapse (and other similar cases) / hasn't dropped it yet
 ## Todo: Make collectible drops add themselves to stats (see music box)
 ## Todo: Make them aggro when hit
+## Todo: Make further components for things like sprites and bodies, -
+## - have it be as reusable as possible, and organize them using groups instead of onready
+## Todo: AnimPlayer for passive additional anims like float and a main player for "state" anims
 const PROJECTILE = preload("uid://6n70akjpdb5c")
 const DEFAULT_PROJECTILE_TEXTURE = preload("uid://dgygswxu7j8ds")
 const TERRAIN_LAYER:= 2
@@ -87,21 +90,21 @@ func _physics_process(delta: float) -> void:
 ## Todo: Turn into behavior
 func drop_loot():
 	if data == null:
-		printerr(self, " : data not found")
+		push_error(self, " : data not found")
 		return
 	
 	if data.drop == null:
 		return
 	
 	if not ResourceLoader.exists(data.drop):
-		printerr(self, ": data.drop has invalid path")
+		push_error(self, ": data.drop has invalid path")
 		return
 	
 	var drop_scene: PackedScene = load(data.drop)
 	var drop_inst:= drop_scene.instantiate()
 	
 	if not drop_inst is Node:
-		printerr(self, ": drop_inst is not a node")
+		push_error(self, ": drop_inst is not a node")
 		return
 	
 	var inst_save_id:= save_id + "_" + str(0)
@@ -169,7 +172,7 @@ func within_tiles_to_player(distance: float):
 		return false
 	
 	if occupied_cell == null:
-		printerr(self, ": occupied_cell not found")
+		push_error(self, ": occupied_cell not found")
 		return false
 	
 	var height_diff: float = abs( abs( occupied_cell.global_position.y ) -abs( player_cell.global_position.y ) )

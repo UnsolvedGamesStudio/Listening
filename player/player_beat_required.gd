@@ -77,7 +77,7 @@ extends Node3D
 	#var spawn_point:= get_tree().get_first_node_in_group("player_spawn")
 #
 	#if spawn_point == null:
-		#printerr(self, ": player spawn not set")
+		#push_error(self, ": player spawn not set")
 		#return
 	#
 	#global_position = spawn_point.global_position

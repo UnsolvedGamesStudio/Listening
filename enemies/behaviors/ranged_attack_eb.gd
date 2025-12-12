@@ -12,6 +12,7 @@ var projectile_range:= 2
 var projectile_damage:= 10.0
 var projectile_speed:= 25.0
 var projectile_scale:= Vector3(1.0, 1.0, 1.0)
+var projectile_height_offset:= 0.0
 
 var attack_anim: AnimationPlayer
 
@@ -30,7 +31,7 @@ func set_stats():
 	var data: EnemyData = O.data
 	
 	if data == null:
-		printerr(self, " of ", O, ": data not found")
+		push_error(self, " of ", O, ": data not found")
 		return
 	
 	shoots_every_x_beat = data.shoots_every_x_beat
@@ -40,6 +41,7 @@ func set_stats():
 	projectile_damage = data.projectile_damage
 	projectile_speed = data.projectile_speed
 	projectile_scale = data.projectile_scale
+	projectile_height_offset = data.projectile_height_offset
 
 
 func find_melee_range():
@@ -73,7 +75,7 @@ func check_ranged():
 	if O.within_tiles_to_player(projectile_range) == false:
 		return
 	
-	if O.within_tiles_to_player(melee_range) == true:
+	if O.within_tiles_to_player(O.data.melee_range) == true:
 		return
 	
 	ranged_attack()
@@ -93,6 +95,7 @@ func create_projectile():
 	projectile_inst.scale = projectile_scale
 	projectile_inst.sprite_3d.texture = data.projectile_texture
 	projectile_inst.global_position = O.sprite_3d.global_position
+	projectile_inst.global_position.y += projectile_height_offset
 	
 	var projectile_direction:= projectile_inst.global_position.direction_to(Find.P().enemy_aim_point.global_position)
 	projectile_inst.direction = projectile_direction

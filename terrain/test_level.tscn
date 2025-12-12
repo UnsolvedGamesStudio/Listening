@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d3u7i3tehxhh6" path="res://terrain/cells/floor_cell.tscn" id="1_327qs"]
 [ext_resource type="PackedScene" uid="uid://c7wmmnca4o1dx" path="res://player/spawn_point.tscn" id="4_sb12i"]
-[ext_resource type="PackedScene" uid="uid://cqc1iuhqntykk" path="res://enemies/enemy_scenes/enemy_1.tscn" id="4_we1x4"]
+[ext_resource type="PackedScene" uid="uid://cqc1iuhqntykk" path="res://enemies/enemy_scenes/pet_peeve.tscn" id="4_we1x4"]
 [ext_resource type="PackedScene" uid="uid://ce10gkdeiprj7" path="res://player/player.tscn" id="5_gbhdq"]
 [ext_resource type="PackedScene" uid="uid://ugnt6a8ceul7" path="res://decoration/framed_mirror.tscn" id="5_w17i1"]
 

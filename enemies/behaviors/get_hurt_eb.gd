@@ -29,7 +29,7 @@ func _physics_process(delta: float) -> void:
 func update_value():
 	health_bar = %HealthBar
 	if health_bar == null:
-		printerr(self, ": health_bar not found")
+		push_error(self, ": health_bar not found")
 		return
 	
 	health_bar.max_value = max_hp / 100
@@ -42,7 +42,7 @@ func set_stats():
 	var data: EnemyData = O.data
 	
 	if data == null:
-		printerr(self, " of ", O, ": data not found")
+		push_error(self, " of ", O, ": data not found")
 		return
 	
 	max_hp = data.max_hp

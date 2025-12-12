@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oaasrdhpkcsp"
-path.s3tc="res://.godot/imported/default_projectile.png-8b24b6218d413b4178af5c50c72fea3f.s3tc.ctex"
+uid="uid://cr7gehcdnwfrq"
+path="res://.godot/imported/pet_peeve-Sheet.png-06c21e787d1e51fd3ff9fa77e92346e4.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://projectile/textures/default_projectile.png"
-dest_files=["res://.godot/imported/default_projectile.png-8b24b6218d413b4178af5c50c72fea3f.s3tc.ctex"]
+source_file="res://enemies/textures/pet_peeve-Sheet.png"
+dest_files=["res://.godot/imported/pet_peeve-Sheet.png-06c21e787d1e51fd3ff9fa77e92346e4.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

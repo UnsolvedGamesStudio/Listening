@@ -27,7 +27,7 @@ func on_teleporter_area_entered(area: Area3D):
 	var player: Player = area.owner
 	
 	if teleport_position == null:
-		printerr(self, ": Teleport position not set")
+		push_error(self, ": Teleport position not set")
 		return
 	
 	get_tree().get_first_node_in_group("secret_room").show()

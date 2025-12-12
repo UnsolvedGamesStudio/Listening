@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://suco4qnttkw5"]
+
+[ext_resource type="Script" uid="uid://cp5eldo3s7fri" path="res://enemies/behaviors/anim_to_the_beat_eb.gd" id="1_sl0wn"]
+
+[node name="AnimToTheBeatEB" type="Node"]
+script = ExtResource("1_sl0wn")
+metadata/_custom_type_script = "uid://cp5eldo3s7fri"

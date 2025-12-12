@@ -28,7 +28,7 @@ func write_save_data():
 	var file = FileAccess.open(json_path, FileAccess.ModeFlags.WRITE)
 	
 	if file == null:
-		printerr(self, ": Unable to write json file, no file found")
+		push_error(self, ": Unable to write json file, no file found")
 		return
 	
 	var json_text:= JSON.stringify(_saved_data, "\t")
@@ -38,7 +38,7 @@ func write_save_data():
 
 func load_save_data():
 	if not FileAccess.file_exists(json_path):
-		printerr(self, " : No save file found")
+		push_error(self, " : No save file found")
 		return
 	
 	var file = FileAccess.open(json_path, FileAccess.READ)
@@ -46,7 +46,7 @@ func load_save_data():
 	var parsed_text = JSON.parse_string(json_text)
 	
 	if _saved_data == null:
-		printerr(self, ": parsed json data is null")
+		push_error(self, ": parsed json data is null")
 		return
 	
 	_saved_data = parsed_text
@@ -54,7 +54,7 @@ func load_save_data():
 
 func read_save_data():
 	if not FileAccess.file_exists(json_path):
-		printerr(self, " : No save file found")
+		push_error(self, " : No save file found")
 		return
 	
 	var file = FileAccess.open(json_path, FileAccess.READ)

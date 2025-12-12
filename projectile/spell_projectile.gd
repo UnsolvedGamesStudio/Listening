@@ -66,7 +66,7 @@ func load_sfx(path):
 		return
 	
 	if not ResourceLoader.exists(path):
-		printerr(self, ": projectile sfx has invalid path of '", path, "'")
+		push_error(self, ": projectile sfx has invalid path of '", path, "'")
 		return
 	
 	return load(path)

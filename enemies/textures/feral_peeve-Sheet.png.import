@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oaasrdhpkcsp"
-path.s3tc="res://.godot/imported/default_projectile.png-8b24b6218d413b4178af5c50c72fea3f.s3tc.ctex"
+uid="uid://cu7th12mbq2l7"
+path="res://.godot/imported/feral_peeve-Sheet.png-4e262f8b138d2b2f052e0688ac59f606.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://projectile/textures/default_projectile.png"
-dest_files=["res://.godot/imported/default_projectile.png-8b24b6218d413b4178af5c50c72fea3f.s3tc.ctex"]
+source_file="res://enemies/textures/feral_peeve-Sheet.png"
+dest_files=["res://.godot/imported/feral_peeve-Sheet.png-4e262f8b138d2b2f052e0688ac59f606.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -24,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

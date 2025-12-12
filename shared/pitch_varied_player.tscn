@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy4glw7xs1fvg"]
+
+[ext_resource type="Script" uid="uid://u35f1ap2mj7q" path="res://shared/pitch_varied_player.gd" id="1_j6ed1"]
+
+[node name="PitchVariedPlayer" type="AudioStreamPlayer3D"]
+max_distance = 10.0
+script = ExtResource("1_j6ed1")

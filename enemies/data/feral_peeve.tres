@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_tavwi")
-id = "test2"
+id = "feral_peeve"
 name = "Feral Peeve"
 max_hp = 200.0
 movement_speed = 2
@@ -17,4 +17,5 @@ projectile_damage = 6.0
 projectile_speed = 70.0
 projectile_range = 4
 projectile_scale = Vector3(0.5, 0.5, 0.5)
+projectile_height_offset = -0.2
 drop = "res://pickups/dopamine/dopamine_pickup.tscn"

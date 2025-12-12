@@ -135,7 +135,7 @@ func init_projectile_effect():
 		return
 	
 	if not ResourceLoader.exists(projectile_effect_path):
-		printerr(self, ": projectile_effect has invalid path")
+		push_error(self, ": projectile_effect has invalid path")
 		return
 	
 	var effect_scene: PackedScene = load(projectile_effect_path)

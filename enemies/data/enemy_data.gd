@@ -37,6 +37,7 @@ enum ranges{MELEE, RANGED, CONTACT}
 @export var projectile_speed:= 60.0
 @export var projectile_range:= 2
 @export var projectile_scale:= Vector3(1.0, 1.0, 1.0)
+@export var projectile_height_offset:= 0.0
 
 @export_group("Vulnerablities")
 @export var joy_damage_mult:= 1.0

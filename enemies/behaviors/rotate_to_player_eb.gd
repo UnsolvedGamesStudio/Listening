@@ -8,7 +8,7 @@ var valid:= true
 
 func enter() -> void:
 	if to_rotate == null:
-		printerr(self, " of ", owner, ": to_rotate not found")
+		push_error(self, " of ", owner, ": to_rotate not found")
 		valid = false
 
 

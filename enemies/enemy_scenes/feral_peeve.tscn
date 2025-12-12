@@ -1,15 +1,17 @@
-[gd_scene load_steps=20 format=3 uid="uid://dwksm2bi3elij"]
+[gd_scene load_steps=26 format=3 uid="uid://dwksm2bi3elij"]
 
 [ext_resource type="Script" uid="uid://pm4s0telhvbu" path="res://enemies/enemy_scenes/enemy.gd" id="1_cmw5j"]
-[ext_resource type="Resource" uid="uid://cwljawr36evsw" path="res://enemies/data/enemy_2.tres" id="2_gdugp"]
+[ext_resource type="Resource" uid="uid://cwljawr36evsw" path="res://enemies/data/feral_peeve.tres" id="2_gdugp"]
 [ext_resource type="PackedScene" uid="uid://ycxhwv4g5a5v" path="res://vfx/EnemyIndicator.tscn" id="3_gdugp"]
-[ext_resource type="Texture2D" uid="uid://up16qvqyk6lp" path="res://enemies/textures/iseen_a_skull2.png" id="3_tynow"]
+[ext_resource type="Texture2D" uid="uid://cu7th12mbq2l7" path="res://enemies/textures/feral_peeve-Sheet.png" id="3_ka08n"]
 [ext_resource type="PackedScene" uid="uid://bichiu55qpo3e" path="res://enemies/enemy_scenes/enemy_body.tscn" id="4_pehek"]
 [ext_resource type="PackedScene" uid="uid://cmviqulbv2o3x" path="res://enemies/behaviors/get_hurt_eb.tscn" id="4_uup4c"]
 [ext_resource type="PackedScene" uid="uid://d3qw0t4lwkfbh" path="res://enemies/behaviors/movement_eb.tscn" id="5_pehek"]
 [ext_resource type="PackedScene" uid="uid://ckrngbta7laek" path="res://enemies/behaviors/melee_attack_eb.tscn" id="6_b1gtg"]
 [ext_resource type="PackedScene" uid="uid://b8rwjdbr6qey4" path="res://enemies/behaviors/ranged_attack_eb.tscn" id="7_pwkjs"]
+[ext_resource type="PackedScene" uid="uid://suco4qnttkw5" path="res://enemies/behaviors/anim_to_the_beat_eb.tscn" id="9_apk7q"]
 [ext_resource type="PackedScene" uid="uid://d0ruxhcq4o58e" path="res://enemies/room_notifier.tscn" id="9_gdugp"]
+[ext_resource type="AudioStream" uid="uid://bworp8jgwbky3" path="res://assets/sfx/glitchy_bone.ogg" id="12_apk7q"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_b1gtg"]
 radius = 0.6829613
@@ -17,17 +19,65 @@ radius = 0.6829613
 [sub_resource type="ViewportTexture" id="ViewportTexture_8dnoj"]
 viewport_path = NodePath("ToAnimate/HealthBar3D/SubViewport")
 
+[sub_resource type="Animation" id="Animation_apk7q"]
+resource_name = "animation1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999964, 0.19999993, 0.27499998, 0.43333337, 0.6333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 1, 0, 1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5vua6"]
+_data = {
+&"animation1": SubResource("Animation_apk7q")
+}
+
+[sub_resource type="Animation" id="Animation_ei43v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToAnimate/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_7frlh"]
 resource_name = "bob"
-loop_mode = 2
-step = 0.0333333
+length = 2.0
+loop_mode = 1
+step = 0.025
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("ToAnimate")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 1.5, 0, 1, 1, 0, 1.7, 0)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 1.5, 0, 1.5, 1, 0, 1.7, 0, 2, 1, 0, 1.5, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("ToAnimate/Sprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 1, 0]
+}
 
 [sub_resource type="Animation" id="Animation_3t1x0"]
 resource_name = "die"
@@ -89,9 +139,25 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a6vjd"]
 _data = {
+&"RESET": SubResource("Animation_ei43v"),
 &"bob": SubResource("Animation_7frlh"),
 &"die": SubResource("Animation_3t1x0"),
 &"hurt": SubResource("Animation_07tka")
+}
+
+[sub_resource type="Animation" id="Animation_5vua6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ToAnimate/Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
 }
 
 [sub_resource type="Animation" id="Animation_orwns"]
@@ -108,7 +174,7 @@ tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.033333335, 1, 0.95, 0.95, 0.
 
 [sub_resource type="Animation" id="Animation_a6vjd"]
 resource_name = "ranged_attack"
-length = 0.8
+length = 0.4
 step = 0.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -117,14 +183,27 @@ tracks/0/path = NodePath("ToAnimate/Sprite3D:offset")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.26666668, 0.36666667, 0.5, 0.6333333, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -5.505), Vector2(0, 10), Vector2(0, -5.505), Vector2(0, 10), Vector2(0, -5.505), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, 2.155), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ToAnimate/Sprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_07tka"]
 _data = {
+&"RESET": SubResource("Animation_5vua6"),
 &"attack": SubResource("Animation_orwns"),
 &"ranged_attack": SubResource("Animation_a6vjd")
 }
@@ -139,9 +218,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="ToAnimate"]
 unique_name_in_owner = true
+pixel_size = 0.025
 billboard = 2
 texture_filter = 0
-texture = ExtResource("3_tynow")
+texture = ExtResource("3_ka08n")
+hframes = 2
+frame = 1
 
 [node name="VisionRaycast" type="RayCast3D" parent="ToAnimate/Sprite3D"]
 unique_name_in_owner = true
@@ -190,6 +272,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 
 [node name="RangedAttackEB" parent="ToAnimate/Behaviors" instance=ExtResource("7_pwkjs")]
 
+[node name="AnimToTheBeatEB" parent="ToAnimate/Behaviors" node_paths=PackedStringArray("anim_player", "audio_player") instance=ExtResource("9_apk7q")]
+anim_player = NodePath("BeatPlayer")
+anim_every_x_beat = 4
+anim_sequence = Array[String](["animation1"])
+audio_player = NodePath("Rattle")
+audio_every_x_beat = 4
+
+[node name="BeatPlayer" type="AnimationPlayer" parent="ToAnimate/Behaviors/AnimToTheBeatEB"]
+libraries = {
+&"": SubResource("AnimationLibrary_5vua6")
+}
+speed_scale = 1.5
+
+[node name="Rattle" type="AudioStreamPlayer3D" parent="ToAnimate/Behaviors/AnimToTheBeatEB"]
+stream = ExtResource("12_apk7q")
+pitch_scale = 0.8
+max_distance = 10.0
+bus = &"SFX"
+
 [node name="EnemyIndicator" parent="." instance=ExtResource("3_gdugp")]
 unique_name_in_owner = true
 
@@ -202,6 +303,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_a6vjd")
 }
 autoplay = "bob"
+speed_scale = 0.9
 
 [node name="AttackAnim" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

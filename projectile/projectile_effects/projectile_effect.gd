@@ -6,7 +6,7 @@ var projectile: Projectile
 
 func _ready() -> void:
 	if projectile == null:
-		printerr(self, ": parent projectile not found, freeing self")
+		push_error(self, ": parent projectile not found, freeing self")
 		queue_free()
 		return
 	

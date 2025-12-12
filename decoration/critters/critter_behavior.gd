@@ -6,7 +6,7 @@ var O: Critter
 
 func _ready() -> void:
 	if not owner is Critter:
-		printerr(self, " : Owner is not Critter, freeing self")
+		push_error(self, " : Owner is not Critter, freeing self")
 		queue_free()
 	
 	O = owner

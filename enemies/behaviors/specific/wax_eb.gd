@@ -21,7 +21,7 @@ func self_damage():
 		return
 	
 	if get_hurt_eb == null:
-		printerr(self, " of ", O , ": get_hurt_eb_not_found")
+		push_error(self, " of ", O , ": get_hurt_eb_not_found")
 		return
 	
 	get_hurt_eb.lose_hp(self_damage_amount)
@@ -32,7 +32,7 @@ func shrink():
 		return
 	
 	if get_hurt_eb == null:
-		printerr(self, " of ", O , ": get_hurt_eb_not_found")
+		push_error(self, " of ", O , ": get_hurt_eb_not_found")
 		return
 	
 	if not "to_animate" in O:

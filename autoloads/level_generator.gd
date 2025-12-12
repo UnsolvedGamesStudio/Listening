@@ -17,7 +17,10 @@ func _ready() -> void:
 		push_error("MainScene node not found")
 		return
 	
-	current_blueprint = main.default_blueprint
+	if main.use_test_blueprint:
+		current_blueprint = main.test_blueprint
+	else:
+		current_blueprint = main.default_blueprint
 
 
 func activate():
@@ -97,7 +100,7 @@ func generate_object_tiles(used_tiles: Array[Vector2i], layer: TileMapLayer, blu
 		var unique_object_id: int = cell_data.get_custom_data("unique_object_id")
 		
 		if scene_data == null:
-			printerr(tile, ": no scene data found")
+			push_error(tile, ": no scene data found")
 			continue
 		
 		var scene_inst: Node = scene_data.instantiate()

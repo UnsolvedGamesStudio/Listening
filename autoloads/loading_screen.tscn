@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6ii5smx7jr4n"]
+[gd_scene load_steps=17 format=3 uid="uid://b6ii5smx7jr4n"]
 
 [ext_resource type="Script" uid="uid://cx4vigvx51ady" path="res://autoloads/loading_screen.gd" id="1_jyqcq"]
 [ext_resource type="Texture2D" uid="uid://c65g0ywrxwakh" path="res://autoloads/textures/faded_texture.tres" id="1_xpwtf"]
 [ext_resource type="Texture2D" uid="uid://7qsqxphc4j8y" path="res://autoloads/textures/circle_texture_bar.png" id="3_5fvr4"]
+[ext_resource type="Texture2D" uid="uid://bdnubc60rwmo" path="res://screen_filters/textures/dots_vignette.png" id="3_6qlle"]
 [ext_resource type="Shader" uid="uid://cse6ndvg7hwym" path="res://autoloads/clock_wipe_shader.gdshader" id="4_f0syc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7jn7i"]
+blend_mode = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6qlle"]
 shader = ExtResource("4_f0syc")
@@ -12,6 +16,67 @@ shader_parameter/scale = 0.90000004275
 shader_parameter/center = Vector2(0.5, 0.5)
 shader_parameter/direction = -1.0
 shader_parameter/start_angle = 4.7170002240575
+
+[sub_resource type="Animation" id="Animation_6gwdx"]
+resource_name = "shrink"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LoadingCircle:material:shader_parameter/scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(0.25000024, 0.18946497, 1),
+"update": 0,
+"values": [0.850000040375, 1.0000000475, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(0.25000024, 0.18946497, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(0.015, 0.015)]
+}
+
+[sub_resource type="Animation" id="Animation_h5el0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LoadingCircle:material:shader_parameter/scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.90000004275]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_57o6x"]
+_data = {
+&"RESET": SubResource("Animation_h5el0"),
+&"shrink": SubResource("Animation_6gwdx")
+}
 
 [sub_resource type="Animation" id="Animation_5fvr4"]
 resource_name = "wobble"
@@ -30,9 +95,51 @@ tracks/0/keys = {
 "values": [0.90000004275, 0.850000040375]
 }
 
+[sub_resource type="Animation" id="Animation_6qlle"]
+length = 0.001
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f0syc"]
 _data = {
+&"RESET": SubResource("Animation_6qlle"),
 &"wobble": SubResource("Animation_5fvr4")
+}
+
+[sub_resource type="Animation" id="Animation_7jn7i"]
+resource_name = "wobble"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dots:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.025, 1.025)]
+}
+
+[sub_resource type="Animation" id="Animation_dmstt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dots:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.0182649, 1.0182649)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6gwdx"]
+_data = {
+&"RESET": SubResource("Animation_dmstt"),
+&"wobble": SubResource("Animation_7jn7i")
 }
 
 [node name="LoadingScreen" type="CanvasLayer"]
@@ -47,6 +154,19 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("1_xpwtf")
+metadata/_edit_use_anchors_ = true
+
+[node name="Dots" type="TextureRect" parent="."]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+material = SubResource("CanvasItemMaterial_7jn7i")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0182649, 1.0182649)
+pivot_offset = Vector2(256, 224)
+texture = ExtResource("3_6qlle")
 metadata/_edit_use_anchors_ = true
 
 [node name="LoadingCircle" type="TextureRect" parent="."]
@@ -76,14 +196,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(256, 224)
 theme_override_font_sizes/font_size = 14
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="wobble" type="AnimationPlayer" parent="."]
+[node name="Disappear" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_57o6x")
+}
+speed_scale = 1.3
+
+[node name="Wobble" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_f0syc")
 }
-autoplay = "wobble"
 speed_scale = 1.5
+
+[node name="DotsWobble" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_6gwdx")
+}

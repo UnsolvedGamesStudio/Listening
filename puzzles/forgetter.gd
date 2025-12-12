@@ -68,7 +68,7 @@ func forget_entity(area: Area3D):
 
 func forget(object: Node3D):
 	if object == null:
-		printerr(self, " forget(): object not found")
+		push_error(self, " forget(): object not found")
 		return
 	
 	if "enabled" in object:

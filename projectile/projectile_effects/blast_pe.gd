@@ -10,7 +10,7 @@ var triggered:= false
 
 func enter():
 	if explosion_scene == null:
-		printerr(self, ": explosion_scene not found, freeing self")
+		push_error(self, ": explosion_scene not found, freeing self")
 		queue_free()
 		return
 
