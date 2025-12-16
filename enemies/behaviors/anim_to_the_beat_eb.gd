@@ -16,11 +16,23 @@ class_name AnimToTheBeatEB
 @export_range(0.01, 5.0) var min_pitch:= 0.9
 @export_range(0.01, 5.0) var max_pitch:= 1.1
 
+@export_group("Random Delay")
+@export var randomize_timing:= false
+@export_range(0.0, 5.0) var min_delay:= 0.0
+@export_range(0.01, 10.0) var max_delay:= 0.15
+
+var delay_timer: Timer
 var anim_progress:= 0
 
 
 func _ready() -> void:
 	Bus.beat.connect(on_beat)
+	
+	if randomize_timing == true:
+		delay_timer = Timer.new()
+		add_child(delay_timer)
+		delay_timer.wait_time = randf_range(min_delay, max_delay)
+		delay_timer.one_shot = true
 
 
 func animate_sprite():
@@ -38,6 +50,8 @@ func animate_sprite():
 		push_error(self, ": Anim player does not have '", correct_anim, "'")
 		return
 	
+	await delay()
+	
 	anim_player.stop()
 	anim_player.play(correct_anim)
 	
@@ -48,6 +62,9 @@ func animate_sprite():
 
 
 func animate_audio():
+	if O.sees_player == false:
+		return
+	
 	if audio_enabled == false:
 		return
 	
@@ -61,7 +78,17 @@ func animate_audio():
 		audio_player.pitch_scale += randf_range(min_pitch, max_pitch)
 		audio_player.pitch_scale = og_pitch
 	
+	await delay()
+	
 	audio_player.play()
+
+
+func delay():
+	if not delay_timer:
+		return
+	
+	delay_timer.start()
+	await delay_timer.timeout
 
 
 func on_beat(beat_count: int):

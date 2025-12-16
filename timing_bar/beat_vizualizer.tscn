@@ -45,15 +45,15 @@ script = ExtResource("1_kra6h")
 
 [node name="TimingBar" type="TextureRect" parent="."]
 unique_name_in_owner = true
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
+anchors_preset = -1
+anchor_top = 0.96428573
+anchor_right = 0.9999999
 anchor_bottom = 1.0
-offset_top = -16.0
 grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("1_boco5")
 stretch_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer" type="PanelContainer" parent="TimingBar"]
 layout_mode = 1
@@ -118,7 +118,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="BeatActivator" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(2, 532)
+position = Vector2(13, 420)
 texture = ExtResource("3_yv7sp")
 
 [node name="BeatArea" type="Area2D" parent="BeatActivator"]

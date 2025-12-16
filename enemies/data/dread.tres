@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://cdiemjse6tvdf"]
 
-[ext_resource type="Texture2D" uid="uid://dgygswxu7j8ds" path="res://projectile/textures/default_projectile.png" id="1_57rgr"]
+[ext_resource type="Texture2D" uid="uid://oaasrdhpkcsp" path="res://projectile/textures/default_projectile.png" id="1_57rgr"]
 [ext_resource type="Script" uid="uid://xik6wqrvw2sj" path="res://enemies/data/enemy_data.gd" id="2_57rgr"]
 
 [resource]

@@ -32,7 +32,7 @@ enum ranges{MELEE, RANGED, CONTACT}
 
 @export_group("Projectile")
 @export var projectile_enabled:= true
-@export var projectile_texture:= preload("uid://dgygswxu7j8ds")
+@export var projectile_texture:= preload("uid://oaasrdhpkcsp")
 @export var projectile_damage:= 10.0
 @export var projectile_speed:= 60.0
 @export var projectile_range:= 2

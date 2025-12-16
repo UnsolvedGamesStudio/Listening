@@ -124,6 +124,7 @@ debug_color = Color(0.41099185, 0.603334, 0, 0.14901961)
 [node name="AmbientSFX" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("3_1o5tm")
+volume_db = 15.0
 autoplay = true
 max_distance = 10.0
 bus = &"SFX"

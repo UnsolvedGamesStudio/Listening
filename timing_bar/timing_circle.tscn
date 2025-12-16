@@ -112,7 +112,6 @@ _data = {
 [node name="TimingCircle" type="Sprite2D"]
 material = SubResource("ShaderMaterial_4mav4")
 texture = ExtResource("1_476gq")
-offset = Vector2(-36, -18)
 script = ExtResource("2_3qkbb")
 
 [node name="Zones" type="Node2D" parent="."]
@@ -155,4 +154,3 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_4mav4")
 }
-autoplay = "enter"

@@ -7,8 +7,9 @@ static var any_being_dragged:= false
 
 
 func _ready() -> void:
-	offset_slider_label.text = str("Beat Offset: ", int(Vars.beat_circle_offset), "px")
+	offset_slider_label.text = str("Beat Offset: ", Vars.beat_circle_offset, "ms")
 	offset_slider.value = Vars.beat_circle_offset
+	
 	offset_slider.mouse_entered.connect(on_offset_slider_mouse_entered)
 	offset_slider.drag_started.connect(on_offset_slider_drag_started)
 	offset_slider.value_changed.connect(on_offset_slider_value_changed)
@@ -31,7 +32,8 @@ func on_offset_slider_started():
 
 func on_offset_slider_value_changed(value: float) -> void:
 	GlobalSfx.ui_hover.play(0.02)
-	offset_slider_label.text = str("Beat Offset: ", int(value), "px")
+	Vars.beat_circle_offset = offset_slider.value
+	offset_slider_label.text = str("Beat Offset: ", Vars.beat_circle_offset, "ms")
 
 
 func on_offset_slider_drag_ended(value_changed: bool) -> void:

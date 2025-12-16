@@ -8,7 +8,7 @@ class_name Enemy
 ## - have it be as reusable as possible, and organize them using groups instead of onready
 ## Todo: AnimPlayer for passive additional anims like float and a main player for "state" anims
 const PROJECTILE = preload("uid://6n70akjpdb5c")
-const DEFAULT_PROJECTILE_TEXTURE = preload("uid://dgygswxu7j8ds")
+const DEFAULT_PROJECTILE_TEXTURE = preload("uid://oaasrdhpkcsp")
 const TERRAIN_LAYER:= 2
 const PLAYER_LAYER:= 4
 const SHELL_LAYER:= 11
@@ -79,7 +79,7 @@ func init_stats():
 
 func _physics_process(delta: float) -> void:
 	check_on_top_of_player()
-	check_sees_player()
+	_check_sees_player()
 	update_enemy_indicator()
 	
 	if on_top_of_player == true:
@@ -200,7 +200,7 @@ func check_on_top_of_player():
 		on_top_of_player = false
 
 
-func check_sees_player():
+func _check_sees_player():
 	var player_distance = (global_position - Find.P().enemy_aim_point.global_position).length()
 	
 	if player_distance > vision_limit:

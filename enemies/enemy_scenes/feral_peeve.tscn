@@ -288,7 +288,7 @@ speed_scale = 1.5
 [node name="Rattle" type="AudioStreamPlayer3D" parent="ToAnimate/Behaviors/AnimToTheBeatEB"]
 stream = ExtResource("12_apk7q")
 pitch_scale = 0.8
-max_distance = 10.0
+max_distance = 14.0
 bus = &"SFX"
 
 [node name="EnemyIndicator" parent="." instance=ExtResource("3_gdugp")]

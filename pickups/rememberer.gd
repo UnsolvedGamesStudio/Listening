@@ -30,12 +30,19 @@ func looked_at_by_player(on: bool):
 
 
 func activate():
-	if Vars.synapses >= required_synapses:
+	if player_has_enough():
 		remembember_all_forgetters()
 		SaveManager.save_position("rememberer", global_position)
 	
 	else:
 		animation_player.play("bounce")
+
+
+func player_has_enough():
+	if Vars.synapses >= required_synapses:
+		return true
+	
+	return false
 
 
 func remembember_all_forgetters():

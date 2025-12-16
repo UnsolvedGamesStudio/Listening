@@ -1,5 +1,7 @@
 extends Node
 
+signal song_started
+
 signal beat_press_attempted
 
 signal beat(beat_count: int)

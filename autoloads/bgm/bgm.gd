@@ -1,5 +1,6 @@
 extends AudioStreamPlayer
 ## Todo: Make played octave relative to a default rather than copying the midi
+## Todo: Make score damage mult have dimin returns
 @onready var rhythm_notifier: RhythmNotifier = %RhythmNotifier
 @onready var midi_player: MidiPlayer = %MidiPlayer
 @onready var sampler_instrument: SamplerInstrument = %SamplerInstrument
@@ -51,7 +52,8 @@ func start_song():
 	init_song_data()
 	
 	play()
-	kick.play()
+	
+	Bus.song_started.emit()
 	
 	if midi_player.file == null:
 		push_error(self, ": Midi file not found")

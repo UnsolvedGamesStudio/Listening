@@ -48,6 +48,9 @@ func _process(delta: float) -> void:
 
 
 func start():
+	if get_tree().get_first_node_in_group("main_scene").disable_loading_screen:
+		return
+	
 	show()
 	wobble.play("wobble")
 	dots_wobble.play("wobble")

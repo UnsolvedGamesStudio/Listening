@@ -9,7 +9,17 @@ const RETICLE_OPEN = preload("uid://dhqpx2xr22di")
 var reticle: TextureRect
 
 var P: Player
-var los: RayCast3D
+
+enum HintNames {INTERACT, PICK_UP, REMEMBER, UNLOCK, OPEN}
+var hints: Dictionary[HintNames, String] = {
+	HintNames.INTERACT : "Interact",
+	HintNames.PICK_UP : "Pick up",
+	HintNames.REMEMBER : "Remember",
+	HintNames.UNLOCK : "Unlock",
+	HintNames.OPEN : "Open",
+}
+
+var tooltip: Label
 
 var animating_reticle_pressed:= false
 
@@ -17,6 +27,15 @@ var animating_reticle_pressed:= false
 func _ready() -> void:
 	reticle = get_tree().get_first_node_in_group("reticle")
 	P = get_parent()
+	tooltip = get_tree().get_first_node_in_group("interact_tooltip")
+	
+	if not P:
+		push_error(self, ": Player (P) not found, freeing self")
+		queue_free()
+
+
+func _process(delta: float) -> void:
+	update_tooltip()
 
 
 func _input(event: InputEvent) -> void:
@@ -49,7 +68,7 @@ func interact():
 	activate_item()
 
 
-func activate_item():
+func get_collider():
 	var collider: Area3D = P.current_los_collider()
 	
 	if collider == null:
@@ -58,6 +77,57 @@ func activate_item():
 	var object: = collider.owner
 	
 	if check_distance(object) >= Vars.interact_range:
+		return
+	
+	return object
+
+
+func update_tooltip():
+	var object: Node = get_collider()
+	
+	if tooltip == null:
+		return
+	
+	if object == null:
+		tooltip.text = ""
+		return
+	
+	var tooltip_text:= get_tooltip_key(object)
+	
+	if tooltip.text == tooltip_text:
+		return
+	
+	tooltip.text = tooltip_text
+
+
+func get_tooltip_key(object: Node) -> String:
+	var returned_string:= ""
+	
+	if object is Pickup:
+		returned_string = hints[HintNames.PICK_UP]
+	
+	if object is RemembererPickup:
+		returned_string = hints[HintNames.REMEMBER]
+		
+		if not object.player_has_enough():
+			returned_string += "?"
+	
+	if object is Keyhole:
+		returned_string = hints[HintNames.UNLOCK]
+		
+		if not object.has_item():
+			returned_string += "?"
+	
+	if object is MusicBox:
+		returned_string = hints[HintNames.OPEN]
+	
+	return returned_string
+
+
+func activate_item():
+	var object: Node = get_collider()
+	
+	if object == null:
 		return
 	
 	if "activate_on_interact" in object:

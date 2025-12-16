@@ -24,18 +24,17 @@ box_4 = Array[PackedScene]([ExtResource("8_d2bwe"), ExtResource("4_osa6w"), ExtR
 [node name="Floor1" parent="." instance=ExtResource("10_qgfrc")]
 
 [node name="Cells" parent="Floor1" groups=["editor_cells"] instance=ExtResource("10_gsuot")]
-tile_map_data = PackedByteArray("AAD//wAAAQABAAAAAAAAAAAAAQABAAAAAAABAAAAAQABAAAAAAABAP//AQABAAAAAAAAAP//AQABAAAAAAD/////AQABAAAAAAABAP7/AQABAAAAAAAAAP7/AQABAAAAAAD///7/AQABAAAAAAABAAEAAQAAAAAAAAAAAAEAAQAAAAAAAAD//wEAAQAAAAAAAAD//wIAAQAAAAAAAAAAAAIAAQAAAAAAAAABAAIAAQAAAAAAAAABAAMAAQAAAAAAAAAAAAMAAQAAAAAAAAD//wMAAQAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAABAAEAAQAAAAEAAAAAAAEAAQAAAAEAAAD//wEAAQAAAAEAAAD//wIAAQAAAAEAAAAAAAIAAQAAAAAAAAABAAMAAQAAAAEAAAAAAAMAAQAAAAEAAAD//wMAAQAAAAEAAAABAAIAAQAAAAEAAAA=")
 script = null
 
 [node name="TileForgetters" parent="Floor1" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
 
 [node name="Layer1" parent="Floor1" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
-tile_map_data = PackedByteArray("AAAAAP7/AQAAAAAAAAAAAAIABAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAAIABAAAAAAAAAA=")
 
 [node name="Layer2" parent="Floor1" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
 
 [node name="Floor2" parent="." instance=ExtResource("10_qgfrc")]
-visible = false
 floor_number = 2
 height = 5.0
 

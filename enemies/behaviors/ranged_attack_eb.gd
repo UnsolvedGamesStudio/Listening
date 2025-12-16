@@ -2,7 +2,7 @@ extends EnemyBehavior
 class_name RangedAttackEB
 
 const PROJECTILE = preload("uid://6n70akjpdb5c")
-const DEFAULT_PROJECTILE_TEXTURE = preload("uid://dgygswxu7j8ds")
+const DEFAULT_PROJECTILE_TEXTURE = preload("uid://oaasrdhpkcsp")
 
 @onready var sfx: AudioStreamPlayer3D = %SFX
 

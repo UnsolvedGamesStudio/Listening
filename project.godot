@@ -90,6 +90,7 @@ hub_world=""
 blueprint_layout=""
 playable_level=""
 secret_room=""
+interact_tooltip=""
 
 [gui]
 

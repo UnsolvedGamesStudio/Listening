@@ -9,3 +9,4 @@ var default_blueprint:= preload("uid://bptiy4w2getxo")
 @export var default_song:= preload("uid://bv4fypx7ab87u")
 @export var prevent_saving:= false
 @export var always_start_bgm:= false
+@export var disable_loading_screen:= false

@@ -1,4 +1,5 @@
 extends Node3D
+class_name Keyhole
 ## Todo: Play a chord of the corresponding "key" when unlocking with or picking up keys
 ##Todo: Extend the walls of the locked wall if adjacent walls are detected/remove other walls
 @onready var decal: Decal = %Decal
