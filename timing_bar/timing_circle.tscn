@@ -26,7 +26,7 @@ resource_name = "enter"
 length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
@@ -110,8 +110,10 @@ _data = {
 }
 
 [node name="TimingCircle" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0)
 material = SubResource("ShaderMaterial_4mav4")
 texture = ExtResource("1_476gq")
+offset = Vector2(-36, -18)
 script = ExtResource("2_3qkbb")
 
 [node name="Zones" type="Node2D" parent="."]
@@ -154,3 +156,4 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_4mav4")
 }
+autoplay = "enter"

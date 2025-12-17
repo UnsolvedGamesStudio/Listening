@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwk7ovxfs2mxp"]
-
-[ext_resource type="Script" uid="uid://dtrcpk8gbny5x" path="res://timing_bar/beat_timer.gd" id="1_dny6o"]
-
-[node name="BeatTimer" type="Timer"]
-one_shot = true
-autostart = true
-script = ExtResource("1_dny6o")

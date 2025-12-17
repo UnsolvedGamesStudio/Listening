@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://xqc1yxn05bn"]
 
 [ext_resource type="Script" uid="uid://ddi8nw37cgvp1" path="res://scenes/main_scene.gd" id="1_jyhfs"]
-[ext_resource type="Resource" uid="uid://b3cbgo4s0mytf" path="res://assets/music/song_data/reverie.tres" id="2_tbgi4"]
+[ext_resource type="Resource" uid="uid://b5n752kaydvfi" path="res://assets/music/song_data/one_mind.tres" id="2_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://be7uvcmrgobq8" path="res://vfx/2d_particle.png" id="3_tefeu"]
 [ext_resource type="Script" uid="uid://duv71sufvwmty" path="res://scenes/cursor_manager.gd" id="4_o6xl0"]
 
@@ -16,7 +16,9 @@ gravity = Vector3(0, 98, 0)
 [node name="Main" type="Node" groups=["main_scene"]]
 script = ExtResource("1_jyhfs")
 scene_to_load = 1
-default_song = ExtResource("2_tbgi4")
+use_test_blueprint = true
+default_song = ExtResource("2_jyhfs")
+disable_loading_screen = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3

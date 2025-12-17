@@ -1,10 +1,13 @@
 extends Node
-
+## Todo: Refactor all the unused signals and merge the ones that could merge
 signal song_started
 
 signal beat_press_attempted
 
 signal beat(beat_count: int)
+signal sub_tick(beat_count: int)
+signal circle_spawned
+
 
 signal beat_success(level: int)
 signal beat_success_to_circle(level: int, circle: TimingCircle, element: int)

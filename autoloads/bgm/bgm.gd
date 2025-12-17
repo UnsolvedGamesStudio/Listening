@@ -1,6 +1,8 @@
 extends AudioStreamPlayer
 ## Todo: Make played octave relative to a default rather than copying the midi
 ## Todo: Make score damage mult have dimin returns
+@onready var beat_timer: BeatTimer = %BeatTimer
+@onready var circle_beat_timer: CircleBeatTimer = %CircleBeatTimer
 @onready var rhythm_notifier: RhythmNotifier = %RhythmNotifier
 @onready var midi_player: MidiPlayer = %MidiPlayer
 @onready var sampler_instrument: SamplerInstrument = %SamplerInstrument
@@ -29,7 +31,8 @@ func _ready() -> void:
 	
 	current_song_data = main.default_song
 	
-	rhythm_notifier.beat.connect(on_beat)
+	beat_timer.beat.connect(on_beat)
+	beat_timer.sub_tick.connect(on_sub_tick)
 	midi_player.midi_event.connect(on_midi_event)
 	
 	if get_tree().get_first_node_in_group("main_scene").always_start_bgm == true:
@@ -71,7 +74,8 @@ func stop_song():
 
 func init_song_data():
 	stream = load(current_song_data.file_path)
-	rhythm_notifier.bpm = current_song_data.bpm
+	beat_timer.bpm = current_song_data.bpm
+	circle_beat_timer.bpm = current_song_data.bpm
 	midi_player.file = current_song_data.chords_midi_path
 	volume_db = current_song_data.volume
 
@@ -331,6 +335,7 @@ func play_correct_chime(hit: bool):
 
 
 func play_kick():
+	kick.stop()
 	kick.play()
 
 
@@ -338,10 +343,14 @@ func check_real_timing():
 	last_timing = rhythm_notifier.current_position
 
 
-func on_beat(_interval: int):
+func on_beat(beat_index):
 	if Vars.paused == false:
 		beat_count += 1
 	
 	check_real_timing()
-	play_kick()
+	
 	Bus.beat.emit(beat_count)
+
+
+func on_sub_tick(sub_index):
+	Bus.sub_tick.emit(beat_count)

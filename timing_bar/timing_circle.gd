@@ -17,11 +17,9 @@ var start_pos:= Vector2.ZERO
 var middle_pos:= Vector2.ZERO
 var end_pos:= Vector2.ZERO
 
-var travel_to_middle_duration:= 2.2
-var post_middle_duration:= 2.2
+var travel_to_middle_duration:= 2.4
+var post_middle_duration:= 2.4
 var spawn_time:= 0.0
-
-var beats_ahead = ceil(travel_to_middle_duration / Bgm.rhythm_notifier.beat_length)
 
 
 func _ready() -> void:
@@ -40,70 +38,27 @@ func _ready() -> void:
 
 
 func setup_for_beat(target_beat_time: float) -> void:
-	# target_beat_time = the time (in seconds) that this circle MUST be at middle_pos
-	# compute spawn_time so it starts travelling early enough
-	spawn_time = target_beat_time - travel_to_middle_duration + (Vars.beat_circle_offset / 1000)
-	
-	# set immediate visual to the start position so the circle appears at your start location
-	# (set position, not global_position; the BeatVisualizer will add_child first)
-	position = start_pos
-	
-	update_visual_to_now()
-	
-	# optional: if your node runs _ready and sets spawn_time too early, avoid that by checking
-	# we override anything set earlier. _ready should not set spawn_time unconditionally anymore.
-
-
-func update_visual_to_now() -> void:
-	var now: float = Bgm.rhythm_notifier.current_position
-	# if not started yet, stay at start_pos
-	if now < spawn_time:
-		position = start_pos
-		return
-
-	var t := (now - spawn_time) / travel_to_middle_duration
-	t = clamp(t, 0.0, 1.0)
-	if t < 1.0:
-		position = start_pos.lerp(middle_pos, t)
-		return
-
-	# after middle
-	var t2 := (now - spawn_time - travel_to_middle_duration) / post_middle_duration
-	t2 = clamp(t2, 0.0, 1.0)
-	position = middle_pos.lerp(end_pos, t2)
+	spawn_time = target_beat_time - travel_to_middle_duration + (Vars.beat_circle_offset / 1000.0)
 
 
 func _process(delta: float) -> void:
-	var now: float = Bgm.rhythm_notifier.current_position
+	var now: float = Bgm.beat_timer.audio_pos
 	var t = (now - spawn_time) / travel_to_middle_duration
 	
 	if now < spawn_time:
-		return  # not yet started
+		return
 	
 	t = clamp(t, 0.0, 1.0)
 	
 	if t < 1.0:
-		# traveling towards the middle
 		position = start_pos.lerp(middle_pos, t)
 	else:
-		# traveling past the middle
 		var t2 = (now - spawn_time - travel_to_middle_duration) / post_middle_duration
 		t2 = clamp(t2, 0.0, 1.0)
 		position = middle_pos.lerp(end_pos, t2)
 		
 		if t2 >= 1.0:
-			queue_free()
-
-
-#func tween_position():
-	#if speed % 2 == 1:
-		#speed += 1
-	#
-	#var tween:= create_tween()
-	#var length: float = Bgm.rhythm_notifier.beat_length * speed
-	#
-	#tween.tween_property(self, "global_position:x", get_viewport_rect().size.x, length)
-	#tween.tween_callback(remove)
+			remove()
 
 
 func remove():

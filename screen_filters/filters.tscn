@@ -82,6 +82,23 @@ _data = {
 &"shift": SubResource("Animation_jyhfs")
 }
 
+[sub_resource type="Animation" id="Animation_wxfey"]
+resource_name = "fade_out"
+length = 0.8
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Filters/FadeRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_o5qli"]
 resource_name = "fade_out"
 length = 0.8
@@ -116,28 +133,27 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_wxfey"]
-resource_name = "fade_out"
-length = 0.8
-step = 0.0333333
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5df70"]
+_data = {
+&"RESET": SubResource("Animation_wxfey"),
+&"fade_in": SubResource("Animation_o5qli"),
+&"fade_out": SubResource("Animation_xawky")
+}
+
+[sub_resource type="Animation" id="Animation_70lj0"]
+resource_name = "RESET"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Filters/FadeRect:modulate")
+tracks/0/path = NodePath("%Fade/../../FadeBlackRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5df70"]
-_data = {
-&"RESET": SubResource("Animation_wxfey"),
-&"fade_in": SubResource("Animation_o5qli"),
-&"fade_out": SubResource("Animation_xawky")
+"values": [Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_grcp3"]
@@ -170,22 +186,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_70lj0"]
-resource_name = "RESET"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("%Fade/../../FadeBlackRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_grcp3"]

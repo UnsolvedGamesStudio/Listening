@@ -1,8 +1,10 @@
-[gd_scene load_steps=16 format=4 uid="uid://dewfhmrag5pkp"]
+[gd_scene load_steps=19 format=4 uid="uid://dewfhmrag5pkp"]
 
 [ext_resource type="AudioStream" uid="uid://blbxn1c7hs7h" path="res://assets/music/reverie.ogg" id="1_4owoj"]
 [ext_resource type="Script" uid="uid://dbs7tn7suqlhg" path="res://autoloads/bgm/bgm.gd" id="2_vucbv"]
 [ext_resource type="Script" uid="uid://dos3qhffr4v0a" path="res://addons/rhythm_notifier/rhythm_notifier.gd" id="3_1oder"]
+[ext_resource type="Script" uid="uid://cyh71sgrflymr" path="res://autoloads/bgm/beat_timer.gd" id="3_j4ark"]
+[ext_resource type="Script" uid="uid://db3i7s0rdcnes" path="res://autoloads/bgm/circle_beat_timer.gd" id="4_1r8mc"]
 [ext_resource type="Script" uid="uid://2ag1petdt53" path="res://addons/SimpleSampler/sampler_instrument.gd" id="5_syuoy"]
 [ext_resource type="Script" uid="uid://dtpmtwvvk0ac7" path="res://addons/SimpleSampler/sample_resource.gd" id="6_yq28d"]
 [ext_resource type="Script" uid="uid://b1ncyajtuicss" path="res://addons/midi/MidiPlayer.gd" id="7_4owoj"]
@@ -10,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://bm6btfvrx3t1a" path="res://assets/samples/lute_sample.tres" id="7_qfgnj"]
 [ext_resource type="AudioStream" uid="uid://hmaa8n3edwg0" path="res://assets/samples/clean-808-kick_A_minor.wav" id="8_wbxdo"]
 [ext_resource type="AudioStream" uid="uid://b2k6m68kkjla0" path="res://assets/music/stasis_v1.mp3" id="9_qfgnj"]
+[ext_resource type="Script" uid="uid://bp4y2cxwsw3h6" path="res://autoloads/bgm/kick.gd" id="11_yl5a4"]
 
 [sub_resource type="Resource" id="Resource_yl5a4"]
 script = ExtResource("6_yq28d")
@@ -71,6 +74,16 @@ volume_db = 14.312
 bus = &"BGM"
 script = ExtResource("2_vucbv")
 
+[node name="BeatTimer" type="Node" parent="." node_paths=PackedStringArray("audio_player")]
+unique_name_in_owner = true
+script = ExtResource("3_j4ark")
+audio_player = NodePath("..")
+
+[node name="CircleBeatTimer" type="Node" parent="." node_paths=PackedStringArray("audio_player")]
+unique_name_in_owner = true
+script = ExtResource("4_1r8mc")
+audio_player = NodePath("..")
+
 [node name="RhythmNotifier" type="Node" parent="." node_paths=PackedStringArray("audio_stream_player")]
 unique_name_in_owner = true
 process_mode = 3
@@ -115,6 +128,7 @@ unique_name_in_owner = true
 process_mode = 3
 stream = ExtResource("8_wbxdo")
 bus = &"Kick"
+script = ExtResource("11_yl5a4")
 
 [node name="PauseMenuMusic" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

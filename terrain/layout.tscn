@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://d1rnngxhnemng"]
 
-[ext_resource type="PackedScene" uid="uid://dflkyrrs1kf1s" path="res://timing_bar/beat_vizualizer.tscn" id="3_tupbf"]
+[ext_resource type="PackedScene" uid="uid://dflkyrrs1kf1s" path="res://timing_bar/beat_visualizer.tscn" id="3_tupbf"]
 [ext_resource type="PackedScene" uid="uid://bdbt8bcqdo4xx" path="res://terrain/layout_light.tscn" id="4_e4vt8"]
 [ext_resource type="PackedScene" uid="uid://ce10gkdeiprj7" path="res://player/player.tscn" id="4_trw21"]
 [ext_resource type="AudioStream" uid="uid://btu6qvvkk8lsp" path="res://assets/ambience/room_tone.ogg" id="5_b0xiq"]
