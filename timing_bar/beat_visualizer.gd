@@ -31,8 +31,23 @@ func init_bar_position():
 
 
 func connect_signals():
-	Bgm.circle_beat_timer.circle_beat.connect(on_beat)
+	Bgm.beat_timer.beat.connect(on_beat)
 	Bus.beat_press_attempted.connect(on_beat_press_attempted)
+
+
+func spawn_circle_for_beat(beat_idx: int) -> void:
+	var beat_length: float = Bgm.beat_timer.beat_length
+	var target_beat_time := float(beat_idx) * beat_length
+	
+	var circle: TimingCircle = TIMING_CIRCLE.instantiate()
+	
+	add_child(circle)
+	set_circle_values_for_appropriate_beat(circle)
+	circle.setup_for_beat(target_beat_time)
+	
+	Bus.circle_spawned.emit()
+	
+	Vars.active_circles.append(circle)
 
 
 func set_circle_values_for_appropriate_beat(circle_inst: TimingCircle, start_offset: float = 0.0) -> void:
@@ -55,8 +70,8 @@ func generate_circle_for_next_beat(start_offset: float = 0.0):
 	var circle_inst: TimingCircle = TIMING_CIRCLE.instantiate()
 	
 	# compute the next beat target time (one beat ahead)
-	var now = Bgm.circle_beat_timer.audio_pos
-	var next_beat_time = now + Bgm.circle_beat_timer.beat_length
+	var now = Bgm.beat_timer.audio_pos
+	var next_beat_time = now + Bgm.beat_timer.beat_length
 	
 	# set values (includes calling setup_for_beat on the circle)
 	add_child(circle_inst)
@@ -94,16 +109,14 @@ func generate_text(accuracy: String):
 func on_beat_press_attempted():
 	pop_out_beat_activator()
 
-#var _last_beat_time := -1.0
 
-
-func on_beat(_beat_count: int) -> void:
-	var now : float = Bgm.circle_beat_timer.audio_pos
-	var beat_len : float = Bgm.circle_beat_timer.beat_length
-	var beat_idx := int(floor(now / beat_len))
+func on_beat(_beat_count: int, is_catch_up) -> void:
+	var now : float = Bgm.beat_timer.audio_pos
+	var beat_length : float = Bgm.beat_timer.beat_length
+	var beat_idx := int(floor(now / beat_length))
 
 	# How many beats ahead a circle must target to have time to travel to middle
-	var beats_ahead := int(ceil(TIMING_CIRCLE.instantiate().travel_to_middle_duration / beat_len))
+	var beats_ahead := int(ceil(TIMING_CIRCLE.instantiate().travel_to_middle_duration / beat_length))
 	# (Optional optimization: cache this value instead of instantiating. See note below.)
 
 	var target_idx := beat_idx + beats_ahead
@@ -111,23 +124,3 @@ func on_beat(_beat_count: int) -> void:
 	while last_spawned_beat < target_idx:
 		last_spawned_beat += 1
 		spawn_circle_for_beat(last_spawned_beat)
-
-
-func spawn_circle_for_beat(beat_idx: int) -> void:
-	var beat_len: float = Bgm.circle_beat_timer.beat_length
-	var target_beat_time := float(beat_idx) * beat_len
-	
-	var circle: TimingCircle = TIMING_CIRCLE.instantiate()
-	
-	add_child(circle)
-	set_circle_values_for_appropriate_beat(circle)
-	circle.setup_for_beat(target_beat_time)
-	
-	Bus.circle_spawned.emit()
-	
-	Vars.active_circles.append(circle)
-
-
-func _process(delta: float) -> void:
-	if Input.is_key_pressed(KEY_L):
-		OS.delay_msec(60)

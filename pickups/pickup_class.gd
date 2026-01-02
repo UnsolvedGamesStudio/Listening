@@ -31,7 +31,7 @@ func _ready() -> void:
 	enter()
 	area_3d.area_entered.connect(on_area_3d_area_entered)
 	Bus.beat.connect(on_beat)
-	animation_player.speed_scale = Bgm.rhythm_notifier.beat_length * 4
+	animation_player.speed_scale = Bgm.beat_timer.beat_length * 4
 
 
 func _physics_process(delta: float) -> void:
@@ -64,14 +64,14 @@ func on_beat(beat_count: int):
 func looked_at_by_player(on: bool):
 	if on == true:
 		sprite_3d.modulate = interacted_color
-		animation_player.speed_scale = Bgm.rhythm_notifier.beat_length * 8
+		animation_player.speed_scale = Bgm.beat_timer.beat_length * 8
 		
 		if not current_anim_rate < 2:
 			current_anim_rate /= 2
 	
 	else:
 		sprite_3d.modulate = Color(1.0, 1.0, 1.0, 1.0)
-		animation_player.speed_scale = Bgm.rhythm_notifier.beat_length * 4
+		animation_player.speed_scale = Bgm.beat_timer.beat_length * 4
 		
 		current_anim_rate = animate_every_x_beat
 
@@ -122,15 +122,15 @@ func move_towards_player():
 	#var camera_pos:= player.camera.global_position
 	#var target_pos:= Vector3(camera_pos.x, camera_pos.y * 0.8, camera_pos.z)
 	#
-	#tween.parallel().tween_property(sprite_3d, "global_position", target_pos, Bgm.rhythm_notifier.beat_length * tween_length_mult)
-	#tween.parallel().tween_property(self, "scale", Vector3(0.6, 0.6, 0.6), Bgm.rhythm_notifier.beat_length * tween_length_mult)
+	#tween.parallel().tween_property(sprite_3d, "global_position", target_pos, Bgm.beat_timer.beat_length * tween_length_mult)
+	#tween.parallel().tween_property(self, "scale", Vector3(0.6, 0.6, 0.6), Bgm.beat_timer.beat_length * tween_length_mult)
 	#tween.tween_callback(queue_free)
 
 
 func vanish():
 	var tween:= create_tween()
 	
-	tween.tween_property(sprite_3d, "modulate:a", 0.0,  Bgm.rhythm_notifier.beat_length * tween_length_mult)
+	tween.tween_property(sprite_3d, "modulate:a", 0.0,  Bgm.beat_timer.beat_length * tween_length_mult)
 	tween.tween_callback(destroy)
 
 

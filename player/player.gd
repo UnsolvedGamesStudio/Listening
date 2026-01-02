@@ -199,6 +199,8 @@ func heal(amount: float):
 
 
 func move_forward():
+	print(Bgm.timing_checker.valid_input(Bgm.timing_checker.TimeableInputs.MOVE))
+	
 	if is_moving == true:
 		return
 	
@@ -213,7 +215,7 @@ func move_forward():
 	is_moving = true
 	trigger_beat_check()
 	
-	var tween_length: float = (Bgm.rhythm_notifier.beat_length * 1.8) / (movement_speed)
+	var tween_length: float = (Bgm.beat_timer.beat_length * 1.8) / (movement_speed)
 	var tween:= get_tree().create_tween()
 	
 	tween.tween_property(self, "global_position", target_cell.global_position, tween_length)

@@ -25,9 +25,6 @@ var spawn_time:= 0.0
 func _ready() -> void:
 	var easiest_zone := perfect_zone
 	
-	# remove this line — the spawner will set spawn_time:
-	# spawn_time = Bgm.rhythm_notifier.current_position - travel_to_middle_duration
-	
 	original_texture = texture
 	visible_on_screen_notifier_2d.connect("screen_exited", on_screen_exited)
 	Bus.beat_success_to_circle.connect(on_beat_success_to_circle)

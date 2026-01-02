@@ -232,7 +232,7 @@ func create_projectile(projectile_effect_path: String = "", data: ProjectileData
 
 func element_expiry():
 	var container_ui: ElementContainerUI = get_tree().get_first_node_in_group("element_container_ui")
-	container_ui.element_expiry_timer.start(Bgm.rhythm_notifier.beat_length * element_expiry_time_mult)
+	container_ui.element_expiry_timer.start(Bgm.beat_timer.beat_length * element_expiry_time_mult)
 	await container_ui.element_expiry_timer.timeout
 	Vars.element_container.clear()
 	container_ui.update()

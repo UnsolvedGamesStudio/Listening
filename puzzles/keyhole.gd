@@ -50,9 +50,9 @@ func open():
 	var tween:= create_tween()
 	var original_y:= O.global_position.y
 	
-	tween.tween_property(O, "global_position:y", original_y + 0.4, Bgm.rhythm_notifier.beat_length / 3)
-	tween.tween_property(O, "global_position:y", original_y - 4.1, Bgm.rhythm_notifier.beat_length * 3)
-	tween.parallel().tween_property(O, "global_rotation_degrees", Vector3(randf_range(-360, 360), randf_range(-180, 180), randf_range(-360, 360)), Bgm.rhythm_notifier.beat_length * 7)
+	tween.tween_property(O, "global_position:y", original_y + 0.4, Bgm.beat_timer.beat_length / 3)
+	tween.tween_property(O, "global_position:y", original_y - 4.1, Bgm.beat_timer.beat_length * 3)
+	tween.parallel().tween_property(O, "global_rotation_degrees", Vector3(randf_range(-360, 360), randf_range(-180, 180), randf_range(-360, 360)), Bgm.beat_timer.beat_length * 7)
 	tween.tween_callback(O.queue_free)
 
 

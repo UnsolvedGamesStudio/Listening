@@ -10,6 +10,9 @@ func _ready() -> void:
 
 
 func create_texture_rect(item: Vars.item_types):
+	if not "texture" in Vars.inventory[item]:
+		return
+	
 	var new_rect: TextureRect = INVENTORY_UI_ITEM.instantiate()
 	new_rect.texture = Vars.inventory[item]["texture"]
 	new_rect.get_child(0).text = str("x", Vars.inventory[item]["amount"])

@@ -126,14 +126,14 @@ func tween_object(object: Node3D, object_list: Array[Node3D]):
 		object,
 		"global_position",
 		target_pos,
-		Bgm.rhythm_notifier.beat_length * 2
+		Bgm.beat_timer.beat_length * 2
 	).set_trans(Tween.TRANS_CUBIC)
 	
 	tween.parallel().tween_property(
 		object,
 		"scale",
 		Vector3(1.0, 1.0, 1.0),
-		Bgm.rhythm_notifier.beat_length * 2
+		Bgm.beat_timer.beat_length * 2
 	).set_trans(Tween.TRANS_CUBIC)
 	
 	await tween.finished

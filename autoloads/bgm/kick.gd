@@ -2,10 +2,10 @@ extends AudioStreamPlayer
 
 
 func _ready() -> void:
-	Bus.circle_spawned.connect(on_circle_spawned)
+	Bus.beat.connect(on_beat)
 
 
-func on_circle_spawned():
+func on_beat(beat_count: int):
 	if playing:
 		stop()
 	

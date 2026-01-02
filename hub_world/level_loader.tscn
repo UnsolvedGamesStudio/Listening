@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://oqqdlvk5l7s8"]
+[gd_scene load_steps=13 format=3 uid="uid://oqqdlvk5l7s8"]
 
 [ext_resource type="Script" uid="uid://bjjl8xitp77ry" path="res://hub_world/level_loader.gd" id="1_6x6pu"]
 [ext_resource type="PlaneMesh" uid="uid://covn2ehde4snx" path="res://vfx/particle_mesh.tres" id="2_b3c8u"]
 [ext_resource type="Texture2D" uid="uid://dbyd2im7ned86" path="res://vfx/enemy_indicator.png" id="2_qtyh0"]
+[ext_resource type="Material" uid="uid://c8f5xvqdav5t1" path="res://assets/ui_theme/text_ouline.tres" id="3_7jh1e"]
 [ext_resource type="AudioStream" uid="uid://cqx12xnemy6re" path="res://assets/sfx/warp_pad_sfx.ogg" id="3_8afp4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_li2hn"]
@@ -130,6 +131,7 @@ size = Vector2i(200, 200)
 
 [node name="LevelNameLabel" type="Label" parent="LevelNameLabel3D/SubViewport"]
 unique_name_in_owner = true
+material = ExtResource("3_7jh1e")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -143,7 +145,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.99999994, 0.104506545, 0.8650311, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 14
 text = "Level Name"
 horizontal_alignment = 1

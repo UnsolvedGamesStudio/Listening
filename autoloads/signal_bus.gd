@@ -5,7 +5,8 @@ signal song_started
 signal beat_press_attempted
 
 signal beat(beat_count: int)
-signal sub_tick(beat_count: int)
+signal sub_tick(sub_index: int)
+signal half_beat
 signal circle_spawned
 
 

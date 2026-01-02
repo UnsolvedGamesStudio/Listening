@@ -6,7 +6,7 @@
 script = ExtResource("1_l4l7f")
 name = "One Mind"
 author = "RedFlagDiver"
-file_path = "res://assets/music/one_mind.ogg"
+file_path = "res://assets/music/beat_only.ogg"
 chords_midi_path = "res://assets/music/chord_midis/one_mind_chords.mid"
 key = "B Minor"
 metadata/_custom_type_script = "uid://cm2xsueacjqna"

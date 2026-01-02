@@ -1,8 +1,8 @@
 extends AudioStreamPlayer
 ## Todo: Make played octave relative to a default rather than copying the midi
 ## Todo: Make score damage mult have dimin returns
+@onready var timing_checker: Node = %TimingChecker
 @onready var beat_timer: BeatTimer = %BeatTimer
-@onready var circle_beat_timer: CircleBeatTimer = %CircleBeatTimer
 @onready var rhythm_notifier: RhythmNotifier = %RhythmNotifier
 @onready var midi_player: MidiPlayer = %MidiPlayer
 @onready var sampler_instrument: SamplerInstrument = %SamplerInstrument
@@ -12,6 +12,7 @@ extends AudioStreamPlayer
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var non_beat_bgm: AudioStreamPlayer = %NonBeatBGM
 @onready var chord_timing: Timer = %ChordTiming
+
 
 var combo_label: ComboManager
 var beat_visualizer: CanvasLayer
@@ -75,7 +76,6 @@ func stop_song():
 func init_song_data():
 	stream = load(current_song_data.file_path)
 	beat_timer.bpm = current_song_data.bpm
-	circle_beat_timer.bpm = current_song_data.bpm
 	midi_player.file = current_song_data.chords_midi_path
 	volume_db = current_song_data.volume
 
@@ -270,9 +270,6 @@ func check_accuracy(punished_for_bad_timing:= false):
 		if area.owner is TimingCircle:
 			circle = area.owner
 	
-	if circles_are_in == false:
-		accuracy = check_silent_timing()
-	
 	if not accuracy == "missed":
 		Bus.beat_success.emit(level)
 	
@@ -286,27 +283,6 @@ func check_accuracy(punished_for_bad_timing:= false):
 		Bus.beat_failure.emit()
 	
 	beat_visualizer.generate_text(accuracy)
-	return accuracy
-
-
-func check_silent_timing():
-	var window: float = rhythm_notifier.beat_length
-	var accuracy:= "missed"
-	
-	var easy_timing = Bgm.rhythm_notifier.current_position > (last_timing - (window / 2.9) ) and\
-	Bgm.rhythm_notifier.current_position < (last_timing + (window / 2.9) )
-	var medium_timing = Bgm.rhythm_notifier.current_position > (last_timing - (window / 3.8) ) and\
-	Bgm.rhythm_notifier.current_position < (last_timing + (window / 3.8) )
-	var perfect_timing = Bgm.rhythm_notifier.current_position > (last_timing - (window / 4.5) ) and\
-	Bgm.rhythm_notifier.current_position < (last_timing + (window / 4.5) )
-	
-	if easy_timing:
-		accuracy = "easy"
-	if medium_timing:
-		accuracy = "medium"
-	if perfect_timing:
-		accuracy = "perfect"
-	
 	return accuracy
 
 
@@ -339,18 +315,16 @@ func play_kick():
 	kick.play()
 
 
-func check_real_timing():
-	last_timing = rhythm_notifier.current_position
-
-
-func on_beat(beat_index):
+func on_beat(beat_index, is_catch_up: bool):
 	if Vars.paused == false:
 		beat_count += 1
-	
-	check_real_timing()
 	
 	Bus.beat.emit(beat_count)
 
 
-func on_sub_tick(sub_index):
-	Bus.sub_tick.emit(beat_count)
+func on_sub_tick(sub_index, is_catch_up: bool):
+	@warning_ignore("integer_division")
+	if sub_index % (beat_timer.SUBDIVISIONS / 2) == 0:
+		Bus.half_beat.emit()
+	
+	Bus.sub_tick.emit(sub_index)
