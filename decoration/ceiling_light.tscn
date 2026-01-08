@@ -1,37 +1,96 @@
-[gd_scene load_steps=4 format=3 uid="uid://d4mdi2w55raag"]
+[gd_scene load_steps=10 format=3 uid="uid://d4mdi2w55raag"]
 
-[ext_resource type="PackedScene" uid="uid://bw8gqh3mcauhb" path="res://terrain/ceiling.tscn" id="1_fpt1a"]
+[ext_resource type="Script" uid="uid://b7a8s3us4ko23" path="res://decoration/ceiling_light.gd" id="1_7rvyx"]
+[ext_resource type="PackedScene" uid="uid://d0j4hrmx01ddb" path="res://decoration/decoration_behaviors/decoration_break.tscn" id="1_g7j5x"]
 [ext_resource type="Texture2D" uid="uid://dbyd2im7ned86" path="res://vfx/enemy_indicator.png" id="1_hr870"]
 [ext_resource type="Texture2D" uid="uid://leo0aoy1bf1i" path="res://decoration/textures/ceiling_light_gradient.tres" id="2_hr870"]
+[ext_resource type="Texture2D" uid="uid://rlyy1m78pc8g" path="res://decoration/textures/ceiling_light_crack.png" id="5_7rvyx"]
+[ext_resource type="AudioStream" uid="uid://bnov1gwnawvx7" path="res://assets/sfx/glass_break.wav" id="6_awhgx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7rvyx"]
+size = Vector3(1.15, 0.069910154, 1.15)
+
+[sub_resource type="Gradient" id="Gradient_awhgx"]
+offsets = PackedFloat32Array(0.023076924, 0.9846154)
+colors = PackedColorArray(0.16862746, 0.30588236, 0.58431375, 1, 0.05490196, 0.047058824, 0.047058824, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1ixn8"]
+gradient = SubResource("Gradient_awhgx")
+fill = 2
+fill_from = Vector2(0.50220263, 0.50220263)
+fill_to = Vector2(1, 1)
+repeat = 1
 
 [node name="CeilingLight" type="Node3D"]
+script = ExtResource("1_7rvyx")
 
-[node name="EdgeDecal" type="Decal" parent="."]
+[node name="DecorationBreak" parent="." instance=ExtResource("1_g7j5x")]
+collision_layer = 0
+collision_mask = 304
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DecorationBreak"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.948545, 0)
+shape = SubResource("BoxShape3D_7rvyx")
+
+[node name="Unbroken" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="EdgeDecal" type="Decal" parent="Unbroken"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.996758, 0)
 size = Vector3(1.65, 0.04, 1.65)
 texture_albedo = ExtResource("1_hr870")
 texture_normal = ExtResource("1_hr870")
 emission_energy = 0.0
-modulate = Color(0, 0.12833337, 0.22, 1)
+modulate = Color(0, 0.12941177, 0.21960784, 1)
 
-[node name="LightDecal" type="Decal" parent="."]
+[node name="LightDecal" type="Decal" parent="Unbroken"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.992992, 0)
 size = Vector3(1.5, 0.04, 1.5)
 texture_albedo = ExtResource("2_hr870")
 texture_emission = ExtResource("2_hr870")
 emission_energy = 2.37
 
-[node name="SpotLight3D" type="SpotLight3D" parent="LightDecal"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Unbroken/LightDecal"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.036955357, 0)
 light_energy = 1.7
 spot_range = 35.712395
 spot_angle = 57.20182
 
-[node name="OmniLight3D" type="OmniLight3D" parent="LightDecal"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Unbroken/LightDecal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1718111, 0)
 light_color = Color(0.81127083, 0.9999997, 0.9995714, 1)
 light_energy = 1.265
 omni_range = 8.155671
 
-[node name="Ceiling" parent="." instance=ExtResource("1_fpt1a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+[node name="Broken" type="Node3D" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="BreakDecal" type="Decal" parent="Broken"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.986714, 0)
+size = Vector3(1.5, 0.02, 1.5)
+texture_albedo = ExtResource("5_7rvyx")
+upper_fade = 2.7753633e-05
+lower_fade = 1e-05
+
+[node name="BrokenEdgeDecal" type="Decal" parent="Broken"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9942164, 0)
+size = Vector3(1.65, 0.04, 1.65)
+texture_albedo = ExtResource("1_hr870")
+modulate = Color(0, 0.12833337, 0.22, 1)
+upper_fade = 0.008449222
+lower_fade = 0.018749999
+
+[node name="BrokenLightDecal" type="Decal" parent="Broken"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.987855, 0)
+size = Vector3(1.5, 0.04, 1.5)
+texture_albedo = SubResource("GradientTexture2D_1ixn8")
+upper_fade = 0.008449225
+lower_fade = 0.01689845
+
+[node name="BreakSFX" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_awhgx")
+volume_db = 1.1
+pitch_scale = 1.36
+max_distance = 50.0

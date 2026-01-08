@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=4 uid="uid://bptiy4w2getxo"]
 
 [ext_resource type="Script" uid="uid://ri7ko3t1xlih" path="res://level_editor/level_editor.gd" id="1_nkg3k"]
-[ext_resource type="PackedScene" uid="uid://bxps6405tef61" path="res://Interactables/hypothalamus/hypothalamus.tscn" id="2_66nps"]
+[ext_resource type="PackedScene" uid="uid://du5ntj4wse8ga" path="res://Interactables/hypothalamus/ventral_tegmentum.tscn" id="2_66nps"]
 [ext_resource type="PackedScene" uid="uid://dsni4a2x3dlwl" path="res://pickups/dopamine/dopamine_pickup.tscn" id="2_i7bqf"]
 [ext_resource type="PackedScene" uid="uid://dilbsihag48bm" path="res://level_editor/tilemaps/objects_tilemap.tscn" id="2_tbfd6"]
 [ext_resource type="PackedScene" uid="uid://bt2bkedotxagp" path="res://level_editor/tilemaps/cells_tilemap.tscn" id="3_b8lnj"]

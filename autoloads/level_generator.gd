@@ -50,6 +50,7 @@ func generate(blueprint):
 	
 	blueprint.queue_free()
 	Bus.level_done_generating.emit()
+	Bus.level_layout_ready.emit()
 
 
 func update_floor_levels(blueprint_floor: BlueprintFloor):

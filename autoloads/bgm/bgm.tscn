@@ -1,9 +1,8 @@
-[gd_scene load_steps=19 format=4 uid="uid://dewfhmrag5pkp"]
+[gd_scene load_steps=18 format=4 uid="uid://dewfhmrag5pkp"]
 
 [ext_resource type="AudioStream" uid="uid://blbxn1c7hs7h" path="res://assets/music/reverie.ogg" id="1_4owoj"]
 [ext_resource type="Script" uid="uid://dbs7tn7suqlhg" path="res://autoloads/bgm/bgm.gd" id="2_vucbv"]
 [ext_resource type="Script" uid="uid://dos3qhffr4v0a" path="res://addons/rhythm_notifier/rhythm_notifier.gd" id="3_1oder"]
-[ext_resource type="Script" uid="uid://dom771oh6trig" path="res://autoloads/bgm/timing_requirements.gd" id="3_eqmcx"]
 [ext_resource type="Script" uid="uid://cyh71sgrflymr" path="res://autoloads/bgm/beat_timer.gd" id="3_j4ark"]
 [ext_resource type="Script" uid="uid://2ag1petdt53" path="res://addons/SimpleSampler/sampler_instrument.gd" id="5_syuoy"]
 [ext_resource type="Script" uid="uid://dtpmtwvvk0ac7" path="res://addons/SimpleSampler/sample_resource.gd" id="6_yq28d"]
@@ -73,10 +72,6 @@ stream = ExtResource("1_4owoj")
 volume_db = 14.312
 bus = &"BGM"
 script = ExtResource("2_vucbv")
-
-[node name="TimingChecker" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("3_eqmcx")
 
 [node name="BeatTimer" type="Node" parent="." node_paths=PackedStringArray("audio_player")]
 unique_name_in_owner = true

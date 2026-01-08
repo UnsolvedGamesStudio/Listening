@@ -24,10 +24,7 @@ func _process(delta: float) -> void:
 	
 	var target:= 0.0
 	
-	if SceneManager.loading_in_progress == true:
-		target = SceneManager.current_loading_progress + target_add
-	else:
-		target = 1.0
+	target = set_target_value()
 	
 	completion = move_toward(completion, target, delta * 2)
 	loading_circle.material.set_shader_parameter("progress", completion)
@@ -45,6 +42,16 @@ func _process(delta: float) -> void:
 		await disappear.animation_finished
 		Bus.loading_screen_finished.emit()
 		hide()
+
+
+func set_target_value():
+	#if SceneManager.active_scene_name == SceneManager.Scenes.LAYOUT:
+		#pass
+	
+	if SceneManager.loading_in_progress == true:
+		return SceneManager.current_loading_progress + target_add
+	else:
+		return 1.0
 
 
 func start():

@@ -8,6 +8,7 @@ class_name ShellObject
 @onready var timer: Timer = $Timer
 @onready var mesh_instance_3d: MeshInstance3D = %MeshInstance3D
 @onready var area_3d: Area3D = %Area3D
+@onready var broken_sfx: AudioStreamPlayer3D = %BrokenSFX
 @onready var created_sfx: AudioStreamPlayer3D = %CreatedSFX
 @onready var break_particles: CPUParticles3D = %BreakParticles
 
@@ -84,6 +85,7 @@ func update_break_state():
 
 
 func destroy():
+	broken_sfx.play()
 	break_particles.reparent(Find.layout())
 	break_particles.activate()
 	queue_free()

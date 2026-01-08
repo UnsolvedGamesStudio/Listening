@@ -17,7 +17,6 @@ gravity = Vector3(0, 98, 0)
 
 [node name="Main" type="Node" groups=["main_scene"]]
 script = ExtResource("1_jyhfs")
-scene_to_load = 1
 default_song = ExtResource("2_jyhfs")
 disable_loading_screen = true
 
@@ -41,7 +40,6 @@ script = ExtResource("4_o6xl0")
 
 [node name="DebugStressTester" type="Node" parent="."]
 script = ExtResource("5_tbgi4")
-enabled = true
 stress_main_thread_hitch = true
 stress_random_jitter = true
 

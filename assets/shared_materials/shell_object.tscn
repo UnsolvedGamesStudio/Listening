@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b63ny4wig2srm"]
+[gd_scene load_steps=11 format=3 uid="uid://b63ny4wig2srm"]
 
 [ext_resource type="PackedScene" uid="uid://b41hsxloqp0kp" path="res://abilities/shell/shield.tscn" id="1_1ct44"]
 [ext_resource type="Script" uid="uid://sq2yhhow1w67" path="res://assets/shared_materials/shell_object.gd" id="1_1nw6h"]
 [ext_resource type="AudioStream" uid="uid://f8fo4fd7ydmy" path="res://assets/sfx/ice_shell_sfx.ogg" id="3_siw0y"]
+[ext_resource type="AudioStream" uid="uid://bnov1gwnawvx7" path="res://assets/sfx/glass_break.wav" id="4_oiog7"]
 [ext_resource type="Shader" uid="uid://ojon0136p0gr" path="res://abilities/shell/glass_shader.gdshader" id="4_r5wtn"]
 [ext_resource type="Script" uid="uid://dlyb1yqv3h6y8" path="res://vfx/cpu_particles.gd" id="5_t43dm"]
 
@@ -66,6 +67,13 @@ one_shot = true
 unique_name_in_owner = true
 stream = ExtResource("3_siw0y")
 volume_db = -1.553
+bus = &"SFX"
+
+[node name="BrokenSFX" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_oiog7")
+volume_db = -1.553
+pitch_scale = 1.44
 bus = &"SFX"
 
 [node name="BreakParticles" type="CPUParticles3D" parent="."]

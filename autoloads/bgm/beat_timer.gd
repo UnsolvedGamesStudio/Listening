@@ -13,19 +13,19 @@ const SUBDIVISIONS: int = 32
 @export var bpm: float = 120.0 ## Song's BPM
 @export var print_accuracy:= false ## Prints a benchmark
 
-# ---- Public state ----
+## Public state
 var audio_pos: float = 0.0 ## Continuous playback time, corrected for latency and looping
-var beat_length: float = 0.0
+var beat_length: float = 0.5
 var sub_length: float = 0.0
 
 var current_beat_tick: int = -1
 var current_sub_tick: int = -1
 
-# ---- Internal ----
+## Internal
 var _last_emitted_sub_tick: int = -1
 var _last_stream: AudioStream
 
-# ---- Accuracy diagnostics (true beats only) ----
+## Accuracy diagnostics
 var _last_accuracy_beat:= -1
 var _max_error_ms:= 0.0
 var _avg_error_ms:= 0.0
@@ -115,9 +115,7 @@ func reset_playback_timing():
 	audio_pos = 0.0
 
 
-# -------------------------------------------------
-# Accuracy diagnostics (true beats only)
-# -------------------------------------------------
+## Accuracy diagnostics
 func _measure_beat_accuracy(beat_index: int) -> void:
 	if print_accuracy == false:
 		return

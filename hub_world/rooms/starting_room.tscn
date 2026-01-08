@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://mhegbsv55r4g"]
+[gd_scene load_steps=14 format=4 uid="uid://mhegbsv55r4g"]
 
 [ext_resource type="PackedScene" uid="uid://d3u7i3tehxhh6" path="res://terrain/cells/floor_cell.tscn" id="1_gsl5u"]
 [ext_resource type="PackedScene" uid="uid://c7wmmnca4o1dx" path="res://player/spawn_point.tscn" id="2_kd8b7"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://oqqdlvk5l7s8" path="res://hub_world/level_loader.tscn" id="4_kd8b7"]
 [ext_resource type="Resource" uid="uid://cpcv3aj6jdd1b" path="res://levels/data/level_1.tres" id="5_ihdwo"]
 [ext_resource type="Resource" uid="uid://chbob2ci0t1vb" path="res://levels/data/level_3.tres" id="6_aatpt"]
+[ext_resource type="PackedScene" uid="uid://du5ntj4wse8ga" path="res://Interactables/hypothalamus/ventral_tegmentum.tscn" id="6_xh2da"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_loyhd"]
 albedo_color = Color(0.036830127, 0.15851668, 0.1551865, 1)
@@ -97,7 +98,7 @@ _data = {
 [node name="StartingRoom" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("3_ihdwo")]
-transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, -2, -7.3313713e-06, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -7.3313713e-06, 0)
 
 [node name="FloorCell" parent="." instance=ExtResource("1_gsl5u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -119,6 +120,11 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 
 [node name="FloorCell18" parent="." instance=ExtResource("1_gsl5u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -7.3313713e-06, -2)
+
+[node name="FloorCell19" parent="." instance=ExtResource("1_gsl5u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -7.3313713e-06, -6)
+
+[node name="VentralTegmentum" parent="FloorCell19" instance=ExtResource("6_xh2da")]
 
 [node name="Level3Cell" parent="." instance=ExtResource("1_gsl5u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -7.3313713e-06, -4)

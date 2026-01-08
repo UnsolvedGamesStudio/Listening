@@ -21,7 +21,7 @@ var walls: Dictionary = {
 
 
 func _ready() -> void:
-	await Bus.level_done_generating
+	await Bus.level_layout_ready
 	
 	cell_collision.area_entered.connect(on_area_entered)
 	cell_collision.area_exited.connect(on_area_exited)
@@ -57,7 +57,7 @@ func is_valid_occupant(occupant: Node):
 	if occupant is Enemy:
 		return true 
 	
-	if occupant is Obstacle:
+	if occupant.is_in_group("obstacle"):
 		return true 
 	
 	return false

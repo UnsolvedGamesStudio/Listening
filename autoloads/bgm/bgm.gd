@@ -1,7 +1,6 @@
 extends AudioStreamPlayer
 ## Todo: Make played octave relative to a default rather than copying the midi
 ## Todo: Make score damage mult have dimin returns
-@onready var timing_checker: Node = %TimingChecker
 @onready var beat_timer: BeatTimer = %BeatTimer
 @onready var rhythm_notifier: RhythmNotifier = %RhythmNotifier
 @onready var midi_player: MidiPlayer = %MidiPlayer

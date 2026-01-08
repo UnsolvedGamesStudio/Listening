@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0j4hrmx01ddb"]
+
+[ext_resource type="Script" uid="uid://6x4iy0rrrhig" path="res://decoration/decoration_behaviors/decoration_break.gd" id="1_isled"]
+
+[node name="DecorationBreak" type="Area3D"]
+script = ExtResource("1_isled")

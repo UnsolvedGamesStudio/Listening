@@ -67,6 +67,7 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	reset_vars()
+	
 	player_collision.area_entered.connect(on_player_collision_area_entered)
 	movement_raycast.target_position.z = -Vars.cell_size / 1.75
 	interact_range = Vars.cell_size * 10000
@@ -76,20 +77,22 @@ func _ready() -> void:
 	
 	move_to_cell_indicator.reparent(get_parent())
 	movement_raycast.reparent(get_parent())
+	
 	go_to_spawn()
+	
 	player_collision.get_child(0).disabled = false
 	Bus.player_moved.emit()
 
 
 func go_to_spawn():
 	var spawn_point:= get_tree().get_first_node_in_group("player_spawn")
-
+	
 	if spawn_point == null:
 		push_error(self, ": player spawn not set")
 		return
 	
 	global_position = spawn_point.global_position
-	global_rotation = spawn_point.global_rotation
+	neck.global_rotation.y = spawn_point.global_rotation.y
 
 
 func reset_vars():
@@ -111,11 +114,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	current_los_collider()
 	snap_rotations()
+	
 	if Input.is_action_pressed("forward") and can_act == true:
 		move_forward()
-	
-	if Input.is_action_just_pressed("forward") and can_act == true and is_moving == false:
-		Bus.beat_press_attempted.emit()
 	
 	if is_moving == true and player_sfx.steps.is_playing() == false:
 		player_sfx.steps.pitch_scale = randf_range(0.9, 1.1)
@@ -140,9 +141,8 @@ func camera_movement(event: InputEvent):
 	camera.rotate_x(-event.relative.y * (camera_speed / 12000.0))
 	player_collision.rotate_y(-event.relative.x * (camera_speed / 12000.0))
 	camera.rotation.x = clampf(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
-
-
-## Upside-down camera movement:
+	
+	## Upside-down camera movement:
 	#neck.rotate_y(event.relative.x * (camera_speed / 12000.0))
 	#camera.rotate_x(-event.relative.y * (camera_speed / 12000.0))
 	#player_collision.rotate_y(-event.relative.x * (camera_speed / 12000.0))
@@ -199,8 +199,6 @@ func heal(amount: float):
 
 
 func move_forward():
-	print(Bgm.timing_checker.valid_input(Bgm.timing_checker.TimeableInputs.MOVE))
-	
 	if is_moving == true:
 		return
 	
@@ -215,7 +213,7 @@ func move_forward():
 	is_moving = true
 	trigger_beat_check()
 	
-	var tween_length: float = (Bgm.beat_timer.beat_length * 1.8) / (movement_speed)
+	var tween_length: float = (1.8 * Bgm.beat_timer.beat_length) / (movement_speed)
 	var tween:= get_tree().create_tween()
 	
 	tween.tween_property(self, "global_position", target_cell.global_position, tween_length)
@@ -246,11 +244,12 @@ func check_impassable(cell: Node3D):
 		if not is_instance_valid(occupant):
 			return false
 		
-		if not "impassable" in occupant:
-			return false
-		
-		if occupant.impassable == true:
+		if occupant.is_in_group("obstacle"):
 			return true
+		
+		if "impassable" in occupant:
+			if occupant.impassable == true:
+				return true
 	
 	return false
 

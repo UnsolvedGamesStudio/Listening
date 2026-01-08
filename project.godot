@@ -91,6 +91,7 @@ blueprint_layout=""
 playable_level=""
 secret_room=""
 interact_tooltip=""
+obstacle=""
 
 [gui]
 
