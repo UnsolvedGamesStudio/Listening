@@ -16,6 +16,8 @@ func enter():
 	
 	original_position = global_position
 	
+	if SaveManager.position_collected("rememberer", original_position):
+		queue_free()
 
 
 func looked_at_by_player(on: bool):
@@ -32,7 +34,6 @@ func looked_at_by_player(on: bool):
 func activate():
 	if player_has_enough():
 		remembember_all_forgetters()
-		SaveManager.save_position("rememberer", global_position)
 	
 	else:
 		animation_player.play("bounce")

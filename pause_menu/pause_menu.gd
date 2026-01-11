@@ -2,7 +2,6 @@ extends CanvasLayer
 ## Todo: add a pause/unpause sigil
 ## Todo: add a tiny swipe clock to show when unpause will happen
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
-@onready var back_to_hub_button: Button = %BackToHubButton
 
 var waiting_for_beat:= false
 
@@ -26,8 +25,6 @@ func _input(event: InputEvent) -> void:
 
 
 func pause():
-	SceneManager.call_deferred("hide_node_in_hub", back_to_hub_button, SceneManager.Scenes.HUB_WORLD)
-	
 	animation_player.play("pop_in")
 	Filters.pause_shader_fade.play("fade_in")
 	await get_tree().create_timer(0.0, true, false, true).timeout
@@ -40,11 +37,7 @@ func pause():
 
 func unpause_attempt():
 	GlobalSfx.rewind.play()
-	#
-	#if Bgm.playing == true:
-		#waiting_for_beat = true
-		#return
-	#
+	
 	unpause()
 
 

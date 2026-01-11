@@ -1,5 +1,6 @@
 extends Node3D
 class_name Enemy
+## Todo: Make drop logic a universal behavior class, that can be populated via export, and triggered/triggering
 ## Todo: Before adding new enemies, make every enemy nothing but a collection of behavior nodes; whatever it takes to make every enemy self-sufficiant
 ## Todo: Add indication that enemy already dropped the synapse (and other similar cases) / hasn't dropped it yet
 ## Todo: Make collectible drops add themselves to stats (see music box)

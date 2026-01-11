@@ -92,6 +92,7 @@ func change_scene(scene_path: Scenes):
 	path_being_loaded = path
 	loading_in_progress = true
 	current_loading_progress = 0.0
+	last_loading_progress = 0.0
 	active_scene_name = scene_path
 	loading_thread_started.emit(scene_path)
 	ResourceLoader.load_threaded_request(path)

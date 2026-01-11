@@ -45,9 +45,6 @@ func _process(delta: float) -> void:
 
 
 func set_target_value():
-	#if SceneManager.active_scene_name == SceneManager.Scenes.LAYOUT:
-		#pass
-	
 	if SceneManager.loading_in_progress == true:
 		return SceneManager.current_loading_progress + target_add
 	else:
@@ -58,11 +55,12 @@ func start():
 	if get_tree().get_first_node_in_group("main_scene").disable_loading_screen:
 		return
 	
+	disappear.play("RESET")
 	show()
 	wobble.play("wobble")
 	dots_wobble.play("wobble")
 	completion = 0.0
 	target_add = 0.0
-	label.text = str(0)
+	label.text = str( roundi( min( 100.0, completion * 100.0 ) ) )
 	loading_circle.material.set_shader_parameter("progress", 0.0)
 	finished = false

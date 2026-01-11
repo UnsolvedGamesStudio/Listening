@@ -1,6 +1,6 @@
 extends Pickup
 class_name SynapsePickup
-
+## Todo: Add level name to save ID
 @onready var sfx: AudioStreamPlayer = %SFX
 
 var category:= "synapses"

@@ -15,6 +15,7 @@ func _ready() -> void:
 		write_save_data()
 	
 	load_save_data()
+	#load_on_start()
 	
 	Bus.game_lost.connect(on_game_lost)
 	Bus.loading_level.connect(on_loading_level)
@@ -115,9 +116,18 @@ func erase_all_save_data():
 	write_save_data()
 
 
+#func load_on_start():
+	#var data: Dictionary = read_save_data()
+	#
+	#if "synapses" in data:
+		#Vars.synapses = data["synapses"].size()
+	#
+	#if "neurons" in data:
+		#Vars.neurons = data["neurons"].size()
+
+
 func on_game_lost():
 	pass
-	
 
 
 func on_loading_level():

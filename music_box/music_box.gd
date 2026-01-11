@@ -49,6 +49,14 @@ func init_contents():
 		var inst_save_id:= save_id + "_" + str(i)
 		
 		if SaveManager.check_node_collected(object_inst, inst_save_id) == true:
+			if object_inst is SynapsePickup:
+				Vars.synapses += 1
+				Vars.total_synapses += 1
+		
+			if object_inst is NeuronPickup:
+				Vars.neurons += 1
+				Vars.total_neurons += 1
+			
 			object_inst.queue_free()
 			continue
 		

@@ -5,6 +5,7 @@ extends Node
 ## Todo: Make enemy id's customizable like the boxes etc
 ## Todo: Make a modifier tile that reveals another tile when affected enemies are defeated
 ## Todo: Make more things work from the "level ready" signal, rather than being called from other classes
+## Todo: Unify "object already saved" logic
 var main: MainScene
 var enabled:= true
 var current_blueprint: PackedScene
@@ -108,6 +109,14 @@ func generate_object_tiles(used_tiles: Array[Vector2i], layer: TileMapLayer, blu
 		var inst_save_id:= "%d_%d" % [tile.x, tile.y]
 		
 		if SaveManager.check_node_collected(scene_inst, inst_save_id) == true:
+			if scene_inst is SynapsePickup:
+				Vars.synapses += 1
+				Vars.total_synapses += 1
+			
+			if scene_inst is NeuronPickup:
+				Vars.neurons += 1
+				Vars.total_neurons += 1
+			
 			scene_inst.queue_free()
 			continue
 		
