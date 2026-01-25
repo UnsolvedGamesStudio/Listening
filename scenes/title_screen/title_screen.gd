@@ -4,5 +4,6 @@ extends Node3D
 
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	title_appear.play("appear")
 	Bgm.non_beat_bgm.play()

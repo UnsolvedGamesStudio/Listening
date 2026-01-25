@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ce10gkdeiprj7"]
+[gd_scene load_steps=22 format=3 uid="uid://ce10gkdeiprj7"]
 
 [ext_resource type="Script" uid="uid://bxbkaxat5hcgk" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://86r6xeju02bg" path="res://main_ui/main_ui.tscn" id="2_boad6"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://d262iiqxl5dvs" path="res://player/held_instrument_manager.gd" id="5_rgyib"]
 [ext_resource type="PackedScene" uid="uid://bkt3xpwbltnif" path="res://player/trigger_combo.tscn" id="7_hg6s5"]
 [ext_resource type="PackedScene" uid="uid://dbkojsebkkehc" path="res://player/abilities/shell_ability.tscn" id="9_8t03j"]
+[ext_resource type="Script" uid="uid://bh8kqg5fh2ynh" path="res://player/player_camera.gd" id="10_kb6p2"]
 [ext_resource type="PackedScene" uid="uid://cqty5ekbal6tr" path="res://player/player_sfx.tscn" id="12_ebec5"]
 [ext_resource type="PackedScene" uid="uid://cq12v0t8iygax" path="res://vfx/healing_particle_cloud.tscn" id="12_yllr7"]
 [ext_resource type="Texture2D" uid="uid://txm6cignwm3l" path="res://assets/camera_icon.png" id="13_yllr7"]
@@ -107,6 +108,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.642, 0)
 unique_name_in_owner = true
 cull_mask = 1048571
 current = true
+script = ExtResource("10_kb6p2")
 
 [node name="FakeCamera" type="Sprite3D" parent="Neck/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0033361912, 0)
@@ -141,7 +143,6 @@ visible = false
 collision_mask = 70
 hit_back_faces = false
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.282909, 0)

@@ -53,5 +53,7 @@ func remembember_all_forgetters():
 		
 		if forgetter.puzzle_id == puzzle_id:
 			forgetter.remember()
+		
+		SaveManager.save_position("rememberers", global_position)
 	
 	vanish()

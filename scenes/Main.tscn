@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c58klmnfg17b8"]
 
 [ext_resource type="Script" uid="uid://ddi8nw37cgvp1" path="res://scenes/main_scene.gd" id="1_jyhfs"]
-[ext_resource type="Resource" uid="uid://b5n752kaydvfi" path="res://assets/music/song_data/one_mind.tres" id="2_jyhfs"]
+[ext_resource type="Resource" uid="uid://b3cbgo4s0mytf" path="res://assets/music/song_data/reverie.tres" id="2_tefeu"]
 [ext_resource type="Texture2D" uid="uid://be7uvcmrgobq8" path="res://vfx/2d_particle.png" id="3_tefeu"]
 [ext_resource type="Script" uid="uid://duv71sufvwmty" path="res://scenes/cursor_manager.gd" id="4_o6xl0"]
 [ext_resource type="Script" uid="uid://cehyoy0pxx2ps" path="res://debug_nodes/debug_stress_tester.gd" id="5_tbgi4"]
@@ -17,7 +17,7 @@ gravity = Vector3(0, 98, 0)
 
 [node name="Main" type="Node" groups=["main_scene"]]
 script = ExtResource("1_jyhfs")
-default_song = ExtResource("2_jyhfs")
+default_song = ExtResource("2_tefeu")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -39,9 +39,6 @@ script = ExtResource("4_o6xl0")
 
 [node name="DebugStressTester" type="Node" parent="."]
 script = ExtResource("5_tbgi4")
-stress_main_thread_hitch = true
-stress_random_jitter = true
 
 [node name="PlayerCheats" type="Node" parent="."]
 script = ExtResource("6_tefeu")
-enabled = true

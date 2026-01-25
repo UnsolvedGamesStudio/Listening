@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b8wfatk83re85"]
 
-[ext_resource type="Texture2D" uid="uid://ltw5a023lpvh" path="res://instruments/textures/lute.png" id="1_2oggr"]
-[ext_resource type="Script" uid="uid://b8n0337li4v1b" path="res://instruments/held_instrument.gd" id="1_8c4sm"]
+[ext_resource type="Script" uid="uid://b8n0337li4v1b" path="res://instruments/held_instrument.gd" id="1_eynu5"]
+[ext_resource type="Texture2D" uid="uid://ltw5a023lpvh" path="res://instruments/textures/lute.png" id="2_ibo6n"]
 
 [sub_resource type="Animation" id="Animation_2oggr"]
 resource_name = "idle"
@@ -81,7 +81,7 @@ _data = {
 }
 
 [node name="HeldInstrument" type="CanvasLayer"]
-script = ExtResource("1_8c4sm")
+script = ExtResource("1_eynu5")
 
 [node name="ToMove" type="Node2D" parent="."]
 position = Vector2(288.13, 401.555)
@@ -89,7 +89,7 @@ position = Vector2(288.13, 401.555)
 [node name="Sprite2D" type="Sprite2D" parent="ToMove"]
 position = Vector2(-10.130004, 0)
 scale = Vector2(0.99999994, 0.99999994)
-texture = ExtResource("1_2oggr")
+texture = ExtResource("2_ibo6n")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

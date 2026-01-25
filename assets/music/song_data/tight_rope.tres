@@ -6,7 +6,6 @@
 script = ExtResource("1_6hb0r")
 name = "Tight Rope"
 author = "RedFlagDiver"
-volume = 15.0
 file_path = "res://assets/music/tight_rope.ogg"
 chords_midi_path = "res://assets/music/chord_midis/tight_rope_chords.mid"
 metadata/_custom_type_script = "uid://cm2xsueacjqna"

@@ -83,7 +83,11 @@ func _should_run_stressor(
 	stressor_key: int,
 	blanket_pressed: bool,
 	edge_triggered: bool = false
-) -> bool:
+	) -> bool:
+	
+	if not enabled:
+		return false
+	
 	if always_active or blanket_pressed:
 		return true
 
@@ -101,21 +105,27 @@ func _should_run_stressor(
 	return pressed
 
 
-# =================================================
 # Stressor implementations
-# =================================================
-
 func _apply_main_thread_hitch() -> void:
+	if not enabled:
+		return
+	
 	OS.delay_msec(main_thread_hitch_ms)
 
 
 func _apply_random_jitter() -> void:
+	if not enabled:
+		return
+	
 	if randf() < random_jitter_chance:
 		var ms := randi_range(random_jitter_min_ms, random_jitter_max_ms)
 		OS.delay_msec(ms)
 
 
 func _apply_restart_track() -> void:
+	if not enabled:
+		return
+	
 	if Bgm:
 		Bgm.play(0.0)
 

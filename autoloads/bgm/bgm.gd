@@ -12,9 +12,8 @@ extends AudioStreamPlayer
 @onready var non_beat_bgm: AudioStreamPlayer = %NonBeatBGM
 @onready var chord_timing: Timer = %ChordTiming
 
-
 var combo_label: ComboManager
-var beat_visualizer: CanvasLayer
+var beat_visualizer: BeatVisualizer
 
 var current_song_data: SongData
 
@@ -242,46 +241,46 @@ func check_accuracy(punished_for_bad_timing:= false):
 	if beat_visualizer == null:
 		return "perfect"
 	
-	var beat_area: Area2D = beat_visualizer.beat_area
-	var circle: TimingCircle
 	var accuracy:= "missed"
 	var level:= 0
 	
-	Bus.beat_press_attempted.emit()
-	for area in beat_area.get_overlapping_areas():
-		if not "difficulty" in area:
-			return accuracy
-		
-		if area.difficulty == "easy":
-			level = 1
-			accuracy = "easy"
-		
-		if area.difficulty == "medium":
-			level = 2
-			accuracy = "medium"
-		
-		if area.difficulty == "perfect":
-			level = 3
-			accuracy = "perfect"
-		
-		play_correct_chime(true)
-		
-		if area.owner is TimingCircle:
-			circle = area.owner
+	var easy_dist:= 10.5
+	var medium_dist:= 6.5
+	var perfect_dist:= 3.5
+	
+	var closest_results: Array = beat_visualizer.get_closest_circle()
+	
+	var closest_circle: TimingCircle = closest_results[0]
+	var circle_dist: float = closest_results[1]
+	
+	if circle_dist <= easy_dist:
+		accuracy = "easy"
+		level = 1
+	
+	if circle_dist <= medium_dist:
+		level = 2
+		accuracy = "medium"
+	
+	if circle_dist <= perfect_dist:
+		level = 3
+		accuracy = "perfect"
+	
+	beat_visualizer.generate_text(accuracy)
 	
 	if not accuracy == "missed":
+		play_correct_chime(true)
 		Bus.beat_success.emit(level)
-	
-	if not accuracy == "missed" and circles_are_in == true:
-		Vars.last_activated_circle = circle
-		circle.deactivate_zones()
-		circle.recolor(level)
+		Vars.last_activated_circle = closest_circle
+		closest_circle.recolor(level)
+		
+		var player: Player = Find.P()
+		if player:
+			player.camera.forward_zoom_fx(0.03 * (level * 0.5), 0.3)
 	
 	if accuracy == "missed" and punished_for_bad_timing == true:
 		play_correct_chime(false)
 		Bus.beat_failure.emit()
 	
-	beat_visualizer.generate_text(accuracy)
 	return accuracy
 
 

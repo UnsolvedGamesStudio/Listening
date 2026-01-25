@@ -49,7 +49,6 @@ var floor_heights: Dictionary[int, float] = {} ## Floor number : Floor height
 var combo:= 0
 var score:= 0.0
 var beat_circle_offset:= 0.0
-var active_circles: Array[TimingCircle] = []
 var last_activated_circle: TimingCircle
 var in_timing_window:= false
 
@@ -81,15 +80,16 @@ func reset():
 	cell_nodes.clear()
 	floor_heights.clear()
 	player_cell = null
+	
 	combo = 0
 	score = 0.0
-	active_circles.clear()
+	
 	last_activated_circle = null
 	element_container.clear()
 	last_element = "none"
 	living_enemies.clear()
 	synapses = SaveManager.get_collected_amount("synapses")
-	total_synapses = SaveManager.get_collected_amount("synapses")
+	total_synapses = 0
 	neurons = SaveManager.get_collected_amount("neurons")
-	total_neurons = SaveManager.get_collected_amount("neurons")
+	total_neurons = 0
 	inventory.clear()

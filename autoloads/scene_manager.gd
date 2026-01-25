@@ -89,20 +89,32 @@ func change_scene(scene_path: Scenes):
 	if first_load == true:
 		first_load = false
 	
+	Vars.reset()
+	
 	path_being_loaded = path
 	loading_in_progress = true
 	current_loading_progress = 0.0
 	last_loading_progress = 0.0
 	active_scene_name = scene_path
 	loading_thread_started.emit(scene_path)
+	
 	ResourceLoader.load_threaded_request(path)
 	
 	if needs_loading_screen(active_scene_name) and LoadingScreen.finished == true:
 		LoadingScreen.start()
 
 
+func reload_level():
+	change_scene(active_scene_name)
+
+
 func _instantiate_after_loading():
 	var packed_scene: PackedScene = ResourceLoader.load_threaded_get(path_being_loaded)
+	
+	_remove_previous_scene()
+	
+	if active_scene_instance:
+		await active_scene_instance.tree_exited
 	
 	if needs_loading_screen(active_scene_name) and LoadingScreen.finished == false:
 		await Bus.loading_screen_finished
@@ -113,7 +125,6 @@ func _instantiate_after_loading():
 		push_error("PackedScene: ", path_being_loaded, " is null after loading")
 		return
 	
-	_remove_previous_scene()
 	
 	var scene_inst: Node = packed_scene.instantiate()
 	

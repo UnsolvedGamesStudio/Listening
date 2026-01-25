@@ -88,7 +88,7 @@ script = ExtResource("1_2bm64")
 position = Vector2(288.13, 401.555)
 
 [node name="Sprite2D" type="Sprite2D" parent="ToMove"]
-position = Vector2(-10.130004, 0)
+position = Vector2(-10.130004, -11.554991)
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("2_qu1if")
 
@@ -97,4 +97,3 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_8c4sm")
 }
-autoplay = "idle"

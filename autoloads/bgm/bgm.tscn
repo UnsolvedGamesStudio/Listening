@@ -69,8 +69,9 @@ _data = {
 [node name="BGM" type="AudioStreamPlayer"]
 process_mode = 3
 stream = ExtResource("1_4owoj")
-volume_db = 14.312
+volume_db = -80.0
 bus = &"BGM"
+parameters/looping = true
 script = ExtResource("2_vucbv")
 
 [node name="BeatTimer" type="Node" parent="." node_paths=PackedStringArray("audio_player")]

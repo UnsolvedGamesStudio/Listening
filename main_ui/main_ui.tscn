@@ -286,14 +286,14 @@ justification_flags = 0
 script = ExtResource("2_5q6g2")
 
 [node name="PauseHint" type="Label" parent="MarginContainer/Middle"]
-modulate = Color(1, 1, 1, 0.6745098)
+modulate = Color(1, 1, 1, 0.5647059)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_fonts/font = SubResource("FontVariation_euac6")
 theme_override_font_sizes/font_size = 7
 text = "Press ESC
-to see controls"
+to see controls and spells"
 horizontal_alignment = 1
 
 [node name="Right" type="VBoxContainer" parent="MarginContainer"]

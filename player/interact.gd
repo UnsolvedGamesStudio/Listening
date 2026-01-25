@@ -10,13 +10,14 @@ var reticle: TextureRect
 
 var P: Player
 
-enum HintNames {INTERACT, PICK_UP, REMEMBER, UNLOCK, OPEN}
+enum HintNames {INTERACT, PICK_UP, REMEMBER, UNLOCK, OPEN, REPLENISH}
 var hints: Dictionary[HintNames, String] = {
 	HintNames.INTERACT : "Interact",
 	HintNames.PICK_UP : "Pick up",
 	HintNames.REMEMBER : "Remember",
 	HintNames.UNLOCK : "Unlock",
 	HintNames.OPEN : "Open",
+	HintNames.REPLENISH : "Replenish dopamine",
 }
 
 var tooltip: Label
@@ -69,12 +70,15 @@ func interact():
 
 
 func get_collider():
-	var collider: Area3D = P.current_los_collider()
+	var collider = P.current_los_collider()
 	
 	if collider == null:
 		return
 	
-	var object: = collider.owner
+	if not collider.owner is Node3D:
+		return
+	
+	var object: Node3D = collider.owner
 	
 	if check_distance(object) >= Vars.interact_range:
 		return
@@ -120,6 +124,9 @@ func get_tooltip_key(object: Node) -> String:
 	
 	if object is MusicBox:
 		returned_string = hints[HintNames.OPEN]
+	
+	if object is DopamineReplenisher:
+		returned_string = hints[HintNames.REPLENISH]
 	
 	return returned_string
 

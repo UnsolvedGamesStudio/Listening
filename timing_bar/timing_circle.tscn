@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0tfafh16tflf"]
+[gd_scene load_steps=8 format=3 uid="uid://d0tfafh16tflf"]
 
 [ext_resource type="Shader" uid="uid://d3vol50xhipt" path="res://timing_bar/outline.gdshader" id="1_4mav4"]
 [ext_resource type="Texture2D" uid="uid://bvo01f3ho371s" path="res://timing_bar/textures/timing_circle.png" id="1_476gq"]
 [ext_resource type="Script" uid="uid://lqwfrw88w54v" path="res://timing_bar/timing_circle.gd" id="2_3qkbb"]
-[ext_resource type="Script" uid="uid://dft4gp0t0pod4" path="res://timing_bar/timing_circle_zone.gd" id="3_yo2ja"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4mav4"]
 resource_local_to_scene = true
@@ -11,15 +10,6 @@ shader = ExtResource("1_4mav4")
 shader_parameter/clr = Color(0, 0.025840001, 0, 0)
 shader_parameter/type = 1
 shader_parameter/thickness = 2.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_tjtfn"]
-radius = 13.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_yo2ja"]
-radius = 6.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_4mav4"]
-radius = 2.0
 
 [sub_resource type="Animation" id="Animation_yo2ja"]
 resource_name = "enter"
@@ -109,47 +99,11 @@ _data = {
 &"exit": SubResource("Animation_4mav4")
 }
 
-[node name="TimingCircle" type="Sprite2D"]
+[node name="TimingCircle" type="Sprite2D" groups=["timing_circle"]]
 modulate = Color(1, 1, 1, 0)
 material = SubResource("ShaderMaterial_4mav4")
 texture = ExtResource("1_476gq")
-offset = Vector2(-36, -18)
 script = ExtResource("2_3qkbb")
-
-[node name="Zones" type="Node2D" parent="."]
-unique_name_in_owner = true
-
-[node name="EasyZone" type="Area2D" parent="Zones"]
-unique_name_in_owner = true
-script = ExtResource("3_yo2ja")
-difficulty = "easy"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/EasyZone"]
-shape = SubResource("CircleShape2D_tjtfn")
-debug_color = Color(0, 0.6313726, 0.4862745, 0)
-
-[node name="MediumZone" type="Area2D" parent="Zones"]
-unique_name_in_owner = true
-script = ExtResource("3_yo2ja")
-difficulty = "medium"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/MediumZone"]
-shape = SubResource("CircleShape2D_yo2ja")
-debug_color = Color(0, 0.6, 0.69803923, 0)
-
-[node name="PerfectZone" type="Area2D" parent="Zones"]
-unique_name_in_owner = true
-script = ExtResource("3_yo2ja")
-difficulty = "perfect"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Zones/PerfectZone"]
-shape = SubResource("CircleShape2D_4mav4")
-debug_color = Color(0.9011016, 0.3098072, 0, 0)
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-unique_name_in_owner = true
-z_index = -1
-rect = Rect2(-8, -8, 16, 16)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

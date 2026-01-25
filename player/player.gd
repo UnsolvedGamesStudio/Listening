@@ -6,7 +6,7 @@ class_name Player
 ## Todo: Make held instrument go up when camera goes way down
 ## Todo: Make an enum+dict that stores all the actions the player can take, and whether they are enabled
 ## Todo: Consolidate what should be in here or Vars
-@onready var camera: Camera3D = %Camera3D
+@onready var camera: PlayerCamera = %Camera3D
 @onready var neck: Node3D = %Neck
 @onready var player_collision: Area3D = %PlayerCollision
 @onready var enemy_aim_point: Marker3D = %EnemyAimPoint
@@ -124,6 +124,9 @@ func _physics_process(delta: float) -> void:
 	
 	if is_moving == false:
 		player_sfx.steps.stop()
+	
+	if Input.is_key_pressed(Key.KEY_B):
+		print_orphan_nodes()
 
 
 func snap_rotations():

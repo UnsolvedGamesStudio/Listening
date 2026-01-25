@@ -59,12 +59,24 @@ text = "Restart Level
 script = ExtResource("2_lggc6")
 type = 2
 
+[node name="HubWorldButton2" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(100.215, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 14
+text = "Back to Hub
+"
+script = ExtResource("2_lggc6")
+type = 3
+hide_in_hub = true
+
 [node name="ExitButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
 process_mode = 3
 custom_minimum_size = Vector2(100.215, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 14
-text = "Exit Game"
+text = "Save and Exit"
 script = ExtResource("2_lggc6")
 type = 1

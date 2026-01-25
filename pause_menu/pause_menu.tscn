@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dohwuclbdrfh1"]
+[gd_scene load_steps=22 format=3 uid="uid://dohwuclbdrfh1"]
 
 [ext_resource type="Script" uid="uid://drn422cycc5qn" path="res://pause_menu/offset_slider.gd" id="1_5hbt6"]
 [ext_resource type="Script" uid="uid://d2xrtoqxe8yqr" path="res://pause_menu/pause_menu.gd" id="1_uwtdo"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://be7uvcmrgobq8" path="res://vfx/2d_particle.png" id="9_1nv8k"]
 [ext_resource type="Script" uid="uid://cweq5gdx57r0c" path="res://pause_menu/sound_slider.gd" id="9_p6csp"]
 [ext_resource type="Texture2D" uid="uid://b05g5frto8yrd" path="res://pause_menu/textures/sfx_icon.png" id="9_teyq6"]
+[ext_resource type="Script" uid="uid://rlqupgwibvlo" path="res://pause_menu/zoom_setting_button.gd" id="10_ja1mc"]
 
 [sub_resource type="FontVariation" id="FontVariation_cux0y"]
 base_font = ExtResource("2_wn31l")
@@ -59,7 +60,8 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b4s0c"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ja1mc"]
+content_margin_left = 7.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="Animation" id="Animation_uwtdo"]
@@ -280,6 +282,18 @@ theme_override_styles/hover = ExtResource("3_qi88y")
 text = "Resume"
 script = ExtResource("2_rd7dy")
 
+[node name="ResumeButton2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_behavior_recursive = 1
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 7
+theme_override_styles/normal = ExtResource("3_b0obc")
+theme_override_styles/hover = ExtResource("3_qi88y")
+text = "Back to Hub"
+script = ExtResource("2_rd7dy")
+type = 3
+hide_in_hub = true
+
 [node name="ExitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 focus_behavior_recursive = 1
@@ -293,7 +307,7 @@ type = 1
 
 [node name="CheatButtonContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_b4s0c")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ja1mc")
 
 [node name="Label" type="Label" parent="VBoxContainer/CheatButtonContainer"]
 layout_mode = 2
@@ -303,12 +317,33 @@ text = "Toggle invincibility"
 [node name="CheatButton" type="CheckButton" parent="VBoxContainer/CheatButtonContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 4
 focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_override_colors/button_checked_color = Color(0.83137256, 0.5019608, 0.73333335, 1)
 theme_override_colors/button_unchecked_color = Color(0.38, 0.566, 1, 1)
 action_mode = 0
 script = ExtResource("4_b4s0c")
+
+[node name="ZoomButtonContainer2" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ja1mc")
+
+[node name="Label" type="Label" parent="VBoxContainer/ZoomButtonContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 7
+text = "Disable zoom effect"
+
+[node name="ZoomButton" type="CheckButton" parent="VBoxContainer/ZoomButtonContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/button_checked_color = Color(0.83137256, 0.5019608, 0.73333335, 1)
+theme_override_colors/button_unchecked_color = Color(0.38, 0.566, 1, 1)
+action_mode = 0
+script = ExtResource("10_ja1mc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

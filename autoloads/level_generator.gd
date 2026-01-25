@@ -110,11 +110,9 @@ func generate_object_tiles(used_tiles: Array[Vector2i], layer: TileMapLayer, blu
 		
 		if SaveManager.check_node_collected(scene_inst, inst_save_id) == true:
 			if scene_inst is SynapsePickup:
-				Vars.synapses += 1
 				Vars.total_synapses += 1
 			
 			if scene_inst is NeuronPickup:
-				Vars.neurons += 1
 				Vars.total_neurons += 1
 			
 			scene_inst.queue_free()

@@ -31,6 +31,9 @@ func _ready() -> void:
 
 
 func on_level_layout_ready():
+	cell_to_id.clear()
+	id_to_cell.clear()
+	
 	# Generate all cells
 	for cell in get_tree().get_nodes_in_group("cell"):
 		add_cell(cell.global_position)
@@ -168,6 +171,9 @@ func can_connect(a_pos: Vector3, b_pos: Vector3, ignore_occupants: Array) -> boo
 	
 	var a_cell = get_cell_node(a_pos)
 	var b_cell = get_cell_node(b_pos)
+	
+	if not a_cell or not b_cell:
+		return false
 	
 	if b_cell.is_cell_blocked(ignore_occupants):
 		return false

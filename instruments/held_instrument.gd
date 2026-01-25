@@ -6,7 +6,13 @@ class_name HeldInstrument
 @export var sample: NoteSample = preload("res://assets/samples/lute_sample.tres")
 @export_range(-80.0, 80.0) var volume_db:= 0.0
 
+@export var look_offset_pixels := 60
+
+var sprite: Node2D
 var player: Player
+
+var base_y := 0.0
+var look_offset := 0.0
 
 
 func _ready() -> void:
@@ -14,10 +20,34 @@ func _ready() -> void:
 		push_error(self, ": Player not found")
 		queue_free()
 	
+	sprite = get_node_or_null("ToMove/Sprite2D")
+	if sprite:
+		base_y = sprite.position.y
+	
 	Bus.player_cast.connect(on_player_cast)
 
 
-func animate_played(elements: Array[int] = []):
+func _process(delta: float) -> void:
+	adapt_to_camera(delta)
+
+
+func adapt_to_camera(delta: float) -> void:
+	if not sprite:
+		return
+	
+	var camera: Camera3D = player.camera
+	var pitch:= camera.rotation.x
+	
+	var normalized:= -pitch / (PI / 2.0)  # [-1, 1]
+	
+	var target:= -normalized * look_offset_pixels
+	
+	look_offset = target
+	
+	sprite.position.y = base_y + look_offset
+
+
+func animate_played(elements: Array[int] = []) -> void:
 	animation_player.stop()
 	if elements == []:
 		animation_player.play("used_empty")
@@ -33,5 +63,5 @@ func animate_played(elements: Array[int] = []):
 		animation_player.play("idle")
 
 
-func on_player_cast(elements: Array[int], success: String = "missed"):
+func on_player_cast(elements: Array[int], success: String = "missed") -> void:
 	animate_played(elements)

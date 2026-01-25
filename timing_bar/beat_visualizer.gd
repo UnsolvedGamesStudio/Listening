@@ -6,13 +6,14 @@ const RANK_LABEL = preload("uid://6w4l5x6wfeyn")
 
 @onready var timing_bar: TextureRect = %TimingBar
 @onready var beat_activator: Sprite2D = %BeatActivator
-@onready var beat_area: Area2D = %BeatArea
+#@onready var beat_area: Area2D = %BeatArea
 @onready var beat_activator_anim: AnimationPlayer = %BeatActivatorAnim
 @onready var succes_label_container: Panel = %SuccesLabelContainer
 
 @export_range(1, 10) var height:= 0.0
 
 var last_spawned_beat := -1
+var travel_to_middle_duration:= 2.4
 
 
 func _ready() -> void:
@@ -46,8 +47,6 @@ func spawn_circle_for_beat(beat_idx: int) -> void:
 	circle.setup_for_beat(target_beat_time)
 	
 	Bus.circle_spawned.emit()
-	
-	Vars.active_circles.append(circle)
 
 
 func set_circle_values_for_appropriate_beat(circle_inst: TimingCircle, start_offset: float = 0.0) -> void:
@@ -77,8 +76,6 @@ func generate_circle_for_next_beat(start_offset: float = 0.0):
 	add_child(circle_inst)
 	set_circle_values_for_appropriate_beat(circle_inst, start_offset)
 	Bus.circle_spawned.emit()
-	
-	Vars.active_circles.append(circle_inst)
 
 
 func get_middle_of_screen():
@@ -88,19 +85,57 @@ func get_middle_of_screen():
 func pop_out_beat_activator():
 	beat_activator_anim.play("pop_out")
 
+## [closest circle, distance from middle]
+func get_closest_circle() -> Array:
+	var closest : Node2D = null
+	var closest_distance : float = INF
+	var to_position : Vector2 = beat_activator.global_position
+	
+	var returned_array:= []
+	var circles:= get_tree().get_nodes_in_group("timing_circle")
+	
+	for circle: TimingCircle in circles:
+		var distance : float = to_position.distance_to(circle.global_position)
+		
+		if distance < closest_distance:
+			closest = circle
+			returned_array = [closest, distance]
+			closest_distance = distance
+	
+	return returned_array
+
+
+#func find_closest_child(parent : Node, to : Node2D) -> Node2D:
+	#var closest : Node2D = null
+	#var closest_distance : float = INF
+	#var to_position : Vector2 = to.global_position
+#
+	#for node : Node2D in parent.get_children():
+		#if node == to:
+			#continue
+		#var distance : float = to_position.distance_squared_to(node.global_position)
+		#if distance < closest_distance:
+			#closest = node
+			#closest_distance = distance
+	#
+	#return closest
+
 
 func generate_text(accuracy: String):
 	var text_inst:= RANK_LABEL.instantiate()
 	var text:= ""
 	
+	if accuracy == "missed":
+		text = "Not quite..."
+	
 	if accuracy == "easy":
-		text = "OK..."
+		text = "Adequate."
 	
 	if accuracy == "medium":
-		text = "Nice."
+		text = "Lovely."
 	
 	if accuracy == "perfect":
-		text = "Perfect!"
+		text = "Splendid!"
 	
 	text_inst.text = str(text)
 	succes_label_container.add_child(text_inst)
@@ -113,14 +148,13 @@ func on_beat_press_attempted():
 func on_beat(_beat_count: int, is_catch_up) -> void:
 	var now : float = Bgm.beat_timer.audio_pos
 	var beat_length : float = Bgm.beat_timer.beat_length
-	var beat_idx := int(floor(now / beat_length))
-
+	var beat_idx:= int(floor(now / beat_length))
+	
 	# How many beats ahead a circle must target to have time to travel to middle
-	var beats_ahead := int(ceil(TIMING_CIRCLE.instantiate().travel_to_middle_duration / beat_length))
-	# (Optional optimization: cache this value instead of instantiating. See note below.)
-
-	var target_idx := beat_idx + beats_ahead
-
+	var beats_ahead:= int(ceil(travel_to_middle_duration / beat_length))
+	
+	var target_idx:= beat_idx + beats_ahead
+	
 	while last_spawned_beat < target_idx:
 		last_spawned_beat += 1
 		spawn_circle_for_beat(last_spawned_beat)
