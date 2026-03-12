@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://kgpvtuwlbuwb"]
+[gd_scene format=3 uid="uid://kgpvtuwlbuwb"]
 
 [ext_resource type="Script" uid="uid://b8n0337li4v1b" path="res://instruments/held_instrument.gd" id="1_b8eu6"]
 [ext_resource type="Resource" uid="uid://dcdoc3ee51eao" path="res://assets/samples/carillon_sample.tres" id="2_ffltk"]
@@ -178,32 +178,30 @@ _data = {
 &"used_weak": SubResource("Animation_ca33o")
 }
 
-[node name="CarillonHeld" type="CanvasLayer"]
+[node name="CarillonHeld" type="CanvasLayer" unique_id=2033728796]
 layer = -1
 script = ExtResource("1_b8eu6")
 sample = ExtResource("2_ffltk")
 volume_db = -10.0
 
-[node name="ToMove" type="Node2D" parent="."]
+[node name="ToMove" type="Node2D" parent="." unique_id=843023897]
 position = Vector2(288.13, 401.555)
 
-[node name="Sprite2D" type="Node2D" parent="ToMove"]
+[node name="Sprite2D" type="Node2D" parent="ToMove" unique_id=1612553003]
 
-[node name="Shaft" type="Sprite2D" parent="ToMove/Sprite2D"]
+[node name="Shaft" type="Sprite2D" parent="ToMove/Sprite2D" unique_id=637581060]
 position = Vector2(-105.20099, -45.554993)
 scale = Vector2(0.9999999, 0.9999999)
 texture = ExtResource("2_pokfc")
 offset = Vector2(-1, -5)
 
-[node name="Carillon" type="Sprite2D" parent="ToMove/Sprite2D"]
+[node name="Carillon" type="Sprite2D" parent="ToMove/Sprite2D" unique_id=1863298890]
 position = Vector2(-105.2272, -80.57797)
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("3_ffltk")
 offset = Vector2(-0.9737854, 30.02298)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=899489717]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_fy1ww")
-}
-autoplay = "idle"
+libraries/ = SubResource("AnimationLibrary_fy1ww")
+autoplay = &"idle"

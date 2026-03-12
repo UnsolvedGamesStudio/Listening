@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://ct3ebunqf07ne"]
+[gd_resource type="TileSet" format=3 uid="uid://ct3ebunqf07ne"]
 
 [ext_resource type="PackedScene" uid="uid://b0qtdogq2osyf" path="res://terrain/cells/walled_cell.tscn" id="1_qis6s"]
 [ext_resource type="Texture2D" uid="uid://db0h4w7etjcx7" path="res://level_editor/textures/map_cell.png" id="2_p4nvn"]

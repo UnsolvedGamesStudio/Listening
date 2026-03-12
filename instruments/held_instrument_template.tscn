@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8wfatk83re85"]
+[gd_scene format=3 uid="uid://b8wfatk83re85"]
 
 [ext_resource type="Script" uid="uid://b8n0337li4v1b" path="res://instruments/held_instrument.gd" id="1_eynu5"]
 [ext_resource type="Texture2D" uid="uid://ltw5a023lpvh" path="res://instruments/textures/lute.png" id="2_ibo6n"]
@@ -80,20 +80,18 @@ _data = {
 &"used_weak": SubResource("Animation_ca33o")
 }
 
-[node name="HeldInstrument" type="CanvasLayer"]
+[node name="HeldInstrument" type="CanvasLayer" unique_id=694578526]
 script = ExtResource("1_eynu5")
 
-[node name="ToMove" type="Node2D" parent="."]
+[node name="ToMove" type="Node2D" parent="." unique_id=1525054649]
 position = Vector2(288.13, 401.555)
 
-[node name="Sprite2D" type="Sprite2D" parent="ToMove"]
+[node name="Sprite2D" type="Sprite2D" parent="ToMove" unique_id=790867098]
 position = Vector2(-10.130004, 0)
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("2_ibo6n")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1924092818]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_8c4sm")
-}
-autoplay = "idle"
+libraries/ = SubResource("AnimationLibrary_8c4sm")
+autoplay = &"idle"

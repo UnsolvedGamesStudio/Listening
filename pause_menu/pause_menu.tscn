@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dohwuclbdrfh1"]
+[gd_scene format=3 uid="uid://dohwuclbdrfh1"]
 
 [ext_resource type="Script" uid="uid://drn422cycc5qn" path="res://pause_menu/offset_slider.gd" id="1_5hbt6"]
 [ext_resource type="Script" uid="uid://d2xrtoqxe8yqr" path="res://pause_menu/pause_menu.gd" id="1_uwtdo"]
@@ -118,7 +118,7 @@ _data = {
 &"pop_out": SubResource("Animation_b4s0c")
 }
 
-[node name="PauseMenu" type="CanvasLayer"]
+[node name="PauseMenu" type="CanvasLayer" unique_id=813693664]
 process_mode = 3
 layer = 2
 offset = Vector2(0, 500)
@@ -127,7 +127,7 @@ script = ExtResource("1_uwtdo")
 metadata/_edit_horizontal_guides_ = [878.0, 650.0]
 metadata/_edit_vertical_guides_ = [512.0, 8.0, 504.0, 256.0]
 
-[node name="MarginContainer3" type="MarginContainer" parent="."]
+[node name="MarginContainer3" type="MarginContainer" parent="." unique_id=1093805448]
 process_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -140,7 +140,7 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 metadata/_edit_use_anchors_ = true
 
-[node name="Combos" type="PanelContainer" parent="."]
+[node name="Combos" type="PanelContainer" parent="." unique_id=251147023]
 process_mode = 2
 anchors_preset = -1
 anchor_left = 0.015625
@@ -152,7 +152,7 @@ size_flags_vertical = 2
 theme_override_styles/panel = ExtResource("3_qi88y")
 metadata/_edit_use_anchors_ = true
 
-[node name="CombosLabel" type="Label" parent="Combos"]
+[node name="CombosLabel" type="Label" parent="Combos" unique_id=1646250244]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/line_spacing = 0
@@ -177,7 +177,7 @@ Mad + Mad + Mad:
 Violence (20)"
 horizontal_alignment = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="."]
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=226424248]
 process_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -191,20 +191,19 @@ theme_override_constants/margin_bottom = 8
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
-[node name="Tutorial" type="PanelContainer" parent="MarginContainer2"]
+[node name="Tutorial" type="PanelContainer" parent="MarginContainer2" unique_id=147324903]
 process_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
 theme_override_styles/panel = ExtResource("3_qi88y")
 
-[node name="ControlsTutorialLabel" type="Label" parent="MarginContainer2/Tutorial"]
+[node name="ControlsTutorialLabel" type="Label" parent="MarginContainer2/Tutorial" unique_id=1665680096]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_wn31l")
 theme_override_font_sizes/font_size = 7
-text = "Press Tab to exit the game.
-Press A/S/D on beat to add elements to your emotion spell.
+text = "Press A/S/D on beat to add elements to your emotion spell.
 Press Left Click on beat to cast the created spell.
 Certain combos of elements create unique effects but
 consume dopamine (hold Shift to cast a projectile instead.)
@@ -212,7 +211,7 @@ Press W to go to the highlighted tile.
 Press Space to interact."
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1268995934]
 process_mode = 2
 custom_minimum_size = Vector2(200, 0)
 anchors_preset = -1
@@ -225,15 +224,15 @@ size_flags_vertical = 4
 theme_override_constants/separation = 5
 metadata/_edit_use_anchors_ = true
 
-[node name="OffsetSliderContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="OffsetSliderContainer" type="PanelContainer" parent="VBoxContainer" unique_id=1652957877]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("3_qi88y")
 script = ExtResource("1_5hbt6")
 
-[node name="Control" type="Control" parent="VBoxContainer/OffsetSliderContainer"]
+[node name="Control" type="Control" parent="VBoxContainer/OffsetSliderContainer" unique_id=1651576940]
 layout_mode = 2
 
-[node name="Line" type="ColorRect" parent="VBoxContainer/OffsetSliderContainer/Control"]
+[node name="Line" type="ColorRect" parent="VBoxContainer/OffsetSliderContainer/Control" unique_id=1015879447]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.38235295
@@ -241,16 +240,16 @@ anchor_right = 0.5054348
 anchor_bottom = 1.0882353
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/OffsetSliderContainer"]
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer/OffsetSliderContainer" unique_id=120843471]
 layout_mode = 2
 
-[node name="OffsetSliderLabel" type="Label" parent="VBoxContainer/OffsetSliderContainer/HBoxContainer"]
+[node name="OffsetSliderLabel" type="Label" parent="VBoxContainer/OffsetSliderContainer/HBoxContainer" unique_id=122336879]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 7
 text = "Beat Offset: 0ms"
 
-[node name="OffsetSlider" type="HSlider" parent="VBoxContainer/OffsetSliderContainer/HBoxContainer"]
+[node name="OffsetSlider" type="HSlider" parent="VBoxContainer/OffsetSliderContainer/HBoxContainer" unique_id=1630631546]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
@@ -272,7 +271,7 @@ tick_count = 25
 ticks_on_borders = true
 ticks_position = 2
 
-[node name="ResumeButton" type="Button" parent="VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="VBoxContainer" unique_id=1810206290]
 layout_mode = 2
 focus_behavior_recursive = 1
 mouse_default_cursor_shape = 2
@@ -282,7 +281,7 @@ theme_override_styles/hover = ExtResource("3_qi88y")
 text = "Resume"
 script = ExtResource("2_rd7dy")
 
-[node name="ResumeButton2" type="Button" parent="VBoxContainer"]
+[node name="ResumeButton2" type="Button" parent="VBoxContainer" unique_id=1419253129]
 layout_mode = 2
 focus_behavior_recursive = 1
 mouse_default_cursor_shape = 2
@@ -294,7 +293,7 @@ script = ExtResource("2_rd7dy")
 type = 3
 hide_in_hub = true
 
-[node name="ExitButton" type="Button" parent="VBoxContainer"]
+[node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=1180532732]
 layout_mode = 2
 focus_behavior_recursive = 1
 mouse_default_cursor_shape = 2
@@ -305,16 +304,16 @@ text = "Save and quit"
 script = ExtResource("2_rd7dy")
 type = 1
 
-[node name="CheatButtonContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="CheatButtonContainer" type="PanelContainer" parent="VBoxContainer" unique_id=927619332]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ja1mc")
 
-[node name="Label" type="Label" parent="VBoxContainer/CheatButtonContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/CheatButtonContainer" unique_id=1520403195]
 layout_mode = 2
 theme_override_font_sizes/font_size = 7
 text = "Toggle invincibility"
 
-[node name="CheatButton" type="CheckButton" parent="VBoxContainer/CheatButtonContainer"]
+[node name="CheatButton" type="CheckButton" parent="VBoxContainer/CheatButtonContainer" unique_id=1178727634]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
@@ -325,16 +324,16 @@ theme_override_colors/button_unchecked_color = Color(0.38, 0.566, 1, 1)
 action_mode = 0
 script = ExtResource("4_b4s0c")
 
-[node name="ZoomButtonContainer2" type="PanelContainer" parent="VBoxContainer"]
+[node name="ZoomButtonContainer2" type="PanelContainer" parent="VBoxContainer" unique_id=2081721879]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ja1mc")
 
-[node name="Label" type="Label" parent="VBoxContainer/ZoomButtonContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/ZoomButtonContainer2" unique_id=490367464]
 layout_mode = 2
 theme_override_font_sizes/font_size = 7
 text = "Disable zoom effect"
 
-[node name="ZoomButton" type="CheckButton" parent="VBoxContainer/ZoomButtonContainer2"]
+[node name="ZoomButton" type="CheckButton" parent="VBoxContainer/ZoomButtonContainer2" unique_id=1983053308]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
@@ -345,14 +344,12 @@ theme_override_colors/button_unchecked_color = Color(0.38, 0.566, 1, 1)
 action_mode = 0
 script = ExtResource("10_ja1mc")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2055676488]
 unique_name_in_owner = true
 process_mode = 3
-libraries = {
-&"": SubResource("AnimationLibrary_s1glv")
-}
+libraries/ = SubResource("AnimationLibrary_s1glv")
 
-[node name="VolumeSlidersContainer" type="PanelContainer" parent="."]
+[node name="VolumeSlidersContainer" type="PanelContainer" parent="." unique_id=604459104]
 process_mode = 2
 anchors_preset = -1
 anchor_left = 0.8691406
@@ -364,10 +361,10 @@ theme_override_styles/panel = ExtResource("3_qi88y")
 script = ExtResource("1_5hbt6")
 metadata/_edit_use_anchors_ = true
 
-[node name="Control" type="Control" parent="VolumeSlidersContainer"]
+[node name="Control" type="Control" parent="VolumeSlidersContainer" unique_id=623222375]
 layout_mode = 2
 
-[node name="Line" type="ColorRect" parent="VolumeSlidersContainer/Control"]
+[node name="Line" type="ColorRect" parent="VolumeSlidersContainer/Control" unique_id=114992316]
 layout_mode = 0
 anchor_left = -0.069767445
 anchor_top = 0.5
@@ -375,18 +372,18 @@ anchor_right = 1.0697675
 anchor_bottom = 0.5045872
 metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="VolumeSlidersContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VolumeSlidersContainer" unique_id=384248450]
 process_mode = 2
 layout_mode = 2
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="VolumeSliders" type="HBoxContainer" parent="VolumeSlidersContainer/MarginContainer"]
+[node name="VolumeSliders" type="HBoxContainer" parent="VolumeSlidersContainer/MarginContainer" unique_id=508015125]
 process_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 11
 
-[node name="MusicSlider" type="VSlider" parent="VolumeSlidersContainer/MarginContainer/VolumeSliders"]
+[node name="MusicSlider" type="VSlider" parent="VolumeSlidersContainer/MarginContainer/VolumeSliders" unique_id=1246986898]
 process_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
@@ -409,7 +406,7 @@ ticks_on_borders = true
 ticks_position = 2
 script = ExtResource("9_p6csp")
 
-[node name="SFXSlider" type="VSlider" parent="VolumeSlidersContainer/MarginContainer/VolumeSliders"]
+[node name="SFXSlider" type="VSlider" parent="VolumeSlidersContainer/MarginContainer/VolumeSliders" unique_id=277129824]
 process_mode = 2
 layout_mode = 2
 size_flags_vertical = 3

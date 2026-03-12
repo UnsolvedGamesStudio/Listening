@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://bqk51arvtg2x"]
+[gd_scene format=4 uid="uid://bqk51arvtg2x"]
 
 [ext_resource type="Script" uid="uid://dr2lkvinonh3v" path="res://scenes/title_screen/title_screen.gd" id="1_5df70"]
 [ext_resource type="Texture2D" uid="uid://bl01myg3ktmfp" path="res://scenes/title_screen/textures/title.png" id="2_ri6bm"]
@@ -52,6 +52,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xawky"]
+transparency = 4
 albedo_color = Color(0.92156863, 0, 0.5764706, 1)
 metallic = 0.75
 metallic_specular = 1.0
@@ -165,16 +166,16 @@ _data = {
 &"appear": SubResource("Animation_ri6bm")
 }
 
-[node name="TitleScreen" type="Node3D"]
+[node name="TitleScreen" type="Node3D" unique_id=303859074]
 script = ExtResource("1_5df70")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1766177674]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0561719, 0)
 light_energy = 8.938
 omni_range = 91.137
 omni_attenuation = 7.116
 
-[node name="Title" type="Sprite3D" parent="."]
+[node name="Title" type="Sprite3D" parent="." unique_id=2053124978]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.0829093, 0)
 layers = 2
 pixel_size = 0.04
@@ -185,26 +186,26 @@ texture_filter = 0
 render_priority = 1
 texture = ExtResource("2_ri6bm")
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+[node name="OmniLight3D2" type="OmniLight3D" parent="." unique_id=1230465237]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.356801, 0)
 light_energy = 16.0
 omni_range = 224.768
 omni_attenuation = 1.225
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+[node name="OmniLight3D3" type="OmniLight3D" parent="." unique_id=259901191]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8326879, -8.470681)
 light_energy = 16.0
 omni_range = 91.137
 omni_attenuation = 1.225
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1335817231]
 transform = Transform3D(1, 0, 0, 0, 1, -1.7484555e-07, 0, 1.7484555e-07, 1, 0, 24.769897, 0)
 light_energy = 3.729
 sky_mode = 1
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=333168246]
 
-[node name="WebDisclaimer" type="Label" parent="UI"]
+[node name="WebDisclaimer" type="Label" parent="UI" unique_id=1529455851]
 visible = false
 anchors_preset = -1
 anchor_left = 0.0234375
@@ -222,7 +223,7 @@ horizontal_alignment = 1
 script = ExtResource("3_d6x3v")
 metadata/_edit_use_anchors_ = true
 
-[node name="StartButton" type="Button" parent="UI"]
+[node name="StartButton" type="Button" parent="UI" unique_id=681983747]
 anchors_preset = -1
 anchor_left = 0.296875
 anchor_top = 0.51339287
@@ -245,7 +246,7 @@ text = "Start Game"
 script = ExtResource("2_vuv2h")
 metadata/_edit_use_anchors_ = true
 
-[node name="ResetButton" type="Button" parent="UI" node_paths=PackedStringArray("confirm_label")]
+[node name="ResetButton" type="Button" parent="UI" unique_id=1918373889 node_paths=PackedStringArray("confirm_label")]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = -1
 anchor_left = 0.015625
@@ -266,7 +267,7 @@ type = 4
 confirm_label = NodePath("ConfirmLabel")
 metadata/_edit_use_anchors_ = true
 
-[node name="ConfirmLabel" type="Label" parent="UI/ResetButton"]
+[node name="ConfirmLabel" type="Label" parent="UI/ResetButton" unique_id=2035288142]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -278,31 +279,27 @@ theme_override_font_sizes/font_size = 7
 text = "Save data erased."
 metadata/_edit_use_anchors_ = true
 
-[node name="SmallBrain" type="MeshInstance3D" parent="." groups=["small_brain"]]
+[node name="SmallBrain" type="MeshInstance3D" parent="." unique_id=648514916 groups=["small_brain"]]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_5df70")
 
-[node name="BigBrain" type="MeshInstance3D" parent="."]
+[node name="BigBrain" type="MeshInstance3D" parent="." unique_id=806602683]
 mesh = SubResource("ArrayMesh_xawky")
 
-[node name="CameraAxis" type="Node3D" parent="."]
+[node name="CameraAxis" type="Node3D" parent="." unique_id=1652886034]
 transform = Transform3D(0.9659256, 0, -0.25881898, 0, 1, 0, 0.25881898, 0, 0.9659256, 0, 0.8362484, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraAxis"]
+[node name="Camera3D" type="Camera3D" parent="CameraAxis" unique_id=59090818]
 transform = Transform3D(1, 0, 0, 0, 0.9918922, -0.12708193, 0, 0.12708193, 0.9918922, 0, -0.6378586, 3.1659017)
 current = true
 
-[node name="Spin" type="AnimationPlayer" parent="." groups=["spin_anim"]]
+[node name="Spin" type="AnimationPlayer" parent="." unique_id=1597887858 groups=["spin_anim"]]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_5uxxq")
-}
-autoplay = "spin"
+libraries/ = SubResource("AnimationLibrary_5uxxq")
+autoplay = &"spin"
 speed_scale = 0.5
 
-[node name="TitleAppear" type="AnimationPlayer" parent="."]
+[node name="TitleAppear" type="AnimationPlayer" parent="." unique_id=195072856]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_d6x3v")
-}
+libraries/ = SubResource("AnimationLibrary_d6x3v")
 speed_scale = 1.5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bb0is713hmgcy"]
+[gd_scene format=4 uid="uid://bb0is713hmgcy"]
 
 [ext_resource type="Script" uid="uid://b3k2nybafyb4y" path="res://hub_world/hub_world.gd" id="1_loyhd"]
 [ext_resource type="PackedScene" uid="uid://mhegbsv55r4g" path="res://hub_world/rooms/starting_room.tscn" id="2_h2nss"]
@@ -6,7 +6,7 @@
 
 [sub_resource type="Gradient" id="Gradient_loyhd"]
 offsets = PackedFloat32Array(0.26618704, 1)
-colors = PackedColorArray(1.6845763e-07, 0.21909505, 0.1846802, 1, 0.5711252, 0, 0.22518748, 1)
+colors = PackedColorArray(1.6845763e-07, 0.21909505, 0.1846802, 1, 0.54925424, 2.8878452e-07, 0.21540031, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_t1r5v"]
 gradient = SubResource("Gradient_loyhd")
@@ -17,13 +17,16 @@ repeat = 2
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_271a7"]
 panorama = SubResource("GradientTexture2D_t1r5v")
+energy_multiplier = 4.81
 
 [sub_resource type="Sky" id="Sky_6w4r1"]
 sky_material = SubResource("PanoramaSkyMaterial_271a7")
 
 [sub_resource type="Environment" id="Environment_h2nss"]
 background_mode = 2
+background_energy_multiplier = 1.28
 sky = SubResource("Sky_6w4r1")
+ambient_light_source = 3
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.024
 
@@ -118,44 +121,45 @@ _data = {
 &"fade_sound_in": SubResource("Animation_loyhd")
 }
 
-[node name="HubWorld" type="Node3D" groups=["hub_world", "playable_level"]]
+[node name="HubWorld" type="Node3D" unique_id=450930451 groups=["hub_world", "playable_level"]]
 script = ExtResource("1_loyhd")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=487855739]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.075575, 0)
+light_color = Color(0.67058825, 0.32941177, 0.4117647, 1)
+light_energy = 0.0
+light_specular = 11.765
+shadow_blur = 0.0
+sky_mode = 2
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=451106924]
 environment = SubResource("Environment_h2nss")
 
-[node name="StartingRoom" parent="." instance=ExtResource("2_h2nss")]
+[node name="StartingRoom" parent="." unique_id=5096815 instance=ExtResource("2_h2nss")]
 transform = Transform3D(0.9999975, -0.00179825, -0.0013325372, 0.0017965839, 0.9999976, -0.0012554296, 0.0013347826, 0.0012530419, 0.99999833, -0.0021666288, 0, -0.0031824112)
 
-[node name="dead_tree" type="MeshInstance3D" parent="."]
+[node name="dead_tree" type="MeshInstance3D" parent="." unique_id=1788142548]
 transform = Transform3D(0.2, 0, 0, 0, 0.1, 0, 0, 0, 0.2, 0, -224.27853, 0)
 rotation_order = 0
 mesh = SubResource("ArrayMesh_271a7")
 skeleton = NodePath("")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="dead_tree"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="dead_tree" unique_id=997687484]
 root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_271a7")
-}
-autoplay = "sway"
+libraries/ = SubResource("AnimationLibrary_271a7")
+autoplay = &"sway"
 speed_scale = 0.35
 
-[node name="HubWorldMusic" type="AudioStreamPlayer" parent="."]
+[node name="HubWorldMusic" type="AudioStreamPlayer" parent="." unique_id=439902330]
 autoplay = true
 bus = &"HubWorldMusic"
 
-[node name="HubWorldAmbience" type="AudioStreamPlayer" parent="."]
+[node name="HubWorldAmbience" type="AudioStreamPlayer" parent="." unique_id=344306943]
 stream = ExtResource("3_loyhd")
 pitch_scale = 0.95
 autoplay = true
 bus = &"Ambience"
 
-[node name="SoundFade" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_t1r5v")
-}
-autoplay = "fade_sound_in"
+[node name="SoundFade" type="AnimationPlayer" parent="." unique_id=1728688398]
+libraries/ = SubResource("AnimationLibrary_t1r5v")
+autoplay = &"fade_sound_in"

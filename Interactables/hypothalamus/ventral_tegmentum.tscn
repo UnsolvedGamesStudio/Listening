@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=4 uid="uid://du5ntj4wse8ga"]
+[gd_scene format=4 uid="uid://du5ntj4wse8ga"]
 
 [ext_resource type="Texture2D" uid="uid://c21twfrvtap7v" path="res://assets/shared_materials/rock_texture.png" id="2_1c3at"]
 [ext_resource type="Material" uid="uid://sa0scvoeuug5" path="res://assets/shared_materials/crystal_material.tres" id="4_r0ytu"]
@@ -859,374 +859,372 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_4wcy6"]
 size = Vector3(0.2, 0.2, 0.2)
 
-[node name="VentralTegmentum" type="Node3D" groups=["obstacle"]]
+[node name="VentralTegmentum" type="Node3D" unique_id=124403380 groups=["obstacle"]]
 
-[node name="Parts" type="Node3D" parent="."]
+[node name="Parts" type="Node3D" parent="." unique_id=1422500913]
 unique_name_in_owner = true
 
-[node name="ScreenLight" type="OmniLight3D" parent="Parts"]
+[node name="ScreenLight" type="OmniLight3D" parent="Parts" unique_id=1852809040]
 transform = Transform3D(-1, 0, -1.5099585e-07, 0, 1, 0, 1.5099585e-07, 0, -1, 0.02840729, 1.584392, 0.06416075)
 light_color = Color(0.34778348, 0.34778348, 0.34778348, 1)
 light_energy = 1.642
 omni_range = 5.962
 
-[node name="Shapes" type="Node3D" parent="Parts"]
+[node name="Shapes" type="Node3D" parent="Parts" unique_id=1251087693]
 transform = Transform3D(-0.437, 0, -6.598517e-08, 0, 0.512, 0, 6.598517e-08, 0, -0.437, 0.0010684431, 0.15560013, -0.06584361)
 
-[node name="Mound" type="MeshInstance3D" parent="Parts/Shapes"]
+[node name="Mound" type="MeshInstance3D" parent="Parts/Shapes" unique_id=171568503]
 transform = Transform3D(0.97646534, 0, 0.2156743, 0, 1, 0, -0.2156743, 0, 0.97646534, 0.02697587, 1.0002875, -0.0982166)
 mesh = SubResource("ArrayMesh_o7vb8")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Mound"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Mound" unique_id=224169526]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Mound/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Mound/StaticBody3D" unique_id=174727382]
 shape = SubResource("ConcavePolygonShape3D_4wcy6")
 
-[node name="Crystals" type="Node3D" parent="Parts/Shapes"]
+[node name="Crystals" type="Node3D" parent="Parts/Shapes" unique_id=359044488]
 
-[node name="Crystal_1_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_1_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=281284116]
 transform = Transform3D(0.15918846, 0.018288292, 0.04387021, 0.02772712, 0.104567386, -0.19481051, -0.021674521, 0.26808608, 0.072993405, -0.9189932, 1.453992, -0.29312205)
 mesh = SubResource("ArrayMesh_7u7a8")
 skeleton = NodePath("")
 
-[node name="CrystalLight" parent="Parts/Shapes/Crystals/Crystal_1_Lp" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight" parent="Parts/Shapes/Crystals/Crystal_1_Lp" unique_id=191419071 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(-0.98647594, 0.14427987, 0.0777728, -0.036231812, 0.27080622, -0.9619518, -0.15985161, -0.9517601, -0.26191628, -1.1938663, 2.794567, -1.2727795)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_1_Lp"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_1_Lp" unique_id=465458915]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_1_Lp/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_1_Lp/StaticBody3D" unique_id=2037508671]
 shape = SubResource("ConcavePolygonShape3D_fj04r")
 
-[node name="Crystal_1_Lp_001" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_1_Lp_001" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=1533232995]
 transform = Transform3D(0.15918846, 0.018288292, 0.04387021, 0.02772712, 0.104567386, -0.19481051, -0.021674521, 0.26808608, 0.072993405, -0.88390434, 1.2820177, -0.57309043)
 mesh = SubResource("ArrayMesh_kkqth")
 skeleton = NodePath("")
 
-[node name="CrystalLight2" parent="Parts/Shapes/Crystals/Crystal_1_Lp_001" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight2" parent="Parts/Shapes/Crystals/Crystal_1_Lp_001" unique_id=1124618290 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(-0.98647594, 0.14427987, 0.0777728, -0.036231812, 0.27080622, -0.9619518, -0.15985161, -0.9517601, -0.26191628, -2.2262936, 3.2485332, -2.2554865)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_1_Lp_001"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_1_Lp_001" unique_id=2018715523]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_1_Lp_001/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_1_Lp_001/StaticBody3D" unique_id=624080330]
 shape = SubResource("ConcavePolygonShape3D_odh5t")
 
-[node name="Crystal_1_Lp_002" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_1_Lp_002" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=43364563]
 transform = Transform3D(0.16050977, -0.0057703024, 0.12020143, 0.071666956, 0.09655076, -0.24469146, -0.020810133, 0.28799957, 0.08444022, -0.87925315, 1.0098752, -0.51911396)
 mesh = SubResource("ArrayMesh_o02th")
 skeleton = NodePath("")
 
-[node name="CrystalLight3" parent="Parts/Shapes/Crystals/Crystal_1_Lp_002" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight3" parent="Parts/Shapes/Crystals/Crystal_1_Lp_002" unique_id=1817051453 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(-0.96085733, 0.2682691, 0.069172494, 0.011726195, 0.2888385, -0.957306, -0.2767953, -0.9190234, -0.2806784, -1.4161277, 2.88364, -1.6893926)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_1_Lp_002"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_1_Lp_002" unique_id=282416262]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_1_Lp_002/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_1_Lp_002/StaticBody3D" unique_id=2145947833]
 shape = SubResource("ConcavePolygonShape3D_wbm48")
 
-[node name="Crystal_2_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_2_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=682076972]
 transform = Transform3D(0.014006098, -0.8637466, 0.14024064, 0.084177166, -0.58061564, -0.17666234, 0.2059166, 0.29610187, 0.06267932, -0.33045745, -0.5109141, -0.097456306)
 mesh = SubResource("ArrayMesh_xnuh6")
 skeleton = NodePath("")
 
-[node name="CrystalLight4" parent="Parts/Shapes/Crystals/Crystal_2_Lp" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight4" parent="Parts/Shapes/Crystals/Crystal_2_Lp" unique_id=4533587 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(-0.10526824, 0.82006305, -0.56250787, 0.27547422, -0.51946735, -0.8088681, -0.9555273, -0.24010457, -0.1712228, -0.123741835, -2.2551653, 0.5635998)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_2_Lp"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_2_Lp" unique_id=1176595293]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_2_Lp/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_2_Lp/StaticBody3D" unique_id=1330897911]
 shape = SubResource("ConcavePolygonShape3D_mpwfu")
 
-[node name="Crystal_2_Lp_001" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_2_Lp_001" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=1696852240]
 transform = Transform3D(0.06550325, -0.6191981, 0.13674572, 0.08256429, -0.48724484, -0.15659417, 0.19576189, 0.41268763, 0.02028892, -0.33045745, -0.5109141, -0.097456306)
 mesh = SubResource("ArrayMesh_ewsa2")
 skeleton = NodePath("")
 
-[node name="CrystalLight5" parent="Parts/Shapes/Crystals/Crystal_2_Lp_001" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight5" parent="Parts/Shapes/Crystals/Crystal_2_Lp_001" unique_id=2134219120 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(-0.37953833, 0.820139, -0.42816204, 0.22416648, -0.3674796, -0.90261185, -0.897608, -0.43855536, -0.04437507, -0.09930432, -2.4291346, 0.59479946)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_2_Lp_001"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_2_Lp_001" unique_id=1915413978]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_2_Lp_001/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_2_Lp_001/StaticBody3D" unique_id=298015123]
 shape = SubResource("ConcavePolygonShape3D_ol5it")
 
-[node name="Crystal_3_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_3_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=962968735]
 transform = Transform3D(-0.120473914, 0.30900687, 0.120676436, -0.32926, 0.1523195, -0.09911265, -0.26692075, -0.327363, 0.067793414, -1.3871543, -0.7799661, -1.4819586)
 mesh = SubResource("ArrayMesh_w64cb")
 skeleton = NodePath("")
 
-[node name="CrystalLight6" parent="Parts/Shapes/Crystals/Crystal_3_Lp" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight6" parent="Parts/Shapes/Crystals/Crystal_3_Lp" unique_id=1999859931 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(0.14016493, -0.7687959, 0.6239444, -0.30908424, 0.5647006, 0.7652321, -0.94064903, -0.3001101, -0.15847148, -2.449854, 0.8243456, -1.6554551)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_3_Lp"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_3_Lp" unique_id=389105789]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_3_Lp/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_3_Lp/StaticBody3D" unique_id=581744043]
 shape = SubResource("ConcavePolygonShape3D_jruig")
 
-[node name="Crystal_3_Lp_001" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_3_Lp_001" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=1616770326]
 transform = Transform3D(-0.064204685, -0.21051446, 0.06882942, -0.008691198, -0.29314935, -0.052720204, 0.25673944, -0.06256863, 0.015427975, -1.2730795, 0.3610528, 1.6036279)
 mesh = SubResource("ArrayMesh_uvfv0")
 skeleton = NodePath("")
 
-[node name="CrystalLight7" parent="Parts/Shapes/Crystals/Crystal_3_Lp_001" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight7" parent="Parts/Shapes/Crystals/Crystal_3_Lp_001" unique_id=802731310 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(0.10107901, -0.2214771, -0.9699128, 0.17319112, -0.9561029, 0.23637266, -0.97968763, -0.1918726, -0.05828407, -1.999537, 0.4856801, -0.37973404)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_3_Lp_001"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_3_Lp_001" unique_id=1669096939]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_3_Lp_001/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_3_Lp_001/StaticBody3D" unique_id=1258003622]
 shape = SubResource("ConcavePolygonShape3D_o8uk1")
 
-[node name="Crystal_4_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_4_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=983376161]
 transform = Transform3D(0.1242542, 0.043133274, -0.0048735416, 0.03494827, -0.096349426, -0.049329147, -0.031963315, 0.06232911, -0.07288125, -0.039890204, 2.1686258, 1.035069)
 mesh = SubResource("ArrayMesh_6ptuy")
 skeleton = NodePath("")
 
-[node name="CrystalLight8" parent="Parts/Shapes/Crystals/Crystal_4_Lp" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight8" parent="Parts/Shapes/Crystals/Crystal_4_Lp" unique_id=823163621 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(-0.92261606, 0.22089964, 0.3162009, -0.37682346, -0.69123787, -0.616599, 0.082363546, -0.6880361, 0.7209873, 0.3491397, 0.01744175, -0.98091507)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_4_Lp"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_4_Lp" unique_id=404292270]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_4_Lp/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_4_Lp/StaticBody3D" unique_id=1343066313]
 shape = SubResource("ConcavePolygonShape3D_tthst")
 
-[node name="Crystal_5_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_5_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=1309196036]
 transform = Transform3D(0.38155496, 0.36314824, 0.2452445, -0.17354254, -0.40114617, 0.41076723, 0.24754828, -0.8409549, -0.090037644, -1.4409184, 0.33867872, -1.3582417)
 mesh = SubResource("ArrayMesh_gt1fu")
 skeleton = NodePath("")
 
-[node name="CrystalLight9" parent="Parts/Shapes/Crystals/Crystal_5_Lp" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight9" parent="Parts/Shapes/Crystals/Crystal_5_Lp" unique_id=675754625 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(-0.8264743, -0.48788455, -0.2809075, -0.18641043, -0.23366444, 0.9542809, -0.531217, 0.84105265, 0.10217088, 0.98692656, -0.25892448, 1.5610535)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_5_Lp"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_5_Lp" unique_id=171064620]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_5_Lp/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_5_Lp/StaticBody3D" unique_id=926822150]
 shape = SubResource("ConcavePolygonShape3D_x1u6o")
 
-[node name="Crystal_3_Lp2" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_3_Lp2" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=584915779]
 transform = Transform3D(0.102796644, 0.23932827, -0.019954953, -0.14256038, 0.04750503, -0.044144668, -0.24221562, -0.01977631, 0.13287897, -0.09085543, -0.35654303, -2.000873)
 mesh = SubResource("ArrayMesh_w64cb")
 skeleton = NodePath("")
 
-[node name="CrystalLight10" parent="Parts/Shapes/Crystals/Crystal_3_Lp2" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight10" parent="Parts/Shapes/Crystals/Crystal_3_Lp2" unique_id=141368651 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(-0.16303644, -0.45680895, 0.8744968, -0.8882813, 0.453716, 0.0714003, -0.4293895, -0.7651584, -0.47974712, -2.3005044, 0.8175068, -2.0461922)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_3_Lp2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_3_Lp2" unique_id=518663531]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_3_Lp2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_3_Lp2/StaticBody3D" unique_id=589400427]
 shape = SubResource("ConcavePolygonShape3D_iq3u0")
 
-[node name="Crystal_5_Lp_001" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_5_Lp_001" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=504190688]
 transform = Transform3D(0.4572112, 0.33454543, 0.02839475, -0.04054189, 0.035223536, 0.42310143, 0.16093446, -0.94156283, 0.025916979, -1.5125101, 0.13178134, -1.2544408)
 mesh = SubResource("ArrayMesh_ie4xp")
 skeleton = NodePath("")
 
-[node name="CrystalLight11" parent="Parts/Shapes/Crystals/Crystal_5_Lp_001" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight11" parent="Parts/Shapes/Crystals/Crystal_5_Lp_001" unique_id=31133086 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(-0.98218155, -0.08339532, -0.16841774, -0.17007825, 0.013173057, 0.9853425, -0.07995438, 0.99642944, -0.027122065, 0.79845023, 0.1430006, 0.40017784)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_5_Lp_001"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_5_Lp_001" unique_id=1377509871]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_5_Lp_001/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_5_Lp_001/StaticBody3D" unique_id=1920209726]
 shape = SubResource("ConcavePolygonShape3D_ynx6f")
 
-[node name="Crystal_5_Lp_002" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_5_Lp_002" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=571945764]
 transform = Transform3D(0.07192123, 0.9851892, -0.036172, -0.09934275, 0.11463744, 0.41302657, 0.47068462, -0.12634282, 0.09270058, 0.057079732, 1.536515, -1.398169)
 mesh = SubResource("ArrayMesh_2oitu")
 skeleton = NodePath("")
 
-[node name="CrystalLight12" parent="Parts/Shapes/Crystals/Crystal_5_Lp_002" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight12" parent="Parts/Shapes/Crystals/Crystal_5_Lp_002" unique_id=1253320960 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(-0.2893557, -0.12670174, -0.94879925, -0.93802226, 0.23505855, 0.25467956, 0.19075502, 0.9636878, -0.1868646, 1.1282215, -0.13308713, 1.5772567)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_5_Lp_002"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_5_Lp_002" unique_id=69917502]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_5_Lp_002/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_5_Lp_002/StaticBody3D" unique_id=1237321462]
 shape = SubResource("ConcavePolygonShape3D_hfqnf")
 
-[node name="Crystal_7_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_7_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=480412833]
 transform = Transform3D(0.81576794, 0.097042136, 0.21945657, 1.2339599, -0.054867335, -0.14757706, -0.034644403, 0.3307827, -0.088861026, -0.023206383, -0.34655905, 0.59713984)
 mesh = SubResource("ArrayMesh_2imlw")
 skeleton = NodePath("")
 
-[node name="CrystalLight13" parent="Parts/Shapes/Crystals/Crystal_7_Lp" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight13" parent="Parts/Shapes/Crystals/Crystal_7_Lp" unique_id=1957265440 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(-0.12616366, 0.9868918, 0.10063392, -0.26966986, 0.06350465, -0.96085656, -0.9546522, -0.14836313, 0.25812304, 1.6014318, 0.04467821, -0.45804024)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_7_Lp"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_7_Lp" unique_id=2118733412]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_7_Lp/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_7_Lp/StaticBody3D" unique_id=753228385]
 shape = SubResource("ConcavePolygonShape3D_y1t4x")
 
-[node name="Crystal_7_Lp_001" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_7_Lp_001" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=1475629169]
 transform = Transform3D(0.6695033, 0.015272814, 0.17964466, 0.8911301, -0.044769216, -0.13454844, 0.03550617, 0.8356294, -0.010491863, 0.07936382, -0.4509455, 0.25743675)
 mesh = SubResource("ArrayMesh_piu52")
 skeleton = NodePath("")
 
-[node name="CrystalLight14" parent="Parts/Shapes/Crystals/Crystal_7_Lp_001" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight14" parent="Parts/Shapes/Crystals/Crystal_7_Lp_001" unique_id=1772420809 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(-0.1495894, 0.9878366, -0.042449754, -0.0060580857, -0.04384771, -0.99901986, -0.98872966, -0.14918563, 0.012543552, 0, 0, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_7_Lp_001"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_7_Lp_001" unique_id=1614360735]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_7_Lp_001/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_7_Lp_001/StaticBody3D" unique_id=1031140443]
 shape = SubResource("ConcavePolygonShape3D_jhefq")
 
-[node name="Crystal_8_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_8_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=1354529434]
 transform = Transform3D(-0.17582251, 0.1492569, 0.054199208, -0.1623995, -0.0075732274, -0.12073459, -0.1673199, -0.14949109, 0.060230725, 0.25901294, 2.0714605, -0.36441368)
 mesh = SubResource("ArrayMesh_47pud")
 skeleton = NodePath("")
 
-[node name="CrystalLight15" parent="Parts/Shapes/Crystals/Crystal_8_Lp" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight15" parent="Parts/Shapes/Crystals/Crystal_8_Lp" unique_id=2002979927 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(0.43973812, -0.536573, 0.720222, -0.7124907, 0.27980867, 0.64347816, -0.5467974, -0.7961133, -0.2592607, -0.18356228, 1.5575575, -0.8058939)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_8_Lp"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_8_Lp" unique_id=974007582]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_8_Lp/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_8_Lp/StaticBody3D" unique_id=294581380]
 shape = SubResource("ConcavePolygonShape3D_mktb1")
 
-[node name="Crystal_8_Lp2" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_8_Lp2" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=472709010]
 transform = Transform3D(-0.0023942983, -0.03547537, -0.02428545, 0.049984656, -0.0061331424, -0.015159502, 0.04361806, -0.032845464, 0.012607875, 0.47485873, 2.0639987, -0.61034966)
 mesh = SubResource("ArrayMesh_47pud")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_8_Lp2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_8_Lp2" unique_id=1401673869]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_8_Lp2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_8_Lp2/StaticBody3D" unique_id=1460012545]
 shape = SubResource("ConcavePolygonShape3D_rwtpx")
 
-[node name="Crystal_8_Lp_001" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_8_Lp_001" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=767373795]
 transform = Transform3D(-0.27473184, 0.033613294, 0.035238665, -0.084497765, -0.03713763, -0.12453033, -0.029714761, -0.2051706, 0.028314235, 0.19800843, 1.9081693, -0.29083937)
 mesh = SubResource("ArrayMesh_ok3w8")
 skeleton = NodePath("")
 
-[node name="CrystalLight18" parent="Parts/Shapes/Crystals/Crystal_8_Lp_001" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight18" parent="Parts/Shapes/Crystals/Crystal_8_Lp_001" unique_id=1709302448 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(0.83775586, -0.5272537, 0.14201602, -0.1918824, -0.0407656, 0.9805709, -0.51122034, -0.8487294, -0.13532233, -0.08785844, 1.684009, -2.3820057)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_8_Lp_001"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_8_Lp_001" unique_id=1733529463]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_8_Lp_001/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_8_Lp_001/StaticBody3D" unique_id=2080076841]
 shape = SubResource("ConcavePolygonShape3D_c5t4v")
 
-[node name="Crystal_8_Lp_002" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_8_Lp_002" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=1487877859]
 transform = Transform3D(-0.2893764, -0.0044100555, -0.06277752, 0.098504916, -0.082573526, -0.16325194, -0.03224049, -0.21270557, 0.064676926, 0.2536618, 2.0866537, -0.46873713)
 mesh = SubResource("ArrayMesh_runt1")
 skeleton = NodePath("")
 
-[node name="CrystalLight17" parent="Parts/Shapes/Crystals/Crystal_8_Lp_002" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight17" parent="Parts/Shapes/Crystals/Crystal_8_Lp_002" unique_id=1207579389 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(0.8612476, 0.48749912, 0.14351693, 0.023810495, -0.32081062, 0.94684404, 0.50762737, -0.81205, -0.28790498, -0.1337601, 1.7908738, -1.8940382)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_8_Lp_002"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_8_Lp_002" unique_id=166487149]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_8_Lp_002/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_8_Lp_002/StaticBody3D" unique_id=213774176]
 shape = SubResource("ConcavePolygonShape3D_35jm2")
 
-[node name="Crystal_9_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_9_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=213360600]
 transform = Transform3D(-0.18416238, 0.12953271, -0.0799941, -0.04310687, -0.2836927, -0.100084685, 0.1108163, 0.10491192, -0.17187217, -0.09893724, 1.9889766, 1.2702487)
 mesh = SubResource("ArrayMesh_ffk67")
 skeleton = NodePath("")
 
-[node name="CrystalLight18" parent="Parts/Shapes/Crystals/Crystal_9_Lp" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight18" parent="Parts/Shapes/Crystals/Crystal_9_Lp" unique_id=1645060420 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(-0.8757933, 0.022883013, 0.48214364, 0.27341127, 0.8466967, 0.4564548, -0.39778435, 0.53158355, -0.7477877, -1.9403543, -2.2445755, -0.9142637)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_9_Lp"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_9_Lp" unique_id=398785455]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_9_Lp/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_9_Lp/StaticBody3D" unique_id=373536777]
 shape = SubResource("ConcavePolygonShape3D_eordf")
 
-[node name="Crystal_9_Lp_001" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_9_Lp_001" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=1202269420]
 transform = Transform3D(-0.12960817, 0.09949622, -0.06188463, -0.12123745, -0.1373115, -0.02308258, 0.11655796, -0.03218805, -0.09282272, 0.07018852, 1.9889766, 1.0659202)
 mesh = SubResource("ArrayMesh_ncud3")
 skeleton = NodePath("")
 
-[node name="CrystalLight20" parent="Parts/Shapes/Crystals/Crystal_9_Lp_001" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight20" parent="Parts/Shapes/Crystals/Crystal_9_Lp_001" unique_id=529338374 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(-0.44278628, 0.46829718, 0.76461625, 0.5144059, 0.83114445, -0.21115263, -0.73438877, 0.29982764, -0.6089142, -1.903369, -2.172554, -0.7271595)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_9_Lp_001"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_9_Lp_001" unique_id=741468021]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_9_Lp_001/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_9_Lp_001/StaticBody3D" unique_id=914106423]
 shape = SubResource("ConcavePolygonShape3D_whq56")
 
-[node name="Crystal_11_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_11_Lp" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=1045350596]
 transform = Transform3D(0.23144962, -0.04231325, 0.18856503, 0.20496401, -0.00088560546, -0.22350878, -0.05271872, -0.18920988, -0.0411229, -1.3265352, 2.2022066, -0.5374567)
 mesh = SubResource("ArrayMesh_2ooqk")
 skeleton = NodePath("")
 
-[node name="CrystalLight19" parent="Parts/Shapes/Crystals/Crystal_11_Lp" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight19" parent="Parts/Shapes/Crystals/Crystal_11_Lp" unique_id=1575144815 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(0.6945057, -0.6698115, -0.26270577, -0.33221272, 0.025338734, -0.94286406, 0.63819784, 0.7420987, -0.20492202, 1.3228424, -1.1369474, 0.603919)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_11_Lp"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_11_Lp" unique_id=220846552]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_11_Lp/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_11_Lp/StaticBody3D" unique_id=216412922]
 shape = SubResource("ConcavePolygonShape3D_h4uj1")
 
-[node name="Crystal_11_Lp_001" type="MeshInstance3D" parent="Parts/Shapes/Crystals"]
+[node name="Crystal_11_Lp_001" type="MeshInstance3D" parent="Parts/Shapes/Crystals" unique_id=2038076594]
 transform = Transform3D(-0.23928893, -0.040940255, -0.1804166, -0.19410038, -0.006627847, 0.23173197, 0.058517136, -0.18939781, 0.030889573, -0.07857032, 1.9244217, -0.86475366)
 mesh = SubResource("ArrayMesh_ncntk")
 skeleton = NodePath("")
 
-[node name="CrystalLight20" parent="Parts/Shapes/Crystals/Crystal_11_Lp_001" instance=ExtResource("5_wkeaw")]
+[node name="CrystalLight20" parent="Parts/Shapes/Crystals/Crystal_11_Lp_001" unique_id=1668624666 instance=ExtResource("5_wkeaw")]
 transform = Transform3D(-0.7210125, 0.62854314, 0.29167542, -0.32276857, 0.067830384, -0.94404423, -0.613157, -0.77481127, 0.15396743, 0.74187374, -0.79551625, 1.7191682)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_11_Lp_001"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Parts/Shapes/Crystals/Crystal_11_Lp_001" unique_id=1027650000]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_11_Lp_001/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/Shapes/Crystals/Crystal_11_Lp_001/StaticBody3D" unique_id=1474853695]
 shape = SubResource("ConcavePolygonShape3D_6t1gp")
 
-[node name="CrystalColorShift" type="AnimationPlayer" parent="Parts/Shapes"]
-libraries = {
-&"": SubResource("AnimationLibrary_oxvdm")
-}
-autoplay = "shift"
+[node name="CrystalColorShift" type="AnimationPlayer" parent="Parts/Shapes" unique_id=630242887]
+libraries/ = SubResource("AnimationLibrary_oxvdm")
+autoplay = &"shift"
 
-[node name="CellDetect" type="Area3D" parent="Parts" groups=["obstacle_collision"]]
+[node name="CellDetect" type="Area3D" parent="Parts" unique_id=225870338 groups=["obstacle_collision"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63563037, 0)
 collision_layer = 512
 collision_mask = 128
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/CellDetect"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Parts/CellDetect" unique_id=1735545914]
 shape = SubResource("BoxShape3D_4wcy6")
 
-[node name="DopamineReplenisher" parent="." instance=ExtResource("5_cjmuq")]
+[node name="DopamineReplenisher" parent="." unique_id=1062786686 instance=ExtResource("5_cjmuq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7713867, 0.18805084)

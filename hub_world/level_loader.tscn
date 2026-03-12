@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://oqqdlvk5l7s8"]
+[gd_scene format=3 uid="uid://oqqdlvk5l7s8"]
 
 [ext_resource type="Script" uid="uid://bjjl8xitp77ry" path="res://hub_world/level_loader.gd" id="1_6x6pu"]
 [ext_resource type="PlaneMesh" uid="uid://covn2ehde4snx" path="res://vfx/particle_mesh.tres" id="2_b3c8u"]
@@ -9,6 +9,8 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_li2hn"]
 resource_local_to_scene = true
 transparency = 1
+cull_mode = 2
+depth_draw_mode = 1
 shading_mode = 0
 albedo_color = Color(0.36842093, 2.2219553, 1.953598, 1)
 albedo_texture = ExtResource("2_qtyh0")
@@ -97,25 +99,25 @@ _data = {
 &"idle": SubResource("Animation_oead0")
 }
 
-[node name="LevelLoader" type="Node3D"]
+[node name="LevelLoader" type="Node3D" unique_id=182478484]
 script = ExtResource("1_6x6pu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1961747213]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 mesh = SubResource("PlaneMesh_k3r13")
 
-[node name="WarpEffect" type="MeshInstance3D" parent="."]
+[node name="WarpEffect" type="MeshInstance3D" parent="." unique_id=1586479499]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 mesh = SubResource("PlaneMesh_k3r13")
 
-[node name="WarpEffect2" type="MeshInstance3D" parent="."]
+[node name="WarpEffect2" type="MeshInstance3D" parent="." unique_id=1178750648]
 unique_name_in_owner = true
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0)
 mesh = SubResource("PlaneMesh_k3r13")
 
-[node name="LevelNameLabel3D" type="Sprite3D" parent="."]
+[node name="LevelNameLabel3D" type="Sprite3D" parent="." unique_id=1170912149]
 transform = Transform3D(2.8444445, 0, 0, 0, 2.8444445, 0, 0, 0, 2.8444445, 0, 1.2908214, 0)
 layers = 2
 modulate = Color(1, 1, 1, 1.6407406)
@@ -125,11 +127,11 @@ texture_filter = 0
 render_priority = 1
 texture = SubResource("ViewportTexture_6x6pu")
 
-[node name="SubViewport" type="SubViewport" parent="LevelNameLabel3D"]
+[node name="SubViewport" type="SubViewport" parent="LevelNameLabel3D" unique_id=404475648]
 transparent_bg = true
 size = Vector2i(200, 200)
 
-[node name="LevelNameLabel" type="Label" parent="LevelNameLabel3D/SubViewport"]
+[node name="LevelNameLabel" type="Label" parent="LevelNameLabel3D/SubViewport" unique_id=1231517929]
 unique_name_in_owner = true
 material = ExtResource("3_7jh1e")
 anchors_preset = 8
@@ -150,30 +152,28 @@ text = "Level Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=177755426]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1500096496]
 shape = SubResource("BoxShape3D_6x6pu")
 
-[node name="SFX" type="AudioStreamPlayer3D" parent="."]
+[node name="SFX" type="AudioStreamPlayer3D" parent="." unique_id=345635494]
 stream = ExtResource("3_8afp4")
 volume_db = -11.0
 autoplay = true
 max_distance = 4.0
 bus = &"SFX"
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=954639574]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0019454, 0)
 cast_shadow = 0
 process_material = SubResource("ParticleProcessMaterial_wj35b")
 draw_pass_1 = ExtResource("2_b3c8u")
 
-[node name="Warp" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_oetdi")
-}
-autoplay = "idle"
+[node name="Warp" type="AnimationPlayer" parent="." unique_id=969641270]
+libraries/ = SubResource("AnimationLibrary_oetdi")
+autoplay = &"idle"

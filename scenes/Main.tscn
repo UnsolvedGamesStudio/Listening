@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c58klmnfg17b8"]
+[gd_scene format=3 uid="uid://c58klmnfg17b8"]
 
 [ext_resource type="Script" uid="uid://ddi8nw37cgvp1" path="res://scenes/main_scene.gd" id="1_jyhfs"]
 [ext_resource type="Resource" uid="uid://b3cbgo4s0mytf" path="res://assets/music/song_data/reverie.tres" id="2_tefeu"]
@@ -15,15 +15,17 @@ emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
 gravity = Vector3(0, 98, 0)
 
-[node name="Main" type="Node" groups=["main_scene"]]
+[node name="Main" type="Node" unique_id=1110477990 groups=["main_scene"]]
 script = ExtResource("1_jyhfs")
+scene_to_load = 3
 default_song = ExtResource("2_tefeu")
+disable_loading_screen = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1782560111]
 process_mode = 3
 layer = 3
 
-[node name="CursorSparkles" type="GPUParticles2D" parent="CanvasLayer"]
+[node name="CursorSparkles" type="GPUParticles2D" parent="CanvasLayer" unique_id=1308698974]
 unique_name_in_owner = true
 process_mode = 3
 emitting = false
@@ -33,12 +35,12 @@ explosiveness = 0.05
 randomness = 0.3
 process_material = SubResource("ParticleProcessMaterial_rarhs")
 
-[node name="CursorManager" type="Node" parent="."]
+[node name="CursorManager" type="Node" parent="." unique_id=1301145743]
 process_mode = 3
 script = ExtResource("4_o6xl0")
 
-[node name="DebugStressTester" type="Node" parent="."]
+[node name="DebugStressTester" type="Node" parent="." unique_id=1548414204]
 script = ExtResource("5_tbgi4")
 
-[node name="PlayerCheats" type="Node" parent="."]
+[node name="PlayerCheats" type="Node" parent="." unique_id=1955176774]
 script = ExtResource("6_tefeu")

@@ -92,7 +92,10 @@ func go_to_spawn():
 		return
 	
 	global_position = spawn_point.global_position
+	
+	neck.global_rotation.x = spawn_point.global_rotation.x
 	neck.global_rotation.y = spawn_point.global_rotation.y
+	neck.global_rotation.z = spawn_point.global_rotation.z
 
 
 func reset_vars():
@@ -125,6 +128,16 @@ func _physics_process(delta: float) -> void:
 	if is_moving == false:
 		player_sfx.steps.stop()
 	
+	debug_controls()
+
+
+func debug_controls():
+	if not OS.has_feature("editor"):
+		return
+	
+	if Input.is_action_pressed("exit"):
+		get_tree().quit()
+	
 	if Input.is_key_pressed(Key.KEY_B):
 		print_orphan_nodes()
 
@@ -134,6 +147,9 @@ func snap_rotations():
 
 
 func camera_movement(event: InputEvent):
+	if not Vars.can_move_camera:
+		return
+	
 	if not Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		return
 	

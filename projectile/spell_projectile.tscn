@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bxvo7ewsxt46f"]
+[gd_scene format=3 uid="uid://bxvo7ewsxt46f"]
 
 [ext_resource type="Script" uid="uid://d07bvstd4u2bp" path="res://projectile/spell_projectile.gd" id="1_dkllc"]
 [ext_resource type="Texture2D" uid="uid://bqokni4d5a22j" path="res://player/spell_casting/textures/spell_projectile.png" id="2_mvva0"]
@@ -51,7 +51,7 @@ tracks/0/path = NodePath("Sprite3D:transparency")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.23333335),
+"times": PackedFloat32Array(0.033333335, 0.26666668),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.0]
@@ -63,7 +63,7 @@ tracks/1/path = NodePath("Sprite3D:scale")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.10000001),
+"times": PackedFloat32Array(0, 0.13333334),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(1, 1, 1)]
@@ -95,7 +95,7 @@ billboard_mode = 1
 material = SubResource("StandardMaterial3D_makwg")
 size = Vector2(0.025, 0.025)
 
-[node name="SpellProjectile" type="RigidBody3D"]
+[node name="SpellProjectile" type="RigidBody3D" unique_id=1948572439]
 collision_layer = 4096
 collision_mask = 20486
 physics_material_override = SubResource("PhysicsMaterial_dkllc")
@@ -104,12 +104,12 @@ contact_monitor = true
 max_contacts_reported = 6
 script = ExtResource("1_dkllc")
 
-[node name="CollisionSize" type="CollisionShape3D" parent="."]
+[node name="CollisionSize" type="CollisionShape3D" parent="." unique_id=1471687766]
 unique_name_in_owner = true
 shape = SubResource("SphereShape3D_hrg8b")
 debug_fill = false
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=209832794]
 unique_name_in_owner = true
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 transparency = 1.0
@@ -118,24 +118,22 @@ texture_filter = 0
 texture = ExtResource("2_mvva0")
 script = ExtResource("3_mvva0")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1211197725]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_dr2av")
-}
-autoplay = "lifetime"
+libraries/ = SubResource("AnimationLibrary_dr2av")
+autoplay = &"lifetime"
 
-[node name="Hitbox" type="Area3D" parent="."]
+[node name="Hitbox" type="Area3D" parent="." unique_id=2006591604]
 unique_name_in_owner = true
 collision_layer = 32784
 collision_mask = 4
 
-[node name="HitboxCollision" type="CollisionShape3D" parent="Hitbox"]
+[node name="HitboxCollision" type="CollisionShape3D" parent="Hitbox" unique_id=332625207]
 unique_name_in_owner = true
 shape = SubResource("SphereShape3D_makwg")
 debug_color = Color(0.97987014, 0, 0.38836122, 0.41960785)
 
-[node name="FlyingParticles" type="GPUParticles3D" parent="."]
+[node name="FlyingParticles" type="GPUParticles3D" parent="." unique_id=872467754]
 transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1.0000001, 0, 1.0000001, -4.3711392e-08, 0, 0, 0)
 visible = false
 cast_shadow = 0
@@ -145,48 +143,48 @@ randomness = 0.53
 process_material = SubResource("ParticleProcessMaterial_hrg8b")
 draw_pass_1 = SubResource("PlaneMesh_dkllc")
 
-[node name="KillTimer" type="Timer" parent="."]
+[node name="KillTimer" type="Timer" parent="." unique_id=1359079081]
 unique_name_in_owner = true
 wait_time = 0.3
 one_shot = true
 
-[node name="Lifetime" type="Timer" parent="."]
+[node name="Lifetime" type="Timer" parent="." unique_id=929956008]
 unique_name_in_owner = true
 one_shot = true
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=438773426]
 unique_name_in_owner = true
 visible = false
 light_energy = 0.1
 light_indirect_energy = 0.1
 omni_attenuation = 1.5
 
-[node name="SFX" type="Node3D" parent="."]
+[node name="SFX" type="Node3D" parent="." unique_id=1865686200]
 
-[node name="SpawnSFX" type="AudioStreamPlayer3D" parent="SFX"]
+[node name="SpawnSFX" type="AudioStreamPlayer3D" parent="SFX" unique_id=675410243]
 unique_name_in_owner = true
 stream = ExtResource("4_bv401")
 max_distance = 10.0
 bus = &"SFX"
 
-[node name="BounceSFX" type="AudioStreamPlayer3D" parent="SFX"]
+[node name="BounceSFX" type="AudioStreamPlayer3D" parent="SFX" unique_id=237783262]
 unique_name_in_owner = true
 stream = ExtResource("5_3t7nv")
 max_distance = 10.0
 bus = &"SFX"
 
-[node name="PassiveSFX" type="AudioStreamPlayer3D" parent="SFX"]
+[node name="PassiveSFX" type="AudioStreamPlayer3D" parent="SFX" unique_id=1594078218]
 unique_name_in_owner = true
 max_distance = 10.0
 bus = &"SFX"
 
-[node name="DestroySFX" type="AudioStreamPlayer3D" parent="SFX"]
+[node name="DestroySFX" type="AudioStreamPlayer3D" parent="SFX" unique_id=1123692724]
 unique_name_in_owner = true
 stream = ExtResource("5_m30nv")
 max_distance = 10.0
 bus = &"SFX"
 
-[node name="ExpireSFX" type="AudioStreamPlayer3D" parent="SFX"]
+[node name="ExpireSFX" type="AudioStreamPlayer3D" parent="SFX" unique_id=1571515415]
 unique_name_in_owner = true
 max_distance = 10.0
 bus = &"SFX"

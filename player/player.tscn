@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ce10gkdeiprj7"]
+[gd_scene format=3 uid="uid://ce10gkdeiprj7"]
 
 [ext_resource type="Script" uid="uid://bxbkaxat5hcgk" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://86r6xeju02bg" path="res://main_ui/main_ui.tscn" id="2_boad6"]
@@ -76,60 +76,60 @@ _data = {
 &"bob": SubResource("Animation_g1dw6")
 }
 
-[node name="Player" type="Node3D" groups=["player"]]
+[node name="Player" type="Node3D" unique_id=1592130768 groups=["player"]]
 script = ExtResource("1_oul6g")
 
-[node name="VictoryScreen" parent="." instance=ExtResource("2_rgyib")]
+[node name="VictoryScreen" parent="." unique_id=1052191973 instance=ExtResource("2_rgyib")]
 
-[node name="MainUI" parent="." instance=ExtResource("2_boad6")]
+[node name="MainUI" parent="." unique_id=1990792424 instance=ExtResource("2_boad6")]
 
-[node name="PauseMenu" parent="." instance=ExtResource("4_hg6s5")]
+[node name="PauseMenu" parent="." unique_id=1254905935 instance=ExtResource("4_hg6s5")]
 
-[node name="HeldInstrumentManager" type="Node" parent="."]
+[node name="HeldInstrumentManager" type="Node" parent="." unique_id=45403477]
 unique_name_in_owner = true
 script = ExtResource("5_rgyib")
 
-[node name="Spellcast" parent="." instance=ExtResource("2_rkbax")]
+[node name="Spellcast" parent="." unique_id=1546357799 instance=ExtResource("2_rkbax")]
 
-[node name="TriggerCombo" parent="." instance=ExtResource("7_hg6s5")]
+[node name="TriggerCombo" parent="." unique_id=551424591 instance=ExtResource("7_hg6s5")]
 
-[node name="Interact" parent="." instance=ExtResource("3_g1dw6")]
+[node name="Interact" parent="." unique_id=1236128210 instance=ExtResource("3_g1dw6")]
 
-[node name="Abilities" type="Node" parent="."]
+[node name="Abilities" type="Node" parent="." unique_id=1407108261]
 unique_name_in_owner = true
 
-[node name="ShellAbility" parent="Abilities" instance=ExtResource("9_8t03j")]
+[node name="ShellAbility" parent="Abilities" unique_id=2007937484 instance=ExtResource("9_8t03j")]
 
-[node name="Neck" type="Node3D" parent="."]
+[node name="Neck" type="Node3D" parent="." unique_id=612237270]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.642, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Neck"]
+[node name="Camera3D" type="Camera3D" parent="Neck" unique_id=2118624850]
 unique_name_in_owner = true
 cull_mask = 1048571
 current = true
 script = ExtResource("10_kb6p2")
 
-[node name="FakeCamera" type="Sprite3D" parent="Neck/Camera3D"]
+[node name="FakeCamera" type="Sprite3D" parent="Neck/Camera3D" unique_id=394009068]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0033361912, 0)
 layers = 4
 flip_h = true
 pixel_size = 0.0025
 texture = ExtResource("13_yllr7")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Neck/Camera3D/FakeCamera"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Neck/Camera3D/FakeCamera" unique_id=1820563843]
 transform = Transform3D(0.7071067, 0, 0.7071067, 0.7071067, 0, -0.7071067, -1.4901161e-08, 1, 1.4901161e-08, 0, 0, -0.35749954)
 layers = 4
 mesh = SubResource("CylinderMesh_yllr7")
 skeleton = NodePath("")
 
-[node name="MovementRaycastTransform" type="RemoteTransform3D" parent="."]
+[node name="MovementRaycastTransform" type="RemoteTransform3D" parent="." unique_id=1556301559]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70000005, 0)
 remote_path = NodePath("../MovementRaycast")
 update_rotation = false
 update_scale = false
 
-[node name="MovementRaycast" type="RayCast3D" parent="."]
+[node name="MovementRaycast" type="RayCast3D" parent="." unique_id=1436978091]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70000005, 0)
 target_position = Vector3(0, 0, -2)
@@ -137,14 +137,14 @@ collision_mask = 8193
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="LineOfSight" type="RayCast3D" parent="."]
+[node name="LineOfSight" type="RayCast3D" parent="." unique_id=1898220882]
 unique_name_in_owner = true
 visible = false
 collision_mask = 70
 hit_back_faces = false
 collide_with_areas = true
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=815518197]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.282909, 0)
 light_color = Color(0.9999997, 0.92281556, 0.86836505, 1)
 light_energy = 1.4
@@ -152,35 +152,33 @@ light_volumetric_fog_energy = 1.495
 shadow_enabled = true
 omni_range = 6.0
 
-[node name="PlayerCollision" type="Area3D" parent="." groups=["player_collision"]]
+[node name="PlayerCollision" type="Area3D" parent="." unique_id=280428723 groups=["player_collision"]]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 8
 collision_mask = 36
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerCollision"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerCollision" unique_id=28121645]
 shape = SubResource("CylinderShape3D_g1dw6")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
-[node name="FakeHitbox" type="MeshInstance3D" parent="PlayerCollision"]
+[node name="FakeHitbox" type="MeshInstance3D" parent="PlayerCollision" unique_id=1425884404]
 layers = 4
 mesh = SubResource("CylinderMesh_ebec5")
 skeleton = NodePath("../..")
 
-[node name="EnemyAimPoint" type="Marker3D" parent="."]
+[node name="EnemyAimPoint" type="Marker3D" parent="." unique_id=1876476601]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73936355, 0)
 
-[node name="MoveToCellIndicator" parent="." groups=["move_to_cell_indicator"] instance=ExtResource("4_yw30f")]
+[node name="MoveToCellIndicator" parent="." unique_id=990894017 groups=["move_to_cell_indicator"] instance=ExtResource("4_yw30f")]
 unique_name_in_owner = true
 
-[node name="Headbob" type="AnimationPlayer" parent="."]
+[node name="Headbob" type="AnimationPlayer" parent="." unique_id=266325024]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_yw30f")
-}
+libraries/ = SubResource("AnimationLibrary_yw30f")
 
-[node name="PlayerSFX" parent="." instance=ExtResource("12_ebec5")]
+[node name="PlayerSFX" parent="." unique_id=2020345715 instance=ExtResource("12_ebec5")]
 
-[node name="HealParticles" parent="." instance=ExtResource("12_yllr7")]
+[node name="HealParticles" parent="." unique_id=2036956058 instance=ExtResource("12_yllr7")]
 unique_name_in_owner = true

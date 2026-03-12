@@ -16,6 +16,7 @@ var dopamine:= max_dopamine / 2.0:
 
 ## Player
 var interact_range:= 4.0
+var can_move_camera:= true
 
 ## Instruments
 enum instrument_types {LUTE, CARILLON}

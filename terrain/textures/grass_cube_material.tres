@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://bst4ecl263gsh"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bst4ecl263gsh"]
 
 [ext_resource type="Shader" uid="uid://bkvbrhy03jggl" path="res://terrain/textures/fading_texture.gdshader" id="1_f2k54"]
 [ext_resource type="Texture2D" uid="uid://cywvh5sygdpbg" path="res://terrain/textures/sunset_anim_curve.tres" id="2_f3866"]

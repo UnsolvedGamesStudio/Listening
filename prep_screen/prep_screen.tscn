@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cglbfa3a2dw7v"]
+[gd_scene format=3 uid="uid://cglbfa3a2dw7v"]
 
 [ext_resource type="Texture2D" uid="uid://b4s6ykblvadm" path="res://terrain/textures/papertexture-2061711_640.png" id="1_im2fx"]
 [ext_resource type="Script" uid="uid://bq3pthjy1lald" path="res://prep_screen/prep_screen.gd" id="1_uxus4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://b3cbgo4s0mytf" path="res://assets/music/song_data/reverie.tres" id="5_46iml"]
 [ext_resource type="Script" uid="uid://c1trbbd4jt2tb" path="res://prep_screen/start_level_button.gd" id="5_77kmu"]
 [ext_resource type="Resource" uid="uid://b5n752kaydvfi" path="res://assets/music/song_data/one_mind.tres" id="6_pauu0"]
+[ext_resource type="Resource" uid="uid://crhfgfnco8jne" path="res://assets/music/song_data/the_chonkiest.tres" id="7_n0148"]
 [ext_resource type="FontVariation" uid="uid://dp8trxjqpgoeg" path="res://assets/fonts/short_story_baseline_fixed.tres" id="8_jpipw"]
 [ext_resource type="StyleBox" uid="uid://dn78ncm4grcm7" path="res://assets/ui_theme/panel.tres" id="10_6omq5"]
 [ext_resource type="Texture2D" uid="uid://dwothjuelphcn" path="res://instruments/textures/carillon_icon.png" id="11_6omq5"]
@@ -23,11 +24,11 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="PrepScreen" type="CanvasLayer"]
+[node name="PrepScreen" type="CanvasLayer" unique_id=1316912403]
 layer = 0
 script = ExtResource("1_uxus4")
 
-[node name="BG" type="TextureRect" parent="."]
+[node name="BG" type="TextureRect" parent="." unique_id=1212433863]
 self_modulate = Color(0.83137256, 0.5019608, 0.73333335, 1)
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,7 +39,7 @@ texture = ExtResource("1_im2fx")
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=791891236]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -48,11 +49,11 @@ theme = ExtResource("2_vx4pu")
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
-[node name="TopContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="TopContainer" type="VBoxContainer" parent="MarginContainer" unique_id=220441603]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Title" type="Label" parent="MarginContainer/TopContainer"]
+[node name="Title" type="Label" parent="MarginContainer/TopContainer" unique_id=297772358]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8627451, 0.91764706, 0.93333334, 1)
 theme_override_font_sizes/font_size = 28
@@ -60,25 +61,25 @@ text = "Level Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SongSelectionPanel" type="PanelContainer" parent="MarginContainer/TopContainer"]
-custom_minimum_size = Vector2(0, 201.1)
+[node name="SongSelectionPanel" type="PanelContainer" parent="MarginContainer/TopContainer" unique_id=517364409]
+custom_minimum_size = Vector2(0, 207)
 layout_mode = 2
 size_flags_vertical = 0
 theme = ExtResource("2_vx4pu")
 
-[node name="SongSelectionMargin" type="MarginContainer" parent="MarginContainer/TopContainer/SongSelectionPanel"]
+[node name="SongSelectionMargin" type="MarginContainer" parent="MarginContainer/TopContainer/SongSelectionPanel" unique_id=218578691]
 layout_mode = 2
 theme = ExtResource("2_vx4pu")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/TopContainer/SongSelectionPanel/SongSelectionMargin"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/TopContainer/SongSelectionPanel/SongSelectionMargin" unique_id=712682770]
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="SongSelectionContainer" type="VBoxContainer" parent="MarginContainer/TopContainer/SongSelectionPanel/SongSelectionMargin/ScrollContainer"]
+[node name="SongSelectionContainer" type="VBoxContainer" parent="MarginContainer/TopContainer/SongSelectionPanel/SongSelectionMargin/ScrollContainer" unique_id=1446985091]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Title" type="Label" parent="MarginContainer/TopContainer/SongSelectionPanel/SongSelectionMargin/ScrollContainer/SongSelectionContainer"]
+[node name="Title" type="Label" parent="MarginContainer/TopContainer/SongSelectionPanel/SongSelectionMargin/ScrollContainer/SongSelectionContainer" unique_id=1749413537]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.15294118, 0.25490198, 0.1764706, 1)
 theme_override_font_sizes/font_size = 14
@@ -86,27 +87,32 @@ text = "Select your song"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Spacer" type="PanelContainer" parent="MarginContainer/TopContainer/SongSelectionPanel/SongSelectionMargin/ScrollContainer/SongSelectionContainer"]
+[node name="Spacer" type="PanelContainer" parent="MarginContainer/TopContainer/SongSelectionPanel/SongSelectionMargin/ScrollContainer/SongSelectionContainer" unique_id=1350548403]
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
-[node name="SongSelectButton3" parent="MarginContainer/TopContainer/SongSelectionPanel/SongSelectionMargin/ScrollContainer/SongSelectionContainer" instance=ExtResource("3_txoma")]
+[node name="SongSelectButton3" parent="MarginContainer/TopContainer/SongSelectionPanel/SongSelectionMargin/ScrollContainer/SongSelectionContainer" unique_id=1564567422 instance=ExtResource("3_txoma")]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 song_data = ExtResource("5_46iml")
 default = true
 
-[node name="SongSelectButton2" parent="MarginContainer/TopContainer/SongSelectionPanel/SongSelectionMargin/ScrollContainer/SongSelectionContainer" instance=ExtResource("3_txoma")]
+[node name="SongSelectButton2" parent="MarginContainer/TopContainer/SongSelectionPanel/SongSelectionMargin/ScrollContainer/SongSelectionContainer" unique_id=1590675107 instance=ExtResource("3_txoma")]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 song_data = ExtResource("6_pauu0")
 
-[node name="SongSelectButton" parent="MarginContainer/TopContainer/SongSelectionPanel/SongSelectionMargin/ScrollContainer/SongSelectionContainer" instance=ExtResource("3_txoma")]
+[node name="SongSelectButton" parent="MarginContainer/TopContainer/SongSelectionPanel/SongSelectionMargin/ScrollContainer/SongSelectionContainer" unique_id=443573569 instance=ExtResource("3_txoma")]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
-[node name="StartButton" type="PanelContainer" parent="MarginContainer/TopContainer"]
+[node name="SongSelectButton4" parent="MarginContainer/TopContainer/SongSelectionPanel/SongSelectionMargin/ScrollContainer/SongSelectionContainer" unique_id=565133875 instance=ExtResource("3_txoma")]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+song_data = ExtResource("7_n0148")
+
+[node name="StartButton" type="PanelContainer" parent="MarginContainer/TopContainer" unique_id=857055184]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -115,7 +121,7 @@ mouse_default_cursor_shape = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vyhib")
 script = ExtResource("5_77kmu")
 
-[node name="Start" type="Label" parent="MarginContainer/TopContainer/StartButton"]
+[node name="Start" type="Label" parent="MarginContainer/TopContainer/StartButton" unique_id=1047759226]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("8_jpipw")
@@ -124,23 +130,23 @@ text = "Start"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=593056201]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 8
 
-[node name="InstrumentButton" parent="MarginContainer/HBoxContainer" instance=ExtResource("3_x7pfc")]
+[node name="InstrumentButton" parent="MarginContainer/HBoxContainer" unique_id=934453189 instance=ExtResource("3_x7pfc")]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/panel = ExtResource("10_6omq5")
 icon = ExtResource("11_pauu0")
 
-[node name="InstrumentButton2" parent="MarginContainer/HBoxContainer" instance=ExtResource("3_x7pfc")]
+[node name="InstrumentButton2" parent="MarginContainer/HBoxContainer" unique_id=235427536 instance=ExtResource("3_x7pfc")]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/panel = ExtResource("10_6omq5")
 icon = ExtResource("11_6omq5")
 instrument = 1
 
-[node name="SongPreview" type="AudioStreamPlayer" parent="." groups=["prep_screen_song_preview"]]
+[node name="SongPreview" type="AudioStreamPlayer" parent="." unique_id=1647017005 groups=["prep_screen_song_preview"]]
 bus = &"BGM"

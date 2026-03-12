@@ -1,4 +1,4 @@
-[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://fp3ej2jqaf5f"]
+[gd_resource type="ArrayMesh" format=4 uid="uid://fp3ej2jqaf5f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rk63c"]
 resource_name = "SVGMat"

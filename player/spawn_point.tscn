@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7wmmnca4o1dx"]
+[gd_scene format=3 uid="uid://c7wmmnca4o1dx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1sf2w"]
 transparency = 1
@@ -8,11 +8,11 @@ albedo_color = Color(0.36838618, 0.8039323, 0.77371633, 0.27450982)
 material = SubResource("StandardMaterial3D_1sf2w")
 size = Vector2(1, 1)
 
-[node name="PlayerSpawnPoint" type="Node3D" groups=["player_spawn"]]
+[node name="PlayerSpawnPoint" type="Node3D" unique_id=1615626978 groups=["player_spawn"]]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1720332567]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.001, 0)
 mesh = SubResource("PlaneMesh_oy4h2")
 
-[node name="Marker3D" type="Marker3D" parent="MeshInstance3D"]
+[node name="Marker3D" type="Marker3D" parent="MeshInstance3D" unique_id=1985792857]
 transform = Transform3D(-0.7071067, 0, 0.7071068, 0, 1, 0, -0.7071068, 0, -0.7071067, 0, -0.001, -0.495)

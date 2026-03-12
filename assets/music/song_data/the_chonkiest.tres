@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SongData" format=3 uid="uid://crhfgfnco8jne"]
+
+[ext_resource type="Script" uid="uid://cm2xsueacjqna" path="res://assets/music/song_data/song_data.gd" id="1_a7b5c"]
+
+[resource]
+script = ExtResource("1_a7b5c")
+name = "The Chonkiest"
+author = "Grooveman David"
+bpm = 142
+volume = -10.0
+file_path = "res://assets/music/the_chonkiest.ogg"
+chords_midi_path = "res://assets/music/chord_midis/the chonkiest chords ever.mid"
+start_of_loop = 19.1
+metadata/_custom_type_script = "uid://cm2xsueacjqna"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d0g3bx2vjpgnv"]
+[gd_scene format=3 uid="uid://d0g3bx2vjpgnv"]
 
 [ext_resource type="Script" uid="uid://cqrnvp223sbhx" path="res://screen_filters/filters.gd" id="1_i0nlq"]
 [ext_resource type="Texture2D" uid="uid://bsv5g3dxvvrml" path="res://screen_filters/textures/dots_vignette_subtle.png" id="2_ydplu"]
@@ -241,11 +241,11 @@ _data = {
 &"fade_out": SubResource("Animation_s4fli")
 }
 
-[node name="Filters" type="CanvasLayer"]
+[node name="Filters" type="CanvasLayer" unique_id=1248516291]
 layer = 0
 script = ExtResource("1_i0nlq")
 
-[node name="Vignette" type="TextureRect" parent="."]
+[node name="Vignette" type="TextureRect" parent="." unique_id=1352702302]
 modulate = Color(1, 1, 1, 0.5803922)
 anchors_preset = 15
 anchor_right = 1.0
@@ -255,7 +255,7 @@ grow_vertical = 2
 texture = ExtResource("2_ydplu")
 metadata/_edit_use_anchors_ = true
 
-[node name="Noise" type="TextureRect" parent="."]
+[node name="Noise" type="TextureRect" parent="." unique_id=870665718]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -266,19 +266,15 @@ mouse_filter = 2
 texture = SubResource("NoiseTexture2D_y6vua")
 metadata/_edit_use_anchors_ = true
 
-[node name="NoiseFade" type="AnimationPlayer" parent="Noise"]
+[node name="NoiseFade" type="AnimationPlayer" parent="Noise" unique_id=1429776165]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_sugp2")
-}
+libraries/ = SubResource("AnimationLibrary_sugp2")
 
-[node name="NoiseShift" type="AnimationPlayer" parent="Noise"]
+[node name="NoiseShift" type="AnimationPlayer" parent="Noise" unique_id=1485948264]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_tbgi4")
-}
+libraries/ = SubResource("AnimationLibrary_tbgi4")
 
-[node name="FadeRect" type="TextureRect" parent="."]
+[node name="FadeRect" type="TextureRect" parent="." unique_id=1412947791]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -288,15 +284,13 @@ mouse_filter = 2
 texture = ExtResource("3_s4fli")
 metadata/_edit_use_anchors_ = true
 
-[node name="Fade" type="AnimationPlayer" parent="FadeRect"]
+[node name="Fade" type="AnimationPlayer" parent="FadeRect" unique_id=682069231]
 unique_name_in_owner = true
 root_node = NodePath("../../..")
-libraries = {
-&"": SubResource("AnimationLibrary_5df70")
-}
-autoplay = "RESET"
+libraries/ = SubResource("AnimationLibrary_5df70")
+autoplay = &"RESET"
 
-[node name="FadeBlackRect" type="ColorRect" parent="."]
+[node name="FadeBlackRect" type="ColorRect" parent="." unique_id=892922296]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -306,15 +300,13 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0)
 metadata/_edit_use_anchors_ = true
 
-[node name="FadeBlack" type="AnimationPlayer" parent="FadeBlackRect"]
+[node name="FadeBlack" type="AnimationPlayer" parent="FadeBlackRect" unique_id=1170973139]
 unique_name_in_owner = true
 root_node = NodePath("../../FadeRect/Fade")
-libraries = {
-&"": SubResource("AnimationLibrary_grcp3")
-}
-autoplay = "RESET"
+libraries/ = SubResource("AnimationLibrary_grcp3")
+autoplay = &"RESET"
 
-[node name="PauseShader" type="ColorRect" parent="."]
+[node name="PauseShader" type="ColorRect" parent="." unique_id=282790674]
 material = SubResource("ShaderMaterial_80yeb")
 anchors_preset = 15
 anchor_right = 1.0
@@ -323,9 +315,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="PauseShaderFade" type="AnimationPlayer" parent="PauseShader"]
+[node name="PauseShaderFade" type="AnimationPlayer" parent="PauseShader" unique_id=941503468]
 unique_name_in_owner = true
 process_mode = 3
-libraries = {
-&"": SubResource("AnimationLibrary_s4fli")
-}
+libraries/ = SubResource("AnimationLibrary_s4fli")

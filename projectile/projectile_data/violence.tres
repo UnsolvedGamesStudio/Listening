@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ProjectileData" load_steps=5 format=3 uid="uid://buahldoniyh22"]
+[gd_resource type="Resource" script_class="ProjectileData" format=3 uid="uid://buahldoniyh22"]
 
 [ext_resource type="Script" uid="uid://bvbp1tvil18db" path="res://projectile/projectile_data/projectile_data.gd" id="1_ccoar"]
 [ext_resource type="Texture2D" uid="uid://dgx3jryq3jhtr" path="res://projectile/textures/violence1.png" id="2_23q2k"]
