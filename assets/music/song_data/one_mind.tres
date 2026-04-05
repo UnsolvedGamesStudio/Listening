@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SongData" load_steps=2 format=3 uid="uid://b5n752kaydvfi"]
+[gd_resource type="Resource" script_class="SongData" format=3 uid="uid://b5n752kaydvfi"]
 
 [ext_resource type="Script" uid="uid://cm2xsueacjqna" path="res://assets/music/song_data/song_data.gd" id="1_l4l7f"]
 
@@ -6,6 +6,7 @@
 script = ExtResource("1_l4l7f")
 name = "One Mind"
 author = "RedFlagDiver"
+volume_modifier = 4.0
 file_path = "res://assets/music/one_mind.ogg"
 chords_midi_path = "res://assets/music/chord_midis/one_mind_chords.mid"
 key = "B Minor"

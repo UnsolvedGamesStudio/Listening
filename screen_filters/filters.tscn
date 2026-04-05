@@ -2,8 +2,22 @@
 
 [ext_resource type="Script" uid="uid://cqrnvp223sbhx" path="res://screen_filters/filters.gd" id="1_i0nlq"]
 [ext_resource type="Texture2D" uid="uid://bsv5g3dxvvrml" path="res://screen_filters/textures/dots_vignette_subtle.png" id="2_ydplu"]
+[ext_resource type="Shader" uid="uid://wq6dygnfwfu2" path="res://screen_filters/nostalgic.gdshader" id="3_0q11c"]
 [ext_resource type="Shader" uid="uid://cedebmt1r0vdl" path="res://screen_filters/filter.gdshader" id="3_80yeb"]
 [ext_resource type="Texture2D" uid="uid://c65g0ywrxwakh" path="res://autoloads/textures/faded_texture.tres" id="3_s4fli"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_grcp3"]
+shader = ExtResource("3_0q11c")
+shader_parameter/bits_per_channel = 3
+shader_parameter/dither_enabled = true
+shader_parameter/dither_mode = 0
+shader_parameter/time_varying_noise = false
+shader_parameter/anti_dither_enabled = true
+shader_parameter/divot_enabled = false
+shader_parameter/vi_enabled = false
+shader_parameter/vi_x_add = 1.0
+shader_parameter/vi_x_start = 0.0
+shader_parameter/gamma = 0.88000001805
 
 [sub_resource type="Gradient" id="Gradient_o5qli"]
 offsets = PackedFloat32Array(0, 0.99065423)
@@ -253,6 +267,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ydplu")
+metadata/_edit_use_anchors_ = true
+
+[node name="Nostalgic" type="ColorRect" parent="." unique_id=835635131]
+z_index = 15
+z_as_relative = false
+material = SubResource("ShaderMaterial_grcp3")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Noise" type="TextureRect" parent="." unique_id=870665718]

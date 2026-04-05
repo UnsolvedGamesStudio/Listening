@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://86r6xeju02bg"]
+[gd_scene format=3 uid="uid://86r6xeju02bg"]
 
 [ext_resource type="Theme" uid="uid://b2d4535til41s" path="res://assets/theme.tres" id="1_fp2hw"]
 [ext_resource type="Script" uid="uid://cfglrrbbq2g8" path="res://main_ui/health_bar.gd" id="1_m5yyi"]
@@ -102,9 +102,9 @@ opentype_features = {
 spacing_bottom = -2
 baseline_offset = 0.22
 
-[node name="MainUI" type="CanvasLayer"]
+[node name="MainUI" type="CanvasLayer" unique_id=1071152925]
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=789337990]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -113,10 +113,10 @@ grow_vertical = 2
 theme = ExtResource("1_fp2hw")
 metadata/_edit_use_anchors_ = true
 
-[node name="Left" type="VBoxContainer" parent="MarginContainer"]
+[node name="Left" type="VBoxContainer" parent="MarginContainer" unique_id=812533982]
 layout_mode = 2
 
-[node name="HealthBar" type="ProgressBar" parent="MarginContainer/Left" groups=["player_hp_bar"]]
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/Left" unique_id=58767224 groups=["player_hp_bar"]]
 z_index = 1
 custom_minimum_size = Vector2(100, 10)
 layout_mode = 2
@@ -129,12 +129,10 @@ show_percentage = false
 script = ExtResource("1_m5yyi")
 metadata/_edit_use_anchors_ = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/Left/HealthBar"]
-libraries = {
-&"": SubResource("AnimationLibrary_hcckg")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/Left/HealthBar" unique_id=679983548]
+libraries/ = SubResource("AnimationLibrary_hcckg")
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Left/HealthBar"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Left/HealthBar" unique_id=1518390929]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 1
@@ -145,18 +143,18 @@ anchor_right = 1.22
 anchor_bottom = 1.2
 metadata/_edit_use_anchors_ = true
 
-[node name="HeartIcon" type="Sprite2D" parent="MarginContainer/Left/HealthBar/PanelContainer"]
+[node name="HeartIcon" type="Sprite2D" parent="MarginContainer/Left/HealthBar/PanelContainer" unique_id=96476679]
 position = Vector2(6, 7)
 texture = ExtResource("3_fp2hw")
 hframes = 2
 script = ExtResource("4_hcckg")
 
-[node name="Timer" type="Timer" parent="MarginContainer/Left/HealthBar/PanelContainer/HeartIcon"]
+[node name="Timer" type="Timer" parent="MarginContainer/Left/HealthBar/PanelContainer/HeartIcon" unique_id=1592683717]
 unique_name_in_owner = true
 wait_time = 0.15
 one_shot = true
 
-[node name="HealthBarLabel" type="Label" parent="MarginContainer/Left/HealthBar"]
+[node name="HealthBarLabel" type="Label" parent="MarginContainer/Left/HealthBar" unique_id=1017635790]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -169,7 +167,7 @@ theme_override_font_sizes/font_size = 7
 text = "20"
 metadata/_edit_use_anchors_ = true
 
-[node name="DopamineBar" type="ProgressBar" parent="MarginContainer/Left" groups=["player_dopamine_bar"]]
+[node name="DopamineBar" type="ProgressBar" parent="MarginContainer/Left" unique_id=608496185 groups=["player_dopamine_bar"]]
 z_index = 1
 custom_minimum_size = Vector2(100, 10)
 layout_mode = 2
@@ -182,7 +180,7 @@ show_percentage = false
 script = ExtResource("5_ht8ex")
 metadata/_edit_use_anchors_ = true
 
-[node name="DopamineIcon" type="TextureRect" parent="MarginContainer/Left/DopamineBar"]
+[node name="DopamineIcon" type="TextureRect" parent="MarginContainer/Left/DopamineBar" unique_id=939572045]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.04
@@ -193,7 +191,7 @@ texture = ExtResource("6_fatuu")
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
-[node name="DopamineBarLabel" type="Label" parent="MarginContainer/Left/DopamineBar/DopamineIcon"]
+[node name="DopamineBarLabel" type="Label" parent="MarginContainer/Left/DopamineBar/DopamineIcon" unique_id=144396303]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -206,74 +204,72 @@ theme_override_font_sizes/font_size = 7
 text = "20"
 metadata/_edit_use_anchors_ = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/Left/DopamineBar"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/Left/DopamineBar" unique_id=1026948715]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_kkjxn")
-}
+libraries/ = SubResource("AnimationLibrary_kkjxn")
 
-[node name="Spacer" type="Panel" parent="MarginContainer/Left"]
+[node name="Spacer" type="Panel" parent="MarginContainer/Left" unique_id=1770357183]
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="NeuronCount" type="HBoxContainer" parent="MarginContainer/Left"]
+[node name="NeuronCount" type="HBoxContainer" parent="MarginContainer/Left" unique_id=932304606]
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="NeuronIcon" type="TextureRect" parent="MarginContainer/Left/NeuronCount"]
+[node name="NeuronIcon" type="TextureRect" parent="MarginContainer/Left/NeuronCount" unique_id=966845440]
 layout_mode = 2
 texture = ExtResource("6_lsa3w")
 stretch_mode = 5
 
-[node name="NeuronsLabel" type="Label" parent="MarginContainer/Left/NeuronCount"]
+[node name="NeuronsLabel" type="Label" parent="MarginContainer/Left/NeuronCount" unique_id=883064447]
 layout_mode = 2
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 14
 text = "0/0"
 script = ExtResource("7_uwb8r")
 
-[node name="SynapsesCount" type="HBoxContainer" parent="MarginContainer/Left"]
+[node name="SynapsesCount" type="HBoxContainer" parent="MarginContainer/Left" unique_id=1479781215]
 layout_mode = 2
 script = ExtResource("11_euac6")
 metadata/_edit_use_anchors_ = true
 
-[node name="SynapseIcon" type="TextureRect" parent="MarginContainer/Left/SynapsesCount"]
+[node name="SynapseIcon" type="TextureRect" parent="MarginContainer/Left/SynapsesCount" unique_id=1146003225]
 layout_mode = 2
 texture = ExtResource("5_vm8jh")
 stretch_mode = 5
 
-[node name="SynapsesLabel" type="Label" parent="MarginContainer/Left/SynapsesCount"]
+[node name="SynapsesLabel" type="Label" parent="MarginContainer/Left/SynapsesCount" unique_id=1034710316]
 layout_mode = 2
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 14
 text = "0/0"
 script = ExtResource("6_sqw8h")
 
-[node name="EnemyCount" type="HBoxContainer" parent="MarginContainer/Left"]
+[node name="EnemyCount" type="HBoxContainer" parent="MarginContainer/Left" unique_id=627926673]
 layout_mode = 2
 script = ExtResource("11_euac6")
 metadata/_edit_use_anchors_ = true
 
-[node name="SynapseIcon" type="TextureRect" parent="MarginContainer/Left/EnemyCount"]
+[node name="SynapseIcon" type="TextureRect" parent="MarginContainer/Left/EnemyCount" unique_id=633588456]
 layout_mode = 2
 texture = ExtResource("9_uwb8r")
 stretch_mode = 5
 
-[node name="EnemiesLeftLabel" type="Label" parent="MarginContainer/Left/EnemyCount"]
+[node name="EnemiesLeftLabel" type="Label" parent="MarginContainer/Left/EnemyCount" unique_id=465419987]
 layout_mode = 2
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 14
 text = "x0"
 script = ExtResource("4_6kiqu")
 
-[node name="Middle" type="VBoxContainer" parent="MarginContainer"]
+[node name="Middle" type="VBoxContainer" parent="MarginContainer" unique_id=1810397130]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/separation = 2
 
-[node name="Timer" type="Label" parent="MarginContainer/Middle"]
+[node name="Timer" type="Label" parent="MarginContainer/Middle" unique_id=729738999]
 custom_minimum_size = Vector2(68.235, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -285,7 +281,7 @@ vertical_alignment = 1
 justification_flags = 0
 script = ExtResource("2_5q6g2")
 
-[node name="PauseHint" type="Label" parent="MarginContainer/Middle"]
+[node name="PauseHint" type="Label" parent="MarginContainer/Middle" unique_id=615770844]
 modulate = Color(1, 1, 1, 0.5647059)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -296,21 +292,21 @@ text = "Press ESC
 to see controls and spells"
 horizontal_alignment = 1
 
-[node name="Right" type="VBoxContainer" parent="MarginContainer"]
+[node name="Right" type="VBoxContainer" parent="MarginContainer" unique_id=1672536961]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
-[node name="ElementContainerUI" parent="MarginContainer/Right" instance=ExtResource("1_rvqvy")]
+[node name="ElementContainerUI" parent="MarginContainer/Right" unique_id=388913768 instance=ExtResource("1_rvqvy")]
 custom_minimum_size = Vector2(25, 100)
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="ItemContainerUI" parent="MarginContainer/Right" instance=ExtResource("4_ru8ot")]
+[node name="ItemContainerUI" parent="MarginContainer/Right" unique_id=1552803550 instance=ExtResource("4_ru8ot")]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("20_kkjxn")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1173840104]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -319,12 +315,12 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
-[node name="Reticle" type="TextureRect" parent="CenterContainer" groups=["reticle"]]
+[node name="Reticle" type="TextureRect" parent="CenterContainer" unique_id=1539416980 groups=["reticle"]]
 modulate = Color(1, 1, 1, 0.39215687)
 layout_mode = 2
 texture = ExtResource("1_sgsgb")
 
-[node name="InteractTooltip" type="Label" parent="CenterContainer/Reticle" groups=["interact_tooltip"]]
+[node name="InteractTooltip" type="Label" parent="CenterContainer/Reticle" unique_id=69694515 groups=["interact_tooltip"]]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -343,4 +339,4 @@ theme_override_font_sizes/font_size = 7
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DamageIndicator" parent="." instance=ExtResource("7_sqw8h")]
+[node name="DamageIndicator" parent="." unique_id=1873608037 instance=ExtResource("7_sqw8h")]

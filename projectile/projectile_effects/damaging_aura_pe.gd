@@ -6,6 +6,7 @@ class_name DamagingAuraPE
 @onready var appear: AnimationPlayer = %Appear
 
 @export var damage:= 5.0
+@export var hide_projectile:= false
 
 
 func enter():
@@ -13,6 +14,10 @@ func enter():
 		appear.speed_scale /= (projectile.origin_node.scale.y * 2.0)
 	
 	projectile.disable_hitbox()
+	
+	if hide_projectile:
+		projectile.sprite_3d.hide()
+	
 	damage_cooldown.timeout.connect(on_damage_cooldown_timeout)
 
 

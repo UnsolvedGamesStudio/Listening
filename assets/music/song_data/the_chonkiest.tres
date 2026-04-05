@@ -7,7 +7,6 @@ script = ExtResource("1_a7b5c")
 name = "The Chonkiest"
 author = "Grooveman David"
 bpm = 142
-volume = -10.0
 file_path = "res://assets/music/the_chonkiest.ogg"
 chords_midi_path = "res://assets/music/chord_midis/the chonkiest chords ever.mid"
 start_of_loop = 19.1

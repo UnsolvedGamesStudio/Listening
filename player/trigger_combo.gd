@@ -59,8 +59,9 @@ func spell_9(combo_name):
 	print("do a spell 9")
 
 
+## Frostbite (SAD + SAD + SAD)
 func spell_10(combo_name):
-	print("do a spell 10")
+	pass
 
 
 func spell_11(combo_name):
@@ -70,7 +71,7 @@ func spell_11(combo_name):
 func spell_12(combo_name):
 	print("do a spell 12")
 
-## Violence (ANG = ANG + ANG)
+## Violence (ANG + ANG + ANG)
 func spell_13(combo_name):
 	pass
 

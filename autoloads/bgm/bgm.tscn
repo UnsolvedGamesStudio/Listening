@@ -69,7 +69,7 @@ _data = {
 [node name="BGM" type="AudioStreamPlayer" unique_id=1597227087]
 process_mode = 3
 stream = ExtResource("1_4owoj")
-volume_db = -80.0
+volume_db = -7.0
 bus = &"BGM"
 parameters/looping = true
 script = ExtResource("2_vucbv")
@@ -90,6 +90,7 @@ audio_stream_player = NodePath("..")
 [node name="SamplerInstrument" type="AudioStreamPlayer" parent="." unique_id=1178423505]
 unique_name_in_owner = true
 process_mode = 3
+volume_db = -12.0
 max_polyphony = 8
 bus = &"Sampler"
 script = ExtResource("5_syuoy")

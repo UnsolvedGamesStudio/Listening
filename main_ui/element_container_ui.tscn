@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://5is6n10g8b8b"]
+[gd_scene format=3 uid="uid://5is6n10g8b8b"]
 
 [ext_resource type="StyleBox" uid="uid://3mxb1yvwi5f0" path="res://assets/ui_theme/outline_panel.tres" id="1_erlmv"]
 [ext_resource type="Script" uid="uid://bdu1s4nar2plq" path="res://main_ui/element_container_ui.gd" id="1_k5wb2"]
+[ext_resource type="Script" uid="uid://cxx8nkoghlqkd" path="res://main_ui/element_containers.gd" id="3_7htvf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_erlmv"]
 bg_color = Color(0.16862746, 0.30588236, 0.58431375, 1)
@@ -11,7 +12,7 @@ anti_aliasing = false
 bg_color = Color(1, 1, 1, 1)
 anti_aliasing = false
 
-[node name="ElementContainerUI" type="PanelContainer"]
+[node name="ElementContainerUI" type="PanelContainer" unique_id=1627978064]
 custom_minimum_size = Vector2(25, 0)
 anchors_preset = -1
 anchor_left = 0.9479167
@@ -22,12 +23,13 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_vertical = 0
 theme_override_styles/panel = ExtResource("1_erlmv")
+script = ExtResource("1_k5wb2")
 metadata/_edit_use_anchors_ = true
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=594192424]
 layout_mode = 2
 
-[node name="TimerBar" type="ProgressBar" parent="Control"]
+[node name="TimerBar" type="ProgressBar" parent="Control" unique_id=358896787]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(2, 7)
 layout_mode = 1
@@ -46,46 +48,46 @@ fill_mode = 2
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=180588172]
 layout_mode = 2
 alignment = 1
 
-[node name="ElementContainers" type="VBoxContainer" parent="HBoxContainer" groups=["element_container_ui"]]
+[node name="ElementContainers" type="VBoxContainer" parent="HBoxContainer" unique_id=1296671100 groups=["element_container_ui"]]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
-script = ExtResource("1_k5wb2")
+script = ExtResource("3_7htvf")
 
-[node name="Element1Container" type="PanelContainer" parent="HBoxContainer/ElementContainers"]
+[node name="Element1Container" type="PanelContainer" parent="HBoxContainer/ElementContainers" unique_id=306478152]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 6
 
-[node name="Element1" type="TextureRect" parent="HBoxContainer/ElementContainers/Element1Container"]
+[node name="Element1" type="TextureRect" parent="HBoxContainer/ElementContainers/Element1Container" unique_id=1864741241]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="Element2Container" type="PanelContainer" parent="HBoxContainer/ElementContainers"]
+[node name="Element2Container" type="PanelContainer" parent="HBoxContainer/ElementContainers" unique_id=1279218468]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 6
 
-[node name="Element2" type="TextureRect" parent="HBoxContainer/ElementContainers/Element2Container"]
+[node name="Element2" type="TextureRect" parent="HBoxContainer/ElementContainers/Element2Container" unique_id=2076917301]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="Element3Container" type="PanelContainer" parent="HBoxContainer/ElementContainers"]
+[node name="Element3Container" type="PanelContainer" parent="HBoxContainer/ElementContainers" unique_id=747676777]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 6
 
-[node name="Element3" type="TextureRect" parent="HBoxContainer/ElementContainers/Element3Container"]
+[node name="Element3" type="TextureRect" parent="HBoxContainer/ElementContainers/Element3Container" unique_id=611900016]
 unique_name_in_owner = true
 layout_mode = 2
 stretch_mode = 5
 
-[node name="ElementExpiryTimer" type="Timer" parent="HBoxContainer/ElementContainers"]
+[node name="ElementExpiryTimer" type="Timer" parent="HBoxContainer/ElementContainers" unique_id=149171300]
 unique_name_in_owner = true
 one_shot = true

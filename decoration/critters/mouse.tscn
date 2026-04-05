@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c68q06qr8h5xi"]
+[gd_scene format=3 uid="uid://c68q06qr8h5xi"]
 
 [ext_resource type="Script" uid="uid://cm24cge1m8xwf" path="res://decoration/critters/mouse.gd" id="1_7shys"]
 [ext_resource type="PackedScene" uid="uid://dwwqg64m47km3" path="res://decoration/critters/critter_hurtbox.tscn" id="2_im2v1"]
@@ -80,48 +80,48 @@ _data = {
 &"moving": SubResource("Animation_4se78")
 }
 
-[node name="Mouse" type="RigidBody3D"]
+[node name="Mouse" type="RigidBody3D" unique_id=997859730]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_7shys")
 
-[node name="Meshes" type="Node3D" parent="."]
+[node name="Meshes" type="Node3D" parent="." unique_id=63014270]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06197186, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes" unique_id=1054409280]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.9289634, 0, 0, 0)
 mesh = SubResource("CylinderMesh_dgxte")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Meshes"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Meshes" unique_id=586657248]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.04727173, 0.33654785)
 mesh = SubResource("CylinderMesh_7shys")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Meshes"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Meshes" unique_id=1732599326]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04727173, -0.21987534)
 mesh = SubResource("SphereMesh_4se78")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=896256015]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06197186, 0)
 shape = SubResource("BoxShape3D_7shys")
 
-[node name="Hurtbox" parent="." instance=ExtResource("2_im2v1")]
+[node name="Hurtbox" parent="." unique_id=1059778270 instance=ExtResource("2_im2v1")]
 unique_name_in_owner = true
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Hurtbox"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Hurtbox" unique_id=820105526]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25305176, 0)
 shape = SubResource("BoxShape3D_4se78")
 
-[node name="WallDetect" type="Area3D" parent="."]
+[node name="WallDetect" type="Area3D" parent="." unique_id=649191532]
 unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WallDetect"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallDetect" unique_id=2041161717]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006549835, 0.05692632, -0.18545532)
 shape = SubResource("BoxShape3D_r2l80")
 debug_color = Color(0.41099185, 0.603334, 0, 0.14901961)
 
-[node name="AmbientSFX" type="AudioStreamPlayer3D" parent="."]
+[node name="AmbientSFX" type="AudioStreamPlayer3D" parent="." unique_id=1006238999]
 unique_name_in_owner = true
 stream = ExtResource("3_1o5tm")
 volume_db = 15.0
@@ -129,24 +129,22 @@ autoplay = true
 max_distance = 10.0
 bus = &"SFX"
 
-[node name="DieSFX" type="AudioStreamPlayer3D" parent="."]
+[node name="DieSFX" type="AudioStreamPlayer3D" parent="." unique_id=1979113471]
 unique_name_in_owner = true
 stream = ExtResource("4_1o5tm")
-volume_db = -10.0
+volume_db = -12.5
 pitch_scale = 1.2
 max_distance = 10.0
 bus = &"SFX"
 
-[node name="CritterMovement" parent="." instance=ExtResource("2_r2l80")]
+[node name="CritterMovement" parent="." unique_id=600323704 instance=ExtResource("2_r2l80")]
 min_random_time = 4.0
 max_random_time = 8.0
 speed_boost_frequency = 5.0
 speed_boost_mult = 2.5
 
-[node name="CritterGetHurt" parent="." instance=ExtResource("3_4se78")]
+[node name="CritterGetHurt" parent="." unique_id=610461838 instance=ExtResource("3_4se78")]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=117469642]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_im2v1")
-}
+libraries/ = SubResource("AnimationLibrary_im2v1")

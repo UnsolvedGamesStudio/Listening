@@ -103,7 +103,6 @@ func cast_spell(comboless:= false):
 	fire(key)
 
 
-
 func fire(key):
 	var amount:= 1
 	var delay:= 0.2
@@ -213,7 +212,6 @@ func create_projectile(projectile_effect_path: String = "", data: ProjectileData
 	
 	if not data == null:
 		projectile_inst.data = data
-	
 	
 	projectile_inst.direction = look_at_direction.normalized()
 	projectile_inst.color = determine_color()

@@ -24,7 +24,9 @@ func add_scene(scene: PackedScene):
 	instrument_inst.player = get_parent()
 	add_child(instrument_inst)
 	
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sampler"), instrument_inst.volume_db)
+	var bus_volume: float = 0.0 + instrument_inst.volume_modifier
+	
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sampler"), bus_volume)
 	set_sample(instrument_inst)
 
 

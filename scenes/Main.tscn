@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://duv71sufvwmty" path="res://scenes/cursor_manager.gd" id="4_o6xl0"]
 [ext_resource type="Script" uid="uid://cehyoy0pxx2ps" path="res://debug_nodes/debug_stress_tester.gd" id="5_tbgi4"]
 [ext_resource type="Script" uid="uid://cb7dc6jt07vix" path="res://debug_nodes/player_debug.gd" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://cpp7g0af4m0ed" path="res://AudioMixerVisualizer/AudioDebugVisualizer.tscn" id="7_o6xl0"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rarhs"]
 lifetime_randomness = 0.51
@@ -44,3 +45,30 @@ script = ExtResource("5_tbgi4")
 
 [node name="PlayerCheats" type="Node" parent="." unique_id=1955176774]
 script = ExtResource("6_tefeu")
+
+[node name="DevNotes" type="RichTextLabel" parent="." unique_id=818737383]
+anchors_preset = -1
+anchor_left = 1.171875
+anchor_top = 0.02232143
+anchor_right = 2.1425781
+anchor_bottom = 1.5066965
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/bold_font_size = 14
+theme_override_font_sizes/bold_italics_font_size = 14
+theme_override_font_sizes/italics_font_size = 14
+theme_override_font_sizes/mono_font_size = 14
+text = "- chest interact flicker 
+- keep checking volumes
+- ice spell still has note inside
+- melting Wax err message - cursor flicker
+- rememberers still not going away if enough saved
+- occasional enter level crashes
+- kick spam on enter level
+- test beat offset
+
+The text-based scene at path \"res://autoloads/bgm/bgm.tscn\" is large on disk (10.56 MiB), likely because it has embedded binary data. Consider saving its binary subresource(s) to a binary `.res` file or saving the scene as a binary `.scn` file."
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioDebugVisualizer" parent="." unique_id=557291510 instance=ExtResource("7_o6xl0")]
+visible = false
+buses = Array[int]([2])

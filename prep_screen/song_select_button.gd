@@ -67,6 +67,7 @@ func _gui_input(event: InputEvent) -> void:
 
 func apply_data():
 	Bgm.current_song_data = song_data
+	Bgm.init_song_data()
 
 
 func on_clicked():
@@ -88,7 +89,8 @@ func on_mouse_entered():
 		scale.y = 1.1
 	
 	GlobalSfx.ui_hover.play()
-	song_preview.volume_db = song_data.volume
+	
+	song_preview.volume_db = Bgm.volume_db + song_data.volume_modifier
 	song_preview.stream = song_stream
 	song_preview.play()
 

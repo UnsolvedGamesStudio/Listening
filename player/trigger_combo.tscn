@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkt3xpwbltnif"]
+[gd_scene format=3 uid="uid://bkt3xpwbltnif"]
 
 [ext_resource type="Script" uid="uid://chuway8vdph2c" path="res://player/trigger_combo.gd" id="1_pqrcl"]
 
-[node name="TriggerCombo" type="Node"]
+[node name="TriggerCombo" type="Node" unique_id=1448931754]
 script = ExtResource("1_pqrcl")

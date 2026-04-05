@@ -18,6 +18,7 @@ var beat_visualizer: BeatVisualizer
 var current_song_data: SongData
 
 var current_midi_notes:= []
+var default_chord:= [["E", 4], ["G#", 4], ["B", 4]]
 var beat_count:= 0
 var last_timing:= 0.0
 var circles_are_in:= false
@@ -75,7 +76,7 @@ func init_song_data():
 	stream = load(current_song_data.file_path)
 	beat_timer.bpm = current_song_data.bpm
 	midi_player.file = current_song_data.chords_midi_path
-	volume_db = current_song_data.volume
+	volume_db += current_song_data.volume_modifier
 
 
 func add_note_to_array(note):
@@ -136,84 +137,95 @@ func translate_midi(midi_number):
 
 
 func play_sample(elements: Array[int] = []):
-	if get_notes() == []:
-		play_note_no_music(elements)
-		return
+	var chord:= default_chord
+	
+	if get_notes() != []:
+		chord = get_notes()
+	else:
+		print("Using default chord")
 	
 	var sample:= sampler_instrument.samples[0]
 	
 	sampler_instrument.stop()
 	
 	if elements == []:
-		play_single_note(get_notes().pick_random(), 2)
+		play_single_note(chord.pick_random(), 2)
+		return
 	
 	if elements.size() == 3:
-		play_full_chord()
+		play_full_chord(chord)
 		return
+	
+	var played_notes:= 0
 	
 	for element in elements:
 		if element == 0:
-			play_highest_note()
+			play_highest_note(chord)
 		
 		if element == 1:
-			play_lowest_note()
+			play_lowest_note(chord)
 		
 		if element == 2:
-			play_middle_note()
+			play_middle_note(chord)
+		
+		played_notes += 1
 
 
-func play_lowest_note():
-	var note_to_play: Array = get_notes()[0]
+func play_lowest_note(chord: Array):
+	var note_to_play: Array = chord[0]
 	play_single_note(note_to_play)
 
 
-func play_highest_note():
-	var note_to_play: Array = get_notes()[-1]
+func play_highest_note(chord: Array):
+	var note_to_play: Array = chord[-1]
 	play_single_note(note_to_play)
 
 
-func play_middle_note():
-	var current_notes := get_notes()
+func play_middle_note(chord: Array):
+	var current_notes := chord
 	var count := current_notes.size()
+	
 	if count == 0:
 		return
 	
-	var idx := (count - 1) / 2.0
+	var idx:= (count - 1) / 2.0
+	
 	if count % 2 == 0:
 		# even → two middle elements → random tie-breaker
 		idx += randi() % 2
 	
 	var note_to_play = current_notes[idx]
+	
 	play_single_note(note_to_play)
 
 
-func play_note_no_music(elements):
-	#var note_names:= ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
-	#var c_maj:= ["C", "D", "E", "F", "G", "A", "B"]
-	var b_melodic_min:= ["B", "C#", "D", "E", "F#", "G#", "A#"]
-	var sample:= sampler_instrument.samples[0]
-	
-	if elements == []:
-		sampler_instrument.play_note(b_melodic_min.pick_random(), sample.octave + 1)
-	
-	if elements.size() == 3:
-		sampler_instrument.play_note("B", sample.octave)
-		sampler_instrument.play_note("E", sample.octave)
-		sampler_instrument.play_note("G#", sample.octave)
-		return
-	
-	for element in elements:
-		if element == 0:
-			sampler_instrument.play_note("B", sample.octave)
-		if element == 1:
-			sampler_instrument.play_note("E", sample.octave)
-		if element == 2:
-			sampler_instrument.play_note("G#", sample.octave)
+#func play_note_no_music(elements):
+	##var note_names:= ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+	##var c_maj:= ["C", "D", "E", "F", "G", "A", "B"]
+	#var b_melodic_min:= ["B", "C#", "D", "E", "F#", "G#", "A#"]
+	#var sample:= sampler_instrument.samples[0]
+	#
+	#if elements == []:
+		#sampler_instrument.play_note(b_melodic_min.pick_random(), sample.octave + 1)
+	#
+	#if elements.size() == 3:
+		#sampler_instrument.play_note("B", sample.octave)
+		#sampler_instrument.play_note("E", sample.octave)
+		#sampler_instrument.play_note("G#", sample.octave)
+		#return
+	#
+	#for element in elements:
+		#if element == 0:
+			#sampler_instrument.play_note("B", sample.octave)
+		#if element == 1:
+			#sampler_instrument.play_note("E", sample.octave)
+		#if element == 2:
+			#sampler_instrument.play_note("G#", sample.octave)
 
 
 func play_single_note(note, octave_modifier: int = 0):
 	var sample:= sampler_instrument.samples[0]
-	var exception_octave:= 0 ## Temporary
+	var exception_octave:= 0
 	
 	if Vars.current_instrument == Vars.instrument_types.CARILLON:
 		exception_octave = 5
@@ -227,13 +239,10 @@ func play_single_note(note, octave_modifier: int = 0):
 	sampler_instrument.play_note(sample.tone, sample.octave)
 
 
-func play_full_chord(octave_modifier: int = 0):
-	if get_notes() == []:
-		return
-	
+func play_full_chord(chord: Array, octave_modifier: int = 0):
 	var sample:= sampler_instrument.samples[0]
 	
-	for note in get_notes():
+	for note in chord:
 		play_single_note(note, octave_modifier)
 
 
