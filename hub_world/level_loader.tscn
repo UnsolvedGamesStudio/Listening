@@ -12,7 +12,7 @@ transparency = 1
 cull_mode = 2
 depth_draw_mode = 1
 shading_mode = 0
-albedo_color = Color(0.36842093, 2.2219553, 1.953598, 1)
+albedo_color = Color(0.368, 2.222, 1.954, 1)
 albedo_texture = ExtResource("2_qtyh0")
 texture_filter = 0
 
@@ -145,7 +145,7 @@ offset_right = 20.0
 offset_bottom = 6.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.99999994, 0.104506545, 0.8650311, 1)
+theme_override_colors/font_color = Color(0.972549, 0.77254903, 0.22745098, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 14
 text = "Level Name"

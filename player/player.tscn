@@ -136,6 +136,7 @@ target_position = Vector3(0, 0, -2)
 collision_mask = 8193
 collide_with_areas = true
 collide_with_bodies = false
+debug_shape_custom_color = Color(0.89529264, 0.82314134, 0.8695663, 1)
 
 [node name="LineOfSight" type="RayCast3D" parent="." unique_id=1898220882]
 unique_name_in_owner = true

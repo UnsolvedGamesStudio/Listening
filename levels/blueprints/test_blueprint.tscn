@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://d4kapwpdawyhh"]
+[gd_scene format=4 uid="uid://d4kapwpdawyhh"]
 
 [ext_resource type="Script" uid="uid://ri7ko3t1xlih" path="res://level_editor/level_editor.gd" id="1_o44uh"]
 [ext_resource type="PackedScene" uid="uid://7meyinovsje0" path="res://pickups/synapse_pickup.tscn" id="2_qgfrc"]
@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cyvhy058hngw7" path="res://levels/blueprints/blueprint_floor.tscn" id="10_qgfrc"]
 [ext_resource type="PackedScene" uid="uid://dilbsihag48bm" path="res://level_editor/tilemaps/objects_tilemap.tscn" id="11_mny3b"]
 
-[node name="LevelBlueprint" type="Node" groups=["level_blueprint"]]
+[node name="LevelBlueprint" type="Node" unique_id=190750745 groups=["level_blueprint"]]
 script = ExtResource("1_o44uh")
 remembering_costs = Array[int]([0, 8, 30, 40])
 box_1 = Array[PackedScene]([ExtResource("2_qgfrc"), ExtResource("3_rdfb2"), ExtResource("4_osa6w")])
@@ -21,28 +21,28 @@ box_2 = Array[PackedScene]([ExtResource("5_5nbes"), ExtResource("2_qgfrc"), ExtR
 box_3 = Array[PackedScene]([ExtResource("6_eeivi"), ExtResource("4_osa6w"), ExtResource("4_osa6w"), ExtResource("4_osa6w"), ExtResource("7_68vj4")])
 box_4 = Array[PackedScene]([ExtResource("8_d2bwe"), ExtResource("4_osa6w"), ExtResource("4_osa6w"), ExtResource("9_xt7bh")])
 
-[node name="Floor1" parent="." instance=ExtResource("10_qgfrc")]
+[node name="Floor1" parent="." unique_id=1696812109 instance=ExtResource("10_qgfrc")]
 
-[node name="Cells" parent="Floor1" groups=["editor_cells"] instance=ExtResource("10_gsuot")]
+[node name="Cells" parent="Floor1" unique_id=1860087059 groups=["editor_cells"] instance=ExtResource("10_gsuot")]
 tile_map_data = PackedByteArray("AAABAAEAAQAAAAEAAAAAAAEAAQAAAAEAAAD//wEAAQAAAAEAAAD//wIAAQAAAAEAAAAAAAIAAQAAAAAAAAABAAMAAQAAAAEAAAAAAAMAAQAAAAEAAAD//wMAAQAAAAEAAAABAAIAAQAAAAEAAAA=")
 script = null
 
-[node name="TileForgetters" parent="Floor1" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
+[node name="TileForgetters" parent="Floor1" unique_id=469663849 groups=["editor_objects"] instance=ExtResource("11_mny3b")]
 
-[node name="Layer1" parent="Floor1" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
-tile_map_data = PackedByteArray("AAAAAAIABAAAAAAAAAD//wEABwAAAAAAAAAAAAEABwAAAAEAAAA=")
+[node name="Layer1" parent="Floor1" unique_id=1405763340 groups=["editor_objects"] instance=ExtResource("11_mny3b")]
+tile_map_data = PackedByteArray("AAAAAAIABAAAAAAAAAABAAIABQABAAAAAAAAAAEABwAAAAEAAAD//wEABwAAAAAAAAD//wIABQADAAAAAAA=")
 
-[node name="Layer2" parent="Floor1" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
+[node name="Layer2" parent="Floor1" unique_id=1538985090 groups=["editor_objects"] instance=ExtResource("11_mny3b")]
 
-[node name="Floor2" parent="." instance=ExtResource("10_qgfrc")]
+[node name="Floor2" parent="." unique_id=2073654455 instance=ExtResource("10_qgfrc")]
 floor_number = 2
 height = 5.0
 
-[node name="Cells" parent="Floor2" groups=["editor_cells"] instance=ExtResource("10_gsuot")]
+[node name="Cells" parent="Floor2" unique_id=401936192 groups=["editor_cells"] instance=ExtResource("10_gsuot")]
 script = null
 
-[node name="TileForgetters" parent="Floor2" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
+[node name="TileForgetters" parent="Floor2" unique_id=114104369 groups=["editor_objects"] instance=ExtResource("11_mny3b")]
 
-[node name="Layer1" parent="Floor2" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
+[node name="Layer1" parent="Floor2" unique_id=1723596376 groups=["editor_objects"] instance=ExtResource("11_mny3b")]
 
-[node name="Layer2" parent="Floor2" groups=["editor_objects"] instance=ExtResource("11_mny3b")]
+[node name="Layer2" parent="Floor2" unique_id=154815717 groups=["editor_objects"] instance=ExtResource("11_mny3b")]

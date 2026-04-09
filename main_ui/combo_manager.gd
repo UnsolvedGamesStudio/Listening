@@ -15,7 +15,10 @@ func update_label():
 	score_label.text = str("Dmg bonus: ", roundi(min(100.0, Vars.score / 20.0) ) )
 
 
-func on_beat_success(level: int):
+func on_beat_success(level: int, ups_combo: bool):
+	if not ups_combo:
+		return
+	
 	Vars.combo += 1
 	Vars.score += level + 10
 	update_label()

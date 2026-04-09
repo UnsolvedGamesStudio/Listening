@@ -20,6 +20,7 @@ gravity = Vector3(0, 98, 0)
 script = ExtResource("1_jyhfs")
 scene_to_load = 3
 default_song = ExtResource("2_tefeu")
+prevent_saving = true
 disable_loading_screen = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1782560111]
@@ -50,25 +51,33 @@ script = ExtResource("6_tefeu")
 anchors_preset = -1
 anchor_left = 1.171875
 anchor_top = 0.02232143
-anchor_right = 2.1425781
-anchor_bottom = 1.5066965
+anchor_right = 2.6855469
+anchor_bottom = 1.8080357
 theme_override_font_sizes/normal_font_size = 14
 theme_override_font_sizes/bold_font_size = 14
 theme_override_font_sizes/bold_italics_font_size = 14
 theme_override_font_sizes/italics_font_size = 14
 theme_override_font_sizes/mono_font_size = 14
-text = "- chest interact flicker 
+text = "Memos
+- change level name
 - keep checking volumes
-- ice spell still has note inside
-- melting Wax err message - cursor flicker
-- rememberers still not going away if enough saved
-- occasional enter level crashes
-- kick spam on enter level
-- test beat offset
+- make right click clear spell
 
-The text-based scene at path \"res://autoloads/bgm/bgm.tscn\" is large on disk (10.56 MiB), likely because it has embedded binary data. Consider saving its binary subresource(s) to a binary `.res` file or saving the scene as a binary `.scn` file."
+Replicable bugs:
+- cursor flicker
+- kick spam on enter level
+- bottom of the walls flickers rapidly on north and south sides
+- rotation from tilemap broken
+
+Inconsistent bugs:
+- chest interact flicker
+- melting Wax err message
+- occasional enter level crashes(?)
+
+Error Messages:
+The text-based scene at path \"res://autoloads/bgm/bgm.tscn\" is large on disk (10.56 MiB), likely because it has embedded binary data. Consider saving its binary subresource(s) to a binary `.res` file or saving the scene as a binary `.scn` file. (also on hub world)"
 metadata/_edit_use_anchors_ = true
 
-[node name="AudioDebugVisualizer" parent="." unique_id=557291510 instance=ExtResource("7_o6xl0")]
+[node name="DbDebugVisualizer" parent="." unique_id=557291510 instance=ExtResource("7_o6xl0")]
 visible = false
 buses = Array[int]([2])

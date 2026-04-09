@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwvoawpjhacas"]
+[gd_scene format=3 uid="uid://cwvoawpjhacas"]
 
 [ext_resource type="Material" uid="uid://bst4ecl263gsh" path="res://terrain/textures/grass_cube_material.tres" id="1_uvwf8"]
 
@@ -6,9 +6,9 @@
 material = ExtResource("1_uvwf8")
 size = Vector3(2, 0.99, 2)
 
-[node name="FloorVisuals" type="Node3D"]
+[node name="FloorVisuals" type="Node3D" unique_id=2096635480]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=276753429]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.495, 0)
 mesh = SubResource("BoxMesh_d8fh8")
 skeleton = NodePath("../..")

@@ -23,6 +23,9 @@ func _input(event: InputEvent) -> void:
 		else:
 			on_cast_pressed(false)
 	
+	if event.is_action_pressed("use_item"):
+		remove_all_elements()
+	
 	if event.is_action_pressed("element_1"):
 		add_element(0)
 	
@@ -33,8 +36,13 @@ func _input(event: InputEvent) -> void:
 		add_element(2)
 
 
-func on_cast_pressed(comboless:= false):
-	var success: String = Bgm.check_accuracy(true)
+func on_cast_pressed(comboless_cast:= false):
+	var success: String
+	
+	if container == []:
+		success = Bgm.check_accuracy(false, false)
+	else:
+		success = Bgm.check_accuracy(true, true)
 	
 	if Bgm.playing == false:
 		Bgm.play_sample(container)
@@ -44,7 +52,7 @@ func on_cast_pressed(comboless:= false):
 	
 	Bus.player_cast.emit(container, success)
 	
-	cast_spell(comboless)
+	cast_spell(comboless_cast)
 
 
 func add_element(element: int):
@@ -54,8 +62,13 @@ func add_element(element: int):
 		push_error(self, ": container_ui not found")
 		return
 	
-	var success: String = Bgm.check_accuracy(true)
+	var success: String
 	
+	if container.size() >= 3:
+		success = Bgm.check_accuracy(false, false)
+	else:
+		success = Bgm.check_accuracy(true, true)
+
 	if success == "missed":
 		return
 	
@@ -73,7 +86,7 @@ func add_element(element: int):
 	container_ui.update()
 
 
-func cast_spell(comboless:= false):
+func cast_spell(comboless_cast:= false):
 	Bgm.play_sample(container)
 	
 	if container == []:
@@ -86,7 +99,7 @@ func cast_spell(comboless:= false):
 	
 	var key: StringName = ""
 	
-	if comboless == false:
+	if comboless_cast == false:
 		key = check_for_combo(container)
 	
 	if enough_dopamine(key) == false:

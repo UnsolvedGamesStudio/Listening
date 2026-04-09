@@ -156,7 +156,7 @@ func _remove_previous_scene():
 	
 	active_scene_instance.queue_free()
 
-
+## Get current scene
 func is_current_scene(scene: Scenes):
 	if active_scene_name == scene:
 		return true

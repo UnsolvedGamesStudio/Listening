@@ -119,6 +119,7 @@ func translate_midi(midi_number):
 	# Return the note name and the octave number as an array
 	return [note_name, octave_number]
 
+
 #func read_chord(midi_number):
 	#if current_chord.size() >= 4:
 		#current_chord.clear()
@@ -141,8 +142,6 @@ func play_sample(elements: Array[int] = []):
 	
 	if get_notes() != []:
 		chord = get_notes()
-	else:
-		print("Using default chord")
 	
 	var sample:= sampler_instrument.samples[0]
 	
@@ -246,9 +245,17 @@ func play_full_chord(chord: Array, octave_modifier: int = 0):
 		play_single_note(note, octave_modifier)
 
 
-func check_accuracy(punished_for_bad_timing:= false):
+func check_accuracy(punished_for_bad_timing:= false, ups_combo: bool = true, display_text: bool = true):
 	if beat_visualizer == null:
 		return "perfect"
+	
+	if beat_visualizer == null:
+		return "perfect"
+	
+	var closest_results: Array = beat_visualizer.get_closest_circle()
+	
+	if closest_results == null or closest_results == []:
+		return "missed"
 	
 	var accuracy:= "missed"
 	var level:= 0
@@ -257,28 +264,26 @@ func check_accuracy(punished_for_bad_timing:= false):
 	var medium_dist:= 6.5
 	var perfect_dist:= 3.5
 	
-	var closest_results: Array = beat_visualizer.get_closest_circle()
 	
 	var closest_circle: TimingCircle = closest_results[0]
 	var circle_dist: float = closest_results[1]
 	
 	if circle_dist <= easy_dist:
-		accuracy = "easy"
 		level = 1
-	
-	if circle_dist <= medium_dist:
+		accuracy = "easy"
+	elif circle_dist <= medium_dist:
 		level = 2
 		accuracy = "medium"
-	
-	if circle_dist <= perfect_dist:
+	elif circle_dist <= perfect_dist:
 		level = 3
 		accuracy = "perfect"
 	
-	beat_visualizer.generate_text(accuracy)
+	if display_text:
+		beat_visualizer.generate_text(accuracy)
 	
 	if not accuracy == "missed":
 		play_correct_chime(true)
-		Bus.beat_success.emit(level)
+		Bus.beat_success.emit(level, ups_combo)
 		Vars.last_activated_circle = closest_circle
 		closest_circle.recolor(level)
 		

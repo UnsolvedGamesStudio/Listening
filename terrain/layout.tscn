@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d1rnngxhnemng"]
+[gd_scene format=3 uid="uid://d1rnngxhnemng"]
 
 [ext_resource type="PackedScene" uid="uid://dflkyrrs1kf1s" path="res://timing_bar/beat_visualizer.tscn" id="3_tupbf"]
 [ext_resource type="PackedScene" uid="uid://bdbt8bcqdo4xx" path="res://terrain/layout_light.tscn" id="4_e4vt8"]
@@ -33,6 +33,21 @@ fog_density = 1.0
 volumetric_fog_density = 0.134
 volumetric_fog_albedo = Color(0.535566, 0.75898, 0.81535, 1)
 
+[sub_resource type="Animation" id="Animation_b0xiq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("Sun:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.6580628, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_e4vt8"]
 resource_name = "wobble"
 loop_mode = 2
@@ -49,53 +64,36 @@ tracks/0/keys = {
 "values": [Vector3(-1.6580628, 0, 0), Vector3(-1.3089969, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_b0xiq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sun:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-1.6580628, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q710m"]
 _data = {
 &"RESET": SubResource("Animation_b0xiq"),
 &"wobble": SubResource("Animation_e4vt8")
 }
 
-[node name="Layout" type="Node3D" groups=["blueprint_layout", "layout", "playable_level"]]
+[node name="Layout" type="Node3D" unique_id=766167518 groups=["blueprint_layout", "layout", "playable_level"]]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1118160473]
 environment = SubResource("Environment_mhowc")
 
-[node name="BeatVisualizer" parent="." instance=ExtResource("3_tupbf")]
+[node name="BeatVisualizer" parent="." unique_id=1128626099 instance=ExtResource("3_tupbf")]
 
-[node name="Player" parent="." instance=ExtResource("4_trw21")]
+[node name="Player" parent="." unique_id=1739421205 instance=ExtResource("4_trw21")]
 
-[node name="LayoutAmbience" type="AudioStreamPlayer" parent="."]
+[node name="LayoutAmbience" type="AudioStreamPlayer" parent="." unique_id=1755860090]
 stream = ExtResource("5_b0xiq")
 volume_db = 1.5
 pitch_scale = 0.95
 autoplay = true
 bus = &"Ambience"
 
-[node name="Sun" parent="." instance=ExtResource("4_e4vt8")]
+[node name="Sun" parent="." unique_id=1386342259 instance=ExtResource("4_e4vt8")]
 transform = Transform3D(1, 0, 0, 0, -0.08715576, 0.99619466, 0, -0.99619466, -0.08715576, 0, 18, 0)
 light_color = Color(0.64000005, 0.8, 0.79733336, 1)
 light_energy = 1.77
 light_indirect_energy = 0.945
 shadow_enabled = true
 
-[node name="SunAnim" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_q710m")
-}
-autoplay = "wobble"
+[node name="SunAnim" type="AnimationPlayer" parent="." unique_id=1147507914]
+libraries/ = SubResource("AnimationLibrary_q710m")
+autoplay = &"wobble"
 speed_scale = 0.1

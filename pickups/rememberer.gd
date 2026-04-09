@@ -16,7 +16,7 @@ func enter():
 	
 	original_position = global_position
 	
-	if SaveManager.position_collected("rememberer", original_position):
+	if SaveManager.position_collected(SaveManager.DataType.REMEMBERERS, original_position):
 		queue_free()
 
 
@@ -54,6 +54,6 @@ func remembember_all_forgetters():
 		if forgetter.puzzle_id == puzzle_id:
 			forgetter.remember()
 		
-		SaveManager.save_position("rememberers", global_position)
+		SaveManager.save_position(SaveManager.DataType.REMEMBERERS, global_position)
 	
 	vanish()

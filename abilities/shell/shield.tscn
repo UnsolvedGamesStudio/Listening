@@ -1,24 +1,22 @@
-[gd_scene load_steps=7 format=4 uid="uid://b41hsxloqp0kp"]
+[gd_scene format=4 uid="uid://b41hsxloqp0kp"]
 
 [ext_resource type="Material" uid="uid://bfltvlgqsp84d" path="res://abilities/shell/shield_break_material.tres" id="1_2ktxt"]
 [ext_resource type="Shader" uid="uid://ojon0136p0gr" path="res://abilities/shell/glass_shader.gdshader" id="1_3clln"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2yg65"]
-render_priority = 1
+render_priority = 0
 next_pass = ExtResource("1_2ktxt")
 shader = ExtResource("1_3clln")
 shader_parameter/albedo = Color(1, 1, 1, 0)
-shader_parameter/roughness = 0.45200002147
-shader_parameter/normal_strength = -6.889999567275
-shader_parameter/edge_color = Color(0.7295144, 0.96602684, 0.9125339, 1)
+shader_parameter/roughness = 0.0350000016625
+shader_parameter/normal_strength = -10.5909997430725
+shader_parameter/edge_color = Color(0.7969977, 0.9167709, 0.2981878, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dq6r4"]
 next_pass = SubResource("ShaderMaterial_2yg65")
 transparency = 1
 cull_mode = 2
-albedo_color = Color(0.8661061, 0.9187369, 0.89471775, 0)
-metallic_specular = 1.0
-roughness = 0.0
+albedo_color = Color(0.7688452, 0.84278506, 1.1551381e-06, 0.011764706)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_3yik8"]
 _surfaces = [{
@@ -50,6 +48,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3yik8")
 
-[node name="ShieldMesh" type="MeshInstance3D"]
+[node name="ShieldMesh" type="MeshInstance3D" unique_id=1115468462]
 mesh = SubResource("ArrayMesh_8lb82")
 skeleton = NodePath("")

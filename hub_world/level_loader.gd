@@ -27,4 +27,9 @@ func load_level():
 
 
 func on_area_3d_area_entered(area: Area3D):
+	if not area.owner is Player:
+		return
+	
+	area.owner.can_act = false
+	area.owner.can_look = false
 	load_level()

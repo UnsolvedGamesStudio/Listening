@@ -182,7 +182,7 @@ _data = {
 layer = -1
 script = ExtResource("1_b8eu6")
 sample = ExtResource("2_ffltk")
-volume_db = -10.0
+volume_modifier = -1.0
 
 [node name="ToMove" type="Node2D" parent="." unique_id=843023897]
 position = Vector2(288.13, 401.555)

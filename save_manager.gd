@@ -1,12 +1,18 @@
 extends Node
 ## Todo: Make second dict for save cache
 ## Todo: Take current level/scene into account
+enum DataType {NEURONS, SYNAPSES, REMEMBERERS, FORGETTERS}
+
 var json_path:= "user://psychodrama_save_data.json"
 
 var _saved_data:= {}
 
 
+
 func _ready() -> void:
+	if OS.has_feature("editor"):
+		json_path = "res://debug_save_file.json"
+	
 	if not FileAccess.file_exists(json_path):
 		write_save_data()
 	
@@ -63,15 +69,18 @@ func read_save_data():
 	return parsed_text
 
 
-func save_position(category: String, position: Vector3):
+func save_position(category: DataType, position: Vector3):
 	var save_id:= str(position.x, "_", position.y, "_", position.z)
 	
 	set_collected(category, save_id)
 
 
-func set_collected(category: String, save_id: String):
-	_saved_data.get_or_add(category, {})
-	_saved_data[category].get_or_add(save_id, true)
+func set_collected(category: DataType, save_id: String):
+	if not str(category) in _saved_data:
+		_saved_data[str(category)] = {}
+	
+	if not save_id in _saved_data[str(category)]:
+		_saved_data[str(category)][save_id] = true
 
 
 func check_node_collected(object, inst_save_id):
@@ -84,28 +93,27 @@ func check_node_collected(object, inst_save_id):
 	return false
 
 
-func position_collected(category: String, position: Vector3):
+func position_collected(category: DataType, position: Vector3):
 	var save_id:= str(position.x, "_", position.y, "_", position.z)
 	
 	return check_id_collected(category, save_id)
 
 
-func check_id_collected(category: String, save_id: String):
-	if not category in _saved_data:
-		_saved_data[category] = {}
+func check_id_collected(category: DataType, save_id: String):
+	if not str(category) in _saved_data:
 		return false
 	
-	if not save_id in _saved_data[category]:
+	if not str(save_id) in _saved_data[str(category)]:
 		return false
 	
 	return true
 
 
-func get_collected_amount(category: String) -> int:
-	if not category in _saved_data:
+func get_collected_amount(category: DataType) -> int:
+	if not str(category) in _saved_data:
 		return 0
 	
-	return _saved_data[category].size()
+	return _saved_data[str(category)].size()
 
 
 func erase_all_save_data():

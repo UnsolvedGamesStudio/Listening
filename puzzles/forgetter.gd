@@ -24,7 +24,7 @@ func _ready() -> void:
 	
 	original_position = global_position
 	
-	if SaveManager.position_collected("forgetters", global_position):
+	if SaveManager.position_collected(SaveManager.DataType.FORGETTERS, global_position):
 		previously_collected = true
 	
 	enter()
@@ -94,7 +94,7 @@ func remember():
 		
 		remembered_nodes.append(object)
 	
-	SaveManager.save_position("forgetters", global_position)
+	SaveManager.save_position(SaveManager.DataType.FORGETTERS, global_position)
 	forgotten_nodes.clear()
 
 

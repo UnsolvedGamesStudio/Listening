@@ -5,22 +5,26 @@
 [ext_resource type="AudioStream" uid="uid://bj8gjlnc00uc0" path="res://assets/ambience/calm-wind-outside-426735.mp3" id="3_loyhd"]
 
 [sub_resource type="Gradient" id="Gradient_loyhd"]
-offsets = PackedFloat32Array(0.26618704, 1)
-colors = PackedColorArray(1.6845763e-07, 0.21909505, 0.1846802, 1, 0.54925424, 2.8878452e-07, 0.21540031, 1)
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.7338129)
+colors = PackedColorArray(0.74651563, 0.45424247, 0.7655103, 1, 6.256998e-07, 0.44415462, 0.5458492, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_t1r5v"]
 gradient = SubResource("Gradient_loyhd")
-width = 10
-height = 10
+width = 50
+height = 50
 fill = 1
+fill_from = Vector2(0.4955157, 0.57174885)
 repeat = 2
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_271a7"]
 panorama = SubResource("GradientTexture2D_t1r5v")
-energy_multiplier = 4.81
+filter = false
+energy_multiplier = 2.41
 
 [sub_resource type="Sky" id="Sky_6w4r1"]
 sky_material = SubResource("PanoramaSkyMaterial_271a7")
+radiance_size = 0
 
 [sub_resource type="Environment" id="Environment_h2nss"]
 background_mode = 2
@@ -31,7 +35,11 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.024
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t1r5v"]
-albedo_color = Color(0, 0, 0, 1)
+disable_specular_occlusion = true
+albedo_color = Color(0.87301314, 0.9093772, 0.99453074, 1)
+metallic_specular = 0.0
+texture_repeat = false
+disable_receive_shadows = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_erjaa"]
 _surfaces = [{

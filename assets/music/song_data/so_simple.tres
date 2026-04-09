@@ -7,6 +7,7 @@ script = ExtResource("1_asfef")
 name = "So Simple"
 author = "Floatie"
 bpm = 140
+volume_modifier = 1.5
 file_path = "res://assets/music/so_simple.ogg"
 chords_midi_path = "res://assets/music/chord_midis/so_simple_chords.mid"
 metadata/_custom_type_script = "uid://cm2xsueacjqna"

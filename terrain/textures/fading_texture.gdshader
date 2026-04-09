@@ -8,6 +8,8 @@ uniform sampler2D texture_albedo : source_color, filter_nearest_mipmap, repeat_e
 uniform float metallic : hint_range(0.0, 1.0, 0.01);
 uniform float roughness : hint_range(0.0, 1.0);
 uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float clearcoat : hint_range(0.0, 1.0, 0.01);
+uniform float clearcoat_roughness : hint_range(0.0, 1.0, 0.01);
 
 uniform vec3 uv1_scale;
 uniform vec3 uv1_offset;
@@ -50,4 +52,6 @@ void fragment() {
     METALLIC = metallic;
     SPECULAR = specular;
     ROUGHNESS = roughness;
+	CLEARCOAT = clearcoat;
+	CLEARCOAT_ROUGHNESS = clearcoat_roughness;
 }

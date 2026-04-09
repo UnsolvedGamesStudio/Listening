@@ -4,9 +4,9 @@ var paused:= false
 var level_time:= 0.0
 
 var total_neurons:= 0
-var neurons: int = SaveManager.get_collected_amount("synapses")
+var neurons: int = SaveManager.get_collected_amount(SaveManager.DataType.NEURONS)
 var total_synapses:= 0
-var synapses: int = SaveManager.get_collected_amount("synapses")
+var synapses: int = SaveManager.get_collected_amount(SaveManager.DataType.SYNAPSES)
 var max_dopamine:= 100.0:
 	set(value):
 		max_dopamine = clampf(value, 0.0, 9999.9)
@@ -89,8 +89,8 @@ func reset():
 	element_container.clear()
 	last_element = "none"
 	living_enemies.clear()
-	synapses = SaveManager.get_collected_amount("synapses")
+	synapses = SaveManager.get_collected_amount(SaveManager.DataType.SYNAPSES)
 	total_synapses = 0
-	neurons = SaveManager.get_collected_amount("neurons")
+	neurons = SaveManager.get_collected_amount(SaveManager.DataType.NEURONS)
 	total_neurons = 0
 	inventory.clear()

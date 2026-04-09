@@ -6,7 +6,7 @@ class_name ShellObject
 ## Todo: let it work from outside the ability usage, or maybe extra shield is more fun
 ## Todo: Try converting break texture to a decal
 @onready var timer: Timer = $Timer
-@onready var mesh_instance_3d: MeshInstance3D = %MeshInstance3D
+@onready var mesh_instance_3d: MeshInstance3D = %ShieldMesh
 @onready var area_3d: Area3D = %Area3D
 @onready var broken_sfx: AudioStreamPlayer3D = %BrokenSFX
 @onready var created_sfx: AudioStreamPlayer3D = %CreatedSFX

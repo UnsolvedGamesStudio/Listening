@@ -1,8 +1,0 @@
-[gd_resource type="PlaneMesh" load_steps=2 format=3 uid="uid://beeomnc187kth"]
-
-[ext_resource type="Material" uid="uid://dgxgauw6r1qe5" path="res://terrain/textures/wall_hills_material.tres" id="1_x5nk6"]
-
-[resource]
-material = ExtResource("1_x5nk6")
-size = Vector2(2, 4)
-orientation = 2

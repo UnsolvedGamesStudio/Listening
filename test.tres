@@ -1,4 +1,4 @@
-[gd_resource type="MeshLibrary" load_steps=6 format=3 uid="uid://b14hraa281vyg"]
+[gd_resource type="MeshLibrary" format=3 uid="uid://b14hraa281vyg"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gdonx"]
 load_path = "res://.godot/imported/enemy_indicator.png-0f7790bf2cab8c79a925a8bddac29c93.s3tc.ctex"

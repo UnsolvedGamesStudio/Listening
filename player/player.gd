@@ -20,9 +20,11 @@ class_name Player
 
 const MOVE_SIGIL = preload("uid://iw7wpmqsi86")
 
-@export var camera_raycast_distance:= 200.0
-@export var interact_range: float = 1.0
-@export var camera_speed:= 50
+var camera_raycast_distance:= 200.0
+var interact_range: float = 1.0
+var camera_speed:= 50
+
+@export var start_invincible:= false
 
 var tilt_lower_limit:= deg_to_rad(-90)
 var tilt_upper_limit:= deg_to_rad(90)
@@ -30,10 +32,12 @@ var tilt_upper_limit:= deg_to_rad(90)
 var looked_at_cell: Cell
 var looked_at_object: Area3D
 var is_moving:= false
+var checking_move:= false
 
 var invincible_cheat:= false
 var invincible:= false
 var can_act:= true
+var can_look:= true
 var can_interact:= true
 
 ## Stats
@@ -65,8 +69,11 @@ func _ready() -> void:
 		is_on_web_os = true
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	can_act = false
 	
 	reset_vars()
+	
+	Bus.beat.connect(on_beat)
 	
 	player_collision.area_entered.connect(on_player_collision_area_entered)
 	movement_raycast.target_position.z = -Vars.cell_size / 1.75
@@ -82,6 +89,11 @@ func _ready() -> void:
 	
 	player_collision.get_child(0).disabled = false
 	Bus.player_moved.emit()
+	
+	can_act = true
+	
+	if start_invincible:
+		invincible_cheat = true
 
 
 func go_to_spawn():
@@ -107,6 +119,9 @@ func reset_vars():
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if not can_look:
+		return
+	
 	var mouse_input = event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
 	
 	if mouse_input:
@@ -118,8 +133,14 @@ func _physics_process(delta: float) -> void:
 	current_los_collider()
 	snap_rotations()
 	
-	if Input.is_action_pressed("forward") and can_act == true:
-		move_forward()
+	var in_hub: bool = SceneManager.is_current_scene(SceneManager.Scenes.HUB_WORLD)
+	
+	if in_hub:
+		if Input.is_action_pressed("forward"):
+			move_forward(false, false)
+	else:
+		if Input.is_action_just_pressed("forward"):
+			move_forward(true, true)
 	
 	if is_moving == true and player_sfx.steps.is_playing() == false:
 		player_sfx.steps.pitch_scale = randf_range(0.9, 1.1)
@@ -217,9 +238,20 @@ func heal(amount: float):
 	heal_particles.emitting = false
 
 
-func move_forward():
+func move_forward(ups_combo: bool, beat_text: bool):
 	if is_moving == true:
 		return
+	
+	if can_act == false:
+		return
+	
+	if Bgm.check_accuracy(false, ups_combo, beat_text) == "missed" and checking_move == false:
+		if not SceneManager.is_current_scene(SceneManager.Scenes.HUB_WORLD):
+			checking_move = true
+		return
+	
+	if not Vars.last_activated_circle == null:
+		Vars.last_activated_circle.change_texure(MOVE_SIGIL)
 	
 	var target_cell: Node3D = get_looked_at_cell()
 	
@@ -230,7 +262,6 @@ func move_forward():
 		return
 	
 	is_moving = true
-	trigger_beat_check()
 	
 	var tween_length: float = (1.8 * Bgm.beat_timer.beat_length) / (movement_speed)
 	var tween:= get_tree().create_tween()
@@ -241,18 +272,9 @@ func move_forward():
 	await tween.finished
 	
 	Bus.player_moved.emit()
-	is_moving = false
 	update_move_to_cell_indicator()
-
-
-func trigger_beat_check():
-	if not Input.is_action_just_pressed("forward"):
-		return
 	
-	Bgm.check_accuracy()
-	
-	if not Vars.last_activated_circle == null:
-		Vars.last_activated_circle.change_texure(MOVE_SIGIL)
+	is_moving = false
 
 
 func check_impassable(cell: Node3D):
@@ -274,9 +296,6 @@ func check_impassable(cell: Node3D):
 
 
 func update_move_to_cell_indicator():
-	if is_moving == true:
-		return
-	
 	var target_cell: Node3D = get_looked_at_cell()
 	
 	if target_cell == null:
@@ -365,3 +384,10 @@ func on_player_collision_area_entered(area: Area3D):
 	
 	if "body_damage" in area.owner:
 		take_damage(area.owner.body_damage, area.owner)
+
+
+func on_beat(_beat_count: int):
+	checking_move = false
+	
+	if Input.is_action_pressed("forward"):
+		move_forward(false, false)

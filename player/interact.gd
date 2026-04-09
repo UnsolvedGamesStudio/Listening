@@ -50,13 +50,6 @@ func _input(event: InputEvent) -> void:
 	interact()
 
 
-func trigger_beat_check():
-	Bgm.check_accuracy()
-	
-	if not Vars.last_activated_circle == null:
-		Vars.last_activated_circle.change_texure(INTERACT_SIGIL)
-
-
 func check_distance(object: Node3D):
 	return object.global_position.distance_to(P.global_position)
 
@@ -148,7 +141,12 @@ func activate_item():
 		if object.activated == true:
 			return
 	
-	trigger_beat_check()
+	if Bgm.check_accuracy(true) == "missed":
+		return
+	
+	if Vars.last_activated_circle:
+		Vars.last_activated_circle.change_texure(INTERACT_SIGIL)
+	
 	object.activate()
 
 

@@ -3,7 +3,7 @@ class_name NeuronPickup
 
 @onready var sfx: AudioStreamPlayer = %SFX
 
-var category:= "neurons"
+var category:= SaveManager.DataType.NEURONS
 
 
 func _ready() -> void:
