@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://du111uv3smns3"]
+[gd_scene format=3 uid="uid://du111uv3smns3"]
 
 [ext_resource type="Script" uid="uid://b7rpppcvfk1s3" path="res://pickups/shrinking_pickup.gd" id="1_g8f0x"]
 [ext_resource type="Texture2D" uid="uid://b6ebkg2oclvjh" path="res://pickups/textures/drink_me_bottle-Sheet.png" id="2_g8f0x"]
@@ -38,7 +38,7 @@ tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.43333334),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [1, 0]
@@ -49,12 +49,12 @@ _data = {
 &"on_beat": SubResource("Animation_lcksh")
 }
 
-[node name="ShrinkingPickup" type="Node3D"]
+[node name="ShrinkingPickup" type="Node3D" unique_id=894866536]
 script = ExtResource("1_g8f0x")
 activate_on_contact = false
 animate_every_x_beat = 2
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1856939754]
 unique_name_in_owner = true
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.45716447, 0)
 billboard = 2
@@ -65,16 +65,16 @@ hframes = 2
 frame = 1
 region_rect = Rect2(0, 0, 32, 16)
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=1227223787]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39508143, 0)
 collision_layer = 64
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=308070960]
 shape = SubResource("SphereShape3D_g8f0x")
 
-[node name="Particles" type="GPUParticles3D" parent="."]
+[node name="Particles" type="GPUParticles3D" parent="." unique_id=1583798345]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1.0000001, 0, 1.0000001, -4.3711392e-08, 0, 0.2413302, 0)
 amount = 10
@@ -83,8 +83,6 @@ randomness = 0.52
 process_material = SubResource("ParticleProcessMaterial_lcksh")
 draw_pass_1 = SubResource("PlaneMesh_u4p6y")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1758638822]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_emkgw")
-}
+libraries/ = SubResource("AnimationLibrary_emkgw")

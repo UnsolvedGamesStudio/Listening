@@ -9,8 +9,12 @@ extends Node
 @export var infinite_synapses:= false
 @export var infinite_keys:= false
 
-
 var player: Player
+
+
+func _ready() -> void:
+	if not OS.has_feature("editor"):
+		enabled = false
 
 
 func _process(delta: float) -> void:

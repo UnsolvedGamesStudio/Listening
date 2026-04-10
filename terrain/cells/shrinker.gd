@@ -1,7 +1,8 @@
 extends Area3D
 class_name ShrinkerCell
-## Todo: Fix some enemies being very hard to hit properly while shrunk
+## Todo: Fix some enemies being very hard to hit properly while they're shrunk
 @export var cell: Cell
+
 
 func _ready() -> void:
 	area_entered.connect(on_area_entered)
@@ -16,6 +17,9 @@ func shrink(area: Area3D):
 	if check_elligible(area) == false:
 		return
 	
+	if area.get_parent() is Dopamine:
+		area.owner.global_position.y = global_position.y + 0.12
+	
 	area.owner.scale = Vector3(cell_height, cell_height, cell_height)
 
 
@@ -24,6 +28,9 @@ func check_elligible(area: Area3D):
 		return true
 	
 	if area.owner is Pickup:
+		return true
+	
+	if area.owner is Dopamine:
 		return true
 	
 	return false

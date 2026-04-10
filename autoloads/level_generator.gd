@@ -155,13 +155,15 @@ func rotate_scene(scene: Node3D, tile: Vector2i, layer: TileMapLayer):
 		return
 	
 	if flip_h == true and flip_v == false:
-		scene.global_rotation_degrees.y = -90.0
+		scene.rotate_y(-PI / 2.0)
+		return
 	
 	if flip_h == true and flip_v == true:
-		scene.global_rotation_degrees.y = 180.0
+		scene.rotate_y(PI)
+		return
 	
 	if flip_h == false and flip_v == true:
-		scene.global_rotation_degrees.y = 90.0
+		scene.rotate_y(PI / 2.0)
 
 
 func puzzle_setup(scene_inst: Node, puzzle_id: int):

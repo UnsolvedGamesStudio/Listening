@@ -27,6 +27,7 @@ buses/default_bus_layout="uid://0twpoghvkwjw"
 [autoload]
 
 SaveManager="*res://save_manager.gd"
+WindowTitleManager="*uid://j6ucmnv0b7hg"
 Bus="*res://autoloads/signal_bus.gd"
 Bgm="*res://autoloads/bgm/bgm.tscn"
 Vars="*res://autoloads/vars.gd"

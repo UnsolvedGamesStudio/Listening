@@ -31,6 +31,8 @@ func _ready() -> void:
 	
 	current_song_data = main.default_song
 	
+	await Bus.level_done_generating
+	
 	beat_timer.beat.connect(on_beat)
 	beat_timer.sub_tick.connect(on_sub_tick)
 	midi_player.midi_event.connect(on_midi_event)
@@ -271,10 +273,10 @@ func check_accuracy(punished_for_bad_timing:= false, ups_combo: bool = true, dis
 	if circle_dist <= easy_dist:
 		level = 1
 		accuracy = "easy"
-	elif circle_dist <= medium_dist:
+	if circle_dist <= medium_dist:
 		level = 2
 		accuracy = "medium"
-	elif circle_dist <= perfect_dist:
+	if circle_dist <= perfect_dist:
 		level = 3
 		accuracy = "perfect"
 	

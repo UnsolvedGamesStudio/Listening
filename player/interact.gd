@@ -141,7 +141,7 @@ func activate_item():
 		if object.activated == true:
 			return
 	
-	if Bgm.check_accuracy(true) == "missed":
+	if Bgm.check_accuracy(false, false, false) == "missed":
 		return
 	
 	if Vars.last_activated_circle:

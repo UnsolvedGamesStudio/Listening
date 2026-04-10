@@ -1,9 +1,83 @@
 [gd_scene format=3 uid="uid://itikcsbog7mw"]
 
 [ext_resource type="PlaneMesh" uid="uid://cp2hvxuc40h7n" path="res://terrain/textures/wall_mesh_hills.tres" id="1_nveup"]
+[ext_resource type="Script" uid="uid://vc0il7o41xrp" path="res://terrain/wall.gd" id="1_pckf0"]
+[ext_resource type="Texture2D" uid="uid://b32bvidf4017h" path="res://terrain/textures/wall_sun_1.png" id="2_f45pk"]
+[ext_resource type="Texture2D" uid="uid://dhrj4sjefy4tk" path="res://terrain/textures/wall_sun_2.png" id="3_pckf0"]
+[ext_resource type="Script" uid="uid://bjp1x1njm1b6h" path="res://shared/beat_anim.gd" id="4_ma7tm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e8xgp"]
 size = Vector3(1.99, 4, 0.15)
+
+[sub_resource type="Animation" id="Animation_kyck0"]
+resource_name = "new_animation"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:mesh:material:next_pass:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:mesh:material:next_pass:next_pass:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.972549, 0.77254903, 0.22745098, 1), Color(0.95, 0.39900002, 0.1235, 0), Color(0.972549, 0.77254903, 0.22745098, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uo4wk"]
+_data = {
+&"new_animation": SubResource("Animation_kyck0")
+}
+
+[sub_resource type="Animation" id="Animation_etfjm"]
+resource_name = "1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:mesh:material:next_pass:next_pass:albedo_texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_f45pk")]
+}
+
+[sub_resource type="Animation" id="Animation_pib1m"]
+resource_name = "2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:mesh:material:next_pass:next_pass:albedo_texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_pckf0")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7lodl"]
+_data = {
+&"1": SubResource("Animation_etfjm"),
+&"2": SubResource("Animation_pib1m")
+}
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sf26d"]
 size = Vector3(2, 4, 0.06)
@@ -11,21 +85,36 @@ size = Vector3(2, 4, 0.06)
 [node name="Wall" type="StaticBody3D" unique_id=171009489 groups=["wall"]]
 collision_layer = 2
 collision_mask = 0
+script = ExtResource("1_pckf0")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1606137871]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+collision_layer = 8194
+collision_mask = 2
+
+[node name="AreaCollision" type="CollisionShape3D" parent="Area3D" unique_id=1532605923]
+unique_name_in_owner = true
+shape = SubResource("BoxShape3D_e8xgp")
+debug_color = Color(0, 0.4164458, 0.8722284, 1)
+debug_fill = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=772300978]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 mesh = ExtResource("1_nveup")
 
-[node name="Area3D" type="Area3D" parent="MeshInstance3D" unique_id=1606137871]
-unique_name_in_owner = true
-collision_layer = 8194
-collision_mask = 2
+[node name="ColorShift" type="AnimationPlayer" parent="MeshInstance3D" unique_id=1573245120]
+libraries/ = SubResource("AnimationLibrary_uo4wk")
+autoplay = &"new_animation"
+speed_scale = 0.1
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D" unique_id=1532605923]
-shape = SubResource("BoxShape3D_e8xgp")
-debug_color = Color(0, 0.4164458, 0.8722284, 1)
+[node name="SunAnim" type="AnimationPlayer" parent="MeshInstance3D" unique_id=1258023495]
+libraries/ = SubResource("AnimationLibrary_7lodl")
+autoplay = &"1"
+script = ExtResource("4_ma7tm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1889515102]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0.004)
 shape = SubResource("BoxShape3D_sf26d")
 debug_color = Color(0.7047918, 0, 0.25789106, 1)
+debug_fill = false

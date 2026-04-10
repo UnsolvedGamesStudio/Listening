@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bm12hq1n81tt1"]
+[gd_scene format=3 uid="uid://bm12hq1n81tt1"]
 
 [ext_resource type="Script" uid="uid://pm4s0telhvbu" path="res://enemies/enemy_scenes/enemy.gd" id="1_m21hj"]
 [ext_resource type="Texture2D" uid="uid://clmbdswxbp53" path="res://enemies/textures/wax-Sheet.png" id="2_m21hj"]
@@ -94,20 +94,20 @@ _data = {
 &"ranged_attack": SubResource("Animation_a6vjd")
 }
 
-[node name="Enemy" type="Node3D"]
+[node name="Enemy" type="Node3D" unique_id=904646338]
 script = ExtResource("1_m21hj")
 data = ExtResource("2_sadtc")
 
-[node name="HealthBar3D" type="Sprite3D" parent="."]
+[node name="HealthBar3D" type="Sprite3D" parent="." unique_id=33578451]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0423326, 0)
 billboard = 2
 texture_filter = 0
 texture = SubResource("ViewportTexture_7frlh")
 
-[node name="SubViewport" type="SubViewport" parent="HealthBar3D"]
+[node name="SubViewport" type="SubViewport" parent="HealthBar3D" unique_id=1421970072]
 size = Vector2i(50, 5)
 
-[node name="HealthBar" type="ProgressBar" parent="HealthBar3D/SubViewport"]
+[node name="HealthBar" type="ProgressBar" parent="HealthBar3D/SubViewport" unique_id=1181764588]
 unique_name_in_owner = true
 modulate = Color(0, 18.892157, 0, 1)
 custom_minimum_size = Vector2(50, 5)
@@ -118,10 +118,10 @@ step = 0.001
 value = 0.5
 show_percentage = false
 
-[node name="ToAnimate" type="Node3D" parent="."]
+[node name="ToAnimate" type="Node3D" parent="." unique_id=1814650551]
 unique_name_in_owner = true
 
-[node name="Sprite3D" type="Sprite3D" parent="ToAnimate"]
+[node name="Sprite3D" type="Sprite3D" parent="ToAnimate" unique_id=784823374]
 unique_name_in_owner = true
 offset = Vector2(0, 32)
 pixel_size = 0.03
@@ -130,12 +130,12 @@ texture_filter = 0
 texture = ExtResource("2_m21hj")
 hframes = 2
 
-[node name="OmniLight3D" type="OmniLight3D" parent="ToAnimate/Sprite3D"]
+[node name="OmniLight3D" type="OmniLight3D" parent="ToAnimate/Sprite3D" unique_id=391503017]
 light_color = Color(0.972549, 0.4862745, 0.15294118, 1)
 light_energy = 0.0
 omni_range = 5.905134
 
-[node name="VisionRaycast" type="RayCast3D" parent="ToAnimate/Sprite3D"]
+[node name="VisionRaycast" type="RayCast3D" parent="ToAnimate/Sprite3D" unique_id=598160625]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4490714, 0)
 target_position = Vector3(0, 0, -1000)
@@ -144,41 +144,37 @@ hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="EnemyBody" parent="ToAnimate" instance=ExtResource("4_hnwyi")]
+[node name="EnemyBody" parent="ToAnimate" unique_id=1569427305 instance=ExtResource("4_hnwyi")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ToAnimate/EnemyBody"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToAnimate/EnemyBody" unique_id=26300682]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9835185, 0)
 shape = SubResource("CylinderShape3D_m21hj")
 
-[node name="Behaviors" type="Node3D" parent="ToAnimate"]
+[node name="Behaviors" type="Node3D" parent="ToAnimate" unique_id=1273943121]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8689611, 0)
 
-[node name="GetHurtEB" parent="ToAnimate/Behaviors" instance=ExtResource("4_bltlj")]
+[node name="GetHurtEB" parent="ToAnimate/Behaviors" unique_id=1727774793 instance=ExtResource("4_bltlj")]
 
-[node name="MovementEB" parent="ToAnimate/Behaviors" instance=ExtResource("5_sadtc")]
+[node name="MovementEB" parent="ToAnimate/Behaviors" unique_id=941417557 instance=ExtResource("5_sadtc")]
 
-[node name="MeleeAttackEB" parent="ToAnimate/Behaviors" instance=ExtResource("6_juo5d")]
+[node name="MeleeAttackEB" parent="ToAnimate/Behaviors" unique_id=169458176 instance=ExtResource("6_juo5d")]
 
-[node name="WaxEB" parent="ToAnimate/Behaviors" node_paths=PackedStringArray("get_hurt_eb", "light") instance=ExtResource("8_sadtc")]
+[node name="WaxEB" parent="ToAnimate/Behaviors" unique_id=1604416803 node_paths=PackedStringArray("get_hurt_eb", "light") instance=ExtResource("8_sadtc")]
 get_hurt_eb = NodePath("../GetHurtEB")
 light = NodePath("../../Sprite3D/OmniLight3D")
 
-[node name="EnemyIndicator" parent="." instance=ExtResource("3_6ylel")]
+[node name="EnemyIndicator" parent="." unique_id=1812714555 instance=ExtResource("3_6ylel")]
 unique_name_in_owner = true
 
-[node name="RoomNotifier" parent="." instance=ExtResource("9_juo5d")]
+[node name="RoomNotifier" parent="." unique_id=64720438 instance=ExtResource("9_juo5d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12783343, 0)
 
-[node name="IdleAnim" type="AnimationPlayer" parent="."]
+[node name="IdleAnim" type="AnimationPlayer" parent="." unique_id=1577807112]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_mrmtu")
-}
-autoplay = "idle"
+libraries/ = SubResource("AnimationLibrary_mrmtu")
+autoplay = &"idle"
 
-[node name="AttackAnim" type="AnimationPlayer" parent="."]
+[node name="AttackAnim" type="AnimationPlayer" parent="." unique_id=379075886]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_07tka")
-}
+libraries/ = SubResource("AnimationLibrary_07tka")

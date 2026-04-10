@@ -156,11 +156,11 @@ func debug_controls():
 	if not OS.has_feature("editor"):
 		return
 	
-	if Input.is_action_pressed("exit"):
-		get_tree().quit()
+	#if Input.is_action_pressed("exit"):
+		#SceneManager.quit_game()
 	
-	if Input.is_key_pressed(Key.KEY_B):
-		print_orphan_nodes()
+	#if Input.is_key_pressed(Key.KEY_B):
+		#print_orphan_nodes()
 
 
 func snap_rotations():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://7meyinovsje0"]
+[gd_scene format=3 uid="uid://7meyinovsje0"]
 
 [ext_resource type="Script" uid="uid://dm3hq7mfobrwx" path="res://pickups/synapse_pickup.gd" id="1_byumj"]
 [ext_resource type="Texture2D" uid="uid://di2kls167grne" path="res://pickups/textures/drop-Sheet.png" id="2_tiukb"]
@@ -18,7 +18,6 @@ turbulence_noise_scale = 0.05
 
 [sub_resource type="Animation" id="Animation_lcksh"]
 resource_name = "on_beat"
-loop_mode = 1
 step = 0.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -27,7 +26,7 @@ tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.16666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [1, 0]
@@ -38,11 +37,11 @@ _data = {
 &"on_beat": SubResource("Animation_lcksh")
 }
 
-[node name="SynapsePickup" type="Node3D"]
+[node name="SynapsePickup" type="Node3D" unique_id=2127663717]
 script = ExtResource("1_byumj")
 animate_every_x_beat = 2
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=280402617]
 unique_name_in_owner = true
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 1.2762816, 0)
 billboard = 2
@@ -53,16 +52,16 @@ hframes = 2
 frame = 1
 region_rect = Rect2(0, 0, 32, 16)
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=1576482135]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3060288, 0)
 collision_layer = 64
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1360516496]
 shape = SubResource("SphereShape3D_bgvgf")
 
-[node name="Particles" type="GPUParticles3D" parent="."]
+[node name="Particles" type="GPUParticles3D" parent="." unique_id=5808515]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 1.0972521, 0)
 cast_shadow = 0
@@ -73,13 +72,11 @@ randomness = 0.52
 process_material = SubResource("ParticleProcessMaterial_tiukb")
 draw_pass_1 = ExtResource("3_tiukb")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=347744774]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_emkgw")
-}
+libraries/ = SubResource("AnimationLibrary_emkgw")
 
-[node name="SFX" type="AudioStreamPlayer" parent="."]
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1905937379]
 unique_name_in_owner = true
 stream = ExtResource("4_58epu")
 volume_db = 4.0

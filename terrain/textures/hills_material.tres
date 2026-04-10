@@ -1,10 +1,30 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://buqh4e3ki5dyr"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://buqh4e3ki5dyr"]
 
-[ext_resource type="Texture2D" uid="uid://md0wsvp0hsq0" path="res://terrain/textures/hills_wallpaper_pastel.png" id="1_pdarl"]
+[ext_resource type="Texture2D" uid="uid://md0wsvp0hsq0" path="res://terrain/textures/hills_wallpaper_pastel.png" id="2_xgam6"]
+[ext_resource type="Texture2D" uid="uid://b32bvidf4017h" path="res://terrain/textures/wall_sun_1.png" id="3_fa11b"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vd65i"]
+load_path = "res://.godot/imported/hills_wallpaper.png-7711051dd21592a245a9549739126dd8.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_afnbc"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.972549, 0.77254903, 0.22745098, 1)
+albedo_texture = ExtResource("3_fa11b")
+texture_filter = 0
+grow_amount = 0.01
+z_clip_scale = 0.46
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lpuj6"]
+next_pass = SubResource("StandardMaterial3D_afnbc")
+transparency = 1
+cull_mode = 2
+albedo_color = Color(1, 1, 1, 0)
+albedo_texture = ExtResource("2_xgam6")
+texture_filter = 0
 
 [resource]
+next_pass = SubResource("StandardMaterial3D_lpuj6")
 cull_mode = 2
-albedo_texture = ExtResource("1_pdarl")
-roughness = 0.63
-uv1_world_triplanar = true
-texture_filter = 2
+albedo_texture = SubResource("CompressedTexture2D_vd65i")
+texture_filter = 0

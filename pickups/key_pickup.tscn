@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ciib1opj8rndx"]
+[gd_scene format=3 uid="uid://ciib1opj8rndx"]
 
 [ext_resource type="Script" uid="uid://d1oh0ke0xfu6d" path="res://pickups/key_pickup.gd" id="1_on6h4"]
 [ext_resource type="Texture2D" uid="uid://ds7esfeg8ue4b" path="res://level_editor/textures/key_tiles.png" id="2_on6h4"]
@@ -54,12 +54,12 @@ _data = {
 &"on_beat": SubResource("Animation_lcksh")
 }
 
-[node name="KeyPickup" type="Node3D"]
+[node name="KeyPickup" type="Node3D" unique_id=505523305]
 script = ExtResource("1_on6h4")
 
-[node name="ToAnimate" type="Node3D" parent="."]
+[node name="ToAnimate" type="Node3D" parent="." unique_id=982043649]
 
-[node name="Sprite3D" type="Sprite3D" parent="ToAnimate"]
+[node name="Sprite3D" type="Sprite3D" parent="ToAnimate" unique_id=1739054780]
 unique_name_in_owner = true
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.5471647, 0)
 billboard = 2
@@ -68,16 +68,16 @@ texture_filter = 0
 texture = SubResource("AtlasTexture_usfr8")
 region_rect = Rect2(0, 0, 32, 16)
 
-[node name="Area3D" type="Area3D" parent="ToAnimate"]
+[node name="Area3D" type="Area3D" parent="ToAnimate" unique_id=1603076994]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5769119, 0)
 collision_layer = 64
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ToAnimate/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ToAnimate/Area3D" unique_id=867736397]
 shape = SubResource("SphereShape3D_bgvgf")
 
-[node name="Particles" type="GPUParticles3D" parent="ToAnimate"]
+[node name="Particles" type="GPUParticles3D" parent="ToAnimate" unique_id=1370100934]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0.3681352, 0)
 amount = 10
@@ -86,13 +86,11 @@ randomness = 0.52
 process_material = SubResource("ParticleProcessMaterial_on6h4")
 draw_pass_1 = SubResource("PlaneMesh_usfr8")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1472424164]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_emkgw")
-}
+libraries/ = SubResource("AnimationLibrary_emkgw")
 
-[node name="SFX" type="AudioStreamPlayer" parent="."]
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1993398609]
 unique_name_in_owner = true
 stream = ExtResource("3_on6h4")
 volume_db = -3.0

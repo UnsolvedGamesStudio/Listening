@@ -1,37 +1,122 @@
-[gd_scene load_steps=5 format=3 uid="uid://b83lfu8d5ldik"]
+[gd_scene format=3 uid="uid://b83lfu8d5ldik"]
 
-[ext_resource type="Material" uid="uid://djbbuirw3rbcb" path="res://terrain/textures/height_wall_hills_material.tres" id="1_ldx48"]
+[ext_resource type="Material" uid="uid://buqh4e3ki5dyr" path="res://terrain/textures/hills_material.tres" id="1_assqp"]
+[ext_resource type="Texture2D" uid="uid://b32bvidf4017h" path="res://terrain/textures/wall_sun_1.png" id="3_0frjc"]
+[ext_resource type="Texture2D" uid="uid://dhrj4sjefy4tk" path="res://terrain/textures/wall_sun_2.png" id="3_ln4oo"]
+[ext_resource type="Script" uid="uid://bjp1x1njm1b6h" path="res://shared/beat_anim.gd" id="4_0frjc"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_s5pla"]
-material = ExtResource("1_ldx48")
+material = ExtResource("1_assqp")
 size = Vector2(2, 4)
 orientation = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e8xgp"]
-size = Vector3(1.99, 4, 0.01)
+size = Vector3(1.99, 4, 0.15)
+
+[sub_resource type="Animation" id="Animation_kyck0"]
+resource_name = "new_animation"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:mesh:material:next_pass:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:mesh:material:next_pass:next_pass:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.972549, 0.77254903, 0.22745098, 1), Color(0.95, 0.39900002, 0.1235, 0), Color(0.972549, 0.77254903, 0.22745098, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ldx48"]
+_data = {
+&"new_animation": SubResource("Animation_kyck0")
+}
+
+[sub_resource type="Animation" id="Animation_etfjm"]
+resource_name = "1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:mesh:material:next_pass:next_pass:albedo_texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_0frjc")]
+}
+
+[sub_resource type="Animation" id="Animation_pib1m"]
+resource_name = "2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:mesh:material:next_pass:next_pass:albedo_texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_ln4oo")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cbak8"]
+_data = {
+&"1": SubResource("Animation_etfjm"),
+&"2": SubResource("Animation_pib1m")
+}
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sf26d"]
-size = Vector3(2, 0.001, 4)
+size = Vector3(2, 0.06, 4)
 
-[node name="NorthFace" type="StaticBody3D" groups=["wall"]]
+[node name="Wall" type="StaticBody3D" unique_id=276413962 groups=["wall"]]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, 0)
 collision_layer = 2
 collision_mask = 0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1012617807]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 mesh = SubResource("PlaneMesh_s5pla")
 
-[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+[node name="Area3D" type="Area3D" parent="MeshInstance3D" unique_id=566103754]
 unique_name_in_owner = true
 collision_layer = 8194
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D" unique_id=1586595935]
 shape = SubResource("BoxShape3D_e8xgp")
 debug_color = Color(0, 0.4164458, 0.8722284, 1)
+debug_fill = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="ColorShift" type="AnimationPlayer" parent="MeshInstance3D" unique_id=1616304231]
+libraries/ = SubResource("AnimationLibrary_ldx48")
+autoplay = &"new_animation"
+speed_scale = 0.1
+
+[node name="SunAnim" type="AnimationPlayer" parent="MeshInstance3D" unique_id=2119179634]
+libraries/ = SubResource("AnimationLibrary_cbak8")
+autoplay = &"1"
+script = ExtResource("4_0frjc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1528998379]
 transform = Transform3D(1, -4.3711392e-08, -1.9106857e-15, 0, -4.371139e-08, 1, -4.3711392e-08, -1, -4.371139e-08, 0, 2, 0.004)
 shape = SubResource("BoxShape3D_sf26d")
 debug_color = Color(1.5161187e-06, 0.64737827, 0.2282449, 1)
+debug_fill = false

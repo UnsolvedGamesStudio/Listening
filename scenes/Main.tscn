@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://ddi8nw37cgvp1" path="res://scenes/main_scene.gd" id="1_jyhfs"]
 [ext_resource type="Resource" uid="uid://b3cbgo4s0mytf" path="res://assets/music/song_data/reverie.tres" id="2_tefeu"]
 [ext_resource type="Texture2D" uid="uid://be7uvcmrgobq8" path="res://vfx/2d_particle.png" id="3_tefeu"]
+[ext_resource type="FontFile" uid="uid://coihm6kr2umjr" path="res://assets/fonts/Short_Story.ttf" id="4_85g3d"]
 [ext_resource type="Script" uid="uid://duv71sufvwmty" path="res://scenes/cursor_manager.gd" id="4_o6xl0"]
+[ext_resource type="Script" uid="uid://bdnhstidkrubs" path="res://main_ui/debug_label.gd" id="5_choun"]
 [ext_resource type="Script" uid="uid://cehyoy0pxx2ps" path="res://debug_nodes/debug_stress_tester.gd" id="5_tbgi4"]
 [ext_resource type="Script" uid="uid://cb7dc6jt07vix" path="res://debug_nodes/player_debug.gd" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://cpp7g0af4m0ed" path="res://AudioMixerVisualizer/AudioDebugVisualizer.tscn" id="7_o6xl0"]
@@ -16,12 +18,70 @@ emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
 gravity = Vector3(0, 98, 0)
 
+[sub_resource type="FontVariation" id="FontVariation_ya4ey"]
+base_font = ExtResource("4_85g3d")
+opentype_features = {
+1667329140: 0
+}
+spacing_bottom = -2
+baseline_offset = 0.22
+
 [node name="Main" type="Node" unique_id=1110477990 groups=["main_scene"]]
 script = ExtResource("1_jyhfs")
-scene_to_load = 3
+scene_to_load = 1
 default_song = ExtResource("2_tefeu")
 prevent_saving = true
 disable_loading_screen = true
+
+[node name="Debug" type="Node" parent="." unique_id=978892620]
+
+[node name="DevNotes" type="RichTextLabel" parent="Debug" unique_id=818737383]
+anchors_preset = -1
+anchor_left = 1.546875
+anchor_top = 0.008928572
+anchor_right = 2.546875
+anchor_bottom = 1.6160715
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/bold_font_size = 14
+theme_override_font_sizes/bold_italics_font_size = 14
+theme_override_font_sizes/italics_font_size = 14
+theme_override_font_sizes/mono_font_size = 14
+text = "Memos
+- check neuron being duplicated from save/loading
+- keep checking volumes
+- preload complex projectiles
+- indicate previously looted chests
+
+Replicable bugs:
+- top of Dread's collision gets passed through
+- Pathfinding needs to update after rememberer triggered and locked wall opened
+- bottom of the walls flickers rapidly on north and south sides
+- rotation from tilemap broken
+- dopamine a little close to shrinker gets shrinked
+- loading screen gone before scene is fully ready
+- when entering level, ui resets for a split second
+
+Mystery bugs:
+- occasional frame stall, kick repeats a lot during it
+- Wax refused to follow (this was after Boredom moved on top of player)
+
+Error Messages:
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayerCheats" type="Node" parent="Debug" unique_id=1955176774]
+script = ExtResource("6_tefeu")
+enabled = true
+enable_all_infinites = true
+
+[node name="DebugStressTester" type="Node" parent="Debug" unique_id=1548414204]
+script = ExtResource("5_tbgi4")
+
+[node name="DbDebugVisualizer" parent="Debug" unique_id=557291510 instance=ExtResource("7_o6xl0")]
+visible = false
+buses = Array[int]([2])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1782560111]
 process_mode = 3
@@ -37,47 +97,23 @@ explosiveness = 0.05
 randomness = 0.3
 process_material = SubResource("ParticleProcessMaterial_rarhs")
 
+[node name="DebugLabel" type="Label" parent="CanvasLayer" unique_id=1191155246]
+visible = false
+modulate = Color(1, 1, 1, 0.5647059)
+anchors_preset = -1
+anchor_left = 0.009765625
+anchor_top = 0.9464286
+anchor_right = 0.24023438
+anchor_bottom = 0.99776787
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = SubResource("FontVariation_ya4ey")
+theme_override_font_sizes/font_size = 7
+text = "debug build"
+vertical_alignment = 1
+script = ExtResource("5_choun")
+metadata/_edit_use_anchors_ = true
+
 [node name="CursorManager" type="Node" parent="." unique_id=1301145743]
 process_mode = 3
 script = ExtResource("4_o6xl0")
-
-[node name="DebugStressTester" type="Node" parent="." unique_id=1548414204]
-script = ExtResource("5_tbgi4")
-
-[node name="PlayerCheats" type="Node" parent="." unique_id=1955176774]
-script = ExtResource("6_tefeu")
-
-[node name="DevNotes" type="RichTextLabel" parent="." unique_id=818737383]
-anchors_preset = -1
-anchor_left = 1.171875
-anchor_top = 0.02232143
-anchor_right = 2.6855469
-anchor_bottom = 1.8080357
-theme_override_font_sizes/normal_font_size = 14
-theme_override_font_sizes/bold_font_size = 14
-theme_override_font_sizes/bold_italics_font_size = 14
-theme_override_font_sizes/italics_font_size = 14
-theme_override_font_sizes/mono_font_size = 14
-text = "Memos
-- change level name
-- keep checking volumes
-- make right click clear spell
-
-Replicable bugs:
-- cursor flicker
-- kick spam on enter level
-- bottom of the walls flickers rapidly on north and south sides
-- rotation from tilemap broken
-
-Inconsistent bugs:
-- chest interact flicker
-- melting Wax err message
-- occasional enter level crashes(?)
-
-Error Messages:
-The text-based scene at path \"res://autoloads/bgm/bgm.tscn\" is large on disk (10.56 MiB), likely because it has embedded binary data. Consider saving its binary subresource(s) to a binary `.res` file or saving the scene as a binary `.scn` file. (also on hub world)"
-metadata/_edit_use_anchors_ = true
-
-[node name="DbDebugVisualizer" parent="." unique_id=557291510 instance=ExtResource("7_o6xl0")]
-visible = false
-buses = Array[int]([2])

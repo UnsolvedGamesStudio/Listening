@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5gdwlmng0rsy"]
+[gd_scene format=3 uid="uid://c5gdwlmng0rsy"]
 
 [ext_resource type="Script" uid="uid://b1d1ue50x01g6" path="res://puzzles/obstacle.gd" id="1_6568k"]
 [ext_resource type="PackedScene" uid="uid://dgneaw016pnir" path="res://puzzles/keyhole_interactable.tscn" id="1_p1utb"]
@@ -7,37 +7,33 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_p1utb"]
 size = Vector3(1.9, 4, 1.9)
 
-[node name="LockedWall" type="Node3D"]
+[node name="LockedWall" type="Node3D" unique_id=1023323689 groups=["obstacle"]]
 script = ExtResource("1_6568k")
 
-[node name="KeyholeInteractable" parent="." instance=ExtResource("1_p1utb")]
+[node name="KeyholeInteractable" parent="." unique_id=1417544556 instance=ExtResource("1_p1utb")]
 transform = Transform3D(0.95, 0, 0, 0, -4.152582e-08, 0.95, 0, -0.95, -4.152582e-08, 0, 2, 0)
 
-[node name="Faces" type="Node3D" parent="."]
+[node name="Faces" type="Node3D" parent="." unique_id=1565851125]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1.052, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="NorthFace" parent="Faces" instance=ExtResource("4_7u0j8")]
+[node name="NorthFace" parent="Faces" unique_id=554147351 instance=ExtResource("4_7u0j8")]
 transform = Transform3D(0.95, 0, -2.2649766e-07, 0, 0.95, 0, 2.2649766e-07, 0, 0.95, 0, 0, -0.95)
-collision_layer = 0
 
-[node name="EastFace" parent="Faces" instance=ExtResource("4_7u0j8")]
+[node name="EastFace" parent="Faces" unique_id=941119414 instance=ExtResource("4_7u0j8")]
 transform = Transform3D(-4.152582e-08, 4.1525823e-08, -0.95, 1.8151514e-15, 0.95, 4.1525823e-08, 0.95, 0, -4.152582e-08, 0.95, 0, 0)
-collision_layer = 0
 
-[node name="SouthFace" parent="Faces" instance=ExtResource("4_7u0j8")]
+[node name="SouthFace" parent="Faces" unique_id=88923119 instance=ExtResource("4_7u0j8")]
 transform = Transform3D(-0.95, -2.1354062e-37, 4.1525816e-08, 2.1e-44, 0.95, 4.8852417e-30, -4.1525816e-08, 4.8852417e-30, -0.95, 0, 0, 0.95)
-collision_layer = 0
 
-[node name="WestFace" parent="Faces" instance=ExtResource("4_7u0j8")]
+[node name="WestFace" parent="Faces" unique_id=527145369 instance=ExtResource("4_7u0j8")]
 transform = Transform3D(1.1328623e-08, 0, 0.95, 0, 0.95, 0, -0.95, 0, 1.1328623e-08, -0.95, 0, 0)
-collision_layer = 0
 
-[node name="Area3D" type="Area3D" parent="." groups=["obstacle_collision"]]
+[node name="Area3D" type="Area3D" parent="." unique_id=1591451569 groups=["obstacle_collision"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 collision_layer = 130
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2110143516]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0013060584)
 shape = SubResource("BoxShape3D_p1utb")

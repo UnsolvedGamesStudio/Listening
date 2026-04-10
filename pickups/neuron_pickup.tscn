@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dqpxy77one4hb"]
+[gd_scene format=3 uid="uid://dqpxy77one4hb"]
 
 [ext_resource type="Script" uid="uid://bhaaicftpcw12" path="res://pickups/neuron_pickup.gd" id="1_kudkk"]
 [ext_resource type="Texture2D" uid="uid://n3guqraf3vnf" path="res://pickups/textures/neuron-Sheet.png" id="2_hqk12"]
@@ -37,7 +37,6 @@ orientation = 2
 
 [sub_resource type="Animation" id="Animation_lcksh"]
 resource_name = "on_beat"
-loop_mode = 1
 step = 0.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -57,13 +56,13 @@ _data = {
 &"on_beat": SubResource("Animation_lcksh")
 }
 
-[node name="NeuronPickup" type="Node3D"]
+[node name="NeuronPickup" type="Node3D" unique_id=2055590278]
 script = ExtResource("1_kudkk")
 tween_length_mult = 2.0
 animate_every_x_beat = 6
 interacted_color = Color(0.9188262, 0.9091066, 0, 1)
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1490844510]
 unique_name_in_owner = true
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 1.2762816, 0)
 pixel_size = 0.005
@@ -72,19 +71,20 @@ double_sided = false
 texture_filter = 0
 texture = ExtResource("2_hqk12")
 hframes = 2
+frame = 1
 region_rect = Rect2(0, 0, 32, 16)
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=824474320]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3060288, 0)
 collision_layer = 64
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1837975444]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26719284, 0)
 shape = SubResource("SphereShape3D_6nqee")
 
-[node name="Particles" type="GPUParticles3D" parent="."]
+[node name="Particles" type="GPUParticles3D" parent="." unique_id=1878002794]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 1.5791655, 0)
 cast_shadow = 0
@@ -95,13 +95,11 @@ randomness = 0.52
 process_material = SubResource("ParticleProcessMaterial_rglt4")
 draw_pass_1 = SubResource("PlaneMesh_f3io4")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1738114121]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_emkgw")
-}
+libraries/ = SubResource("AnimationLibrary_emkgw")
 
-[node name="SFX" type="AudioStreamPlayer" parent="."]
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1297963159]
 unique_name_in_owner = true
 stream = ExtResource("3_hqk12")
 volume_db = 14.999

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4d6fhecioyhy"]
+[gd_scene format=3 uid="uid://b4d6fhecioyhy"]
 
 [ext_resource type="Script" uid="uid://bqiahf7fqvj5b" path="res://pickups/healing_pickup.gd" id="1_lcksh"]
 [ext_resource type="Texture2D" uid="uid://cxymxxlybqtl" path="res://pickups/textures/sprout-Sheet.png" id="2_lcksh"]
@@ -47,10 +47,11 @@ _data = {
 &"on_beat": SubResource("Animation_lcksh")
 }
 
-[node name="HealingPickup" type="Node3D"]
+[node name="HealingPickup" type="Node3D" unique_id=1730350705]
 script = ExtResource("1_lcksh")
+interacted_color = Color(0, 0.7746173, 0.715674, 1)
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=845443364]
 unique_name_in_owner = true
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.022028953, 0.211, 0)
 cast_shadow = 2
@@ -63,15 +64,15 @@ hframes = 2
 frame = 1
 region_rect = Rect2(0, 0, 32, 16)
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=1141625317]
 unique_name_in_owner = true
 collision_layer = 64
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=820574713]
 shape = SubResource("SphereShape3D_bgvgf")
 
-[node name="Particles" type="GPUParticles3D" parent="."]
+[node name="Particles" type="GPUParticles3D" parent="." unique_id=375769091]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, -1.0000001, 0, 1.0000001, -4.3711392e-08, 0, 0.2413302, 0)
 cast_shadow = 0
@@ -81,8 +82,6 @@ randomness = 0.52
 process_material = SubResource("ParticleProcessMaterial_lcksh")
 draw_pass_1 = SubResource("PlaneMesh_emkgw")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1372799148]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_emkgw")
-}
+libraries/ = SubResource("AnimationLibrary_emkgw")

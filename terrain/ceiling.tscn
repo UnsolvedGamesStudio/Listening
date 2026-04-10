@@ -1,22 +1,61 @@
-[gd_scene load_steps=4 format=3 uid="uid://bw8gqh3mcauhb"]
+[gd_scene format=3 uid="uid://bw8gqh3mcauhb"]
 
-[ext_resource type="Material" uid="uid://cvl3k4gjeucae" path="res://terrain/textures/ceiling_sky_material.tres" id="1_b01wm"]
+[ext_resource type="Texture2D" uid="uid://b80gy4a6qlhym" path="res://terrain/textures/ceiling_sky.png" id="1_5j47l"]
+[ext_resource type="Texture2D" uid="uid://b2mpp84cugomi" path="res://terrain/textures/ceiling_sky_pastel.png" id="2_7v482"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jqtsm"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(1, 1, 1, 0)
+albedo_texture = ExtResource("2_7v482")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_celov"]
+next_pass = SubResource("StandardMaterial3D_jqtsm")
+cull_mode = 2
+albedo_texture = ExtResource("1_5j47l")
+texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_sf26d"]
-material = ExtResource("1_b01wm")
+material = SubResource("StandardMaterial3D_celov")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8d6ju"]
 size = Vector3(2, 0.001, 2)
 
-[node name="Ceiling" type="StaticBody3D"]
+[sub_resource type="Animation" id="Animation_anemd"]
+resource_name = "new_animation"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh:material:next_pass:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ich4n"]
+_data = {
+&"new_animation": SubResource("Animation_anemd")
+}
+
+[node name="Ceiling" type="StaticBody3D" unique_id=1845592142]
 collision_layer = 2
 collision_mask = 0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=684363668]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 0)
 mesh = SubResource("PlaneMesh_sf26d")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=546858468]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5571734e-08, -0.0009889603, 0.0042419434)
 shape = SubResource("BoxShape3D_8d6ju")
 debug_color = Color(0.8937149, 0.56088555, 0, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=11322065]
+libraries/ = SubResource("AnimationLibrary_ich4n")
+speed_scale = 0.1

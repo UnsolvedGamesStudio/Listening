@@ -39,11 +39,14 @@ func on_level_layout_ready():
 		add_cell(cell.global_position)
 	
 	# Build connections
-	for cell_pos in cell_to_id.keys():
-		rebuild_cell_connections(cell_pos, true, [Find.P()])
+	rebuild()
 
 
 # ---- PUBLIC API ----
+func rebuild():
+	for cell_pos in cell_to_id.keys():
+		rebuild_cell_connections(cell_pos, true, [Find.P()])
+
 
 func add_cell(cell_pos: Vector3) -> int:
 	if cell_to_id.has(cell_pos):

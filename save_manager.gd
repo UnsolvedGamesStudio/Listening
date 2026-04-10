@@ -8,7 +8,6 @@ var json_path:= "user://psychodrama_save_data.json"
 var _saved_data:= {}
 
 
-
 func _ready() -> void:
 	if OS.has_feature("editor"):
 		json_path = "res://debug_save_file.json"
@@ -25,7 +24,6 @@ func _ready() -> void:
 	Bus.loading_level.connect(on_loading_level)
 
 
-## Todo: If file is blank, initialize the dict
 func write_save_data():
 	if get_tree().get_first_node_in_group("main_scene").prevent_saving == true:
 		return

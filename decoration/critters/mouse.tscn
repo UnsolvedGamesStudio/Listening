@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://u1b4in7jupp7" path="res://assets/sfx/mouse_idle.ogg" id="3_1o5tm"]
 [ext_resource type="PackedScene" uid="uid://cgv5kne52pn1o" path="res://decoration/critters/critter_get_hurt.tscn" id="3_4se78"]
 [ext_resource type="AudioStream" uid="uid://cly28y4nmyy1x" path="res://assets/sfx/mouse_scream_sfx.ogg" id="4_1o5tm"]
+[ext_resource type="Script" uid="uid://bjp1x1njm1b6h" path="res://shared/beat_anim.gd" id="7_u4ur1"]
 
 [sub_resource type="Gradient" id="Gradient_dgxte"]
 offsets = PackedFloat32Array(0, 0.24460432)
@@ -66,7 +67,7 @@ size = Vector3(0.23828125, 0.12059082, 0.44047874)
 size = Vector3(1, 0.49389648, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r2l80"]
-size = Vector3(0.17498016, 0.05811719, 0.32305908)
+size = Vector3(0.17498016, 0.17771985, 0.32305908)
 
 [sub_resource type="Animation" id="Animation_r2l80"]
 resource_name = "idle"
@@ -80,6 +81,39 @@ _data = {
 &"moving": SubResource("Animation_4se78")
 }
 
+[sub_resource type="Animation" id="Animation_kpccx"]
+resource_name = "1"
+length = 0.53333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Meshes/Body:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.46666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1.9289634), Vector3(1, 1.5, 1.929), Vector3(1, 1, 1.9289634)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Meshes/Body:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.46666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.03, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_shnvm"]
+_data = {
+&"1": SubResource("Animation_kpccx")
+}
+
 [node name="Mouse" type="RigidBody3D" unique_id=997859730]
 collision_layer = 0
 collision_mask = 2
@@ -88,15 +122,15 @@ script = ExtResource("1_7shys")
 [node name="Meshes" type="Node3D" parent="." unique_id=63014270]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06197186, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes" unique_id=1054409280]
+[node name="Body" type="MeshInstance3D" parent="Meshes" unique_id=1054409280]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.9289634, 0, 0, 0)
 mesh = SubResource("CylinderMesh_dgxte")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Meshes" unique_id=586657248]
+[node name="Tail" type="MeshInstance3D" parent="Meshes" unique_id=586657248]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.04727173, 0.33654785)
 mesh = SubResource("CylinderMesh_7shys")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Meshes" unique_id=1732599326]
+[node name="Nose" type="MeshInstance3D" parent="Meshes" unique_id=1732599326]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04727173, -0.21987534)
 mesh = SubResource("SphereMesh_4se78")
 
@@ -106,6 +140,7 @@ shape = SubResource("BoxShape3D_7shys")
 
 [node name="Hurtbox" parent="." unique_id=1059778270 instance=ExtResource("2_im2v1")]
 unique_name_in_owner = true
+collision_mask = 32784
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Hurtbox" unique_id=820105526]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25305176, 0)
@@ -117,7 +152,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallDetect" unique_id=2041161717]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006549835, 0.05692632, -0.18545532)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006549835, 0.11672766, -0.18545532)
 shape = SubResource("BoxShape3D_r2l80")
 debug_color = Color(0.41099185, 0.603334, 0, 0.14901961)
 
@@ -140,11 +175,20 @@ bus = &"SFX"
 [node name="CritterMovement" parent="." unique_id=600323704 instance=ExtResource("2_r2l80")]
 min_random_time = 4.0
 max_random_time = 8.0
+turn_speed = 3.5
+base_speed = 0.85
 speed_boost_frequency = 5.0
-speed_boost_mult = 2.5
+speed_boost_mult = 2.1
 
 [node name="CritterGetHurt" parent="." unique_id=610461838 instance=ExtResource("3_4se78")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=117469642]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_im2v1")
+
+[node name="BeatAnim" type="AnimationPlayer" parent="." unique_id=870143549]
+libraries/ = SubResource("AnimationLibrary_shnvm")
+autoplay = &"1"
+script = ExtResource("7_u4ur1")
+method = 1
+adapt_to_bpm = true

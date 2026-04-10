@@ -30,7 +30,7 @@ script = null
 [node name="TileForgetters" parent="Floor1" unique_id=469663849 groups=["editor_objects"] instance=ExtResource("11_mny3b")]
 
 [node name="Layer1" parent="Floor1" unique_id=1405763340 groups=["editor_objects"] instance=ExtResource("11_mny3b")]
-tile_map_data = PackedByteArray("AAAAAAIABAAAAAAAAAABAAIABQABAAAAAAAAAAEABwAAAAEAAAD//wEABwAAAAAAAAD//wIABQADAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAAIABAAAAAAAAAAAAAEAAQAEAAAAAAA=")
 
 [node name="Layer2" parent="Floor1" unique_id=1538985090 groups=["editor_objects"] instance=ExtResource("11_mny3b")]
 

@@ -43,7 +43,7 @@ func shrink():
 
 func tween_values():
 	var tween:= create_tween()
-	var shrink_amount:= original_scale.y * (get_hurt_eb.hp / get_hurt_eb.max_hp)
+	var shrink_amount: float = max(0.01, original_scale.y * (get_hurt_eb.hp / get_hurt_eb.max_hp))
 	var dim_amount:= original_energy * (get_hurt_eb.hp / get_hurt_eb.max_hp)
 	
 	tween.parallel().tween_property(O.to_animate, "scale:y", shrink_amount, 0.25)

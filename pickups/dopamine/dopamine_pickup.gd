@@ -63,6 +63,9 @@ func move_towards_player():
 	
 	var player_pos:= Find.P().camera.global_position + (Vector3.DOWN / 1.05)
 	
+	if global_position == player_pos:
+		return
+	
 	move_lerp_rate *= 1.1
 	global_position = global_position.lerp(player_pos, move_lerp_rate)
 

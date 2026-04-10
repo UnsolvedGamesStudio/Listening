@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2emw1jx7dwb2"]
+[gd_scene format=3 uid="uid://d2emw1jx7dwb2"]
 
 [ext_resource type="Script" uid="uid://5g0ky2a22hhi" path="res://terrain/cells/walled_cell.gd" id="1_b0f2n"]
 [ext_resource type="Script" uid="uid://cnier2fyv1lb5" path="res://terrain/cells/unwalled_cell.gd" id="3_b0f2n"]
@@ -18,80 +18,84 @@ size = Vector3(1.9980469, 1.0009824, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_b0f2n"]
 size = Vector3(1.95, 3.9, 1.95)
 
-[node name="HeightLimitedCell" type="Node3D" groups=["walled_cell"]]
+[node name="HeightLimitedCell" type="Node3D" unique_id=352883322 groups=["walled_cell"]]
 script = ExtResource("1_b0f2n")
 
-[node name="InsideWalls" type="Node3D" parent="."]
+[node name="InsideWalls" type="Node3D" parent="." unique_id=1180923744]
 transform = Transform3D(1, 0, 0, 0, 0.9, 0, 0, 0, 1, 0, 0.4, 0)
 
-[node name="NorthFace" parent="InsideWalls" instance=ExtResource("4_522tv")]
+[node name="NorthFace" parent="InsideWalls" unique_id=1804913367 instance=ExtResource("4_522tv")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, 0, -1.0009999)
 
-[node name="EastFace" parent="InsideWalls" instance=ExtResource("4_522tv")]
+[node name="EastFace" parent="InsideWalls" unique_id=1227231238 instance=ExtResource("4_522tv")]
 transform = Transform3D(1.9470718e-07, 0, 1, 0, 1, 0, -1, 0, 1.9470718e-07, 1, 0, 0.0009999871)
 
-[node name="SouthFace" parent="InsideWalls" instance=ExtResource("4_522tv")]
+[node name="SouthFace" parent="InsideWalls" unique_id=692099186 instance=ExtResource("4_522tv")]
 transform = Transform3D(1, 0, -6.3573026e-08, 0, 1, 0, 6.3573026e-08, 0, 1, 0, 0, 1.0009999)
 
-[node name="WestFace" parent="InsideWalls" instance=ExtResource("4_522tv")]
+[node name="WestFace" parent="InsideWalls" unique_id=1758988209 instance=ExtResource("4_522tv")]
 transform = Transform3D(-1.6292068e-07, 0, -1, 0, 1, 0, 1, 0, -1.6292068e-07, -0.999, 0, 0)
 
-[node name="BaseTerrain" type="Node3D" parent="."]
+[node name="BaseTerrain" type="Node3D" parent="." unique_id=272565927]
 
-[node name="NorthFace" parent="BaseTerrain" instance=ExtResource("3_d8fh8")]
+[node name="NorthFace" parent="BaseTerrain" unique_id=835504212 instance=ExtResource("3_d8fh8")]
 unique_name_in_owner = true
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -1)
+visible = false
 
-[node name="EastFace" parent="BaseTerrain" instance=ExtResource("3_d8fh8")]
+[node name="EastFace" parent="BaseTerrain" unique_id=614278598 instance=ExtResource("3_d8fh8")]
 unique_name_in_owner = true
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 1, 0, 0)
+visible = false
 
-[node name="SouthFace" parent="BaseTerrain" instance=ExtResource("3_d8fh8")]
+[node name="SouthFace" parent="BaseTerrain" unique_id=1797169213 instance=ExtResource("3_d8fh8")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+visible = false
 
-[node name="WestFace" parent="BaseTerrain" instance=ExtResource("3_d8fh8")]
+[node name="WestFace" parent="BaseTerrain" unique_id=7530465 instance=ExtResource("3_d8fh8")]
 unique_name_in_owner = true
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1, 0, 0)
+visible = false
 
-[node name="TopFace" parent="BaseTerrain" instance=ExtResource("7_27ovq")]
+[node name="TopFace" parent="BaseTerrain" unique_id=210938400 instance=ExtResource("7_27ovq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 
-[node name="LoweredCeiling" parent="BaseTerrain" instance=ExtResource("7_27ovq")]
+[node name="LoweredCeiling" parent="BaseTerrain" unique_id=1280615480 instance=ExtResource("7_27ovq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 
-[node name="BottomFace" type="StaticBody3D" parent="BaseTerrain"]
+[node name="BottomFace" type="StaticBody3D" parent="BaseTerrain" unique_id=442191695]
 unique_name_in_owner = true
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("3_b0f2n")
 
-[node name="Cell" parent="BaseTerrain/BottomFace" instance=ExtResource("4_0u8it")]
+[node name="Cell" parent="BaseTerrain/BottomFace" unique_id=593731896 instance=ExtResource("4_0u8it")]
 unique_name_in_owner = true
 max_player_height = 0.25
 
-[node name="FloorVisuals" parent="BaseTerrain/BottomFace" instance=ExtResource("7_xhjm3")]
+[node name="FloorVisuals" parent="BaseTerrain/BottomFace" unique_id=2062022771 instance=ExtResource("7_xhjm3")]
 
-[node name="CellDetect" type="Area3D" parent="BaseTerrain/BottomFace"]
+[node name="CellDetect" type="Area3D" parent="BaseTerrain/BottomFace" unique_id=440870084]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BaseTerrain/BottomFace/CellDetect"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BaseTerrain/BottomFace/CellDetect" unique_id=535749478]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8536967, 0)
 shape = SubResource("BoxShape3D_i71dc")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BaseTerrain/BottomFace"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BaseTerrain/BottomFace" unique_id=1721672256]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0009765625, -0.5004912, 0.0042419434)
 shape = SubResource("BoxShape3D_320jl")
 debug_color = Color(0.83842415, 0.0011944127, 0.92669535, 0.41960785)
 
-[node name="Shrinker" type="Area3D" parent="." node_paths=PackedStringArray("cell")]
+[node name="Shrinker" type="Area3D" parent="." unique_id=1727312319 node_paths=PackedStringArray("cell")]
 collision_layer = 0
 collision_mask = 1012
 script = ExtResource("5_0u8it")
 cell = NodePath("../BaseTerrain/BottomFace/Cell")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Shrinker"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shrinker" unique_id=1946468923]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("BoxShape3D_b0f2n")

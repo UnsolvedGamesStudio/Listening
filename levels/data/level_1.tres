@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelData" load_steps=4 format=3 uid="uid://cpcv3aj6jdd1b"]
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://cpcv3aj6jdd1b"]
 
 [ext_resource type="Texture2D" uid="uid://b4s6ykblvadm" path="res://terrain/textures/papertexture-2061711_640.png" id="1_5r2sd"]
 [ext_resource type="PackedScene" uid="uid://bptiy4w2getxo" path="res://levels/blueprints/level_1_blueprint.tscn" id="1_c7a60"]
@@ -7,4 +7,4 @@
 [resource]
 script = ExtResource("1_whlj7")
 level_blueprint = ExtResource("1_c7a60")
-level_name = "Reverie"
+level_name = "Hypnagogic"

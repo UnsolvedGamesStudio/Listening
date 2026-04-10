@@ -8,8 +8,8 @@ const CURSOR_CLICK = preload("uid://d3po7d2es7mo2")
 
 
 func _ready() -> void:
-	Input.set_custom_mouse_cursor(CURSOR_CLICK, Input.CURSOR_ARROW)
-	Input.set_custom_mouse_cursor(CURSOR_CLICK, Input.CURSOR_POINTING_HAND)
+	Input.set_custom_mouse_cursor(CURSOR_NEUTRAL, Input.CURSOR_ARROW)
+	Input.set_custom_mouse_cursor(CURSOR_HOVER, Input.CURSOR_POINTING_HAND)
 
 
 func _physics_process(delta: float) -> void:
@@ -33,9 +33,19 @@ func _input(event: InputEvent) -> void:
 	if not Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 		return
 	
-	if event.is_action_pressed("cast"):
+	if not event is InputEventMouseButton:
+		return
+	
+	if not event.button_index == MOUSE_BUTTON_LEFT:
+		return
+	
+	if event.pressed:
 		Input.set_custom_mouse_cursor(CURSOR_CLICK, Input.CURSOR_ARROW)
 		Input.set_custom_mouse_cursor(CURSOR_CLICK, Input.CURSOR_POINTING_HAND)
-	else:
+		return
+	
+	if not event.pressed:
 		Input.set_custom_mouse_cursor(CURSOR_NEUTRAL, Input.CURSOR_ARROW)
 		Input.set_custom_mouse_cursor(CURSOR_HOVER, Input.CURSOR_POINTING_HAND)
+		return
+	

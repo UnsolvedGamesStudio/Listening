@@ -1,10 +1,55 @@
 [gd_scene format=3 uid="uid://cwvoawpjhacas"]
 
-[ext_resource type="Material" uid="uid://bst4ecl263gsh" path="res://terrain/textures/grass_cube_material.tres" id="1_uvwf8"]
+[ext_resource type="Texture2D" uid="uid://b41c5i32xvqau" path="res://terrain/textures/grass_floor.png" id="1_uvwf8"]
+[ext_resource type="Texture2D" uid="uid://s8e0mkkpoy8n" path="res://terrain/textures/grass_floor_pastel.png" id="2_81rfs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4et2n"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+albedo_texture = ExtResource("2_81rfs")
+metallic_specular = 0.0
+clearcoat_enabled = true
+clearcoat = 0.16
+clearcoat_roughness = 0.09
+uv1_scale = Vector3(3, 1.995, 2)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_81rfs"]
+next_pass = SubResource("StandardMaterial3D_4et2n")
+albedo_texture = ExtResource("1_uvwf8")
+metallic_specular = 0.0
+clearcoat_enabled = true
+clearcoat = 0.16
+clearcoat_roughness = 0.09
+uv1_scale = Vector3(3, 1.995, 2)
+uv1_offset = Vector3(-1, 0, 0)
+texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_d8fh8"]
-material = ExtResource("1_uvwf8")
+material = SubResource("StandardMaterial3D_81rfs")
 size = Vector3(2, 0.99, 2)
+
+[sub_resource type="Animation" id="Animation_vs2el"]
+resource_name = "new_animation"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh:material:next_pass:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5.0000005, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4et2n"]
+_data = {
+&"new_animation": SubResource("Animation_vs2el")
+}
 
 [node name="FloorVisuals" type="Node3D" unique_id=2096635480]
 
@@ -12,3 +57,8 @@ size = Vector3(2, 0.99, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.495, 0)
 mesh = SubResource("BoxMesh_d8fh8")
 skeleton = NodePath("../..")
+
+[node name="ColorShift" type="AnimationPlayer" parent="." unique_id=59722408]
+libraries/ = SubResource("AnimationLibrary_4et2n")
+autoplay = &"new_animation"
+speed_scale = 0.1

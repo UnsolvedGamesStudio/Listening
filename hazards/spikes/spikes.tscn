@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c86l6d7h0h8wa"]
+[gd_scene format=3 uid="uid://c86l6d7h0h8wa"]
 
 [ext_resource type="ArrayMesh" uid="uid://bn4ylrjkxguy1" path="res://hazards/spikes/spike_mesh.tres" id="1_3s87x"]
 [ext_resource type="Script" uid="uid://57tlvk71dd56" path="res://hazards/spikes/spikes.gd" id="1_7fboi"]
@@ -51,167 +51,165 @@ _data = {
 &"up_down": SubResource("Animation_cagj7")
 }
 
-[node name="Spikes" type="Node3D"]
+[node name="Spikes" type="Node3D" unique_id=1851571244]
 script = ExtResource("1_7fboi")
 
-[node name="SpikeMeshes" type="Node3D" parent="."]
+[node name="SpikeMeshes" type="Node3D" parent="." unique_id=188994755]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, -0.1, 0)
 
-[node name="Spike" type="MeshInstance3D" parent="SpikeMeshes"]
+[node name="Spike" type="MeshInstance3D" parent="SpikeMeshes" unique_id=897728601]
 transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, 0, 41.446636, 0)
 mesh = ExtResource("1_3s87x")
 skeleton = NodePath("")
 
-[node name="Spike2" type="MeshInstance3D" parent="SpikeMeshes"]
+[node name="Spike2" type="MeshInstance3D" parent="SpikeMeshes" unique_id=2138705780]
 transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, 87.39969, 41.446636, 0)
 mesh = ExtResource("1_3s87x")
 skeleton = NodePath("")
 
-[node name="Spike3" type="MeshInstance3D" parent="SpikeMeshes"]
+[node name="Spike3" type="MeshInstance3D" parent="SpikeMeshes" unique_id=1557283472]
 transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, -88.922775, 41.446636, 0)
 mesh = ExtResource("1_3s87x")
 skeleton = NodePath("")
 
-[node name="Spike4" type="MeshInstance3D" parent="SpikeMeshes"]
+[node name="Spike4" type="MeshInstance3D" parent="SpikeMeshes" unique_id=582422114]
 transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, 0, 41.446636, 89.36937)
 mesh = ExtResource("1_3s87x")
 skeleton = NodePath("")
 
-[node name="Spike5" type="MeshInstance3D" parent="SpikeMeshes"]
+[node name="Spike5" type="MeshInstance3D" parent="SpikeMeshes" unique_id=1465358957]
 transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, 87.39969, 41.446636, 89.36937)
 mesh = ExtResource("1_3s87x")
 skeleton = NodePath("")
 
-[node name="Spike6" type="MeshInstance3D" parent="SpikeMeshes"]
+[node name="Spike6" type="MeshInstance3D" parent="SpikeMeshes" unique_id=1188978834]
 transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, -88.922775, 41.446636, 89.36937)
 mesh = ExtResource("1_3s87x")
 skeleton = NodePath("")
 
-[node name="Spike7" type="MeshInstance3D" parent="SpikeMeshes"]
+[node name="Spike7" type="MeshInstance3D" parent="SpikeMeshes" unique_id=235795686]
 transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, 0, 41.446636, -90.226326)
 mesh = ExtResource("1_3s87x")
 skeleton = NodePath("")
 
-[node name="Spike8" type="MeshInstance3D" parent="SpikeMeshes"]
+[node name="Spike8" type="MeshInstance3D" parent="SpikeMeshes" unique_id=713322125]
 transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, 87.39969, 41.446636, -90.226326)
 mesh = ExtResource("1_3s87x")
 skeleton = NodePath("")
 
-[node name="Spike9" type="MeshInstance3D" parent="SpikeMeshes"]
+[node name="Spike9" type="MeshInstance3D" parent="SpikeMeshes" unique_id=286546488]
 transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, -88.922775, 41.446636, -90.226326)
 mesh = ExtResource("1_3s87x")
 skeleton = NodePath("")
 
-[node name="Spike10" type="MeshInstance3D" parent="SpikeMeshes"]
+[node name="Spike10" type="MeshInstance3D" parent="SpikeMeshes" unique_id=1244685536]
 transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, -50.669945, 41.446636, -55.292873)
 mesh = ExtResource("1_3s87x")
 skeleton = NodePath("")
 
-[node name="Spike11" type="MeshInstance3D" parent="SpikeMeshes"]
+[node name="Spike11" type="MeshInstance3D" parent="SpikeMeshes" unique_id=1089827287]
 transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, 49.330055, 41.446636, -55.292873)
 mesh = ExtResource("1_3s87x")
 skeleton = NodePath("")
 
-[node name="Spike12" type="MeshInstance3D" parent="SpikeMeshes"]
+[node name="Spike12" type="MeshInstance3D" parent="SpikeMeshes" unique_id=1879129964]
 transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, 49.33005, 41.446636, 44.707127)
 mesh = ExtResource("1_3s87x")
 skeleton = NodePath("")
 
-[node name="Spike13" type="MeshInstance3D" parent="SpikeMeshes"]
+[node name="Spike13" type="MeshInstance3D" parent="SpikeMeshes" unique_id=128453742]
 transform = Transform3D(0.135, 0, 0, 0, 0.8507815, 0, 0, 0, 0.135, -50.66995, 41.446636, 44.707127)
 mesh = ExtResource("1_3s87x")
 skeleton = NodePath("")
 
-[node name="HoleMeshes" type="Node3D" parent="."]
+[node name="HoleMeshes" type="Node3D" parent="." unique_id=156549713]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, -0.39488864, 0)
 
-[node name="Hole" type="MeshInstance3D" parent="HoleMeshes"]
+[node name="Hole" type="MeshInstance3D" parent="HoleMeshes" unique_id=808020476]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 40.86874, 0)
 mesh = SubResource("CylinderMesh_iveop")
 skeleton = NodePath("")
 
-[node name="Hole2" type="MeshInstance3D" parent="HoleMeshes"]
+[node name="Hole2" type="MeshInstance3D" parent="HoleMeshes" unique_id=2097766595]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 87.39969, 40.86874, 0)
 mesh = SubResource("CylinderMesh_iveop")
 skeleton = NodePath("")
 
-[node name="Hole3" type="MeshInstance3D" parent="HoleMeshes"]
+[node name="Hole3" type="MeshInstance3D" parent="HoleMeshes" unique_id=570707190]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -88.922775, 40.86874, 0)
 mesh = SubResource("CylinderMesh_iveop")
 skeleton = NodePath("")
 
-[node name="Hole4" type="MeshInstance3D" parent="HoleMeshes"]
+[node name="Hole4" type="MeshInstance3D" parent="HoleMeshes" unique_id=854568506]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 40.86874, 89.36937)
 mesh = SubResource("CylinderMesh_iveop")
 skeleton = NodePath("")
 
-[node name="Hole5" type="MeshInstance3D" parent="HoleMeshes"]
+[node name="Hole5" type="MeshInstance3D" parent="HoleMeshes" unique_id=741388816]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 87.39969, 40.86874, 89.36937)
 mesh = SubResource("CylinderMesh_iveop")
 skeleton = NodePath("")
 
-[node name="Hole6" type="MeshInstance3D" parent="HoleMeshes"]
+[node name="Hole6" type="MeshInstance3D" parent="HoleMeshes" unique_id=1196156921]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -88.922775, 40.86874, 89.36937)
 mesh = SubResource("CylinderMesh_iveop")
 skeleton = NodePath("")
 
-[node name="Hole7" type="MeshInstance3D" parent="HoleMeshes"]
+[node name="Hole7" type="MeshInstance3D" parent="HoleMeshes" unique_id=293505361]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 40.86874, -90.226326)
 mesh = SubResource("CylinderMesh_iveop")
 skeleton = NodePath("")
 
-[node name="Hole8" type="MeshInstance3D" parent="HoleMeshes"]
+[node name="Hole8" type="MeshInstance3D" parent="HoleMeshes" unique_id=1203418070]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 87.39969, 40.86874, -90.226326)
 mesh = SubResource("CylinderMesh_iveop")
 skeleton = NodePath("")
 
-[node name="Hole9" type="MeshInstance3D" parent="HoleMeshes"]
+[node name="Hole9" type="MeshInstance3D" parent="HoleMeshes" unique_id=444126889]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -88.922775, 40.86874, -90.226326)
 mesh = SubResource("CylinderMesh_iveop")
 skeleton = NodePath("")
 
-[node name="Hole10" type="MeshInstance3D" parent="HoleMeshes"]
+[node name="Hole10" type="MeshInstance3D" parent="HoleMeshes" unique_id=1081813518]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -50.669945, 40.86874, -55.292873)
 mesh = SubResource("CylinderMesh_iveop")
 skeleton = NodePath("")
 
-[node name="Hole11" type="MeshInstance3D" parent="HoleMeshes"]
+[node name="Hole11" type="MeshInstance3D" parent="HoleMeshes" unique_id=461034165]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 49.33005, 40.86874, -55.292873)
 mesh = SubResource("CylinderMesh_iveop")
 skeleton = NodePath("")
 
-[node name="Hole12" type="MeshInstance3D" parent="HoleMeshes"]
+[node name="Hole12" type="MeshInstance3D" parent="HoleMeshes" unique_id=154426944]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 49.33005, 40.86874, 44.707127)
 mesh = SubResource("CylinderMesh_iveop")
 skeleton = NodePath("")
 
-[node name="Hole13" type="MeshInstance3D" parent="HoleMeshes"]
+[node name="Hole13" type="MeshInstance3D" parent="HoleMeshes" unique_id=194474321]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -50.66995, 40.86874, 44.707127)
 mesh = SubResource("CylinderMesh_iveop")
 skeleton = NodePath("")
 
-[node name="Hitbox" type="Area3D" parent="."]
-collision_layer = 304
+[node name="Hitbox" type="Area3D" parent="." unique_id=86273709]
+collision_layer = 288
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=62480779]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032546997, 0.47287297, -0.018051147)
 shape = SubResource("BoxShape3D_7fboi")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=283090957]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_dwf70")
-}
+libraries/ = SubResource("AnimationLibrary_dwf70")
 speed_scale = 4.0
 
-[node name="OutSFX" type="AudioStreamPlayer3D" parent="."]
+[node name="OutSFX" type="AudioStreamPlayer3D" parent="." unique_id=1639620450]
 unique_name_in_owner = true
 stream = ExtResource("3_iveop")
 volume_db = 11.0
 max_distance = 10.0
 
-[node name="InSFX" type="AudioStreamPlayer3D" parent="."]
+[node name="InSFX" type="AudioStreamPlayer3D" parent="." unique_id=802397851]
 unique_name_in_owner = true
 stream = ExtResource("3_iveop")
 volume_db = 11.0

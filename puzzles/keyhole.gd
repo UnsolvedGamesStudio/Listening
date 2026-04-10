@@ -34,14 +34,21 @@ func activate():
 		locked_sfx.play()
 		return
 	
-	open()
-	Vars.inventory[required_item]["amount"] -= 1
-	Bus.item_removed.emit(required_item)
-
-
-func open():
 	var O: Node3D = owner.owner
 	
+	if O.has_method("turn_off_faces"):
+		O.turn_off_faces()
+	
+	
+	Vars.inventory[required_item]["amount"] -= 1
+	Bus.item_removed.emit(required_item)
+	
+	await open_anim(O).finished
+	
+	O.queue_free()
+
+
+func open_anim(O: Node3D):
 	area_3d.get_child(0).disabled = true
 	O.impassable = false
 	O.occupied_cell = null
@@ -53,7 +60,7 @@ func open():
 	tween.tween_property(O, "global_position:y", original_y + 0.4, Bgm.beat_timer.beat_length / 3)
 	tween.tween_property(O, "global_position:y", original_y - 4.1, Bgm.beat_timer.beat_length * 3)
 	tween.parallel().tween_property(O, "global_rotation_degrees", Vector3(randf_range(-360, 360), randf_range(-180, 180), randf_range(-360, 360)), Bgm.beat_timer.beat_length * 7)
-	tween.tween_callback(O.queue_free)
+	return tween
 
 
 func has_item():
