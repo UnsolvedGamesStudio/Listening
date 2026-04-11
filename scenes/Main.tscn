@@ -28,10 +28,7 @@ baseline_offset = 0.22
 
 [node name="Main" type="Node" unique_id=1110477990 groups=["main_scene"]]
 script = ExtResource("1_jyhfs")
-scene_to_load = 1
 default_song = ExtResource("2_tefeu")
-prevent_saving = true
-disable_loading_screen = true
 
 [node name="Debug" type="Node" parent="." unique_id=978892620]
 
@@ -39,9 +36,9 @@ disable_loading_screen = true
 anchors_preset = -1
 anchor_left = 1.546875
 anchor_top = 0.008928572
-anchor_right = 2.546875
+anchor_right = 3.0898438
 anchor_bottom = 1.6160715
-grow_horizontal = 2
+grow_horizontal = 0
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 14
 theme_override_font_sizes/bold_font_size = 14
@@ -49,23 +46,19 @@ theme_override_font_sizes/bold_italics_font_size = 14
 theme_override_font_sizes/italics_font_size = 14
 theme_override_font_sizes/mono_font_size = 14
 text = "Memos
-- check neuron being duplicated from save/loading
+- check neuron being duplicated from save/loading*
 - keep checking volumes
 - preload complex projectiles
 - indicate previously looted chests
 
 Replicable bugs:
-- top of Dread's collision gets passed through
-- Pathfinding needs to update after rememberer triggered and locked wall opened
 - bottom of the walls flickers rapidly on north and south sides
-- rotation from tilemap broken
 - dopamine a little close to shrinker gets shrinked
 - loading screen gone before scene is fully ready
 - when entering level, ui resets for a split second
 
 Mystery bugs:
 - occasional frame stall, kick repeats a lot during it
-- Wax refused to follow (this was after Boredom moved on top of player)
 
 Error Messages:
 "
@@ -73,8 +66,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="PlayerCheats" type="Node" parent="Debug" unique_id=1955176774]
 script = ExtResource("6_tefeu")
-enabled = true
-enable_all_infinites = true
 
 [node name="DebugStressTester" type="Node" parent="Debug" unique_id=1548414204]
 script = ExtResource("5_tbgi4")

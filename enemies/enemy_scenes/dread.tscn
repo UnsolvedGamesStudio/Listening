@@ -81,12 +81,14 @@ layers = 2
 mesh = ExtResource("8_5lhxg")
 skeleton = NodePath("")
 
-[node name="EnemyBody" parent="." unique_id=229015105 instance=ExtResource("4_nxgbk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+[node name="EnemyBody" parent="Mesh" unique_id=229015105 instance=ExtResource("4_nxgbk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5661131, 0)
 
-[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="EnemyBody" unique_id=374632862]
-transform = Transform3D(0.034568053, 0, 0.99940234, 0, 1, 0, -0.99940234, 0, 0.034568053, -0.0054674745, 0.19286704, -0.352544)
-polygon = PackedVector2Array(-0.31095463, -1.6578952, -0.3960928, -1.6709857, -0.38182753, 1.6619921, 2.5903163, 1.6212626, 2.5772166, 1.5361745, -0.27165985, 1.5819912)
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Mesh/EnemyBody" unique_id=374632862]
+transform = Transform3D(-0.0060213804, 0, 0.9999819, 0, 1, 0, -0.9999819, 0, -0.0060213804, -0.0054674745, 0.19286704, -0.30697137)
+depth = 1.2
+polygon = PackedVector2Array(-0.2677985, -1.6667256, -0.37137815, -1.6667256, -0.35843033, 1.712498, 2.6389046, 1.6995509, 2.6453786, 1.5441842, -0.24837726, 1.5700786)
+debug_color = Color(0.99999994, 0.5581318, 0.15722993, 0.41960785)
 
 [node name="VisionRaycast" type="RayCast3D" parent="." unique_id=1809077304]
 unique_name_in_owner = true

@@ -43,12 +43,7 @@ func move_towards_player():
 	var allow_diagonals:= can_move_diagonally
 	var ignore_occupants: Array = [O, Find.P()]
 	
-	target_cell = NavGraph.get_next_cell(
-		own_cell_pos, 
-		player_cell_pos, 
-		allow_diagonals, 
-		ignore_occupants, 
-		false)
+	target_cell = NavGraph.get_next_cell(own_cell_pos, player_cell_pos)
 	
 	move_to_cell(target_cell)
 
@@ -62,6 +57,7 @@ func move_to_cell(target_cell: Cell):
 	
 	if cell_occupied(target_cell) == true:
 		return
+	
 	
 	target_cell.add_occupant(O)
 	Find.P().update_move_to_cell_indicator()

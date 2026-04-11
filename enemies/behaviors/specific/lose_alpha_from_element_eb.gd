@@ -17,7 +17,7 @@ func on_hit_by_player_damage(projectile: Projectile):
 		return
 	
 	var material: Material = mesh.get_active_material(0)
-	
+	print("qfdhg")
 	for value: int in projectile.elements:
 		
 		if value == element:

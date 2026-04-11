@@ -1,234 +1,153 @@
 extends Node
-## Todo: When an enemy can't move, rerun omitting what blocked it
-## Todo: subclasses for ground and air movement
-# ---- CONFIG ----
-var max_vertical_diff: float = 1.5      # maximum allowed height difference between neighbors
-
-# ---- INTERNAL DATA ----
-var astar: AStar3D = AStar3D.new()
-var cell_to_id: Dictionary = {}         # Vector3 -> int
-var id_to_cell: Dictionary = {}         # int -> Vector3
-var _debug_spheres: Array = []
-
-# Directions
-const ORTHO_DIRS := [
+## vector3i would be more performant
+const DIRECTIONS:= [
 	Vector3(1, 0, 0),
 	Vector3(-1, 0, 0),
 	Vector3(0, 0, 1),
 	Vector3(0, 0, -1),
 ]
 
-const DIAG_DIRS := [
-	Vector3(1, 0, 1),
-	Vector3(1, 0, -1),
-	Vector3(-1, 0, 1),
-	Vector3(-1, 0, -1),
-]
+const WALL_MAPPINGS: Dictionary[Vector3, Array] = {
+	Vector3(1, 0, 0): [Cell.WallSide.EAST, Cell.WallSide.WEST],   # Moving East
+	Vector3(-1, 0, 0): [Cell.WallSide.WEST, Cell.WallSide.EAST],  # Moving West
+	Vector3(0, 0, 1): [Cell.WallSide.SOUTH, Cell.WallSide.NORTH], # Moving South
+	Vector3(0, 0, -1): [Cell.WallSide.NORTH, Cell.WallSide.SOUTH] # Moving North
+}
+
+var astar: AStar3D = AStar3D.new()
+var _debug_spheres: Array = []
+
+var id_to_cell: Dictionary[int, Cell] = {}
+
+var pos_to_id: Dictionary[Vector3, int] = {}
+var id_to_pos: Dictionary[int, Vector3] = {}
 
 
-func _ready() -> void:
-	Bus.level_layout_ready.connect(on_level_layout_ready)
-
-
-func on_level_layout_ready():
-	cell_to_id.clear()
-	id_to_cell.clear()
+#region Internal Helpers
+func get_cells() -> Array[Cell]:
+	var cells_array: Array[Cell] = []
 	
-	# Generate all cells
 	for cell in get_tree().get_nodes_in_group("cell"):
-		add_cell(cell.global_position)
+		if cell is not Cell:
+			continue
+		
+		cells_array.append(cell)
 	
-	# Build connections
-	rebuild()
+	return cells_array
 
 
-# ---- PUBLIC API ----
-func rebuild():
-	for cell_pos in cell_to_id.keys():
-		rebuild_cell_connections(cell_pos, true, [Find.P()])
-
-
-func add_cell(cell_pos: Vector3) -> int:
-	if cell_to_id.has(cell_pos):
-		return cell_to_id[cell_pos]
+func add_cell(cell: Cell):
+	var cell_pos = cell.global_position
+	var point_id = pos_to_id.size()
 	
-	var id = cell_to_id.size()
+	pos_to_id[cell_pos] = point_id
+	id_to_pos[point_id] = cell_pos
+	id_to_cell[point_id] = cell
 	
-	cell_to_id[cell_pos] = id
-	id_to_cell[id] = cell_pos
+	astar.add_point(point_id, cell_pos)
 	
-	astar.add_point(id, cell_pos)
-	
-	return id
+	connect_to_neighbors(cell_pos)
 
 
-func remove_cell(cell_pos: Vector3) -> void:
-	if not cell_to_id.has(cell_pos):
+func connect_to_neighbors(cell_pos: Vector3):
+	if not pos_to_id.has(cell_pos):
 		return
 	
-	var id = cell_to_id[cell_pos]
+	var point_id = pos_to_id[cell_pos]
 	
-	for neighbor_id in astar.get_point_connections(id):
-		astar.disconnect_points(id, neighbor_id)
-	
-	astar.remove_point(id)
-	cell_to_id.erase(cell_pos)
-	id_to_cell.erase(id)
-
-
-func move_cell(old_pos: Vector3, new_pos: Vector3) -> void:
-	if not cell_to_id.has(old_pos):
-		return
-	
-	var id = cell_to_id[old_pos]
-	
-	cell_to_id.erase(old_pos)
-	cell_to_id[new_pos] = id
-	id_to_cell[id] = new_pos
-	astar.set_point_position(id, new_pos)
-	rebuild_cell_connections(new_pos)  # rebuild neighbors after moving
-
-# Rebuild neighbors of a single cell
-func rebuild_cell_connections(cell_pos: Vector3, allow_diagonals: bool = true, ignore_occupants: Array = []) -> void:
-	if not cell_to_id.has(cell_pos):
-		return
-	
-	var id = cell_to_id[cell_pos]
-	
-	# Disconnect all existing neighbors
-	for neighbor_id in astar.get_point_connections(id):
-		astar.disconnect_points(id, neighbor_id)
-	
-	# Connect orthogonal neighbors
-	for dir in ORTHO_DIRS:
-		var npos = cell_pos + dir * Vars.cell_size
+	for direction in DIRECTIONS:
+		var neighbor_pos: Vector3 = cell_pos + direction * Vars.cell_size
 		
-		if cell_to_id.has(npos) and can_connect(cell_pos, npos, ignore_occupants):
-			var nid = cell_to_id[npos]
-			
-			astar.connect_points(id, nid, true)
-	
-	# Connect diagonals if allowed
-	if allow_diagonals:
-		for dir in DIAG_DIRS:
-			var npos = cell_pos + dir * Vars.cell_size
-			
-			if cell_to_id.has(npos) and can_connect_diagonal(cell_pos, npos, ignore_occupants):
-				var nid = cell_to_id[npos]
-				
-				astar.connect_points(id, nid, true)
-
-# Get path between two cells
-func get_cell_path(start_pos: Vector3, end_pos: Vector3, draw_path:= false) -> Array:
-	if not cell_to_id.has(start_pos) or not cell_to_id.has(end_pos):
-		return []
-	
-	var start_id = cell_to_id[start_pos]
-	var end_id = cell_to_id[end_pos]
-	var path:= astar.get_point_path(start_id, end_id)
-	
-	if draw_path == true:
-		draw_debug_path(path)
-	
-	return path
-
-# Get path between two cells after reconnecting the relevant cells if any change was signaled
-func get_dynamic_path(start_pos: Vector3, end_pos: Vector3, allow_diagonals: bool = true, ignore_occupants: Array = [], draw_path:= false) -> Array:
-	# Rebuild relevant connections first
-	rebuild_cell_connections(start_pos, allow_diagonals, ignore_occupants)
-	rebuild_cell_connections(end_pos, allow_diagonals, ignore_occupants)
-	
-	# Rebuild neighbors
-	for dir in ORTHO_DIRS + DIAG_DIRS:
-		var neighbor_pos_start = start_pos + dir * Vars.cell_size
+		if not pos_to_id.has(neighbor_pos):
+			continue
 		
-		if cell_to_id.has(neighbor_pos_start):
-			rebuild_cell_connections(neighbor_pos_start, allow_diagonals, ignore_occupants)
+		var neighbor_id: int = pos_to_id[neighbor_pos]
+	
+		if not can_connect(point_id, neighbor_id):
+			continue
 		
-		var neighbor_pos_end = end_pos + dir * Vars.cell_size
-		
-		if cell_to_id.has(neighbor_pos_end):
-			rebuild_cell_connections(neighbor_pos_end, allow_diagonals, ignore_occupants)
-	
-	return get_cell_path(start_pos, end_pos)
+		astar.connect_points(point_id, neighbor_id, true)
 
 
-func get_next_cell(start_pos: Vector3, end_pos: Vector3, allow_diagonals: bool = true, ignore_occupants: Array = [], draw_path:= false):
-	var next_cell: Cell
-	var current_path:= get_dynamic_path(start_pos, end_pos, allow_diagonals, ignore_occupants, draw_path)
-	
-	if current_path.size() <= 2:
-		return null
-	
-	next_cell = get_cell_node(current_path[1])
-	
-	return next_cell
-
-
-# ---- INTERNAL HELPERS ----
-
-func can_connect(a_pos: Vector3, b_pos: Vector3, ignore_occupants: Array) -> bool:
-	# Check vertical difference
-	if absf(a_pos.y - b_pos.y) > max_vertical_diff:
+func can_connect(from_point: int, to_point: int) -> bool:
+	if not id_to_cell.has(from_point) or not id_to_cell.has(from_point):
 		return false
 	
-	var a_cell = get_cell_node(a_pos)
-	var b_cell = get_cell_node(b_pos)
+	var from_cell: Cell = id_to_cell[from_point]
+	var to_cell: Cell = id_to_cell[to_point]
 	
-	if not a_cell or not b_cell:
+	if walls_blocking(from_cell, to_cell) == false:
 		return false
 	
-	if b_cell.is_cell_blocked(ignore_occupants):
-		return false
-	if b_cell.forgotten == true:
-		return false
-	
-	# Check walls
-	var delta = b_pos - a_pos
-	
-	if abs(delta.x) > 0:
-		if delta.x > 0:
-			return not (a_cell.walls[Cell.WallSide.EAST] or b_cell.walls[Cell.WallSide.WEST])
-		else:
-			return not (a_cell.walls[Cell.WallSide.WEST] or b_cell.walls[Cell.WallSide.EAST])
-	
-	elif abs(delta.z) > 0:
-		if delta.z > 0:
-			return not (a_cell.walls[Cell.WallSide.SOUTH] or b_cell.walls[Cell.WallSide.NORTH])
-		else:
-			return not (a_cell.walls[Cell.WallSide.NORTH] or b_cell.walls[Cell.WallSide.SOUTH])
-	
-	return true
-
-
-func can_connect_diagonal(a_pos: Vector3, b_pos: Vector3, ignore_occupants: Array) -> bool:
-	var delta = (b_pos - a_pos) / Vars.cell_size
-	
-	# Check both orthogonal neighbors exist and can connect
-	var step1 = a_pos + Vector3(delta.x, 0, 0) * Vars.cell_size
-	var step2 = a_pos + Vector3(0, 0, delta.z) * Vars.cell_size
-	if not (cell_to_id.has(step1) and cell_to_id.has(step2)):
-		return false
-	
-	if not (can_connect(a_pos, step1, ignore_occupants) and can_connect(a_pos, step2, ignore_occupants)):
-		return false
-	
-	# Also check diagonal target itself
-	if not can_connect(a_pos, b_pos, ignore_occupants):
+	if to_cell.forgotten:
 		return false
 	
 	return true
 
 
-func get_cell_node(pos: Vector3):
+func walls_blocking(from_cell: Cell, to_cell: Cell) -> bool:
+	var from_pos: Vector3 = from_cell.global_position
+	var to_pos: Vector3 = to_cell.global_position
+	
+	var direction = ((to_pos - from_pos) / Vars.cell_size).round()
+	
+	if not WALL_MAPPINGS.has(direction):
+		return true
+	
+	var leave_wall: int = WALL_MAPPINGS[direction][0]
+	var enter_wall: int = WALL_MAPPINGS[direction][1]
+	
+	var leave_blocked: bool = from_cell.walls[leave_wall]
+	var enter_blocked: bool = to_cell.walls[enter_wall]
+	
+	return not leave_blocked and not enter_blocked
+
+
+func get_cell_node(cell_pos: Vector3):
 	for cell in get_tree().get_nodes_in_group("cell"):
-		if cell.global_position == pos:
+		if cell.global_position == cell_pos:
 			return cell
 	
 	return null
 
-# Call this to visualize a path
-func draw_debug_path(path: Array, sphere_radius: float = 0.2, color: Color = Color(0.103, 0.532, 0.625, 1.0)) -> void:
+#endregion
+
+## API
+func get_next_cell(start_pos: Vector3, end_pos: Vector3, draw_path_debug:= false) -> Cell:
+	var next_cell: Cell
+	var start_id: int = pos_to_id[start_pos]
+	var end_id: int = pos_to_id[end_pos]
+	var path: Array = astar.get_point_path(start_id, end_id)
+	
+	if path.size() < 2:
+		return
+	
+	next_cell = get_cell_node(path[1])
+	
+	if not next_cell:
+		return null
+	
+	if draw_path_debug:
+		draw_debug_path(path)
+	
+	return next_cell
+
+
+func update_point_connections(cell_pos: Vector3):
+	connect_to_neighbors(cell_pos)
+
+
+func set_point_weight(cell_pos: Vector3, new_weight):
+	if not pos_to_id.has(cell_pos):
+		return
+	
+	var point_id: int = pos_to_id[cell_pos]
+	
+	
+	astar.set_point_weight_scale(point_id, new_weight)
+
+
+func draw_debug_path(path: Array, sphere_radius: float = 0.15, color: Color = Color(0.189, 0.74, 0.864, 1.0)) -> void:
 	# Remove previous spheres
 	for sphere in _debug_spheres:
 		if is_instance_valid(sphere):

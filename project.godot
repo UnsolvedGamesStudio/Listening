@@ -66,7 +66,7 @@ movie_writer/movie_file="D:/Documents/godot projects/exports/movie/video.avi"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/SimpleSampler/plugin.cfg", "res://addons/midi/plugin.cfg", "res://addons/midi_import/plugin.cfg")
+enabled=PackedStringArray("res://addons/SimpleSampler/plugin.cfg", "res://addons/midi/plugin.cfg", "res://addons/midi_import/plugin.cfg", "res://addons/tilemap_tooltips/plugin.cfg")
 
 [global_group]
 

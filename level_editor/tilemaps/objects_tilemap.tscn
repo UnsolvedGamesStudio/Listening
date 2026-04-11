@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://dilbsihag48bm"]
+[gd_scene format=3 uid="uid://dilbsihag48bm"]
 
 [ext_resource type="PackedScene" uid="uid://6etr4cvlbgr2" path="res://music_box/music_box.tscn" id="1_cf6e4"]
 [ext_resource type="Texture2D" uid="uid://0gh2qphl4tm4" path="res://level_editor/textures/box_tiles.png" id="2_1uy3p"]
@@ -278,8 +278,6 @@ sources/0 = SubResource("TileSetAtlasSource_a0av3")
 sources/10 = SubResource("TileSetAtlasSource_1a3vd")
 sources/11 = SubResource("TileSetAtlasSource_m4r6b")
 
-[node name="ObjectsTilemap" type="TileMapLayer"]
+[node name="ObjectsTilemap" type="TileMapLayer" unique_id=1757639495]
 tile_set = SubResource("TileSet_yxmo0")
 collision_enabled = false
-
-[connection signal="changed" from="." to="." method="_on_changed"]

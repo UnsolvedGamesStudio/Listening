@@ -1,41 +1,35 @@
-[gd_scene load_steps=6 format=3 uid="uid://ut6wqeoatv1w"]
+[gd_scene format=3 uid="uid://ut6wqeoatv1w"]
 
 [ext_resource type="PackedScene" uid="uid://d3u7i3tehxhh6" path="res://terrain/cells/floor_cell.tscn" id="1_327qs"]
 [ext_resource type="PackedScene" uid="uid://c7wmmnca4o1dx" path="res://player/spawn_point.tscn" id="4_sb12i"]
-[ext_resource type="PackedScene" uid="uid://cqc1iuhqntykk" path="res://enemies/enemy_scenes/pet_peeve.tscn" id="4_we1x4"]
 [ext_resource type="PackedScene" uid="uid://ce10gkdeiprj7" path="res://player/player.tscn" id="5_gbhdq"]
-[ext_resource type="PackedScene" uid="uid://ugnt6a8ceul7" path="res://decoration/framed_mirror.tscn" id="5_w17i1"]
+[ext_resource type="PackedScene" uid="uid://061m5bvukwlk" path="res://enemies/enemy_scenes/dread.tscn" id="5_w17i1"]
 
-[node name="TestLevel" type="Node3D" groups=["layout", "playable_level"]]
+[node name="TestLevel" type="Node3D" unique_id=742180196 groups=["layout", "playable_level"]]
 
-[node name="Terrain" type="Node3D" parent="."]
+[node name="Terrain" type="Node3D" parent="." unique_id=1359960788]
 
-[node name="FloorCell" parent="Terrain" instance=ExtResource("1_327qs")]
+[node name="FloorCell" parent="Terrain" unique_id=1350741147 instance=ExtResource("1_327qs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
-[node name="FloorCell2" parent="Terrain" instance=ExtResource("1_327qs")]
+[node name="FloorCell2" parent="Terrain" unique_id=645706992 instance=ExtResource("1_327qs")]
 
-[node name="FloorCell3" parent="Terrain" instance=ExtResource("1_327qs")]
+[node name="FloorCell3" parent="Terrain" unique_id=1842828198 instance=ExtResource("1_327qs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
-[node name="FloorCell4" parent="Terrain" instance=ExtResource("1_327qs")]
+[node name="FloorCell4" parent="Terrain" unique_id=377892192 instance=ExtResource("1_327qs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
-[node name="FloorCell5" parent="Terrain" instance=ExtResource("1_327qs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4)
+[node name="FloorCell5" parent="Terrain" unique_id=54841077 instance=ExtResource("1_327qs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0039206, 0, -2)
 
-[node name="FloorCell6" parent="Terrain" instance=ExtResource("1_327qs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+[node name="FloorCell6" parent="Terrain" unique_id=744591373 instance=ExtResource("1_327qs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0039206, 0, 0)
 
-[node name="FloorCell7" parent="Terrain" instance=ExtResource("1_327qs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -4)
+[node name="PlayerSpawnPoint" parent="." unique_id=1212989444 instance=ExtResource("4_sb12i")]
 
-[node name="Enemy" parent="Terrain/FloorCell7" instance=ExtResource("4_we1x4")]
-
-[node name="PlayerSpawnPoint" parent="." instance=ExtResource("4_sb12i")]
-
-[node name="Player" parent="." instance=ExtResource("5_gbhdq")]
+[node name="Player" parent="." unique_id=542655412 instance=ExtResource("5_gbhdq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
-[node name="FramedMirror" parent="." instance=ExtResource("5_w17i1")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -1)
+[node name="Enemy" parent="." unique_id=457388263 instance=ExtResource("5_w17i1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -4)

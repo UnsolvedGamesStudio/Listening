@@ -96,7 +96,7 @@ _data = {
 script = ExtResource("1_loyhd")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=487855739]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.075575, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.075575, 3.6318038)
 light_color = Color(0.67058825, 0.32941177, 0.4117647, 1)
 light_energy = 0.0
 light_specular = 11.765
@@ -105,9 +105,6 @@ sky_mode = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=451106924]
 environment = SubResource("Environment_h2nss")
-
-[node name="StartingRoom" parent="." unique_id=5096815 instance=ExtResource("2_h2nss")]
-transform = Transform3D(0.9999975, -0.00179825, -0.0013325372, 0.0017965839, 0.9999976, -0.0012554296, 0.0013347826, 0.0012530419, 0.99999833, -0.0021666288, 0, -0.0031824112)
 
 [node name="dead_tree" type="MeshInstance3D" parent="." unique_id=1788142548]
 transform = Transform3D(0.2, 0, 0, 0, 0.1, 0, 0, 0, 0.2, 0, -224.27853, 0)
@@ -135,3 +132,6 @@ bus = &"Ambience"
 [node name="SoundFade" type="AnimationPlayer" parent="." unique_id=1728688398]
 libraries/ = SubResource("AnimationLibrary_t1r5v")
 autoplay = &"fade_sound_in"
+
+[node name="StartingRoom" parent="." unique_id=216725926 instance=ExtResource("2_h2nss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9262824, 1.2208853, 7.9996414)

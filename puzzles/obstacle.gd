@@ -13,5 +13,12 @@ func turn_off_faces():
 			continue
 		
 		face.turn_off()
-	
-	NavGraph.rebuild_cell_connections(occupied_cell.global_position, true, [Find.P()])
+
+	#print(NavGraph.cell_to_id[occupied_cell.global_position])
+	#
+	#print(NavGraph.astar.get_point_connections(NavGraph.cell_to_id[occupied_cell.global_position]))
+	#await get_tree().create_timer(0.5).timeout
+	#print(NavGraph.astar.get_point_connections(NavGraph.cell_to_id[occupied_cell.global_position]))
+	#NavGraph.rebuild_cell_connections(occupied_cell.global_position, true, [Find.P()])
+	#await get_tree().create_timer(0.5).timeout
+	#print(NavGraph.astar.get_point_connections(NavGraph.cell_to_id[occupied_cell.global_position]))
