@@ -18,6 +18,7 @@ config/name="Psychodrama"
 run/main_scene="uid://c58klmnfg17b8"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/image="uid://cr8gjsy3e2jpb"
+config/icon="uid://byb603a4s3xj2"
 boot_splash/minimum_display_time=25
 
 [audio]

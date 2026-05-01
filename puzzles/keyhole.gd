@@ -39,7 +39,6 @@ func activate():
 	if O.has_method("turn_off_faces"):
 		O.turn_off_faces()
 	
-	
 	Vars.inventory[required_item]["amount"] -= 1
 	Bus.item_removed.emit(required_item)
 	

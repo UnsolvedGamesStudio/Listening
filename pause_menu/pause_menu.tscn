@@ -207,8 +207,8 @@ text = "Press A/S/D on beat to add elements to your emotion spell.
 Press Left Click on beat to cast the created spell.
 Certain combos of elements create unique effects but
 consume dopamine (hold Shift to cast a projectile instead.)
-Press W to go to the highlighted tile.
-Press Space to interact."
+Press W on beat to go to the highlighted tile (can be held).
+Press Space on beat to interact."
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1268995934]

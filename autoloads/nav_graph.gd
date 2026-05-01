@@ -62,7 +62,10 @@ func connect_to_neighbors(cell_pos: Vector3):
 			continue
 		
 		var neighbor_id: int = pos_to_id[neighbor_pos]
-	
+		
+		if point_id == neighbor_id:
+			continue
+		
 		if not can_connect(point_id, neighbor_id):
 			continue
 		
@@ -76,6 +79,9 @@ func can_connect(from_point: int, to_point: int) -> bool:
 	var from_cell: Cell = id_to_cell[from_point]
 	var to_cell: Cell = id_to_cell[to_point]
 	
+	if (not is_instance_valid(from_cell)) or (not is_instance_valid(to_cell)):
+		return false
+	
 	if walls_blocking(from_cell, to_cell) == false:
 		return false
 	
@@ -86,6 +92,11 @@ func can_connect(from_point: int, to_point: int) -> bool:
 
 
 func walls_blocking(from_cell: Cell, to_cell: Cell) -> bool:
+	if not from_cell.is_inside_tree():
+		return false
+	if not to_cell.is_inside_tree():
+		return false
+	
 	var from_pos: Vector3 = from_cell.global_position
 	var to_pos: Vector3 = to_cell.global_position
 	

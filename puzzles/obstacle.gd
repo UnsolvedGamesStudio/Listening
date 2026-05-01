@@ -13,6 +13,9 @@ func turn_off_faces():
 			continue
 		
 		face.turn_off()
+		
+		if occupied_cell.occupants.has(self):
+			occupied_cell.remove_occupant(self)
 
 	#print(NavGraph.cell_to_id[occupied_cell.global_position])
 	#

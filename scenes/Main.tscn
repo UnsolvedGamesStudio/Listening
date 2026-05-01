@@ -58,7 +58,9 @@ Replicable bugs:
 - when entering level, ui resets for a split second
 
 Mystery bugs:
+- on (dread?) pathfinding, that transform condition = true bug
 - occasional frame stall, kick repeats a lot during it
+- locked wall blocking walk a bit after unlock
 
 Error Messages:
 "
